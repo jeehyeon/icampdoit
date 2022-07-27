@@ -1,0 +1,13 @@
+/* your styles go here */
+
+img.weatherimage{
+	position:relative;
+	width:58px;
+	height:58px;
+	right: 0px;
+}
+
+
+div.tit_weather{
+text-align: center;
+}
