@@ -22,7 +22,7 @@
     <!-- Magnigic Popup-->
     <link rel="stylesheet" href="./resources/bootstrap-5/html/vendor/magnific-popup/magnific-popup.css">
     <!-- theme stylesheet-->
-    <link rel="stylesheet" href="./resources/bootstrap-5/html/css/style.default.css" id="theme-stylesheet">
+    <link rel="stylesheet" href="./resources/bootstrap-5/html/css/style.green.css" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="./resources/bootstrap-5/html/css/custom.css">
     <!-- Favicon-->
@@ -83,7 +83,7 @@
          	</div>
          	
          	<form class="d-flex">
-             	<button class="btn btn-outline-success btn-sm" type="button" href="./resources/bootstrap-5/html/login.html">Sign in</button>
+             	<button class="btn btn-outline-primary btn-sm" type="button" href="./resources/bootstrap-5/html/login.html">Sign in</button>
              </form>
          </div>
       </nav>
@@ -118,7 +118,7 @@
                     </button>
                   </div>
                   <div class="col-lg-2 d-grid">
-                    <button class="btn btn-success rounded-pill h-100" type="submit">검색하기 </button>
+                    <button class="btn btn-primary rounded-pill h-100" type="submit">검색하기 </button>
                   </div>
                 </div>
               </form>
@@ -153,7 +153,7 @@
 									<select class="form-select" id="gugun">
 										<option>서울시</option>
 										<option>인천시</option>
-										<option>경기도</option>
+										<option>경기도2</option>
 									</select>
 								</li>
 								
@@ -164,7 +164,7 @@
 					
 				<!-- Modal footer -->
 				<div class="modal-footer">
-					<button type="button" class="btn btn-success" data-bs-dismiss="modal">검색하기</button>
+					<button type="button" class="btn btn-primary" data-bs-dismiss="modal">검색하기</button>
 				</div>
 					
 			</div>
