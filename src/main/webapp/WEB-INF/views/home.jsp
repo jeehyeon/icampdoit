@@ -48,20 +48,20 @@
 	          
 	              <!-- About 페이지 링크 -->
 	              <li class="nav-item">
-	              	<a class="nav-link" href="./resources/bootstraop-5/html/about.jsp">About</a>
+	              	<a class="nav-link" href="./about.do">About</a>
 	              </li>
 	              
 	              <!-- Customer Care 페이지 -->
 				  <li class="nav-item dropdown">
 				  	<a class="nav-link dropdown-toggle" id="noticeDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Customer Care</a>
-	                <div class="dropdown-menu" aria-labelledby="noticeDropdownMenuLink"><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/notice.jsp">공지사항</a><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/faq.jsp">FAQ</a></div>
+	                <div class="dropdown-menu" aria-labelledby="noticeDropdownMenuLink"><a class="dropdown-item" href="./notice.do">공지사항</a><a class="dropdown-item" href="/faq.do">FAQ</a></div>
 	              </li>
 	              
 	              <!-- Search 페이지 -->
 	              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="searchDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                   Search</a>
 	                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="searchDropdownMenuLink">
-	                  <a class="dropdown-item" href="./resources/bootstrap-5/html/docs/generalsearch.jsp">일반검색</a><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/mapsearch.jsp">지도검색</a>
+	                  <a class="dropdown-item" href="./searchkey.do">일반검색</a><a class="dropdown-item" href="./searchmap.do">지도검색</a>
 	                </div>
 	              </li>
 	              
@@ -69,7 +69,7 @@
 	              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="communicationDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                   Communication</a>
 	                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="communicationDropdownMenuLink">
-	                  <a class="dropdown-item" href="./resources/bootstrap-5/html/docs/board.jsp">게시판</a><a class="dropdown-item" href="./hboardlist.do">혼캠 자료실</a>
+	                  <a class="dropdown-item" href="./mboardlist.do">게시판</a><a class="dropdown-item" href="./hboardlist.do">혼캠 자료실</a>
 	                </div>
 	              </li>
 	              
@@ -77,14 +77,14 @@
 	              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="mypageDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                   MyPage</a>
 	                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="mypageDropdownMenuLink">
-	                  <a class="dropdown-item" href="./resources/bootstrap-5/html/docs/mypage.jsp">내 정보</a><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/subscribe.jsp">찜한 목록</a><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/mywritings.jsp">내가 쓴 글</a>
+	                  <a class="dropdown-item" href="./mypage.do">내 정보</a><a class="dropdown-item" href="./mypagesub.do">찜한 목록</a><a class="dropdown-item" href="./mypagemylist.do">내가 쓴 글</a>
 	                </div>
 	              </li>
 	            </ul>
          	</div>
          	
          	<form class="d-flex">
-             	<button class="btn btn-outline-primary btn-sm" type="button" href="./resources/bootstrap-5/html/login.html">Sign in</button>
+             	<button class="btn btn-outline-primary btn-sm" type="button"><a href="./login.do">Sign in</a></button>
              </form>
          </div>
       </nav>
@@ -108,10 +108,10 @@
               <h1 class="display-3 fw-bold text-shadow">I Camp Do It</h1>
             </div>           
             <div class="search-bar mt-5 p-3 p-lg-1 ps-lg-4">
-              <form action="#">
+              <form action="./searchkey.do" method="get">
                 <div class="row">
                   <div class="col-lg-7 d-flex align-items-center form-group">
-                    <input class="form-control border-0 shadow-0" type="text" name="search" placeholder="키워드 검색">
+                    <input class="form-control border-0 shadow-0" type="text" name="keysearch" placeholder="키워드 검색">
                   </div>
                   <div class="col-lg-3 d-flex align-items-center form-group no-divider">
                     <button type="button" class="btn btn-outline-light text-dark" id="filteringButton" data-style="btn-form-control" data-bs-toggle="modal" data-bs-target="#filteringModal">
@@ -142,23 +142,294 @@
 					
 				<!-- Modal body -->
 				<div class="modal-body">
-					<form id="campSearchForm" action="./resources/bootstraop-5/html/generalsearch.jsp" method="get">
-						<div class="detailSearch">
-							<ul>
-								<li><strong>지역</strong></li>
-									<select class="form-select" id="sido">
-										<option>서울시</option>
-										<option>인천시</option>
-										<option>경기도</option>
-									</select>
-									<select class="form-select" id="gugun">
-										<option>서울시</option>
-										<option>인천시</option>
-										<option>경기도2</option>
-									</select>
-								</li>
-								
-							</ul>
+					<form id="campSearchForm" action="./searchkey.do" method="get">
+						<!-- 지역 필터링 -->
+						<div class="form-group row" id="locationFilter">
+							<div class="col-sm-2"><strong>지역</strong></div>
+							<div class="col-sm-10">
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="locationSeoul">
+									<label class="from-check-label" for="locationSeoul">
+										서울시
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="locationIncheon">
+									<label class="from-check-label" for="locationIncheon">
+										인천시
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="locationGyeonggi">
+									<label class="from-check-label" for="locationGyeonggi">
+										경기도
+									</label>
+								</div>
+							</div>
+						</div>
+						<br>
+						<!-- 시설 종류 -->
+						<div class="form-group row" id="typeFilter">
+							<div class="col-sm-2"><strong>시설 종류</strong></div>
+							<div class="col-sm-10">
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="typeCamping">
+									<label class="from-check-label" for="typeCamping">
+										일반 야영장
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="typeCar">
+									<label class="from-check-label" for="typeCar">
+										자동차 야영장
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="typeGlamping">
+									<label class="from-check-label" for="typeGlamping">
+										글램핑
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="typeCaraban">
+									<label class="from-check-label" for="typeCaraban">
+										카라반
+									</label>
+								</div>
+							</div>
+						</div>
+						<br>
+						<!-- 입지 -->
+						<div class="form-group row" id="placeFilter">
+							<div class="col-sm-2"><strong>입지</strong></div>
+							<div class="col-sm-10">
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="placeMountain">
+									<label class="from-check-label" for="placeMountain">
+										산
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="placeForest">
+									<label class="from-check-label" for="placeForest">
+										숲
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="placeStream">
+									<label class="from-check-label" for="placeStream">
+										계곡
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="placeCity">
+									<label class="from-check-label" for="placeCity">
+										도심
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="placeRiver">
+									<label class="from-check-label" for="placeRiver">
+										강
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="placeLake">
+									<label class="from-check-label" for="placeLake">
+										호수
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="placeBeach">
+									<label class="from-check-label" for="placeBeach">
+										해변
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="placeIsland">
+									<label class="from-check-label" for="placeIsland">
+										섬
+									</label>
+								</div>
+							</div>
+						</div>
+						<br>
+						<!-- 바닥형태 -->
+						<div class="form-group row" id="floorFilter">
+							<div class="col-sm-2"><strong>바닥 형태</strong></div>
+							<div class="col-sm-10">
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="floorGrass">
+									<label class="from-check-label" for="floorGrass">
+										잔디
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="floorRock">
+									<label class="from-check-label" for="floorRock">
+										파쇄석
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="floorTeck">
+									<label class="from-check-label" for="floorTeck">
+										테크
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="floorPebble">
+									<label class="from-check-label" for="floorPebble">
+										자갈
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="floorDirt">
+									<label class="from-check-label" for="floorDirt">
+										맨흙
+									</label>
+								</div>						
+							</div>
+						</div>
+						<br>
+						<!-- 부대시설 -->
+						<div class="form-group row" id="facilityFilter">
+							<div class="col-sm-2"><strong>부대 시설</strong></div>
+							<div class="col-sm-10">
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="facElectro">
+									<label class="from-check-label" for="facElectro">
+										전기
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="facWarmwater">
+									<label class="from-check-label" for="facWarmwater">
+										온수
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="facPlay">
+									<label class="from-check-label" for="facPlay">
+										놀이터
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="facGym">
+									<label class="from-check-label" for="facGym">
+										운동시설
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="facWifi">
+									<label class="from-check-label" for="facWifi">
+										무선인터넷
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="facWood">
+									<label class="from-check-label" for="facWood">
+										장작판매
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="facTrampoline">
+									<label class="from-check-label" for="facTrampoline">
+										트램폴린
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="facPool">
+									<label class="from-check-label" for="facPool">
+										물놀이장
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="facMart">
+									<label class="from-check-label" for="facMart">
+										마트
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="facConv">
+									<label class="from-check-label" for="facConv">
+										편의점
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="facWalk">
+									<label class="from-check-label" for="facWalk">
+										산책로
+									</label>
+								</div>
+							</div>
+						</div>
+						<br>
+						<!-- 캠핑장비 대여 -->
+						<div class="form-group row" id="rentFilter">
+							<div class="col-sm-2"><strong>캠핑장비 대여</strong></div>
+							<div class="col-sm-10">
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="rentTent">
+									<label class="from-check-label" for="rentTent">
+										텐트
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="rentFire">
+									<label class="from-check-label" for="rentFire">
+										화로대
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="rentHeat">
+									<label class="from-check-label" for="rentHeat">
+										난방기구
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="rentDish">
+									<label class="from-check-label" for="rentDish">
+										식기
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="rentBed">
+									<label class="from-check-label" for="rentBed">
+										침낭
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="rentWire">
+									<label class="from-check-label" for="rentWire">
+										릴선
+									</label>
+								</div>							
+							</div>
+						</div>
+						<br>
+						<!-- 기타정보 -->
+						<div class="form-group row" id="etcFilter">
+							<div class="col-sm-2"><strong>기타정보</strong></div>
+							<div class="col-sm-10">
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="etcTrailer">
+									<label class="from-check-label" for="etcTrailer">
+										개인 트레일러 입장 가능
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="etcCaraban">
+									<label class="from-check-label" for="etcCaraban">
+										개인 카라반 입장 가능
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="etcPet">
+									<label class="from-check-label" for="etcPet">
+										반려견 입장 가능
+									</label>
+								</div>					
+							</div>
 						</div>
 					</form>
 				</div>
@@ -167,10 +438,10 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" data-bs-dismiss="modal">검색하기</button>
 				</div>
-					
 			</div>
 		</div>
 	</div>
+	
 <!-- 소연 시작 -->
 	<section class="py-6">
       <div class="container">
@@ -524,14 +795,7 @@
       </div>
     </section>
     <!-- 팀원소개 끝 -->
-    
-    
-
-    
-   
-    
-    
-    
+     
     <!-- Footer - 관리자 페이지 이동 부분 넣을 곳 -->
     <footer class="position-relative z-index-10 d-print-none">
            
