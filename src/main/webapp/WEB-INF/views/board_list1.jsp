@@ -32,93 +32,231 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+     
+    
   </head>
   <body style="padding-top: 72px;">
     <header class="header">
-    
-      <!-- Navbar 로고부분-->
+      <!-- Navbar-->
       <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
         <div class="container-fluid">
-          	<a class="navbar-brand py-1" href="./list.do"><img src="./resources/bootstrap-5/html/img/logo.svg" alt="Directory logo"></a>          
+          <div class="d-flex align-items-center"><a class="navbar-brand py-1" href="./list.do"><img src="./resources/bootstrap-5/html/img/logo.svg" alt="Directory logo"></a>
+            <form class="form-inline d-none d-sm-flex" action="#" id="search">
+              <div class="input-label-absolute input-label-absolute-left input-expand ms-lg-2 ms-xl-3"> 
+                <label class="label-absolute" for="search_search"><i class="fa fa-search"></i><span class="sr-only">What are you looking for?</span></label>
+                <input class="form-control form-control-sm border-0 shadow-0 bg-gray-200" id="search_search" placeholder="Search" aria-label="Search" type="search">
+              </div>
+            </form>
+          </div>
           <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
-          
-          <div class="collapse navbar-collapse justify-content-center" id="navbarCollapse">      
-	          <ul class="navbar-nav">
-	          
-	              <!-- About 페이지 링크 -->
-	              <li class="nav-item">
-	              	<a class="nav-link" href="./resources/bootstraop-5/html/about.jsp">About</a>
-	              </li>
-	              
-	              <!-- Customer Care 페이지 -->
-				  <li class="nav-item dropdown">
-				  	<a class="nav-link dropdown-toggle" id="noticeDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Customer Care</a>
-	                <div class="dropdown-menu" aria-labelledby="noticeDropdownMenuLink"><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/notice.jsp">공지사항</a><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/faq.jsp">FAQ</a></div>
-	              </li>
-	              
-	              <!-- Search 페이지 -->
-	              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="searchDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	                   Search</a>
-	                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="searchDropdownMenuLink">
-	                  <a class="dropdown-item" href="./resources/bootstrap-5/html/docs/generalsearch.jsp">일반검색</a><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/mapsearch.jsp">지도검색</a>
-	                </div>
-	              </li>
-	              
-	              <!-- Communication 페이지 -->      
-	              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="communicationDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	                   Communication</a>
-	                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="communicationDropdownMenuLink">
-	                  <a class="dropdown-item" href="./resources/bootstrap-5/html/docs/board.jsp">게시판</a><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/inventory.jsp">혼캠 자료실</a>
-	                </div>
-	              </li>
-	              
-	              <!-- MyPage 페이지 -->      
-	              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="mypageDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	                   MyPage</a>
-	                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="mypageDropdownMenuLink">
-	                  <a class="dropdown-item" href="./resources/bootstrap-5/html/docs/mypage.jsp">내 정보</a><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/subscribe.jsp">찜한 목록</a><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/mywritings.jsp">내가 쓴 글</a>
-	                </div>
-	              </li>
-	            </ul>
-         	</div>
-         	
-         	<form class="d-flex">
-             	<button class="btn btn-outline-success btn-sm" type="button" href="./resources/bootstrap-5/html/login.html">Sign in</button>
-             </form>
-         </div>
+          <!-- Navbar Collapse -->
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <form class="form-inline mt-4 mb-2 d-sm-none" action="#" id="searchcollapsed">
+              <div class="input-label-absolute input-label-absolute-left w-100">
+                <label class="label-absolute" for="searchcollapsed_search"><i class="fa fa-search"></i><span class="sr-only">What are you looking for?</span></label>
+                <input class="form-control form-control-sm border-0 shadow-0 bg-gray-200" id="searchcollapsed_search" placeholder="Search" aria-label="Search" type="search">
+              </div>
+            </form>
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle active" id="homeDropdownMenuLink" href="./list.do" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   Home</a>
+                <div class="dropdown-menu" aria-labelledby="homeDropdownMenuLink"><a class="dropdown-item" href="./list.do">Rooms</a><a class="dropdown-item" href="./resources/bootstrap-5/html/index-2.html">Restaurants</a><a class="dropdown-item" href="./resources/bootstrap-5/html/index-3.html">Travel</a><a class="dropdown-item" href="./resources/bootstrap-5/html/index-4.html">Real Estate <span class="badge badge-info-light ms-1 mt-n1">New</span></a></div>
+              </li>
+              <!-- Megamenu-->
+              <li class="nav-item dropdown position-static"><a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Template</a>
+                <div class="dropdown-menu megamenu py-lg-0">
+                  <div class="row">
+                    <div class="col-lg-9">
+                      <div class="row p-3 pe-lg-0 ps-lg-5 pt-lg-5">
+                        <div class="col-lg-3">
+                          <!-- Megamenu list-->
+                          <h6 class="text-uppercase">Homepage</h6>
+                          <ul class="megamenu-list list-unstyled">
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./list.do">Rooms   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/index-2.html">Restaurants   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/index-3.html">Travel   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/index-4.html">Real estate <span class="badge badge-info-light ms-1">New</span>   </a></li>
+                          </ul>
+                          <!-- Megamenu list-->
+                          <h6 class="text-uppercase">Restaurants</h6>
+                          <ul class="megamenu-list list-unstyled">
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/category.html">Category - Map on the top   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/category-2.html">Category - Map on the right   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/category-3.html">Category - no map   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/detail.html">Restaurant detail   </a></li>
+                          </ul>
+                        </div>
+                        <div class="col-lg-3">
+                          <!-- Megamenu list-->
+                          <h6 class="text-uppercase">Rooms</h6>
+                          <ul class="megamenu-list list-unstyled">
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/category-rooms.html">Category - Map on the top   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/category-2-rooms.html">Category - Map on the right   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/category-3-rooms.html">Category - no map   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/detail-rooms.html">Room detail   </a></li>
+                          </ul>
+                          <!-- Megamenu list-->
+                          <h6 class="text-uppercase">Blog</h6>
+                          <ul class="megamenu-list list-unstyled">
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/blog.html">Blog   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/post.html">Post   </a></li>
+                          </ul>
+                          <!-- Megamenu list-->
+                          <h6 class="text-uppercase">Pages</h6>
+                          <ul class="megamenu-list list-unstyled">
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/compare.html">Comparison   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/team.html">Team   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/contact.html">Contact   </a></li>
+                          </ul>
+                        </div>
+                        <div class="col-lg-3">
+                          <!-- Megamenu list-->
+                          <h6 class="text-uppercase">Pages</h6>
+                          <ul class="megamenu-list list-unstyled">
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/pricing.html">Pricing   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/text.html">Text page   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/faq.html">F.A.Q.s   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/coming-soon.html">Coming soon   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/404.html">404 page   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/knowledge-base.html">Knowledge Base  <span class="badge badge-info-light ms-1">New</span>   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/knowledge-base-topic.html">Knowledge Base  &mdash; Topic<span class="badge badge-info-light ms-1">New</span>   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/terms.html">Terms & Conditions  <span class="badge badge-info-light ms-1">New</span>   </a></li>
+                          </ul>
+                          <!-- Megamenu list-->
+                          <h6 class="text-uppercase">Host</h6>
+                          <ul class="megamenu-list list-unstyled">
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/user-add-0.html">Add new listing - 6 pages   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/user-list.html">Bookings &mdash; list view   </a></li>
+                          </ul>
+                        </div>
+                        <div class="col-lg-3">
+                          <!-- Megamenu list-->
+                          <h6 class="text-uppercase">User</h6>
+                          <ul class="megamenu-list list-unstyled">
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/user-profile.html">Profile   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/user-account.html">Account   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/user-personal.html">Personal info - forms   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/user-security.html">Password & security - forms   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/login.html">Sign in   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/signup.html">Sign up   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/user-booking-1.html">Booking process - 4 pages   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/user-grid.html">Bookings &mdash; grid view   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/user-booking-detail.html">Booking detail   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/user-invoice.html">Invoice  <span class="badge badge-info-light ms-1">New</span>   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/user-messages.html">Messages <span class="badge badge-info-light ms-1">New</span>   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/user-messages-detail.html">Message Detail  <span class="badge badge-info-light ms-1">New</span>   </a></li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="row megamenu-services d-none d-lg-flex ps-lg-5">
+                        <div class="col-xl-3 col-lg-6 d-flex">
+                          <div class="megamenu-services-item">
+                            <svg class="svg-icon megamenu-services-icon">
+                              <use xlink:href="#destination-map-1"> </use>
+                            </svg>
+                            <div>
+                              <h6 class="text-uppercase">Best rentals</h6>
+                              <p class="mb-0 text-muted text-sm">Find the perfect place</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-6 d-flex">
+                          <div class="megamenu-services-item">
+                            <svg class="svg-icon megamenu-services-icon">
+                              <use xlink:href="#money-box-1"> </use>
+                            </svg>
+                            <div>
+                              <h6 class="text-uppercase">Earn points</h6>
+                              <p class="mb-0 text-muted text-sm">And get great rewards</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-6 d-flex">
+                          <div class="megamenu-services-item">
+                            <svg class="svg-icon megamenu-services-icon">
+                              <use xlink:href="#customer-support-1"> </use>
+                            </svg>
+                            <div>
+                              <h6 class="text-uppercase">020-800-456-747</h6>
+                              <p class="mb-0 text-muted text-sm">24/7 Available Support</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-6 d-flex">
+                          <div class="megamenu-services-item">
+                            <svg class="svg-icon megamenu-services-icon">
+                              <use xlink:href="#secure-payment-1"> </use>
+                            </svg>
+                            <div>
+                              <h6 class="text-uppercase">Secure Payment</h6>
+                              <p class="mb-0 text-muted text-sm">Secure Payment</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-3 d-none d-lg-block position-relative"><img class="bg-image" src="./resources/bootstrap-5/html/img/photo/photo-1521170665346-3f21e2291d8b.jpg" alt=""></div>
+                  </div>
+                </div>
+              </li>
+              <!-- /Megamenu end-->
+              <li class="nav-item"><a class="nav-link" href="./resources/bootstrap-5/html/contact.html">Contact</a>
+              </li>
+              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle " id="docsDropdownMenuLink" href="./list.do" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   Docs</a>
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="docsDropdownMenuLink">
+                  <h6 class="dropdown-header fw-normal">Documentation</h6><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/docs-introduction.html">Introduction </a><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/docs-directory-structure.html">Directory structure </a><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/docs-gulp.html">Gulp </a><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/docs-customizing-css.html">Customizing CSS </a><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/docs-credits.html">Credits </a><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/docs-changelog.html">Changelog </a>
+                  <div class="dropdown-divider"></div>
+                  <h6 class="dropdown-header fw-normal">Components</h6><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/components-bootstrap.html">Bootstrap </a><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/components-directory.html">Theme </a>
+                </div>
+              </li>
+              <li class="nav-item"><a class="nav-link" href="./resources/bootstrap-5/html/login.html">Sign in</a></li>
+              <li class="nav-item"><a class="nav-link" href="./resources/bootstrap-5/html/signup.html">Sign up</a></li>
+              <li class="nav-item mt-3 mt-lg-0 ms-lg-3 d-lg-none d-xl-inline-block"><a class="btn btn-primary" href="./resources/bootstrap-5/html/user-add-0.html">Add a listing</a></li>
+            </ul>
+          </div>
+        </div>
       </nav>
       <!-- /Navbar -->
     </header>
-    
-    <!-- 메인 검색 배경부분 -->
     <section class="hero-home">
       <div class="swiper-container hero-slider">
         <div class="swiper-wrapper dark-overlay">
-          <div class="swiper-slide" style="background-image:url(./resources/bootstrap-5/html/img/photo/camping.jpg)"></div>
-          <div class="swiper-slide" style="background-image:url(./resources/bootstrap-5/html/img/photo/camping2.jpg)"></div>
-          <div class="swiper-slide" style="background-image:url(./resources/bootstrap-5/html/img/photo/camping3.jpg)"></div>
-          <div class="swiper-slide" style="background-image:url(./resources/bootstrap-5/html/img/photo/camping4.jpg)"></div>
+          <div class="swiper-slide" style="background-image:url(./resources/bootstrap-5/html/img/photo/photo-1501621965065-c6e1cf6b53e2.jpg)"></div>
+          <div class="swiper-slide" style="background-image:url(./resources/bootstrap-5/html/img/photo/photo-1519974719765-e6559eac2575.jpg)"></div>
+          <div class="swiper-slide" style="background-image:url(./resources/bootstrap-5/html/img/photo/photo-1490578474895-699cd4e2cf59.jpg)"></div>
+          <div class="swiper-slide" style="background-image:url(./resources/bootstrap-5/html/img/photo/photo-1534850336045-c6c6d287f89e.jpg)"></div>
         </div>
-      </div>   
+      </div>
       <div class="container py-6 py-md-7 text-white z-index-20">
         <div class="row">
           <div class="col-xl-10">
             <div class="text-center text-lg-start">
-              <h1 class="display-3 fw-bold text-shadow">I Camp Do It</h1>
-            </div>           
+              <p class="subtitle letter-spacing-4 mb-2 text-secondary text-shadow">The best holiday experience</p>
+              <h1 class="display-3 fw-bold text-shadow">Stay like a local</h1>
+            </div>
             <div class="search-bar mt-5 p-3 p-lg-1 ps-lg-4">
               <form action="#">
                 <div class="row">
-                  <div class="col-lg-7 d-flex align-items-center form-group">
-                    <input class="form-control border-0 shadow-0" type="text" name="search" placeholder="키워드 검색">
+                  <div class="col-lg-4 d-flex align-items-center form-group">
+                    <input class="form-control border-0 shadow-0" type="text" name="search" placeholder="What are you searching for?">
+                  </div>
+                  <div class="col-lg-3 d-flex align-items-center form-group">
+                    <div class="input-label-absolute input-label-absolute-right w-100">
+                      <label class="label-absolute" for="location"><i class="fa fa-crosshairs"></i><span class="sr-only">City</span></label>
+                      <input class="form-control border-0 shadow-0" type="text" name="location" placeholder="Location" id="location">
+                    </div>
                   </div>
                   <div class="col-lg-3 d-flex align-items-center form-group no-divider">
-                    <button type="button" class="btn btn-outline-light text-dark" id="filteringButton" data-style="btn-form-control" data-bs-toggle="modal" data-bs-target="#filteringModal">
-                      캠핑장 상세 조건 검색
-                    </button>
+                    <select class="selectpicker" title="Categories" data-style="btn-form-control">
+                      <option value="small">Restaurants</option>
+                      <option value="medium">Hotels</option>
+                      <option value="large">Cafes</option>
+                      <option value="x-large">Garages</option>
+                    </select>
                   </div>
                   <div class="col-lg-2 d-grid">
-                    <button class="btn btn-success rounded-pill h-100" type="submit">검색하기 </button>
+                    <button class="btn btn-primary rounded-pill h-100" type="submit">Search </button>
                   </div>
                 </div>
               </form>
@@ -128,49 +266,6 @@
       </div>
     </section>
     
-    <!-- 상세보기 팝업 -->
-    <div class="modal fade" id="filteringModal">
-		<div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-			<div class="modal-content">
-					
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title">캠핑장 상세조건을 설정해주세요</h4>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-				</div>
-					
-				<!-- Modal body -->
-				<div class="modal-body">
-					<form id="campSearchForm" action="./resources/bootstraop-5/html/generalsearch.jsp" method="get">
-						<div class="detailSearch">
-							<ul>
-								<li><strong>지역</strong></li>
-									<select class="form-select" id="sido">
-										<option>서울시</option>
-										<option>인천시</option>
-										<option>경기도</option>
-									</select>
-									<select class="form-select" id="gugun">
-										<option>서울시</option>
-										<option>인천시</option>
-										<option>경기도</option>
-									</select>
-								</li>
-								
-							</ul>
-						</div>
-					</form>
-				</div>
-					
-				<!-- Modal footer -->
-				<div class="modal-footer">
-					<button type="button" class="btn btn-success" data-bs-dismiss="modal">검색하기</button>
-				</div>
-					
-			</div>
-		</div>
-	</div>
-
     <section class="py-6">
       <div class="container">
         <div class="row mb-5">
@@ -222,6 +317,120 @@
         </div>
       </div>
     </section>
+    <!-- 
+   <script>
+        (function(d, s, id) {
+            if (d.getElementById(id)) {
+                if (window.__TOMORROW__) {
+                    window.__TOMORROW__.renderWidget();
+                }
+                return;
+            }
+            const fjs = d.getElementsByTagName(s)[0];
+            const js = d.createElement(s);
+            js.id = id;
+            js.src = "https://www.tomorrow.io/v1/widget/sdk/sdk.bundle.min.js";
+
+            fjs.parentNode.insertBefore(js, fjs);
+        })(document, 'script', 'tomorrow-sdk');
+        </script>
+
+        <div class="tomorrow"
+           data-location-id="065498"
+           data-language="KO"
+           data-unit-system="METRIC"
+           data-skin="light"
+           data-widget-type="upcoming"
+           style="padding-bottom:22px;position:relative;width:80%;left:160px;"
+        >
+          <a
+            href="https://www.tomorrow.io/weather/"
+            rel="nofollow noopener noreferrer"
+            target="_blank"
+            style="position: absolute; bottom: 0; transform: translateX(-50%); left: 50%;"
+          >
+            
+          </a>
+        </div>
+   -->
+   
+   
+   <!-- 날씨파트 -->
+   
+
+    
+    <section class="py-6">
+      <div class="container">
+        <h3 class="text-left text-uppercase letter-spacing-3 mb-5">주간 예보</h3>
+        <!-- Brands Slider-->
+        <div class="swiper-container brands-slider">
+          <div class="swiper-wrapper pb-5">
+            <!-- today -->
+            <div class="swiper-slide h-auto d-flex align-items-center justify-content-center">
+			   	<div class="tit_weather"> <strong>7.26</strong><br/>화</div>
+			   	<img class="testimage" src="./resources/bootstrap-5/html/img/testimg/NB01.png"/>
+			   	25°C/32°C<br/>
+			    강수 : 10%
+		   	</div>
+		   	
+            <!-- today+1-->
+            <div class="swiper-slide h-auto d-flex align-items-center justify-content-center">
+	           <div class="tit_weather"> <strong>7.27</strong><br/>수</div>
+			   	<img class="testimage" src="./resources/bootstrap-5/html/img/testimg/NB01.png"/>
+			   	23°C/33°C<br/>
+			   	강수 : 30%
+            </div>
+            
+            <!--  today+2-->
+            <div class="swiper-slide h-auto d-flex align-items-center justify-content-center">
+	            <div class="tit_weather"><strong>7.28</strong><br/>목 </div>
+			   	<img class="testimage" src="./resources/bootstrap-5/html/img/testimg/NB03.png"/>
+			   	25°C/34°C<br/>
+			   	강수 : 0%
+            </div>
+            
+            <!--  today+3-->
+            <div class="swiper-slide h-auto d-flex align-items-center justify-content-center">
+	            <div class="tit_weather"><strong>7.29</strong><br/>금 </div>
+			   	<img class="testimage" src="./resources/bootstrap-5/html/img/testimg/NB08.png"/>
+			   	22°C/30°C<br/>
+			   	강수 : 50%
+            </div>
+            
+            <!--  today+4-->
+            <div class="swiper-slide h-auto d-flex align-items-center justify-content-center">
+	            <div class="tit_weather"><strong>7.30</strong> <br/>토</div>
+			   	<img class="testimage" src="./resources/bootstrap-5/html/img/testimg/NB08.png"/>
+			   	25°C/32°C<br/>
+			   	강수 : 50%
+            </div>
+            
+            <!--  today+5-->
+            <div class="swiper-slide h-auto d-flex align-items-center justify-content-center">
+	            <div class="tit_weather"><strong>7.31</strong><br/>일 </div>
+			   	<img class="testimage" src="./resources/bootstrap-5/html/img/testimg/NB01.png"/>
+			   	23°C/33°C<br/>
+			   	강수 : 0%
+            </div>
+            
+            <!--  today+6-->
+            <div class="swiper-slide h-auto d-flex align-items-center justify-content-center">
+	            <div class="tit_weather"><strong>8.01</strong> <br/>월</div>
+			   	<img class="testimage" src="./resources/bootstrap-5/html/img/testimg/NB01.png"/>
+			   	25°C/34°C<br/>
+			   	강수 : 10%
+            </div>
+            
+            
+            
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+    <!-- @@ -->
+    
     <section class="py-6 bg-gray-100"> 
       <div class="container">
         <div class="row mb-5">
@@ -417,7 +626,14 @@
         </div>
       </div>
     </section>
-
+    <!-- Divider Section-->
+    <section class="py-7 position-relative dark-overlay"><img class="bg-image" src="./resources/bootstrap-5/html/img/photo/photo-1497436072909-60f360e1d4b1.jpg" alt="">
+      <div class="container">
+        <div class="overlay-content text-white py-lg-5">
+          <h3 class="display-3 fw-bold text-serif text-shadow mb-5">Ready for your next holidays?</h3><a class="btn btn-light" href="./resources/bootstrap-5/html/category-rooms.html">Get started</a>
+        </div>
+      </div>
+    </section>
     <section class="py-7">
       <div class="container">
         <div class="text-center">
@@ -532,8 +748,7 @@
         </div>
       </div>
     </section>
-    
-    <!-- Instagram
+    <!-- Instagram-->
     <section>
       <div class="container-fluid px-0">
         <div class="swiper-container instagram-slider">
@@ -561,9 +776,7 @@
         </div>
       </div>
     </section>
-    -->
-    
-    <!-- Footer - 관리자 페이지 이동 부분 넣을 곳 -->
+    <!-- Footer-->
     <footer class="position-relative z-index-10 d-print-none">
       <!-- Main block - menus, subscribe form-->
       <div class="py-6 bg-gray-200 text-muted"> 
@@ -611,13 +824,12 @@
           </div>
         </div>
       </div>
-      
       <!-- Copyright section of the footer-->
       <div class="py-4 fw-light bg-gray-800 text-gray-300">
         <div class="container">
           <div class="row align-items-center">
             <div class="col-md-6 text-center text-md-start">
-              <p class="text-sm mb-md-0">&copy; 2022, Your company.  All rights reserved.</p>
+              <p class="text-sm mb-md-0">&copy; 2021, Your company.  All rights reserved.</p>
             </div>
             <div class="col-md-6">
               <ul class="list-inline mb-0 mt-2 mt-md-0 text-center text-md-end">

@@ -1,1 +1,38 @@
 /* your styles go here */
+
+
+
+
+div.test1{
+	border: 2px solid;
+   	border-radius: 40px;
+   	padding: 90px;
+   	background-color:#FFFFFF;
+   	border-color:#E0E0E0;
+   	width:1350px;
+	bottom:60px;
+	height:100px;
+   	position:relative;	
+}
+
+img.testimage{
+	position:relative;
+	width:58px;
+	height:58px;
+	right: 0px;
+}
+
+div.weatherplace{
+
+float:left;
+width: 139px;
+height: 130px;
+text-align:center;
+position:relative;
+bottom:70px;
+float:left;
+}
+
+div.tit_weather{
+text-align: center;
+}
