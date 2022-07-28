@@ -75,7 +75,7 @@
               </div>
               <hr class="my-4">
               <p class="text-center"><small class="text-muted text-center">Don't have an account yet? <a href="signup.do">Sign Up                </a></small></p>
-            </form><a class="close-absolute me-md-5 me-xl-6 pt-5" href="home.do"> 
+            </form><a class="close-absolute me-md-5 me-xl-6 pt-5" href="./home.do"> 
               <svg class="svg-icon w-3rem h-3rem">
                 <use xlink:href="#close-1"> </use>
               </svg></a>
