@@ -35,185 +35,56 @@
   </head>
   <body style="padding-top: 72px;">
     <header class="header">
-      <!-- Navbar-->
+      <!-- Navbar 로고부분-->
       <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
         <div class="container-fluid">
-          <div class="d-flex align-items-center"><a class="navbar-brand py-1" href="./resources/bootstrap-5/html/index.html"><img src="./resources/bootstrap-5/html/img/logo.svg" alt="Directory logo"></a>
-            <form class="form-inline d-none d-sm-flex" action="#" id="search">
-              <div class="input-label-absolute input-label-absolute-left input-expand ms-lg-2 ms-xl-3"> 
-                <label class="label-absolute" for="search_search"><i class="fa fa-search"></i><span class="sr-only">What are you looking for?</span></label>
-                <input class="form-control form-control-sm border-0 shadow-0 bg-gray-200" id="search_search" placeholder="Search" aria-label="Search" type="search">
-              </div>
-            </form>
-          </div>
+          	<a class="navbar-brand py-1" href="./home.do"><img src="./resources/bootstrap-5/html/img/logo.svg" alt="Directory logo"></a>          
           <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
-          <!-- Navbar Collapse -->
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <form class="form-inline mt-4 mb-2 d-sm-none" action="#" id="searchcollapsed">
-              <div class="input-label-absolute input-label-absolute-left w-100">
-                <label class="label-absolute" for="searchcollapsed_search"><i class="fa fa-search"></i><span class="sr-only">What are you looking for?</span></label>
-                <input class="form-control form-control-sm border-0 shadow-0 bg-gray-200" id="searchcollapsed_search" placeholder="Search" aria-label="Search" type="search">
-              </div>
-            </form>
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle " id="homeDropdownMenuLink" href="./resources/bootstrap-5/html/index.html" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                   Home</a>
-                <div class="dropdown-menu" aria-labelledby="homeDropdownMenuLink"><a class="dropdown-item" href="./resources/bootstrap-5/html/index.html">Rooms</a><a class="dropdown-item" href="./resources/bootstrap-5/html/index-2.html">Restaurants</a><a class="dropdown-item" href="./resources/bootstrap-5/html/index-3.html">Travel</a><a class="dropdown-item" href="./resources/bootstrap-5/html/index-4.html">Real Estate <span class="badge badge-info-light ms-1 mt-n1">New</span></a></div>
-              </li>
-              <!-- Megamenu-->
-              <li class="nav-item dropdown position-static"><a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Template</a>
-                <div class="dropdown-menu megamenu py-lg-0">
-                  <div class="row">
-                    <div class="col-lg-9">
-                      <div class="row p-3 pe-lg-0 ps-lg-5 pt-lg-5">
-                        <div class="col-lg-3">
-                          <!-- Megamenu list-->
-                          <h6 class="text-uppercase">Homepage</h6>
-                          <ul class="megamenu-list list-unstyled">
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/index.html">Rooms   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/index-2.html">Restaurants   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/index-3.html">Travel   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/index-4.html">Real estate <span class="badge badge-info-light ms-1">New</span>   </a></li>
-                          </ul>
-                          <!-- Megamenu list-->
-                          <h6 class="text-uppercase">Restaurants</h6>
-                          <ul class="megamenu-list list-unstyled">
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/category.html">Category - Map on the top   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/category-2.html">Category - Map on the right   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/category-3.html">Category - no map   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/detail.html">Restaurant detail   </a></li>
-                          </ul>
-                        </div>
-                        <div class="col-lg-3">
-                          <!-- Megamenu list-->
-                          <h6 class="text-uppercase">Rooms</h6>
-                          <ul class="megamenu-list list-unstyled">
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/category-rooms.html">Category - Map on the top   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/category-2-rooms.html">Category - Map on the right   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/category-3-rooms.html">Category - no map   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/detail-rooms.html">Room detail   </a></li>
-                          </ul>
-                          <!-- Megamenu list-->
-                          <h6 class="text-uppercase">Blog</h6>
-                          <ul class="megamenu-list list-unstyled">
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/blog.html">Blog   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/post.html">Post   </a></li>
-                          </ul>
-                          <!-- Megamenu list-->
-                          <h6 class="text-uppercase">Pages</h6>
-                          <ul class="megamenu-list list-unstyled">
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/compare.html">Comparison   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/team.html">Team   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/contact.html">Contact   </a></li>
-                          </ul>
-                        </div>
-                        <div class="col-lg-3">
-                          <!-- Megamenu list-->
-                          <h6 class="text-uppercase">Pages</h6>
-                          <ul class="megamenu-list list-unstyled">
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/pricing.html">Pricing   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/text.html">Text page   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/faq.html">F.A.Q.s   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/coming-soon.html">Coming soon   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/404.html">404 page   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/knowledge-base.html">Knowledge Base  <span class="badge badge-info-light ms-1">New</span>   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/knowledge-base-topic.html">Knowledge Base  &mdash; Topic<span class="badge badge-info-light ms-1">New</span>   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/terms.html">Terms & Conditions  <span class="badge badge-info-light ms-1">New</span>   </a></li>
-                          </ul>
-                          <!-- Megamenu list-->
-                          <h6 class="text-uppercase">Host</h6>
-                          <ul class="megamenu-list list-unstyled">
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/user-add-0.html">Add new listing - 6 pages   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/user-list.html">Bookings &mdash; list view   </a></li>
-                          </ul>
-                        </div>
-                        <div class="col-lg-3">
-                          <!-- Megamenu list-->
-                          <h6 class="text-uppercase">User</h6>
-                          <ul class="megamenu-list list-unstyled">
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/user-profile.html">Profile   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/user-account.html">Account   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/user-personal.html">Personal info - forms   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/user-security.html">Password & security - forms   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/login.html">Sign in   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/signup.html">Sign up   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/user-booking-1.html">Booking process - 4 pages   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/user-grid.html">Bookings &mdash; grid view   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/user-booking-detail.html">Booking detail   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/user-invoice.html">Invoice  <span class="badge badge-info-light ms-1">New</span>   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/user-messages.html">Messages <span class="badge badge-info-light ms-1">New</span>   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="./resources/bootstrap-5/html/user-messages-detail.html">Message Detail  <span class="badge badge-info-light ms-1">New</span>   </a></li>
-                          </ul>
-                        </div>
-                      </div>
-                      <div class="row megamenu-services d-none d-lg-flex ps-lg-5">
-                        <div class="col-xl-3 col-lg-6 d-flex">
-                          <div class="megamenu-services-item">
-                            <svg class="svg-icon megamenu-services-icon">
-                              <use xlink:href="#destination-map-1"> </use>
-                            </svg>
-                            <div>
-                              <h6 class="text-uppercase">Best rentals</h6>
-                              <p class="mb-0 text-muted text-sm">Find the perfect place</p>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-6 d-flex">
-                          <div class="megamenu-services-item">
-                            <svg class="svg-icon megamenu-services-icon">
-                              <use xlink:href="#money-box-1"> </use>
-                            </svg>
-                            <div>
-                              <h6 class="text-uppercase">Earn points</h6>
-                              <p class="mb-0 text-muted text-sm">And get great rewards</p>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-6 d-flex">
-                          <div class="megamenu-services-item">
-                            <svg class="svg-icon megamenu-services-icon">
-                              <use xlink:href="#customer-support-1"> </use>
-                            </svg>
-                            <div>
-                              <h6 class="text-uppercase">020-800-456-747</h6>
-                              <p class="mb-0 text-muted text-sm">24/7 Available Support</p>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-6 d-flex">
-                          <div class="megamenu-services-item">
-                            <svg class="svg-icon megamenu-services-icon">
-                              <use xlink:href="#secure-payment-1"> </use>
-                            </svg>
-                            <div>
-                              <h6 class="text-uppercase">Secure Payment</h6>
-                              <p class="mb-0 text-muted text-sm">Secure Payment</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-3 d-none d-lg-block position-relative"><img class="bg-image" src="./resources/bootstrap-5/html/img/photo/photo-1521170665346-3f21e2291d8b.jpg" alt=""></div>
-                  </div>
-                </div>
-              </li>
-              <!-- /Megamenu end-->
-              <li class="nav-item"><a class="nav-link" href="./resources/bootstrap-5/html/contact.html">Contact</a>
-              </li>
-              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle " id="docsDropdownMenuLink" href="./resources/bootstrap-5/html/index.html" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                   Docs</a>
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="docsDropdownMenuLink">
-                  <h6 class="dropdown-header fw-normal">Documentation</h6><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/docs-introduction.html">Introduction </a><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/docs-directory-structure.html">Directory structure </a><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/docs-gulp.html">Gulp </a><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/docs-customizing-css.html">Customizing CSS </a><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/docs-credits.html">Credits </a><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/docs-changelog.html">Changelog </a>
-                  <div class="dropdown-divider"></div>
-                  <h6 class="dropdown-header fw-normal">Components</h6><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/components-bootstrap.html">Bootstrap </a><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/components-directory.html">Theme </a>
-                </div>
-              </li>
-              <li class="nav-item"><a class="nav-link" href="./resources/bootstrap-5/html/login.html">Sign in</a></li>
-              <li class="nav-item"><a class="nav-link" href="./resources/bootstrap-5/html/signup.html">Sign up</a></li>
-              <li class="nav-item mt-3 mt-lg-0 ms-lg-3 d-lg-none d-xl-inline-block"><a class="btn btn-primary" href="./resources/bootstrap-5/html/user-add-0.html">Add a listing</a></li>
-            </ul>
-          </div>
-        </div>
+          
+          <div class="collapse navbar-collapse justify-content-center" id="navbarCollapse">      
+	          <ul class="navbar-nav">
+	          
+	              <!-- About 페이지 링크 -->
+	              <li class="nav-item">
+	              	<a class="nav-link" href="./about.do">About</a>
+	              </li>
+	              
+	              <!-- Customer Care 페이지 -->
+				  <li class="nav-item dropdown">
+				  	<a class="nav-link dropdown-toggle" id="noticeDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Customer Care</a>
+	                <div class="dropdown-menu" aria-labelledby="noticeDropdownMenuLink"><a class="dropdown-item" href="./notice.do">공지사항</a><a class="dropdown-item" href="/faq.do">FAQ</a></div>
+	              </li>
+	              
+	              <!-- Search 페이지 -->
+	              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="searchDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                   Search</a>
+	                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="searchDropdownMenuLink">
+	                  <a class="dropdown-item" href="./searchkey.do">일반검색</a><a class="dropdown-item" href="./searchmap.do">지도검색</a>
+	                </div>
+	              </li>
+	              
+	              <!-- Communication 페이지 -->      
+	              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="communicationDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                   Communication</a>
+	                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="communicationDropdownMenuLink">
+	                  <a class="dropdown-item" href="./mboardlist.do">게시판</a><a class="dropdown-item" href="./hboardlist.do">혼캠 자료실</a>
+	                </div>
+	              </li>
+	              
+	              <!-- MyPage 페이지 -->      
+	              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="mypageDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                   MyPage</a>
+	                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="mypageDropdownMenuLink">
+	                  <a class="dropdown-item" href="./mypage.do">내 정보</a><a class="dropdown-item" href="./mypagesub.do">찜한 목록</a><a class="dropdown-item" href="./mypagemylist.do">내가 쓴 글</a>
+	                </div>
+	              </li>
+	            </ul>
+         	</div>
+         	
+         	<form class="d-flex">
+             	<button class="btn btn-outline-primary btn-sm" type="button"><a href="./login.do">Sign in</a></button>
+             </form>
+         </div>
       </nav>
       <!-- /Navbar -->
       
@@ -226,7 +97,7 @@
             <div class="card">
               <div class="card-body p-5"><strong class="text-uppercase text-secondary d-inline-block mb-2 text-sm" style="font-family: 'Recipekorea';">없는 거 빼고 다 있는</strong>
                 <h2 class="mb-3" style="font-family: 'Recipekorea';">혼캠 자료실</h2>
-                <p class="text-muted">여기에 무슨 내용을 쓰지?</p><a class="btn btn-link p-0" href="./resources/bootstrap-5/html/post.html">Continue reading <i class="fa fa-long-arrow-alt-right"></i></a>
+                <p class="text-muted">혼캠족을 위한 자료실입니다.</p>
               </div>
             </div>
           </div>
