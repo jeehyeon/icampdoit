@@ -84,7 +84,7 @@
          	</div>
          	
          	<form class="d-flex">
-             	<button class="btn btn-outline-primary btn-sm" type="button" href="./resources/bootstrap-5/html/login.html">Sign in</button>
+             	<button class="btn btn-outline-primary btn-sm" type="button"><a href="./login.do">Sign in</a></button>
              </form>
          </div>
       </nav>
@@ -171,7 +171,8 @@
 			</div>
 		</div>
 	</div>
-<!-- 소연 시작 -->
+	
+	<!-- 캠핑장조회수 시작 -->
 	<section class="py-6">
       <div class="container">
         <div class="row mb-5">
@@ -179,7 +180,7 @@
             <p class="subtitle text-primary" style="font-family: 'Recipekorea';"><font size=-1>MOST POPULAR CAMPSITES</font></p>
             <h2 style="font-family: 'Recipekorea';">캠핑장 조회수 TOP 5</h2>
           </div>
-          <div class="col-md-4 d-lg-flex align-items-center justify-content-end"><a class="text-muted text-sm" href="./resources/bootstrap-5/html/category.html" style="font-family: 'Recipekorea';">
+          <div class="col-md-4 d-lg-flex align-items-center justify-content-end"><a class="text-muted text-sm" href="./resources/bootstrap-5/html/category.html" style="font-family: 'BMJUA';">
                더 많은 캠핑장 보러가기<i class="fas fa-angle-double-right ms-2"></i></a></div>
         </div>
         <div class="swiper-container guides-slider mx-n2 pt-3">
@@ -231,7 +232,9 @@
         </div>
       </div>
     </section>
-    <!-- Our picks section-->
+    <!-- 캠핑장조회수 끝 -->
+    
+	<!-- 캠핑장추천 시작 -->
     <section class="py-6 bg-gray-100">
       <div class="container">
         <div class="row mb-5">
@@ -239,7 +242,7 @@
             <p class="subtitle text-primary">THE STARRY NIGHT</font></p>
             <h2 style="font-family: 'Recipekorea';">별보기 좋은 캠핑장 Best 5</h2>
           </div>
-          <div class="col-md-4 d-md-flex align-items-center justify-content-end"><a class="text-muted text-sm" href="category-3-rooms.html" style="font-family: 'Recipekorea';">
+          <div class="col-md-4 d-md-flex align-items-center justify-content-end"><a class="text-muted text-sm" href="category-3-rooms.html" style="font-family: 'BMJUA';">
                더 많은 캠핑장 보러가기<i class="fas fa-angle-double-right ms-2"></i></a></div>
         </div>
         <div class="row">
@@ -283,10 +286,9 @@
         </div>
       </div>
     </section>
+	<!-- 캠핑장추천 끝 -->
 
-
-
-<!-- 컨텐츠추천 시작 -->
+	<!-- 컨텐츠추천 시작 -->
     <section class="py-6">
       <div class="container">
         <div class="row mb-5">
@@ -294,7 +296,7 @@
             <p class="subtitle text-primary">Stay and chill at camping</p>
             <h2 style="font-family: 'Recipekorea';">혼캠족을 위한 컨텐츠 추천</h2>
           </div>
-          <div class="col-md-4 d-lg-flex align-items-center justify-content-end"><a class="text-muted text-sm" href="./hboardlist.do">
+          <div class="col-md-4 d-lg-flex align-items-center justify-content-end"><a class="text-muted text-sm" href="./hboardlist.do" style="font-family: 'BMJUA';">
                혼캠 자료실<i class="fas fa-angle-double-right ms-2"></i></a></div>
         </div>
         <div class="swiper-container guides-slider mx-n2 pt-3">
@@ -353,46 +355,30 @@
       <div class="container">
         <div class="row mb-lg-6">
           <div class="col-md-8">
-            <p class="subtitle text-secondary">Survey</p>
+            <p class="subtitle text-primary">Survey</p>
             <h2 class="mb-md-0" style="font-family: 'Recipekorea';">설문조사 결과를 참고하세요!</h2>
           </div>
          
         </div>
         <div class="row">
           <div class="mb-3 mb-lg-0 col-sm-6 col-lg-3">
-            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative" href="#"><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/여가.jpg" alt=""/>
-                <div class="team-circle bg-secondary-light"></div></a>
-              <div class="card-body team-body text-center">
-                <h6 class="card-title" style="font-family: 'BMJUA';">여가시간 추천</h6>
-                <p class="card-subtitle text-muted text-xs text-uppercase">    </p>
-              </div>
+            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative" href="#"><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/여가.jpg" style="border-radius: 8px;" alt="여가"/>
+                <div class="team-circle bg-primary-light"></div></a>
             </div>
           </div>
           <div class="mb-3 mb-lg-0 col-sm-6 col-lg-3">
-            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative" href="#"><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/혼캠장점.jpg" alt=""/>
-                <div class="team-circle bg-secondary-light"></div></a>
-              <div class="card-body team-body text-center">
-                <h6 class="card-title" style="font-family: 'BMJUA';">혼캠 장점</h6>
-                <p class="card-subtitle text-muted text-xs text-uppercase">    </p>
-              </div>
+            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative" href="#"><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/혼캠장점.jpg" style="border-radius: 8px;" alt="장점"/>
+                <div class="team-circle bg-primary-light"></div></a>
             </div>
           </div>
           <div class="mb-3 mb-lg-0 col-sm-6 col-lg-3">
-            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative" href="#"><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/준비물.jpg" alt=""/>
-                <div class="team-circle bg-secondary-light"></div></a>
-              <div class="card-body team-body text-center">
-                <h6 class="card-title" style="font-family: 'BMJUA';">챙겨가면 좋은 준비물</h6>
-                <p class="card-subtitle text-muted text-xs text-uppercase">    </p>
-              </div>
+            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative" href="#"><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/준비물.jpg" style="border-radius: 8px;" alt="준비물"/>
+                <div class="team-circle bg-primary-light"></div></a>
             </div>
           </div>
           <div class="mb-3 mb-lg-0 col-sm-6 col-lg-3">
-            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative" href="#"><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/캠핑종류.jpg" alt=""/>
-                <div class="team-circle bg-secondary-light"></div></a>
-              <div class="card-body team-body text-center">
-                <h6 class="card-title" style="font-family: 'BMJUA';">선호하는 캠핑 종류</h6>
-                <p class="card-subtitle text-muted text-xs text-uppercase">    </p>
-              </div>
+            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative" href="#"><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/캠핑종류.jpg" style="border-radius: 8px;" alt="캠핑종류"/>
+                <div class="team-circle bg-primary-light"></div></a>
             </div>
           </div>
         </div>
@@ -477,15 +463,13 @@
       <div class="container">
         <div class="row mb-lg-6">
           <div class="col-md-8">
-            <p class="subtitle text-primary">WHO ARE WE?</p>
+            <p class="subtitle text-secondary">WHO ARE WE?</p>
             <h2 class="mb-md-0" style="font-family: 'Recipekorea';">Meet our team</h2>
           </div>
-          <div class="col-md-4 d-md-flex align-items-center justify-content-end"><a class="text-muted text-sm" href="./resources/bootstrap-5/html/team.html">
-               Meet us all<i class="fas fa-angle-double-right ms-2"></i></a></div>
         </div>
         <div class="row">
           <div class="mb-3 mb-lg-0 col-sm-6 col-lg-3">
-            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative" href="#"><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/리나.png" alt=""/>
+            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative"><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/리나.png" alt=""/>
                 <div class="team-circle bg-info-light"></div></a>
               <div class="card-body team-body text-center">
                 <h6 class="card-title">Rina</h6>
@@ -494,7 +478,7 @@
             </div>
           </div>
           <div class="mb-3 mb-lg-0 col-sm-6 col-lg-3">
-            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative" href="#"><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/병찬.png" alt=""/>
+            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative"><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/병찬.png" alt=""/>
                 <div class="team-circle bg-info-light"></div></a>
               <div class="card-body team-body text-center">
                 <h6 class="card-title">Byeong Chan</h6>
@@ -503,7 +487,7 @@
             </div>
           </div>
           <div class="mb-3 mb-lg-0 col-sm-6 col-lg-3">
-            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative" href="#"><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/소연.png" alt=""/>
+            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative"><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/소연.png" alt=""/>
                 <div class="team-circle bg-info-light"></div></a>
               <div class="card-body team-body text-center">
                 <h6 class="card-title">So Yeon</h6>
@@ -512,7 +496,7 @@
             </div>
           </div>
           <div class="mb-3 mb-lg-0 col-sm-6 col-lg-3">
-            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative" href="#"><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/지현.png" alt=""/>
+            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative"><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/지현.png" alt=""/>
                 <div class="team-circle bg-info-light"></div></a>
               <div class="card-body team-body text-center">
                 <h6 class="card-title">Jee Hyeon</h6>
