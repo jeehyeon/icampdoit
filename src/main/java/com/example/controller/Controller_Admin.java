@@ -42,6 +42,16 @@ public class Controller_Admin {
 		
 		return modelAndView;
 	}
+	@RequestMapping( value="/admin_users_view" )
+	public ModelAndView adminUsersView(HttpServletRequest request) {
+		System.out.println( "admin() 호출" );
+		
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName( "admin/admin_users_view" );
+		
+		return modelAndView;
+	}
 
 	
 }
