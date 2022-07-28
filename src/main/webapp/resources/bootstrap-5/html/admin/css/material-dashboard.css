@@ -27633,5 +27633,27 @@ pre[class*="language-"] {
     overflow: auto !important;
   }
 }
+.pagenu{
+position:relative;
+margin: auto;
+width: 22%;
+}
+
+.listdata:hover{
+background-color: #ccc;
+          
+}
+
+.subjectdrop{
+margin-left:10px;
+float:left;
+margin-top:-31px;
+}
+
+.writebtn{
+margin-right:10px;
+margin-top:-34px;
+float:right;
+}
 
 /*# sourceMappingURL=dashboard-free.css.map */
