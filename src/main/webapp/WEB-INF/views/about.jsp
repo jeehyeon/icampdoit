@@ -99,6 +99,58 @@
         <h1 class="hero-heading">About I Camp Do It</h1>
       </div>
     </section>
+    
+    <!-- 팀원소개 시작 -->  
+    <section class="py-6 bg-gray-100">
+      <div class="container">
+        <div class="row mb-lg-6">
+          <div class="col-md-8">
+            <p class="subtitle text-secondary">WHO ARE WE?</p>
+            <h2 class="mb-md-0" style="font-family: 'Recipekorea';">Meet our team</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="mb-3 mb-lg-0 col-sm-6 col-lg-3">
+            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative"><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/리나.png" alt=""/>
+                <div class="team-circle bg-info-light"></div></a>
+              <div class="card-body team-body text-center">
+                <h6 class="card-title">Rina</h6>
+                <p class="card-subtitle text-muted text-xs text-uppercase">Backend    </p>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3 mb-lg-0 col-sm-6 col-lg-3">
+            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative"><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/병찬.png" alt=""/>
+                <div class="team-circle bg-info-light"></div></a>
+              <div class="card-body team-body text-center">
+                <h6 class="card-title">Byeong Chan</h6>
+                <p class="card-subtitle text-muted text-xs text-uppercase">Backend    </p>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3 mb-lg-0 col-sm-6 col-lg-3">
+            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative"><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/소연.png" alt=""/>
+                <div class="team-circle bg-info-light"></div></a>
+              <div class="card-body team-body text-center">
+                <h6 class="card-title">So Yeon</h6>
+                <p class="card-subtitle text-muted text-xs text-uppercase">Frontend    </p>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3 mb-lg-0 col-sm-6 col-lg-3">
+            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative"><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/지현.png" alt=""/>
+                <div class="team-circle bg-info-light"></div></a>
+              <div class="card-body team-body text-center">
+                <h6 class="card-title">Jee Hyeon</h6>
+                <p class="card-subtitle text-muted text-xs text-uppercase">Frontend    </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- 팀원소개 끝 -->
+    
     <section class="py-6">
       <div class="container">
         <div class="row">
