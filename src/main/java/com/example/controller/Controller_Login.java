@@ -8,28 +8,28 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @RestController
-public class Controller {
+public class Controller_Login {
 	
-	@RequestMapping( value="/home.do" )
-	public ModelAndView home(HttpServletRequest request) {
-		System.out.println( "list() 호출" );
+	
+	@RequestMapping( value="/login.do" )
+	public ModelAndView login(HttpServletRequest request) {
+		System.out.println( "login() 호출" );
 		
 
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName( "home" );
+		modelAndView.setViewName( "/login/login" );
 		
 		return modelAndView;
 	}
-	
-	@RequestMapping( value="/about.do" )
-	public ModelAndView about(HttpServletRequest request) {
-		System.out.println( "about() 호출" );
+
+	@RequestMapping( value="/signup.do" )
+	public ModelAndView signup(HttpServletRequest request) {
+		System.out.println( "signup() 호출" );
 		
 
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName( "about" );
+		modelAndView.setViewName( "/login/signup" );
 		
 		return modelAndView;
 	}
-	
 }

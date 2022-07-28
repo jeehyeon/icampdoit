@@ -8,26 +8,26 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @RestController
-public class Controller {
+public class Controller_Customercare {
 	
-	@RequestMapping( value="/home.do" )
-	public ModelAndView home(HttpServletRequest request) {
-		System.out.println( "list() 호출" );
+	@RequestMapping( value="/notice.do" )
+	public ModelAndView notice(HttpServletRequest request) {
+		System.out.println( "notice()호출" );
 		
 
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName( "home" );
+		modelAndView.setViewName( "/customercare/notice" );
 		
 		return modelAndView;
 	}
 	
-	@RequestMapping( value="/about.do" )
-	public ModelAndView about(HttpServletRequest request) {
-		System.out.println( "about() 호출" );
+	@RequestMapping( value="/faq.do" )
+	public ModelAndView faq(HttpServletRequest request) {
+		System.out.println( "faq() 호출" );
 		
 
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName( "about" );
+		modelAndView.setViewName( "/customercare/faq" );
 		
 		return modelAndView;
 	}
