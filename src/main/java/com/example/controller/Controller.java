@@ -12,7 +12,7 @@ public class Controller {
 	
 	@RequestMapping( value="/home.do" )
 	public ModelAndView home(HttpServletRequest request) {
-		System.out.println( "list() È£Ãâ" );
+		System.out.println( "list() í˜¸ì¶œ" );
 		
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -23,7 +23,7 @@ public class Controller {
 	
 	@RequestMapping( value="/about.do" )
 	public ModelAndView about(HttpServletRequest request) {
-		System.out.println( "about() È£Ãâ" );
+		System.out.println( "about() í˜¸ì¶œ" );
 		
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -34,7 +34,7 @@ public class Controller {
 	
 	@RequestMapping( value="/notice.do" )
 	public ModelAndView notice(HttpServletRequest request) {
-		System.out.println( "notice() È£Ãâ" );
+		System.out.println( "notice()í˜¸ì¶œ" );
 		
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -45,7 +45,7 @@ public class Controller {
 	
 	@RequestMapping( value="/faq.do" )
 	public ModelAndView faq(HttpServletRequest request) {
-		System.out.println( "faq() È£Ãâ" );
+		System.out.println( "faq() í˜¸ì¶œ" );
 		
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -56,7 +56,7 @@ public class Controller {
 	
 	@RequestMapping( value="/searchkey.do" )
 	public ModelAndView searchkey(HttpServletRequest request) {
-		System.out.println( "searchkey() È£Ãâ" );
+		System.out.println( "searchkey()í˜¸ì¶œ" );
 		
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -67,7 +67,7 @@ public class Controller {
 	
 	@RequestMapping( value="/searchmap.do" )
 	public ModelAndView searchmap(HttpServletRequest request) {
-		System.out.println( "searchmap() È£Ãâ" );
+		System.out.println( "searchmap() í˜¸ì¶œ" );
 		
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -78,7 +78,7 @@ public class Controller {
 	
 	@RequestMapping( value="/campview.do" )
 	public ModelAndView campview(HttpServletRequest request) {
-		System.out.println( "campview() È£Ãâ" );
+		System.out.println( "campview() í˜¸ì¶œ" );
 		
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -89,7 +89,7 @@ public class Controller {
 	
 	@RequestMapping( value="/mboardlist.do" )
 	public ModelAndView mboardlist(HttpServletRequest request) {
-		System.out.println( "mboardlist() È£Ãâ" );
+		System.out.println( "mboardlist() í˜¸ì¶œ" );
 		
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -100,7 +100,7 @@ public class Controller {
 	
 	@RequestMapping( value="/mboardview.do" )
 	public ModelAndView mboardview(HttpServletRequest request) {
-		System.out.println( "mboardview() È£Ãâ" );
+		System.out.println( "mboardview() í˜¸ì¶œ" );
 		
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -111,7 +111,7 @@ public class Controller {
 	
 	@RequestMapping( value="/mboardwrite.do" )
 	public ModelAndView mboardwrite(HttpServletRequest request) {
-		System.out.println( "mboardwrite() È£Ãâ" );
+		System.out.println( "mboardwrite() í˜¸ì¶œ" );
 		
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -122,7 +122,7 @@ public class Controller {
 	
 	@RequestMapping( value="/mboardmodify.do" )
 	public ModelAndView mboardmodify(HttpServletRequest request) {
-		System.out.println( "mboardmodify() È£Ãâ" );
+		System.out.println( "mboardmodify() í˜¸ì¶œ" );
 		
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -133,7 +133,7 @@ public class Controller {
 	
 	@RequestMapping( value="/hboardlist.do" )
 	public ModelAndView hboardlist(HttpServletRequest request) {
-		System.out.println( "hboardlist() È£Ãâ" );
+		System.out.println( "hboardlist()í˜¸ì¶œ" );
 		
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -144,7 +144,7 @@ public class Controller {
 	
 	@RequestMapping( value="/hboardview.do" )
 	public ModelAndView hboardview(HttpServletRequest request) {
-		System.out.println( "hboardview() È£Ãâ" );
+		System.out.println( "hboardview() í˜¸ì¶œ" );
 		
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -155,7 +155,7 @@ public class Controller {
 	
 	@RequestMapping( value="/mypage.do" )
 	public ModelAndView mypage(HttpServletRequest request) {
-		System.out.println( "mypage() È£Ãâ" );
+		System.out.println( "mypage() í˜¸ì¶œ" );
 		
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -166,7 +166,7 @@ public class Controller {
 	
 	@RequestMapping( value="/mypagesub.do" )
 	public ModelAndView mypagesub(HttpServletRequest request) {
-		System.out.println( "mypagesub() È£Ãâ" );
+		System.out.println( "mypagesub() í˜¸ì¶œ" );
 		
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -177,7 +177,7 @@ public class Controller {
 	
 	@RequestMapping( value="/mypagemylist.do" )
 	public ModelAndView mypagemylist(HttpServletRequest request) {
-		System.out.println( "mypagemylist() È£Ãâ" );
+		System.out.println( "mypagemylist() í˜¸ì¶œ" );
 		
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -188,7 +188,7 @@ public class Controller {
 	
 	@RequestMapping( value="/login.do" )
 	public ModelAndView login(HttpServletRequest request) {
-		System.out.println( "login() È£Ãâ" );
+		System.out.println( "login() í˜¸ì¶œ" );
 		
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -232,7 +232,7 @@ public class Controller {
 
 	@RequestMapping( value="/signup.do" )
 	public ModelAndView signup(HttpServletRequest request) {
-		System.out.println( "signup() È£Ãâ" );
+		System.out.println( "signup() í˜¸ì¶œ" );
 		
 
 		ModelAndView modelAndView = new ModelAndView();
