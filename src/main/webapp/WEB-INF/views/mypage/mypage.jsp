@@ -91,7 +91,7 @@
     </header>
     
     <section class="py-5">
-      <div class="container">
+      <div class="container-fluid border-bottom px-lg-5">
         <!-- Breadcrumbs -->
         <ol class="breadcrumb ps-0  justify-content-start">
           <li class="breadcrumb-item"><a href="./home.do">Home</a></li>
@@ -99,6 +99,9 @@
         </ol>
         <h1 class="hero-heading mb-0" style="font-family: 'Recipekorea';">내 정보</h1>
         <p class="text-muted mb-5">내 정보 확인 및 수정</p>
+      </div>
+        
+      <div class="container-fluid py-5 px-lg-5">  
         <div class="row">
           <div class="col-lg-7 mb-5 mb-lg-0">
             <div class="text-block"> 
@@ -110,7 +113,7 @@
                   <button class="btn btn-link ps-0 text-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#personalDetails" aria-expanded="false" aria-controls="personalDetails">Update</button>
                 </div>
               </div>
-              <p class="text-sm text-muted"><i class="fa fa-id-card fa-fw me-2"></i>홍길동  /  test01<br><i class="fa fa-birthday-cake fa-fw me-2"></i>1997/04/14<br><i class="fa fa-envelope-open fa-fw me-2"></i>john.doe@directory.com  <span class="mx-2"> | </span>  <i class="fa fa-phone fa-fw me-2"></i>010-1234-5678</p>
+              <p class="text-sm text-muted"><i class="fa fa-user-circle fa-fw me-2"></i>홍길동<br><i class="fa fa-id-card fa-fw me-2"></i>test01<br><i class="fa fa-birthday-cake fa-fw me-2"></i>1997/04/14<br><i class="fa fa-envelope-open fa-fw me-2"></i>john.doe@directory.com  <span class="mx-2"> | </span>  <i class="fa fa-phone fa-fw me-2"></i>010-1234-5678</p>
               <div class="collapse" id="personalDetails">
                 <form action="#">
                   <div class="row pt-4">
