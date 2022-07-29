@@ -93,7 +93,7 @@
     <section class="py-5">
       <div class="container-fluid border-bottom px-lg-5">
         <!-- Breadcrumbs -->
-        <h6 style="color : green">MY PAGE</h6>
+        <p class="subtitle text-sm text-primary">My Page    </p>
         <h1 class="hero-heading mb-0" style="font-family: 'Recipekorea';">내 정보</h1>
         <p></p>
       </div>

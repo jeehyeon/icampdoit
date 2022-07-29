@@ -104,12 +104,262 @@
       <div class="row">
         <div class="col-lg-3 pt-3">
           <form class="pe-xl-3" action="#" autocomplete="off">
-            <div class="mb-4">
-              <label class="form-label" for="form_dates">Dates</label>
-              <div class="datepicker-container datepicker-container-left">
-                <input class="form-control" type="text" name="bookingDate" id="form_dates" placeholder="Choose your dates">
-              </div>
+            <div class="mb-4">   
+              <label class="form-label" for="keyword">키워드</label>
+              <input class="form-control" type="text" name="keyword" id="keyword" placeholder="키워드나 캠핑장 이름을 입력해주세요.">
             </div>
+            <div class="mb-4">
+				<label class="form-label">업종</label>
+                <ul class="list-inline mt-xl-1 mb-0">
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="typeCamping" name="type[]">
+                          <label class="form-check-label" for="typeCamping">일반 야영장                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="typeCar" name="type[]">
+                          <label class="form-check-label" for="typeCar">자동차 야영장                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="typeGlamping" name="type[]">
+                          <label class="form-check-label" for="typeGlamping">글램핑                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="typeCaraban" name="type[]">
+                          <label class="form-check-label" for="typeCaraban">카라반                                            </label>
+                        </div>
+                      </li>
+                </ul>
+            </div>
+             <div class="mb-4">
+				<label class="form-label">입지</label>
+                <ul class="list-inline mt-xl-1 mb-0">
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="placeMountain" name="type[]">
+                          <label class="form-check-label" for="placeMountain">산                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="placeForest" name="type[]">
+                          <label class="form-check-label" for="placeForest">숲                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="placeStream" name="type[]">
+                          <label class="form-check-label" for="placeStream">계곡                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="placeCity" name="type[]">
+                          <label class="form-check-label" for="placeCity">도심                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="placeRiver" name="type[]">
+                          <label class="form-check-label" for="placeRiver">강                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="placeLake" name="type[]">
+                          <label class="form-check-label" for="placeLake">호수                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="placeBeach" name="type[]">
+                          <label class="form-check-label" for="placeBeach">해변                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="placeIsland" name="type[]">
+                          <label class="form-check-label" for="placeIsland">섬                                            </label>
+                        </div>
+                      </li>
+                </ul>
+            </div>
+            <div class="mb-4">
+				<label class="form-label">바닥 형태</label>
+                <ul class="list-inline mt-xl-1 mb-0">
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="floorGrass" name="type[]">
+                          <label class="form-check-label" for="floorGrass">잔디                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="floorRock" name="type[]">
+                          <label class="form-check-label" for="floorRock">파쇄석                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="floorTeck" name="type[]">
+                          <label class="form-check-label" for="floorTeck">테크                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="floorPebble" name="type[]">
+                          <label class="form-check-label" for="floorPebble">자갈                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="floorDirt" name="type[]">
+                          <label class="form-check-label" for="floorDirt">흙                                            </label>
+                        </div>
+                      </li>
+                </ul>
+            </div>
+            <div class="mb-4">
+				<label class="form-label">부대 시설</label>
+                <ul class="list-inline mt-xl-1 mb-0">
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="facElectro" name="type[]">
+                          <label class="form-check-label" for="facElectro">전기                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="facWarmwater" name="type[]">
+                          <label class="form-check-label" for="facWarmwater">온수                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="facPlay" name="type[]">
+                          <label class="form-check-label" for="facPlay">놀이터                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="facGym" name="type[]">
+                          <label class="form-check-label" for="facGym">운동시설                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="facWifi" name="type[]">
+                          <label class="form-check-label" for="facWifi">무선인터넷                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="facWood" name="type[]">
+                          <label class="form-check-label" for="facWood">장작판매                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="facTrampoline" name="type[]">
+                          <label class="form-check-label" for="facTrampoline">트램폴린                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="facPool" name="type[]">
+                          <label class="form-check-label" for="facPool">물놀이장                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="facMart" name="type[]">
+                          <label class="form-check-label" for="facMart">마트                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="facConv" name="type[]">
+                          <label class="form-check-label" for="facConv">편의점                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="facWalk" name="type[]">
+                          <label class="form-check-label" for="facWalk">산책로                                            </label>
+                        </div>
+                      </li>
+                </ul>
+            </div>
+            <div class="mb-4">
+				<label class="form-label">캠핑 장비 대여</label>
+                <ul class="list-inline mt-xl-1 mb-0">
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="rentTent" name="type[]">
+                          <label class="form-check-label" for="rentTent">텐트                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="rentFire" name="type[]">
+                          <label class="form-check-label" for="rentFire">화로대                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="rentHeat" name="type[]">
+                          <label class="form-check-label" for="rentHeat">난방기구                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="rentDish" name="type[]">
+                          <label class="form-check-label" for="rentDish">식기                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="rentBed" name="type[]">
+                          <label class="form-check-label" for="rentBed">침낭                                            </label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="rentWire" name="type[]">
+                          <label class="form-check-label" for="rentWire">릴선                                            </label>
+                        </div>
+                      </li>
+                </ul>
+            </div>
+            <div class="mb-4"> 
+                  <label class="form-label">기타</label>
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="etcTrailer" name="amenities[]">
+                        <label class="form-check-label" for="etcTrailer">개인 트레일러 입장 가능                               </label>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="etcCaraban" name="amenities[]">
+                        <label class="form-check-label" for="etcCaraban">개인 카라반 입장 가능                               </label>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="etcPet" name="amenities[]">
+                        <label class="form-check-label" for="etcPet">반려견 입장 가능                               </label>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
             <div class="mb-4">
               <label class="form-label" for="form_guests">Guests</label>
               <select class="selectpicker form-control" name="guests" id="form_guests" data-style="btn-selectpicker" title=" ">
