@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Directory Theme by Bootstrapious</title>
+    <title>I CAMP DO IT</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -27,7 +27,7 @@
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="./resources/bootstrap-5/html/css/custom.css">
     <!-- Favicon-->
-    <link rel="shortcut icon" href="./resources/bootstrap-5/html/img/favicon.png">
+    <link rel="shortcut icon" href="./resources/bootstrap-5/html/img/logo2.svg">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
@@ -450,7 +450,7 @@
             <p class="subtitle text-primary" style="font-family: 'Recipekorea';"><font size=-1>MOST POPULAR CAMPSITES</font></p>
             <h2 style="font-family: 'Recipekorea';">캠핑장 조회수 TOP 5</h2>
           </div>
-          <div class="col-md-4 d-lg-flex align-items-center justify-content-end"><a class="text-muted text-sm" href="./resources/bootstrap-5/html/category.html" style="font-family: 'Recipekorea';">
+          <div class="col-md-4 d-lg-flex align-items-center justify-content-end"><a class="text-muted text-sm" href="./resources/bootstrap-5/html/category.html" style="font-family: 'BMJUA';">
                더 많은 캠핑장 보러가기<i class="fas fa-angle-double-right ms-2"></i></a></div>
         </div>
         <div class="swiper-container guides-slider mx-n2 pt-3">
@@ -510,7 +510,7 @@
             <p class="subtitle text-primary">THE STARRY NIGHT</font></p>
             <h2 style="font-family: 'Recipekorea';">별보기 좋은 캠핑장 Best 5</h2>
           </div>
-          <div class="col-md-4 d-md-flex align-items-center justify-content-end"><a class="text-muted text-sm" href="category-3-rooms.html" style="font-family: 'Recipekorea';">
+          <div class="col-md-4 d-md-flex align-items-center justify-content-end"><a class="text-muted text-sm" href="category-3-rooms.html" style="font-family: 'BMJUA';">
                더 많은 캠핑장 보러가기<i class="fas fa-angle-double-right ms-2"></i></a></div>
         </div>
         <div class="row">
@@ -657,6 +657,7 @@
     <!-- 날씨 -->
     <section class="py-6 " >
       <div class="container">
+      <p class="subtitle text-primary">weekly forecast</p>
         <h3 class="text-left text-uppercase letter-spacing-3 mb-5" style="font-family: 'Recipekorea';">주간 예보</h3>
         <!-- Brands Slider-->
         <div class="swiper-container brands-slider">
