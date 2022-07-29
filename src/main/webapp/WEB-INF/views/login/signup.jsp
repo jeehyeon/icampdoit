@@ -44,20 +44,20 @@
               -->
             </div>
             <form class="form-validate">
-              <div class="mb-4">
-                <label class="form-label" for="loginUserName"> NAME</label>
+              <div class="mb-3">
+                <label class="form-label" for="loginUserName"> *NAME</label>
                 <input class="form-control" name="loginUserName" id="loginUserName" type="Name" placeholder="Name" autocomplete="off" required data-msg="Please enter your Name">
               </div>
-              <div class="mb-5">
-                <label class="form-label" for="loginUserID"> ID</label>
+              <div class="mb-4">
+                <label class="form-label" for="loginUserID"> *ID</label>
                 <div style="line-height:15%;">
                 <input name="loginUserID" id="loginUserID" type="ID" class="form-control" placeholder="ID" autocomplete="off" required data-msg="Please enter your ID">
                 <br>
                 <button type="button" class="btn btn btn-dark btn-sm" style="float: right; height: 30px; display: flex; align-items:center;">아이디 중복확인</button>
                 </div>
               </div>
-           	  <div class="mb-4">
-                <label class="form-label" for="loginPassword"> Password</label>
+           	  <div class="mb-3">
+                <label class="form-label" for="loginPassword"> *Password</label>
                 <input class="form-control" name="loginPassword" id="loginPassword" placeholder="Password" type="password" required data-msg="Please enter your password">
               </div>
               <!--
@@ -66,12 +66,12 @@
                 <input class="form-control" name="loginPassword2" id="loginPassword2" placeholder="Password" type="password" required data-msg="Please enter your password">
               </div>
               -->
-              <div class="mb-4">
-                <label class="form-label" for="loginUserEmail"> Email Address</label>
+              <div class="mb-3">
+                <label class="form-label" for="loginUserEmail"> *Email Address</label>
                 <input class="form-control" name="loginUserEmail" id="loginUserEmail" type="email" placeholder="name@address.com" autocomplete="off" required data-msg="Please enter your email">
               </div>
-              <div class="mb-4">
-                <label class="form-label" for="loginUserGender"> Gender</label>
+              <div class="mb-3">
+                <label class="form-label" for="loginUserGender"> *Gender</label>
                 <div class="form-check">
                   <input class="form-check-input" name="loginUserGender" type="checkbox">
                   <label class="form-check-label text-muted"><span class="text-sm">male</span></label>
@@ -81,15 +81,28 @@
                   <label class="form-check-label text-muted"><span class="text-sm">female</span></label>
                 </div>
               </div>
+              
               <div class="mb-4">
-                <label class="form-label" for="loginUsername"> 이용약관 동의</label>
-      			<textarea cols="69" rows="10" placeholder="제1조 [목적] 이 약관은 ‘바람따라구름따라’가 운영하는 ICampDoIt 에서 제공하는 인터넷 관련 서비스를 이용함에 있어 ... " readonly></textarea>
+                <label class="form-label" for="loginUsername"> *이용약관 동의</label>
+                <button class="btn btn-link ps-0 text-primary btn-sm collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#agree" aria-expanded="false" aria-controls="personalDetails">자세히 보기</button>
+      			  <div class="collapse" id="agree">
+	                <form action="#">
+	                  <div class="container mb-2">
+						  <form>
+						    <div class="form-group">
+						      <textarea class="form-control" rows="7" id="comment" style="background-color: white" readonly>제1장 총칙&#13;&#10;제1조. 목적&#13;&#10; 본 약관은 I Camp Do It(이하 "아이캠두잇")이 제공하는 모든 서비스의 이용조건 및 절차, 이용자와 아이캠두잇의 권리, 의무, 책임사항과 기타 필요한 사항을 규정합니다.&#13;&#10;제2조. 용어의 정의&#13;&#10;본 약관에서 사용하는 용어의 정의는 다음과 같습니다.&#13;&#10;...</textarea>
+						    </div>
+						  </form>
+	                  </div>
+	                </form>
+      			  </div>
+      			                    			  
       			<div class="form-check">
                   <input class="form-check-input" id="agree" type="checkbox">
                   <label class="form-check-label text-muted"> <span class="text-sm">[필수] 이용약관에 동의합니다.</span></label>
                 </div>
               </div>
-              
+                          
               <div class="d-grid gap-2">
                 <button class="btn btn-lg btn-primary" type="submit">Sign up</button>
               </div>
@@ -97,12 +110,16 @@
               <div class="d-grid gap-2">
                 <button class="btn btn btn-outline-muted btn-social" style="background-color: #ffc107"><i class="fa fa-solid fa-comment btn-social-icon fa-2x"> </i>CONNECT <span class="d-none d-sm-inline">WITH KAKAKO</span></button>
               </div>
+              <!--  
               <hr class="my-4">
               <p class="text-sm text-muted">By signing up you agree to Directory's <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>.</p>
-            </form><a class="close-absolute me-md-5 me-xl-6 pt-5" href="./home.do"> 
+              -->
+            </form>
+            <a class="close-absolute me-md-5 me-xl-6 pt-5" href="./home.do"> 
               <svg class="svg-icon w-3rem h-3rem">
                 <use xlink:href="#close-1"> </use>
-              </svg></a>
+              </svg>
+            </a>
           </div>
         </div>
         <div class="col-md-4 col-lg-6 col-xl-7 d-none d-md-block">

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -89,20 +88,131 @@
       </nav>
       <!-- /Navbar -->
     </header>
-    
-	<!-- Hero Section-->
-    <section class="hero py-5 py-lg-7">
-      <div class="container position-relative">
-        <!-- Breadcrumbs -->
-        <ol class="breadcrumb ps-0  justify-content-center">
-          <li class="breadcrumb-item"><a href="./home.do">Home</a></li>
-          <li class="breadcrumb-item active">공지사항                         </li>
-        </ol>
-        <h1 class="hero-heading mb-0">공지사항</h1>
+        
+    <section class="py-5 p-print-0 mb-5">
+      <div class="container">
+      	<!--
+        <div class="row mb-4 d-print-none">
+          <div class="col-lg-6">
+            <ol class="breadcrumb ps-0  justify-content-start">
+              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item"><a href="user-account.html">Account</a></li>
+              <li class="breadcrumb-item active">Invoice 202009001   </li>
+            </ol>
+          </div>
+          <div class="col-lg-6 text-lg-end">
+            <button class="btn btn-primary me-2"><i class="far fa-file-pdf me-2"></i> Download PDF</button>
+            <button class="btn" onclick="window.print()"><i class="fas fa-print me-2"></i> Print</button>
+          </div>
+        </div>
+        -->
+        <div>
+          <div class="mb-5 mt-6 border-0" style="background-color: white" align="center">
+            <h1 style="font-family: 'Recipekorea';">NOTICE</h1>
+          </div>
+          <!-- 
+          <div class="card-header bg-gray-100 p-5 border-0 px-print-0">
+            <div class="row">
+              <div class="col-6 d-flex align-items-center"><img src="./resources/bootstrap-5/html/img/logo2.svg" alt="Directory"></div>
+              <div class="col-6 text-end">
+                <h3 class="mb-0">Invoice 202009001</h3>
+                <p class="mb-0">Issued on Sep 01, 2020</p>
+              </div>
+            </div>
+          </div>
+          -->
+          <div class="card-body p-5 p-print-0">
+            <div class="row">
+              <div class="col-sm-6 mt-3 pe-lg-3">
+                <h2 class="h6 text-uppercase mb-4">전체: 7 건</h2>
+              </div>
+            </div>
+            
+            <!-- 목록 -->
+            <div class="table-responsive text-sm mb-3">
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <td class="text-center">1</td>
+                    <td class="fw-bold">[공지] 사이트 이용안내 변경 사항 공지</td>
+                    <td></td>
+                    <td class="text-end"></td>
+                    <td class="text-center">아이캠두잇</td>
+                    <td class="text-end">2022-01-01</td>
+                  </tr>
+                  <tr>
+                    <td class="text-center">2</td>
+                    <td class="fw-bold">[공지] 사이트 이용안내 변경 사항 공지</td>
+                    <td></td>
+                    <td class="text-end"></td>
+                    <td class="text-center">아이캠두잇</td>
+                    <td class="text-end">2022-01-01</td>
+                  </tr>
+                  <tr>
+                    <td class="text-center">3</td>
+                    <td class="fw-bold">[공지] 사이트 이용안내 변경 사항 공지</td>
+                    <td></td>
+                    <td class="text-end"></td>
+                    <td class="text-center">아이캠두잇</td>
+                    <td class="text-end">2022-01-01</td>
+                  </tr>
+                  <tr>
+                    <td class="text-center">4</td>
+                    <td class="fw-bold">[공지] 사이트 이용안내 변경 사항 공지</td>
+                    <td></td>
+                    <td class="text-end"></td>
+                    <td class="text-center">아이캠두잇</td>
+                    <td class="text-end">2022-01-01</td>
+                  </tr>
+                  <tr>
+                    <td class="text-center">5</td>
+                    <td class="fw-bold">[공지] 사이트 이용안내 변경 사항 공지</td>
+                    <td></td>
+                    <td class="text-end"></td>
+                    <td class="text-center">아이캠두잇</td>
+                    <td class="text-end">2022-01-01</td>
+                  </tr>
+                  <tr>
+                    <td class="text-center">6</td>
+                    <td class="fw-bold">[공지] 사이트 이용안내 변경 사항 공지</td>
+                    <td></td>
+                    <td class="text-end"></td>
+                    <td class="text-center">아이캠두잇</td>
+                    <td class="text-end">2022-01-01</td>
+                  </tr>
+                  <tr>
+                    <td class="text-center">7</td>
+                    <td class="fw-bold">[공지] 사이트 이용안내 변경 사항 공지</td>
+                    <td></td>
+                    <td class="text-end"></td>
+                    <td class="text-center">아이캠두잇</td>
+                    <td class="text-end">2022-01-01</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <!-- 페이징 -->
+          <div class="card-footer bg-white p-5 px-print-0 border-0 text-end text-sm">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination pagination-template d-flex justify-content-center">
+                <li class="page-item"><a class="page-link" href="#"> <i class="fa fa-angle-left"></i></a></li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#"> <i class="fa fa-angle-right"></i></a></li>
+              </ul>
+            </nav>  
+          </div>
+        </div>
       </div>
     </section>
+    <!-- 
 	<section class="py-6">
+	
 	</section>
+	-->
     <!-- Footer - 관리자 페이지 이동 부분 넣을 곳 -->
     <footer class="position-relative z-index-10 d-print-none">
            
