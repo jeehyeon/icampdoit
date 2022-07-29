@@ -70,7 +70,9 @@
               </div>
               <hr class="my-3 hr-text letter-spacing-2" data-content="OR">
               <div class="d-grid gap-2">
+                <!--  
                 <button type="button" class="btn btn btn-outline-dark btn-social"><a href="signup.do">CREATE ACCOUNT</a></button>
+                -->
                 <button type="button" class="btn btn btn-outline-muted btn-social btn-warning"><i class="fa fa-solid fa-comment btn-social-icon fa-2x"> </i>CONNECT <span class="d-none d-sm-inline">WITH KAKAKO</span></button>
               </div>
               <hr class="my-4">

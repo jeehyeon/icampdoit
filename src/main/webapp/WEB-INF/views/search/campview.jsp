@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -48,20 +47,20 @@
 	          
 	              <!-- About 페이지 링크 -->
 	              <li class="nav-item">
-	              	<a class="nav-link" href="./resources/bootstraop-5/html/about.jsp">About</a>
+	              	<a class="nav-link" href="./about.do">About</a>
 	              </li>
 	              
 	              <!-- Customer Care 페이지 -->
 				  <li class="nav-item dropdown">
 				  	<a class="nav-link dropdown-toggle" id="noticeDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Customer Care</a>
-	                <div class="dropdown-menu" aria-labelledby="noticeDropdownMenuLink"><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/notice.jsp">공지사항</a><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/faq.jsp">FAQ</a></div>
+	                <div class="dropdown-menu" aria-labelledby="noticeDropdownMenuLink"><a class="dropdown-item" href="./notice.do">공지사항</a><a class="dropdown-item" href="/faq.do">FAQ</a></div>
 	              </li>
 	              
 	              <!-- Search 페이지 -->
 	              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="searchDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                   Search</a>
 	                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="searchDropdownMenuLink">
-	                  <a class="dropdown-item" href="./resources/bootstrap-5/html/docs/generalsearch.jsp">일반검색</a><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/mapsearch.jsp">지도검색</a>
+	                  <a class="dropdown-item" href="./searchkey.do">일반검색</a><a class="dropdown-item" href="./searchmap.do">지도검색</a>
 	                </div>
 	              </li>
 	              
@@ -69,7 +68,7 @@
 	              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="communicationDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                   Communication</a>
 	                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="communicationDropdownMenuLink">
-	                  <a class="dropdown-item" href="./resources/bootstrap-5/html/docs/board.jsp">게시판</a><a class="dropdown-item" href="./hboardlist.do">혼캠 자료실</a>
+	                  <a class="dropdown-item" href="./mboardlist.do">게시판</a><a class="dropdown-item" href="./hboardlist.do">혼캠 자료실</a>
 	                </div>
 	              </li>
 	              
@@ -77,14 +76,14 @@
 	              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="mypageDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                   MyPage</a>
 	                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="mypageDropdownMenuLink">
-	                  <a class="dropdown-item" href="./resources/bootstrap-5/html/docs/mypage.jsp">내 정보</a><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/subscribe.jsp">찜한 목록</a><a class="dropdown-item" href="./resources/bootstrap-5/html/docs/mywritings.jsp">내가 쓴 글</a>
+	                  <a class="dropdown-item" href="./mypage.do">내 정보</a><a class="dropdown-item" href="./mypagesub.do">찜한 목록</a><a class="dropdown-item" href="./mypagemylist.do">내가 쓴 글</a>
 	                </div>
 	              </li>
 	            </ul>
          	</div>
          	
          	<form class="d-flex">
-             	<button class="btn btn-outline-primary btn-sm" type="button" href="./resources/bootstrap-5/html/login.html">Sign in</button>
+             	<button class="btn btn-outline-primary btn-sm" type="button"><a href="./login.do">Sign in</a></button>
              </form>
          </div>
       </nav>
