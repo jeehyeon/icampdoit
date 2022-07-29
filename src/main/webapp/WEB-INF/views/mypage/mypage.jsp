@@ -93,12 +93,9 @@
     <section class="py-5">
       <div class="container-fluid border-bottom px-lg-5">
         <!-- Breadcrumbs -->
-        <ol class="breadcrumb ps-0  justify-content-start">
-          <li class="breadcrumb-item"><a href="./home.do">Home</a></li>
-          <li class="breadcrumb-item active">My Page   </li>
-        </ol>
+        <h6 style="color : green">MY PAGE</h6>
         <h1 class="hero-heading mb-0" style="font-family: 'Recipekorea';">내 정보</h1>
-        <p class="text-muted mb-5">내 정보 확인 및 수정</p>
+        <p></p>
       </div>
         
       <div class="container-fluid py-5 px-lg-5">  

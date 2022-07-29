@@ -97,7 +97,7 @@
           <li class="breadcrumb-item active">My Page   </li>
         </ol>
         <h1 class="hero-heading mb-0" style="font-family: 'Recipekorea';">내가 쓴 글</h1>
-        <p class="text-muted mb-5">내가 쓴 글을 확인해보세요</p>
+        <p></p>
       </div>
      </section>
     <section class="py-3">
