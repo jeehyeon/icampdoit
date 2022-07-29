@@ -83,7 +83,16 @@
     <span class="nav-link-text ms-1">게시판 관리</span>
   </a>
 </li>
-
+<li class="nav-item">
+  <a class="nav-link text-white " href="./home.do">
+    
+      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+        <i class="material-icons opacity-10">assignment</i>
+      </div>
+    
+    <span class="nav-link-text ms-1">사용자 페이지</span>
+  </a>
+</li>
   
 
 <li class="nav-item">
@@ -161,7 +170,7 @@
                         <span class="text-secondary text-xs font-weight-bold">남</span>
                       </td>
                       <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="./admin_users_view" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Edit
                         </a>
                       </td>
@@ -188,7 +197,7 @@
                         <span class="text-secondary text-xs font-weight-bold">남</span>
                       </td>
                       <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="./admin_users_view" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Edit
                         </a>
                       </td>
@@ -215,7 +224,7 @@
                         <span class="text-secondary text-xs font-weight-bold">남</span>
                       </td>
                       <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="./admin_users_view" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Edit
                         </a>
                       </td>
@@ -242,7 +251,7 @@
                         <span class="text-secondary text-xs font-weight-bold">남</span>
                       </td>
                       <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="./admin_users_view" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Edit
                         </a>
                       </td>
@@ -269,7 +278,7 @@
                         <span class="text-secondary text-xs font-weight-bold">남</span>
                       </td>
                       <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="./admin_users_view" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Edit
                         </a>
                       </td>
@@ -296,7 +305,7 @@
                         <span class="text-secondary text-xs font-weight-bold">남</span>
                       </td>
                       <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="./admin_users_view" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Edit
                         </a>
                       </td>
@@ -323,7 +332,7 @@
                         <span class="text-secondary text-xs font-weight-bold">남</span>
                       </td>
                       <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="./admin_users_view" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Edit
                         </a>
                       </td>
