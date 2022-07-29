@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,7 +21,7 @@
     <!-- Magnigic Popup-->
     <link rel="stylesheet" href="./resources/bootstrap-5/html/vendor/magnific-popup/magnific-popup.css">
     <!-- theme stylesheet-->
-    <link rel="stylesheet" href="./resources/bootstrap-5/html/css/style.default.css" id="theme-stylesheet">
+    <link rel="stylesheet" href="./resources/bootstrap-5/html/css/style.green.css" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="./resources/bootstrap-5/html/css/custom.css">
     <!-- Favicon-->
@@ -87,17 +86,17 @@
          </div>
       </nav>
       <!-- /Navbar -->
-      
-    <!-- 게시판 시작 -->  
     </header>
+    
+    <!-- 게시판 시작 --> 
     <section class="position-relative py-6"><img class="bg-image" src="./resources/bootstrap-5/html/img/photo/자료실.png" alt="">
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
             <div class="card">
-              <div class="card-body p-5"><strong class="text-uppercase text-secondary d-inline-block mb-2 text-sm" style="font-family: 'Recipekorea';">없는 거 빼고 다 있는</strong>
+              <div class="card-body p-5"><strong class="text-uppercase text-primary d-inline-block mb-2 text-sm" style="font-family: 'Recipekorea';">없는 거 빼고 다 있는</strong>
                 <h2 class="mb-3" style="font-family: 'Recipekorea';">혼캠 자료실</h2>
-                <p class="text-muted">혼캠족을 위한 자료실입니다.</p>
+                <p class="text-muted" style="font-family: 'BMJUA';">혼캠족을 위한 자료실입니다.</p>
               </div>
             </div>
           </div>
@@ -157,29 +156,13 @@
               </div>
             </div>
           </div>
-          <!-- blog item-->
-          <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-            <div class="card shadow border-0 h-100"><a href="./resources/bootstrap-5/html/post.html"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/photo-1514890547357-a9ee288728e0.jpg" alt="..."/></a>
-              <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#">Guides </a>
-                <h5 class="my-2"><a class="text-dark" href="./resources/bootstrap-5/html/post.html">Best of this year's Biennale          </a></h5>
-                <p class="text-gray-500 text-sm my-3"><i class="far fa-clock me-2"></i>January 16, 2016</p>
-                <p class="my-2 text-muted text-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestib...</p><a class="btn btn-link ps-0" href="./resources/bootstrap-5/html/post.html">더보기<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Pagination -->
-        <nav aria-label="Blog pagination">
-          <ul class="pagination justify-content-between mb-5">
-            <li class="page-item"><a class="page-link text-sm rounded" href="#"> <i class="fa fa-chevron-left me-1"></i>Older posts</a></li>
-            <li class="page-item disabled"><a class="page-link text-sm rounded" href="#" tabindex="-1">Newer posts  <i class="fa fa-chevron-right ms-1"></i></a></li>
-          </ul>
-        </nav>
+          
+        <!-- 페이징 -->
       </div>
     </section>
-    <!-- Footer-->
+    <!-- Footer - 관리자 페이지 이동 부분 넣을 곳 -->
     <footer class="position-relative z-index-10 d-print-none">
-      
+           
       <!-- Copyright section of the footer-->
       <div class="py-4 fw-light bg-gray-800 text-gray-300">
         <div class="container">
@@ -188,11 +171,11 @@
               <p class="text-sm mb-md-0">&copy; 2022, Your company.  All rights reserved.</p>
             </div>
             <div class="col-md-6">
-              <ul class="list-inline mb-0 mt-2 mt-md-0 text-center text-md-end">
-                <li class="list-inline-item"><img class="w-2rem" src="./resources/bootstrap-5/html/img/visa.svg" alt="..."></li>
-                <li class="list-inline-item"><img class="w-2rem" src="./resources/bootstrap-5/html/img/mastercard.svg" alt="..."></li>
-                <li class="list-inline-item"><img class="w-2rem" src="./resources/bootstrap-5/html/img/paypal.svg" alt="..."></li>
-                <li class="list-inline-item"><img class="w-2rem" src="./resources/bootstrap-5/html/img/western-union.svg" alt="..."></li>
+             <!-- 관리자페이지 바로가기 -->
+             	
+              	<ul class="list-inline mb-0 mt-2 mt-md-0 text-center text-md-end">
+                <li class="list-inline-item"><a class="text-muted text-sm" href="./admin.do" >
+              	관리자 페이지</a></li>
               </ul>
             </div>
           </div>
