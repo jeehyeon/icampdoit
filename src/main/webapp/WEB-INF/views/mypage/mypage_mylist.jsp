@@ -107,9 +107,9 @@
         <div class="row mb-5">
           <!-- blog item-->
           <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-            <div class="card shadow border-0 h-100"><a href="post.html"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/photo-1512917774080-9991f1c4c750.jpg" alt="..."/></a>
+            <div class="card shadow border-0 h-100"><a href="./mboardview.do"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/photo-1512917774080-9991f1c4c750.jpg" alt="..."/></a>
               <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#">자유게시판 </a>
-                <h5 class="my-2"><a class="text-dark" href="post.html">혹시 차박으로 혼캠 가시는 혼캠러 있나요?         </a></h5>
+                <h5 class="my-2"><a class="text-dark" href="./mboardview.do">혹시 차박으로 혼캠 가시는 혼캠러 있나요?         </a></h5>
                 <p class="text-gray-500 text-sm my-3"><i class="far fa-clock me-2"></i>22-07-29</p>
                 <p class="my-2 text-muted text-sm">차박으로 혼캠가는 건 처음인데 꿀팁같은거 있으면 알려주세요...</p>
               </div>
@@ -117,9 +117,9 @@
           </div>
           <!-- blog item-->
           <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-            <div class="card shadow border-0 h-100"><a href="post.html"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/photo-1522771739844-6a9f6d5f14af.jpg" alt="..."/></a>
+            <div class="card shadow border-0 h-100"><a href="./mboardview.do"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/photo-1522771739844-6a9f6d5f14af.jpg" alt="..."/></a>
               <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#">중고거래 </a>
-                <h5 class="my-2"><a class="text-dark" href="post.html">(팝니다)구매하고 2번 사용함          </a></h5>
+                <h5 class="my-2"><a class="text-dark" href="./mboardview.do">(팝니다)구매하고 2번 사용함          </a></h5>
                 <p class="text-gray-500 text-sm my-3"><i class="far fa-clock me-2"></i>22-07-29</p>
                 <p class="my-2 text-muted text-sm">캠핑할때 쓰기 좋은 테이블인데 제 취향은 아니라서 판매합니다. 구매의사가 있으신 분들은 아래 댓글 달아주세요.</p>
               </div>
@@ -127,9 +127,9 @@
           </div>
           <!-- blog item-->
           <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-            <div class="card shadow border-0 h-100"><a href="post.html"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/photo-1482463084673-98272196658a.jpg" alt="..."/></a>
+            <div class="card shadow border-0 h-100"><a href="./mboardview.do"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/photo-1482463084673-98272196658a.jpg" alt="..."/></a>
               <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#">후기게시판 </a>
-                <h5 class="my-2"><a class="text-dark" href="post.html">자라섬 캠핑장 후기          </a></h5>
+                <h5 class="my-2"><a class="text-dark" href="./mboardview.do">자라섬 캠핑장 후기          </a></h5>
                 <p class="text-gray-500 text-sm my-3"><i class="far fa-clock me-2"></i>22-07-20</p>
                 <p class="my-2 text-muted text-sm">안녕하세요, 저 얼마전에 자라섬 캠핑장에 다녀왔는데요, 장단점을 좀 공유하고 싶어서 글 올립니다..!</p>
               </div>
@@ -137,9 +137,9 @@
           </div>
           <!-- blog item-->
           <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-            <div class="card shadow border-0 h-100"><a href="post.html"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/photo-1499695867787-121ffb7950bf.jpg" alt="..."/></a>
+            <div class="card shadow border-0 h-100"><a href="./mboardview.do"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/photo-1499695867787-121ffb7950bf.jpg" alt="..."/></a>
               <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#">자유게시판 </a>
-                <h5 class="my-2"><a class="text-dark" href="post.html">저번주에 혹시 용인휴양림 캠핑장 이용하신 분?          </a></h5>
+                <h5 class="my-2"><a class="text-dark" href="./mboardview.do">저번주에 혹시 용인휴양림 캠핑장 이용하신 분?          </a></h5>
                 <p class="text-gray-500 text-sm my-3"><i class="far fa-clock me-2"></i>22-07-15</p>
                 <p class="my-2 text-muted text-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestib...</p>
               </div>
@@ -147,9 +147,9 @@
           </div>
           <!-- blog item-->
           <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-            <div class="card shadow border-0 h-100"><a href="post.html"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/photo-1495562569060-2eec283d3391.jpg" alt="..."/></a>
+            <div class="card shadow border-0 h-100"><a href="./mboardview.do"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/photo-1495562569060-2eec283d3391.jpg" alt="..."/></a>
               <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#">후기게시판 </a>
-                <h5 class="my-2"><a class="text-dark" href="post.html">가평 캠핑장 후기          </a></h5>
+                <h5 class="my-2"><a class="text-dark" href="./mboardview.do">가평 캠핑장 후기          </a></h5>
                 <p class="text-gray-500 text-sm my-3"><i class="far fa-clock me-2"></i>22-06-28</p>
                 <p class="my-2 text-muted text-sm">Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.  Mauris placerat eleif...</p>
               </div>
@@ -157,9 +157,9 @@
           </div>
           <!-- blog item-->
           <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-            <div class="card shadow border-0 h-100"><a href="post.html"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/photo-1514890547357-a9ee288728e0.jpg" alt="..."/></a>
+            <div class="card shadow border-0 h-100"><a href="./mboardview.do"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/photo-1514890547357-a9ee288728e0.jpg" alt="..."/></a>
               <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#">중고거래 </a>
-                <h5 class="my-2"><a class="text-dark" href="post.html">(삽니다)랜턴          </a></h5>
+                <h5 class="my-2"><a class="text-dark" href="./mboardview.do">(삽니다)랜턴          </a></h5>
                 <p class="text-gray-500 text-sm my-3"><i class="far fa-clock me-2"></i>22-05-15</p>
                 <p class="my-2 text-muted text-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestib...</p>
               </div>

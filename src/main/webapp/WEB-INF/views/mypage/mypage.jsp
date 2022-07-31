@@ -32,10 +32,21 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  	<style type="text/css">
+  		#wrap {
+  			min-height: 100%;
+		    position: relative;
+		    padding-bottom: 110px;
+  		}
+  		#footer {
+  			position: relative;
+    		transform: translatY(-100%);
+  		}
+  	</style>
   </head>
   <body style="padding-top: 72px;">
+    <div id="wrap">
     <header class="header">
-
       <!-- Navbar 로고부분-->
       <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
         <div class="container-fluid">
@@ -100,17 +111,17 @@
         
       <div class="container-fluid py-5 px-lg-5">  
         <div class="row">
-          <div class="col-lg-7 mb-5 mb-lg-0">
+          <div class="col-lg-12 mb-5 mb-lg-0">
             <div class="text-block"> 
               <div class="row mb-3">
                 <div class="col-sm-9">
                   <h5 style="font-family: 'Recipekorea';">상세정보</h5>
                 </div>
-                <div class="col-sm-3 text-end">
-                  <button class="btn btn-link ps-0 text-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#personalDetails" aria-expanded="false" aria-controls="personalDetails">Update</button>
+                <div class="col-sm-12 text-end">
+                  <button class="btn btn-link ps-0 text-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#personalDetails" aria-expanded="false" aria-controls="personalDetails">수정하기</button>
                 </div>
               </div>
-              <p class="text-sm text-muted"><i class="fa fa-user-circle fa-fw me-2"></i>홍길동<br><i class="fa fa-id-card fa-fw me-2"></i>test01<br><i class="fa fa-birthday-cake fa-fw me-2"></i>1997/04/14<br><i class="fa fa-envelope-open fa-fw me-2"></i>john.doe@directory.com  <span class="mx-2"> | </span>  <i class="fa fa-phone fa-fw me-2"></i>010-1234-5678</p>
+              <p class="text-sm text-muted"><i class="fa fa-user-circle fa-fw me-2"></i>홍길동<br><i class="fa fa-id-card fa-fw me-2"></i>test01<br><i class="fa fa-birthday-cake fa-fw me-2"></i>1997-04-14<br><i class="fa fa-envelope-open fa-fw me-2"></i>john.doe@directory.com  <span class="mx-2"> | </span>  <i class="fa fa-phone fa-fw me-2"></i>010-1234-5678</p>
               <div class="collapse" id="personalDetails">
                 <form action="#">
                   <div class="row pt-4">
@@ -146,8 +157,9 @@
         </div>
       </div>
     </section>
+    </div>
 	<!-- Footer - 관리자 페이지 이동 부분 넣을 곳 -->
-    <footer class="position-relative z-index-10 d-print-none">
+    <footer class="position-relative z-index-10 d-print-none" id="footer">
            
       <!-- Copyright section of the footer-->
       <div class="py-4 fw-light bg-gray-800 text-gray-300">
