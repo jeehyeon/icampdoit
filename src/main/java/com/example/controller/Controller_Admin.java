@@ -24,7 +24,7 @@ public class Controller_Admin {
 	}
 	@RequestMapping( value="/admin_users.do" )
 	public ModelAndView adminUsers(HttpServletRequest request) {
-		System.out.println( "admin() 호출" );
+		System.out.println( "admin_users" );
 		
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -34,7 +34,7 @@ public class Controller_Admin {
 	}
 	@RequestMapping( value="/admin_board.do" )
 	public ModelAndView adminBoard(HttpServletRequest request) {
-		System.out.println( "admin() 호출" );
+		System.out.println( "admin_board 호출" );
 		
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -42,9 +42,9 @@ public class Controller_Admin {
 		
 		return modelAndView;
 	}
-	@RequestMapping( value="/admin_users_view" )
+	@RequestMapping( value="/admin_users_view.do" )
 	public ModelAndView adminUsersView(HttpServletRequest request) {
-		System.out.println( "admin() 호출" );
+		System.out.println( "admin_users_view 호출" );
 		
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -52,6 +52,26 @@ public class Controller_Admin {
 		
 		return modelAndView;
 	}
+	
+	@RequestMapping( value="/admin_board_write.do" )
+	public ModelAndView adminBoardWrite(HttpServletRequest request) {
+		System.out.println( "admin_board_write 호출" );
+		
 
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName( "admin/admin_board_write" );
+		
+		return modelAndView;
+	}
+	@RequestMapping( value="/admin_board_modify.do" )
+	public ModelAndView adminBoardModify(HttpServletRequest request) {
+		System.out.println( "admin_board_modify 호출" );
+		
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName( "admin/admin_board_modify" );
+		
+		return modelAndView;
+	}
 	
 }

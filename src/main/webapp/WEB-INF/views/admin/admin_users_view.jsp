@@ -229,8 +229,8 @@
                         </div>
                       </td>
                       <td>
-                      	<button type="button" class="btn btn-danger float-end m-0">회원삭제</button>
-						<button type="button" class="btn btn-success float-end m-0">수정완료</button>
+                      	<button type="button" class="btn btn-danger float-end mx-1 my-1">회원삭제</button>
+						<button type="button" class="btn btn-success float-end mx-1 my-1">수정완료</button>
                       </td>
                     </tr>   
                     
@@ -240,7 +240,7 @@
             </div>
  
           </div>
-   
+   	</div>
   </div>
   
   <!--   Core JS Files   -->

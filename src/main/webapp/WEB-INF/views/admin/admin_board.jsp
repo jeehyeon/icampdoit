@@ -12,6 +12,7 @@
   <title>
     I Camp Do It admin users
   </title>
+  
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
   <!-- Nucleo Icons -->
@@ -23,6 +24,9 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="./resources/bootstrap-5/html/admin/css/material-dashboard.css?v=3.0.4" rel="stylesheet" />
+  
+  
+  
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -150,7 +154,9 @@
                 </div>
                 
 	               <div class="writebtn">
-	                <button type="button" class="btn btn-lg me-1 bg-gradient-dark">글쓰기</button>
+		               <a href="admin_board_write.do">
+		                <button type="button" class="btn btn-lg me-1 bg-gradient-dark">글쓰기</button>
+		                </a>
 	               </div>
               </div>
             </div>
@@ -169,77 +175,92 @@
                   </thead>
                   <tbody>
                     <tr class="listdata">
-                      <td >
+                    	
+                      <td onclick="moveMo()">
                         <div class="d-flex px-2 py-1">  
                           <div class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm">공지</h6> 
                           </div>
                         </div>
                       </td>
-                      <td>                 
+                      <td onclick="moveMo()">                 
                         <p class="text-xs font-weight-bold mb-0">홍길동</p>
                       </td>
-                      <td>
+                      <td onclick="moveMo()">
                         <p class="text-xs font-weight-bold mb-0">공지사항입니다</p>                 
                       </td>
-                      <td class="align-middle text-center text-sm">
-                        <span>22.07.28</span>
-                      </td>
-                      <td class="align-middle text-center">
+                      <td class="align-middle text-center text-sm" onclick="moveMo()">
+                        <span>2022-07-31</span>
+                      </td >
+                      <td class="align-middle text-center" onclick="moveMo()">
                         <span class="text-secondary text-xs font-weight-bold">8</span>
                       </td>
+                      
                       <td class="align-middle">
                         <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           삭제
                         </a>
                       </td>
+                      
                     </tr>
                     
                     <tr class="listdata">
-                      <td >
+                    
+                      <td onclick="moveMo()">
+                      
                         <div class="d-flex px-2 py-1">  
                           <div class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm">자유</h6> 
                           </div>
                         </div>
+                        
                       </td>
-                      <td>                 
+                      <td onclick="moveMo()">   
+                                   
                         <p class="text-xs font-weight-bold mb-0">홍길동</p>
+                        
                       </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">자유게시글입니다</p>                 
+                      <td onclick="moveMo()">
+                      
+                        <p class="text-xs font-weight-bold mb-0">자유게시글입니다</p> 
+                                     
                       </td>
-                      <td class="align-middle text-center text-sm">
-                        <span>22.07.28</span>
+                      <td class="align-middle text-center text-sm" onclick="moveMo()">
+                      	
+                        <span>2022-07-31</span>
+                       
                       </td>
-                      <td class="align-middle text-center">
+                      <td class="align-middle text-center" onclick="moveMo()">
+                     
                         <span class="text-secondary text-xs font-weight-bold">2</span>
+                       
                       </td>
                       <td class="align-middle">
                         <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           삭제
                         </a>
                       </td>
+                     
                     </tr>
                     
                     <tr class="listdata">
-                      <td >
+                      <td onclick="moveMo()">
                         <div class="d-flex px-2 py-1">  
                           <div class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm">후기</h6> 
                           </div>
                         </div>
                       </td>
-                      <td>                 
+                      <td onclick="moveMo()">                 
                         <p class="text-xs font-weight-bold mb-0">김병찬</p>
                       </td>
-                      <td>
+                      <td onclick="moveMo()">
                         <p class="text-xs font-weight-bold mb-0">후기 게시글입니다</p>                 
                       </td>
-                      <td class="align-middle text-center text-sm">
-                        <span>22.07.28</span>
+                      <td class="align-middle text-center text-sm" onclick="moveMo()">
+                        <span>2022-07-31</span>
                       </td>
-                      <td class="align-middle text-center">
+                      <td class="align-middle text-center" onclick="moveMo()">
                         <span class="text-secondary text-xs font-weight-bold">8</span>
                       </td>
                       <td class="align-middle">
@@ -249,113 +270,7 @@
                       </td>
                     </tr>
                     
-                    <tr class="listdata">
-                      <td >
-                        <div class="d-flex px-2 py-1">  
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">혼캠</h6> 
-                          </div>
-                        </div>
-                      </td>
-                      <td>                 
-                        <p class="text-xs font-weight-bold mb-0">손흥민</p>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">혼캠자료실 게시글입니다.</p>                 
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span>22.07.28</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">7</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          삭제
-                        </a>
-                      </td>
-                    </tr>
                     
-                    <tr class="listdata">
-                      <td >
-                        <div class="d-flex px-2 py-1">  
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">공지</h6> 
-                          </div>
-                        </div>
-                      </td>
-                      <td>                 
-                        <p class="text-xs font-weight-bold mb-0">홍길동</p>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">공지사항입니다</p>                 
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span>22.07.28</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">8</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          삭제
-                        </a>
-                      </td>
-                    </tr>
-                    
-                    <tr class="listdata">
-                      <td >
-                        <div class="d-flex px-2 py-1">  
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">공지</h6> 
-                          </div>
-                        </div>
-                      </td>
-                      <td>                 
-                        <p class="text-xs font-weight-bold mb-0">홍길동</p>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">공지사항입니다</p>                 
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span>22.07.28</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">8</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          삭제
-                        </a>
-                      </td>
-                    </tr>
-                    
-                    <tr class="listdata">
-                      <td >
-                        <div class="d-flex px-2 py-1">  
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">공지</h6> 
-                          </div>
-                        </div>
-                      </td>
-                      <td>                 
-                        <p class="text-xs font-weight-bold mb-0">홍길동</p>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">공지사항입니다</p>                 
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span>22.07.28</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">8</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          삭제
-                        </a>
-                      </td>
-                    </tr>
                     
                   </tbody>
                 </table>
@@ -416,6 +331,11 @@
   <script src="./resources/bootstrap-5/html/admin/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="./resources/bootstrap-5/html/admin/js/plugins/smooth-scrollbar.min.js"></script>
   <script>
+  function moveMo() {
+		location.href = "admin_board_modify.do";
+	}
+  
+  
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
       var options = {
