@@ -8,7 +8,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="./resources/bootstrap-5/html/admin/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="./resources/bootstrap-5/html/admin/img/favicon.png">
+  <link rel="icon" type="image/png" href="./resources/bootstrap-5/html/img/logo2.svg">
   <title>
     I Camp Do It admin users
   </title>

@@ -21,7 +21,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="./resources/bootstrap-5/html/admin/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="./resources/bootstrap-5/html/admin/img/favicon.png">
+  <link rel="icon" type="image/png" href="./resources/bootstrap-5/html/img/logo2.svg">
   <title>
     Material Dashboard 2 by Creative Tim
   </title>
@@ -144,11 +144,9 @@
                 <table class="table align-items-center mb-1">
  
                   <tr>
-                  	<td>
                   	
-                  	</td>
                   	<td>
-                  	<div class="dropdown my-2 px-1" style="float:left">
+                  	<div class="dropdown mx-5 my-2 px-1" style="float:left">
 					  <button class="btn bg-white dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
 					    말머리
 					  </button>
@@ -168,31 +166,23 @@
                   	</td>
                   </tr>          	
                     <tr>
-                    	<td>
-                       
-                      </td>
+                    	
                       <td>
+                      <div class="mx-6">
                        <div id="summernote"></div>
+                       </div>
                       </td>
                     </tr> 
                      
                      <tr>
-                      <td>
-                        <div class="d-flex px-3 py-0">  
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">  </h6> 
-                          </div>
-                          <div class="input-group input-group-static my-2 px-3 w-xxl-30">
-						      
-						    </div>
-                        </div>
-                      </td>
+                      
                       <td>
                       	<button type="button" class="btn btn-warning float-end mx-1">취소</button>
                       	<button type="button" class="btn btn-danger float-end mx-1">삭제</button>
                       	
 						<button type="button" class="btn btn-success float-end mx-1">수정 완료</button>
                       </td>
+                     
                     </tr>   
                     
                   
@@ -233,9 +223,10 @@
   		maxHeight: null,
         tabsize: 2,
         height: 550,
-        width: 1300,
-        lang : 'ko-KR'
-       
+        width: 800,
+        lang : 'ko-KR',
+        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체']
+       	
         
       });
     });
