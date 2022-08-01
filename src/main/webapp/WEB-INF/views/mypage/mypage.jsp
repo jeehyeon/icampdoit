@@ -36,7 +36,7 @@
   		#wrap {
   			min-height: 100%;
 		    position: relative;
-		    padding-bottom: 110px;
+		    padding-bottom: 380px;
   		}
   		#footer {
   			position: relative;
@@ -102,14 +102,15 @@
     </header>
     
     <section class="py-5">
-      <div class="container-fluid border-bottom px-lg-5">
+      <div class="container border-bottom px-lg-6">
+      	
         <!-- Breadcrumbs -->
         <p class="subtitle text-sm text-primary">My Page    </p>
         <h1 class="hero-heading mb-0" style="font-family: 'Recipekorea';">내 정보</h1>
         <p></p>
       </div>
         
-      <div class="container-fluid py-5 px-lg-5">  
+      <div class="container py-5 px-lg-6">  
         <div class="row">
           <div class="col-lg-12 mb-5 mb-lg-0">
             <div class="text-block"> 

@@ -90,7 +90,7 @@
     </header>
     
      <section class="py-5">
-      <div class="container-fluid border-bottom px-lg-5">
+      <div class="container border-bottom px-lg-5">
         <!-- Breadcrumbs -->
         <p class="subtitle text-sm text-primary">My Page    </p>
         <h1 class="hero-heading mb-0" style="font-family: 'Recipekorea';">내가 쓴 글</h1>
