@@ -233,8 +233,9 @@
         tabsize: 2,
         height: 550,
         width: 1300,
-        lang : 'ko-KR'
-       
+        lang : 'ko-KR',
+        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체']
+        
         
       });
     });
