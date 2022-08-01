@@ -101,41 +101,25 @@
       <div class="container">
         <div class="row">   
           <div class="col-xl-8 col-lg-10 mx-auto">
-            <div class="text-content">
-              <h3 class="text-primary" style="font-family: 'GmarketSansMedium';">1. 혼캠, 정말 유행인가요?</h3>
-              <p>This website, <a href="https://example.com">https://www.gukjenews.com/news/articleView.html?idxno=2413424</a>, is operated by Jack Flag and Bootstrapious. Throughout the site, the termsefer to Jack Flag and Bootstrapious. We offer혻this website, including all information, tools and services available from this site to you, the user, conditioned upon your acceptance of all terms, conditions, policies and notices stated here.</p>
-              <p>By visiting our site and/ or purchasing something from us, you engage in our  and agree to be bound by the following terms and conditions (), including those additional terms and conditions and policies referenced herein and/or available by hyperlink. These Terms of Service apply 혻to all users of the site, including without limitation users who are browsers, vendors, customers, merchants, and/ or contributors of content.</p>
-              <p>Please read these Terms of Service carefully before accessing or using our website. By accessing or using any part of the site, you agree to be bound by these Terms of Service. If you do혻not agree to all the terms and conditions of this agreement, then you may not access the website or use any services. If these Terms of Service are considered an offer, acceptance is expressly limited to these Terms of Service.</p>
-              <p>The materials contained in this website are protected by applicable copyright and trademark law.</p>
-              <h3 class="text-primary" style="font-family: 'GmarketSansMedium';">2. 안전하고 편리한 캠핑장 고르는 꿀팁있나요?</h3>
-              <ol type="a">
-                <li>https://outdoorworld.tistory.com/40</li>
-                <li>아래는 캠핑을 잘 즐길 수 있는 꿀팁</li>
-                <li>https://news.g-enews.com/ko-kr/news/article/news_all/202205231543487875f29c535823_1/article.html?md=20220524182339_U</li>
-                <li>Eu incididunt proident commodo occaecat commodo occaecat eiusmod ex qui et. Culpa esse do laborum elit commodo cupidatat veniam consequat ut nostrud non ut ea proident. Fugiat eu magna sint ea fugiat commodo ad duis excepteur.</li>
-                <li>Ex mollit id dolore commodo do. Do incididunt aute ipsum eiusmod cillum occaecat et ut voluptate aliquip occaecat consequat laborum id. Consectetur fugiat sit do culpa. Consequat esse sunt esse reprehenderit commodo nisi amet Lorem nulla enim enim eiusmod nulla.</li>
-                <li>This license shall automatically terminate if you violate any of these restrictions and may be terminated by Bootstrapious at any time.</li>
-                <li>Our order process is conducted by our online reseller Paddle.com. Paddle.com is the Merchant of Record for all our orders. Paddle provides all customer service inquiries and handles returns.</li>
+            <div class="text-content" style="font-family: 'GmarketSansMedium';">
+              <h3 class="text-primary" style="font-family: 'GmarketSansMedium';">1. 고객상담 및 문의는 어디로 하면 되나요?</h3>
+              <p class="mb-5">오른쪽의 초록글자 링크를 클릭해서 <a href='mailto:asyeon13@naver.com'>관리자 이메일</a>로 문의내용을 보내주세요. <br> 빠른 시일내로 답변 드리겠습니다.</p>
+              
+              <h3 class="text-primary" style="font-family: 'GmarketSansMedium';">2. 회원정보 수정은 어떻게 하나요?</h3>
+              <ol type="1" class="mb-5">
+                <li>먼저, 로그인 된 상태여야 합니다.</li>
+                <li>메뉴바의 'MYPAGE' -> '내 정보'를 클릭해주세요. ( <a href='./mypage.do'>수정페이지 바로가기</a> )</li>
+                <li>'수정하기'버튼을 눌러 정보를 수정하고, 아래의 '내 정보 수정하기' 버튼을 누르면 수정완료 입니다.</li>
               </ol>
-              <h3 class="text-primary" style="font-family: 'GmarketSansMedium';">3. 캠핑에 안 챙기면 후회할 필수템 있나요?</h3>
-              <p>http://www.sisacast.kr/news/articleView.html?idxno=33285 ///Qui laboris cillum nisi nisi reprehenderit fugiat quis in ipsum irure fugiat. In duis cillum exercitation magna non nisi cillum. Ex in nostrud proident velit eiusmod commodo consequat incididunt deserunt quis sit proident qui ut. Proident do do in ipsum ipsum veniam excepteur velit pariatur veniam consectetur do elit. Pariatur aliquip aute mollit nisi aute anim voluptate tempor culpa sunt eu fugiat sint aliquip.</p>
-              <h3 class="text-primary" style="font-family: 'GmarketSansMedium';">4. 캠핑룩 추천해주세요!</h3>
-              <ol type="a">
-              <li>http://zine.istyle24.com/Fashion/FashionView.aspx?Idx=51376&Menu=12&_C_=23069</li>
-                <li>Mollit sit officia dolore reprehenderit in elit ad excepteur irure tempor minim. Laborum nulla nulla aliqua sit qui pariatur ullamco occaecat cillum do. Sit laborum laboris voluptate qui nostrud nulla quis elit sunt amet magna. Deserunt adipisicing culpa ut nostrud laboris exercitation cupidatat aute. Amet sunt nisi magna dolore reprehenderit quis reprehenderit quis eu ex incididunt ullamco elit.</li>
-                <li>Aliqua eiusmod non consectetur non fugiat. Lorem duis aute non eu quis do labore proident laborum reprehenderit nisi minim. Commodo aute proident do eiusmod dolor et officia voluptate proident eiusmod. Cupidatat ex ipsum reprehenderit ullamco qui ex sit nisi esse Lorem. Sunt adipisicing tempor aliqua anim dolor tempor adipisicing ipsum irure do. Ex labore deserunt cupidatat ipsum ipsum aute et sint enim labore in qui ad occaecat. Cillum velit exercitation minim nulla laborum dolore ea velit id enim esse duis.</li>
-              </ol>
-              <h3>6. Limitations</h3>
-              <p>Sint ut ut duis esse enim ea aute ut nostrud. Eiusmod ea do dolor velit Lorem ut commodo ea elit ea consectetur aliquip aute. Eiusmod mollit consequat aute esse eu dolore nostrud nisi esse duis cupidatat. Consequat laborum laborum esse est duis est id anim magna magna cupidatat veniam. Officia labore cupidatat quis irure cupidatat do nisi est. In labore ut enim non Lorem cupidatat officia. Consequat proident dolore anim minim proident officia excepteur aliquip magna non labore officia excepteur.</p>
-              <h3>7. Accuracy of materials</h3>
-              <p>Magna commodo ut est aliquip amet reprehenderit est incididunt laboris. Laborum non ullamco in in quis ipsum exercitation occaecat laboris. Culpa ex ex sit pariatur enim magna officia esse laboris ad dolore.</p>
-              <h3>8. Links</h3>
-              <p>Anim esse Lorem nostrud consequat. Aute cupidatat duis deserunt reprehenderit consequat elit tempor. Ad mollit ad quis nulla id irure aliqua amet velit.</p>
-              <h3>9. Modifications</h3>
-              <p>Bootstrapious may revise these terms of service for its website at any time without notice. By using this website you are agreeing to be bound by the then current version of these terms of service.</p>
-              <h3>10. Governing Law</h3>
-              <p>These terms and conditions are governed by and construed in accordance with the laws of Czech Republic and you irrevocably submit to the exclusive jurisdiction of the courts in that State or location.</p>
-              <p>Version 1.2혻- Effective date: April 23, 2020.  </p>
+              
+              <h3 class="text-primary" style="font-family: 'GmarketSansMedium';">3. 사이트에서 바로 캠핑장 예약은 안되나요?</h3>
+              <p class="mb-5">저희 사이트에서는 아직 예약하기 기능은 제공하고 있지 않습니다.<br> 추후에 기능이 생기면 공지해 드리겠습니다.</p>
+              
+              <h3 class="text-primary" style="font-family: 'GmarketSansMedium';">4. 컨텐츠 업데이트 주기는 어떻게 되나요?</h3>
+              <p class="mb-5">분기별로 업데이트를 진행하고 있습니다.</p>
+                            
+              <h3 class="text-primary" style="font-family: 'GmarketSansMedium';">5. 회원탈퇴는 어떻게 하나요?</h3>
+              <p class="mb-5">회원탈퇴문의 또한 <a href='mailto:asyeon13@naver.com'>관리자 이메일</a>로 보내주세요. <br> 빠른 시일내로 처리해 드리겠습니다.</p>
             </div>
           </div>
         </div>

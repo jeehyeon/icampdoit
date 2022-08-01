@@ -88,39 +88,16 @@
       </nav>
       <!-- /Navbar -->
     </header>
-        
+    
+    <!-- NOTICE 시작 -->
+    <section class="hero py-5 py-lg-7"><img class="bg-image" src="./resources/bootstrap-5/html/img/photo/어바웃4.jpg">
+      <div class="container position-relative text-white">
+        <h1 class="hero-heading mb-0" style="font-family: 'Recipekorea';">NOTICE</h1>
+      </div>
+    </section>
+     
     <section class="py-5 p-print-0 mb-5">
       <div class="container">
-      	<!--
-        <div class="row mb-4 d-print-none">
-          <div class="col-lg-6">
-            <ol class="breadcrumb ps-0  justify-content-start">
-              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item"><a href="user-account.html">Account</a></li>
-              <li class="breadcrumb-item active">Invoice 202009001   </li>
-            </ol>
-          </div>
-          <div class="col-lg-6 text-lg-end">
-            <button class="btn btn-primary me-2"><i class="far fa-file-pdf me-2"></i> Download PDF</button>
-            <button class="btn" onclick="window.print()"><i class="fas fa-print me-2"></i> Print</button>
-          </div>
-        </div>
-        -->
-        <div>
-          <div class="mb-5 mt-6 border-0" style="background-color: white" align="center">
-            <h1 style="font-family: 'Recipekorea';">NOTICE</h1>
-          </div>
-          <!-- 
-          <div class="card-header bg-gray-100 p-5 border-0 px-print-0">
-            <div class="row">
-              <div class="col-6 d-flex align-items-center"><img src="./resources/bootstrap-5/html/img/logo2.svg" alt="Directory"></div>
-              <div class="col-6 text-end">
-                <h3 class="mb-0">Invoice 202009001</h3>
-                <p class="mb-0">Issued on Sep 01, 2020</p>
-              </div>
-            </div>
-          </div>
-          -->
           <div class="card-body p-5 p-print-0">
             <div class="row">
               <div class="col-sm-6 mt-3 pe-lg-3">
