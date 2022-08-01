@@ -127,7 +127,7 @@
                 </div>
                 <!-- 글쓰기버튼 -->
                 <div>
-                  <button class="btn btn-primary me-2"> 글 쓰 기 </button>
+                  <input type="button" value=" 글 쓰 기 " class="btn btn-primary text-white" style="cursor: pointer;" onclick="location.href='mboardwrite.do'" />
                 </div>
               </div> 
             </div>
