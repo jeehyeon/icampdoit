@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Directory Theme by Bootstrapious</title>
+    <title>I CAMP DO IT</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -25,7 +25,7 @@
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="./resources/bootstrap-5/html/css/custom.css">
     <!-- Favicon-->
-    <link rel="shortcut icon" href="./resources/bootstrap-5/html/img/favicon.png">
+    <link rel="shortcut icon" href="./resources/bootstrap-5/html/img/logo2.svg">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
@@ -89,7 +89,7 @@
     </header>
     
     <!-- About 시작 -->
-    <section class="hero-home dark-overlay mb-5"><img class="bg-image" src="./resources/bootstrap-5/html/img/photo/어바웃1.jpg" alt="">
+    <section class="hero-home dark-overlay mb-5"><img class="bg-image" src="./resources/bootstrap-5/html/img/photo/어바웃1.jpg">
       <div class="container py-7">
         <div class="overlay-content text-center text-white">
 		<h1 class="display-3 text-serif fw-bold text-shadow mb-0"><span style="color: gray">About</span> I Camp Do It</h1>        
@@ -97,41 +97,28 @@
       </div>
     </section>
     
+    <!-- About 내용 -->
     <section class="py-6">
       <div class="container">
         <div class="row">
-          <div class="col-xl-8 col-lg-10 mx-auto">           
-            <p class="lead mb-5">As am hastily invited <strong>settled at limited</strong> civilly fortune me. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. </p>
-          </div>
-        </div>
-        
-        <div class="row">
-          <div class="col-xl-8 col-lg-10 mx-auto">                               
-            <div class="text-content">
-              <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
-              <figure class="figure mb-3"><img class="figure-img img-fluid" src="./resources/bootstrap-5/html/img/photo/어바웃3.jpg" alt="Example blog post alt.">
-                <figcaption class="figure-caption text-center">Photo by Jack Tran, New York                     </figcaption>
-              </figure>
-              <h2>Header Level 2</h2>
-              <ol>
-                <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-                <li>Aliquam tincidunt mauris eu risus.</li>
-              </ol>
-              <blockquote class="blockquote blockquote-primary bg-gray-100 p-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</blockquote>
-              <h3>Header Level 3</h3>
-              <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-              <ul>
-                <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-                <li>Aliquam tincidunt mauris eu risus.</li>
-              </ul>
-              <p><img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/어바웃4.jpg" alt="Example blog post alt"></p>
-              <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. </p>
-              <p>Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus   </p>
+          <div class="col-xl-8 col-lg-10 mx-auto" style="font-family: 'GmarketSansMedium';'">           
+            <p class="lead mb-5">'아이캠두잇'은 2030 남녀 중 '혼캠'에 관심 있는 사람들, 수도권 거주자 혹은 수도권 캠핑장 이용자들을 위한 웹사이트입니다.</p>
+            
+            <div class="text-content border mb-6" style="border-radius: 10px;">
+              <figure class="figure px-3 py-3"><img class="figure-img img-fluid" src="./resources/bootstrap-5/html/img/photo/어바웃5.jpg"></figure>
+              <p class="lead mb-4" style="text-align: center;">'혼캠'이란 <strong>'혼자 캠핑'</strong>의 줄임말로, 파생단어로 '혼캠족'(=혼자 캠핑을 다니는 사람들)이 있습니다.</p>
             </div>
+            
+            <p class="lead mb-3">사이트 이름으로는  <strong>" I <span style="color: red">CAN</span> DO IT + <span style="color: red">CAMP</span> = I CAMP DO IT "</strong> 이라는 합성어를 새로 만들어, 혼자서 캠핑도 잘 할 수 있다는 느낌을 전달해드리고 싶었습니다.</p><br><br>
+            
+            <p><img class="img-fluid mb-5" src="./resources/bootstrap-5/html/img/photo/어바웃3.jpg"></p>
+            <p class="lead mb-6">혼캠족이 점점 늘고 있는 만큼 캠핑에 대해 잘 모르는 사람들도 쉽게 서비스를 이용할 수 있고, 정보를 취득할 수 있는 사이트가 필요하다 라는 생각으로 시작한 사이트입니다.<br><br>
+            따라서, 혼캠족을 주 타겟으로 한 정보들과 혼캠러들과 서로 소통하며 얘기와 정보를 나눌 수 있는 커뮤니티 게시판, 캠핑관련 용품들의 중고거래 게시판을 제공합니다.<br>
+            테마/컨텐츠 추천 등으로 입문자들에게도 유용한 정보를 제공하는 것이 특징입니다.<br><br>
+            또한, 일반/키워드/지도검색을 통해 내가 가고 싶은 캠핑장의 상세정보를 제공합니다.<br>
+            상세정보 페이지의 리뷰에서 해당 캠핑장에 대한 다른 사람들의 의견과 평점 또한 확인할 수 있습니다.</p>
+            <p><img class="img-fluid mb-5" src="./resources/bootstrap-5/html/img/photo/어바웃2.jpg"></p>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-xl-10 mx-auto"><img class="img-fluid mb-5" src="./resources/bootstrap-5/html/img/photo/어바웃2.jpg" alt=""></div>
         </div>
       </div>
     </section>
@@ -146,7 +133,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="mb-3 mb-lg-0 col-sm-6 col-lg-3">
+          <div class="mb-5 mb-lg-0 col-sm-6 col-lg-3">
             <div class="card border-0 hover-animate bg-transparent"><a class="position-relative"><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/리나.png" alt=""/>
                 <div class="team-circle bg-info-light"></div></a>
               <div class="card-body team-body text-center">
