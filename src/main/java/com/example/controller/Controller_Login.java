@@ -79,4 +79,27 @@ public class Controller_Login {
 		
 		return modelAndView;
 	}
+	
+	
+	@RequestMapping( value="/idcheck.do" )
+	public int idcheck(HttpServletRequest request) {
+		
+		String id = request.getParameter("id");
+		System.out.println(id);
+		int flag= dao.idCheck(id);
+		
+		return flag;
+	}
+	
+	@RequestMapping( value="/idsearch.do" )
+	public String idsearch(HttpServletRequest request) {
+		
+		String name = request.getParameter("idname");
+		String birth = request.getParameter("idbirth");
+		String email = request.getParameter("idemail");
+		
+		String data= dao.idSearch(name, birth, email);
+		
+		return data;
+	}
 }

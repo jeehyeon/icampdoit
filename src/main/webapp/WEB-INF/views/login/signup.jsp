@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="./resources/bootstrap-5/html/css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="./resources/bootstrap-5/html/img/logo2.svg">
+    
+    
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
@@ -52,10 +54,13 @@
               <div class="mb-4">
                 <label class="form-label" for="id"> *ID</label>
                 <div style="line-height:15%;">
-                <input name="id" id="id" type="ID" class="form-control" placeholder="ID" autocomplete="off" required data-msg="Please enter your ID">
+                <input name="id" id="id" type="ID" class="form-control" placeholder="ID" autocomplete="off" required data-msg="Please enter your ID" onkeydown="inputIdChk()">
                 <br>
-                <button type="button" class="btn btn btn-dark btn-sm" style="float: right; height: 30px; display: flex; align-items:center;">아이디 중복확인</button>
+                <button type="button" id="btnCheck" class="btn btn btn-dark btn-sm" style="float: right; height: 30px; display: flex; align-items:center;">아이디 중복확인</button>
                 </div>
+                <span id="result"></span>
+                <input type="hidden" id="idcheck" value="idUncheck"/>
+                
               </div>
               
               <!-- 비밀번호 -->
@@ -182,6 +187,8 @@
       </div>
     </div>
     <!-- JavaScript files-->
+    <!-- jQuery-->
+    <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
     <script>
       // ------------------------------------------------------- //
       //   Inject SVG Sprite - 
@@ -243,6 +250,9 @@
 				if( document.signup.gen.value.trim() == '' ) {
 					alert( '성별을 체크해 주세요' );
 					return false;				
+				}if( document.signup.idcheck.value != 'idChecked' ) {
+					alert( '아이디 중복체크를 해주세요' );
+					return false;				
 				}
     			
     			
@@ -250,10 +260,42 @@
     			
     		};
     	};
-      
+    	
+    	$('#btnCheck').click(function () {		
+    	    if ($('#id').val() != '') {	        
+    	        $.ajax({ 	   					
+    	            type: 'GET',
+    	            url: './idcheck.do',
+    	            data: 'id=' + $('#id').val(),
+    	            dataType: 'json',
+    	            success: function(result) {
+    	                if (result == '1') {
+    	                    $('#result').text('사용 가능한 아이디입니다.');
+    	                    $('#idcheck').val('idChecked');
+
+    	                } else {
+    	                    $('#result').text('이미 사용중인 아이디입니다.');
+    	                }
+    	            },
+    	            error: function(a, b, c) {
+    	                console.log(a, b, c);
+    	            }				
+    	        });
+    	   				
+    	    } else {
+    	        alert('아이디를 입력하세요.');
+    	        $('#id').focus();
+    	    }
+    	   			
+    	});
+    	
+    	
+    	
+    	function inputIdChk(){
+    		$('#idcheck').val('idUncheck');
+    	}
     </script>
-    <!-- jQuery-->
-    <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
+    
     <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
     <script src="./resources/bootstrap-5/html/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Magnific Popup - Lightbox for the gallery-->

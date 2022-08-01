@@ -96,21 +96,22 @@
 		        <form>  
 		          <div class="form-group">
 		            <label for="name" class="col-form-label"><b>이름</b></label>
-		            <input type="text" class="form-control" id="name">
+		            <input type="text" class="form-control" id="idname">
 		          </div>
 		          <div class="form-group">
 		            <label for="birth" class="col-form-label"><b>생년월일(YYYYMMDD)</b></label>
-		            <input type="text" class="form-control" id="birth" placeholder="ex) 19961116">
+		            <input type="text" class="form-control" id="idbirth" placeholder="ex) 19961116">
 		          </div>
 		          <div class="form-group">
 		            <label for="email" class="col-form-label"><b>이메일</b></label>
-		            <input type="text" class="form-control" id="email"  placeholder="name@address.com">
+		            <input type="text" class="form-control" id="idemail"  placeholder="name@address.com">
 		          </div>
 		        </form>
 		      </div>
+		      
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">취소</button>
-		        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#FindID2">확인</button>
+		        <button type="button" id="idbtn" class="btn btn-primary">확인</button>
 		      </div>
 		    </div>
 		  </div>
@@ -126,7 +127,7 @@
 		      </div>
 		      <div class="modal-body">
 		        <form>  
-		          <div class="form-group">
+		          <div id="idresult" class="form-group">
 		            <p>회원님의 아이디는 <b>soye**</b> 입니다.</p>
 		          </div>
 		        </form>
@@ -221,6 +222,7 @@
       </div>
     </div>
     <!-- JavaScript files-->
+    <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
     <script>
       // ------------------------------------------------------- //
       //   Inject SVG Sprite - 
@@ -246,10 +248,51 @@
       injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg'); 
       
       
+      window.onload = function() {
+  		document.getElementById( 'idbtn' ).onclick = function() {
+  			// 데이터 전송
+  			
+  			alert('test');
+  			
+
+  			
+  		};
+  	};
       
-     
       
+   
       
+      $('#idbtn').click(function () {		
+  	    if ($('#idname').val() != '' && $('#idbirth').val() != '' && $('#idemail').val() != '') {	        
+  	        $.ajax({ 	   					
+  	            type: 'GET',
+  	            url: './idsearch.do',
+  	            data: 'idname=' + $('#idname').val(),
+  	            	'idbirth='+$('#idbirth').val(),
+  	            	'idemail='+$('#idemail').val(),
+  	            dataType: 'json',
+  	            success: function(result) {
+  	               const data = result.split('/');
+  	               let html= '';
+  	               for(var i in data){
+  	            	   html+='<p>회원님의 아이디는 <b>'+ data[i] +'</b>입니다.</p>' 
+  	               }
+  	               $('#idresult').html(html);
+  	               
+  	            },
+  	            error: function(a, b, c) {
+  	                console.log(a, b, c);
+  	            }				
+  	        });
+  	   				
+  	    } else {
+  	        alert('빈칸을 모두 입력해주세요.');
+  	        $('#idname').focus();
+  	    }
+  	   			
+  	});
+      
+   
       
       
       
