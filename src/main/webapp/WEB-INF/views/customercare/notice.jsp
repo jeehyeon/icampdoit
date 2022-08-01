@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Directory Theme by Bootstrapious</title>
+    <title>I CAMP DO IT</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -25,7 +25,7 @@
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="./resources/bootstrap-5/html/css/custom.css">
     <!-- Favicon-->
-    <link rel="shortcut icon" href="./resources/bootstrap-5/html/img/favicon.png">
+    <link rel="shortcut icon" href="./resources/bootstrap-5/html/img/logo2.svg">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
@@ -131,62 +131,72 @@
             <!-- 목록 -->
             <div class="table-responsive text-sm mb-3">
               <table class="table">
+              	<thead class="bg-gray-100">
+                  <tr class="border-0">
+                    <th class="text-center">No</th>
+                    <th class="text-center">제목</th>
+                    <th></th>
+                    <th class="text-end">작성자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th class="text-end">작성날짜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th class="text-end">조회수</th>
+                  </tr>
+                </thead>
                 <tbody>
                   <tr>
                     <td class="text-center">1</td>
-                    <td class="fw-bold">[공지] 사이트 이용안내 변경 사항 공지</td>
+                    <td class="fw-bold text-center">[공지] 사이트 이용안내 변경 사항 공지</td>
                     <td></td>
-                    <td class="text-end"></td>
-                    <td class="text-center">아이캠두잇</td>
+                    <td class="text-end">아이캠두잇</td>
                     <td class="text-end">2022-01-01</td>
+                    <td class="text-end">0</td>
                   </tr>
                   <tr>
                     <td class="text-center">2</td>
-                    <td class="fw-bold">[공지] 사이트 이용안내 변경 사항 공지</td>
+                    <td class="fw-bold text-center">[공지] 사이트 이용안내 변경 사항 공지</td>
                     <td></td>
-                    <td class="text-end"></td>
-                    <td class="text-center">아이캠두잇</td>
+                    <td class="text-end">아이캠두잇</td>
                     <td class="text-end">2022-01-01</td>
+                    <td class="text-end">0</td>
                   </tr>
                   <tr>
                     <td class="text-center">3</td>
-                    <td class="fw-bold">[공지] 사이트 이용안내 변경 사항 공지</td>
+                    <td class="fw-bold text-center">[공지] 사이트 이용안내 변경 사항 공지</td>
                     <td></td>
-                    <td class="text-end"></td>
-                    <td class="text-center">아이캠두잇</td>
+                    <td class="text-end">아이캠두잇</td>
                     <td class="text-end">2022-01-01</td>
+                    <td class="text-end">0</td>
                   </tr>
                   <tr>
                     <td class="text-center">4</td>
-                    <td class="fw-bold">[공지] 사이트 이용안내 변경 사항 공지</td>
+                    <td class="fw-bold text-center">[공지] 사이트 이용안내 변경 사항 공지</td>
                     <td></td>
-                    <td class="text-end"></td>
-                    <td class="text-center">아이캠두잇</td>
+                    <td class="text-end">아이캠두잇</td>
                     <td class="text-end">2022-01-01</td>
+                    <td class="text-end">0</td>
                   </tr>
                   <tr>
                     <td class="text-center">5</td>
-                    <td class="fw-bold">[공지] 사이트 이용안내 변경 사항 공지</td>
+                    <td class="fw-bold text-center">[공지] 사이트 이용안내 변경 사항 공지</td>
                     <td></td>
-                    <td class="text-end"></td>
-                    <td class="text-center">아이캠두잇</td>
+                    <td class="text-end">아이캠두잇</td>
                     <td class="text-end">2022-01-01</td>
+                    <td class="text-end">0</td>
                   </tr>
                   <tr>
                     <td class="text-center">6</td>
-                    <td class="fw-bold">[공지] 사이트 이용안내 변경 사항 공지</td>
+                    <td class="fw-bold text-center">[공지] 사이트 이용안내 변경 사항 공지</td>
                     <td></td>
-                    <td class="text-end"></td>
-                    <td class="text-center">아이캠두잇</td>
+                    <td class="text-end">아이캠두잇</td>
                     <td class="text-end">2022-01-01</td>
+                    <td class="text-end">0</td>
                   </tr>
                   <tr>
                     <td class="text-center">7</td>
-                    <td class="fw-bold">[공지] 사이트 이용안내 변경 사항 공지</td>
+                    <td class="fw-bold text-center">[공지] 사이트 이용안내 변경 사항 공지</td>
                     <td></td>
-                    <td class="text-end"></td>
-                    <td class="text-center">아이캠두잇</td>
+                    <td class="text-end">아이캠두잇</td>
                     <td class="text-end">2022-01-01</td>
+                    <td class="text-end">0</td>
                   </tr>
                 </tbody>
               </table>

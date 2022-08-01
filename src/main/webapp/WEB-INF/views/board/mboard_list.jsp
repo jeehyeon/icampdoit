@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Directory Theme by Bootstrapious</title>
+    <title>I CAMP DO IT</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -25,7 +25,7 @@
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="./resources/bootstrap-5/html/css/custom.css">
     <!-- Favicon-->
-    <link rel="shortcut icon" href="./resources/bootstrap-5/html/img/favicon.png">
+    <link rel="shortcut icon" href="./resources/bootstrap-5/html/img/logo2.svg">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
@@ -90,12 +90,10 @@
     </header>
     
 	<!-- Hero Section-->
-    <section class="hero-home dark-overlay mb-5"><img class="bg-image" src="./resources/bootstrap-5/html/img/photo/게시판1.jpg" alt="">
-      <div class="container py-7">
-        <div class="overlay-content text-center text-white">
-		<h1 class="hero-heading mb-0" style="font-family: 'Recipekorea';">게시판</h1>       
-		</div>
-      </div>
+    <section class="hero py-lg-7"><img class="bg-image" src="./resources/bootstrap-5/html/img/photo/게시판2.jpg" alt="">
+		<div class="container position-relative text-center text-white">
+        <h1 class="hero-heading mb-0" style="font-family: 'Recipekorea';">게시판</h1>
+      	</div>
     </section>
     
     <section class="py-5 p-print-0 mb-7">
@@ -116,16 +114,18 @@
         </div>
         -->
         <div class="card border-0 shadow shadow-print-0">
-          <div class="card-header bg-gray-100 p-4 border-0 px-print-0">
+          <div class="card-header p-4 border-0 px-print-0" style="background-color: white">
             <div class="row">
               <div class="d-flex justify-content-between align-items-center flex-column flex-md-row mb-4 mt-2">
+                <!-- 게시판종류 드롭박스 -->
                 <div class="me-3">
                   <select class="selectpicker" name="sort" id="form_sort" data-style="btn-selectpicker" title="">
-                    <option value="sortBy_0">후기 게시판  </option>
-                    <option value="sortBy_1">자유 게시판   </option>
-                    <option value="sortBy_2">중고거래 게시판   </option>
+                    <option value="sortBy_0">후기 게시판</option>
+                    <option value="sortBy_1">자유 게시판</option>
+                    <option value="sortBy_2">중고거래 게시판</option>
                   </select>
                 </div>
+                <!-- 글쓰기버튼 -->
                 <div>
                   <button class="btn btn-primary me-2"> 글 쓰 기 </button>
                 </div>
@@ -140,73 +140,83 @@
               </div>
             </div>
             
-            <!-- 목록 -->
-            <div class="container row mb-2 mt-2">
-	          <!-- blog item-->
-	          <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-	            <div class="card shadow border-0 h-100"><a href="post.html"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/photo-1512917774080-9991f1c4c750.jpg" alt="..."/></a>
-	              <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#">Travel </a>
-	                <h5 class="my-2"><a class="text-dark" href="post.html">Autumn fashion tips and tricks          </a></h5>
-	                <p class="text-gray-500 text-sm my-3"><i class="far fa-clock me-2"></i>January 16, 2016</p>
-	                <p class="my-2 text-muted text-sm">Pellentesque habitant morbi tristique senectus. Vestibulum tortor quam, feugiat vitae, ultricies ege...</p><a class="btn btn-link ps-0" href="post.html">Read more<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
-	              </div>
-	            </div>
-	          </div>
-	          <!-- blog item-->
-	          <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-	            <div class="card shadow border-0 h-100"><a href="post.html"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/photo-1522771739844-6a9f6d5f14af.jpg" alt="..."/></a>
-	              <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#">Living </a>
-	                <h5 class="my-2"><a class="text-dark" href="post.html">Newest photo apps          </a></h5>
-	                <p class="text-gray-500 text-sm my-3"><i class="far fa-clock me-2"></i>January 16, 2016</p>
-	                <p class="my-2 text-muted text-sm">ellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibu...</p><a class="btn btn-link ps-0" href="post.html">Read more<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
-	              </div>
-	            </div>
-	          </div>
-	          <!-- blog item-->
-	          <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-	            <div class="card shadow border-0 h-100"><a href="post.html"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/photo-1482463084673-98272196658a.jpg" alt="..."/></a>
-	              <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#">Travel </a>
-	                <h5 class="my-2"><a class="text-dark" href="post.html">Best books about Photography          </a></h5>
-	                <p class="text-gray-500 text-sm my-3"><i class="far fa-clock me-2"></i>January 16, 2016</p>
-	                <p class="my-2 text-muted text-sm">Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.  Mauris placerat eleif...</p><a class="btn btn-link ps-0" href="post.html">Read more<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
-	              </div>
-	            </div>
-	          </div>
-	          <!-- blog item-->
-	          <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-	            <div class="card shadow border-0 h-100"><a href="post.html"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/photo-1499695867787-121ffb7950bf.jpg" alt="..."/></a>
-	              <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#">Living </a>
-	                <h5 class="my-2"><a class="text-dark" href="post.html">Pellentesque habitant morbi          </a></h5>
-	                <p class="text-gray-500 text-sm my-3"><i class="far fa-clock me-2"></i>January 16, 2016</p>
-	                <p class="my-2 text-muted text-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestib...</p><a class="btn btn-link ps-0" href="post.html">Read more<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
-	              </div>
-	            </div>
-	          </div>
-	          <!-- blog item-->
-	          <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-	            <div class="card shadow border-0 h-100"><a href="post.html"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/photo-1495562569060-2eec283d3391.jpg" alt="..."/></a>
-	              <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#">Travel </a>
-	                <h5 class="my-2"><a class="text-dark" href="post.html">10 Free things to do in Venice          </a></h5>
-	                <p class="text-gray-500 text-sm my-3"><i class="far fa-clock me-2"></i>January 16, 2016</p>
-	                <p class="my-2 text-muted text-sm">Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.  Mauris placerat eleif...</p><a class="btn btn-link ps-0" href="post.html">Read more<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
-	              </div>
-	            </div>
-	          </div>
-	          <!-- blog item-->
-	          <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-	            <div class="card shadow border-0 h-100"><a href="post.html"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/photo-1514890547357-a9ee288728e0.jpg" alt="..."/></a>
-	              <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#">Guides </a>
-	                <h5 class="my-2"><a class="text-dark" href="post.html">Best of this year's Biennale          </a></h5>
-	                <p class="text-gray-500 text-sm my-3"><i class="far fa-clock me-2"></i>January 16, 2016</p>
-	                <p class="my-2 text-muted text-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestib...</p><a class="btn btn-link ps-0" href="post.html">Read more<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
-	              </div>
-	            </div>
-	          </div>
-	        </div>
+            <!-- 게시판 목록 -->
+            <div class="table-responsive text-sm mb-3">
+              <table class="table">
+              	<thead class="bg-gray-100">
+                  <tr class="border-0">
+                    <th class="text-center">No</th>
+                    <th class="text-center">제목</th>
+                    <th></th>
+                    <th class="text-end">작성자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th class="text-end">작성날짜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th class="text-end">조회수</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="text-center">1</td>
+                    <td class="fw-bold text-center">[후기게시판] 자라섬 캠핑장 솔직후기</td>
+                    <td></td>
+                    <td class="text-end">soyeon</td>
+                    <td class="text-end">2022-01-01</td>
+                    <td class="text-end">0</td>
+                  </tr>
+                  <tr>
+                    <td class="text-center">2</td>
+                    <td class="fw-bold text-center">[후기게시판] 자라섬 캠핑장 솔직후기</td>
+                    <td></td>
+                    <td class="text-end">rina</td>
+                    <td class="text-end">2022-01-01</td>
+                    <td class="text-end">0</td>
+                  </tr>
+                  <tr>
+                    <td class="text-center">3</td>
+                    <td class="fw-bold text-center">[후기게시판] 자라섬 캠핑장 솔직후기</td>
+                    <td></td>
+                    <td class="text-end">jeehyeon</td>
+                    <td class="text-end">2022-01-01</td>
+                    <td class="text-end">0</td>
+                  </tr>
+                  <tr>
+                    <td class="text-center">4</td>
+                    <td class="fw-bold text-center">[후기게시판] 자라섬 캠핑장 솔직후기</td>
+                    <td></td>
+                    <td class="text-end">byeongchan</td>
+                    <td class="text-end">2022-01-01</td>
+                    <td class="text-end">0</td>
+                  </tr>
+                  <tr>
+                    <td class="text-center">5</td>
+                    <td class="fw-bold text-center">[후기게시판] 자라섬 캠핑장 솔직후기</td>
+                    <td></td>
+                    <td class="text-end">soyeon</td>
+                    <td class="text-end">2022-01-01</td>
+                    <td class="text-end">0</td>
+                  </tr>
+                  <tr>
+                    <td class="text-center">6</td>
+                    <td class="fw-bold text-center">[후기게시판] 자라섬 캠핑장 솔직후기</td>
+                    <td></td>
+                    <td class="text-end">soyeon</td>
+                    <td class="text-end">2022-01-01</td>
+                    <td class="text-end">0</td>
+                  </tr>
+                  <tr>
+                    <td class="text-center">7</td>
+                    <td class="fw-bold text-center">[후기게시판] 자라섬 캠핑장 솔직후기</td>
+                    <td></td>
+                    <td class="text-end">soyeon</td>
+                    <td class="text-end">2022-01-01</td>
+                    <td class="text-end">0</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
           
           <!-- 페이징 -->
-          <div class="card-footer bg-gray-100 p-5 px-print-0 border-0 text-end text-sm">
+          <div class="card-footer p-5 px-print-0 border-0 text-end text-sm" style="background-color: white">
             <nav aria-label="Page navigation example">
               <ul class="pagination pagination-template d-flex justify-content-center">
                 <li class="page-item"><a class="page-link" href="#"> <i class="fa fa-angle-left"></i></a></li>
