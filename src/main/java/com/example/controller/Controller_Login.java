@@ -2,34 +2,43 @@ package com.example.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.exam.login.LoginTO;
+import com.exam.login.loginDAO;
+
 
 @RestController
 public class Controller_Login {
-	
+	@Autowired
+	private loginDAO dao;
 	
 	@RequestMapping( value="/login.do" )
 	public ModelAndView login(HttpServletRequest request) {
 		System.out.println( "login() 호출" );
-		
 
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName( "/login/login" );
+		modelAndView.setViewName( "login/login" );
 		
 		return modelAndView;
 	}
 
-	@RequestMapping( value="/signup.do" )
-	public ModelAndView signup(HttpServletRequest request) {
-		System.out.println( "signup() 호출" );
+	@RequestMapping( value="/login_ok.do" )
+	public ModelAndView loginOk(HttpServletRequest request) {
+		System.out.println( "loginOk() 호출" );
 		
-
+		LoginTO lto = new LoginTO();
+		lto.setId(request.getParameter("id"));
+		lto.setPwd(request.getParameter("pwd"));
+	
+		int flag = dao.loginOK(lto);
+		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName( "/login/signup" );
-		
+		modelAndView.setViewName( "login/login_ok" );
+		modelAndView.addObject("flag", flag);
 		return modelAndView;
 	}
 }

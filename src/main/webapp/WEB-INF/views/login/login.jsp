@@ -42,7 +42,7 @@
             </div>
             
             <!-- 로그인시작 -->
-            <form class="form-validate">
+            <form class="login form-validate" action="login_ok.do" method="post">
               <!-- 아이디 -->
               <div class="mb-4">
                 <div class="row">
@@ -66,7 +66,7 @@
               
               <!-- Submit-->
               <div class="d-grid">
-                <button class="btn btn-lg btn-primary">Sign in</button>
+                <button class="lbtn btn btn-lg btn-primary">Sign in</button>
               </div>
               <hr class="my-3 hr-text letter-spacing-2" data-content="OR">
               <div class="d-grid gap-2">
@@ -244,6 +244,22 @@
       // https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg
       //- injectSvgSprite('${path}icons/orion-svg-sprite.svg'); 
       injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg'); 
+      
+      
+      
+      window.onload = function() {
+  		document.getElementById( 'lbtn' ).onclick = function() {
+
+  			// 데이터 전송
+  			document.login.submit();
+  		};
+  	};
+      
+      
+      
+      
+      
+      
       
     </script>
     <!-- jQuery-->
