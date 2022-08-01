@@ -41,7 +41,7 @@
             </div>
             
             <!-- 회원가입 시작 -->
-            <form class="form-validate">
+            <form class="form-validate" action="signup_ok.do" method="post" name="signup">
               <!-- 이름 -->
               <div class="mb-3">
                 <label class="form-label" for="name"> *NAME</label>
@@ -61,7 +61,7 @@
               <!-- 비밀번호 -->
            	  <div class="mb-3">
                 <label class="form-label" for="password"> *Password</label>
-                <input class="form-control" name="password" id="pwd" placeholder="Password" type="password" required data-msg="Please enter your password">
+                <input class="form-control" name="pwd" id="pwd" placeholder="Password" type="password" required data-msg="Please enter your password">
               </div>
               <!--
               <div class="mb-4">
@@ -112,7 +112,7 @@
               <div class="mb-3">
                 <label class="form-label" for="pwdhint"> *비밀번호 확인 질문</label>
                 <div class="mb-3">
-                <select class="form-select">
+                <select class="form-select" name="hint">
                   <option value="1">자신의 보물 1호는?</option>
                   <option value="2">내가 어릴적 살던 동네이름은?</option>
                   <option value="3">내가 제일 좋아하는 과자이름은?</option>
@@ -124,7 +124,7 @@
               <!-- 비밀번호 확인 답변 -->
               <div class="mb-3">
               	<label class="form-label" for="pwdanswer"> *비밀번호 확인 답변</label>
-                <input class="form-control" name="pwdanswer" id="answer" type="email" autocomplete="off" required data-msg="Please enter your answer">
+                <input class="form-control" name="answer" id="answer" type="email" autocomplete="off" required data-msg="Please enter your answer">
               </div>
               
               <!-- 성별 -->
@@ -151,13 +151,13 @@
 						  </form>
 	                  </div>    			  
       			<div class="form-check">
-                  <input class="form-check-input" id="" type="checkbox">
+                  <input class="form-check-input" id="" type="checkbox" name="info">
                   <label class="form-check-label text-muted"> <span class="text-sm">[필수] 이용약관에 동의합니다.</span></label>
                 </div>
               </div>
                           
               <div class="d-grid gap-2">
-                <button class="btn btn-lg btn-primary" type="submit">Sign up</button>
+                <button id="sbtn" class="btn btn-lg btn-primary">Sign up</button>
               </div>
               <hr class="my-3 hr-text letter-spacing-2" data-content="OR">
               <div class="d-grid gap-2 mb-3">
@@ -205,6 +205,51 @@
       // https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg
       //- injectSvgSprite('${path}icons/orion-svg-sprite.svg'); 
       injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg'); 
+      
+      
+      
+      window.onload = function() {
+    		document.getElementById( 'sbtn' ).onclick = function() {
+    			// 데이터 전송
+    			if( document.signup.info.checked == false ) {
+				alert( '동의하셔야 합니다.' );
+				return false;
+				}
+				//alert( '정상' );
+				if( document.signup.name.value.trim() == '' ) {
+					alert( '이름을 입력해 주세요.' );
+					return false;				
+				}
+				if( document.signup.id.value.trim() == '' ) {
+					alert( '아이디를 입력해 주세요.' );
+					return false;				
+				}
+				if( document.signup.pwd.value.trim() == '' ) {
+					alert( '비밀번호를 입력해 주세요.' );
+					return false;				
+				}
+				if( document.signup.birth.value.trim() == '' ) {
+					alert( '생년월일을 입력해 주세요' );
+					return false;				
+				}
+				if( document.signup.email.value.trim() == '' ) {
+					alert( '이메일을 입력해 주세요' );
+					return false;				
+				}
+				if( document.signup.answer.value.trim() == '' ) {
+					alert( '비밀번호 확인 답변을 입력해 주세요' );
+					return false;				
+				}
+				if( document.signup.gen.value.trim() == '' ) {
+					alert( '성별을 체크해 주세요' );
+					return false;				
+				}
+    			
+    			
+    			document.signup.submit();
+    			
+    		};
+    	};
       
     </script>
     <!-- jQuery-->

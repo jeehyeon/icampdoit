@@ -247,13 +247,7 @@
       
       
       
-      window.onload = function() {
-  		document.getElementById( 'lbtn' ).onclick = function() {
-
-  			// 데이터 전송
-  			document.login.submit();
-  		};
-  	};
+     
       
       
       

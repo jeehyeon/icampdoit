@@ -29,5 +29,21 @@ public class loginDAO {
 		return flag;
 	}
 	
+	public int signUpOK(SignUpTO sto) {
+		int flag = 1;
+		
+		String sql = "insert into users values(0, ?, ?, ?, ?, ?, now(), ?, ?, ?)";
+		
+		
+		int result = jdbcTemplate.update(sql,  sto.getId(), sto.getPwd(), sto.getName(), sto.getGen(), sto.getEmail(), sto.getBirth(),  sto.getHint(), sto.getAnswer());
+		
+		
+		if(result == 1) {
+			flag = 0;
+		}
+		
+		return flag;
+	}
+	
 	
 }
