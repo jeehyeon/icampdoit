@@ -42,6 +42,5 @@ public class Controller_Mypage {
 		modelAndView.setViewName( "/mypage/mypage_mylist" );
 		
 		return modelAndView;
-	}
-	
+	}	
 }

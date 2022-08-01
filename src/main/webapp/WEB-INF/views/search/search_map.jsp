@@ -100,7 +100,7 @@
             <div class="row">
               <div class="col-xl-4 col-md-6 mb-4">
                 <label class="form-label" for="form_guests">전체/시,도</label>
-                <select class="selectpicker form-control" name="guests" id="form_guests" data-style="btn-selectpicker" title=" ">
+                <select class="selectpicker form-control" name="guests" id="sido" data-style="btn-selectpicker" title=" ">
                   <option value="seoul">서울시    </option>
                   <option value="incheon">인천시    </option>
                   <option value="gyeonggi">경기도    </option>
@@ -108,7 +108,7 @@
               </div>
               <div class="col-xl-4 col-md-6 mb-4">
                 <label class="form-label" for="form_type">전체/시,구</label>
-                <select class="selectpicker form-control" name="type" id="form_type" multiple data-style="btn-selectpicker" data-none-selected-text="">
+                <select class="selectpicker form-control" name="type" id="gugun" multiple data-style="btn-selectpicker" data-none-selected-text="">
                   <option value="type_0">Entire place    </option>
                   <option value="type_1">Private room    </option>
                   <option value="type_2">Shared room    </option>
