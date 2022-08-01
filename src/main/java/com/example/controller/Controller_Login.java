@@ -41,4 +41,14 @@ public class Controller_Login {
 		modelAndView.addObject("flag", flag);
 		return modelAndView;
 	}
+	
+	@RequestMapping( value="/kakao_login.do" )
+	public ModelAndView kakaoLogin(HttpServletRequest request) {
+		System.out.println( "kakaoLogin() 호출" );
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName( "login/kakao" );
+		
+		return modelAndView;
+	}
 }
