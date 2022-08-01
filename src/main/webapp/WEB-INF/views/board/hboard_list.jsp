@@ -66,7 +66,7 @@
 	              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="communicationDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                   Communication</a>
 	                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="communicationDropdownMenuLink">
-	                  <a class="dropdown-item" href="./mboardlist.do">게시판</a><a class="dropdown-item" href="./hboardlist.do">혼캠 자료실</a>
+	                  <a class="dropdown-item" href="./mboardlist.do">게시판</a><a class="dropdown-item" href="./hboardview.do">혼캠 자료실</a>
 	                </div>
 	              </li>
 	              
@@ -108,51 +108,51 @@
         <div class="row mb-5">
           <!-- blog item-->
           <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-            <div class="card shadow border-0 h-100"><a href="./resources/bootstrap-5/html/post.html"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/원플리1.jpg" alt="..."/></a>
+            <div class="card shadow border-0 h-100"><a href="./hboardview.do"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/원플리1.jpg" alt="..."/></a>
               <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#"># playlist </a>
-                <h5 class="my-2"><a class="text-dark" href="./resources/bootstrap-5/html/post.html">Late Spring breeze          </a></h5>
+                <h5 class="my-2"><a class="text-dark" href="./hboardview.do">Late Spring breeze          </a></h5>
                 <p class="text-gray-500 text-sm my-3"><i class="far fa-clock me-2"></i>July 26, 2022</p>
-                <p class="my-2 text-muted text-sm">Pellentesque habitant morbi tristique senectus. Vestibulum tortor quam, feugiat vitae, ultricies ege...</p><a class="btn btn-link ps-0" href="./resources/bootstrap-5/html/post.html">더보기<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
+                <p class="my-2 text-muted text-sm">Pellentesque habitant morbi tristique senectus. Vestibulum tortor quam, feugiat vitae, ultricies ege...</p><a class="btn btn-link ps-0" href="./hboardview.do">더보기<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
               </div>
             </div>
           </div>
           <!-- blog item-->
           <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-            <div class="card shadow border-0 h-100"><a href="./resources/bootstrap-5/html/post.html"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/원플리2.jpg" alt="..."/></a>
+            <div class="card shadow border-0 h-100"><a href="./hboardview.do"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/원플리2.jpg" alt="..."/></a>
               <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#"># playlist </a>
-                <h5 class="my-2"><a class="text-dark" href="./resources/bootstrap-5/html/post.html">Park & Picnic Mood          </a></h5>
+                <h5 class="my-2"><a class="text-dark" href="./hboardview.do">Park & Picnic Mood          </a></h5>
                 <p class="text-gray-500 text-sm my-3"><i class="far fa-clock me-2"></i>July 26, 2022</p>
-                <p class="my-2 text-muted text-sm">ellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibu...</p><a class="btn btn-link ps-0" href="./resources/bootstrap-5/html/post.html">더보기<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
+                <p class="my-2 text-muted text-sm">ellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibu...</p><a class="btn btn-link ps-0" href="./hboardview.do">더보기<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
               </div>
             </div>
           </div>
           <!-- blog item-->
           <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-            <div class="card shadow border-0 h-100"><a href="./resources/bootstrap-5/html/post.html"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/원플리3.jpg" alt="..."/></a>
+            <div class="card shadow border-0 h-100"><a href="./hboardview.do"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/원플리3.jpg" alt="..."/></a>
               <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#"># playlist </a>
-                <h5 class="my-2"><a class="text-dark" href="./resources/bootstrap-5/html/post.html">Chill Vibe          </a></h5>
+                <h5 class="my-2"><a class="text-dark" href="./hboardview.do">Chill Vibe          </a></h5>
                 <p class="text-gray-500 text-sm my-3"><i class="far fa-clock me-2"></i>July 26, 2022</p>
-                <p class="my-2 text-muted text-sm">Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.  Mauris placerat eleif...</p><a class="btn btn-link ps-0" href="./resources/bootstrap-5/html/post.html">더보기<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
+                <p class="my-2 text-muted text-sm">Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.  Mauris placerat eleif...</p><a class="btn btn-link ps-0" href="./hboardview.do">더보기<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
               </div>
             </div>
           </div>
           <!-- blog item-->
           <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-            <div class="card shadow border-0 h-100"><a href="./resources/bootstrap-5/html/post.html"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/인턴.png" alt="..."/></a>
+            <div class="card shadow border-0 h-100"><a href="./hboardview.do"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/인턴.png" alt="..."/></a>
               <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#"># movie </a>
-                <h5 class="my-2"><a class="text-dark" href="./resources/bootstrap-5/html/post.html">Intern          </a></h5>
+                <h5 class="my-2"><a class="text-dark" href="./hboardview.do">Intern          </a></h5>
                 <p class="text-gray-500 text-sm my-3"><i class="far fa-clock me-2"></i>July 26, 2022</p>
-                <p class="my-2 text-muted text-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestib...</p><a class="btn btn-link ps-0" href="./resources/bootstrap-5/html/post.html">더보기<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
+                <p class="my-2 text-muted text-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestib...</p><a class="btn btn-link ps-0" href="./hboardview.do">더보기<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
               </div>
             </div>
           </div>
           <!-- blog item-->
           <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-            <div class="card shadow border-0 h-100"><a href="./resources/bootstrap-5/html/post.html"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/너의이름은.jpg" alt="..."/></a>
+            <div class="card shadow border-0 h-100"><a href="./hboardview.do"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/너의이름은.jpg" alt="..."/></a>
               <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#"># movie </a>
-                <h5 class="my-2" style="font-family: 'BMJUA';"><a class="text-dark" href="./resources/bootstrap-5/html/post.html">너의 이름은          </a></h5>
+                <h5 class="my-2" style="font-family: 'BMJUA';"><a class="text-dark" href="./hboardview.do">너의 이름은          </a></h5>
                 <p class="text-gray-500 text-sm my-3"><i class="far fa-clock me-2"></i>July 26, 2022</p>
-                <p class="my-2 text-muted text-sm">Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.  Mauris placerat eleif...</p><a class="btn btn-link ps-0" href="./resources/bootstrap-5/html/post.html">더보기<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
+                <p class="my-2 text-muted text-sm">Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.  Mauris placerat eleif...</p><a class="btn btn-link ps-0" href="./hboardview.do">더보기<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
               </div>
             </div>
           </div>

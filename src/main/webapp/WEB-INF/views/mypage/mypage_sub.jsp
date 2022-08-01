@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Directory Theme by Bootstrapious</title>
+    <title>I CAMP DO IT</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -26,7 +25,7 @@
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="./resources/bootstrap-5/html/css/custom.css">
     <!-- Favicon-->
-    <link rel="shortcut icon" href="./resources/bootstrap-5/html/img/favicon.png">
+    <link rel="shortcut icon" href="./resources/bootstrap-5/html/img/logo2.svg">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
@@ -98,7 +97,7 @@
             <div class="text-block">
               <p class="subtitle text-sm text-primary">My Page    </p>
               <h2 class="mb-4" style="font-family: 'Recipekorea';">내가 찜한 목록 </h2>
-              
+              <hr>
 			  <div class="d-flex d-block d-sm-flex review">										
 			  	<div class="text-md-center flex-shrink-0 me-4 me-xl-5"><img class="d-block avatar avatar-xl p-2 mb-2" src="./resources/bootstrap-5/html/img/photo/해피캠핑장.jpg" alt="Padm챕 Amidala"></div>
                 <div class="col-sm-10">
