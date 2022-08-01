@@ -165,14 +165,14 @@
             <!-- /comment form-->
         
             <div class="row">
-			 <div class="col-lg-8">
+			  <div class="col-lg-8">
 				<input type="button" value="목록" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardlist.do?cpage='" />
-			 </div>
-			 <div class="col-lg-4 text-lg-end">
+			  </div>
+			  <div class="col-lg-4 text-lg-end">
 				<input type="button" value="수정" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardmodify.do?cpage=&seq='" />
 				<input type="button" value="삭제" class="btn btn-primary" style="cursor: pointer;" onclick="location.href=" />				
-			 </div>
-			 </div>
+			  </div>
+            </div>
             
           <!-- <li><p><a class="btn btn-link text-primary" href="#"><i class="fa fa-solid fa-angles-up"></i> top</a></p></li> -->
             
@@ -181,7 +181,7 @@
       </div>
     </section>
      
-     <!-- Footer - 관리자 페이지 이동 부분 넣을 곳 -->
+    <!-- Footer - 관리자 페이지 이동 부분 넣을 곳 -->
     <footer class="position-relative z-index-10 d-print-none">
            
       <!-- Copyright section of the footer-->
