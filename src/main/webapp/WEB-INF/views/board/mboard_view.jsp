@@ -93,14 +93,16 @@
     </header>
     
     <!-- Hero Section-->
-    <section class="pt-7 pb-5 d-flex align-items-end dark-overlay bg-cover" style="background-image: url('./resources/bootstrap-5/html/img/photo/camping-bg1.jpg');">
+    <section class="pt-7 pb-6 d-flex align-items-end dark-overlay bg-cover" style="background-image: url('./resources/bootstrap-5/html/img/photo/camping-bg1.jpg');">
       <div class="container overlay-content">
         <div class="d-flex justify-content-between align-items-start flex-column flex-lg-row align-items-lg-end">
           <div class="text-white mb-4 mb-lg-0">
             <h1 class="text-shadow verified">제목입니다!!!</h1>
-            <p><i class="fa-solid fa-calendar text-primary"></i>&nbsp; 2022-07-30</p>
-            <p><i class="fa-solid fa-user text-primary"></i>&nbsp; 홍길동</p>
-            <p><i class="fa-solid fa-check-to-slot text-primary"></i>&nbsp; 조회수 16</p>
+            <div>
+             <span><i class="fa-solid fa-user text-primary"></i> 홍길동</span>&nbsp;&nbsp;
+             <span><i class="fa-solid fa-calendar text-primary"></i> 2022-07-30</span>&nbsp;&nbsp;
+             <span><i class="fa-solid fa-check-to-slot text-primary"></i> 조회수 16</span>
+            </div>
           </div>        
         </div>
       </div>
@@ -111,68 +113,69 @@
           <div class="col-lg-12">
             <!-- About Listing-->
             <div class="text-block">
-              <h3 class="mb-3">Content</h3>
               <p class="text-muted"> 내용1 </p>
               <p class="text-muted"> 내용2 </p>
             </div>
             
-            <div class="text-block">             
-              <!-- Gallery-->
-              <h3 class="mb-4">Gallery</h3>
-              <div class="row gallery ms-n1 me-n1">
-                <div class="col-lg-4 col-6 px-1 mb-2"><a href="./resources/bootstrap-5/html/img/photo/restaurant-1515164783716-8e6920f3e77c.jpg"><img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/restaurant-1515164783716-8e6920f3e77c.jpg" alt="..."></a></div>
-                <div class="col-lg-4 col-6 px-1 mb-2"><a href="./resources/bootstrap-5/html/img/photo/restaurant-1466978913421-dad2ebd01d17.jpg"><img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/restaurant-1466978913421-dad2ebd01d17.jpg" alt="..."></a></div>
-                <div class="col-lg-4 col-6 px-1 mb-2"><a href="./resources/bootstrap-5/html/img/photo/restaurant-1477763858572-cda7deaa9bc5.jpg"><img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/restaurant-1477763858572-cda7deaa9bc5.jpg" alt="..."></a></div>
-                <div class="col-lg-4 col-6 px-1 mb-2"><a href="./resources/bootstrap-5/html/img/photo/restaurant-1505275350441-83dcda8eeef5.jpg"><img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/restaurant-1505275350441-83dcda8eeef5.jpg" alt="..."></a></div>
-                <div class="col-lg-4 col-6 px-1 mb-2"><a href="./resources/bootstrap-5/html/img/photo/restaurant-1508766917616-d22f3f1eea14.jpg"><img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/restaurant-1508766917616-d22f3f1eea14.jpg" alt="..."></a></div>
-                <div class="col-lg-4 col-6 px-1 mb-2"><a href="./resources/bootstrap-5/html/img/photo/restaurant-1430931071372-38127bd472b8.jpg"><img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/restaurant-1430931071372-38127bd472b8.jpg" alt="..."></a></div>
-              </div>
-            </div>
-            <div class="text-block">
-              <h5 class="text-uppercase text-muted mb-4" style="font-family: 'BMJUA';">댓글</h5>
-              <!-- comments-->
-            <div class="mt-5">            
+            
+            <!-- <div class="text-block">
+              <h5 class="text-uppercase text-muted mb-0" style="font-family: 'BMJUA';">댓글</h5><hr> -->
+             <!-- comments-->
+             <div class="mt-5">             
               <!-- comment-->
-              <div class="d-flex mb-4">
-                <div>
-                  <h5>hong gil dong</h5>
+              <div class="row">
+               <div class="col-9"><strong>hong gil dong</strong></div>
+               <div class="col-3" align="right"><a class="btn btn-outline-primary" href="" onclick="" >삭제</a></div>
+               <div>
                   <p class="text-uppercase text-sm text-muted"><i class="far fa-clock"></i> 2022-07-30</p>
                   <p class="text-muted" style="font-family: 'BMJUA';">댓글 내용 입니다. 댓글 내용 입니다. 댓글 내용 입니다. 댓글 내용 입니다. 댓글 내용 입니다.</p>
-                </div>
-                <div class="calltoactions"><a class="btn btn-primary" href="" onclick="" >삭제</a></div> 
-                <input type="password" name="cpassword" placeholder="비밀번호" class="coment_input pR10" />
-				<input type="button" value="삭제" class="btn btn-primary" style="cursor: pointer;" />
+                  <!-- <div align="right"><a class="btn btn-primary" href="" onclick="" >삭제</a></div> --> 
+               </div>
               </div>
               <hr>
-              <!-- /comment-->                           
+              <!-- /comment--> 
+              <!-- comment-->
+              <div class="row">
+               <div class="col-9"><strong>hong gil dong</strong></div>
+               <div class="col-3" align="right"><a class="btn btn-outline-primary" href="" onclick="" >삭제</a></div>
+               <div>
+                  <p class="text-uppercase text-sm text-muted"><i class="far fa-clock"></i> 2022-07-30</p>
+                  <p class="text-muted" style="font-family: 'BMJUA';">댓글 내용 입니다. 댓글 내용 입니다. 댓글 내용 입니다. 댓글 내용 입니다. 댓글 내용 입니다.</p>
+                  <!-- <div align="right"><a class="btn btn-primary" href="" onclick="" >삭제</a></div> --> 
+               </div>
+              </div>
+              <hr>
+              <!-- /comment-->                       
             </div>           
             <!-- /comments-->
             
             <!-- comment form-->
-            <div class="mb-5">
-              <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#leaveComment" aria-expanded="false" aria-controls="leaveComment">댓글 남기기</button>
-              <div class="collapse" id="leaveComment"> 
-                <div class="mt-4">
-                  <form class="form" id="comment-form" method="post" action="#">
-                    
-                    <div class="mb-4">
-                      <label class="form-label" for="comment">Comment <span class="required">*</span></label>
-                      <textarea class="form-control" id="comment" rows="4" placeholder="내용을 입력해주세요." required data-msg="Please enter your comment"></textarea>
-                    </div>
-                    <button class="btn btn-primary" type="submit"><i class="far fa-comment"></i> 등록하기                                   </button>
-                  </form>
-                </div>
+            <div class="mb-4">
+              <div class="collapse.show" id="leaveComment"> 
+                <form class="form" id="comment-form" method="post" action="#">                   
+                  <div class="mb-4">
+                     <label class="form-label" for="comment"> <span class="required"></span></label>
+                     <textarea class="form-control" id="comment" rows="3" placeholder="내용을 입력해주세요." required data-msg="Please enter your comment"></textarea>
+                     </div>
+                    <div class="col-12" align="right"><a class="btn btn-outline-primary" href="" onclick="" ><i class="far fa-comment"></i>등록하기</a></div>
+                </form>
               </div>
             </div>
+            <hr>
             <!-- /comment form-->
-            <!-- Pagination -->
-	        <nav aria-label="Blog pagination">
-	          <ul class="pagination justify-content-between mb-5">
-	            <li class="page-item"><a class="page-link text-sm rounded" href="#"> <i class="fa fa-chevron-left me-1"></i>이전글</a></li>
-	            <li><p><a class="btn btn-link text-primary" href="#"><i class="fa fa-solid fa-angles-up"></i> top</a></p></li>
-	            <li class="page-item"><a class="page-link text-sm rounded" href="#" tabindex="-1">다음글  <i class="fa fa-chevron-right ms-1"></i></a></li>
-	          </ul>
-	        </nav>
+        
+            <div class="row">
+			 <div class="col-lg-8">
+				<input type="button" value="목록" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardlist.do?cpage='" />
+			 </div>
+			 <div class="col-lg-4 text-lg-end">
+				<input type="button" value="수정" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardmodify.do?cpage=&seq='" />
+				<input type="button" value="삭제" class="btn btn-primary" style="cursor: pointer;" onclick="location.href=" />				
+			 </div>
+			 </div>
+            
+          <!-- <li><p><a class="btn btn-link text-primary" href="#"><i class="fa fa-solid fa-angles-up"></i> top</a></p></li> -->
+            
           </div>
         </div>
       </div>
