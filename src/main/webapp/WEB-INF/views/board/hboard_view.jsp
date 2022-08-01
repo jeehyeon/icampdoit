@@ -116,19 +116,14 @@
         </div>
         <div class="row">
           <div class="col-xl-10 mx-auto"><img class="img-fluid mb-5" src="./resources/bootstrap-5/html/img/photo/photo-1471189641895-16c58a695bcb.jpg" alt=""></div>
+        </div>       
+      <hr>
+        <div class="text-center">
+		  <input type="button" value="목록" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardlist.do?cpage='" />
         </div>
-        <div class="row">
-          <div class="col-xl-8 col-lg-10 mx-auto">                               
-            <div class="text-content">
-              <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
-              <figure class="figure mb-3"><img class="figure-img img-fluid w-100" src="./resources/bootstrap-5/html/img/photo/photo-1482463084673-98272196658a.jpg" alt="Example blog post alt.">
-                <figcaption class="figure-caption text-center">Photo by Jack Tran, New York                     </figcaption>
-              </figure>             
-          </div>
-        </div>
-      </div>
+        <br /><br /><br />
     </section>
-     
+
      <!-- Footer - 관리자 페이지 이동 부분 넣을 곳 -->
     <footer class="position-relative z-index-10 d-print-none">
            
