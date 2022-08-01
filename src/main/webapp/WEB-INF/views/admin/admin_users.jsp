@@ -131,7 +131,7 @@
         <div class="col-12">
           <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-              <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+              <div class="bg-gradient-secondary shadow-primary border-radius-lg pt-4 pb-3">
                 <h6 class="text-white text-capitalize ps-3">회원 목록</h6>
               </div>
             </div>
@@ -164,13 +164,13 @@
                         <p class="text-xs font-weight-bold mb-0">TestMail@TEST.COM</p>                 
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <span>96.04.02</span>
+                        <span>1996-04-02</span>
                       </td>
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold">남</span>
                       </td>
                       <td class="align-middle">
-                        <a href="./admin_users_view" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="./admin_users_view.do" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Edit
                         </a>
                       </td>
@@ -191,13 +191,13 @@
                         <p class="text-xs font-weight-bold mb-0">TestMail@TEST.COM</p>                 
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <span>96.04.02</span>
+                        <span>1996-04-02</span>
                       </td>
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold">남</span>
                       </td>
                       <td class="align-middle">
-                        <a href="./admin_users_view" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="./admin_users_view.do" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Edit
                         </a>
                       </td>
@@ -218,13 +218,13 @@
                         <p class="text-xs font-weight-bold mb-0">TestMail@TEST.COM</p>                 
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <span>96.04.02</span>
+                        <span>1996-04-02</span>
                       </td>
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold">남</span>
                       </td>
                       <td class="align-middle">
-                        <a href="./admin_users_view" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="./admin_users_view.do" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Edit
                         </a>
                       </td>
@@ -245,13 +245,13 @@
                         <p class="text-xs font-weight-bold mb-0">TestMail@TEST.COM</p>                 
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <span>96.04.02</span>
+                        <span>1996-04-02</span>
                       </td>
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold">남</span>
                       </td>
                       <td class="align-middle">
-                        <a href="./admin_users_view" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="./admin_users_view.do" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Edit
                         </a>
                       </td>
@@ -272,13 +272,13 @@
                         <p class="text-xs font-weight-bold mb-0">TestMail@TEST.COM</p>                 
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <span>96.04.02</span>
+                        <span>1996-04-02</span>
                       </td>
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold">남</span>
                       </td>
                       <td class="align-middle">
-                        <a href="./admin_users_view" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="./admin_users_view.do" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Edit
                         </a>
                       </td>
@@ -299,13 +299,13 @@
                         <p class="text-xs font-weight-bold mb-0">TestMail@TEST.COM</p>                 
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <span>96.04.02</span>
+                        <span>1996-04-02</span>
                       </td>
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold">남</span>
                       </td>
                       <td class="align-middle">
-                        <a href="./admin_users_view" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="./admin_users_view.do" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Edit
                         </a>
                       </td>
@@ -326,13 +326,13 @@
                         <p class="text-xs font-weight-bold mb-0">TestMail@TEST.COM</p>                 
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <span>96.04.02</span>
+                        <span>1996-04-02</span>
                       </td>
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold">남</span>
                       </td>
                       <td class="align-middle">
-                        <a href="./admin_users_view" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="./admin_users_view.do" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Edit
                         </a>
                       </td>
