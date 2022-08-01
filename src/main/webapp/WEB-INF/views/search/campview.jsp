@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Directory Theme by Bootstrapious</title>
+    <title>I CAMP DO IT</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -27,7 +27,7 @@
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="./resources/bootstrap-5/html/css/custom.css">
     <!-- Favicon-->
-    <link rel="shortcut icon" href="./resources/bootstrap-5/html/img/favicon.png">
+    <link rel="shortcut icon" href="./resources/bootstrap-5/html/img/logo2.svg">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
@@ -130,10 +130,11 @@
                  </div>
                  <div class="col-md-6">
 		           <ul class="list-unstyled text-muted">
-		             <li class="mb-2"> <i class="fa fa-regular fa-fire text-secondary w-1rem me-3 text-center"></i><span class="text-sm">장작판매</span></li>
+		             <li class="mb-2"><i class="fa fa-regular fa-fire text-secondary w-1rem me-3 text-center"></i><span class="text-sm">장작판매</span></li>
 		             <li class="mb-2"><i class="fa fa-solid fa-shoe-prints text-secondary w-1rem me-3 text-center"></i><span class="text-sm">산책로</span></li>
 		             <li class="mb-2"><i class="fa fa-solid fa-dumbbell text-secondary w-1rem me-3 text-center"></i><span class="text-sm">운동시설</span></li>
-		             <li class="mb-2"> <i class="fa fa-regular fa-store text-secondary w-1rem me-3 text-center"></i><span class="text-sm">마트,편의점</span></li>
+		             <li class="mb-2"><i class="fa fa-regular fa-store text-secondary w-1rem me-3 text-center"></i><span class="text-sm">마트,편의점</span></li>
+		             
 		             <!-- 
 		             <li class="mb-2"> <i class="fa fa-bed me-1 text-secondary w-1rem me-3 text-center"></i><span class="text-sm">bed</span></li>
 		             -->
@@ -187,31 +188,7 @@
                </table>
               </div>
            </div>
-            
-           <!--      
-           <div class="text-block">
-	         <h4 class="mb-4" style="font-family: 'GmarketSansMedium';">카라반 내부시설</h4>
-	          <div class="row"> 
-	            <div class="col-md-6">
-	              <ul class="list-unstyled text-muted">
-	                <li class="mb-2"> <i class="fa fa-wifi text-secondary w-1rem me-3 text-center"></i><span class="text-sm">Free Wifi</span></li>
-	                <li class="mb-2"> <i class="fa fa-tv text-secondary w-1rem me-3 text-center"></i><span class="text-sm">TV</span></li>
-	                <li class="mb-2"> <i class="fa fa-snowflake text-secondary w-1rem me-3 text-center"></i><span class="text-sm">Air conditioning</span></li>
-	                <li class="mb-2"> <i class="fa fa-thermometer-three-quarters text-secondary w-1rem me-3 text-center"></i><span class="text-sm">Heating</span></li>
-	              </ul>
-	            </div>
-	            <div class="col-md-6">
-	              <ul class="list-unstyled text-muted">
-	                <li class="mb-2"> <i class="fa fa-bath text-secondary w-1rem me-3 text-center"></i><span class="text-sm">Toilet</span></li>
-	                <li class="mb-2"> <i class="fa fa-utensils text-secondary w-1rem me-3 text-center"></i><span class="text-sm">Cookware</span></li>
-	                <li class="mb-2"> <i class="fa fa-laptop text-secondary w-1rem me-3 text-center"></i><span class="text-sm">Desk for work</span></li>
-	                <li class="mb-2"> <i class="fa fa-bed me-1 text-secondary w-1rem me-3 text-center"></i><span class="text-sm">bed</span></li>
-	              </ul>
-	            </div>
-	          </div>
-           </div>
-           -->
-          
+                   
            <!-- 갤러리 -->  
            <div class="text-block">
 	         <h4 class="mb-4" style="font-family: 'GmarketSansMedium';">갤러리</h4>
