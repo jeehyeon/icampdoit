@@ -248,7 +248,6 @@
       injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg'); 
 
     </script>
-    
     <script type="text/javascript">
     
 	    window.onload = function() {
@@ -286,7 +285,9 @@
 	  	        $('#idname').focus();
 	  	    } 	   			
 	  	});
-      
+    </script>
+
+    <script type="text/javascript">
     	//카카오 초기화
     	Kakao.init('2dde53cc9d654a3a8d8b78783aa5cbfc');
     	console.log( Kakao.isInitialized() ); //초기화 판단 여부. console 에 true 나오면 됨.
