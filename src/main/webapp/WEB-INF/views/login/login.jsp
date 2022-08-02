@@ -248,7 +248,45 @@
       injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg'); 
 
     </script>
+    
     <script type="text/javascript">
+    
+	    window.onload = function() {
+	  		document.getElementById( 'idbtn' ).onclick = function() {
+	  			// 데이터 전송 			
+	  			alert('test');
+	  		};
+	  	};
+	
+	      $('#idbtn').click(function () {		
+	  	    if ($('#idname').val() != '' && $('#idbirth').val() != '' && $('#idemail').val() != '') {	        
+	  	        $.ajax({ 	   					
+	  	            type: 'GET',
+	  	            url: './idsearch.do',
+	  	            data: 'idname=' + $('#idname').val(),
+	  	            	'idbirth='+$('#idbirth').val(),
+	  	            	'idemail='+$('#idemail').val(),
+	  	            dataType: 'json',
+	  	            success: function(result) {
+	  	               const data = result.split('/');
+	  	               let html= '';
+	  	               for(var i in data){
+	  	            	   html+='<p>회원님의 아이디는 <b>'+ data[i] +'</b>입니다.</p>' 
+	  	               }
+	  	               $('#idresult').html(html);
+	  	               
+	  	            },
+	  	            error: function(a, b, c) {
+	  	                console.log(a, b, c);
+	  	            }				
+	  	        });
+	  	   				
+	  	    } else {
+	  	        alert('빈칸을 모두 입력해주세요.');
+	  	        $('#idname').focus();
+	  	    } 	   			
+	  	});
+      
     	//카카오 초기화
     	Kakao.init('2dde53cc9d654a3a8d8b78783aa5cbfc');
     	console.log( Kakao.isInitialized() ); //초기화 판단 여부. console 에 true 나오면 됨.
