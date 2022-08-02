@@ -31,7 +31,6 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-  	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
   </head>
   <body>
     <div class="container-fluid px-3">
@@ -71,11 +70,10 @@
               </div>
               <hr class="my-3 hr-text letter-spacing-2" data-content="OR">
               <div class="d-grid gap-2">
-              <a id="custom-login-btn" href="javascript:loginWithKakao()">
-			  <img src="./resources/bootstrap-5/html/img/kakao_login.png"
-			    width="300"
-			    alt="카카오 로그인 버튼" />
-			  </a>
+                <!--  
+                <button type="button" class="btn btn btn-outline-dark btn-social"><a href="signup.do">CREATE ACCOUNT</a></button>
+                -->
+                <button type="button" class="btn btn btn-outline-muted btn-social btn-warning"><i class="fa fa-solid fa-comment btn-social-icon fa-2x"> </i>CONNECT <span class="d-none d-sm-inline">WITH KAKAKO</span></button>
               </div>
               <hr class="my-4">
               <p class="text-center"><small class="text-muted text-center">Don't have an account yet? <a href="signup.do">Sign Up</a></small></p>
@@ -246,59 +244,18 @@
       // https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg
       //- injectSvgSprite('${path}icons/orion-svg-sprite.svg'); 
       injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg'); 
-
+      
+      
+      
+     
+      
+      
+      
+      
+      
+      
+      
     </script>
-    <script type="text/javascript">
-    	//카카오 초기화
-    	Kakao.init('2dde53cc9d654a3a8d8b78783aa5cbfc');
-    	console.log( Kakao.isInitialized() ); //초기화 판단 여부. console 에 true 나오면 됨.
-    	
-    	//데모버전으로 들어가서 카카오로그인 코드확인
-		function loginWithKakao() {
-			Kakao.Auth.login({
-		      success: function(authObj) {
-		    	  console.log( authObj ); //access 토큰값 출력
-		    	  Kakao.Auth.setAccessToken(authObj.access_token ); //access 토큰값 저장
-		    	  
-		    	  getInfo();
-		      },
-		      fail: function(err) {
-		        console.log(err);
-		      },
-		    })
-		}
-    	
-    	//access 토큰을 발급받고, 아래 함수 호출시켜 사용자 정보를 받아오기
-    	function getInfo(){
-    		Kakao.API.request({
-    			url: '/v2/user/me',
-    			success: function(res){
-    				console.log(res);
-    				var nickname = res.kakao_account.profile.nickname;
-    				var email = res.kakao_account.email;
-    				var gender = res.kakao_account.gender;
-    				var age = res.kakao_account.age_range;
-    				
-    				console.log( email, nickname, gender, age );
-    			},
-    			fail: function(error){
-    				alert('카카오 로그인에 실패했습니다. 관리자에게 문의하세요.' + JSON.stringify(error) );
-    			}
-    		});
-    	}
-    	
-    	
-    	//로그아웃 기능 - 카카오 서버에 접속하는 엑세스 토큰 만료. 사용자 어플리케이션의 로그아웃은 따로 해야 함.
-    	function kakaoLogout(){
-    		if( !Kakao.Auth.getAccessToken() ){
-    			alert( 'Not logged in' );
-    			return;
-    		}
-    		Kakao.Auth.logout(function(){
-    			alert( 'logout ok\naccess token -> ' + Kakao.Auth.getAccessToken() );
-    		});
-    	}
-	</script>
     <!-- jQuery-->
     <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
     <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
