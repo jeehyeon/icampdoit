@@ -110,11 +110,9 @@
 				 <div class="me-2">
 					<select class="selectpicker bg-gray-100" name="sort"
 						id="form_sort" data-style="btn-selectpicker" title="말머리">
-						<option value="sortBy_0" href="#">공지</option>
-						<option value="sortBy_1" href="#">혼캠</option>
-						<option value="sortBy_2" href="#">자유</option>
-						<option value="sortBy_3" href="#">후기</option>
-						<option value="sortBy_4" href="#">중고</option>
+						<option value="sortBy_0" href="#">자유</option>
+						<option value="sortBy_1" href="#">후기</option>
+						<option value="sortBy_2" href="#">중고</option>
 					</select>
 				 </div>
               </div>
