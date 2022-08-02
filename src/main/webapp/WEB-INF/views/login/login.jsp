@@ -50,7 +50,7 @@
                   <div class="col">
                     <label class="form-label" for="loginUserID"> ID</label>
                   </div>
-                  <div class="col-auto"><a class="form-text small text-primary" href="#" data-bs-toggle="modal" data-bs-target="#FindID">Forgot ID?</a></div>
+                  <div class="col-auto"><a id="forgotid" class="form-text small text-primary" href="#" data-bs-toggle="modal" data-bs-target="#FindID">Forgot ID?</a></div>
                 </div>
                 <input class="form-control" name="id" id="id" type="ID" placeholder="ID" autocomplete="off" required data-msg="Please enter your ID">
               </div>
@@ -98,21 +98,21 @@
 		        <form>  
 		          <div class="form-group">
 		            <label for="name" class="col-form-label"><b>이름</b></label>
-		            <input type="text" class="form-control" id="name">
+		            <input type="text" class="form-control" id="idname">
 		          </div>
 		          <div class="form-group">
 		            <label for="birth" class="col-form-label"><b>생년월일(YYYYMMDD)</b></label>
-		            <input type="text" class="form-control" id="birth" placeholder="ex) 19961116">
+		            <input type="text" class="form-control" id="idbirth" placeholder="ex) 19961116">
 		          </div>
 		          <div class="form-group">
 		            <label for="email" class="col-form-label"><b>이메일</b></label>
-		            <input type="text" class="form-control" id="email"  placeholder="name@address.com">
+		            <input type="text" class="form-control" id="idemail"  placeholder="name@address.com">
 		          </div>
 		        </form>
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">취소</button>
-		        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#FindID2">확인</button>
+		        <button id="idbtn2" type="button" class="btn btn-dark" data-bs-dismiss="modal">취소</button>
+		        <button id="idbtn" type="button" class="btn btn-primary">확인</button>
 		      </div>
 		    </div>
 		  </div>
@@ -223,6 +223,8 @@
       </div>
     </div>
     <!-- JavaScript files-->
+    <!-- jQuery-->
+     <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
     <script>
       // ------------------------------------------------------- //
       //   Inject SVG Sprite - 
@@ -248,44 +250,44 @@
       injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg'); 
 
     </script>
-    
     <script type="text/javascript">
-    
-	    window.onload = function() {
-	  		document.getElementById( 'idbtn' ).onclick = function() {
-	  			// 데이터 전송 			
-	  			alert('test');
-	  		};
-	  	};
-	
-	      $('#idbtn').click(function () {		
-	  	    if ($('#idname').val() != '' && $('#idbirth').val() != '' && $('#idemail').val() != '') {	        
-	  	        $.ajax({ 	   					
-	  	            type: 'GET',
-	  	            url: './idsearch.do',
-	  	            data: 'idname=' + $('#idname').val(),
-	  	            	'idbirth='+$('#idbirth').val(),
-	  	            	'idemail='+$('#idemail').val(),
-	  	            dataType: 'json',
-	  	            success: function(result) {
-	  	               const data = result.split('/');
-	  	               let html= '';
-	  	               for(var i in data){
-	  	            	   html+='<p>회원님의 아이디는 <b>'+ data[i] +'</b>입니다.</p>' 
-	  	               }
-	  	               $('#idresult').html(html);
-	  	               
-	  	            },
-	  	            error: function(a, b, c) {
-	  	                console.log(a, b, c);
-	  	            }				
-	  	        });
-	  	   				
-	  	    } else {
-	  	        alert('빈칸을 모두 입력해주세요.');
-	  	        $('#idname').focus();
-	  	    } 	   			
-	  	});
+ 
+    $("#idbtn").click(function(){
+    	var name = $('#idname').val();
+     	var birth = $('#idbirth').val();
+     	var email = $('#idemail').val();
+     	var postData = {'name' : name , 'birth' : birth , 'email' : email};
+    	
+    	
+	     if($('#idname').val() != ''){	        
+	        $.ajax({ 	   					
+	            type: 'POST',
+	            url: './idsearch.do',
+	            data: postData,
+	            dataType: 'text',
+	            success: function(result) {
+	            	if(result != 0){
+		            	var str = result.substring(0, result.length -2);
+		                alert("회원님의 아이디는 "+ str + "입니다.");
+	            	}else{
+	            		alert("회원님의 정보가 없습니다.");
+	            	};
+	              
+	            },
+	            error: function(a, b, c) {
+	                console.log(a, b, c);
+	            }				
+	        });
+	    	 
+	    } else {
+	        alert('빈칸을 모두 입력해주세요.');
+	        $('#idname').focus();
+	    } 				
+	});
+
+    </script>
+    <script type="text/javascript">
+ 
       
     	//카카오 초기화
     	Kakao.init('2dde53cc9d654a3a8d8b78783aa5cbfc');
