@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%
+String ucode = request.getParameter("resultpwd");
+System.out.println(ucode);
+%>
 <!DOCTYPE html>
   <head>
     <meta charset="utf-8">
@@ -43,21 +46,22 @@
             </div>
             
             <!-- 새 비밀번호 설정 시작 -->
-            <form class="form-validate" action="signup_ok.do" method="post" name="newpwd">              
+            <form class="form-validate" action="./newpwd_ok.do" method="post" name="newpwd" id="newpwd">
+            	<input type="hidden" name="ucode" value="<%=ucode%>"/>        
               <!-- 새 비밀번호 입력 -->
            	  <div class="mb-4">
                 <label class="form-label" for="password"> *새 비밀번호</label>
-                <input type="text" class="form-control" id="pwd" placeholder="Password" required data-msg="Please enter your new password">
+                <input type="password" name="pwd" class="form-control" id="pwd" placeholder="Password" required data-msg="Please enter your new password">
               </div>
                             
               <!-- 새 비밀번호 확인 -->
               <div class="mb-4">
               	<label class="form-label" for="newpwd2"> *새 비밀번호 확인</label>
-              	<input type="text" class="form-control" id="pwd" placeholder="비밀번호를 한번 더 입력하세요." required data-msg="Please enter your new password">
+              	<input type="password" class="form-control" name="pwd2" id="pwd2" placeholder="비밀번호를 한번 더 입력하세요." required data-msg="Please enter your new password">
               </div>
               
               <div class="d-grid gap-2">
-                <button id="sbtn" class="btn btn-lg btn-primary">비밀번호 재설정</button>
+                <button id="sbtn" name="sbtn" class="btn btn-lg btn-primary">비밀번호 재설정</button>
               </div>
             </form>
             <a class="close-absolute me-md-5 me-xl-6 pt-5" href="./home.do"> 
@@ -100,87 +104,34 @@
       //- injectSvgSprite('${path}icons/orion-svg-sprite.svg'); 
       injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg'); 
       
-      
-      
       window.onload = function() {
-    		document.getElementById( 'sbtn' ).onclick = function() {
-    			// 데이터 전송
-    			if( document.signup.info.checked == false ) {
-				alert( '동의하셔야 합니다.' );
-				return false;
-				}
-				//alert( '정상' );
-				if( document.signup.name.value.trim() == '' ) {
-					alert( '이름을 입력해 주세요.' );
-					return false;				
-				}
-				if( document.signup.id.value.trim() == '' ) {
-					alert( '아이디를 입력해 주세요.' );
-					return false;				
-				}
-				if( document.signup.pwd.value.trim() == '' ) {
+  		document.getElementById( 'sbtn' ).onclick = function() {
+  			
+  			
+				
+				
+				if( document.newpwd.pwd.value.trim() == '' ) {
 					alert( '비밀번호를 입력해 주세요.' );
 					return false;				
 				}
-				if( document.signup.birth.value.trim() == '' ) {
-					alert( '생년월일을 입력해 주세요' );
+				if( document.newpwd.pwd2.value.trim() == '' ) {
+					alert( '비밀번호 확인을 입력해 주세요.' );
 					return false;				
 				}
-				if( document.signup.email.value.trim() == '' ) {
-					alert( '이메일을 입력해 주세요' );
+				if( document.newpwd.pwd2.value.trim() != document.newpwd.pwd.value.trim() ) {
+					alert( '비밀번호 입력값이 서로 다릅니다.' );
 					return false;				
 				}
-				if( document.signup.answer.value.trim() == '' ) {
-					alert( '비밀번호 확인 답변을 입력해 주세요' );
-					return false;				
-				}
-				if( document.signup.gen.value.trim() == '' ) {
-					alert( '성별을 체크해 주세요' );
-					return false;				
-				}if( document.signup.idcheck.value != 'idChecked' ) {
-					alert( '아이디 중복체크를 해주세요' );
-					return false;				
-				}
-    			
-    			
-    			document.signup.submit();
-    			
-    		};
-    	};
-    	
-    	$('#btnCheck').click(function () {		
-    	    if ($('#id').val() != '') {	        
-    	        $.ajax({ 	   					
-    	            type: 'GET',
-    	            url: './idcheck.do',
-    	            data: 'id=' + $('#id').val(),
-    	            dataType: 'json',
-    	            success: function(result) {
-    	                if (result == '1') {
-    	                    $('#result').text('사용 가능한 아이디입니다.');
-    	                    $('#idcheck').val('idChecked');
-
-    	                } else {
-    	                    $('#result').text('이미 사용중인 아이디입니다.');
-    	                }
-    	            },
-    	            error: function(a, b, c) {
-    	                console.log(a, b, c);
-    	            }				
-    	        });
-    	   				
-    	    } else {
-    	        alert('아이디를 입력하세요.');
-    	        $('#id').focus();
-    	    }
-    	   			
-    	});
+  			
+  			
+  			document.newpwd.submit();
+  			
+  		};
+  	};
+      
+      
     	
     	
-    	
-    	function inputIdChk(){
-    		$('#idcheck').val('idUncheck');
-    	}
     </script>
     
     <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->

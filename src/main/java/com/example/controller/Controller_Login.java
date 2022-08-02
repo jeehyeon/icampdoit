@@ -107,10 +107,40 @@ public class Controller_Login {
 	
 	@RequestMapping( value="/newpwd.do" )
 	public ModelAndView newpwd(HttpServletRequest request) {
-
+		System.out.println("newpwd() 호출");
+		String ucode = request.getParameter("ucode");
+		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "login/newpwd" );
+		modelAndView.addObject("ucode", ucode);
+		return modelAndView;
+	}
+	
+	@RequestMapping( value="/pwdcheck.do" )
+	public String pwdcheck(HttpServletRequest request) {
+		SignUpTO sto = new SignUpTO();
+		sto.setName(request.getParameter("name"));
+		sto.setId(request.getParameter("id"));
+		sto.setEmail(request.getParameter("email"));
+		sto.setHint(request.getParameter("hint"));
+		sto.setAnswer(request.getParameter("answer"));
 		
+		System.out.println("hint" + sto.getHint());
+		String result = dao.pwdCheck(sto);
+		
+		return result;
+	}
+	
+	@RequestMapping( value="/newpwd_ok.do" )
+	public ModelAndView newpwdOk(HttpServletRequest request) {
+		String pwd = request.getParameter("pwd");
+		String ucode = request.getParameter("ucode");
+		
+		
+		int flag = dao.pwdset(pwd, ucode);
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName( "login/newpwd_ok" );
+		modelAndView.addObject("flag", flag);
 		return modelAndView;
 	}
 }
