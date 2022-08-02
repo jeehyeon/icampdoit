@@ -102,4 +102,13 @@ public class Controller_Login {
 		
 		return data;
 	}
+	
+	@RequestMapping( value="/newpwd.do" )
+	public ModelAndView newpwd(HttpServletRequest request) {
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName( "login/newpwd" );
+		
+		return modelAndView;
+	}
 }
