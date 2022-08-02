@@ -119,7 +119,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr onmouseover="this.style.background='#f1f6ea'" onmouseout="this.style.background='white'" style="cursor: pointer;" onclick="location.href='noticeview.do'">
                     <td class="text-center">1</td>
                     <td class="fw-bold text-center">[공지] 사이트 이용안내 변경 사항 공지</td>
                     <td></td>
@@ -127,7 +127,7 @@
                     <td class="text-end">2022-01-01</td>
                     <td class="text-end">0</td>
                   </tr>
-                  <tr>
+                  <tr onmouseover="this.style.background='#f1f6ea'" onmouseout="this.style.background='white'" style="cursor: pointer;" onclick="location.href='noticeview.do'">
                     <td class="text-center">2</td>
                     <td class="fw-bold text-center">[공지] 사이트 이용안내 변경 사항 공지</td>
                     <td></td>
@@ -135,7 +135,7 @@
                     <td class="text-end">2022-01-01</td>
                     <td class="text-end">0</td>
                   </tr>
-                  <tr>
+                  <tr onmouseover="this.style.background='#f1f6ea'" onmouseout="this.style.background='white'" style="cursor: pointer;" onclick="location.href='noticeview.do'">
                     <td class="text-center">3</td>
                     <td class="fw-bold text-center">[공지] 사이트 이용안내 변경 사항 공지</td>
                     <td></td>
@@ -143,7 +143,7 @@
                     <td class="text-end">2022-01-01</td>
                     <td class="text-end">0</td>
                   </tr>
-                  <tr>
+                  <tr onmouseover="this.style.background='#f1f6ea'" onmouseout="this.style.background='white'" style="cursor: pointer;" onclick="location.href='noticeview.do'">
                     <td class="text-center">4</td>
                     <td class="fw-bold text-center">[공지] 사이트 이용안내 변경 사항 공지</td>
                     <td></td>
@@ -151,7 +151,7 @@
                     <td class="text-end">2022-01-01</td>
                     <td class="text-end">0</td>
                   </tr>
-                  <tr>
+                  <tr onmouseover="this.style.background='#f1f6ea'" onmouseout="this.style.background='white'" style="cursor: pointer;" onclick="location.href='noticeview.do'">
                     <td class="text-center">5</td>
                     <td class="fw-bold text-center">[공지] 사이트 이용안내 변경 사항 공지</td>
                     <td></td>
@@ -159,7 +159,7 @@
                     <td class="text-end">2022-01-01</td>
                     <td class="text-end">0</td>
                   </tr>
-                  <tr>
+                  <tr onmouseover="this.style.background='#f1f6ea'" onmouseout="this.style.background='white'" style="cursor: pointer;" onclick="location.href='noticeview.do'">
                     <td class="text-center">6</td>
                     <td class="fw-bold text-center">[공지] 사이트 이용안내 변경 사항 공지</td>
                     <td></td>
@@ -167,7 +167,7 @@
                     <td class="text-end">2022-01-01</td>
                     <td class="text-end">0</td>
                   </tr>
-                  <tr>
+                  <tr onmouseover="this.style.background='#f1f6ea'" onmouseout="this.style.background='white'" style="cursor: pointer;" onclick="location.href='noticeview.do'">
                     <td class="text-center">7</td>
                     <td class="fw-bold text-center">[공지] 사이트 이용안내 변경 사항 공지</td>
                     <td></td>
