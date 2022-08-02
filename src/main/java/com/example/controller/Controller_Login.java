@@ -93,11 +93,13 @@ public class Controller_Login {
 	
 	@RequestMapping( value="/idsearch.do" )
 	public String idsearch(HttpServletRequest request) {
-		
-		String name = request.getParameter("idname");
-		String birth = request.getParameter("idbirth");
-		String email = request.getParameter("idemail");
-		
+		System.out.println("idsearch() 실행");
+		String name = request.getParameter("name");
+		String birth = request.getParameter("birth");
+		String email = request.getParameter("email");
+		System.out.println("1 "+name);
+		System.out.println("2 "+birth);
+		System.out.println("3 "+email);
 		String data= dao.idSearch(name, birth, email);
 		
 		return data;
