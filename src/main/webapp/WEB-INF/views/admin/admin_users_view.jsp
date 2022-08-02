@@ -196,7 +196,7 @@
                           </div>
                           <div class="input-group input-group-static my-2 px-3 w-xxl-30">
 						      <label class="form-label"></label>
-						       <input type="date" class="form-control">
+						       <input type="text" class="form-control">
 						    </div>
                         </div>
                       </td>
@@ -209,8 +209,8 @@
                           </div>
                           <div class="input-group input-group-static my-2 px-3 w-xxl-30">
 						     <select class="form-control" id="exampleFormControlSelect1">
-						       <option>남성</option>
-						       <option>여성</option>
+						       <option>남</option>
+						       <option>여</option>
 						     </select>
 						    </div>
                         </div>

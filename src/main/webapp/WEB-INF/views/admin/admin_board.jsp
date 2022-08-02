@@ -138,17 +138,16 @@
               <div class="bg-gradient-secondary shadow-primary border-radius-lg pt-5 pb-4">
                 <!-- 말머리 드롭다운 -->
                 <div class="subjectdrop">
-               	 <div class="dropdown">
-					  <button class="btn bg-white dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-					    말머리
-					  </button>
-					  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					    <li><a class="dropdown-item" href="#">공지</a></li>
-					    <li><a class="dropdown-item" href="#">혼캠</a></li>
-					    <li><a class="dropdown-item" href="#">자유</a></li>
-					    <li><a class="dropdown-item" href="#">후기</a></li>
-					    <li><a class="dropdown-item" href="#">중고</a></li>
-					  </ul>
+               	 <div class="me-2 ms-1" style="float:left">
+					<select name="sort"
+						id="form_sort" class="customSelect1">
+						<option value="sortBy_default" href="#">말머리</option>
+						<option value="sortBy_0" href="#">공지</option>
+						<option value="sortBy_1" href="#">혼캠</option>
+						<option value="sortBy_2" href="#">자유</option>
+						<option value="sortBy_3" href="#">후기</option>
+						<option value="sortBy_4" href="#">중고</option>
+					</select>
 				 </div>
 				 
                 </div>

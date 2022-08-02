@@ -142,22 +142,19 @@
             <div class="card-body px-0 pb-2">
              <div class="table-responsive p-1">
                 <table class="table align-items-center mb-1">
- 
-                  <tr>
-                  	
+                  <tr> 	
                   	<td>
-                  	<div class="dropdown mx-5 my-2 px-1" style="float:left">
-					  <button class="btn bg-white dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-					    말머리
-					  </button>
-					  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					    <li><a class="dropdown-item" href="#">공지</a></li>
-					    <li><a class="dropdown-item" href="#">혼캠</a></li>
-					    <li><a class="dropdown-item" href="#">자유</a></li>
-					    <li><a class="dropdown-item" href="#">후기</a></li>
-					    <li><a class="dropdown-item" href="#">중고</a></li>
-					  </ul>
-				 	</div>
+                  	<div class="me-2 ms-6 mt-1" style="float:left">
+					<select name="sort"
+						id="form_sort" class="customSelect">
+						<option value="sortBy_default" href="#">말머리</option>
+						<option value="sortBy_0" href="#">공지</option>
+						<option value="sortBy_1" href="#">혼캠</option>
+						<option value="sortBy_2" href="#">자유</option>
+						<option value="sortBy_3" href="#">후기</option>
+						<option value="sortBy_4" href="#">중고</option>
+					</select>
+				 </div>
             		<div class="input-group input-group-outline my-1 px-1 w-xxl-30">
 						      <label class="form-label">제목을 입력하세요</label>
 						      <input type="text" class="form-control">

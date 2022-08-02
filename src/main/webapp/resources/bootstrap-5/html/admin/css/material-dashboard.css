@@ -27659,4 +27659,25 @@ float:right;
 .nonetr{
 border-top:none
 }
+
+.customSelect {
+border:1px solid #ccc;
+border-radius:4px;
+height: 40px;
+font-size: 1.000rem;
+  font-weight: 400;
+  color: #7b809a;
+}
+.customSelect1 {
+border:1px solid #ccc;
+border-radius:4px;
+height: 35px;
+font-size: 1.000rem;
+  font-weight: 400;
+  color: #7b809a;
+}
+
+
+
+
 /*# sourceMappingURL=dashboard-free.css.map */
