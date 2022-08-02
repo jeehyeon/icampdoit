@@ -32,4 +32,15 @@ public class Controller_Customercare {
 		return modelAndView;
 	}
 	
+	@RequestMapping( value="/noticeview.do" )
+	public ModelAndView noticeview(HttpServletRequest request) {
+		System.out.println( "noticeview() 호출" );
+		
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName( "/customercare/notice_view" );
+		
+		return modelAndView;
+	}
+	
 }

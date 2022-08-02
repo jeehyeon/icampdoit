@@ -89,30 +89,16 @@
       <!-- /Navbar -->
     </header>
     
-	<!-- Hero Section-->
+	<!-- 게시판 시작 -->
     <section class="hero py-lg-7"><img class="bg-image" src="./resources/bootstrap-5/html/img/photo/게시판2.jpg" alt="">
 		<div class="container position-relative text-center text-white">
         <h1 class="hero-heading mb-0" style="font-family: 'Recipekorea';">게시판</h1>
       	</div>
     </section>
     
+    <!-- 게시판 말머리 드롭박스 -->
     <section class="py-5 p-print-0 mb-7">
       <div class="container">
-      	<!--
-        <div class="row mb-4 d-print-none">
-          <div class="col-lg-6">
-            <ol class="breadcrumb ps-0  justify-content-start">
-              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item"><a href="user-account.html">Account</a></li>
-              <li class="breadcrumb-item active">Invoice 202009001   </li>
-            </ol>
-          </div>
-          <div class="col-lg-6 text-lg-end">
-            <button class="btn btn-primary me-2"><i class="far fa-file-pdf me-2"></i> Download PDF</button>
-            <button class="btn" onclick="window.print()"><i class="fas fa-print me-2"></i> Print</button>
-          </div>
-        </div>
-        -->
         <div class="card border-0 shadow shadow-print-0">
           <div class="card-header p-4 border-0 px-print-0" style="background-color: white">
             <div class="row">
@@ -154,7 +140,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr onmouseover="this.style.background='#f1f6ea'" onmouseout="this.style.background='white'" style="cursor: pointer;" onclick="location.href='mboardview.do'">
                     <td class="text-center">1</td>
                     <td class="fw-bold text-center">[후기게시판] 자라섬 캠핑장 솔직후기</td>
                     <td></td>
@@ -162,7 +148,7 @@
                     <td class="text-end">2022-01-01</td>
                     <td class="text-end">0</td>
                   </tr>
-                  <tr>
+                  <tr onmouseover="this.style.background='#f1f6ea'" onmouseout="this.style.background='white'" style="cursor: pointer;" onclick="location.href='mboardview.do'">
                     <td class="text-center">2</td>
                     <td class="fw-bold text-center">[후기게시판] 자라섬 캠핑장 솔직후기</td>
                     <td></td>
@@ -170,7 +156,7 @@
                     <td class="text-end">2022-01-01</td>
                     <td class="text-end">0</td>
                   </tr>
-                  <tr>
+                  <tr onmouseover="this.style.background='#f1f6ea'" onmouseout="this.style.background='white'" style="cursor: pointer;" onclick="location.href='mboardview.do'">
                     <td class="text-center">3</td>
                     <td class="fw-bold text-center">[후기게시판] 자라섬 캠핑장 솔직후기</td>
                     <td></td>
@@ -178,7 +164,7 @@
                     <td class="text-end">2022-01-01</td>
                     <td class="text-end">0</td>
                   </tr>
-                  <tr>
+                  <tr onmouseover="this.style.background='#f1f6ea'" onmouseout="this.style.background='white'" style="cursor: pointer;" onclick="location.href='mboardview.do'">
                     <td class="text-center">4</td>
                     <td class="fw-bold text-center">[후기게시판] 자라섬 캠핑장 솔직후기</td>
                     <td></td>
@@ -186,7 +172,7 @@
                     <td class="text-end">2022-01-01</td>
                     <td class="text-end">0</td>
                   </tr>
-                  <tr>
+                  <tr onmouseover="this.style.background='#f1f6ea'" onmouseout="this.style.background='white'" style="cursor: pointer;" onclick="location.href='mboardview.do'">
                     <td class="text-center">5</td>
                     <td class="fw-bold text-center">[후기게시판] 자라섬 캠핑장 솔직후기</td>
                     <td></td>
@@ -194,7 +180,7 @@
                     <td class="text-end">2022-01-01</td>
                     <td class="text-end">0</td>
                   </tr>
-                  <tr>
+                  <tr onmouseover="this.style.background='#f1f6ea'" onmouseout="this.style.background='white'" style="cursor: pointer;" onclick="location.href='mboardview.do'">
                     <td class="text-center">6</td>
                     <td class="fw-bold text-center">[후기게시판] 자라섬 캠핑장 솔직후기</td>
                     <td></td>
@@ -202,7 +188,7 @@
                     <td class="text-end">2022-01-01</td>
                     <td class="text-end">0</td>
                   </tr>
-                  <tr>
+                  <tr onmouseover="this.style.background='#f1f6ea'" onmouseout="this.style.background='white'" style="cursor: pointer;" onclick="location.href='mboardview.do'">
                     <td class="text-center">7</td>
                     <td class="fw-bold text-center">[후기게시판] 자라섬 캠핑장 솔직후기</td>
                     <td></td>
