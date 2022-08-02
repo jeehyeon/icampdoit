@@ -70,12 +70,19 @@
                 <button class="lbtn btn btn-lg btn-primary">Sign in</button>
               </div>
               <hr class="my-3 hr-text letter-spacing-2" data-content="OR">
-              <div class="d-grid gap-2">
-              <a id="custom-login-btn" href="javascript:loginWithKakao()">
-			  <img src="./resources/bootstrap-5/html/img/kakao_login.png"
-			    width="300"
-			    alt="카카오 로그인 버튼" />
-			  </a>
+              <div class="d-grid gap-2" id="kakaoLogin">             		
+              		<a id="custom-login-btn" href="javascript:loginWithKakao()">
+				  		<img src="./resources/bootstrap-5/html/img/kakao_login.png"
+				    	width="300"
+				    	alt="카카오 로그인 버튼" />
+				  	</a>
+				  	<form id="form-kakao-login" method="post" action="./kakao_login.do">
+				  		<input type="hidden" name="email" />
+				  		<input type="hidden" name="nickname" />
+				  	</form>
+				  	
+				  	<button class="api-btn" onclick="kakaoLogout()">로그아웃</button>
+				  	<button class="api-btn" onclick="kakaoUnlink()">카카오탈퇴</button>   
               </div>
               <hr class="my-4">
               <p class="text-center"><small class="text-muted text-center">Don't have an account yet? <a href="signup.do">Sign Up</a></small></p>
@@ -286,8 +293,7 @@
 	});
 
     </script>
-    <script type="text/javascript">
- 
+ 	 <script type="text/javascript">
       
     	//카카오 초기화
     	Kakao.init('2dde53cc9d654a3a8d8b78783aa5cbfc');
@@ -295,49 +301,77 @@
     	
     	//데모버전으로 들어가서 카카오로그인 코드확인
 		function loginWithKakao() {
-			Kakao.Auth.login({
-		      success: function(authObj) {
-		    	  console.log( authObj ); //access 토큰값 출력
-		    	  Kakao.Auth.setAccessToken(authObj.access_token ); //access 토큰값 저장
-		    	  
-		    	  getInfo();
+			window.Kakao.Auth.login({
+		      	success: function(authObj) {
+		    	  	//console.log( authObj ); //access 토큰값 출력		    	  	
+		    	  	Kakao.Auth.setAccessToken(authObj.access_token ); //access 토큰값 저장
+		    	  	
+		    	  	//로그인 성공시, API 호출
+		    	    //access 토큰을 발급받고, 아래 함수 호출시켜 사용자 정보를 받아오기
+		    	  	Kakao.API.request({
+		    			url: '/v2/user/me',
+		    			success: function(res){
+		    				//console.log(res);
+		    				var nickname = res.kakao_account.profile.nickname;
+		    				var email = res.kakao_account.email;
+		    				var gender = res.kakao_account.gender;
+		    				var age = res.kakao_account.age_range;
+		    				
+		    				//console.log( email, nickname, gender, age );
+		    				alert(JSON.stringify(res));
+		    				alert(JSON.stringify(authObj));
+		    				console.log( nickname );
+		    				console.log( email );
+		    				console.log( authObj.acces_token);
+		    				
+		    				$('#form-kakao-login input[name=nickname]').val(nickname);
+		    				$('#form-kakao-login input[name=email]').val(email);
+		    				
+		    				document.querySelector( '#form-kakao-login' ).submit();
+		    				
+		    				location.href="./home.do";
+		    			},
+		    			fail: function(error){
+		    				alert('카카오 로그인에 실패했습니다. 관리자에게 문의하세요.' + JSON.stringify(error) );
+		    			}
+		    	  	});
 		      },
 		      fail: function(err) {
 		        console.log(err);
 		      },
-		    })
+		    });
 		}
-    	
-    	//access 토큰을 발급받고, 아래 함수 호출시켜 사용자 정보를 받아오기
-    	function getInfo(){
-    		Kakao.API.request({
-    			url: '/v2/user/me',
-    			success: function(res){
-    				console.log(res);
-    				var nickname = res.kakao_account.profile.nickname;
-    				var email = res.kakao_account.email;
-    				var gender = res.kakao_account.gender;
-    				var age = res.kakao_account.age_range;
-    				
-    				console.log( email, nickname, gender, age );
-    			},
-    			fail: function(error){
-    				alert('카카오 로그인에 실패했습니다. 관리자에게 문의하세요.' + JSON.stringify(error) );
-    			}
-    		});
-    	}
     	
     	
     	//로그아웃 기능 - 카카오 서버에 접속하는 엑세스 토큰 만료. 사용자 어플리케이션의 로그아웃은 따로 해야 함.
     	function kakaoLogout(){
-    		if( !Kakao.Auth.getAccessToken() ){
+    		if( !Kakao.Auth.getAccessToken() ){ //토큰이 있는지 확인. 없으면
     			alert( 'Not logged in' );
     			return;
     		}
-    		Kakao.Auth.logout(function(){
+    		Kakao.Auth.logout(function(){ //카카오 로그아웃
     			alert( 'logout ok\naccess token -> ' + Kakao.Auth.getAccessToken() );
+    			
     		});
     	}
+    	
+    	
+    	//연결 끊기 기능 - 탈퇴처리리는 직접 구현해야 함. 	
+    	function kakaoUnlink(){
+    		Kakao.API.request({
+        		url: '/v1/user/unlink',
+        		success: function(response) {
+        			console.log( response );
+        			callbackFunction();
+        		},
+        		fail: function(error){
+        			alert('탈퇴처리가 미완료되었습니다. \n관리자에게 문의하시기 바랍니다.' );
+        			console.log( error );
+        		}
+        	});
+    	}
+    	
+    	
 	</script>
     <!-- jQuery-->
     <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
