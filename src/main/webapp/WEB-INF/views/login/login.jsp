@@ -159,15 +159,15 @@
 		        <form>  
 		          <div class="form-group">
 		            <label for="name" class="col-form-label"><b>이름</b></label>
-		            <input type="text" class="form-control" id="name">
+		            <input type="text" class="form-control" id="pname">
 		          </div>
 		          <div class="form-group">
 		            <label for="id" class="col-form-label"><b>아이디</b></label>
-		            <input type="text" class="form-control" id="id">
+		            <input type="text" class="form-control" id="pid">
 		          </div>
 		          <div class="form-group">
 		            <label for="email" class="col-form-label"><b>이메일</b></label>
-		            <input type="text" class="form-control" id="email">
+		            <input type="text" class="form-control" id="pemail">
 		          </div>
 		          <!--  
 		          <div class="form-group">
@@ -176,14 +176,25 @@
 		          </div>
 		          -->
 		          <div class="form-group">
-		            <label for="hint" class="col-form-label"><b>비밀번호확인질문 :</b><br> " 자신의 보물 1호는? "</label>
-		            <input type="text" class="form-control" id="answer">
+		            <label class="form-label" for="pwdhint"> *비밀번호 확인 질문</label>
+	                <div class="mb-3">
+	                <select class="form-select" name="phint" id="phint">
+	                  <option value="1">자신의 보물 1호는?</option>
+	                  <option value="2">내가 어릴적 살던 동네이름은?</option>
+	                  <option value="3">내가 제일 좋아하는 과자이름은?</option>
+	                  <option value="4">가장 기억에 남는 선생님 성함은?</option>
+	   				</select>
+              		</div>
+		            <input type="text" class="form-control" id="panswer">
 		          </div>
+		        </form>
+		        <form action="./newpwd.do" id="resform" name="resform" method="post">
+		        <input type="hidden" name="resultpwd" id="resultpwd" value=""/>
 		        </form>
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">취소</button>
-		        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#NewPwd">확인</button>
+		        <button id="pbtn" type="button"  class="btn btn-primary">확인</button>
 		      </div>
 		    </div>
 		  </div>
@@ -258,7 +269,7 @@
 
     </script>
     <script type="text/javascript">
- 
+ 	//아이디 찾기 부분
     $("#idbtn").click(function(){
     	var name = $('#idname').val();
      	var birth = $('#idbirth').val();
@@ -291,7 +302,50 @@
 	        $('#idname').focus();
 	    } 				
 	});
-
+	//비밀번호 찾기 부분
+	$("#pbtn").click(function(){
+    	var name = $('#pname').val();
+     	var id = $('#pid').val();
+     	var email = $('#pemail').val();
+     	var hint = $("#phint option:selected").val();
+     	console.log(hint);
+     	var answer = $('#panswer').val();
+     	var postData = {'name' : name , 'id' : id , 'email' : email, 'hint' : hint, 'answer' : answer};
+    	
+    	
+	     if(($('#pname').val() != '')&&($('#pid').val() != '')&&($('#pemail').val() != '')&&($('#panswer').val() != '')){	        
+	        $.ajax({ 	   					
+	            type: 'POST',
+	            url: './pwdcheck.do',
+	            data: postData,
+	            dataType: 'text',
+	            success: function(result) {
+	            	if(result != -1){
+	            		
+		                $('#resultpwd').val(result);
+		               
+		               	$('#resform').submit();
+		                
+	            	}else{
+	            		alert("회원님의 정보가 없거나 입력사항이 틀립니다.");
+	            	};
+	              
+	            },
+	            error: function(a, b, c) {
+	                console.log(a, b, c);
+	            }				
+	        });
+	    	 
+	    } else {
+	        alert('빈칸을 모두 입력해주세요.');
+	        $('#idname').focus();
+	    } 				
+	});
+	
+	
+	
+	
+	
     </script>
  	 <script type="text/javascript">
       
