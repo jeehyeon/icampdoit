@@ -70,23 +70,29 @@
                 <button class="lbtn btn btn-lg btn-primary">Sign in</button>
               </div>
               <hr class="my-3 hr-text letter-spacing-2" data-content="OR">
-              <div class="d-grid gap-2" id="kakaoLogin">             		
+              
+              
+              <hr class="my-4">
+              <p class="text-center"><small class="text-muted text-center">Don't have an account yet? <a href="signup.do">Sign Up</a></small></p>
+            </form>
+            <div class="d-grid gap-2" name="kakao_frm">             		
               		<a id="custom-login-btn" href="javascript:loginWithKakao()">
 				  		<img src="./resources/bootstrap-5/html/img/kakao_login.png"
 				    	width="300"
 				    	alt="카카오 로그인 버튼" />
 				  	</a>
-				  	<form id="form-kakao-login" method="post" action="./kakao_login.do">
-				  		<input type="hidden" name="email" />
-				  		<input type="hidden" name="nickname" />
-				  	</form>
-				  	
+
 				  	<button class="api-btn" onclick="kakaoLogout()">로그아웃</button>
 				  	<button class="api-btn" onclick="kakaoUnlink()">카카오탈퇴</button>   
               </div>
-              <hr class="my-4">
-              <p class="text-center"><small class="text-muted text-center">Don't have an account yet? <a href="signup.do">Sign Up</a></small></p>
-            </form><a class="close-absolute me-md-5 me-xl-6 pt-5" href="./home.do"> 
+              <div>
+              		<form id="kakao_frm" method="post" action="./kakaologin_form.do" name="kakao_frm">
+				  	<input type="hidden" name="kakaoemail" id="kakaoemail" />
+				  	<input type="hidden" name="kakaonickname" id="kakaonickname" />
+				  	<input type="hidden" name="kakaokid" id="kakaokid" />
+				  	</form>
+              </div>
+            <a class="close-absolute me-md-5 me-xl-6 pt-5" href="./home.do"> 
               <svg class="svg-icon w-3rem h-3rem">
                 <use xlink:href="#close-1"> </use>
               </svg></a>
@@ -357,7 +363,7 @@
 		function loginWithKakao() {
 			window.Kakao.Auth.login({
 		      	success: function(authObj) {
-		    	  	//console.log( authObj ); //access 토큰값 출력		    	  	
+		    	  	console.log( authObj ); //access 토큰값 출력		    	  	
 		    	  	Kakao.Auth.setAccessToken(authObj.access_token ); //access 토큰값 저장
 		    	  	
 		    	  	//로그인 성공시, API 호출
@@ -365,25 +371,35 @@
 		    	  	Kakao.API.request({
 		    			url: '/v2/user/me',
 		    			success: function(res){
-		    				//console.log(res);
 		    				var nickname = res.kakao_account.profile.nickname;
 		    				var email = res.kakao_account.email;
-		    				var gender = res.kakao_account.gender;
-		    				var age = res.kakao_account.age_range;
+		    				var kid = res.id;
 		    				
-		    				//console.log( email, nickname, gender, age );
-		    				alert(JSON.stringify(res));
-		    				alert(JSON.stringify(authObj));
-		    				console.log( nickname );
+		    				console.log(res);
+		    				
+		    				//alert(JSON.stringify(res));
+		    				//alert(JSON.stringify(authObj));
+		    				//console.log( authObj.acces_token);
+		    				
 		    				console.log( email );
-		    				console.log( authObj.acces_token);
+		    				//console.log( res.kakao_account.profile.nickname );
+		    				$( '#kakaonickname' ).val( nickname );
+		    				$( '#kakaoemail' ).val( email );
+		    				$( '#kakaokid' ).val( kid );
 		    				
-		    				$('#form-kakao-login input[name=nickname]').val(nickname);
-		    				$('#form-kakao-login input[name=email]').val(email);
+		    				//$('#kakaoemail').val(res.kakao_account.profile.email);
+		    				//$('#kakaonickname').val(res.kakao_account.profile.nickname);
 		    				
-		    				document.querySelector( '#form-kakao-login' ).submit();
+		    				console.log( $('#kakaoemail').val() );
+		    				console.log( $('#kakaonickname').val() );
 		    				
-		    				location.href="./home.do";
+		    				//document.kakao_frm.action
+		    				//document.getElementById( 'kakao_frm' ).submit();
+		    				
+		    				$('#kakao_frm').submit();
+		    				
+		    				//ajax
+		    				//카카오로그인 DB 만들어야 함. 비번은 랜덤으로..
 		    			},
 		    			fail: function(error){
 		    				alert('카카오 로그인에 실패했습니다. 관리자에게 문의하세요.' + JSON.stringify(error) );

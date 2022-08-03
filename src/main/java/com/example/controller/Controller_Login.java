@@ -159,8 +159,11 @@ public class Controller_Login {
 		sto.setEmail(request.getParameter("kakaoemail"));
 		sto.setKid(request.getParameter("kid"));
 		
+		System.out.println(sto.getName());
 		
 		int flag = dao.kakaoCheck(sto.getName(), sto.getEmail(), sto.getKid());
+		
+		System.out.println( "flag : " + flag );
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "login/kakaoLogin_ok" );
