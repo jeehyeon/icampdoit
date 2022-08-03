@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +29,7 @@ public class Controller_Login {
 	}
 
 	@RequestMapping( value="/login_ok.do" )
-	public ModelAndView loginOk(HttpServletRequest request) {
+	public ModelAndView loginOk(HttpServletRequest request, HttpSession session) {
 		System.out.println( "loginOk() 호출" );
 		
 		LoginTO lto = new LoginTO();
@@ -36,6 +37,11 @@ public class Controller_Login {
 		lto.setPwd(request.getParameter("pwd"));
 	
 		int ucode = dao.loginOK(lto);
+		
+		if(ucode != -1) {
+			session.setAttribute("ucode", ucode);
+			session.setMaxInactiveInterval(60*60);
+		}
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "login/login_ok" );
