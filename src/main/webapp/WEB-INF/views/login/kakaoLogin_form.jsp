@@ -223,7 +223,6 @@
 <script>
 			
 	    	$(document).on("click", "#btncheck", function () {		
-	    		alert('클릭');
 	    	    if ($('#id').val() != '') {	        
 	    	        $.ajax({ 	   					
 	    	            type: 'GET',
