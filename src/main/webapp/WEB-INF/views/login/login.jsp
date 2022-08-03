@@ -72,19 +72,22 @@
               <hr class="my-3 hr-text letter-spacing-2" data-content="OR">
               
               
-              <hr class="my-4">
-              <p class="text-center"><small class="text-muted text-center">Don't have an account yet? <a href="signup.do">Sign Up</a></small></p>
+              
             </form>
-            <div class="d-grid gap-2" name="kakao_frm">             		
+            <div class="d-grid gap-2" name="kakao_frm">
+            <button type="button" class="btn btn btn-outline-muted btn-lg btn-social btn-warning"><a id="custom-login-btn" href="javascript:loginWithKakao()" style="color:#2e322e"><i class="fa fa-solid fa-comment btn-social-icon fa-2x"></i>LOGIN <span class="d-none d-sm-inline">WITH KAKAKO</a></span></button>
+            		<!--             		
               		<a id="custom-login-btn" href="javascript:loginWithKakao()">
 				  		<img src="./resources/bootstrap-5/html/img/kakao_login.png"
 				    	width="300"
 				    	alt="카카오 로그인 버튼" />
-				  	</a>
-
+				  	</a>				  	
 				  	<button class="api-btn" onclick="kakaoLogout()">로그아웃</button>
-				  	<button class="api-btn" onclick="kakaoUnlink()">카카오탈퇴</button>   
+				  	<button class="api-btn" onclick="kakaoUnlink()">카카오탈퇴</button>  
+				  	-->
               </div>
+              <hr class="my-4">
+              <p class="text-center"><small class="text-muted text-center">Don't have an account yet? <a href="signup.do">Sign Up</a></small></p>
               <div>
               		<form id="kakao_frm" method="post" action="./kakaologin_form.do" name="kakao_frm">
 				  	<input type="hidden" name="kakaoemail" id="kakaoemail" />
