@@ -15,7 +15,8 @@ public class Controller {
 	public ModelAndView home(HttpServletRequest request, HttpSession session) {
 		System.out.println( "list() 호출" );
 		if(session != null) {
-			System.out.println("세션값 : " + session.getAttribute("ucode"));
+			System.out.println("세션값 ucode : " + session.getAttribute("ucode"));
+			System.out.println("세션값 id : " + session.getAttribute("id"));
 		}
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -25,7 +26,7 @@ public class Controller {
 	}
 	
 	@RequestMapping( value="/about.do" )
-	public ModelAndView about(HttpServletRequest request) {
+	public ModelAndView about(HttpServletRequest request, HttpSession session) {
 		System.out.println( "about() 호출" );
 		
 

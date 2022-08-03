@@ -3,9 +3,8 @@
     pageEncoding="UTF-8"%>
 
 <%
-	int flag = (Integer)request.getAttribute("flag");
+	int ucode = (Integer)request.getAttribute("ucode");
 	SignUpTO sto =(SignUpTO)request.getAttribute("sto"); 
-
 %>
 
 
@@ -23,8 +22,8 @@
 	</form>
 	
    <script type='text/javascript'>
-    const flag = <%=flag%>;
-    if(flag == 0){
+    const ucode = <%=ucode%>;
+    if(ucode != -1){
     	location.href='home.do';
     }else{
     	document.signupdata.submit()

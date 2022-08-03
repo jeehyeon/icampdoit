@@ -40,6 +40,7 @@ public class Controller_Login {
 		
 		if(ucode != -1) {
 			session.setAttribute("ucode", ucode);
+			session.setAttribute("id", lto.getId());
 			session.setMaxInactiveInterval(60*60);
 		}
 		
@@ -157,7 +158,7 @@ public class Controller_Login {
 	
 	
 	@RequestMapping( value="/kakaologin_form.do" )
-	public ModelAndView kakaologin_form(HttpServletRequest request) {
+	public ModelAndView kakaologin_form(HttpServletRequest request, HttpSession session) {
 		System.out.println("kakaologin_form() 실행");
 		SignUpTO sto = new SignUpTO();
 		
@@ -167,13 +168,21 @@ public class Controller_Login {
 		
 		System.out.println("kakaologin_form : " + sto.getKid());
 		
-		int flag = dao.kakaoCheck(sto.getName(), sto.getEmail(), sto.getKid());
+		int ucode = dao.kakaoCheck(sto.getName(), sto.getEmail(), sto.getKid());
+		String id="";
+		if(ucode != -1) {
+			id = dao.kakaoLoginID(ucode);
+			
+			session.setAttribute("ucode", ucode);
+			session.setAttribute("id", id);
+			
+		}
 		
-		System.out.println( "flag : " + flag );
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "login/kakaoLogin_ok" );
-		modelAndView.addObject("flag", flag);
+		modelAndView.addObject("ucode", ucode);
+		modelAndView.addObject("id", id);
 		modelAndView.addObject("sto", sto);
 		
 		return modelAndView;
@@ -221,4 +230,15 @@ public class Controller_Login {
 		modelAndView.addObject("flag", flag);
 		return modelAndView;
 	}
+	
+	
+	@RequestMapping( value="/logout.do" )
+	public ModelAndView logout(HttpServletRequest request, HttpSession session) {
+		session.invalidate();
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName( "login/logout_ok" );
+		
+		return modelAndView;
+	}
+	
 }

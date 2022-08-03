@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%
+//session 값 가져오기
+int ucode = -1;
+String id ="";
+if(session.getAttribute("id") != null){
+	ucode = (int)session.getAttribute("ucode");
+	id = (String)session.getAttribute("id");
+}
+%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -84,7 +92,12 @@
          	</div>
          	
          	<form class="d-flex">
+         	<%if(ucode == -1){ %>
              	<button class="btn btn-outline-primary btn-sm" type="button"><a href="./login.do">Sign in</a></button>
+             	<%}else{ %>
+             	<span class="mx-2"><%=id%>님 </span>
+             	<button class="btn btn-outline-primary btn-sm" type="button"><a href="./logout.do">Logout</a></button>
+             	<%}; %>
              </form>
          </div>
       </nav>

@@ -113,14 +113,30 @@ public class loginDAO {
 	 
 	public int kakaoCheck(String name, String email, String kid) {
 		
-		int flag = 1;
-		String sql = "select count(*) from users where name=? and email=? and kid=?";
-		int result = jdbcTemplate.queryForObject(sql, Integer.class, name, email, kid);
-		if(result == 1) {
-			flag = 0;
+		
+		int ucode;
+		try {
+			String sql = "select ucode from users where name=? and email=? and kid=?";
+			ucode = jdbcTemplate.queryForObject(sql, Integer.class, name, email, kid);
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			ucode= -1;
 		}
 		
 		
-		return flag;
+		
+		return ucode;
+	}
+	public String kakaoLoginID(int ucode) {
+		
+		
+		
+			String sql = "select id from users where ucode=?";
+			String id = jdbcTemplate.queryForObject(sql, String.class, ucode);
+		
+		
+		
+		
+		return id;
 	}
 }
