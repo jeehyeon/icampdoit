@@ -209,7 +209,7 @@
 	    			
 	    		};
 	    	};
-</script>z
+</script>
 <script>
 			
 	    	$(document).on("click", "#btncheck", function () {		

@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 
 <%
-int flag = (Integer)request.getAttribute("flag");
-	
+	int ucode = (Integer)request.getAttribute("ucode");
+	String id= (String)request.getAttribute("String");
 	out.println( "<script type='text/javascript'>" );
-	if( flag == 0 ) {
+	if( ucode != -1 ) {
 		//세션 등록
 		
 		
