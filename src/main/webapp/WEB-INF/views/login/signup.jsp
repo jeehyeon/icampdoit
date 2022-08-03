@@ -42,7 +42,7 @@
             </div>
             
             <!-- 회원가입 시작 -->
-            <form class="form-validate" action="signup_ok.do" method="post">
+            <form class="form-validate" action="signup_ok.do" method="post" name="signup">
               <!-- 이름 -->
               <div class="mb-3">
                 <label class="form-label" for="name"> *NAME</label>
