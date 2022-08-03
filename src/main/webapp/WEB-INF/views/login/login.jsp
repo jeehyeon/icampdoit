@@ -376,7 +376,7 @@
 		    				var kid = res.id;
 		    				
 		    				console.log(res);
-		    				
+		    				//alert(kid);
 		    				//alert(JSON.stringify(res));
 		    				//alert(JSON.stringify(authObj));
 		    				//console.log( authObj.acces_token);

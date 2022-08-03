@@ -157,9 +157,9 @@ public class Controller_Login {
 		
 		sto.setName(request.getParameter("kakaonickname"));
 		sto.setEmail(request.getParameter("kakaoemail"));
-		sto.setKid(request.getParameter("kid"));
+		sto.setKid(request.getParameter("kakaokid"));
 		
-		System.out.println(sto.getName());
+		System.out.println("kakaologin_form : " + sto.getKid());
 		
 		int flag = dao.kakaoCheck(sto.getName(), sto.getEmail(), sto.getKid());
 		
@@ -191,7 +191,7 @@ public class Controller_Login {
 	@RequestMapping( value="/kakaosignup_ok.do" )
 	public ModelAndView kakaosignupOk(HttpServletRequest request) {
 		System.out.println( "kakaosignupOk() 호출" );
-	
+		
 		SignUpTO sto = new SignUpTO();
 		sto.setName(request.getParameter("name"));
 		sto.setId(request.getParameter("id"));
@@ -202,6 +202,12 @@ public class Controller_Login {
 		sto.setHint(request.getParameter("hint"));
 		sto.setAnswer(request.getParameter("answer"));
 		sto.setKid(request.getParameter("kid"));
+		System.out.println("사인업 아이디: " + sto.getId());
+		System.out.println("사인업 이름: " + sto.getName());
+		System.out.println("사인업 이메일: " + sto.getEmail());
+		System.out.println("사인업 생일: " + sto.getBirth());
+		System.out.println("사인업 힌트: " + sto.getHint());
+		System.out.println("사인업 답변: " + sto.getAnswer());
 		
 		int flag = dao.signUpOK(sto);
 		ModelAndView modelAndView = new ModelAndView();

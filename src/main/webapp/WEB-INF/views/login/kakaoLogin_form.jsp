@@ -1,9 +1,11 @@
+<%@page import="com.exam.login.SignUpTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
-	String kakaoemail = request.getParameter( "kakaoemail" );
-	String kakaonickname = request.getParameter( "kakaonickname" );
+	
+	SignUpTO sto =(SignUpTO)request.getAttribute("sto");
+	
 %>
 
 <!DOCTYPE html>
@@ -51,21 +53,24 @@
             </div>
             
             <!-- 회원가입 시작 -->
-            <form action="./kakaoLogin_editForm_ok.do" method="post" name="sfrm" class="form-horizontal" enctype="multipart/form-data">
+            <form action="./kakaosignup_ok.do" method="post" name="sfrm" class="form-horizontal">
+            <input type="hidden" name="kid" id="kid" value="<%=sto.getKid()%>"/>
               <!-- 이름 -->
               <div class="mb-3">
                 <label class="form-label" for="name"> *NAME</label>
-                <input type="text" class="form-control" name="name" value="<%=kakaonickname%>" readonly>
+                <input type="text" class="form-control" name="name" value="<%=sto.getName()%>" readonly>
               </div>
               
               <!-- 아이디 -->
               <div class="mb-4">
                 <label class="form-label" for="id"> *ID</label>
                 <div style="line-height:15%;">
-                <input type="text" class="form-control" id="user_id" name="id" required="required">
+                <input name="id" id="id" type="text" class="form-control" placeholder="ID" autocomplete="off" required data-msg="Please enter your ID" onkeydown="inputIdChk()">
                 <br>
-                <button type="button" class="btn btn btn-dark btn-sm" style="float: right; height: 30px; display: flex; align-items:center;">아이디 중복확인</button>
+                <button type="button" class="btn btn btn-dark btn-sm" id="btncheck" style="float: right; height: 30px; display: flex; align-items:center;">아이디 중복확인</button>
                 </div>
+                 <span id="result"></span>
+                <input type="hidden" id="idcheck" value="idUncheck"/>
               </div>
               
               <!-- 비밀번호 -->
@@ -83,7 +88,7 @@
               <!-- 이메일 -->
               <div class="mb-3">
                 <label class="form-label" for="email"> *Email Address</label>
-                <input type="text" class="form-control" id="user_id" name="id" value="<%=kakaoemail%>" required="required" readonly>
+                <input type="text" class="form-control" id="email" name="email" value="<%=sto.getEmail()%>" required="required" readonly>
               </div>
               
               <!-- 비밀번호 확인 질문 -->
@@ -102,7 +107,7 @@
               <!-- 비밀번호 확인 답변 -->
               <div class="mb-3">
               	<label class="form-label" for="pwdanswer"> *비밀번호 확인 답변</label>
-                <input class="form-control" name="answer" id="answer" type="email" autocomplete="off" required data-msg="Please enter your answer">
+                <input class="form-control" name="answer" id="answer" type="text" autocomplete="off" required data-msg="Please enter your answer">
               </div>
               
               <!-- 성별 -->
@@ -129,7 +134,7 @@
 						  </form>
 	                  </div>    			  
       			<div class="form-check">
-                  <input class="form-check-input" id="" type="checkbox" name="info">
+                  <input class="form-check-input" id="info" type="checkbox" name="info">
                   <label class="form-check-label text-muted"> <span class="text-sm">[필수] 이용약관에 동의합니다.</span></label>
                 </div>
               </div>
@@ -138,174 +143,112 @@
               </div>
             </form>
 
-			<div class="text-center">ICampDoIt 계정 회원이십니까? <a href="./login.do">ICampDoIt 계정으로 로그인 하기</a></div>
-			<div class="text-center">ICampDoIt 계정으로 가입하시겠습니까? <a href="./signup.do">ICampDoIt 계정으로 가입 하기</a></div>
 		</div>
-	
+<!-- jQuery-->
+<script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
 		<script type="text/javascript">
-		window.onload = function() {
-			//id와pw 적합여부 검사(4~12자리, 영어대소문자, 숫자만 가능)
-			let val = /^[a-zA-Z0-9]{4,15}$/		
-			
-			//생년월일 적합여부 검사
-			let birth_val = /([0-9]{2}(0[1-9]{1}|1[0-2]{1})(0[1-9]{1}|[1,2]{1}[0-9]{1}|3[0,1]{1}))/g
-			
-			//이메일형식 적합여부 검사
-			let mail_val = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
-			
-			//폰번호 적합여부 검사
-			let phone_val = /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/
-			
-			//형식검사하는 메서드
-			function check( val, target ) {
-				if( val.test( target ) ) {
-					return true;
-				}
-			}
-			
-			
-			//닉네임 중복 검사
-			$( "#nick_id" ).blur( function() {
-				var user_nick = $( "#nick_id" ).val();
-				if( user_nick != '' ) {
-					if( check( val, user_nick ) ) {
-						$.ajax({
-							url: './usingNick_chk.do?user_nick='+user_nick,
-							type: 'GET',
-							success: function( data ) {
-								
-								if( data == "0" ) {
-									$( "#usingNick_chk" ).text( "사용할 수 있는 닉네임입니다." );
-									$( "#usingNick_chk" ).css( "margin-left", "155px" );
-									$( "#usingNick_chk" ).css( "color", "blue" );
-									$( "#submit1" ).attr( "disabled", false );
-								} else if( data == "1"  ) {
-									$( "#usingNick_chk" ).text( "사용중인 닉네임입니다." );
-									$( "#usingNick_chk" ).css( "margin-left", "155px" );
-									$( "#usingNick_chk" ).css( "color", "red" );
-									$( "#submit1" ).attr( "disabled", true );
-								}
-							},
-							error: function() {
-								console.log( "kakoLogin_editForm의 ajax 에러" )
-							}
-						})
-					} else {
-						$( "#usingNick_chk" ).text( "닉네임이 형식에 맞지않습니다." );
-						$( "#usingNick_chk" ).css( "margin-left", "155px" );
-						$( "#usingNick_chk" ).css( "color", "red" );
-						$( "#user_nick" ).val( "" );
-						$( "#submit1" ).attr( "disabled", true );
-					}
-					
-				} else {
-					$( "#usingNick_chk" ).text( "" );
-				}
-			})
-			
-			//생년월일 유효성검사
-			$( "#user_birth" ).blur( function() {
-				var user_birth = $( '#user_birth' ).val();
-				
-				if( user_birth.length != 6 || !check( birth_val, user_birth ) ) {
-					$( "#birth_chk" ).text( "생년월일이 형식에 맞지않습니다." );
-					$( "#birth_chk" ).css( "margin-left", "155px" );
-					$( "#birth_chk" ).css( "color", "red" );
-					$( '#user_birth' ).val( "" );
-					$( "#submit1" ).attr( "disabled", true );
-				} else {
-					$( "#birth_chk" ).text( "" );
-					$( "#submit1" ).attr( "disabled", false );
-				}
-			})
-			
-			//전화번호 유효성검사
-			$( '#user_phone' ).blur( function() {
-				var user_phone = $( '#user_phone' ).val();
-				
-				if( !check( phone_val, user_phone ) ) {
-					$( "#phone_chk" ).text( "휴대폰번호가 형식에 맞지않습니다." );
-					$( "#phone_chk" ).css( "margin-left", "155px" );
-					$( "#phone_chk" ).css( "color", "red" );
-					$( '#user_phone' ).val( "" );
-					$( "#submit1" ).attr( "disabled", true );
-				} else {
-					$( "#phone_chk" ).text( "" );
-					$( "#submit1" ).attr( "disabled", false );
-				}
-			})
-			
-			document.getElementById('submit1').onclick = function() {
-				let id = document.sfrm.id.value.trim()
-				let pwd = document.sfrm.pwd.value.trim()
-				let mail = document.sfrm.mail.value.trim()
-				let birth = document.sfrm.birth.value.trim()
-				let phone = document.sfrm.phone.value.trim()
-				
-				if( birth == '' ) {
-					alert( '생년월일을 입력하셔야 합니다.')
-					return false;
-				}
-				if( phone == '' ) {
-					alert( '핸드폰 번호를 입력하셔야 합니다.')
-					return false;
-				}
-				if( document.sfrm.nick.value.trim() == '' ) {
-					alert( '닉네임을 입력하셔야 합니다.')
-					return false;
-				}
-				if(document.sfrm.info.checked == false) {
-					alert('동의를 하셔야 합니다.');
-					return false;
-				}
-				//파일형식 검사(사진파일만 가능)
-				if ( document.sfrm.profile.value.trim() != '' ) {
-					var fileValue = document.sfrm.profile.value.trim().split('\\');
-					var filename = fileValue[fileValue.length-1];
-					var fileEname = filename.substring(filename.length-4, filename.length);
-					if ( fileEname == '.jpg' || fileEname == '.png' || fileEname == '.gif' || fileEname == '.GIF' || fileEname == '.PNG' || fileEname == '.JPG' ) {} 
-					else {
-						alert( '사진파일만 첨부해주세요.(jpg, png, gif)' );
-						document.sfrm.profile.value = '';
-						return false;
-					}
-				}
-				document.sfrm.submit();
-			};
-			
-			//개인정보방침보이는 modal창 설정
-			$( '#dialog' ).dialog({
-				width: 700,
-				height: 500,
-				autoOpen: false,
-				modal: true,
-				resizable: false,
-				buttons: {
-					'확인': function() {
-						$( this ).dialog( 'close' );
-					}
-				},
-				show: {
-					effect: 'blind',
-					duration: 1000
-				},
-				hide: {
-					effect: 'blind',
-					duration: 1000
-				}
-			})
-		};
+		 function injectSvgSprite(path) {
+		      
+	          var ajax = new XMLHttpRequest();
+	          ajax.open("GET", path, true);
+	          ajax.send();
+	          ajax.onload = function(e) {
+	          var div = document.createElement("div");
+	          div.className = 'd-none';
+	          div.innerHTML = ajax.responseText;
+	          document.body.insertBefore(div, document.body.childNodes[0]);
+	          }
+	      }    
+		 injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg');
+		</script>
+		<script>
 		
-		//개인정보방침 modal창 띄우기
-		function agree() {
-			$( '#dialog' ).dialog( 'open' );
-		}
 		
+		
+		 window.onload = function() {
+	    		document.getElementById( 'sbtn' ).onclick = function() {
+	    			// 데이터 전송
+	    			if( document.sfrm.info.checked == false ) {
+					alert( '동의하셔야 합니다.' );
+					return false;
+					}
+					//alert( '정상' );
+					if( document.sfrm.name.value.trim() == '' ) {
+						alert( '이름을 입력해 주세요.' );
+						return false;				
+					}
+					if( document.sfrm.id.value.trim() == '' ) {
+						alert( '아이디를 입력해 주세요.' );
+						return false;				
+					}
+					if( document.sfrm.pwd.value.trim() == '' ) {
+						alert( '비밀번호를 입력해 주세요.' );
+						return false;				
+					}
+					if( document.sfrm.birth.value.trim() == '' ) {
+						alert( '생년월일을 입력해 주세요' );
+						return false;				
+					}
+					if( document.sfrm.email.value.trim() == '' ) {
+						alert( '이메일을 입력해 주세요' );
+						return false;				
+					}
+					if( document.sfrm.answer.value.trim() == '' ) {
+						alert( '비밀번호 확인 답변을 입력해 주세요' );
+						return false;				
+					}
+					if( document.sfrm.gen.value.trim() == '' ) {
+						alert( '성별을 체크해 주세요' );
+						return false;				
+					}if( document.sfrm.idcheck.value != 'idChecked' ) {
+						alert( '아이디 중복체크를 해주세요' );
+						return false;				
+					}
+
+	    			document.sfrm.submit();
+	    			
+	    		};
+	    	};
+</script>z
+<script>
+			
+	    	$(document).on("click", "#btncheck", function () {		
+	    		alert('클릭');
+	    	    if ($('#id').val() != '') {	        
+	    	        $.ajax({ 	   					
+	    	            type: 'GET',
+	    	            url: './idcheck.do',
+	    	            data: 'id=' + $('#id').val(),
+	    	            dataType: 'json',
+	    	            success: function(result) {
+	    	                if (result == '1') {
+	    	                    $('#result').text('사용 가능한 아이디입니다.');
+	    	                    $('#idcheck').val('idChecked');
+
+	    	                } else {
+	    	                    $('#result').text('이미 사용중인 아이디입니다.');
+	    	                }
+	    	            },
+	    	            error: function(a, b, c) {
+	    	                console.log(a, b, c);
+	    	            }				
+	    	        });
+	    	   				
+	    	    } else {
+	    	        alert('아이디를 입력하세요.');
+	    	        $('#id').focus();
+	    	    }
+	    	   			
+	    	});
+	    	
+
+	    	function inputIdChk(){
+	    		$('#idcheck').val('idUncheck');
+	    	}
 		
 		</script>
 		
-		<!-- jQuery-->
-	    <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
+		
 	    <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
 	    <script src="./resources/bootstrap-5/html/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	    <!-- Magnific Popup - Lightbox for the gallery-->
