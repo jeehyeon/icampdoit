@@ -41,10 +41,9 @@
 	    <!-- Font Awesome CSS-->
 	    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	  	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-	
 	</head>
 	<body>
-		<div class="container-fluid px-3">
+ 	 <div class="container-fluid px-3">
       <div class="row min-vh-100">
         <div class="col-md-8 col-lg-6 col-xl-5 d-flex align-items-center">
           <div class="w-100 py-5 px-md-5 px-xxl-6 position-relative">
@@ -142,8 +141,19 @@
                 <button id="sbtn" class="btn btn-lg btn-primary">Sign up</button>
               </div>
             </form>
-
-		</div>
+			<a class="close-absolute me-md-5 me-xl-6 pt-5" href="./home.do"> 
+              <svg class="svg-icon w-3rem h-3rem">
+                <use xlink:href="#close-1"> </use>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-6 col-xl-7 d-none d-md-block">
+          <!-- Image-->
+          <div class="bg-cover h-100 me-n3" style="background-image: url(./resources/bootstrap-5/html/img/photo/캠핑.jpg);"></div>
+        </div>
+      </div>
+    </div>
 <!-- jQuery-->
 <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
 		<script type="text/javascript">
@@ -209,7 +219,7 @@
 	    			
 	    		};
 	    	};
-</script>z
+</script>
 <script>
 			
 	    	$(document).on("click", "#btncheck", function () {		
