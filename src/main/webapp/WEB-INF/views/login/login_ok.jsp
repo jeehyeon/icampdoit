@@ -6,6 +6,9 @@ int flag = (Integer)request.getAttribute("flag");
 	
 	out.println( "<script type='text/javascript'>" );
 	if( flag == 0 ) {
+		//세션 등록
+		
+		
 		out.println( "location.href='home.do';" );
 	} else {
 		out.println( "alert( '로그인 실패: 아이디나 비밀번호를 확인해주세요.' );" );

@@ -20,25 +20,27 @@ public class loginDAO {
 	private JdbcTemplate jdbcTemplate;
 	
 	public int loginOK(LoginTO lto) {
-		int flag = 1;
 		
-		String sql = "select count(*) from users where id=? and pwd=?;";
-		int result = jdbcTemplate.queryForObject(sql, Integer.class, lto.getId(), lto.getPwd());
-		System.out.println(result);
 		
-		if(result == 1) {
-			flag = 0;
-		}else {
-			flag = 1;
+		int ucode;
+		try {
+			String sql = "select ucode from users where id=? and pwd=?;";
+			ucode = jdbcTemplate.queryForObject(sql, Integer.class, lto.getId(), lto.getPwd());
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			ucode= -1;
 		}
 		
-		return flag;
+		
+		
+		
+		return ucode;
 	}
 	
 	public int signUpOK(SignUpTO sto) {
 		int flag = 1;	
-		String sql = "insert into users values(0, ?, ?, ?, ?, ?, now(), ?, ?, ?)";
-		int result = jdbcTemplate.update(sql,  sto.getId(), sto.getPwd(), sto.getName(), sto.getGen(), sto.getEmail(), sto.getBirth(),  sto.getHint(), sto.getAnswer());
+		String sql = "insert into users values(0, ?, ?, ?, ?, ?, now(), ?, ?, ?, ?)";
+		int result = jdbcTemplate.update(sql,  sto.getId(), sto.getPwd(), sto.getName(), sto.getGen(), sto.getEmail(), sto.getBirth(),  sto.getHint(), sto.getAnswer(), sto.getKid());
 
 		if(result == 1) {
 			flag = 0;
@@ -108,4 +110,17 @@ public class loginDAO {
 			
 			return flag;
 		}
+	 
+	public int kakaoCheck(String name, String email, String kid) {
+		
+		int flag = 1;
+		String sql = "select count(*) from users where name=? and email=? and kid=?";
+		int result = jdbcTemplate.queryForObject(sql, Integer.class, name, email, kid);
+		if(result == 1) {
+			flag = 0;
+		}
+		
+		
+		return flag;
+	}
 }

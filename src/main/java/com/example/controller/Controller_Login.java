@@ -35,11 +35,13 @@ public class Controller_Login {
 		lto.setId(request.getParameter("id"));
 		lto.setPwd(request.getParameter("pwd"));
 	
-		int flag = dao.loginOK(lto);
+		int ucode = dao.loginOK(lto);
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "login/login_ok" );
-		modelAndView.addObject("flag", flag);
+		modelAndView.addObject("ucode", ucode);
+		modelAndView.addObject("id", lto.getId());
+		
 		return modelAndView;
 	}
 	@RequestMapping( value="/signup.do" )
@@ -63,6 +65,7 @@ public class Controller_Login {
 		sto.setGen(request.getParameter("gen"));
 		sto.setHint(request.getParameter("hint"));
 		sto.setAnswer(request.getParameter("answer"));
+		sto.setKid("0");
 		System.out.println(sto.getPwd());
 		int flag = dao.signUpOK(sto);
 		ModelAndView modelAndView = new ModelAndView();
@@ -118,6 +121,7 @@ public class Controller_Login {
 	
 	@RequestMapping( value="/pwdcheck.do" )
 	public String pwdcheck(HttpServletRequest request) {
+		System.out.println("pwdcheck() 실행");
 		SignUpTO sto = new SignUpTO();
 		sto.setName(request.getParameter("name"));
 		sto.setId(request.getParameter("id"));
@@ -133,6 +137,7 @@ public class Controller_Login {
 	
 	@RequestMapping( value="/newpwd_ok.do" )
 	public ModelAndView newpwdOk(HttpServletRequest request) {
+		System.out.println("newpwdOk() 실행");
 		String pwd = request.getParameter("pwd");
 		String ucode = request.getParameter("ucode");
 		
@@ -140,6 +145,64 @@ public class Controller_Login {
 		int flag = dao.pwdset(pwd, ucode);
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "login/newpwd_ok" );
+		modelAndView.addObject("flag", flag);
+		return modelAndView;
+	}
+	
+	
+	@RequestMapping( value="/kakaologin_form.do" )
+	public ModelAndView kakaologin_form(HttpServletRequest request) {
+		System.out.println("kakaologin_form() 실행");
+		SignUpTO sto = new SignUpTO();
+		
+		sto.setName(request.getParameter("kakaonickname"));
+		sto.setEmail(request.getParameter("kakaoemail"));
+		sto.setKid(request.getParameter("kid"));
+		
+		
+		int flag = dao.kakaoCheck(sto.getName(), sto.getEmail(), sto.getKid());
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName( "login/kakaoLogin_ok" );
+		modelAndView.addObject("flag", flag);
+		modelAndView.addObject("sto", sto);
+		
+		return modelAndView;
+	}
+	@RequestMapping( value="/kakaosignup.do" )
+	public ModelAndView kakaosignup(HttpServletRequest request) {
+		System.out.println("kakaosignup() 실행");
+		//data
+		SignUpTO sto = new SignUpTO();
+		sto.setName(request.getParameter("name"));
+		sto.setEmail(request.getParameter("email"));
+		sto.setKid(request.getParameter("kid"));
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName( "login/kakaoLogin_form" );
+		modelAndView.addObject("sto", sto);
+		return modelAndView;
+	}
+	
+	
+	
+	@RequestMapping( value="/kakaosignup_ok.do" )
+	public ModelAndView kakaosignupOk(HttpServletRequest request) {
+		System.out.println( "kakaosignupOk() 호출" );
+	
+		SignUpTO sto = new SignUpTO();
+		sto.setName(request.getParameter("name"));
+		sto.setId(request.getParameter("id"));
+		sto.setPwd(request.getParameter("pwd"));
+		sto.setBirth(request.getParameter("birth"));
+		sto.setEmail(request.getParameter("email"));
+		sto.setGen(request.getParameter("gen"));
+		sto.setHint(request.getParameter("hint"));
+		sto.setAnswer(request.getParameter("answer"));
+		sto.setKid(request.getParameter("kid"));
+		
+		int flag = dao.signUpOK(sto);
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName( "login/signup_ok" );
 		modelAndView.addObject("flag", flag);
 		return modelAndView;
 	}

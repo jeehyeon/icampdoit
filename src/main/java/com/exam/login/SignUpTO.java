@@ -14,4 +14,5 @@ public class SignUpTO {
 	private String hint;
 	private String answer;
 	private String gen;
+	private String kid;
 }
