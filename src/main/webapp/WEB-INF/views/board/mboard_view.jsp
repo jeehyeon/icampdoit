@@ -94,11 +94,11 @@ if(session.getAttribute("id") != null){
          	</div>
          	
          	<form class="d-flex">
-         	<%if(ucode == -1){ %>
-             	<button class="btn btn-outline-primary btn-sm" type="button"><a href="./login.do">Sign in</a></button>
+         		<%if(ucode == -1){ %>
+             	<button class="btn btn-outline-primary btn-sm" type="button" onclick="location.href='./login.do'">Login</button>
              	<%}else{ %>
-             	<span class="mx-2"><%=id%>님 </span>
-             	<button class="btn btn-outline-primary btn-sm" type="button"><a href="./logout.do">Logout</a></button>
+             	<span class="mx-2"><strong><%=id%></strong>님 </span>
+             	<button class="btn btn-outline-primary btn-sm" type="button" onclick="location.href='./logout.do'">Logout</button>
              	<%}; %>
              </form>
          </div>
@@ -184,7 +184,7 @@ if(session.getAttribute("id") != null){
 			  </div>
 			  <div class="col-lg-4 text-lg-end">
 				<input type="button" value="수정" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardmodify.do?cpage=&seq='" />
-				<input type="button" value="삭제" class="btn btn-primary" style="cursor: pointer;" onclick="location.href=" />				
+				<input type="button" value="삭제" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboarddeleteOk.do?cpage=&seq='" />				
 			  </div>
             </div>
             
