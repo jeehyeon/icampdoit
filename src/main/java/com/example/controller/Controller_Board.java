@@ -112,10 +112,6 @@ public class Controller_Board {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
-		if(session.getAttribute("ucode") == null) {
-			modelAndView.setViewName( "/login/nousers" );
-			return modelAndView;
-		}
 		modelAndView.setViewName( "/board/hboard_list" );
 		
 		return modelAndView;
@@ -127,10 +123,6 @@ public class Controller_Board {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
-		if(session.getAttribute("ucode") == null) {
-			modelAndView.setViewName( "/login/nousers" );
-			return modelAndView;
-		};
 		modelAndView.setViewName( "/board/hboard_view" );
 		
 		return modelAndView;
