@@ -25,13 +25,12 @@
     <link rel="stylesheet" href="./resources/bootstrap-5/html/css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="./resources/bootstrap-5/html/img/logo2.svg">
-    
-    
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
   </head>
   <body>
     <div class="container-fluid px-3">
@@ -60,7 +59,6 @@
                 </div>
                 <span id="result"></span>
                 <input type="hidden" id="idcheck" value="idUncheck"/>
-                
               </div>
               
               <!-- 비밀번호 -->
@@ -68,42 +66,10 @@
                 <label class="form-label" for="password"> *Password</label>
                 <input class="form-control" name="pwd" id="pwd" placeholder="Password" type="password" required data-msg="Please enter your password">
               </div>
-              <!--
-              <div class="mb-4">
-                <label class="form-label" for="loginPassword2"> Confirm your password</label>
-                <input class="form-control" name="loginPassword2" id="loginPassword2" placeholder="Password" type="password" required data-msg="Please enter your password">
-              </div>
-              -->
               
               <!-- 생년월일 -->
               <div class="mb-3">
                 <label class="form-label" for="birth"> *Date of Birth(YYYYMMDD)</label>
-                <!-- 
-                <div class="container border md-3 z-index-10" style="border-radius: 8px;">
-        		<div class="row">
-	              	<div class="col-lg d-flex align-items-center form-group no-divider">
-	                    <select class="selectpicker" title="Categories" data-style="btn-form-control">
-	                      <option value="small">Restaurants</option>
-	                      <option value="medium">Hotels</option>
-	                      <option value="large">Cafes</option>
-	                      <option value="x-large">Garages</option>
-	                    </select>
-	                    <select class="selectpicker" title="Categories" data-style="btn-form-control">
-	                      <option value="small">Restaurants</option>
-	                      <option value="medium">Hotels</option>
-	                      <option value="large">Cafes</option>
-	                      <option value="x-large">Garages</option>
-	                    </select>
-	                    <select class="selectpicker" title="Categories" data-style="btn-form-control">
-	                      <option value="small">Restaurants</option>
-	                      <option value="medium">Hotels</option>
-	                      <option value="large">Cafes</option>
-	                      <option value="x-large">Garages</option>
-	                    </select>
-	                  </div>
-                  </div>
-                  </div>
-                  -->
                 <input class="form-control" name="birth" id="birth" placeholder="ex) 19961116" type="birth" required data-msg="Please enter your password">
               </div>
               
@@ -160,19 +126,26 @@
                   <label class="form-check-label text-muted"> <span class="text-sm">[필수] 이용약관에 동의합니다.</span></label>
                 </div>
               </div>
-                          
+              
+              <!-- 회원가입 버튼 -->            
               <div class="d-grid gap-2">
                 <button id="sbtn" class="btn btn-lg btn-primary">Sign up</button>
               </div>
               <hr class="my-3 hr-text letter-spacing-2" data-content="OR">
-              <div class="d-grid gap-2 mb-3">
-                <button class="btn btn btn-outline-muted btn-social" style="background-color: #ffc107"><i class="fa fa-solid fa-comment btn-social-icon fa-2x"> </i>CONNECT <span class="d-none d-sm-inline">WITH KAKAKO</span></button>
-              </div>
-              <!--  
-              <hr class="my-4">
-              <p class="text-sm text-muted">By signing up you agree to Directory's <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>.</p>
-              -->
             </form>
+              
+              <!-- 카카오 소셜로그인 버튼 -->
+              <div class="d-grid gap-2" name="kakao_frm">
+                <button type="button" class="btn btn btn-outline-muted btn-lg btn-social btn-warning"><a id="custom-login-btn" href="javascript:loginWithKakao()" style="color:#2e322e"><i class="fa fa-solid fa-comment btn-social-icon fa-2x"></i>LOGIN <span class="d-none d-sm-inline">WITH KAKAKO</a></span></button>
+              </div>
+              <div>
+              		<form id="kakao_frm" method="post" action="./kakaologin_form.do" name="kakao_frm">
+				  	<input type="hidden" name="kakaoemail" id="kakaoemail" />
+				  	<input type="hidden" name="kakaonickname" id="kakaonickname" />
+				  	<input type="hidden" name="kakaokid" id="kakaokid" />
+				  	</form>
+              </div>
+            
             <a class="close-absolute me-md-5 me-xl-6 pt-5" href="./home.do"> 
               <svg class="svg-icon w-3rem h-3rem">
                 <use xlink:href="#close-1"> </use>
@@ -289,13 +262,100 @@
     	   			
     	});
     	
-    	
-    	
     	function inputIdChk(){
     		$('#idcheck').val('idUncheck');
     	}
     </script>
     
+    <script type="text/javascript">
+      
+    	//카카오 초기화
+    	Kakao.init('2dde53cc9d654a3a8d8b78783aa5cbfc');
+    	console.log( Kakao.isInitialized() ); //초기화 판단 여부. console 에 true 나오면 됨.
+    	
+    	//데모버전으로 들어가서 카카오로그인 코드확인
+		function loginWithKakao() {
+			window.Kakao.Auth.login({
+		      	success: function(authObj) {
+		    	  	console.log( authObj ); //access 토큰값 출력		    	  	
+		    	  	Kakao.Auth.setAccessToken(authObj.access_token ); //access 토큰값 저장
+		    	  	
+		    	  	//로그인 성공시, API 호출
+		    	    //access 토큰을 발급받고, 아래 함수 호출시켜 사용자 정보를 받아오기
+		    	  	Kakao.API.request({
+		    			url: '/v2/user/me',
+		    			success: function(res){
+		    				var nickname = res.kakao_account.profile.nickname;
+		    				var email = res.kakao_account.email;
+		    				var kid = res.id;
+		    				
+		    				console.log(res);
+		    				//alert(kid);
+		    				//alert(JSON.stringify(res));
+		    				//alert(JSON.stringify(authObj));
+		    				//console.log( authObj.acces_token);
+		    				
+		    				console.log( email );
+		    				//console.log( res.kakao_account.profile.nickname );
+		    				$( '#kakaonickname' ).val( nickname );
+		    				$( '#kakaoemail' ).val( email );
+		    				$( '#kakaokid' ).val( kid );
+		    				
+		    				//$('#kakaoemail').val(res.kakao_account.profile.email);
+		    				//$('#kakaonickname').val(res.kakao_account.profile.nickname);
+		    				
+		    				console.log( $('#kakaoemail').val() );
+		    				console.log( $('#kakaonickname').val() );
+		    				
+		    				//document.kakao_frm.action
+		    				//document.getElementById( 'kakao_frm' ).submit();
+		    				
+		    				$('#kakao_frm').submit();
+		    				
+		    				//ajax
+		    				//카카오로그인 DB 만들어야 함. 비번은 랜덤으로..
+		    			},
+		    			fail: function(error){
+		    				alert('카카오 로그인에 실패했습니다. 관리자에게 문의하세요.' + JSON.stringify(error) );
+		    			}
+		    	  	});
+		      },
+		      fail: function(err) {
+		        console.log(err);
+		      },
+		    });
+		}
+    	
+    	<!--
+    	//로그아웃 기능 - 카카오 서버에 접속하는 엑세스 토큰 만료. 사용자 어플리케이션의 로그아웃은 따로 해야 함.
+    	function kakaoLogout(){
+    		if( !Kakao.Auth.getAccessToken() ){ //토큰이 있는지 확인. 없으면
+    			alert( 'Not logged in' );
+    			return;
+    		}
+    		Kakao.Auth.logout(function(){ //카카오 로그아웃
+    			alert( 'logout ok\naccess token -> ' + Kakao.Auth.getAccessToken() );
+    			
+    		});
+    	}
+    	
+    	
+    	//연결 끊기 기능 - 탈퇴처리리는 직접 구현해야 함. 	
+    	function kakaoUnlink(){
+    		Kakao.API.request({
+        		url: '/v1/user/unlink',
+        		success: function(response) {
+        			console.log( response );
+        			callbackFunction();
+        		},
+        		fail: function(error){
+        			alert('탈퇴처리가 미완료되었습니다. \n관리자에게 문의하시기 바랍니다.' );
+        			console.log( error );
+        		}
+        	});
+    	}
+    	-->
+    </script>
     <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
     <script src="./resources/bootstrap-5/html/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Magnific Popup - Lightbox for the gallery-->

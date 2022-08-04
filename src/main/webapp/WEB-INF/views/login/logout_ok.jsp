@@ -15,8 +15,12 @@
 
 	out.println("<script src=\"https://developers.kakao.com/sdk/js/kakao.js\"></script>");
 	out.println( "<script type='text/javascript'>" );
+<<<<<<< HEAD
 	out.println(kakaoLogout);
 	out.println("alert(\"kaakaologin\")}");
+=======
+	out.println( "alert( '로그아웃 되었습니다.' );" );
+>>>>>>> 01864d03a704cf7033c5f4891ec016663cd13985
 	out.println( "location.href='home.do';" );
 	out.println( "</script>" );
 %>

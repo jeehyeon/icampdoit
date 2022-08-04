@@ -286,7 +286,8 @@
      	var postData = {'name' : name , 'birth' : birth , 'email' : email};
     	
     	
-	     if($('#idname').val() != ''){	        
+	     if(($('#idname').val() != '')&&($('#idbirth').val() != '')&&($('#idemail').val() != '')){	        
+     
 	        $.ajax({ 	   					
 	            type: 'POST',
 	            url: './idsearch.do',
@@ -347,7 +348,7 @@
 	    	 
 	    } else {
 	        alert('빈칸을 모두 입력해주세요.');
-	        $('#idname').focus();
+	        $('#pname').focus();
 	    } 				
 	});
 	
