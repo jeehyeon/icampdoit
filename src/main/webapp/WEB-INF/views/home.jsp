@@ -92,11 +92,11 @@ if(session.getAttribute("id") != null){
          	</div>
          	
          	<form class="d-flex">
-         	<%if(ucode == -1){ %>
-             	<button class="btn btn-outline-primary btn-sm" type="button"><a href="./login.do">Sign in</a></button>
+         	  <%if(ucode == -1){ %>
+             	<button class="btn btn-outline-primary btn-sm" type="button" onclick="location.href='./login.do'">LOGIN</button>
              	<%}else{ %>
              	<span class="mx-2"><strong><%=id%></strong>님 </span>
-             	<button class="btn btn-outline-primary btn-sm" type="button"><a href="./logout.do">Logout</a></button>
+             	<button class="btn btn-outline-primary btn-sm" type="button" onclick="location.href='./logout.do'">LOGOUT</button>
              	<%}; %>
              </form>
          </div>
