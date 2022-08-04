@@ -111,9 +111,17 @@ if(session.getAttribute("id") != null){
       </nav>
       <!-- /Navbar -->
     </header>
+    
+	<section class="pt-5">
+	    <div class="container px-lg-6">      	
+	      <!-- Breadcrumbs -->
+	      <h1 class="hero-heading mb-0" style="font-family: 'Recipekorea';">글 수정</h1>
+	      <p></p>
+	    </div>
+    </section>
 
 	<!-- Write Section-->
-	<section class="py-5 pb-7">
+	<section class=" pb-7">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-12">
@@ -123,9 +131,9 @@ if(session.getAttribute("id") != null){
 				 <div class="me-2">
 					<select class="selectpicker bg-gray-100" name="sort"
 						id="form_sort" data-style="btn-selectpicker" title="말머리">
-						<option value="sortBy_0" href="#">자유</option>
-						<option value="sortBy_1" href="#">후기</option>
-						<option value="sortBy_2" href="#">중고</option>
+						<option value="sortBy_0" id="subject1" href="#">자유</option>
+						<option value="sortBy_1" id="subject2" disabled href="#">후기</option>
+						<option value="sortBy_2" id="subject3" disabled href="#">중고</option>
 					</select>
 				 </div>
               </div>
@@ -186,6 +194,17 @@ if(session.getAttribute("id") != null){
     </footer>
 	<!-- JavaScript files-->
 	<script>
+	$(function(){
+		  
+		  var subject1 = $( '#subject1' );
+		  var subject2 = $( '#subject2' );
+		  var subject3 = $( '#subject3' );
+		  // if (TO의 subject 값 = id 값) 
+		  //subject1.option = disabled; //..? 맞나
+	 	  //아니면 $("select option[id='subject1']").prop('disabled', true); 이 방식도 있음
+		});
+	</script>
+	<script>
 		// ------------------------------------------------------- //
 		//   Inject SVG Sprite - 
 		//   see more here 
@@ -231,15 +250,6 @@ if(session.getAttribute("id") != null){
 	<!-- Available tile layers-->
 	<script src="./resources/bootstrap-5/html/js/map-layers.js"></script>
 	<script src="./resources/bootstrap-5/html/js/map-detail.js"></script>
-	<script>
-		createDetailMap({
-			mapId : 'detailMap',
-			mapCenter : [ 40.732346, -74.0014247 ],
-			markerShow : true,
-			markerPosition : [ 40.732346, -74.0014247 ],
-			markerPath : 'img/marker.svg',
-		})
-	</script>
 
 
 	<!-- jquery -->
