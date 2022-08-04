@@ -80,16 +80,7 @@ public class Controller_Login {
 		return modelAndView;
 	}
 	
-	@RequestMapping( value="/kakao_login.do" )
-	public ModelAndView kakaoLogin(HttpServletRequest request) {
 
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName( "login/kakao" );
-		
-		return modelAndView;
-	}
-	
-	
 	@RequestMapping( value="/idcheck.do" )
 	public int idcheck(HttpServletRequest request) {
 		
