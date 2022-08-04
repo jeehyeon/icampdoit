@@ -94,15 +94,15 @@ public class loginDAO {
 	public int pwdset(String pwd, String ucode) {
 			int flag = 1;
 			
-			String sql1 = "select count(*) from users where ucode=? and pwd=?";
-			int result1 = jdbcTemplate.queryForObject(sql1, Integer.class, ucode, pwd);
-			if(result1 == 1) {
+			String sql = "select count(*) from users where ucode=? and pwd=?";
+			int result = jdbcTemplate.queryForObject(sql, Integer.class, ucode, pwd);
+			if(result == 1) {
 				flag = 2;
 				return flag;
 			}
 
-			String sql = "update users set pwd=? where ucode=?;";
-			int result = jdbcTemplate.update(sql, pwd, ucode);
+			sql = "update users set pwd=? where ucode=?;";
+			result = jdbcTemplate.update(sql, pwd, ucode);
 			if(result == 1) {
 				flag = 0;
 			}
