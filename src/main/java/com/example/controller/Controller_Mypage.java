@@ -15,7 +15,9 @@ public class Controller_Mypage {
 	@RequestMapping( value="/mypage.do" )
 	public ModelAndView mypage(HttpServletRequest request, HttpSession session) {
 		System.out.println( "mypage() 호출" );
+		
 		ModelAndView modelAndView = new ModelAndView();
+		
 		if(session.getAttribute("ucode") == null) {
 			modelAndView.setViewName( "/login/nousers" );
 			return modelAndView;
@@ -26,22 +28,30 @@ public class Controller_Mypage {
 	}
 	
 	@RequestMapping( value="/mypagesub.do" )
-	public ModelAndView mypagesub(HttpServletRequest request) {
+	public ModelAndView mypagesub(HttpServletRequest request, HttpSession session) {
 		System.out.println( "mypagesub() 호출" );
 		
-
 		ModelAndView modelAndView = new ModelAndView();
+		
+		if(session.getAttribute("ucode") == null) {
+			modelAndView.setViewName( "/login/nousers" );
+			return modelAndView;
+		}
 		modelAndView.setViewName( "/mypage/mypage_sub" );
 		
 		return modelAndView;
 	}
 	
 	@RequestMapping( value="/mypagemylist.do" )
-	public ModelAndView mypagemylist(HttpServletRequest request) {
+	public ModelAndView mypagemylist(HttpServletRequest request, HttpSession session) {
 		System.out.println( "mypagemylist() 호출" );
 		
-
 		ModelAndView modelAndView = new ModelAndView();
+		
+		if(session.getAttribute("ucode") == null) {
+			modelAndView.setViewName( "/login/nousers" );
+			return modelAndView;
+		}
 		modelAndView.setViewName( "/mypage/mypage_mylist" );
 		
 		return modelAndView;
