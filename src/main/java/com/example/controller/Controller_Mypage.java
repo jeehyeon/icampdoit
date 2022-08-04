@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,11 +13,13 @@ public class Controller_Mypage {
 	
 	
 	@RequestMapping( value="/mypage.do" )
-	public ModelAndView mypage(HttpServletRequest request) {
+	public ModelAndView mypage(HttpServletRequest request, HttpSession session) {
 		System.out.println( "mypage() 호출" );
-		
-
 		ModelAndView modelAndView = new ModelAndView();
+		if(session.getAttribute("ucode") == null) {
+			modelAndView.setViewName( "/login/nousers" );
+			return modelAndView;
+		}
 		modelAndView.setViewName( "/mypage/mypage" );
 		
 		return modelAndView;
