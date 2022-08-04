@@ -75,10 +75,8 @@
               
             </form>
             <div class="d-grid gap-2" name="kakao_frm">
-              <button type="button" class="btn btn-lg btn-social btn-warning" onClick="location.href='javascript:loginWithKakao()'" style="color:#2e322e"><i class="fa fa-solid fa-comment btn-social-icon fa-2x"></i>LOGIN <span class="d-none d-sm-inline">WITH KAKAKO</span></button>
-            		<!--  
-            		<button type="button" class="btn btn btn-outline-muted btn-lg btn-social btn-warning"><a id="custom-login-btn" href="javascript:loginWithKakao()" style="color:#2e322e"><i class="fa fa-solid fa-comment btn-social-icon fa-2x"></i>LOGIN <span class="d-none d-sm-inline">WITH KAKAKO</a></span></button>
-            		           		
+            <button type="button" class="btn btn btn-outline-muted btn-lg btn-social btn-warning"><a id="custom-login-btn" href="javascript:loginWithKakao()" style="color:#2e322e"><i class="fa fa-solid fa-comment btn-social-icon fa-2x"></i>LOGIN <span class="d-none d-sm-inline">WITH KAKAKO</a></span></button>
+            		<!--             		
               		<a id="custom-login-btn" href="javascript:loginWithKakao()">
 				  		<img src="./resources/bootstrap-5/html/img/kakao_login.png"
 				    	width="300"
