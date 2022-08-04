@@ -47,8 +47,7 @@ public class Controller_Login {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "login/login_ok" );
 		modelAndView.addObject("ucode", ucode);
-		modelAndView.addObject("id", lto.getId());
-		
+
 		return modelAndView;
 	}
 	@RequestMapping( value="/signup.do" )

@@ -3,12 +3,9 @@
 
 <%
 	int ucode = (Integer)request.getAttribute("ucode");
-	String id= (String)request.getAttribute("String");
 	out.println( "<script type='text/javascript'>" );
 	if( ucode != -1 ) {
 		//세션 등록
-		
-		
 		out.println( "location.href='home.do';" );
 	} else {
 		out.println( "alert( '로그인 실패: 아이디나 비밀번호를 확인해주세요.' );" );
