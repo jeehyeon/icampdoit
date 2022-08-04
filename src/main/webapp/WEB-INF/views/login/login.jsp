@@ -67,7 +67,7 @@
               
               <!-- Submit-->
               <div class="d-grid">
-                <button class="lbtn btn btn-lg btn-primary">Sign in</button>
+                <button class="lbtn btn btn-lg btn-primary">LOGIN</button>
               </div>
               <hr class="my-3 hr-text letter-spacing-2" data-content="OR">
               
