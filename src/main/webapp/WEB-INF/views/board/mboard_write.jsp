@@ -1,13 +1,17 @@
+<%@page import="com.exam.mboard.BoardTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-//session 값 가져오기
-int ucode = -1;
-String id ="";
-if(session.getAttribute("id") != null){
-	ucode = (int)session.getAttribute("ucode");
-	id = (String)session.getAttribute("id");
-}
+	//session 값 가져오기
+	int ucode = -1;
+	String id ="";
+	if(session.getAttribute("id") != null){
+		ucode = (int)session.getAttribute("ucode");
+		id = (String)session.getAttribute("id");
+	}
+	int cpage = (Integer)request.getAttribute("cpage");
+
+	
 %>
 <!DOCTYPE html>
   <head>
@@ -50,6 +54,46 @@ if(session.getAttribute("id") != null){
 	<!-- CSS Files -->
 	<link rel="stylesheet" href="./resources/bootstrap-5/html/summernote/summernote-lite.css" />
   </head>
+  
+  <script type="text/javascript">
+  
+	window.onload = function() {
+		document.getElementById( 'wbtn' ).onclick = function() {
+			var subject = wfrm.subject.value;
+	     	var title = wfrm.title.value;
+	     	var content = wfrm.content.value;
+	     	console.log(subject);
+	     	console.log(title);
+	     	
+	     	//var postData = {'subject' : subject , 'title' : title , 'content' : content};
+     	
+			if(subject.trim() == '') {
+				alert( '말머리를 선택하셔야 합니다.' );
+				return false;
+			}
+			if(title.trim() == '') {
+				alert( '제목을 입력하셔야 합니다.' );
+				return false;
+			}
+			if(content.trim() == '') {
+				alert( '내용을 입력하셔야 합니다.' );
+				return false;
+			}
+			 /* if(document.wfrm.upload.value.trim() == '') {
+				alert( '이미지 파일을 첨부하셔야 합니다.' );
+				return false;
+			} else {
+				let extension = document.wfrm.upload.value.split( '.' ).pop();
+				if( extension != 'png' && extension != 'jpg' && extension != 'gif' ) {
+					alert( '이미지 파일로 첨부하셔야 합니다.')
+					return false;
+				}
+			} */ 
+			document.wfrm.submit();
+		};
+	};
+	
+</script> 
 
   <body style="padding-top: 72px;">
     <header class="header">
@@ -114,6 +158,8 @@ if(session.getAttribute("id") != null){
 
 	<!-- Write Section-->
 	<section class="py-5 pb-7">
+	<form action="./mboardwrite_ok.do" method="post" id="wfrm" name="wfrm" enctype="multipart/form-data">
+	<input type="hidden" name="writeOk" id="writeOk" value=""/>
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-12">
@@ -121,11 +167,10 @@ if(session.getAttribute("id") != null){
               <div class="bg-primary border-radius-lg pt-4 pb-3 px-3" style="border-radius: 10px;">
 				 <!-- 게시판종류 드롭박스 -->
 				 <div class="me-2">
-					<select class="selectpicker bg-gray-100" name="sort"
-						id="form_sort" data-style="btn-selectpicker" title="말머리">
-						<option value="sortBy_0" href="#">자유</option>
-						<option value="sortBy_1" href="#">후기</option>
-						<option value="sortBy_2" href="#">중고</option>
+					<select class="selectpicker bg-gray-100" id="subject" name="subject" data-style="btn-selectpicker" title="말머리">
+						<option value="1" href="#">자유</option>
+						<option value="2" href="#">후기</option>
+						<option value="3" href="#">중고</option>
 					</select>
 				 </div>
               </div>
@@ -135,11 +180,12 @@ if(session.getAttribute("id") != null){
               <div class="row">
                 <div class="col-lg-12">
                   <a class="form-text small text-primary" href="#"></a> 
-                  <input class="form-control" name="title" id="title" type="title" placeholder="제목을 입력해주세요." />
+                  <input class="form-control" id="title" name="title" type="title" placeholder="제목을 입력해주세요." />
                 </div>
               </div>
             </div>
-              <div id="summernote"></div>
+              <!-- <div id="summernote"></div> -->
+              <textarea id="summernote" name="content"></textarea>
             </div>
           </div>
         </div>
@@ -149,17 +195,16 @@ if(session.getAttribute("id") != null){
 		<!-- 목록 시작 -->
 		<div class="row">
 		  <div class="col-lg-8">
-	        <input type="button" value="목록" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardlist.do?cpage='" />
+	        <input type="button" value="목록" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardlist.do'" />
 	      </div>
 	      <div class="col-lg-4 text-lg-end">
-	        <input type="button" value="등록" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardwriteOk.do?cpage=&seq='" /> 
-	        <input type="button" value="취소" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardlist.do?cpage='" />
+	        <input type="button" value="등록" id="wbtn" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardwrite_ok.do'" /> 
+	        <input type="button" value="취소" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardlist.do'" />
 	      </div>
 		</div>
 		<!-- 목록 끝 -->
-	
-        </div>
 	  </div>
+	</form>  
 	</section>
 
 	<!-- Footer - 관리자 페이지 이동 부분 넣을 곳 -->
@@ -226,22 +271,6 @@ if(session.getAttribute("id") != null){
 	<script> var basePath = '' </script>
 	<!-- Main Theme JS file    -->
 	<script src="./resources/bootstrap-5/html/js/theme.js"></script>
-	<!-- Map-->
-	<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
-	<!-- Available tile layers-->
-	<script src="./resources/bootstrap-5/html/js/map-layers.js"></script>
-	<script src="./resources/bootstrap-5/html/js/map-detail.js"></script>
-	<script>
-		createDetailMap({
-			mapId : 'detailMap',
-			mapCenter : [ 40.732346, -74.0014247 ],
-			markerShow : true,
-			markerPosition : [ 40.732346, -74.0014247 ],
-			markerPath : 'img/marker.svg',
-		})
-	</script>
-
-
 	<!-- jquery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<!-- summernote -->
@@ -259,17 +288,62 @@ if(session.getAttribute("id") != null){
 		}
 
 		$(document).ready(function() {
+			var fontList = ['맑은 고딕','굴림','돋움','바탕','궁서','NotoSansKR','Arial','Courier New','Verdana','Tahoma'];
 			$('#summernote').summernote({
-				placeholder : 'Hello bootstrap 5',
+				placeholder : '내용을 입력해주세요.',
 				minHeight : null,
 				maxHeight : null,
 				tabsize : 2,
 				height : 550,
 				width : 1250,
-				lang : 'ko-KR'
+				lang : 'ko-KR',
+				fontNames: fontList,
+                fontNamesIgnoreCheck: fontList,
+				toolbar: [
+                    ['style', ['style']],
+                    ['font', ['fontname','fontsize']],
+                    ['fontstyle', ['bold','italic','underline','strikethrough','forecolor','backcolor','color','clear']],
+                    ['paragraph', ['paragraph','height','ul','ol']],
+                    ['insert', ['table','hr','link','picture']],
+                    ['view', ['codeview', 'help']]
+                ],
 
-			});
+				callbacks: { //이미지를 첨부하는 부분
+					onImageUpload : function(files, editor) {
+						for (var i = files.length - 1; i >= 0; i--) {
+							uploadImageFile(files[i], editor);
+			            }
+					},
+					onPaste: function (e) { // 이미지 복붙 안되게 하는 부분
+						var clipboardData = e.originalEvent.clipboardData;
+						if (clipboardData && clipboardData.items && clipboardData.items.length) {
+							var item = clipboardData.items[0];
+							if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
+								e.preventDefault();
+							}
+						}
+					}
+				}
+	        });
 		});
+		
+		// 이미지 파일 업로드
+		function sendFile(file, editor) {
+			var data = new FormData();
+			data.append('file', file);
+			$.ajax({
+				data : data,
+				type : "POST",
+				url : './mboardwrite_ok.do',
+				cache : false,
+				contentType : false,
+				enctype : 'multipart/form-data',
+				processData : false,
+				success : function(url) {
+					$(editor).summernote( 'insertImage', url );
+				}
+			});
+		}
 	</script>
   </body>
 </html>
