@@ -14,7 +14,7 @@ if(session.getAttribute("id") != null){
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>I Camp Do It</title>
+    <title>I CAMP DO IT</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -45,7 +45,14 @@ if(session.getAttribute("id") != null){
   		#wrap {
   			min-height: 100%;
 		    position: relative;
-		    padding-bottom: 380px;
+		    padding-bottom: 200px;
+  		}
+  		#wrap2 {
+		    position: relative;
+		    padding-top: 50px;
+		    padding-bottom: 50px;
+		    margin-top: 300px;
+		    margin-bottom: 200px;
   		}
   		#footer {
   			position: relative;
@@ -53,8 +60,8 @@ if(session.getAttribute("id") != null){
   		}
   	</style>
   </head>
+  <div id="wrap">
   <body style="padding-top: 72px;">
-    <div id="wrap">
     <header class="header">
       <!-- Navbar 로고부분-->
       <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
@@ -101,11 +108,10 @@ if(session.getAttribute("id") != null){
 	              </li>
 	            </ul>
          	</div>
-         	
-         	
+         	 	
 			<form class="d-flex">
          	<%if(ucode == -1){ %>
-             	<button class="btn btn-outline-primary btn-sm" type="button"><a href="./login.do">Sign in</a></button>
+             	<button class="btn btn-outline-primary btn-sm" type="button"><a href="./login.do">Login</a></button>
              	<%}else{ %>
              	<span class="mx-2"><%=id%>님 </span>
              	<button class="btn btn-outline-primary btn-sm" type="button"><a href="./logout.do">Logout</a></button>
@@ -116,11 +122,17 @@ if(session.getAttribute("id") != null){
       <!-- /Navbar -->
     </header>
     
-   
-      <div class="container border-bottom px-lg-6">
-      		<h3>로그인이 필요한 서비스입니다.</h3>
-      		<button onclick="location.href='./login.do'">로그인 하기</button>
+    <div id="wrap2" class="container-sm border justify-content-center my-5" style="background-color:AliceBlue;">
+    	<div class="jumbotron text-center">
+    		<br>
+    		<h2 class="text-center" style="font-family: 'Recipekorea';">로그인이 필요한 서비스입니다.</h2>
+    		<br>
+    		<p class="text-center" style="font-family: 'Recipekorea';">아래 로그인 버튼을 클릭해 로그인을 해주세요</p>
+    		<br>
+    		<button class="btn btn-primary justify-content-center" onclick="location.href='./login.do'">로그인 하기</button>
+    	</div>
     </div>
+	</div>
 	<!-- Footer - 관리자 페이지 이동 부분 넣을 곳 -->
     <footer class="position-relative z-index-10 d-print-none" id="footer">
            
