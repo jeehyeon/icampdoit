@@ -95,7 +95,7 @@ if(session.getAttribute("id") != null){
          	<%if(ucode == -1){ %>
              	<button class="btn btn-outline-primary btn-sm" type="button"><a href="./login.do">Sign in</a></button>
              	<%}else{ %>
-             	<span class="mx-2"><%=id%>님 </span>
+             	<span class="mx-2"><strong><%=id%></strong>님 </span>
              	<button class="btn btn-outline-primary btn-sm" type="button"><a href="./logout.do">Logout</a></button>
              	<%}; %>
              </form>
