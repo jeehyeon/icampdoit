@@ -368,7 +368,7 @@
 			window.Kakao.Auth.login({
 		      	success: function(authObj) {
 		    	  	console.log( authObj ); //access 토큰값 출력		    	  	
-		    	  	Kakao.Auth.setAccessToken(authObj.access_token ); //access 토큰값 저장
+		    	  	Kakao.Auth.setAccessToken(authObj.access_token, false); //access 토큰값 저장
 		    	  	
 		    	  	//로그인 성공시, API 호출
 		    	    //access 토큰을 발급받고, 아래 함수 호출시켜 사용자 정보를 받아오기
