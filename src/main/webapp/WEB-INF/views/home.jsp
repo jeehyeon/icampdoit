@@ -463,7 +463,7 @@ if(session.getAttribute("id") != null){
             <p class="subtitle text-primary" style="font-family: 'Recipekorea';"><font size=-1>MOST POPULAR CAMPSITES</font></p>
             <h2 style="font-family: 'Recipekorea';">캠핑장 조회수 TOP 5</h2>
           </div>
-          <div class="col-md-4 d-lg-flex align-items-center justify-content-end"><a class="text-muted text-sm" href="./resources/bootstrap-5/html/category.html" style="font-family: 'BMJUA';">
+          <div class="col-md-4 d-lg-flex align-items-center justify-content-end"><a class="text-muted text-sm" href="./searchkey.do" style="font-family: 'BMJUA';">
                더 많은 캠핑장 보러가기<i class="fas fa-angle-double-right ms-2"></i></a></div>
         </div>
         <div class="swiper-container guides-slider mx-n2 pt-3">
@@ -471,7 +471,7 @@ if(session.getAttribute("id") != null){
           <div class="swiper-wrapper pb-5">
             <!-- Slides-->
             <div class="swiper-slide h-auto px-2">
-              <div class="card card-poster gradient-overlay hover-animate mb-4 mb-lg-0"><a class="tile-link" href="./resources/bootstrap-5/html/category.html"></a><img class="bg-image" src="./resources/bootstrap-5/html/img/photo/top1예시.jpg" alt="Card image">
+              <div class="card card-poster gradient-overlay hover-animate mb-4 mb-lg-0"><a class="tile-link" href="./campview.do"></a><img class="bg-image" src="./resources/bootstrap-5/html/img/photo/top1예시.jpg" alt="Card image">
                 <div class="card-body overlay-content">
                   <h5 class="card-title text-shadow text-uppercase" style="font-family: 'Recipekorea';">대궐 오토캠핑장</h5>
                   <p class="card-text text-sm" style="font-family: 'BMJUA';">경기도 포천시</p>
@@ -479,7 +479,7 @@ if(session.getAttribute("id") != null){
               </div>
             </div>
             <div class="swiper-slide h-auto px-2">
-              <div class="card card-poster gradient-overlay hover-animate mb-4 mb-lg-0"><a class="tile-link" href="./resources/bootstrap-5/html/category.html"></a><img class="bg-image" src="./resources/bootstrap-5/html/img/photo/top2예시.jpg" alt="Card image">
+              <div class="card card-poster gradient-overlay hover-animate mb-4 mb-lg-0"><a class="tile-link" href="./campview.do"></a><img class="bg-image" src="./resources/bootstrap-5/html/img/photo/top2예시.jpg" alt="Card image">
                 <div class="card-body overlay-content">
                   <h5 class="card-title text-shadow text-uppercase" style="font-family: 'Recipekorea';">도마치 캠핑장</h5>
                   <p class="card-text text-sm" style="font-family: 'BMJUA';">경기도 포천시</p>
@@ -487,7 +487,7 @@ if(session.getAttribute("id") != null){
               </div>
             </div>
             <div class="swiper-slide h-auto px-2">
-              <div class="card card-poster gradient-overlay hover-animate mb-4 mb-lg-0"><a class="tile-link" href="./resources/bootstrap-5/html/category.html"></a><img class="bg-image" src="./resources/bootstrap-5/html/img/photo/top3예시.jpg" alt="Card image">
+              <div class="card card-poster gradient-overlay hover-animate mb-4 mb-lg-0"><a class="tile-link" href="./campview.do"></a><img class="bg-image" src="./resources/bootstrap-5/html/img/photo/top3예시.jpg" alt="Card image">
                 <div class="card-body overlay-content">
                   <h5 class="card-title text-shadow text-uppercase" style="font-family: 'Recipekorea';">대장금 테마파크</h5>
                   <p class="card-text text-sm" style="font-family: 'BMJUA';">경기도 용인시</p>
@@ -495,7 +495,7 @@ if(session.getAttribute("id") != null){
               </div>
             </div>
             <div class="swiper-slide h-auto px-2">
-              <div class="card card-poster gradient-overlay hover-animate mb-4 mb-lg-0"><a class="tile-link" href="./resources/bootstrap-5/html/category.html"></a><img class="bg-image" src="./resources/bootstrap-5/html/img/photo/top4예시.jpg" alt="Card image">
+              <div class="card card-poster gradient-overlay hover-animate mb-4 mb-lg-0"><a class="tile-link" href="./campview.do"></a><img class="bg-image" src="./resources/bootstrap-5/html/img/photo/top4예시.jpg" alt="Card image">
                 <div class="card-body overlay-content">
                   <h5 class="card-title text-shadow text-uppercase" style="font-family: 'Recipekorea';">용인 자연휴양림</h5>
                   <p class="card-text text-sm" style="font-family: 'BMJUA';">경기도 용인시</p>
@@ -503,7 +503,7 @@ if(session.getAttribute("id") != null){
               </div>
             </div>
             <div class="swiper-slide h-auto px-2">
-              <div class="card card-poster gradient-overlay hover-animate mb-4 mb-lg-0"><a class="tile-link" href="./resources/bootstrap-5/html/category.html"></a><img class="bg-image" src="./resources/bootstrap-5/html/img/photo/top5예시.jpg" alt="Card image">
+              <div class="card card-poster gradient-overlay hover-animate mb-4 mb-lg-0"><a class="tile-link" href="./campview.do"></a><img class="bg-image" src="./resources/bootstrap-5/html/img/photo/top5예시.jpg" alt="Card image">
                 <div class="card-body overlay-content">
                   <h5 class="card-title text-shadow text-uppercase" style="font-family: 'Recipekorea';">마장호수 휴 캠핑장</h5>
                   <p class="card-text text-sm" style="font-family: 'BMJUA';">경기도 파주시</p>
@@ -523,19 +523,19 @@ if(session.getAttribute("id") != null){
             <p class="subtitle text-primary">THE STARRY NIGHT</font></p>
             <h2 style="font-family: 'Recipekorea';">별보기 좋은 캠핑장 Best 5</h2>
           </div>
-          <div class="col-md-4 d-md-flex align-items-center justify-content-end"><a class="text-muted text-sm" href="category-3-rooms.html" style="font-family: 'BMJUA';">
+          <div class="col-md-4 d-md-flex align-items-center justify-content-end"><a class="text-muted text-sm" href="./searchkey.do" style="font-family: 'BMJUA';">
                더 많은 캠핑장 보러가기<i class="fas fa-angle-double-right ms-2"></i></a></div>
         </div>
         <div class="row">
           <div class="d-flex align-items-lg-stretch mb-4 col-lg-8">
-            <div class="card shadow-lg border-0 w-100 border-0 hover-animate" data-bs-toggle="tooltip" title="경기도 양주" style="background: center center url(./resources/bootstrap-5/html/img/photo/해피캠핑장.jpg) no-repeat; background-size: cover;"><a class="tile-link" href="./resources/bootstrap-5/html/category.html"> </a>
+            <div class="card shadow-lg border-0 w-100 border-0 hover-animate" data-bs-toggle="tooltip" title="경기도 양주" style="background: center center url(./resources/bootstrap-5/html/img/photo/해피캠핑장.jpg) no-repeat; background-size: cover;"><a class="tile-link" href="./campview.do"> </a>
               <div class="d-flex align-items-center h-100 text-white justify-content-center py-6 py-lg-7">
                 <h3 class="text-shadow text-uppercase mb-0" style="font-family: 'Recipekorea';">해피 캠핑장</h3>
               </div>
             </div>
           </div>
           <div class="d-flex align-items-lg-stretch mb-4 col-lg-4">
-            <div class="card shadow-lg border-0 w-100 border-0 hover-animate" data-bs-toggle="tooltip" title="경기도 연천" style="background: center center url(./resources/bootstrap-5/html/img/photo/한탄강캠핑장.jpg) no-repeat; background-size: cover;"><a class="tile-link" href="./resources/bootstrap-5/html/category.html"> </a>
+            <div class="card shadow-lg border-0 w-100 border-0 hover-animate" data-bs-toggle="tooltip" title="경기도 연천" style="background: center center url(./resources/bootstrap-5/html/img/photo/한탄강캠핑장.jpg) no-repeat; background-size: cover;"><a class="tile-link" href="./campview.do"> </a>
               <div class="d-flex align-items-center h-100 text-white justify-content-center py-6 py-lg-7">
                 <h3 class="text-shadow text-uppercase mb-0" style="font-family: 'Recipekorea';">한탄강 오토캠핑장</h3>
               </div>
@@ -544,7 +544,7 @@ if(session.getAttribute("id") != null){
         </div>
         <div class="row">
           <div class="d-flex align-items-lg-stretch mb-4 col-lg-4">
-            <div class="card shadow-lg border-0 w-100 border-0 hover-animate" data-bs-toggle="tooltip" data-bs-placement="bottom" title="경기도 포천" style="background: center center url(./resources/bootstrap-5/html/img/photo/광릉숲이야기캠핑장.jpg) no-repeat; background-size: cover;"><a class="tile-link" href="./resources/bootstrap-5/html/category.html"> </a>
+            <div class="card shadow-lg border-0 w-100 border-0 hover-animate" data-bs-toggle="tooltip" data-bs-placement="bottom" title="경기도 포천" style="background: center center url(./resources/bootstrap-5/html/img/photo/광릉숲이야기캠핑장.jpg) no-repeat; background-size: cover;"><a class="tile-link" href="./campview.do"> </a>
               <div class="d-flex align-items-center h-100 text-white justify-content-center py-6 py-lg-7">
                 <h3 class="text-shadow text-uppercase mb-0" style="font-family: 'Recipekorea';">광릉숲이야기 캠핑장</h3>
               </div>
@@ -558,7 +558,7 @@ if(session.getAttribute("id") != null){
             </div>
           </div>
           <div class="d-flex align-items-lg-stretch mb-4 col-lg-4">
-            <div class="card shadow-lg border-0 w-100 border-0 hover-animate" data-bs-toggle="tooltip" data-bs-placement="bottom" title="경기도 양평" style="background: center center url(./resources/bootstrap-5/html/img/photo/중미산자연휴양림.jpg) no-repeat; background-size: cover;"><a class="tile-link" href="./resources/bootstrap-5/html/category.html"> </a>
+            <div class="card shadow-lg border-0 w-100 border-0 hover-animate" data-bs-toggle="tooltip" data-bs-placement="bottom" title="경기도 양평" style="background: center center url(./resources/bootstrap-5/html/img/photo/중미산자연휴양림.jpg) no-repeat; background-size: cover;"><a class="tile-link" href="./campview.do"> </a>
               <div class="d-flex align-items-center h-100 text-white justify-content-center py-6 py-lg-7">
                 <h3 class="text-shadow text-uppercase mb-0" style="font-family: 'Recipekorea';">중미산 자연휴양림</h3>
               </div>
