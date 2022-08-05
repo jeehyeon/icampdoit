@@ -2,6 +2,7 @@ package com.example.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,7 +27,8 @@ public class Controller_Board {
 	@Autowired
 	private BoardDAO dao;
 	
-	private String uploadPath = "C:/java/ProjectGit/src/main/webapp/upload"; // 리나 upload 경로
+	 
+	 // 리나 upload 경로
 	private int maxFileSize = 20 * 1024 * 1024;
 	private String encoding = "utf-8";
 	
@@ -87,16 +89,16 @@ public class Controller_Board {
 	@RequestMapping( value="/mboardwrite_ok.do" )
 	public ModelAndView mboardwriteOk(HttpServletRequest request, HttpSession session) throws IOException {
 		System.out.println( "mboardwriteOk() 호출" );
-		
+		String uploadPath = request.getSession().getServletContext().getRealPath("/upload");
 		MultipartRequest multi = new MultipartRequest(request, uploadPath, maxFileSize, encoding, new DefaultFileRenamePolicy());
 		SignUpTO sto = new SignUpTO();
-		
+		System.out.println("세션 아이디값 : " + (String)session.getAttribute("id") );
 		BoardTO to = new BoardTO();
 		to.setSubject( multi.getParameter( "subject" ) );
 		to.setTitle( multi.getParameter( "title" ) );
-		to.setWriter( sto.getId() );
+		to.setWriter((String)session.getAttribute("id"));
 		to.setContent( multi.getParameter( "content" ) );
-		to.setUcode( sto.getUcode() );
+		to.setUcode((Integer)session.getAttribute("ucode") );
 		System.out.println("subject : " +  multi.getParameter( "subject" ) );
 		
 		FileTO fto = new FileTO();		

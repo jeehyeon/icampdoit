@@ -18,7 +18,7 @@ public class BoardDAO {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	private String uploadPath = "C:/java/ProjectGit/src/main/webapp/upload"; // 리나 upload 경로
+	
 	
 	// write
 	public void mboardWrite() {		
@@ -26,16 +26,31 @@ public class BoardDAO {
 	
 	// write_ok
 	public int mboardWriteOk(BoardTO to, FileTO fto) {	
-
+		String sql = "select max(seq) from m_file";
+		String seqdata = jdbcTemplate.queryForObject(sql, String.class);
+		int lastseq = 0;
+		if(seqdata != null) {
+			lastseq = lastseq+Integer.parseInt(seqdata);
+		}
+		
 		int flag = 1;
 		
 		SignUpTO sto = new SignUpTO();
 		
-		String sql = "insert into m_board values ( 0, ?, ?, ?, now(), 0, ?, ?, 0 )";
-		int result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), sto.getId(), to.getContent(), sto.getUcode());
+		sql = "insert into m_board values ( 0, ?, ?, ?, now(), 0, ?, ?, 0 )";
+		int result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(), to.getUcode());
 					System.out.println(result);
-		//sql = "insert into m_file values ( 0, 0, ?, ? )";
-		//result = jdbcTemplate.update(sql, fto.getFilename(), fto.getFilesize());
+					
+		//위에 들어가 부분에 seq값을 다시 들고 나와야데
+		if( result != 1 ) {
+			System.out.println("m_board insert 오류");
+			return flag;	
+		}
+					
+					
+					
+		sql = "insert into m_file values ( 0, ?, ?, ? )";
+		result = jdbcTemplate.update(sql, lastseq+1, fto.getFilename(), fto.getFilesize());
 
 		if( result == 1 ) {
 			flag = 0;

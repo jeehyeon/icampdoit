@@ -307,13 +307,15 @@
                     ['insert', ['table','hr','link','picture']],
                     ['view', ['codeview', 'help']]
                 ],
-
+/*
 				callbacks: { //이미지를 첨부하는 부분
 					onImageUpload : function(files, editor) {
 						for (var i = files.length - 1; i >= 0; i--) {
 							uploadImageFile(files[i], editor);
 			            }
-					},
+						sendFile(files[0], editor);
+			            
+					}*/
 					onPaste: function (e) { // 이미지 복붙 안되게 하는 부분
 						var clipboardData = e.originalEvent.clipboardData;
 						if (clipboardData && clipboardData.items && clipboardData.items.length) {
@@ -323,7 +325,7 @@
 							}
 						}
 					}
-				}
+				//}
 	        });
 		});
 		

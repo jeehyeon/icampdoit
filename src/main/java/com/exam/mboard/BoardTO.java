@@ -13,6 +13,6 @@ public class BoardTO {
 	private String wdate;
 	private String hit;
 	private String content;
-	private String ucode;
+	private int ucode;
 	private int cmt;
 }

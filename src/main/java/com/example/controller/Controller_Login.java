@@ -39,7 +39,7 @@ public class Controller_Login {
 		int ucode = dao.loginOK(lto);
 		
 		if(ucode != -1) {
-			session.setAttribute("ucode", ucode);
+			session.setAttribute("ucode",ucode);
 			session.setAttribute("id", lto.getId());
 			session.setMaxInactiveInterval(60*60);
 		}
