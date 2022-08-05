@@ -3,7 +3,6 @@ package com.example.controller;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.exam.mboard.BoardListTO;
@@ -89,26 +87,9 @@ public class Controller_Board {
 	}
 	
 	@RequestMapping( value="/mboardwrite_ok.do" )
-	public ModelAndView mboardwriteOk(HttpServletRequest request, HttpSession session, MultipartFile mfile) throws IOException {
+	public ModelAndView mboardwriteOk(HttpServletRequest request, HttpSession session) throws IOException {
 		System.out.println( "mboardwriteOk() 호출" );
-		
 		String uploadPath = request.getSession().getServletContext().getRealPath("/upload");
-		System.out.println("1");
-		
-		UUID uuid = UUID.randomUUID();
-		System.out.println("2");
-		
-		//업로드 할 파일 이름
-		//String org_filename = mfile.getOriginalFilename();
-		//String str_filename = uuid.toString() + org_filename;
-		System.out.println("3");
-
-		//System.out.println("원본 파일명 : " + org_filename);
-		//System.out.println("저장할 파일명 : " + str_filename);
-		
-		//String filepath = uploadPath + "\\" + str_filename;
-		//System.out.println("파일경로 : " + filepath);
-		
 		MultipartRequest multi = new MultipartRequest(request, uploadPath, maxFileSize, encoding, new DefaultFileRenamePolicy());
 		SignUpTO sto = new SignUpTO();
 		System.out.println("세션 아이디값 : " + (String)session.getAttribute("id") );

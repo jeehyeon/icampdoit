@@ -10,9 +10,9 @@ public class BoardTO {
 	private String subject;
 	private String title;
 	private String writer;
-	private String content;
 	private String wdate;
 	private String hit;
+	private String content;
 	private int ucode;
 	private int cmt;
 }

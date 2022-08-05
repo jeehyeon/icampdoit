@@ -37,7 +37,7 @@ public class BoardDAO {
 		
 		SignUpTO sto = new SignUpTO();
 		
-		sql = "insert into m_board values ( 0, ?, ?, ?, ?, now(), 0, ?, 0 )";
+		sql = "insert into m_board values ( 0, ?, ?, ?, now(), 0, ?, ?, 0 )";
 		int result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(), to.getUcode());
 					System.out.println(result);
 					
