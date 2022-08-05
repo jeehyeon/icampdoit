@@ -185,7 +185,7 @@
               </div>
             </div>
               <!-- <div id="summernote"></div> -->
-              <textarea id="content" name="content"></textarea>
+              <textarea id="summernote" name="content"></textarea>
             </div>
           </div>
         </div>
@@ -289,7 +289,7 @@
 
 		$(document).ready(function() {
 			var fontList = ['맑은 고딕','굴림','돋움','바탕','궁서','NotoSansKR','Arial','Courier New','Verdana','Tahoma'];
-			$('#content').summernote({
+			$('#summernote').summernote({
 				placeholder : '내용을 입력해주세요.',
 				minHeight : null,
 				maxHeight : null,
@@ -307,16 +307,15 @@
                     ['insert', ['table','hr','link','picture']],
                     ['view', ['codeview', 'help']]
                 ],
-                
-                
+/*
 				callbacks: { //이미지를 첨부하는 부분
 					onImageUpload : function(files, editor) {
 						for (var i = files.length - 1; i >= 0; i--) {
-							sendFile(files[i], editor);
+							uploadImageFile(files[i], editor);
 			            }
-						//sendFile(files[0], editor);
+						sendFile(files[0], editor);
 			            
-					},
+					},*/
 					onPaste: function (e) { // 이미지 복붙 안되게 하는 부분
 						var clipboardData = e.originalEvent.clipboardData;
 						if (clipboardData && clipboardData.items && clipboardData.items.length) {
@@ -326,24 +325,24 @@
 							}
 						}
 					}
-				}
+				//}
 	        });
 		});
 		
 		// 이미지 파일 업로드
 		function sendFile(file, editor) {
-			data = new FormData();
-			data.append("file", file);
+			var data = new FormData();
+			data.append('file', file);
 			$.ajax({
 				data : data,
-				type : 'POST',
+				type : "POST",
 				url : './mboardwrite_ok.do',
 				cache : false,
 				contentType : false,
-				processData : false,
 				enctype : 'multipart/form-data',
-				success : function(data) {
-					$('#content').summernote( 'insertImage', data );
+				processData : false,
+				success : function(url) {
+					$(editor).summernote( 'insertImage', url );
 				}
 			});
 		}
