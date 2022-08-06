@@ -18,15 +18,14 @@ public class BoardDAO {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	
-	
+		
 	// write
 	public void mboardWrite() {		
 	}
-	
+		
 	// write_ok
 	public int mboardWriteOk(BoardTO to, FileTO fto) {	
-		String sql = "select max(seq) from m_file";
+		String sql = "select max(seq) from m_board";
 		String seqdata = jdbcTemplate.queryForObject(sql, String.class);
 		int lastseq = 0;
 		if(seqdata != null) {
@@ -41,13 +40,11 @@ public class BoardDAO {
 		int result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(), to.getUcode());
 					System.out.println(result);
 					
-		//위에 들어가 부분에 seq값을 다시 들고 나와야데
+		//위에 들어가 부분에 seq값을 다시 들고 나와야 함
 		if( result != 1 ) {
 			System.out.println("m_board insert 오류");
 			return flag;	
 		}
-					
-					
 					
 		sql = "insert into m_file values ( 0, ?, ?, ? )";
 		result = jdbcTemplate.update(sql, lastseq+1, fto.getFilename(), fto.getFilesize());

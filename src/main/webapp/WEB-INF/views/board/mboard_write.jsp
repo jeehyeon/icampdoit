@@ -53,9 +53,8 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 	<!-- CSS Files -->
 	<link rel="stylesheet" href="./resources/bootstrap-5/html/summernote/summernote-lite.css" />
-  </head>
-  
-  <script type="text/javascript">
+	
+	<script type="text/javascript">
   
 	window.onload = function() {
 		document.getElementById( 'wbtn' ).onclick = function() {
@@ -79,22 +78,15 @@
 				alert( '내용을 입력하셔야 합니다.' );
 				return false;
 			}
-			 /* if(document.wfrm.upload.value.trim() == '') {
-				alert( '이미지 파일을 첨부하셔야 합니다.' );
-				return false;
-			} else {
-				let extension = document.wfrm.upload.value.split( '.' ).pop();
-				if( extension != 'png' && extension != 'jpg' && extension != 'gif' ) {
-					alert( '이미지 파일로 첨부하셔야 합니다.')
-					return false;
-				}
-			} */ 
+			 
 			document.wfrm.submit();
 		};
 	};
 	
 </script> 
 
+  </head>
+  
   <body style="padding-top: 72px;">
     <header class="header">
       <!-- Navbar 로고부분-->
@@ -278,19 +270,19 @@
 	<script src="./resources/bootstrap-5/html/summernote/lang/summernote-ko-KR.js"></script>
 
 	<script>
-		var win = navigator.platform.indexOf('Win') > -1;
+		/* var win = navigator.platform.indexOf('Win') > -1;
 		if (win && document.querySelector('#sidenav-scrollbar')) {
 			var options = {
 				damping : '0.5'
 			}
 			Scrollbar.init(document.querySelector('#sidenav-scrollbar'),
 					options);
-		}
+		} */
 
 		$(document).ready(function() {
 			var fontList = ['맑은 고딕','굴림','돋움','바탕','궁서','NotoSansKR','Arial','Courier New','Verdana','Tahoma'];
 			$('#summernote').summernote({
-				placeholder : '내용을 입력해주세요.',
+				placeholder : '내용을 입력해주세요. (이미지는 1장만 업로드 가능합니다.)',
 				minHeight : null,
 				maxHeight : null,
 				tabsize : 2,
@@ -298,6 +290,7 @@
 				width : 1250,
 				lang : 'ko-KR',
 				fontNames: fontList,
+				maximumImageFileSize: 10485760,
                 fontNamesIgnoreCheck: fontList,
 				toolbar: [
                     ['style', ['style']],
@@ -307,43 +300,46 @@
                     ['insert', ['table','hr','link','picture']],
                     ['view', ['codeview', 'help']]
                 ],
-/*
+
 				callbacks: { //이미지를 첨부하는 부분
-					onImageUpload : function(files, editor) {
-						for (var i = files.length - 1; i >= 0; i--) {
-							uploadImageFile(files[i], editor);
-			            }
-						sendFile(files[0], editor);
-			            
-					}*/
-					onPaste: function (e) { // 이미지 복붙 안되게 하는 부분
-						var clipboardData = e.originalEvent.clipboardData;
-						if (clipboardData && clipboardData.items && clipboardData.items.length) {
-							var item = clipboardData.items[0];
-							if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
-								e.preventDefault();
-							}
-						}
-					}
-				//}
+					onImageUpload : function(files, editor, welEditable) {
+						for (var i = 0; i < files.length; i++) {
+							sendFile(files[i], editor, welEditable);
+						}										            
+					}					 
+				}
 	        });
 		});
 		
 		// 이미지 파일 업로드
-		function sendFile(file, editor) {
+		function sendFile(file, editor, welEditable) {
+			var imgUrl = './upload/';
 			var data = new FormData();
-			data.append('file', file);
+			data.append('image', file);
 			$.ajax({
 				data : data,
 				type : "POST",
-				url : './mboardwrite_ok.do',
+				url : '/imageUpload.do',
 				cache : false,
 				contentType : false,
 				enctype : 'multipart/form-data',
 				processData : false,
-				success : function(url) {
-					$(editor).summernote( 'insertImage', url );
-				}
+				success : function(savename) {
+					imgUrl = imgUrl + savename
+					
+					$('#summernote').summernote( 'insertImage', imgUrl );
+					
+					if(savename != null){
+	            				               
+						$('#writeOk').val(savename);
+		                
+	            	}else{
+	            		alert("error");
+	            	};
+				},
+				error: function() {
+		        	alert('error, 이미지 사이즈는 10MB 미만이어야 합니다.');
+		        }
 			});
 		}
 	</script>
