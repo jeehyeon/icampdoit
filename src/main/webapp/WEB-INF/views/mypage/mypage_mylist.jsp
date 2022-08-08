@@ -1,13 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.exam.mboard.BoardTO"%> 
+<%@page import="com.exam.mboard.BoardListTO"%> 
+<%@page import="com.exam.mboard.FileTO"%> 
+<%@page import="java.util.ArrayList"%>
 <%
-//session 값 가져오기
-int ucode = -1;
-String id ="";
-if(session.getAttribute("id") != null){
-	ucode = (int)session.getAttribute("ucode");
-	id = (String)session.getAttribute("id");
-}
+	//session 값 가져오기
+	int ucode = -1;
+	String id ="";
+	
+	if(session.getAttribute("id") != null){
+		ucode = (int)session.getAttribute("ucode");
+		id = (String)session.getAttribute("id");
+	}
+		
+	BoardListTO listTO = (BoardListTO)request.getAttribute("listTO");
+	int cpage = listTO.getCpage();
+	
+	int recordPerPage = listTO.getRecordPerPage();
+	int totalRecord = listTO.getTotalRecord();
+	int totalPage = listTO.getTotalPage();
+	int blockPerPage = listTO.getBlockPerPage();
+	int startBlock = listTO.getStartBlock();
+	int endBlock = listTO.getEndBlock();
+	
+	ArrayList<BoardTO> lists = listTO.getBoardLists();
+	
+	StringBuilder sbHtml = new StringBuilder();
+	
+		for( BoardTO to : lists ) {
+			String seq =  to.getSeq();
+			String subject =  to.getSubject();
+			if( subject.equals("1") ) {
+				subject = "후기 게시판";
+			} else if( subject.equals("2") ) {
+				subject = "자유 게시판";
+			} else {
+				subject = "중고거래 게시판";
+			}
+			String title =  to.getTitle();
+			String writer =  to.getWriter();
+			String content =  to.getContent();
+			String wdate =  to.getWdate();
+			String hit =  to.getHit();
+			int cmt = to.getCmt();		
+
+		sbHtml.append( "<tr onmouseover=\"this.style.background='#f1f6ea'\" onmouseout=\"this.style.background='white'\" style=\"cursor: pointer;\" onclick=\"location.href='mboardview.do?cpage=" +cpage+ "&seq=" +seq+ "'\">" );
+        sbHtml.append( "<td class='text-center'>" + seq + "</td>");
+        sbHtml.append( "<td class='fw-bold text-center'>[" + subject + "]</td>");
+        sbHtml.append( "<td class='fw-bold text-center'>" + title + "</td>");
+        sbHtml.append( "<td></td>");
+        sbHtml.append( "<td class='text-center'>" + writer + "</td>");
+        sbHtml.append( "<td class='text-center'>" + wdate + "</td>");
+        sbHtml.append( "<td class='text-center'>" + hit + "</td>");
+				
+	}
+
 %>
     
 <!DOCTYPE html>
@@ -20,6 +68,8 @@ if(session.getAttribute("id") != null){
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
     <link rel="stylesheet" href="./resources/bootstrap-5/html/css/font.css" type="text/css">
+    <!-- Font Awesome 이거 추가함 -->
+    <script src="https://kit.fontawesome.com/5251502df3.js" crossorigin="anonymous"></script>   
     <!-- Price Slider Stylesheets -->
     <link rel="stylesheet" href="./resources/bootstrap-5/html/vendor/nouislider/nouislider.css">
     <!-- Google fonts - Playfair Display-->
@@ -113,81 +163,95 @@ if(session.getAttribute("id") != null){
      </section>
     <section class="py-3">
       <div class="container">
-      	<div class="d-flex justify-content-between align-items-center flex-column flex-lg-row mb-5">
+      	<div class="d-flex justify-content-between align-items-center flex-column flex-lg-row mb-3">
           <div class="me-3">
-            <p class="mb-3 mb-lg-0">총 <strong>6</strong> 건</p>
+            <p class="mb-3 mb-lg-0">&nbsp;&nbsp;총 <strong><%= totalRecord %></strong> 건</p>
           </div>
         </div>
-        <div class="row mb-5">
-          <!-- blog item-->
-          <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-            <div class="card shadow border-0 h-100"><a href="./mboardview.do"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/photo-1512917774080-9991f1c4c750.jpg" alt="..."/></a>
-              <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#">자유게시판 </a>
-                <h5 class="my-2"><a class="text-dark" href="./mboardview.do">혹시 차박으로 혼캠 가시는 혼캠러 있나요?         </a></h5>
-                <p class="text-gray-500 text-sm my-3"><i class="far fa-clock me-2"></i>22-07-29</p>
-                <p class="my-2 text-muted text-sm">차박으로 혼캠가는 건 처음인데 꿀팁같은거 있으면 알려주세요...</p>
-              </div>
+        <!-- 게시판 목록 -->
+            <div class="table-responsive text-sm mb-3">
+              <table class="table">
+              	<thead class="bg-gray-100">
+                  <tr class="border-0">
+                    <th class="text-center">No</th>
+                    <th class="text-center">게시판</th>
+                    <th class="text-center">제목</th>
+                    <th></th>
+                    <th class="text-center">작성자</th>
+                    <th class="text-center">작성날짜</th>
+                    <th class="text-center">조회수</th>
+                  </tr>
+                </thead>
+<!-- 리스트 시작 -->
+	<%=sbHtml.toString()  %>
+<!-- 리스트 끝 -->	
+                 <tbody>
+                 <!--
+                  <tr onmouseover="this.style.background='#f1f6ea'" onmouseout="this.style.background='white'" style="cursor: pointer;" onclick="location.href='mboardview.do'">
+                    <td class="text-center">1</td>
+                    <td class="fw-bold text-center">[후기게시판] 자라섬 캠핑장 솔직후기</td>
+                    <td></td>
+                    <td class="text-end">soyeon</td>
+                    <td class="text-end">2022-01-01</td>
+                    <td class="text-end">0</td>
+                  </tr> --> 
+                </tbody>
+              </table>
             </div>
           </div>
-          <!-- blog item-->
-          <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-            <div class="card shadow border-0 h-100"><a href="./mboardview.do"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/photo-1522771739844-6a9f6d5f14af.jpg" alt="..."/></a>
-              <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#">중고거래 </a>
-                <h5 class="my-2"><a class="text-dark" href="./mboardview.do">(팝니다)구매하고 2번 사용함          </a></h5>
-                <p class="text-gray-500 text-sm my-3"><i class="far fa-clock me-2"></i>22-07-29</p>
-                <p class="my-2 text-muted text-sm">캠핑할때 쓰기 좋은 테이블인데 제 취향은 아니라서 판매합니다. 구매의사가 있으신 분들은 아래 댓글 달아주세요.</p>
-              </div>
-            </div>
-          </div>
-          <!-- blog item-->
-          <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-            <div class="card shadow border-0 h-100"><a href="./mboardview.do"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/photo-1482463084673-98272196658a.jpg" alt="..."/></a>
-              <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#">후기게시판 </a>
-                <h5 class="my-2"><a class="text-dark" href="./mboardview.do">자라섬 캠핑장 후기          </a></h5>
-                <p class="text-gray-500 text-sm my-3"><i class="far fa-clock me-2"></i>22-07-20</p>
-                <p class="my-2 text-muted text-sm">안녕하세요, 저 얼마전에 자라섬 캠핑장에 다녀왔는데요, 장단점을 좀 공유하고 싶어서 글 올립니다..!</p>
-              </div>
-            </div>
-          </div>
-          <!-- blog item-->
-          <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-            <div class="card shadow border-0 h-100"><a href="./mboardview.do"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/photo-1499695867787-121ffb7950bf.jpg" alt="..."/></a>
-              <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#">자유게시판 </a>
-                <h5 class="my-2"><a class="text-dark" href="./mboardview.do">저번주에 혹시 용인휴양림 캠핑장 이용하신 분?          </a></h5>
-                <p class="text-gray-500 text-sm my-3"><i class="far fa-clock me-2"></i>22-07-15</p>
-                <p class="my-2 text-muted text-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestib...</p>
-              </div>
-            </div>
-          </div>
-          <!-- blog item-->
-          <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-            <div class="card shadow border-0 h-100"><a href="./mboardview.do"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/photo-1495562569060-2eec283d3391.jpg" alt="..."/></a>
-              <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#">후기게시판 </a>
-                <h5 class="my-2"><a class="text-dark" href="./mboardview.do">가평 캠핑장 후기          </a></h5>
-                <p class="text-gray-500 text-sm my-3"><i class="far fa-clock me-2"></i>22-06-28</p>
-                <p class="my-2 text-muted text-sm">Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.  Mauris placerat eleif...</p>
-              </div>
-            </div>
-          </div>
-          <!-- blog item-->
-          <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-            <div class="card shadow border-0 h-100"><a href="./mboardview.do"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/photo-1514890547357-a9ee288728e0.jpg" alt="..."/></a>
-              <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#">중고거래 </a>
-                <h5 class="my-2"><a class="text-dark" href="./mboardview.do">(삽니다)랜턴          </a></h5>
-                <p class="text-gray-500 text-sm my-3"><i class="far fa-clock me-2"></i>22-05-15</p>
-                <p class="my-2 text-muted text-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestib...</p>
-              </div>
-            </div>
-          </div>
-        </div>
+          	       
         <!-- Pagination -->
-        <nav aria-label="Page navigation example">
+        <nav aria-label="Page navigation example">  
           <ul class="pagination pagination-template d-flex justify-content-center">
+           <!--
             <li class="page-item"><a class="page-link" href="#"> <i class="fa fa-angle-left"></i></a></li>
             <li class="page-item active"><a class="page-link" href="#">1</a></li>
             <li class="page-item"><a class="page-link" href="#">2</a></li>
             <li class="page-item"><a class="page-link" href="#">3</a></li>
             <li class="page-item"><a class="page-link" href="#"> <i class="fa fa-angle-right"></i></a></li>
+            -->
+        
+        
+<%			
+	//페이지 하단의 << 버튼
+	if ( startBlock == 1 ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-thin fa-angles-left'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='mypagemylist.do?cpage="+ (startBlock - blockPerPage) +"'><i class='fa fa-thin fa-angles-left'></i></a></li> ");
+	}
+	//out.println(" &nbsp; ");
+	//페이지 하단의 < 버튼 => (cpage-1) 한페이지 앞으로 이동
+	if ( cpage == 1 ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'> <i class='fa fa-angle-left'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='mypagemylist.do?cpage="+ (cpage-1) +"'><i class='fa fa-angle-left'></i></a></li> ");
+	}
+	//out.println(" &nbsp;&nbsp; ");
+	//현재 페이지
+	for ( int i=startBlock; i<=endBlock; i++ ) {
+		if ( cpage == i ) { 
+			out.println(" <li class='page-item active'><a class='page-link' href='#'>" + i + "</a></li> ");
+		} else {
+			out.println(" <li class='page-item'><a class='page-link' href='mypagemylist.do?cpage=" + i + "'>" + i + "</a></li> ");
+		}
+	}
+	//out.println(" &nbsp;&nbsp; ");
+	//페이지 하단의 > 버튼
+	if ( cpage == totalPage ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-angle-right'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='mypagemylist.do?cpage="+ (cpage+1) +"'><i class='fa fa-angle-right'></i></a></li> ");
+	}
+	//out.println(" &nbsp; ");
+	//페이지 하단의 >> 버튼
+	if ( endBlock == totalPage ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='mypagemylist.do?cpage="+ (startBlock + blockPerPage) +"'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
+	}
+	//out.println(" &nbsp; ");
+
+%>        
           </ul>
         </nav>
       </div>

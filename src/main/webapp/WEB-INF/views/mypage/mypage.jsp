@@ -1,13 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.exam.login.SignUpTO"%> 
 <%
-//session 값 가져오기
-int ucode = -1;
-String id ="";
-if(session.getAttribute("id") != null){
-	ucode = (int)session.getAttribute("ucode");
-	id = (String)session.getAttribute("id");
-}
+	//session 값 가져오기
+	int ucode = -1;
+	String id ="";
+
+	if(session.getAttribute("id") != null) {
+		ucode = (int)session.getAttribute("ucode");
+		id = (String)session.getAttribute("id");
+	}	
+	SignUpTO sto = (SignUpTO)request.getAttribute("sto");
+	
+	String name = sto.getName();
+	String gen = sto.getGen();
+	String email = sto.getEmail();
+	String birth = sto.getBirth();
+	String yBirth = null;
+	String mBirth = null;
+	String dBirth = null;
+	yBirth = sto.getBirth().substring(0, 4);
+	mBirth = sto.getBirth().substring(4, 6);
+	dBirth = sto.getBirth().substring(6);
+	
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,6 +67,30 @@ if(session.getAttribute("id") != null){
     		transform: translatY(-100%);
   		}
   	</style>
+  	
+  <script type="text/javascript">
+ 	window.onload = function() {// 버튼이벤트
+ 		document.getElementById( 'mbtn' ).onclick = function() {
+ 			if ( document.myfrm.name.value.trim() == '' ) {
+ 				alert( '이름을 입력해주세요' );
+ 				return false;
+ 			}
+ 			if ( document.myfrm.gen.value.trim() == '' ) {
+ 				alert( '성별을 선택해주세요' );
+ 				return false;
+ 			} 	
+ 			if ( document.myfrm.birth.value.trim() == '' ) {
+ 				alert( '생년월일을 입력해주세요' );
+ 				return false;
+ 			}
+ 			if ( document.myfrm.email.value.trim() == '' ) {
+ 				alert( '이메일을 입력해주세요' );
+ 				return false;
+ 			}
+ 			document.myfrm.submit();
+ 		}
+ 	}
+  </script>
   </head>
   <body style="padding-top: 72px;">
     <div id="wrap">
@@ -137,35 +176,37 @@ if(session.getAttribute("id") != null){
                   <button class="btn btn-link ps-0 text-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#personalDetails" aria-expanded="false" aria-controls="personalDetails">수정하기</button>
                 </div>
               </div>
-              <p class="text-sm text-muted"><i class="fa fa-user-circle fa-fw me-2"></i>홍길동<br><i class="fa fa-id-card fa-fw me-2"></i>test01<br><i class="fa fa-birthday-cake fa-fw me-2"></i>1997-04-14<br><i class="fa fa-envelope-open fa-fw me-2"></i>john.doe@directory.com  <span class="mx-2"> | </span>  <i class="fa fa-phone fa-fw me-2"></i>010-1234-5678</p>
+              <p class="text-md text-muted" style="font-family: 'GmarketSansMedium';">
+	              <i class="fa fa-user-circle fa-fw me-2"></i><%=name%><br>
+	              <i class="fa fa-id-card fa-fw me-2"></i><%=id%><br>
+	              <i class="fa fa-birthday-cake fa-fw me-2"></i><%=yBirth%>-<%=mBirth%>-<%=dBirth%><br>
+	              <i class="fa fa-envelope-open fa-fw me-2"></i><%=email%>  
               <div class="collapse" id="personalDetails">
-                <form action="#">
+              
+                <form action="mypagemodify_ok.do" method="post" name="myfrm">
+                <input type="hidden" name="ucode" value="<%=ucode %>" />
                   <div class="row pt-4">
                     <div class="mb-4 col-md-6">
                       <label class="form-label" for="name">이름</label>
-                      <input class="form-control" type="text" name="name" id="name" value="홍길동">
+                      <input class="form-control" type="text" name="name" id="name" value="<%=name%>">
                     </div>
                     <div class="mb-4 col-md-6">
                       <label class="form-label" for="phone">성별</label>
-                      <select class="selectpicker form-control" name="gender" id="gender" data-style="btn-selectpicker">
-                      	<option value="man">남    </option>
-                        <option value="woman">여    </option>
+                      <select class="selectpicker form-control" name="gen" id="gen" data-style="btn-selectpicker" value="<%=gen%>">
+                      	<option value="남">남    </option>
+                        <option value="여">여    </option>
                       </select>
                     </div>
                     <div class="mb-4 col-md-6">
                       <label class="form-label" for="date">생년월일(YYYYMMDD)</label>
-                      <input class="form-control" type="text" name="date" id="date" value="19970414">
+                      <input class="form-control" type="text" name="birth" id="birth" value="<%=birth%>">
                     </div>
                     <div class="mb-4 col-md-6">
                       <label class="form-label" for="email">이메일</label>
-                      <input class="form-control" type="email" name="email" id="email" value="john.doe@directory.com">
-                    </div>
-                    <div class="mb-4 col-md-6">
-                      <label class="form-label" for="phone">전화번호(-없이 입력해주세요)</label>
-                      <input class="form-control" type="text" name="phone" id="phone" value="01012345678">
+                      <input class="form-control" type="email" name="email" id="email" value="<%=email%>">
                     </div>
                   </div>
-                  <button class="btn btn-outline-primary mb-4" type="submit">내 정보 수정하기</button>
+                  <button class="btn btn-outline-primary mb-4" type="submit" id="mbtn">내 정보 수정하기</button>
                 </form>
               </div>
             </div>
@@ -220,8 +261,8 @@ if(session.getAttribute("id") != null){
       // https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg
       //- injectSvgSprite('${path}icons/orion-svg-sprite.svg'); 
       injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg'); 
-      
-    </script>
+    </script> 
+
     <!-- jQuery-->
     <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
     <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
