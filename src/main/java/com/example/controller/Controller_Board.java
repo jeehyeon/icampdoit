@@ -2,6 +2,7 @@ package com.example.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +33,7 @@ public class Controller_Board {
 	private BoardDAO dao;
 		 
 	// 리나 upload 경로
-	private String uploadPath = "C:/java/ProjectGit/src/main/webapp/upload/";
+	private String uploadPath = "C:/Users/anna0/OneDrive/Documents/KIC 자바 수업/프로젝트/icampdoit/src/main/webapp/upload/";
 	//private int maxFileSize = 10 * 1024 * 1024;
 	//private String encoding = "utf-8";
 	
@@ -40,13 +41,24 @@ public class Controller_Board {
 	public ModelAndView mboardlist(HttpServletRequest request, HttpSession session) {
 		System.out.println( "mboardlist() 호출" );
 		
+		ArrayList<BoardTO> lists = dao.mboardList();
+		ArrayList<BoardTO> reviewLists = dao.mboardListReview();
+		ArrayList<BoardTO> freeLists = dao.mboardListFree();
+		ArrayList<BoardTO> tradeLists = dao.mboardListTrade();
+		
+		BoardTO listTO = new BoardTO();
+		
 		ModelAndView modelAndView = new ModelAndView();
 		
 		if(session.getAttribute("ucode") == null) {
 			modelAndView.setViewName( "/login/nousers" );
 			return modelAndView;
-		}
+		}		
 		modelAndView.setViewName( "/board/mboard_list" );
+		modelAndView.addObject( "lists", lists );
+		modelAndView.addObject( "reviewLists", reviewLists );
+		modelAndView.addObject( "freeLists", freeLists );
+		modelAndView.addObject( "tradeLists", tradeLists );
 		
 		return modelAndView;
 	}
@@ -55,6 +67,11 @@ public class Controller_Board {
 	public ModelAndView mboardview(HttpServletRequest request, HttpSession session) {
 		System.out.println( "mboardview() 호출" );
 		
+		BoardTO to = new BoardTO();
+		to.setSeq( request.getParameter( "seq" ) );
+		
+		to = dao.mboardView(to);
+		
 		ModelAndView modelAndView = new ModelAndView();
 		
 		if(session.getAttribute("ucode") == null) {
@@ -62,6 +79,7 @@ public class Controller_Board {
 			return modelAndView;
 		}
 		modelAndView.setViewName( "/board/mboard_view" );
+		modelAndView.addObject( "to", to );
 		
 		return modelAndView;
 	}

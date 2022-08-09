@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.exam.nboard.NBoardDAO" %>
+<%@ page import="com.exam.nboard.NBoardTO" %>
+
 <%
 //session 값 가져오기
 int ucode = -1;
@@ -8,6 +11,17 @@ if(session.getAttribute("id") != null){
 	ucode = (int)session.getAttribute("ucode");
 	id = (String)session.getAttribute("id");
 }
+
+//view DAO 
+	NBoardTO to = (NBoardTO)request.getAttribute( "to" );
+	
+	int seq = to.getSeq();
+	String subject = to.getSubject();
+	String writer = to.getWriter();
+	String title = to.getTitle();
+	String content = to.getContent();
+	String wdate = to.getWdate();
+	int hit = to.getHit();
 %>    
 <!DOCTYPE html>
   <head>
@@ -110,11 +124,11 @@ if(session.getAttribute("id") != null){
       <div class="container overlay-content">
         <div class="d-flex justify-content-between align-items-start flex-column flex-lg-row align-items-lg-end">
           <div class="text-white mb-4 mb-lg-0">
-            <h1 class="text-shadow verified">[공지] 안전교육 교재 배포</h1>
+            <h1 class="text-shadow verified"><%=title %></h1>
             <div>
-             <span><i class="fa-solid fa-user-gear text-primary"></i> 관리자</span>&nbsp;&nbsp;
-             <span><i class="fa-solid fa-calendar text-primary"></i> 2022-07-30</span>&nbsp;&nbsp;
-             <span><i class="fa-solid fa-check-to-slot text-primary"></i> 조회수 16</span>
+             <span><i class="fa-solid fa-user-gear text-primary"></i> <%=writer %></span>&nbsp;&nbsp;
+             <span><i class="fa-solid fa-calendar text-primary"></i> <%=wdate %></span>&nbsp;&nbsp;
+             <span><i class="fa-solid fa-check-to-slot text-primary"></i> 조회수 <%=hit %></span>
             </div>
           </div>        
         </div>
@@ -143,7 +157,7 @@ if(session.getAttribute("id") != null){
 		    </div>
 		  </div>
           <div class="col-xl-8 col-lg-10 mx-auto" style="font-family: 'GmarketSansMedium';'">           
-            <p class="lead mb-3">안녕하세요. 아이캠두잇입니다.<br> 야영장 사업자를 위한 안전교육 교재를 배포해 드립니다.<br> 운영하시는 데에 도움되시길 바랍니다.</p>
+            <p class="lead mb-3"><%=content %>
           </div>
           <!-- 
           <div class="col-xl-10 mx-auto"><img class="img-fluid mb-5" src="./resources/bootstrap-5/html/img/photo/photo-1471189641895-16c58a695bcb.jpg" alt=""></div>	
