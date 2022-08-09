@@ -79,22 +79,24 @@ public class BoardDAO {
 	// list
 	public ArrayList<BoardTO> mboardList() {
 				
-		String sql = "select seq, subject, writer, title, date_format(wdate, '%Y.%m.%d') wdate, hit from m_board order by seq desc";
+		String sql = "select seq, subject, writer, title, date_format(wdate, '%Y.%m.%d') wdate, hit, ucode from m_board order by seq desc";
 		ArrayList<BoardTO> lists = (ArrayList<BoardTO>)jdbcTemplate.query(
 				sql, new BeanPropertyRowMapper<BoardTO>(BoardTO.class) );
 		
 		return lists;		
 	}
 	
-	public ArrayList<BoardTO> mboardListFree() {
+	
+	public ArrayList<BoardTO> mboardListFree(BoardTO to) {
 		
-		String sql = "select seq, subject, writer, title, date_format(wdate, '%Y.%m.%d') wdate, hit from m_board where subject='2' order by seq desc";
+		String sql = "select seq, subject, writer, title, date_format(wdate, '%Y.%m.%d') wdate, hit, ucode from m_board where subject=? order by seq desc";
 		ArrayList<BoardTO> lists = (ArrayList<BoardTO>)jdbcTemplate.query(
-				sql, new BeanPropertyRowMapper<BoardTO>(BoardTO.class) );
+				sql, new BeanPropertyRowMapper<BoardTO>(BoardTO.class), to.getSubject() );
 		
 		return lists;		
 	}
 	
+	/*
 	public ArrayList<BoardTO> mboardListReview() {
 		
 		String sql = "select seq, subject, writer, title, date_format(wdate, '%Y.%m.%d') wdate, hit from m_board where subject='1' order by seq desc";
@@ -112,13 +114,94 @@ public class BoardDAO {
 		
 		return lists;		
 	}
+	*/
 	
 	// listTO
-	public BoardListTO mboardList(BoardListTO listTO) {
+	public BoardListTO mboardList(BoardListTO listTO, int subjectValue ) {
 		
+		int cpage = listTO.getCpage();
+		int recordPerPage = listTO.getRecordPerPage();// 한페이지에 글 개수 5*2=10개
+		int blockPerPage = listTO.getBlockPerPage();// 한 화면에 보이는 페이지수 5개
 		
+		String sql = "select seq, subject, title, writer, date_format(wdate, '%Y-%m-%d') wdate, hit, ucode from m_board where subject=? order by seq desc";
+		ArrayList<BoardTO> boardLists = (ArrayList<BoardTO>)jdbcTemplate.query(
+				sql, new BeanPropertyRowMapper<BoardTO>(BoardTO.class), subjectValue );
+		
+		// 총 게시글 수 얻기
+		listTO.setTotalRecord( boardLists.size() );
+		
+		// 총 페이지 수 얻기(skip은 시작번호)
+		listTO.setTotalPage( ( (listTO.getTotalRecord() -1 ) / recordPerPage ) + 1 );		
+		int skip = ( cpage - 1 ) * recordPerPage;		
+		
+		ArrayList<BoardTO> lists = new ArrayList<BoardTO>();		
+		for( int i=0; i<recordPerPage ; i++ ) {
+			if( skip+i != boardLists.size() ) {
+				BoardTO to = new BoardTO();
+				to.setSeq( boardLists.get(skip+i).getSeq() );
+				to.setSubject( boardLists.get(skip+i).getSubject() );
+				to.setTitle( boardLists.get(skip+i).getTitle() );
+				to.setWriter( boardLists.get(skip+i).getWriter() );
+				to.setWdate( boardLists.get(skip+i).getWdate() );
+				to.setHit( boardLists.get(skip+i).getHit() );
+				to.setUcode( boardLists.get(skip+i).getUcode() );
+				
+				lists.add(to);
+				
+			} else { break; }
+		}
+		
+		listTO.setBoardLists( lists );
+		listTO.setStartBlock( ( ( cpage-1 ) / blockPerPage ) * blockPerPage + 1);
+		listTO.setEndBlock( ( (cpage-1) / blockPerPage) * blockPerPage + blockPerPage);
+		if(listTO.getEndBlock() >= listTO.getTotalPage()) {
+			listTO.setEndBlock(listTO.getTotalPage());
+		}		
 		return listTO;
 	}
+	
+	public BoardListTO mboardSubjectChange(BoardListTO blistTO, BoardTO to ) {
+		int cpage = blistTO.getCpage();
+		int recordPerPage = blistTO.getRecordPerPage();// 한페이지에 글 개수 5*2=10개
+		int blockPerPage = blistTO.getBlockPerPage();// 한 화면에 보이는 페이지수 5개
+		
+		
+		String sql = "select seq, subject, title, writer, date_format(wdate, '%Y-%m-%d') wdate, hit, ucode from m_board where subject=? order by seq desc";
+		ArrayList<BoardTO> boardLists = (ArrayList<BoardTO>)jdbcTemplate.query(
+				sql, new BeanPropertyRowMapper<BoardTO>(BoardTO.class), to.getSubject() );
+		
+		// 총 게시글 수 얻기
+		blistTO.setTotalRecord( boardLists.size() );
+		
+		// 총 페이지 수 얻기(skip은 시작번호)
+		blistTO.setTotalPage( ( (blistTO.getTotalRecord() -1 ) / recordPerPage ) + 1 );		
+		int skip = ( cpage - 1 ) * recordPerPage;		
+		
+		ArrayList<BoardTO> lists = new ArrayList<BoardTO>();		
+		for( int i=0; i<recordPerPage ; i++ ) {
+			if( skip+i != boardLists.size() ) {
+				to.setSeq( boardLists.get(skip+i).getSeq() );
+				to.setSubject( boardLists.get(skip+i).getSubject() );
+				to.setTitle( boardLists.get(skip+i).getTitle() );
+				to.setWriter( boardLists.get(skip+i).getWriter() );
+				to.setWdate( boardLists.get(skip+i).getWdate() );
+				to.setHit( boardLists.get(skip+i).getHit() );
+				to.setUcode( boardLists.get(skip+i).getUcode() );
+				
+				lists.add(to);
+				
+			} else { break; }
+		}
+		
+		blistTO.setBoardLists( lists );
+		blistTO.setStartBlock( ( ( cpage-1 ) / blockPerPage ) * blockPerPage + 1);
+		blistTO.setEndBlock( ( (cpage-1) / blockPerPage) * blockPerPage + blockPerPage);
+		if(blistTO.getEndBlock() >= blistTO.getTotalPage()) {
+			blistTO.setEndBlock(blistTO.getTotalPage());
+		}		
+		return blistTO;
+	}
+	
 	
 	// view
 	public BoardTO mboardView(BoardTO to) {	

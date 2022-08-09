@@ -43,27 +43,84 @@ public class Controller_Board {
 	@RequestMapping( value="/mboardlist.do" )
 	public ModelAndView mboardlist(HttpServletRequest request, HttpSession session) {
 		System.out.println( "mboardlist() 호출" );
-
-		ArrayList<BoardTO> lists = dao.mboardList();
-		ArrayList<BoardTO> reviewLists = dao.mboardListReview();
-		ArrayList<BoardTO> freeLists = dao.mboardListFree();
-		ArrayList<BoardTO> tradeLists = dao.mboardListTrade();
 		
-		BoardTO listTO = new BoardTO();
+		int subjectValue = 1;
+		if(request.getParameter( "subjectValue" ) != null && !request.getParameter( "subjectValue" ).equals( "" ) ) {
+			subjectValue = Integer.parseInt( request.getParameter( "subjectValue" ) );
+		}
+				
+		int cpage = 1;
+		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		BoardListTO blistTO = new BoardListTO();
+		blistTO.setCpage( cpage );
+		
+		
+		blistTO = dao.mboardList( blistTO, subjectValue );
 		
 		ModelAndView modelAndView = new ModelAndView();
+		System.out.println( subjectValue );
 		
 		if(session.getAttribute("ucode") == null) {
 			modelAndView.setViewName( "/login/nousers" );
 			return modelAndView;
 		}		
 		modelAndView.setViewName( "/board/mboard_list" );
-		modelAndView.addObject( "lists", lists );
-		modelAndView.addObject( "reviewLists", reviewLists );
-		modelAndView.addObject( "freeLists", freeLists );
-		modelAndView.addObject( "tradeLists", tradeLists );
+		modelAndView.addObject( "blistTO", blistTO );
+		modelAndView.addObject( "cpage", cpage );
+		modelAndView.addObject( "subjectValue", subjectValue );
 		
 		return modelAndView;
+	}
+	
+	@RequestMapping( value="/selectmboardlist.do" )
+	public String selectmboardlist(HttpServletRequest request, HttpSession session) {
+		System.out.println( "selectmboardlist() 호출" );
+		
+		//ArrayList<BoardTO> lists = dao.mboardList();
+		
+		int cpage = 1;
+		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+
+		BoardTO listTO = new BoardTO();
+		listTO.setSubject( String.valueOf(request.getParameter( "subjectValue" )) );
+		
+		BoardListTO blistTO = new BoardListTO();
+		blistTO.setCpage( cpage );
+		
+		blistTO = dao.mboardSubjectChange(blistTO, listTO);
+		System.out.println(listTO.getSubject());
+		
+		
+		StringBuilder sbHtml = new StringBuilder();
+		
+		ArrayList<BoardTO> freeLists = blistTO.getBoardLists();
+		
+		for( BoardTO to : freeLists ){
+			String seq = to.getSeq();
+			String subject = to.getSubject();
+			String writer = to.getWriter();
+			String title = to.getTitle();
+			String wdate = to.getWdate();
+			String hit = to.getHit();
+			
+			sbHtml.append( "<tr onmouseover=\"this.style.background='#f1f6ea'\" onmouseout=\"this.style.background='white'\" style=\"cursor: pointer;\" onclick=\"location.href='mboardview.do?seq=" + seq + "'\">" );
+			sbHtml.append( "<td class=\"text-center\">" + seq + "</td>" );
+			sbHtml.append( "<td class=\"fw-bold text-center\">" + title + "</td>" );
+	        sbHtml.append( "<td></td>" );
+	        sbHtml.append( "<td class=\"text-end\">" + writer + "</td>" );
+	        sbHtml.append( "<td class=\"text-end\">" + wdate + "</td>" );
+	        sbHtml.append( "<td class=\"text-end\">" + hit + "</td>" );
+	        sbHtml.append( "</tr>" );
+		}
+		
+		String result = sbHtml.toString();
+		
+		return result;
 	}
 	
 	@RequestMapping( value="/mboardview.do" )

@@ -12,15 +12,27 @@ if(session.getAttribute("id") != null){
 	id = (String)session.getAttribute("id");
 }
 
-//게시판
-	ArrayList<BoardTO> lists = (ArrayList)request.getAttribute( "lists" );
-	ArrayList<BoardTO> reviewLists = (ArrayList)request.getAttribute( "reviewLists" );
-	ArrayList<BoardTO> freeLists = (ArrayList)request.getAttribute( "freeLists" );
-	ArrayList<BoardTO> tradeLists = (ArrayList)request.getAttribute( "tradeLists" );
+	BoardListTO listTO = (BoardListTO)request.getAttribute("blistTO");
+	int cpage = (Integer)request.getAttribute( "cpage" );
+	
+	int recordPerPage = listTO.getRecordPerPage();
+	int totalPage = listTO.getTotalPage();
+	int blockPerPage = listTO.getBlockPerPage();
+	int startBlock = listTO.getStartBlock();
+	int endBlock = listTO.getEndBlock();
+	int totalRecord = listTO.getTotalRecord();
+	
+	int subjectValue = (Integer)request.getAttribute( "subjectValue" );
+	
 
-	int totalRecord = lists.size();
+//게시판
+	//int totalRecord = (Integer)request.getAttribute( "totalRecord" );
+	//String result = (String)request.getAttribute( "result" );
+	
+	ArrayList<BoardTO> lists = listTO.getBoardLists();
 	
 	StringBuilder sbHtml = new StringBuilder();
+	
 	
 	for( BoardTO to : lists ){
 		String seq = to.getSeq();
@@ -30,7 +42,7 @@ if(session.getAttribute("id") != null){
 		String wdate = to.getWdate();
 		String hit = to.getHit();
 		
-		sbHtml.append( "<tr onmouseover=\"this.style.background='#f1f6ea'\" onmouseout=\"this.style.background='white'\" style=\"cursor: pointer;\" onclick=\"location.href='mboardview.do?seq=" + seq + "'\">" );
+		sbHtml.append( "<tr onmouseover=\"this.style.background='#f1f6ea'\" onmouseout=\"this.style.background='white'\" style=\"cursor: pointer;\" onclick=\"location.href='mboardview.do?cpage=" + cpage + "&seq=" + seq + "'\">" );
 		sbHtml.append( "<td class=\"text-center\">" + seq + "</td>" );
 		sbHtml.append( "<td class=\"fw-bold text-center\">" + title + "</td>" );
         sbHtml.append( "<td></td>" );
@@ -39,6 +51,7 @@ if(session.getAttribute("id") != null){
         sbHtml.append( "<td class=\"text-end\">" + hit + "</td>" );
         sbHtml.append( "</tr>" );
 	}
+	
 
 %>
 <!DOCTYPE html>
@@ -168,7 +181,7 @@ if(session.getAttribute("id") != null){
           <div class="card-body p-5 p-print-0">
             <div class="row">
               <div class="col-sm-6 pe-lg-3">
-                <h2 class="h6 text-uppercase mb-4">전체: <%=totalRecord %> 건</h2>
+                <h2 class="h6 text-uppercase mb-4" id="totalRecord">전체: <%=totalRecord %> 건</h2>
               </div>
             </div>
             
@@ -243,21 +256,68 @@ if(session.getAttribute("id") != null){
                     <td class="text-end">2022-01-01</td>
                     <td class="text-end">0</td>
                   </tr>
+                  
                    -->
+                   <%=sbHtml.toString() %>
                 </tbody>
               </table>
             </div>
           </div>
           
+          <input type="hidden" value="<%=subjectValue %>" id="subjectInput" />
+          
           <!-- 페이징 -->
           <div class="card-footer p-5 px-print-0 border-0 text-end text-sm" style="background-color: white">
             <nav aria-label="Page navigation example">
               <ul class="pagination pagination-template d-flex justify-content-center">
+              <!--  
                 <li class="page-item"><a class="page-link" href="#"> <i class="fa fa-angle-left"></i></a></li>
                 <li class="page-item active"><a class="page-link" href="#">1</a></li>
                 <li class="page-item"><a class="page-link" href="#">2</a></li>
                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                 <li class="page-item"><a class="page-link" href="#"> <i class="fa fa-angle-right"></i></a></li>
+                -->
+                
+<%			
+	//페이지 하단의 << 버튼
+	if ( startBlock == 1 ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-thin fa-angles-left'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='mboardlist.do?cpage="+ (startBlock - blockPerPage) + "'><i class='fa fa-thin fa-angles-left'></i></a></li> ");
+	}
+	//out.println(" &nbsp; ");
+	//페이지 하단의 < 버튼 => (cpage-1) 한페이지 앞으로 이동
+	if ( cpage == 1 ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'> <i class='fa fa-angle-left'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='mboardlist.do?cpage="+ (cpage-1) + "'><i class='fa fa-angle-left'></i></a></li> ");
+	}
+	//out.println(" &nbsp;&nbsp; ");
+	//현재 페이지
+	for ( int i=startBlock; i<=endBlock; i++ ) {
+		if ( cpage == i ) { 
+			out.println(" <li class='page-item active'><a class='page-link' href='#'>" + i + "</a></li> ");
+		} else {
+			out.println(" <li class='page-item'><a class='page-link' href='mboardlist.do?cpage=" + i + "'>" + i + "</a></li> ");
+		}
+	}
+	//out.println(" &nbsp;&nbsp; ");
+	//페이지 하단의 > 버튼
+	if ( cpage == totalPage ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-angle-right'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='mboardlist.do?cpage="+ (cpage+1) + "'><i class='fa fa-angle-right'></i></a></li> ");
+	}
+	//out.println(" &nbsp; ");
+	//페이지 하단의 >> 버튼
+	if ( endBlock == totalPage ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='mboardlist.do?cpage="+ (startBlock + blockPerPage) + "'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
+	}
+	//out.println(" &nbsp; ");
+
+%>
               </ul>
             </nav>  
             <!-- 
@@ -295,105 +355,65 @@ if(session.getAttribute("id") != null){
       </div>
     </footer>
     <!-- JavaScript files-->
-    
     <script>
+	    window.onload = function(){
+	    	if (  $( "#subjectInput" ).val() == 1 ) {
+	    		$("#form_sort option:eq(0)").prop('selected', true );
+	    		console.log( "1로 변경");
+	    	} else if ( $( "#subjectInput" ).val() == 2 ) {
+	    		$("#form_sort option:eq(1)").prop('selected', true );
+	    		console.log( "2로 변경");
+	    	} else {
+	    		$("#form_sort option:eq(2)").prop('selected', true );
+	    		console.log( "3로 변경");
+	    	}
+	    	
+	    	
+	    }
+    </script>
+    <script>
+    	function changePage(){
+    		
+    	}
+    	
     	function changeSubject(){
     		subjectValue = $( "#form_sort option:selected" ).val();
     		console.log( subjectValue );
     		
+    		location.href='./mboardlist.do?subjectValue=' + subjectValue; 
+    		/*
     		$.ajax({
-    			url: './mboardview.do',
-    			type: 'get',
-    			data: "sbHtml",
-    			dataType: "text",
-    			contentType :   "application/x-www-form-urlencoded; charset=UTF-8",
-    			success: function(data){
-    				if(subjectValue == "1" ) {
-    					
-    					for( BoardTO to : reviewLists ){
-    						String seq = to.getSeq();
-    						String subject = to.getSubject();
-    						String writer = to.getWriter();
-    						String title = to.getTitle();
-    						String wdate = to.getWdate();
-    						String hit = to.getHit();
-    						
-    						sbHtml.append( "<tr onmouseover=\"this.style.background='#f1f6ea'\" onmouseout=\"this.style.background='white'\" style=\"cursor: pointer;\" onclick=\"location.href='mboardview.do?seq=" + seq + "'\">" );
-    						sbHtml.append( "<td class=\"text-center\">" + seq + "</td>" );
-    						sbHtml.append( "<td class=\"fw-bold text-center\">" + title + "</td>" );
-    				        sbHtml.append( "<td></td>" );
-    				        sbHtml.append( "<td class=\"text-end\">" + writer + "</td>" );
-    				        sbHtml.append( "<td class=\"text-end\">" + wdate + "</td>" );
-    				        sbHtml.append( "<td class=\"text-end\">" + hit + "</td>" );
-    				        sbHtml.append( "</tr>" );
-    					}
-    					
-    					$("#tbody").append( sbHtml.toString() );
-    					
-    				} else if( subjectValue == "2" ){
-    					for( BoardTO to : freeLists ){
-    						String seq = to.getSeq();
-    						String subject = to.getSubject();
-    						String writer = to.getWriter();
-    						String title = to.getTitle();
-    						String wdate = to.getWdate();
-    						String hit = to.getHit();
-    						
-    						sbHtml.append( "<tr onmouseover=\"this.style.background='#f1f6ea'\" onmouseout=\"this.style.background='white'\" style=\"cursor: pointer;\" onclick=\"location.href='mboardview.do?seq=" + seq + "'\">" );
-    						sbHtml.append( "<td class=\"text-center\">" + seq + "</td>" );
-    						sbHtml.append( "<td class=\"fw-bold text-center\">" + title + "</td>" );
-    				        sbHtml.append( "<td></td>" );
-    				        sbHtml.append( "<td class=\"text-end\">" + writer + "</td>" );
-    				        sbHtml.append( "<td class=\"text-end\">" + wdate + "</td>" );
-    				        sbHtml.append( "<td class=\"text-end\">" + hit + "</td>" );
-    				        sbHtml.append( "</tr>" );
-    					}
-    					$("#tbody").append( sbHtml.toString() );
-    					
-    				} else if ( subjectValue == "3" ){
-    					for( BoardTO to : tradeLists ){
-    						String seq = to.getSeq();
-    						String subject = to.getSubject();
-    						String writer = to.getWriter();
-    						String title = to.getTitle();
-    						String wdate = to.getWdate();
-    						String hit = to.getHit();
-    						
-    						sbHtml.append( "<tr onmouseover=\"this.style.background='#f1f6ea'\" onmouseout=\"this.style.background='white'\" style=\"cursor: pointer;\" onclick=\"location.href='mboardview.do?seq=" + seq + "'\">" );
-    						sbHtml.append( "<td class=\"text-center\">" + seq + "</td>" );
-    						sbHtml.append( "<td class=\"fw-bold text-center\">" + title + "</td>" );
-    				        sbHtml.append( "<td></td>" );
-    				        sbHtml.append( "<td class=\"text-end\">" + writer + "</td>" );
-    				        sbHtml.append( "<td class=\"text-end\">" + wdate + "</td>" );
-    				        sbHtml.append( "<td class=\"text-end\">" + hit + "</td>" );
-    				        sbHtml.append( "</tr>" );
-    					}
-    					$("#tbody").append( sbHtml.toString() );
-    					
-    				} else {
-    					for( BoardTO to : lists ){
-    						String seq = to.getSeq();
-    						String subject = to.getSubject();
-    						String writer = to.getWriter();
-    						String title = to.getTitle();
-    						String wdate = to.getWdate();
-    						String hit = to.getHit();
-    						
-    						sbHtml.append( "<tr onmouseover=\"this.style.background='#f1f6ea'\" onmouseout=\"this.style.background='white'\" style=\"cursor: pointer;\" onclick=\"location.href='mboardview.do?seq=" + seq + "'\">" );
-    						sbHtml.append( "<td class=\"text-center\">" + seq + "</td>" );
-    						sbHtml.append( "<td class=\"fw-bold text-center\">" + title + "</td>" );
-    				        sbHtml.append( "<td></td>" );
-    				        sbHtml.append( "<td class=\"text-end\">" + writer + "</td>" );
-    				        sbHtml.append( "<td class=\"text-end\">" + wdate + "</td>" );
-    				        sbHtml.append( "<td class=\"text-end\">" + hit + "</td>" );
-    				        sbHtml.append( "</tr>" );
-    					}
-    					$("#tbody").append( sbHtml.toString() );
-    				}
+    			url: './mboardlist.do',
+    			type: 'post',
+    			data: {
+    				subjectValue : $( "#form_sort option:selected" ).val()
+    			},
+    			success : {
+    				
     			}
+    			
+    			//dataType: "text",
+    			//contentType :   "application/x-www-form-urlencoded; charset=UTF-8",
+    			
+    			success: function(result){
+    				
+    				
+    				$("#tbody").html( result );
+    				
+    				
+    				let totalRecord = $("tr").length -1;
+    				
+    				$("#totalRecord").text("전체 : " + totalRecord + " 건");
+    				
+    				
+    		
+    			}
+    			
     		});
+    		*/
     	};
     </script>
+
     <script>
       // ------------------------------------------------------- //
       //   Inject SVG Sprite - 
