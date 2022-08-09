@@ -23,7 +23,7 @@ public class Controller_Search {
 		
 		SearchkeyTO kto = new SearchkeyTO();
 		kto.setKeysearch( request.getParameter( "keysearch" ) );
-		System.out.println( kto.getKeysearch());
+		System.out.println( "키워드 : " + kto.getKeysearch());
 		
 		//dao.searchkeyDAO();
 		

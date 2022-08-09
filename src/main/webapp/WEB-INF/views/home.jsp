@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-//session 값 가져오기
-int ucode = -1;
-String id ="";
-if(session.getAttribute("id") != null){
-	ucode = (int)session.getAttribute("ucode");
-	id = (String)session.getAttribute("id");
-}
+	//session 값 가져오기
+	int ucode = -1;
+	String id ="";
+	if(session.getAttribute("id") != null){
+		ucode = (int)session.getAttribute("ucode");
+		id = (String)session.getAttribute("id");
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -119,9 +119,10 @@ if(session.getAttribute("id") != null){
           <div class="col-xl-10">
             <div class="text-center text-lg-start">
               <h1 class="display-3 fw-bold text-shadow">I Camp Do It</h1>
-            </div>           
-            <div class="search-bar mt-5 p-3 p-lg-1 ps-lg-4">
-              <form action="./searchkey.do" method="get">
+            </div>   
+                   
+            <form action="searchkey.do" method="post"> 
+              <div class="search-bar mt-5 p-3 p-lg-1 ps-lg-4">             
                 <div class="row">
                   <div class="col-lg-7 d-flex align-items-center form-group">
                     <input class="form-control border-0 shadow-0" type="text" name="keysearch" id="keysearch" placeholder="키워드 검색">
@@ -134,9 +135,9 @@ if(session.getAttribute("id") != null){
                   <div class="col-lg-2 d-grid">
                     <button class="btn btn-primary rounded-pill h-100" type="submit">검색하기 </button>
                   </div>
-                </div>
-              </form>
-            </div>
+                </div>             
+              </div>
+            </form>
           </div>
         </div>
       </div>
