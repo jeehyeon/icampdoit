@@ -1,3 +1,4 @@
+<%@page import="com.exam.mboard.BoardDAO"%>
 <%@page import="com.exam.mboard.BoardTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -58,6 +59,7 @@
   
 	window.onload = function() {
 		document.getElementById( 'wbtn' ).onclick = function() {
+
 			var subject = wfrm.subject.value;
 	     	var title = wfrm.title.value;
 	     	var content = wfrm.content.value;
@@ -81,7 +83,12 @@
 			 
 			document.wfrm.submit();
 		};
-	};
+		
+		
+		
+		
+	
+};
 	
 </script> 
 
@@ -151,7 +158,10 @@
 	<!-- Write Section-->
 	<section class="py-5 pb-7">
 	<form action="./mboardwrite_ok.do" method="post" id="wfrm" name="wfrm" enctype="multipart/form-data">
-	<input type="hidden" name="writeOk" id="writeOk" value=""/>
+	<input type="hidden" name="writeOk" id="writeOk" value="default"/>
+	<input type="hidden" name="filesize" id="filesize" value="0000"/>
+	<input type="hidden" name="vcode" id="vcode" value="default"/>
+	
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-12">
@@ -191,7 +201,7 @@
 	      </div>
 	      <div class="col-lg-4 text-lg-end">
 	        <input type="button" value="등록" id="wbtn" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardwrite_ok.do'" /> 
-	        <input type="button" value="취소" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardlist.do'" />
+	        <input type="button" value="취소" id="cbtn" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='/list.do'" />
 	      </div>
 		</div>
 		<!-- 목록 끝 -->
@@ -278,8 +288,28 @@
 			Scrollbar.init(document.querySelector('#sidenav-scrollbar'),
 					options);
 		} */
-
+		document.getElementById( 'cbtn' ).onclick = function() {
+			
+			
+			$.ajax({
+				data : {filename: $('#writeOk').val()},
+				type : "GET",
+				url : '/writecancel.do',
+				success : function() {
+					location.href='/mboardlist.do';
+				},
+				error: function() {
+		        	alert('error, 에러');
+		        }
+			});
+		}
+		
+		
+		
 		$(document).ready(function() {
+			let date = new Date().getTime().toString(36);
+			$('#vcode').val(date);
+
 			var fontList = ['맑은 고딕','굴림','돋움','바탕','궁서','NotoSansKR','Arial','Courier New','Verdana','Tahoma'];
 			$('#summernote').summernote({
 				placeholder : '내용을 입력해주세요. (이미지는 1장만 업로드 가능합니다.)',
@@ -324,14 +354,18 @@
 				contentType : false,
 				enctype : 'multipart/form-data',
 				processData : false,
-				success : function(savename) {
-					imgUrl = imgUrl + savename
+				success : function(result) {
+					console.log(result);
+					let str= result.split('@');
+					
+					imgUrl = imgUrl + str[0];
 					
 					$('#summernote').summernote( 'insertImage', imgUrl );
 					
-					if(savename != null){
+					if(str[0] != null){
 	            				               
-						$('#writeOk').val(savename);
+						$('#writeOk').val(str[0]);
+						$('#filesize').val(str[1]);
 		                
 	            	}else{
 	            		alert("error");
@@ -342,6 +376,9 @@
 		        }
 			});
 		}
+		
+		
+		
 	</script>
   </body>
 </html>
