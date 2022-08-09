@@ -44,7 +44,7 @@ public class Controller_Board {
 	public ModelAndView mboardlist(HttpServletRequest request, HttpSession session) {
 		System.out.println( "mboardlist() 호출" );
 		
-		int subjectValue = 1;
+		int subjectValue = 2;
 		if(request.getParameter( "subjectValue" ) != null && !request.getParameter( "subjectValue" ).equals( "" ) ) {
 			subjectValue = Integer.parseInt( request.getParameter( "subjectValue" ) );
 		}

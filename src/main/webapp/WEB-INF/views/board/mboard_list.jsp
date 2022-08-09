@@ -164,9 +164,9 @@ if(session.getAttribute("id") != null){
               <div class="d-flex justify-content-between align-items-center flex-column flex-md-row mb-4 mt-2">
                 <!-- 게시판종류 드롭박스 -->
                 <div class="me-3">
-                  <select class="selectpicker" name="sort" id="form_sort" data-style="btn-selectpicker" title="" onchange="location.href='javascript:changeSubject()'">
-                    <option value="1">후기 게시판</option>
-                    <option value="2">자유 게시판</option>
+                  <select class="form-select" name="sort" id="form_sort" data-style="btn-selectpicker" title="" onchange="location.href='javascript:changeSubject()'">
+                    <option value="1">자유 게시판</option>
+                    <option value="2">후기 게시판</option>
                     <option value="3">중고거래 게시판</option>
                   </select>
                 </div>
@@ -354,17 +354,18 @@ if(session.getAttribute("id") != null){
         </div>
       </div>
     </footer>
+     <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
     <!-- JavaScript files-->
     <script>
 	    window.onload = function(){
 	    	if (  $( "#subjectInput" ).val() == 1 ) {
-	    		$("#form_sort option:eq(0)").prop('selected', true );
+	    		$("#form_sort").val("1");
 	    		console.log( "1로 변경");
 	    	} else if ( $( "#subjectInput" ).val() == 2 ) {
-	    		$("#form_sort option:eq(1)").prop('selected', true );
+	    		$("#form_sort").val("2");
 	    		console.log( "2로 변경");
 	    	} else {
-	    		$("#form_sort option:eq(2)").prop('selected', true );
+	    		$("#form_sort").val("3");
 	    		console.log( "3로 변경");
 	    	}
 	    	
@@ -440,7 +441,7 @@ if(session.getAttribute("id") != null){
       
     </script>
     <!-- jQuery-->
-    <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
+   
     <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
     <script src="./resources/bootstrap-5/html/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Magnific Popup - Lightbox for the gallery-->
