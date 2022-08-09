@@ -283,14 +283,14 @@ if(session.getAttribute("id") != null){
 	if ( startBlock == 1 ) {
 		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-thin fa-angles-left'></i></a></li> ");
 	} else {
-		out.println(" <li class='page-item'><a class='page-link' href='mboardlist.do?cpage="+ (startBlock - blockPerPage) + "'><i class='fa fa-thin fa-angles-left'></i></a></li> ");
+		out.println(" <li class='page-item'><a class='page-link' href='mboardlist.do?cpage="+ (startBlock - blockPerPage) +"&subjectValue="+ subjectValue +"'><i class='fa fa-thin fa-angles-left'></i></a></li>");
 	}
 	//out.println(" &nbsp; ");
 	//페이지 하단의 < 버튼 => (cpage-1) 한페이지 앞으로 이동
 	if ( cpage == 1 ) {
 		out.println(" <li class='page-item'><a class='page-link' href='#'> <i class='fa fa-angle-left'></i></a></li> ");
 	} else {
-		out.println(" <li class='page-item'><a class='page-link' href='mboardlist.do?cpage="+ (cpage-1) + "'><i class='fa fa-angle-left'></i></a></li> ");
+		out.println(" <li class='page-item'><a class='page-link' href='mboardlist.do?cpage="+ (cpage-1) +"&subjectValue="+ subjectValue + "'><i class='fa fa-angle-left'></i></a></li> ");
 	}
 	//out.println(" &nbsp;&nbsp; ");
 	//현재 페이지
@@ -298,7 +298,7 @@ if(session.getAttribute("id") != null){
 		if ( cpage == i ) { 
 			out.println(" <li class='page-item active'><a class='page-link' href='#'>" + i + "</a></li> ");
 		} else {
-			out.println(" <li class='page-item'><a class='page-link' href='mboardlist.do?cpage=" + i + "'>" + i + "</a></li> ");
+			out.println(" <li class='page-item'><a class='page-link' href='mboardlist.do?cpage=" + i +"&subjectValue="+ subjectValue + "'>" + i + "</a></li> ");
 		}
 	}
 	//out.println(" &nbsp;&nbsp; ");
@@ -306,14 +306,14 @@ if(session.getAttribute("id") != null){
 	if ( cpage == totalPage ) {
 		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-angle-right'></i></a></li> ");
 	} else {
-		out.println(" <li class='page-item'><a class='page-link' href='mboardlist.do?cpage="+ (cpage+1) + "'><i class='fa fa-angle-right'></i></a></li> ");
+		out.println(" <li class='page-item'><a class='page-link' href='mboardlist.do?cpage="+ (cpage+1) +"&subjectValue="+ subjectValue + "'><i class='fa fa-angle-right'></i></a></li> ");
 	}
 	//out.println(" &nbsp; ");
 	//페이지 하단의 >> 버튼
 	if ( endBlock == totalPage ) {
 		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
 	} else {
-		out.println(" <li class='page-item'><a class='page-link' href='mboardlist.do?cpage="+ (startBlock + blockPerPage) + "'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
+		out.println(" <li class='page-item'><a class='page-link' href='mboardlist.do?cpage="+ (startBlock + blockPerPage) +"&subjectValue="+ subjectValue + "'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
 	}
 	//out.println(" &nbsp; ");
 
