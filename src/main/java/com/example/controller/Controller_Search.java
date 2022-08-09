@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,7 @@ import com.exam.search.SearchkeyTO;
 public class Controller_Search {
 	
 	@Autowired
-	SearchkeyDAO dao;
+	SearchkeyDAO kdao;
 	
 	@RequestMapping( value="/searchkey.do" )
 	public ModelAndView searchkey(HttpServletRequest request) {
@@ -25,12 +27,13 @@ public class Controller_Search {
 		kto.setKeysearch( request.getParameter( "keysearch" ) );
 		System.out.println( "키워드 : " + kto.getKeysearch());
 		
-		//dao.searchkeyDAO();
+		//dao.searchkeyDAO( kto.getKeysearch() );
 		
-		
+		ArrayList<SearchkeyTO> datas = (ArrayList<SearchkeyTO>)kdao.searchkeyDAO(kto.getKeysearch());
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "/search/search_key" );
+		modelAndView.addObject("datas", datas);
 		
 		return modelAndView;
 	}

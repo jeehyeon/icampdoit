@@ -1,13 +1,49 @@
+<%@page import="com.exam.search.SearchkeyTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-//session 값 가져오기
-int ucode = -1;
-String id ="";
-if(session.getAttribute("id") != null){
-	ucode = (int)session.getAttribute("ucode");
-	id = (String)session.getAttribute("id");
-}
+	//session 값 가져오기
+	int ucode = -1;
+	String id ="";
+	if(session.getAttribute("id") != null){
+		ucode = (int)session.getAttribute("ucode");
+		id = (String)session.getAttribute("id");
+	}
+	
+	//키워드검색 캠핑장 목록
+	ArrayList<SearchkeyTO> datas = (ArrayList<SearchkeyTO>)request.getAttribute( "datas" );
+
+	int totalRecord = datas.size();
+	System.out.println( "토탈: " + totalRecord );
+	
+	StringBuilder sbHtml = new StringBuilder();
+	
+	for( SearchkeyTO kto : datas ){
+		String facltNm = kto.getFacltNm();
+		String induty = kto.getInduty();
+		String addr1 = kto.getAddr1();
+		String firstImageUrl = kto.getFirstImageUrl();
+		
+		//System.out.println( "출력: "+ facltNm );
+		
+		sbHtml.append( "<div class='col-sm-6 col-xl-4 mb-5 hover-animate'>" );
+		sbHtml.append( "  <div class='card h-100 border-0 shadow'>" );
+		sbHtml.append( "  	<div class='card-img-top overflow-hidden gradient-overlay'><img class='img-fluid' src='" + firstImageUrl + "'/><a class='tile-link' href='./campview.do'></a>" );               
+		sbHtml.append( "  	</div>" );
+		sbHtml.append( "  	<div class='card-body d-flex align-items-center'>" );
+		sbHtml.append( "      <div class='w-100'>" );
+		sbHtml.append( "    	<h5 class='card-title'><a class='text-dark' href='./campview.do'>" + facltNm + "</a></h5>" );
+		sbHtml.append( "      	<div class='d-flex card-subtitle mb-3'>" );
+		sbHtml.append( "          <p class='flex-grow-1 mb-0 text-muted text-sm'>" + addr1 + "</p>" );
+		sbHtml.append( "      	</div>" );
+		sbHtml.append( "      	<p class='card-text text-muted'>" + induty + "</p>" );
+		sbHtml.append( "      </div>" );
+		sbHtml.append( "  	</div>" );
+		sbHtml.append( "  </div>" );
+		sbHtml.append( "</div>" );
+	}
+	
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -381,27 +417,12 @@ if(session.getAttribute("id") != null){
         <div class="col-lg-9">
           <div class="d-flex justify-content-between align-items-center flex-column flex-md-row mb-4">
             <div class="me-3">
-              <p class="mb-3 mb-md-0">총  <strong>12</strong> 건</p>
+              <p class="mb-3 mb-md-0">총  <strong><%=totalRecord %></strong> 건</p>
             </div>
           </div>
           <div class="row">
-            <!-- place item-->
-            <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e33b1527bfe2abaf92">
-              <div class="card h-100 border-0 shadow">
-                <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/photo-1484154218962-a197022b5858.jpg" alt="Modern, Well-Appointed Room"/><a class="tile-link" href="./campview.do"></a>               
-                </div>
-                <div class="card-body d-flex align-items-center">
-                  <div class="w-100">
-                    <h5 class="card-title"><a class="text-decoration-none text-dark" href="./campview.do">캠핑장 이름</a></h5>
-                    <div class="d-flex card-subtitle mb-3">
-                      <p class="flex-grow-1 mb-0 text-muted text-sm">캠핑장 full address</p>
-                    </div>
-                    <p class="card-text text-muted">업종(일반 야영장)</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- place item-->
+            <%=sbHtml.toString() %>
+            <!--  
             <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e322f3375db4d89128">
               <div class="card h-100 border-0 shadow">
                 <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/photo-1426122402199-be02db90eb90.jpg" alt="Cute Quirky Garden apt, NYC adjacent"/><a class="tile-link" href="./campview.do"></a>
@@ -417,62 +438,14 @@ if(session.getAttribute("id") != null){
                 </div>
               </div>
             </div>
-            <!-- place item-->
-            <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e3a31e62979bf147c9">
+            -->
+            <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e33b1527bfe2abaf92">
               <div class="card h-100 border-0 shadow">
-                <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/photo-1512917774080-9991f1c4c750.jpg" alt="Modern Apt - Vibrant Neighborhood!"/><a class="tile-link" href="./campview.do"></a>
+                <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="./resources/bootstrap-5/html/img/noimage.jpg" alt="Modern, Well-Appointed Room"/><a class="tile-link" href="./campview.do"></a>               
                 </div>
                 <div class="card-body d-flex align-items-center">
                   <div class="w-100">
-                    <h5 class="card-title"><a class="text-decoration-none text-dark" href="./campview.do">캠핑장 이름</a></h5>
-                    <div class="d-flex card-subtitle mb-3">
-                      <p class="flex-grow-1 mb-0 text-muted text-sm">캠핑장 full address</p>
-                    </div>
-                    <p class="card-text text-muted">업종(일반 야영장)</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- place item-->
-            <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e3503eb77d487e8082">
-              <div class="card h-100 border-0 shadow">
-                <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/photo-1494526585095-c41746248156.jpg" alt="Sunny Private Studio-Apartment"/><a class="tile-link" href="./campview.do"></a>
-                </div>
-                <div class="card-body d-flex align-items-center">
-                  <div class="w-100">
-                    <h5 class="card-title"><a class="text-decoration-none text-dark" href="./campview.do">캠핑장 이름</a></h5>
-                    <div class="d-flex card-subtitle mb-3">
-                      <p class="flex-grow-1 mb-0 text-muted text-sm">캠핑장 full address</p>
-                    </div>
-                    <p class="card-text text-muted">업종(일반 야영장)</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- place item-->
-            <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e39aa2eed0626e485d">
-              <div class="card h-100 border-0 shadow">
-                <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/photo-1522771739844-6a9f6d5f14af.jpg" alt="Mid-Century Modern Garden Paradise"/><a class="tile-link" href="./campview.do"></a>
-                </div>
-                <div class="card-body d-flex align-items-center">
-                  <div class="w-100">
-                    <h5 class="card-title"><a class="text-decoration-none text-dark" href="./campview.do">캠핑장 이름</a></h5>
-                    <div class="d-flex card-subtitle mb-3">
-                      <p class="flex-grow-1 mb-0 text-muted text-sm">캠핑장 full address</p>
-                    </div>
-                    <p class="card-text text-muted">업종(일반 야영장)</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- place item-->
-            <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e39aa2edasd626e485d">
-              <div class="card h-100 border-0 shadow">
-                <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/photo-1488805990569-3c9e1d76d51c.jpg" alt="Brooklyn Life, Easy to Manhattan"/><a class="tile-link" href="./campview.do"></a>
-                </div>
-                <div class="card-body d-flex align-items-center">
-                  <div class="w-100">
-                    <h5 class="card-title"><a class="text-decoration-none text-dark" href="./campview.do">캠핑장 이름</a></h5>
+                    <h5 class="card-title"><a class="text-decoration-none text-dark" href="./campview.do">캠핑장 대표사진없을때</a></h5>
                     <div class="d-flex card-subtitle mb-3">
                       <p class="flex-grow-1 mb-0 text-muted text-sm">캠핑장 full address</p>
                     </div>
@@ -482,6 +455,7 @@ if(session.getAttribute("id") != null){
               </div>
             </div>
           </div>
+          
           <!-- Pagination -->
           <nav aria-label="Page navigation example">
             <ul class="pagination pagination-template d-flex justify-content-center">
