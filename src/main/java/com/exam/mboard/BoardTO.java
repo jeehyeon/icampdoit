@@ -15,4 +15,5 @@ public class BoardTO {
 	private String hit;
 	private int ucode;
 	private int cmt;
+	private String vcode;
 }

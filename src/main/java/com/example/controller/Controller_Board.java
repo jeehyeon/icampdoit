@@ -32,13 +32,18 @@ public class Controller_Board {
 	private BoardDAO dao;
 		 
 	// 리나 upload 경로
-	private String uploadPath = "C:/java/ProjectGit/src/main/webapp/upload/";
+	//private String uploadPath = "C:/java/ProjectGit/src/main/webapp/upload/";
+	String url1 = System.getProperty("user.dir");
+	private String uploadPath = url1 +"/src/main/webapp/upload/";
+	
+	
 	//private int maxFileSize = 10 * 1024 * 1024;
 	//private String encoding = "utf-8";
 	
 	@RequestMapping( value="/mboardlist.do" )
 	public ModelAndView mboardlist(HttpServletRequest request, HttpSession session) {
 		System.out.println( "mboardlist() 호출" );
+		
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
@@ -124,6 +129,7 @@ public class Controller_Board {
 		
 		savename = getUniqName(savename);
 		File target = new File(uploadPath + savename);
+		System.out.println("파일저장 : ");
 		System.out.println("target : " + target);	
 		System.out.println("savename : " + savename);	
 		
@@ -141,15 +147,16 @@ public class Controller_Board {
             FileUtils.forceDelete(target);	// 실패시 저장된 파일 삭제	 
             System.out.println( "[에러] " + e.getMessage() );
         }
-
-		return savename;
+		String result= savename + "@" + filesize;
+		return result;
 	}
 		
 	@RequestMapping(value = "/mboardwrite_ok.do", method=RequestMethod.POST)
 	public ModelAndView mboardwriteOk(MultipartFile image, HttpServletRequest request, HttpServletResponse response, HttpSession session)
 			throws IOException {
 		System.out.println("mboardwriteOk() 호출");
-
+		System.out.println(request.getParameter("writeOk"));
+		System.out.println(request.getParameter("filesize"));
 		//String uploadPath = request.getSession().getServletContext().getRealPath("/upload");
 
 		//MultipartRequest multi = new MultipartRequest(request, uploadPath, maxFileSize, encoding,
@@ -164,26 +171,30 @@ public class Controller_Board {
 		to.setWriter((String) session.getAttribute("id"));
 		to.setContent(request.getParameter("content"));
 		to.setUcode((Integer) session.getAttribute("ucode"));
+		to.setVcode(request.getParameter("vcode"));
 		System.out.println("subject : " + request.getParameter("subject"));
 
-		String file = request.getParameter("writeOk");
-		System.out.println("파일이름 : " + file);
+		//String file = request.getParameter("writeOk");
+		//System.out.println("파일이름 : " + file);
 		
 		//String filename = file.substring( 0, file.lastIndexOf(",") );
 		//long filesize = Long.parseLong( file.substring(file.lastIndexOf(",")+2) );
 		
 		FileTO fto = new FileTO();
-		fto.setFilename(file);
-		fto.setFilesize(file.length());
+		if(request.getParameter("filesize")!="0") {
+		fto.setFilename(request.getParameter("writeOk"));
+		fto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
+		}
 		/*
 		 * File file = request.getFile("upload"); if (file != null) {
 		 * fto.setFilesize(file.length()); }
 		 */
-
+		
 		int flag = dao.mboardWriteOk(to, fto);
 
+		dao.filecnd(to, fto);
 		ModelAndView modelAndView = new ModelAndView();
-
+		
 		if (session.getAttribute("ucode") == null) {
 			modelAndView.setViewName("/login/nousers");
 			return modelAndView;
@@ -244,6 +255,15 @@ public class Controller_Board {
 		modelAndView.setViewName( "/board/hboard_view" );
 		
 		return modelAndView;
+	}
+	
+	@RequestMapping( value="/writecancel.do" )
+	public void writecancel(HttpServletRequest request, HttpSession session) {
+		System.out.println( "writecancel() 호출" );
+		
+		dao.filedel((String)request.getParameter("filename"));
+		
+		
 	}
 	
 }
