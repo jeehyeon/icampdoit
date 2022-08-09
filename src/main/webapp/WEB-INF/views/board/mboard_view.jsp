@@ -201,7 +201,7 @@ if(session.getAttribute("id") != null){
 			  </div>
 			  <div class="col-lg-4 text-lg-end">
 				<input type="button" value="수정" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardmodify.do?cpage=&seq='" />
-				<input type="button" value="삭제" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboarddeleteOk.do?cpage=&seq='" />				
+				<input type="button" value="삭제" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='javascript:deleteBoard()'" />				
 			  </div>
             </div>
             
@@ -235,6 +235,24 @@ if(session.getAttribute("id") != null){
       </div>
     </footer>
     <!-- JavaScript files-->
+    <script type="text/javascript">
+    
+    	function deleteBoard() {
+    		$.ajax({
+    			url: './mboarddeleteok.do',
+    			type: 'get',
+    			data : ,
+    			success: {
+    				//삭제누른 사람 ucode == 게시글 ucode
+    				//게시글 삭제완료 alert
+    				
+    			}, 
+    			fail: function(error){
+        			alert('작성자만 삭제가 가능합니다.' );
+    		});
+    	}
+    
+    </script>
     
     <script>
       // ------------------------------------------------------- //

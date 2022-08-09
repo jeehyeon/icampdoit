@@ -318,6 +318,21 @@ public class Controller_Board {
 		return modelAndView;
 	}
 	
+	@RequestMapping( value="/mboarddelete_ok.do" )
+	public ModelAndView mboarddeleteOk(HttpServletRequest request, HttpSession session) throws IOException {
+		System.out.println( "mboarddeleteOk() 호출" );
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
+		if(session.getAttribute("ucode") == null) {
+			modelAndView.setViewName( "/login/nousers" );
+			return modelAndView;
+		}
+		modelAndView.setViewName( "/board/mboard_delete_ok" );
+		
+		return modelAndView;
+	}
+	
 	@RequestMapping( value="/hboardlist.do" )
 	public ModelAndView hboardlist(HttpServletRequest request, HttpSession session) {
 		System.out.println( "hboardlist()호출" );

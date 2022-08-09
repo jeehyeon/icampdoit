@@ -248,7 +248,8 @@ public class BoardDAO {
 	// modify
 	public BoardTO mboardModify(BoardTO to) {
 		
-		
+		String sql = "select seq, subject, title, writer, content, ucode, vcode from m_board where seq=?";		
+		to = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<BoardTO>(BoardTO.class), to.getSeq() );
 	
 		return to;
 	}
@@ -272,6 +273,30 @@ public class BoardDAO {
 	public int mboardDeleteOk(BoardTO to) {
 		
 		int flag = 2;
+		String filename = null;
+		
+		String sql = "select filename from m_file where pseq=?";
+		to = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<BoardTO>(BoardTO.class), to.getSeq() );
+		
+		//if( filename ==  ) {
+			
+		//}
+		sql = "delete from m_board where seq=?";
+		int result = jdbcTemplate.update(sql, to.getSeq() );
+		
+		FileTO fto = new FileTO();
+		CmtTO cto = new CmtTO();
+		
+		sql = "delete from m_file where pseq=?";
+		int fileresult = jdbcTemplate.update(sql, fto.getPseq() );
+		
+		sql = "delete from m_cmt where pseq=?";
+		int cmtresult = jdbcTemplate.update(sql, cto.getPseq() );
+		
+		
+		
+		
+		
 		
 		return flag;
 	}
