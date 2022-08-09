@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.exam.mboard.BoardDAO" %>
+<%@ page import="com.exam.mboard.BoardTO" %>
 <%
 //session 값 가져오기
 int ucode = -1;
@@ -8,6 +10,17 @@ if(session.getAttribute("id") != null){
 	ucode = (int)session.getAttribute("ucode");
 	id = (String)session.getAttribute("id");
 }
+
+//view
+	BoardTO to = (BoardTO)request.getAttribute( "to" );
+
+	String seq = to.getSeq();
+	String subject = to.getSubject();
+	String writer = to.getWriter();
+	String title = to.getTitle();
+	String content = to.getContent();
+	String wdate = to.getWdate();
+	String hit = to.getHit();
 %>
     
 <!DOCTYPE html>
@@ -111,11 +124,11 @@ if(session.getAttribute("id") != null){
       <div class="container overlay-content">
         <div class="d-flex justify-content-between align-items-start flex-column flex-lg-row align-items-lg-end">
           <div class="text-white mb-4 mb-lg-0">
-            <h1 class="text-shadow verified">제목입니다!!!</h1>
+            <h1 class="text-shadow verified"><%=title %></h1>
             <div>
-             <span><i class="fa-solid fa-user text-primary"></i> 홍길동</span>&nbsp;&nbsp;
-             <span><i class="fa-solid fa-calendar text-primary"></i> 2022-07-30</span>&nbsp;&nbsp;
-             <span><i class="fa-solid fa-check-to-slot text-primary"></i> 조회수 16</span>
+             <span><i class="fa-solid fa-user text-primary"></i> <%=writer %></span>&nbsp;&nbsp;
+             <span><i class="fa-solid fa-calendar text-primary"></i> <%=wdate %></span>&nbsp;&nbsp;
+             <span><i class="fa-solid fa-check-to-slot text-primary"></i> 조회수 <%=hit %></span>
             </div>
           </div>        
         </div>
@@ -127,8 +140,9 @@ if(session.getAttribute("id") != null){
           <div class="col-lg-12">
             <!-- About Listing-->
             <div class="text-block">
-              <p class="text-muted"> 내용1 </p>
-              <p class="text-muted"> 내용2 </p>
+              <p class="text-muted"> <%=content %> </p>
+              <p></p>
+              <!-- <p class="text-muted"> 내용2 </p>  -->
             </div>
             
             
@@ -218,6 +232,7 @@ if(session.getAttribute("id") != null){
       </div>
     </footer>
     <!-- JavaScript files-->
+    
     <script>
       // ------------------------------------------------------- //
       //   Inject SVG Sprite - 

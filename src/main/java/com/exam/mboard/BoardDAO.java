@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.exam.login.SignUpTO;
 import com.exam.mboard.BoardListTO;
 import com.exam.mboard.BoardTO;
+import com.exam.nboard.NBoardTO;
 
 @Repository
 public class BoardDAO {
@@ -78,7 +79,34 @@ public class BoardDAO {
 	// list
 	public ArrayList<BoardTO> mboardList() {
 				
-		String sql = "select seq, subject, writer, cmt, filename, date_format(wdate, '%Y.%m.%d') wdate, hit, datediff(now(), wdate) wgap from album_cmt_board1 order by seq desc";
+		String sql = "select seq, subject, writer, title, date_format(wdate, '%Y.%m.%d') wdate, hit from m_board order by seq desc";
+		ArrayList<BoardTO> lists = (ArrayList<BoardTO>)jdbcTemplate.query(
+				sql, new BeanPropertyRowMapper<BoardTO>(BoardTO.class) );
+		
+		return lists;		
+	}
+	
+	public ArrayList<BoardTO> mboardListFree() {
+		
+		String sql = "select seq, subject, writer, title, date_format(wdate, '%Y.%m.%d') wdate, hit from m_board where subject='2' order by seq desc";
+		ArrayList<BoardTO> lists = (ArrayList<BoardTO>)jdbcTemplate.query(
+				sql, new BeanPropertyRowMapper<BoardTO>(BoardTO.class) );
+		
+		return lists;		
+	}
+	
+	public ArrayList<BoardTO> mboardListReview() {
+		
+		String sql = "select seq, subject, writer, title, date_format(wdate, '%Y.%m.%d') wdate, hit from m_board where subject='1' order by seq desc";
+		ArrayList<BoardTO> lists = (ArrayList<BoardTO>)jdbcTemplate.query(
+				sql, new BeanPropertyRowMapper<BoardTO>(BoardTO.class) );
+		
+		return lists;		
+	}
+	
+	public ArrayList<BoardTO> mboardListTrade() {
+		
+		String sql = "select seq, subject, writer, title, date_format(wdate, '%Y.%m.%d') wdate, hit from m_board where subject='3' order by seq desc";
 		ArrayList<BoardTO> lists = (ArrayList<BoardTO>)jdbcTemplate.query(
 				sql, new BeanPropertyRowMapper<BoardTO>(BoardTO.class) );
 		
@@ -94,7 +122,14 @@ public class BoardDAO {
 	
 	// view
 	public BoardTO mboardView(BoardTO to) {	
+		
+		String sql = "update m_board set hit=hit+1 where seq=?";
 
+		int result = jdbcTemplate.update(sql, to.getSeq() );
+		
+		sql = "select seq, subject, title, writer, content, date_format(wdate, '%Y-%m-%d') wdate, hit from m_board where seq=?";		
+		to = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<BoardTO>(BoardTO.class), to.getSeq() );
+		
 		return to;
 	}
 	

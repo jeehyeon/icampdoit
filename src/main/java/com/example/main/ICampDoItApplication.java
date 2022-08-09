@@ -5,7 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan( basePackages = { "com.example.controller", "com.exam.login", "com.exam.mboard", "com.exam.search" } )
+@ComponentScan( basePackages = { "com.example.controller", "com.exam.login", "com.exam.mboard", "com.exam.nboard", "com.exam.search" } )
+
 public class ICampDoItApplication {
 
 	public static void main(String[] args) {

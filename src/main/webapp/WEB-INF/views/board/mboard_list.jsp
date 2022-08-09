@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.exam.mboard.BoardTO" %>
+<%@ page import="com.exam.mboard.BoardListTO" %>
+<%@ page import="java.util.ArrayList" %>
 <%
 //session 값 가져오기
 int ucode = -1;
@@ -8,6 +11,35 @@ if(session.getAttribute("id") != null){
 	ucode = (int)session.getAttribute("ucode");
 	id = (String)session.getAttribute("id");
 }
+
+//게시판
+	ArrayList<BoardTO> lists = (ArrayList)request.getAttribute( "lists" );
+	ArrayList<BoardTO> reviewLists = (ArrayList)request.getAttribute( "reviewLists" );
+	ArrayList<BoardTO> freeLists = (ArrayList)request.getAttribute( "freeLists" );
+	ArrayList<BoardTO> tradeLists = (ArrayList)request.getAttribute( "tradeLists" );
+
+	int totalRecord = lists.size();
+	
+	StringBuilder sbHtml = new StringBuilder();
+	
+	for( BoardTO to : lists ){
+		String seq = to.getSeq();
+		String subject = to.getSubject();
+		String writer = to.getWriter();
+		String title = to.getTitle();
+		String wdate = to.getWdate();
+		String hit = to.getHit();
+		
+		sbHtml.append( "<tr onmouseover=\"this.style.background='#f1f6ea'\" onmouseout=\"this.style.background='white'\" style=\"cursor: pointer;\" onclick=\"location.href='mboardview.do?seq=" + seq + "'\">" );
+		sbHtml.append( "<td class=\"text-center\">" + seq + "</td>" );
+		sbHtml.append( "<td class=\"fw-bold text-center\">" + title + "</td>" );
+        sbHtml.append( "<td></td>" );
+        sbHtml.append( "<td class=\"text-end\">" + writer + "</td>" );
+        sbHtml.append( "<td class=\"text-end\">" + wdate + "</td>" );
+        sbHtml.append( "<td class=\"text-end\">" + hit + "</td>" );
+        sbHtml.append( "</tr>" );
+	}
+
 %>
 <!DOCTYPE html>
   <head>
@@ -119,10 +151,10 @@ if(session.getAttribute("id") != null){
               <div class="d-flex justify-content-between align-items-center flex-column flex-md-row mb-4 mt-2">
                 <!-- 게시판종류 드롭박스 -->
                 <div class="me-3">
-                  <select class="selectpicker" name="sort" id="form_sort" data-style="btn-selectpicker" title="">
-                    <option value="sortBy_0">후기 게시판</option>
-                    <option value="sortBy_1">자유 게시판</option>
-                    <option value="sortBy_2">중고거래 게시판</option>
+                  <select class="selectpicker" name="sort" id="form_sort" data-style="btn-selectpicker" title="" onchange="location.href='javascript:changeSubject()'">
+                    <option value="1">후기 게시판</option>
+                    <option value="2">자유 게시판</option>
+                    <option value="3">중고거래 게시판</option>
                   </select>
                 </div>
                 <!-- 글쓰기버튼 -->
@@ -136,7 +168,7 @@ if(session.getAttribute("id") != null){
           <div class="card-body p-5 p-print-0">
             <div class="row">
               <div class="col-sm-6 pe-lg-3">
-                <h2 class="h6 text-uppercase mb-4">전체: 20 건</h2>
+                <h2 class="h6 text-uppercase mb-4">전체: <%=totalRecord %> 건</h2>
               </div>
             </div>
             
@@ -153,7 +185,8 @@ if(session.getAttribute("id") != null){
                     <th class="text-end">조회수</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="tbody">
+                  <!-- 
                   <tr onmouseover="this.style.background='#f1f6ea'" onmouseout="this.style.background='white'" style="cursor: pointer;" onclick="location.href='mboardview.do'">
                     <td class="text-center">1</td>
                     <td class="fw-bold text-center">[후기게시판] 자라섬 캠핑장 솔직후기</td>
@@ -210,6 +243,7 @@ if(session.getAttribute("id") != null){
                     <td class="text-end">2022-01-01</td>
                     <td class="text-end">0</td>
                   </tr>
+                   -->
                 </tbody>
               </table>
             </div>
@@ -261,6 +295,105 @@ if(session.getAttribute("id") != null){
       </div>
     </footer>
     <!-- JavaScript files-->
+    
+    <script>
+    	function changeSubject(){
+    		subjectValue = $( "#form_sort option:selected" ).val();
+    		console.log( subjectValue );
+    		
+    		$.ajax({
+    			url: './mboardview.do',
+    			type: 'get',
+    			data: "sbHtml",
+    			dataType: "text",
+    			contentType :   "application/x-www-form-urlencoded; charset=UTF-8",
+    			success: function(data){
+    				if(subjectValue == "1" ) {
+    					
+    					for( BoardTO to : reviewLists ){
+    						String seq = to.getSeq();
+    						String subject = to.getSubject();
+    						String writer = to.getWriter();
+    						String title = to.getTitle();
+    						String wdate = to.getWdate();
+    						String hit = to.getHit();
+    						
+    						sbHtml.append( "<tr onmouseover=\"this.style.background='#f1f6ea'\" onmouseout=\"this.style.background='white'\" style=\"cursor: pointer;\" onclick=\"location.href='mboardview.do?seq=" + seq + "'\">" );
+    						sbHtml.append( "<td class=\"text-center\">" + seq + "</td>" );
+    						sbHtml.append( "<td class=\"fw-bold text-center\">" + title + "</td>" );
+    				        sbHtml.append( "<td></td>" );
+    				        sbHtml.append( "<td class=\"text-end\">" + writer + "</td>" );
+    				        sbHtml.append( "<td class=\"text-end\">" + wdate + "</td>" );
+    				        sbHtml.append( "<td class=\"text-end\">" + hit + "</td>" );
+    				        sbHtml.append( "</tr>" );
+    					}
+    					
+    					$("#tbody").append( sbHtml.toString() );
+    					
+    				} else if( subjectValue == "2" ){
+    					for( BoardTO to : freeLists ){
+    						String seq = to.getSeq();
+    						String subject = to.getSubject();
+    						String writer = to.getWriter();
+    						String title = to.getTitle();
+    						String wdate = to.getWdate();
+    						String hit = to.getHit();
+    						
+    						sbHtml.append( "<tr onmouseover=\"this.style.background='#f1f6ea'\" onmouseout=\"this.style.background='white'\" style=\"cursor: pointer;\" onclick=\"location.href='mboardview.do?seq=" + seq + "'\">" );
+    						sbHtml.append( "<td class=\"text-center\">" + seq + "</td>" );
+    						sbHtml.append( "<td class=\"fw-bold text-center\">" + title + "</td>" );
+    				        sbHtml.append( "<td></td>" );
+    				        sbHtml.append( "<td class=\"text-end\">" + writer + "</td>" );
+    				        sbHtml.append( "<td class=\"text-end\">" + wdate + "</td>" );
+    				        sbHtml.append( "<td class=\"text-end\">" + hit + "</td>" );
+    				        sbHtml.append( "</tr>" );
+    					}
+    					$("#tbody").append( sbHtml.toString() );
+    					
+    				} else if ( subjectValue == "3" ){
+    					for( BoardTO to : tradeLists ){
+    						String seq = to.getSeq();
+    						String subject = to.getSubject();
+    						String writer = to.getWriter();
+    						String title = to.getTitle();
+    						String wdate = to.getWdate();
+    						String hit = to.getHit();
+    						
+    						sbHtml.append( "<tr onmouseover=\"this.style.background='#f1f6ea'\" onmouseout=\"this.style.background='white'\" style=\"cursor: pointer;\" onclick=\"location.href='mboardview.do?seq=" + seq + "'\">" );
+    						sbHtml.append( "<td class=\"text-center\">" + seq + "</td>" );
+    						sbHtml.append( "<td class=\"fw-bold text-center\">" + title + "</td>" );
+    				        sbHtml.append( "<td></td>" );
+    				        sbHtml.append( "<td class=\"text-end\">" + writer + "</td>" );
+    				        sbHtml.append( "<td class=\"text-end\">" + wdate + "</td>" );
+    				        sbHtml.append( "<td class=\"text-end\">" + hit + "</td>" );
+    				        sbHtml.append( "</tr>" );
+    					}
+    					$("#tbody").append( sbHtml.toString() );
+    					
+    				} else {
+    					for( BoardTO to : lists ){
+    						String seq = to.getSeq();
+    						String subject = to.getSubject();
+    						String writer = to.getWriter();
+    						String title = to.getTitle();
+    						String wdate = to.getWdate();
+    						String hit = to.getHit();
+    						
+    						sbHtml.append( "<tr onmouseover=\"this.style.background='#f1f6ea'\" onmouseout=\"this.style.background='white'\" style=\"cursor: pointer;\" onclick=\"location.href='mboardview.do?seq=" + seq + "'\">" );
+    						sbHtml.append( "<td class=\"text-center\">" + seq + "</td>" );
+    						sbHtml.append( "<td class=\"fw-bold text-center\">" + title + "</td>" );
+    				        sbHtml.append( "<td></td>" );
+    				        sbHtml.append( "<td class=\"text-end\">" + writer + "</td>" );
+    				        sbHtml.append( "<td class=\"text-end\">" + wdate + "</td>" );
+    				        sbHtml.append( "<td class=\"text-end\">" + hit + "</td>" );
+    				        sbHtml.append( "</tr>" );
+    					}
+    					$("#tbody").append( sbHtml.toString() );
+    				}
+    			}
+    		});
+    	};
+    </script>
     <script>
       // ------------------------------------------------------- //
       //   Inject SVG Sprite - 

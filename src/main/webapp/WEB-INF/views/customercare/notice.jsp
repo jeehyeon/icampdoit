@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.exam.nboard.NBoardTO" %>
+<%@ page import="com.exam.nboard.NListTO" %>
+
+<%@ page import="java.util.ArrayList" %>
+
 <%
 //session 값 가져오기
 int ucode = -1;
@@ -8,6 +13,42 @@ if(session.getAttribute("id") != null){
 	ucode = (int)session.getAttribute("ucode");
 	id = (String)session.getAttribute("id");
 }
+
+//Arraylist
+	ArrayList<NBoardTO> lists = (ArrayList)request.getAttribute( "lists" );
+
+	NListTO listTO = (NListTO)request.getAttribute( "listTO" );
+	
+	int totalRecord = listTO.getTotalRecord();
+	int cpage = listTO.getCpage();
+	if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals("") ) {
+		cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+	}
+	int blockPerPage = listTO.getBlockPerPage();
+	int totalPage = listTO.getTotalPage();
+	
+	int startBlock = listTO.getStartBlock();
+	int endBlock = listTO.getEndBlock();
+	
+	StringBuilder sbHtml = new StringBuilder();
+	
+	for( NBoardTO to : lists ){
+		int seq = to.getSeq();
+		String subject = to.getSubject();
+		String writer = to.getWriter();
+		String title = to.getTitle();
+		String wdate = to.getWdate();
+		int hit = to.getHit();
+		
+		sbHtml.append( "<tr onmouseover=\"this.style.background='#f1f6ea'\" onmouseout=\"this.style.background='white'\" style=\"cursor: pointer;\" onclick=\"location.href='noticeview.do?seq=" + seq + "'\">" );
+		sbHtml.append( "<td class=\"text-center\">" + seq + "</td>" );
+		sbHtml.append( "<td class=\"fw-bold text-center\">" + title + "</td>" );
+        sbHtml.append( "<td></td>" );
+        sbHtml.append( "<td class=\"text-end\">" + writer + "</td>" );
+        sbHtml.append( "<td class=\"text-end\">" + wdate + "</td>" );
+        sbHtml.append( "<td class=\"text-end\">" + hit + "</td>" );
+        sbHtml.append( "</tr>" );
+	}
 %>
 <!DOCTYPE html>
   <head>
@@ -116,11 +157,12 @@ if(session.getAttribute("id") != null){
           <div class="card-body p-5 p-print-0">
             <div class="row">
               <div class="col-sm-6 mt-3 pe-lg-3">
-                <h2 class="h6 text-uppercase mb-4">전체: 7 건</h2>
+                <h2 class="h6 text-uppercase mb-4">전체: <%=totalRecord %> 건</h2>
               </div>
             </div>
             
             <!-- 목록 -->
+            
             <div class="table-responsive text-sm mb-3">
               <table class="table">
               	<thead class="bg-gray-100">
@@ -134,6 +176,7 @@ if(session.getAttribute("id") != null){
                   </tr>
                 </thead>
                 <tbody>
+                <!-- 
                   <tr onmouseover="this.style.background='#f1f6ea'" onmouseout="this.style.background='white'" style="cursor: pointer;" onclick="location.href='noticeview.do'">
                     <td class="text-center">1</td>
                     <td class="fw-bold text-center">[공지] 사이트 이용안내 변경 사항 공지</td>
@@ -190,6 +233,8 @@ if(session.getAttribute("id") != null){
                     <td class="text-end">2022-01-01</td>
                     <td class="text-end">0</td>
                   </tr>
+                   -->
+                   <%=sbHtml.toString() %>
                 </tbody>
               </table>
             </div>
