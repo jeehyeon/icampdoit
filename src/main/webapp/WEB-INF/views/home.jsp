@@ -124,7 +124,7 @@ if(session.getAttribute("id") != null){
               <form action="./searchkey.do" method="get">
                 <div class="row">
                   <div class="col-lg-7 d-flex align-items-center form-group">
-                    <input class="form-control border-0 shadow-0" type="text" name="keysearch" placeholder="키워드 검색">
+                    <input class="form-control border-0 shadow-0" type="text" name="keysearch" id="keysearch" placeholder="키워드 검색">
                   </div>
                   <div class="col-lg-3 d-flex align-items-center form-group no-divider">
                     <button type="button" class="btn btn-outline-light text-dark" id="filteringButton" data-style="btn-form-control" data-bs-toggle="modal" data-bs-target="#filteringModal">

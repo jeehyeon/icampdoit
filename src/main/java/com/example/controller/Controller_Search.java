@@ -2,20 +2,33 @@ package com.example.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.exam.search.SearchkeyDAO;
+import com.exam.search.SearchkeyTO;
 
 
 @RestController
 public class Controller_Search {
 	
+	@Autowired
+	SearchkeyDAO dao;
 	
 	@RequestMapping( value="/searchkey.do" )
 	public ModelAndView searchkey(HttpServletRequest request) {
 		System.out.println( "searchkey()호출" );
 		
-
+		SearchkeyTO kto = new SearchkeyTO();
+		kto.setKeysearch( request.getParameter( "keysearch" ) );
+		System.out.println( kto.getKeysearch());
+		
+		//dao.searchkeyDAO();
+		
+		
+		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "/search/search_key" );
 		
