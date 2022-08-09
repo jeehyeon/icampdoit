@@ -42,7 +42,7 @@ if(session.getAttribute("id") != null){
 		String wdate = to.getWdate();
 		String hit = to.getHit();
 		
-		sbHtml.append( "<tr onmouseover=\"this.style.background='#f1f6ea'\" onmouseout=\"this.style.background='white'\" style=\"cursor: pointer;\" onclick=\"location.href='mboardview.do?cpage=" + cpage + "&seq=" + seq + "'\">" );
+		sbHtml.append( "<tr onmouseover=\"this.style.background='#f1f6ea'\" onmouseout=\"this.style.background='white'\" style=\"cursor: pointer;\" onclick=\"location.href='mboardview.do?subjectValue=" + subjectValue + "&cpage=" + cpage + "&seq=" + seq + "'\">" );
 		sbHtml.append( "<td class=\"text-center\">" + seq + "</td>" );
 		sbHtml.append( "<td class=\"fw-bold text-center\">" + title + "</td>" );
         sbHtml.append( "<td></td>" );
@@ -300,7 +300,7 @@ if(session.getAttribute("id") != null){
 		if ( cpage == i ) { 
 			out.println(" <li class='page-item active'><a class='page-link' href='#'>" + i + "</a></li> ");
 		} else {
-			out.println(" <li class='page-item'><a class='page-link' href='mboardlist.do?cpage=" + i +"&subjectValue="+ subjectValue + "'>" + i + "</a></li> ");
+			out.println(" <li class='page-item'><a class='page-link' href='mboardlist.do?subjectValue=" + subjectValue + "&cpage=" + i + "'>" + i + "</a></li> ");
 		}
 	}
 	//out.println(" &nbsp;&nbsp; ");

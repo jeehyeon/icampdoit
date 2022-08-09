@@ -15,13 +15,13 @@ if(session.getAttribute("id") != null){
 //view DAO 
 	NBoardTO to = (NBoardTO)request.getAttribute( "to" );
 	
-	int seq = to.getSeq();
+	String seq = to.getSeq();
 	String subject = to.getSubject();
 	String writer = to.getWriter();
 	String title = to.getTitle();
 	String content = to.getContent();
 	String wdate = to.getWdate();
-	int hit = to.getHit();
+	String hit = to.getHit();
 %>    
 <!DOCTYPE html>
   <head>

@@ -127,10 +127,18 @@ public class Controller_Board {
 	public ModelAndView mboardview(HttpServletRequest request, HttpSession session) {
 		System.out.println( "mboardview() 호출" );
 		
+		int subjectValue = 2;
+		if(request.getParameter( "subjectValue" ) != null && !request.getParameter( "subjectValue" ).equals( "" ) ) {
+			subjectValue = Integer.parseInt( request.getParameter( "subjectValue" ) );
+		}
+		
 		BoardTO to = new BoardTO();
 		to.setSeq( request.getParameter( "seq" ) );
 		
 		to = dao.mboardView(to);
+		
+		BoardListTO bto = new BoardListTO();
+		int cpage = bto.getCpage();
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
@@ -140,6 +148,8 @@ public class Controller_Board {
 		}
 		modelAndView.setViewName( "/board/mboard_view" );
 		modelAndView.addObject( "to", to );
+		modelAndView.addObject( "cpage", cpage );
+		modelAndView.addObject( "subjectValue", subjectValue );
 		
 		return modelAndView;
 	}

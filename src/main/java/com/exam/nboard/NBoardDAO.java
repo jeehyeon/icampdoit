@@ -17,6 +17,8 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.exam.mboard.BoardTO;
+
 @Repository
 public class NBoardDAO {
 	
@@ -41,35 +43,37 @@ public class NBoardDAO {
 		int blockPerPage = listTO.getBlockPerPage();
 		
 		String sql = "select seq, writer, subject, title, date_format(wdate, '%Y-%m-%d') wdate, hit from n_board order by seq desc";
+		ArrayList<NBoardTO> boardLists = (ArrayList<NBoardTO>)jdbcTemplate.query(
+				sql, new BeanPropertyRowMapper<NBoardTO>(NBoardTO.class));
 		
-		List<NListTO> list = jdbcTemplate.query( sql, new RowMapper<NListTO>() {
-
-			@Override
-			public NListTO mapRow(ResultSet rs, int rowNum) throws SQLException {
-				// TODO Auto-generated method stub
-				
-				rs.last();
-				listTO.setTotalRecord( rs.getRow() );
-				rs.beforeFirst();
-				
-				int skip = (cpage -1) * recordPerPage;
-				if( skip != 0 ) rs.absolute(skip);
-				
-				return null;
-			}		
-		});
+		listTO.setTotalRecord( boardLists.size() );
 		
-		listTO.setTotalPage( ( (listTO.getTotalRecord() -1 ) / recordPerPage) +1 );
-		ArrayList<NBoardTO> lists = (ArrayList<NBoardTO>)jdbcTemplate.query(
-				sql, new BeanPropertyRowMapper<NBoardTO>(NBoardTO.class) );
+		listTO.setTotalPage( ( (listTO.getTotalRecord() -1 ) / recordPerPage ) + 1 );		
+		int skip = ( cpage - 1 ) * recordPerPage;	
 		
-		listTO.setBoardLists( lists );
-		listTO.setStartBlock( ( (cpage -1 ) / blockPerPage ) * blockPerPage + 1 );
-		listTO.setEndBlock( ( ( cpage-1 ) / blockPerPage ) * blockPerPage + blockPerPage);
-		if( listTO.getEndBlock() >= listTO.getTotalPage() ) {
-			listTO.setEndBlock( listTO.getTotalPage() );
+		ArrayList<NBoardTO> lists = new ArrayList<NBoardTO>();		
+		for( int i=0; i<recordPerPage ; i++ ) {
+			if( skip+i != boardLists.size() ) {
+				NBoardTO to = new NBoardTO();
+				to.setSeq( boardLists.get(skip+i).getSeq() );
+				to.setSubject( boardLists.get(skip+i).getSubject() );
+				to.setTitle( boardLists.get(skip+i).getTitle() );
+				to.setWriter( boardLists.get(skip+i).getWriter() );
+				to.setWdate( boardLists.get(skip+i).getWdate() );
+				to.setUcode( boardLists.get(skip+i).getUcode() );
+				to.setHit( boardLists.get(skip+i).getHit() );
+				
+				lists.add(to);
+				
+			} else { break; }
 		}
 		
+		listTO.setBoardLists( lists );
+		listTO.setStartBlock( ( ( cpage-1 ) / blockPerPage ) * blockPerPage + 1);
+		listTO.setEndBlock( ( (cpage-1) / blockPerPage) * blockPerPage + blockPerPage);
+		if(listTO.getEndBlock() >= listTO.getTotalPage()) {
+			listTO.setEndBlock(listTO.getTotalPage());
+		}		
 		return listTO;
 		
 	}

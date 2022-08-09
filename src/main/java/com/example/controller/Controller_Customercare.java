@@ -25,16 +25,22 @@ public class Controller_Customercare {
 	public ModelAndView notice(HttpServletRequest request, HttpSession session) {
 		System.out.println( "notice()호출" );
 		
-		ArrayList<NBoardTO> lists = dao.nboardList();
+		//ArrayList<NBoardTO> lists = dao.nboardList();
+		
+		int cpage=1;
+		if(request.getParameter("cpage")!=null && !request.getParameter("cpage").equals("")) {
+			cpage = (Integer.parseInt(request.getParameter("cpage")));
+		}
 		
 		NListTO listTO = new NListTO();
-		if(request.getParameter("cpage")!=null && !request.getParameter("cpage").equals("")) {
-			listTO.setCpage(Integer.parseInt(request.getParameter("cpage")));
-		}
+		listTO.setCpage(cpage);	
+		
+		listTO = dao.nList(listTO);	
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "/customercare/notice" );
-		modelAndView.addObject( "lists", lists );
+		modelAndView.addObject( "listTO", listTO );
+		modelAndView.addObject( "cpage", cpage );
 		
 		return modelAndView;
 	}
@@ -55,7 +61,7 @@ public class Controller_Customercare {
 		System.out.println( "noticeview() 호출" );
 		
 		NBoardTO to = new NBoardTO();
-		to.setSeq( Integer.parseInt(request.getParameter( "seq" )) );
+		to.setSeq( request.getParameter( "seq" ) );
 		
 		to = dao.nboardView(to);
 

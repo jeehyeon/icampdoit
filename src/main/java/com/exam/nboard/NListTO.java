@@ -14,7 +14,6 @@ public class NListTO {
 	private int totalRecord;
 	private int startBlock;
 	private int endBlock;
-	private int blockRecord;
 	private ArrayList<NBoardTO> boardLists;
 	
 	public NListTO() {
@@ -24,6 +23,5 @@ public class NListTO {
 		this.blockPerPage = 5;
 		this.totalPage = 1;
 		this.totalRecord = 0;
-		this.blockRecord = 0;
 	}
 }

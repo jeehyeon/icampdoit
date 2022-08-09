@@ -21,6 +21,9 @@ if(session.getAttribute("id") != null){
 	String content = to.getContent();
 	String wdate = to.getWdate();
 	String hit = to.getHit();
+	
+	int cpage = (Integer)request.getAttribute("cpage");
+	int subjectValue = (Integer)request.getAttribute( "subjectValue" );
 %>
     
 <!DOCTYPE html>
@@ -194,7 +197,7 @@ if(session.getAttribute("id") != null){
         
             <div class="row">
 			  <div class="col-lg-8">
-				<input type="button" value="목록" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardlist.do?cpage='" />
+				<input type="button" value="목록" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardlist.do?subjectValue=<%=subjectValue%>&cpage=<%=cpage%>'" />
 			  </div>
 			  <div class="col-lg-4 text-lg-end">
 				<input type="button" value="수정" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardmodify.do?cpage=&seq='" />

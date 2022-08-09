@@ -216,6 +216,35 @@ public class BoardDAO {
 		return to;
 	}
 	
+	//view Comment
+	public ArrayList<CmtTO> mboardViewComment( CmtTO cto ){
+		
+		String sql = "select seq, pseq, writer, content, date_format(wdate, '%Y.%m.%d') wdate, ucode from m_cmt order by seq desc";
+		ArrayList<CmtTO> lists = (ArrayList<CmtTO>)jdbcTemplate.query(
+				sql, new BeanPropertyRowMapper<CmtTO>(CmtTO.class) );
+		
+		return lists;
+		
+	}
+	
+	//write Comment
+	public int mboardWriteComment( CmtTO cto ) {
+		
+		int flag = 1;
+		
+		String sql = "insert into m_cmt values ( 0, ?, ?, ?, now(), ?)";
+		int result = jdbcTemplate.update(sql, cto.getPseq(), cto.getWriter(), cto.getContent(), cto.getUcode() );
+					System.out.println(result);
+
+		if( result != 1 ) {
+			System.out.println("m_cmt insert 오류");
+		}else {
+			flag=0;
+		}
+		
+		return flag;
+	}
+	
 	// modify
 	public BoardTO mboardModify(BoardTO to) {
 		

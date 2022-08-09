@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class CmtTO {
 	private String seq;
-	private String peq;
+	private String pseq;
 	private String writer;
 	private String content;
 	private String wdate;

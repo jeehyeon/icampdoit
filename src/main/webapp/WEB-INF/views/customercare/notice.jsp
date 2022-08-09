@@ -7,38 +7,36 @@
 
 <%
 //session 값 가져오기
-int ucode = -1;
-String id ="";
-if(session.getAttribute("id") != null){
-	ucode = (int)session.getAttribute("ucode");
-	id = (String)session.getAttribute("id");
-}
+	int ucode = -1;
+	String id ="";
+	if(session.getAttribute("id") != null){
+		ucode = (int)session.getAttribute("ucode");
+		id = (String)session.getAttribute("id");
+	}
 
-//Arraylist
-	ArrayList<NBoardTO> lists = (ArrayList)request.getAttribute( "lists" );
+	//Arraylist
+	//ArrayList<NBoardTO> lists = (ArrayList)request.getAttribute( "lists" );
 
 	NListTO listTO = (NListTO)request.getAttribute( "listTO" );
+	int cpage = listTO.getCpage();
 	
 	int totalRecord = listTO.getTotalRecord();
-	int cpage = listTO.getCpage();
-	if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals("") ) {
-		cpage = Integer.parseInt( request.getParameter( "cpage" ) );
-	}
 	int blockPerPage = listTO.getBlockPerPage();
-	int totalPage = listTO.getTotalPage();
-	
+	int totalPage = listTO.getTotalPage();	
 	int startBlock = listTO.getStartBlock();
 	int endBlock = listTO.getEndBlock();
+	
+	ArrayList<NBoardTO> lists = listTO.getBoardLists();
 	
 	StringBuilder sbHtml = new StringBuilder();
 	
 	for( NBoardTO to : lists ){
-		int seq = to.getSeq();
+		String seq = to.getSeq();
 		String subject = to.getSubject();
 		String writer = to.getWriter();
 		String title = to.getTitle();
 		String wdate = to.getWdate();
-		int hit = to.getHit();
+		String hit = to.getHit();
 		
 		sbHtml.append( "<tr onmouseover=\"this.style.background='#f1f6ea'\" onmouseout=\"this.style.background='white'\" style=\"cursor: pointer;\" onclick=\"location.href='noticeview.do?seq=" + seq + "'\">" );
 		sbHtml.append( "<td class=\"text-center\">" + seq + "</td>" );
@@ -244,11 +242,53 @@ if(session.getAttribute("id") != null){
           <div class="card-footer bg-white p-5 px-print-0 border-0 text-end text-sm">
             <nav aria-label="Page navigation example">
               <ul class="pagination pagination-template d-flex justify-content-center">
+              <!--
                 <li class="page-item"><a class="page-link" href="#"> <i class="fa fa-angle-left"></i></a></li>
                 <li class="page-item active"><a class="page-link" href="#">1</a></li>
                 <li class="page-item"><a class="page-link" href="#">2</a></li>
                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                 <li class="page-item"><a class="page-link" href="#"> <i class="fa fa-angle-right"></i></a></li>
+                -->
+<%			
+	//페이지 하단의 << 버튼
+	if ( startBlock == 1 ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-thin fa-angles-left'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='notice.do?cpage="+ (startBlock - blockPerPage) +"'><i class='fa fa-thin fa-angles-left'></i></a></li> ");
+	}
+	//out.println(" &nbsp; ");
+	//페이지 하단의 < 버튼 => (cpage-1) 한페이지 앞으로 이동
+	if ( cpage == 1 ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'> <i class='fa fa-angle-left'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='notice.do?cpage="+ (cpage-1) +"'><i class='fa fa-angle-left'></i></a></li> ");
+	}
+	//out.println(" &nbsp;&nbsp; ");
+	//현재 페이지
+	for ( int i=startBlock; i<=endBlock; i++ ) {
+		if ( cpage == i ) { 
+			out.println(" <li class='page-item active'><a class='page-link' href='#'>" + i + "</a></li> ");
+		} else {
+			out.println(" <li class='page-item'><a class='page-link' href='notice.do?cpage=" + i + "'>" + i + "</a></li> ");
+		}
+	}
+	//out.println(" &nbsp;&nbsp; ");
+	//페이지 하단의 > 버튼
+	if ( cpage == totalPage ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-angle-right'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='notice.do?cpage="+ (cpage+1) +"'><i class='fa fa-angle-right'></i></a></li> ");
+	}
+	//out.println(" &nbsp; ");
+	//페이지 하단의 >> 버튼
+	if ( endBlock == totalPage ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='notice.do?cpage="+ (startBlock + blockPerPage) +"'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
+	}
+	//out.println(" &nbsp; ");
+
+%>  
               </ul>
             </nav>  
           </div>
