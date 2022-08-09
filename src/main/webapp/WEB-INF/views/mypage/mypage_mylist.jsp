@@ -32,9 +32,9 @@
 			String seq =  to.getSeq();
 			String subject =  to.getSubject();
 			if( subject.equals("1") ) {
-				subject = "후기 게시판";
-			} else if( subject.equals("2") ) {
 				subject = "자유 게시판";
+			} else if( subject.equals("2") ) {
+				subject = "후기 게시판";
 			} else {
 				subject = "중고거래 게시판";
 			}
