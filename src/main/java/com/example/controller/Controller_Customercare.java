@@ -64,10 +64,15 @@ public class Controller_Customercare {
 		to.setSeq( request.getParameter( "seq" ) );
 		
 		to = dao.nboardView(to);
+		
+		NListTO nto = new NListTO();
+		//int cpage = nto.getCpage();
+		int cpage = (Integer.parseInt(request.getParameter( "cpage" )));
 
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "/customercare/notice_view" );
 		modelAndView.addObject( "to", to );
+		modelAndView.addObject( "cpage", cpage );
 		
 		return modelAndView;
 	}

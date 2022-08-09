@@ -22,6 +22,8 @@ if(session.getAttribute("id") != null){
 	String content = to.getContent();
 	String wdate = to.getWdate();
 	String hit = to.getHit();
+	
+	int cpage = (Integer)request.getAttribute("cpage");
 %>    
 <!DOCTYPE html>
   <head>
@@ -167,7 +169,7 @@ if(session.getAttribute("id") != null){
         
         <hr>
         <div class="text-center">
-		  <input type="button" value="목록" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='notice.do?cpage='" />
+		  <input type="button" value="목록" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='notice.do?cpage=<%=cpage %>'" />
         </div>
         <br /><br /><br />
     </section>

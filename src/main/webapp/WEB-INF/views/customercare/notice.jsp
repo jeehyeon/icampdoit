@@ -38,7 +38,7 @@
 		String wdate = to.getWdate();
 		String hit = to.getHit();
 		
-		sbHtml.append( "<tr onmouseover=\"this.style.background='#f1f6ea'\" onmouseout=\"this.style.background='white'\" style=\"cursor: pointer;\" onclick=\"location.href='noticeview.do?seq=" + seq + "'\">" );
+		sbHtml.append( "<tr onmouseover=\"this.style.background='#f1f6ea'\" onmouseout=\"this.style.background='white'\" style=\"cursor: pointer;\" onclick=\"location.href='noticeview.do?cpage=" + cpage + "&seq=" + seq + "'\">" );
 		sbHtml.append( "<td class=\"text-center\">" + seq + "</td>" );
 		sbHtml.append( "<td class=\"fw-bold text-center\">" + title + "</td>" );
         sbHtml.append( "<td></td>" );
