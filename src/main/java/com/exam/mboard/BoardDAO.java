@@ -218,10 +218,11 @@ public class BoardDAO {
 	
 	//view Comment
 	public ArrayList<CmtTO> mboardViewComment( CmtTO cto ){
-		
-		String sql = "select seq, pseq, writer, content, date_format(wdate, '%Y.%m.%d') wdate, ucode from m_cmt order by seq desc";
+		System.out.println("mboardViewComment() seq값 체크 :" + cto.getPseq());
+		String sql = "select seq, pseq, writer, content, date_format(wdate, '%Y.%m.%d') wdate, ucode from m_cmt where pseq=? order by seq desc";
 		ArrayList<CmtTO> lists = (ArrayList<CmtTO>)jdbcTemplate.query(
-				sql, new BeanPropertyRowMapper<CmtTO>(CmtTO.class) );
+				sql, new BeanPropertyRowMapper<CmtTO>(CmtTO.class), cto.getPseq());
+		
 		
 		return lists;
 		

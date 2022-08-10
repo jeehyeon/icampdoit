@@ -24,6 +24,8 @@ if(session.getAttribute("id") != null){
 	
 	int cpage = (Integer)request.getAttribute("cpage");
 	int subjectValue = (Integer)request.getAttribute( "subjectValue" );
+	System.out.println("view페이지 session id : "+id);
+	System.out.println("view페이지 seq : "+seq);
 %>
     
 <!DOCTYPE html>
@@ -152,30 +154,29 @@ if(session.getAttribute("id") != null){
             <!-- <div class="text-block">
               <h5 class="text-uppercase text-muted mb-0" style="font-family: 'BMJUA';">댓글</h5><hr> -->
              <!-- comments-->
-             <div class="mt-5">             
-              <!-- comment-->
+             <div id="cmtbody" class="mt-5">             
+              <!-- comment
               <div class="row">
                <div class="col-9"><strong>hong gil dong</strong></div>
                <div class="col-3" align="right"><a class="btn btn-outline-primary" href="" onclick="" >삭제</a></div>
                <div>
                   <p class="text-uppercase text-sm text-muted"><i class="far fa-clock"></i> 2022-07-30</p>
                   <p class="text-muted" style="font-family: 'BMJUA';">댓글 내용 입니다. 댓글 내용 입니다. 댓글 내용 입니다. 댓글 내용 입니다. 댓글 내용 입니다.</p>
-                  <!-- <div align="right"><a class="btn btn-primary" href="" onclick="" >삭제</a></div> --> 
+                  // <div align="right"><a class="btn btn-primary" href="" onclick="" >삭제</a></div> 
                </div>
               </div>
               <hr>
               <!-- /comment--> 
-              <!-- comment-->
+              <!-- comment
               <div class="row">
                <div class="col-9"><strong>hong gil dong</strong></div>
                <div class="col-3" align="right"><a class="btn btn-outline-primary" href="" onclick="" >삭제</a></div>
                <div>
                   <p class="text-uppercase text-sm text-muted"><i class="far fa-clock"></i> 2022-07-30</p>
-                  <p class="text-muted" style="font-family: 'BMJUA';">댓글 내용 입니다. 댓글 내용 입니다. 댓글 내용 입니다. 댓글 내용 입니다. 댓글 내용 입니다.</p>
-                  <!-- <div align="right"><a class="btn btn-primary" href="" onclick="" >삭제</a></div> --> 
+                  <p class="text-muted" style="font-family: 'BMJUA';">댓글 내용 입니다. 댓글 내용 입니다. 댓글 내용 입니다. 댓글 내용 입니다. 댓글 내용 입니다.</p> 
                </div>
               </div>
-              <hr>
+              <hr>-->
               <!-- /comment-->                       
             </div>           
             <!-- /comments-->
@@ -183,12 +184,15 @@ if(session.getAttribute("id") != null){
             <!-- comment form-->
             <div class="mb-4">
               <div class="collapse.show" id="leaveComment"> 
-                <form class="form" id="comment-form" method="post" action="#">                   
+                <form class="form" id="comment-form" method="post">
+                <input type="hidden" name="ucode" value="<%=ucode%>"/>
+                <input type="hidden" name="id" value="<%=id%>"/>
+                <input type="hidden" name="seq" value="<%=seq%>"/>                   
                   <div class="mb-4">
                      <label class="form-label" for="comment"> <span class="required"></span></label>
-                     <textarea class="form-control" id="comment" rows="3" placeholder="내용을 입력해주세요." required data-msg="Please enter your comment"></textarea>
+                     <textarea class="form-control" name="comment" id="comment" rows="3" placeholder="내용을 입력해주세요." required data-msg="Please enter your comment"></textarea>
                      </div>
-                    <div class="col-12" align="right"><a class="btn btn-outline-primary" href="" onclick="" ><i class="far fa-comment"></i>등록하기</a></div>
+                    <input type="button" value="등록하기" class="btn btn-primary" align="right" onclick='cmtInsert()'/>
                 </form>
               </div>
             </div>
@@ -235,21 +239,59 @@ if(session.getAttribute("id") != null){
       </div>
     </footer>
     <!-- JavaScript files-->
+    <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
     <script type="text/javascript">
-    
+
     	function deleteBoard() {
     		$.ajax({
     			url: './mboarddeleteok.do',
     			type: 'get',
-    			data : ,
+    			data : '{data: data}',
     			success: {
     				//삭제누른 사람 ucode == 게시글 ucode
-    				//게시글 삭제완료 alert
-    				
+    				//게시글 삭제완료 alert	
     			}, 
     			fail: function(error){
         			alert('작성자만 삭제가 가능합니다.' );
+    			}
     		});
+    	}
+    		
+    	function cmtInsert() {
+    		
+    		var formdata = $("#comment-form").serialize() ;
+    		
+    		
+        		$.ajax({
+        			url: './cmt_insert.do',
+        			type: 'post',
+        			data : formdata,
+        			dataType : 'json',
+        			success: function(data){
+        				$("#cmtbody").empty();
+        				$.each(data.cmtList, function(index, cmtList){
+        					
+        					$("#cmtbody").append('<div class="row">');
+        					$("#cmtbody").append(' <div class="col-9"><strong>'+cmtList.writer +'</strong></div>');
+        					$("#cmtbody").append('<div class="col-3" align="right"><a class="btn btn-outline-primary" href="" onclick="" >삭제</a></div>');
+        					$("#cmtbody").append('<div>');
+        					$("#cmtbody").append('<p class="text-uppercase text-sm text-muted"><i class="far fa-clock"></i>'+cmtList.wdate +'</p>');
+        					$("#cmtbody").append('<p class="text-muted" style="font-family: \'BMJUA\';">'+ cmtList.comment+'</p>');
+        					$("#cmtbody").append('</div>');
+        					$("#cmtbody").append('</div>');
+        					$("#cmtbody").append('<hr/>');
+        					
+        					
+        					
+        				});
+        				 
+        				
+        				
+        			}, 
+        			fail: function(error){
+            			alert('댓글달기 실패' );
+        		}
+        	});
     	}
     
     </script>
