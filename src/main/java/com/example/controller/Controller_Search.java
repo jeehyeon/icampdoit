@@ -27,8 +27,6 @@ public class Controller_Search {
 		kto.setKeysearch( request.getParameter( "keysearch" ) );
 		System.out.println( "키워드 : " + kto.getKeysearch());
 		
-		//dao.searchkeyDAO( kto.getKeysearch() );
-		
 		ArrayList<SearchkeyTO> datas = (ArrayList<SearchkeyTO>)kdao.searchkeyDAO(kto.getKeysearch());
 		
 		ModelAndView modelAndView = new ModelAndView();

@@ -1,7 +1,7 @@
-<%@page import="com.exam.search.SearchkeyTO"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="com.exam.search.SearchkeyTO"%>
+<%@page import="java.util.ArrayList"%>
 <%
 	//session 값 가져오기
 	int ucode = -1;
@@ -24,6 +24,9 @@
 		String induty = kto.getInduty();
 		String addr1 = kto.getAddr1();
 		String firstImageUrl = kto.getFirstImageUrl();
+		if( firstImageUrl.equals("default") ) {
+			firstImageUrl = "./resources/bootstrap-5/html/img/noimage.jpg";
+		}
 		
 		//System.out.println( "출력: "+ facltNm );
 		
@@ -50,7 +53,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>I Camp Do It</title>
+    <title>I CAMP DO IT</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
