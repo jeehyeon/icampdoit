@@ -82,13 +82,8 @@
 			}
 			 
 			document.wfrm.submit();
-		};
-		
-		
-		
-		
-	
-};
+		};	
+	};
 	
 </script> 
 

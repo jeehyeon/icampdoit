@@ -25,8 +25,7 @@ public class Controller_HBoard {
 	String url1 = System.getProperty("user.dir");
 	private String uploadPath = url1 +"/src/main/webapp/upload/";
 
-	
-	
+		
 	@RequestMapping( value="/hboardlist.do" )
 	public ModelAndView hboardlist(HttpServletRequest request, HttpSession session) {
 		System.out.println( "hboardlist()호출" );
