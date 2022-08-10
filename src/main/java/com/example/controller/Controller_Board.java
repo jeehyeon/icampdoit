@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.http.fileupload.FileUtils;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.exam.mboard.BoardListTO;
 import com.exam.mboard.BoardTO;
+import com.exam.mboard.CmtTO;
 import com.exam.mboard.FileTO;
 import com.exam.login.SignUpTO;
 import com.exam.mboard.BoardDAO;
@@ -140,6 +143,12 @@ public class Controller_Board {
 		BoardListTO bto = new BoardListTO();
 		int cpage = Integer.parseInt( request.getParameter( "cpage" ) );
 		
+		CmtTO cto = new CmtTO();
+		cto.setPseq(request.getParameter( "seq" ));
+		ArrayList<CmtTO> cmtArr = dao.mboardViewComment(cto);
+		
+		
+		
 		ModelAndView modelAndView = new ModelAndView();
 		
 		if(session.getAttribute("ucode") == null) {
@@ -148,6 +157,7 @@ public class Controller_Board {
 		}
 		modelAndView.setViewName( "/board/mboard_view" );
 		modelAndView.addObject( "to", to );
+		modelAndView.addObject( "cmtArr", cmtArr );
 		modelAndView.addObject( "cpage", cpage );
 		modelAndView.addObject( "subjectValue", subjectValue );
 		
@@ -341,6 +351,69 @@ public class Controller_Board {
 		dao.filedel((String)request.getParameter("filename"));
 		
 		
+	}
+	
+	@RequestMapping( value="/cmt_insert.do" )
+	public JSONObject cmtInsert(HttpServletRequest request, HttpSession session) throws IOException {
+		System.out.println( "mboarddeleteOk() 호출" );
+		//System.out.println(request.getParameter("ucode"));
+		//System.out.println(request.getParameter("id"));
+		//System.out.println(request.getParameter("seq"));
+		//System.out.println(request.getParameter("comment"));
+		
+		CmtTO cto = new CmtTO();
+		cto.setPseq(request.getParameter("seq"));
+		cto.setUcode(request.getParameter("ucode"));
+		cto.setWriter(request.getParameter("id"));
+		cto.setContent(request.getParameter("comment"));
+		
+		int flag = dao.mboardWriteComment(cto);
+		JSONArray cmtList = new JSONArray();
+		if(flag == 0 ) {
+			ArrayList<CmtTO> lists = dao.mboardViewComment(cto);
+			//System.out.println("테스트용");
+			for(CmtTO to : lists) {
+				System.out.println("코멘트 : "+ to.getContent());
+				JSONObject obj = new JSONObject();
+				obj.put("writer", to.getWriter());
+				obj.put("comment", to.getContent());
+				obj.put("wdate", to.getWdate());
+				obj.put("ucode", to.getUcode());
+				obj.put("pseq", to.getPseq());
+				obj.put("seq", to.getSeq());
+				cmtList.add(obj);
+			}
+		}
+		
+		JSONObject data = new JSONObject();
+		data.put("cmtList", cmtList);
+	//System.out.println("제이슨 어레이 : "+ cmtList);
+		
+		
+		
+		return data;
+	}
+	
+	@RequestMapping( value="/cmtList.do" )
+	public JSONObject cmtList(HttpServletRequest request, HttpSession session) throws IOException {
+		System.out.println( "mboarddeleteOk() 호출" );
+		//System.out.println(request.getParameter("ucode"));
+		//System.out.println(request.getParameter("id"));
+		//System.out.println(request.getParameter("seq"));
+		//System.out.println(request.getParameter("comment"));
+		
+		CmtTO cto = new CmtTO();
+		cto.setPseq(request.getParameter("seq"));
+		cto.setUcode(request.getParameter("ucode"));
+		cto.setWriter(request.getParameter("id"));
+		cto.setContent(request.getParameter("comment"));
+		
+		int flag = dao.mboardWriteComment(cto);
+		JSONObject result = new JSONObject();
+		result.put("flag", flag);
+		
+		
+		return result;
 	}
 	
 }
