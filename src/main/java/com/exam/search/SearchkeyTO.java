@@ -26,5 +26,9 @@ public class SearchkeyTO {
 	private String siteBottomCl4;
 	private String siteBottomCl5;
 	private String sbrsCl;			// 부대시설(캠핑장 시설정보)
-	
+	private String doNm;			// 시,도
+	private String eqpmnLendCl;		// 캠핑장비대여
+	private String homepage;		// 캠핑장 사이트주소
+	private String mapX;
+	private String mapY;
 }
