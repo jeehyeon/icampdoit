@@ -19,7 +19,6 @@ import org.xml.sax.SAXException;
 
 @Repository
 public class InsertGocamping {
-	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
@@ -43,17 +42,18 @@ public class InsertGocamping {
 			Document document = dBuilder.parse( new URL("https://api.visitkorea.or.kr/openapi/service/rest/GoCamping/basedList?ServiceKey=74rd5r1MwtY%2F3dFG0s9I1UDtFBJBj1zjmm0VdZBNsJoslwPnviVh2PeV1vCg%2BtaHuMvN8G1f1PWIwKh3I%2BI0oQ%3D%3D&numOfRows=3107&pageNo=1&MobileOS=ETC&MobileApp=TestApp").openStream());
 			
 			Element root = document.getDocumentElement();
-	        System.out.println( root.toString() );	// [response: null] 출력됨
+	        System.out.println( root.toString() );
 	         
 	        NodeList nList = document.getElementsByTagName("item"); 
-			
-			SearchkeyTO kto = new SearchkeyTO();			
-	         
+						
 			for(int i = 0; i < nList.getLength(); i++) {
+				//System.out.println(nList.item(i).getAttributes().getNamedItem("facltNm").getNodeValue());
 				Node node = nList.item(i);
 				
 				if(node.getNodeType() == Node.ELEMENT_NODE) {
 					Element element = (Element) node;
+					
+					SearchkeyTO kto = new SearchkeyTO();
 					
 					if(( getValue("doNm", element) != " " )){
 						
@@ -288,6 +288,7 @@ public class InsertGocamping {
 			e.printStackTrace();
 		}
 		
+		//System.out.println( lists );
 		return lists;
 	
 	}
@@ -295,11 +296,16 @@ public class InsertGocamping {
 	public int insertapi(ArrayList<SearchkeyTO> lists) {
 		   
 		   int flag = 1;
+		   //System.out.println( lists );
 		   
 		   for( SearchkeyTO kto : lists ) {
 			   
 			   String sql = "insert into go_api values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			   int result = jdbcTemplate.update(sql, kto.getFacltNm(), kto.getAddr1(), kto.getAddr2(), kto.getInduty(), kto.getFirstImageUrl(), kto.getContentId(), kto.getIntro(), kto.getAnimalCmgCl(), kto.getTrlerAcmpnyAt(), kto.getCaravAcmpnyAt(), kto.getLctCl(), kto.getBrazierCl(), kto.getSiteBottomCl1(), kto.getSiteBottomCl2(), kto.getSiteBottomCl3(), kto.getSiteBottomCl4(), kto.getSiteBottomCl5(), kto.getSbrsCl(), kto.getDoNm(), kto.getEqpmnLendCl(), kto.getHomepage(), kto.getMapX(), kto.getMapY() ); 
+
+			   //String sql = "insert into go_api ( facltNm, addr1, addr2, induty, firstImageUrl, contentId, intro, animalCmgCl, trlerAcmpnyAt, caravAcmpnyAt, lctCl, brazierCl, siteBottomCl1, siteBottomCl2, siteBottomCl3, siteBottomCl4, siteBottomCl5, sbrsCl, doNm, eqpmnLendCl, homepage, mapX, mapY ) select ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? from dual where not exists ( select facltNm from go_api where facltNm=? )";
+			   //int result = jdbcTemplate.update(sql, kto.getFacltNm(), kto.getAddr1(), kto.getAddr2(), kto.getInduty(), kto.getFirstImageUrl(), kto.getContentId(), kto.getIntro(), kto.getAnimalCmgCl(), kto.getTrlerAcmpnyAt(), kto.getCaravAcmpnyAt(), kto.getLctCl(), kto.getBrazierCl(), kto.getSiteBottomCl1(), kto.getSiteBottomCl2(), kto.getSiteBottomCl3(), kto.getSiteBottomCl4(), kto.getSiteBottomCl5(), kto.getSbrsCl(), kto.getDoNm(), kto.getEqpmnLendCl(), kto.getHomepage(), kto.getMapX(), kto.getMapY(), kto.getFacltNm() ); 
+			   
 			   System.out.println( result );
 			   
 			   if( result != 1 ) {
