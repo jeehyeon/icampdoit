@@ -1,3 +1,5 @@
+<%@page import="com.exam.mboard.CmtTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.exam.mboard.BoardDAO" %>
@@ -26,6 +28,21 @@ if(session.getAttribute("id") != null){
 	int subjectValue = (Integer)request.getAttribute( "subjectValue" );
 	System.out.println("view페이지 session id : "+id);
 	System.out.println("view페이지 seq : "+seq);
+	
+//cmt
+ArrayList<CmtTO> cmtArr = (ArrayList<CmtTO>)request.getAttribute("cmtArr");
+StringBuilder cmtHtml= new StringBuilder();
+for(CmtTO cto : cmtArr){
+	cmtHtml.append("<div class=\"row\">");
+	cmtHtml.append("<div class=\"col-9\"><strong>"+cto.getWriter() +"</strong></div>");
+	cmtHtml.append("<div class=\"col-3\" align=\"right\"><a class=\"btn btn-outline-primary\" href=\"\" onclick=\"\" >삭제</a></div>");
+	cmtHtml.append("<div>");
+	cmtHtml.append("<p class=\"text-uppercase text-sm text-muted\"><i class=\"far fa-clock\"></i>"+cto.getWdate() +"</p>");
+	cmtHtml.append("<p class=\"text-muted\" style=\"font-family: \"BMJUA\";\">"+ cto.getContent() +"</p>");
+	cmtHtml.append("</div>");
+	cmtHtml.append("</div>");
+	cmtHtml.append("<hr/>");
+}
 %>
     
 <!DOCTYPE html>
@@ -155,17 +172,8 @@ if(session.getAttribute("id") != null){
               <h5 class="text-uppercase text-muted mb-0" style="font-family: 'BMJUA';">댓글</h5><hr> -->
              <!-- comments-->
              <div id="cmtbody" class="mt-5">             
-              <!-- comment
-              <div class="row">
-               <div class="col-9"><strong>hong gil dong</strong></div>
-               <div class="col-3" align="right"><a class="btn btn-outline-primary" href="" onclick="" >삭제</a></div>
-               <div>
-                  <p class="text-uppercase text-sm text-muted"><i class="far fa-clock"></i> 2022-07-30</p>
-                  <p class="text-muted" style="font-family: 'BMJUA';">댓글 내용 입니다. 댓글 내용 입니다. 댓글 내용 입니다. 댓글 내용 입니다. 댓글 내용 입니다.</p>
-                  // <div align="right"><a class="btn btn-primary" href="" onclick="" >삭제</a></div> 
-               </div>
-              </div>
-              <hr>
+              
+              <%=cmtHtml.toString() %>
               <!-- /comment--> 
               <!-- comment
               <div class="row">
@@ -192,7 +200,7 @@ if(session.getAttribute("id") != null){
                      <label class="form-label" for="comment"> <span class="required"></span></label>
                      <textarea class="form-control" name="comment" id="comment" rows="3" placeholder="내용을 입력해주세요." required data-msg="Please enter your comment"></textarea>
                      </div>
-                    <input type="button" value="등록하기" class="btn btn-primary" align="right" onclick='cmtInsert()'/>
+                    <div class="btn btn-outline-primary" align="right" onclick="cmtInsert()"><i class="far fa-comment"></i>등록하기</div>
                 </form>
               </div>
             </div>
@@ -269,17 +277,18 @@ if(session.getAttribute("id") != null){
         			dataType : 'json',
         			success: function(data){
         				$("#cmtbody").empty();
+        				$("#comment").val("");
         				$.each(data.cmtList, function(index, cmtList){
         					
-        					$("#cmtbody").append('<div class="row">');
-        					$("#cmtbody").append(' <div class="col-9"><strong>'+cmtList.writer +'</strong></div>');
-        					$("#cmtbody").append('<div class="col-3" align="right"><a class="btn btn-outline-primary" href="" onclick="" >삭제</a></div>');
-        					$("#cmtbody").append('<div>');
-        					$("#cmtbody").append('<p class="text-uppercase text-sm text-muted"><i class="far fa-clock"></i>'+cmtList.wdate +'</p>');
-        					$("#cmtbody").append('<p class="text-muted" style="font-family: \'BMJUA\';">'+ cmtList.comment+'</p>');
-        					$("#cmtbody").append('</div>');
-        					$("#cmtbody").append('</div>');
-        					$("#cmtbody").append('<hr/>');
+        					$("#cmtbody").append('<div class="row">'
+        										+'<div class="col-9"><strong>'+cmtList.writer +'</strong></div>'
+        										+'<div class="col-3" align="right"><a class="btn btn-outline-primary" href="" onclick="" >삭제</a></div>'
+        										+'<div>'
+        										+'<p class="text-uppercase text-sm text-muted"><i class="far fa-clock"></i>'+cmtList.wdate +'</p>'
+        										+'<p class="text-muted" style="font-family: \'BMJUA\';">'+ cmtList.comment+'</p>'
+        										+'</div>'
+        										+'</div>'
+        										+'<hr/>');
         					
         					
         					

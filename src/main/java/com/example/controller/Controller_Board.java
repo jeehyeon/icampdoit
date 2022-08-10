@@ -143,6 +143,12 @@ public class Controller_Board {
 		BoardListTO bto = new BoardListTO();
 		int cpage = Integer.parseInt( request.getParameter( "cpage" ) );
 		
+		CmtTO cto = new CmtTO();
+		cto.setPseq(request.getParameter( "seq" ));
+		ArrayList<CmtTO> cmtArr = dao.mboardViewComment(cto);
+		
+		
+		
 		ModelAndView modelAndView = new ModelAndView();
 		
 		if(session.getAttribute("ucode") == null) {
@@ -151,6 +157,7 @@ public class Controller_Board {
 		}
 		modelAndView.setViewName( "/board/mboard_view" );
 		modelAndView.addObject( "to", to );
+		modelAndView.addObject( "cmtArr", cmtArr );
 		modelAndView.addObject( "cpage", cpage );
 		modelAndView.addObject( "subjectValue", subjectValue );
 		
