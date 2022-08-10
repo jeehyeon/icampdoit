@@ -43,7 +43,7 @@ public class Controller_Board {
 	@RequestMapping( value="/mboardlist.do" )
 	public ModelAndView mboardlist(HttpServletRequest request, HttpSession session) {
 		System.out.println( "mboardlist() 호출" );
-		
+		System.out.println("requsest.getParameter Cpage : " + request.getParameter( "cpage" ));
 		int subjectValue = 2;
 		if(request.getParameter( "subjectValue" ) != null && !request.getParameter( "subjectValue" ).equals( "" ) ) {
 			subjectValue = Integer.parseInt( request.getParameter( "subjectValue" ) );
@@ -53,7 +53,7 @@ public class Controller_Board {
 		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
 			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
 		}
-		
+		System.out.println("test cpage" + cpage);
 		BoardListTO blistTO = new BoardListTO();
 		blistTO.setCpage( cpage );
 		
@@ -138,7 +138,7 @@ public class Controller_Board {
 		to = dao.mboardView(to);
 		
 		BoardListTO bto = new BoardListTO();
-		int cpage = bto.getCpage();
+		int cpage = Integer.parseInt( request.getParameter( "cpage" ) );
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
