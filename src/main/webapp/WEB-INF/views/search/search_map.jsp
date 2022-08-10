@@ -42,6 +42,21 @@ if(session.getAttribute("id") != null){
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+ 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2dde53cc9d654a3a8d8b78783aa5cbfc&libraries=services"></script>
+  
+  	<style>
+	    .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 100px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+	    .wrap * {padding: 0;margin: 0;}
+	    .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+	    .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+	    .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+	    .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+	    .info .close:hover {cursor: pointer;}
+	    .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+	    .info .body {position: relative;overflow: hidden;}
+	    .info .desc {position: relative;margin: 13px 0 0 10px;height: 75px;}
+	    .info .link {color: #5085BB;}
+	</style>
   </head>
   <body style="padding-top: 72px;">
     <header class="header">
@@ -240,43 +255,8 @@ if(session.getAttribute("id") != null){
         </div>
         <div class="col-lg-6 map-side-lg pe-lg-0">
           <div class="map-full shadow-left" id="map"></div>
-          <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2dde53cc9d654a3a8d8b78783aa5cbfc&libraries=services"></script>
-          <script>
-				var container = document.getElementById('map');
-				var options = {
-					center: new kakao.maps.LatLng(33.450701, 126.570667),
-					level: 3
-				};
-		
-				var map = new kakao.maps.Map(container, options);
-				
-				// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
-				var mapTypeControl = new kakao.maps.MapTypeControl();
-
-				// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-				// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-				map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
-
-				// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-				var zoomControl = new kakao.maps.ZoomControl();
-				map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-				
-				// 마커가 표시될 위치입니다 
-				var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
-
-				// 마커를 생성합니다
-				var marker = new kakao.maps.Marker({
-				    position: markerPosition
-				});
-
-				// 마커가 지도 위에 표시되도록 설정합니다
-				marker.setMap(map);
-
-				// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-				// marker.setMap(null);
-				
-				
-			</script>
+          
+          
         </div>
       </div>
     </div>
@@ -303,6 +283,140 @@ if(session.getAttribute("id") != null){
       </div>
     </footer>
     <!-- JavaScript files-->
+    <script>
+				var mapContainer = document.getElementById('map'), //지도 표시할 div id
+					mapOptions = {
+						center: new kakao.maps.LatLng(37.5817426, 127.4838359), //center = 지도 중심 좌표
+						level: 3 //지도 확대 레벨. 기본값=3
+					};
+		
+				var map = new kakao.maps.Map(mapContainer, mapOptions); //지도를 표시할 div와 지도 옵션으로 지도를 생성함
+
+				
+				// 마커가 표시될 위치입니다 
+				//var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
+				
+				// 마커를 생성합니다
+				//var marker = new kakao.maps.Marker({
+				//    position: markerPosition
+				//});
+
+				// 마커가 지도 위에 표시되도록 설정합니다
+				//marker.setMap(map);
+				
+				//마커 여러개 생성
+				/*
+				var positions = [
+					{
+						title: '가평사계절캠핑장',
+						latlng: new kakao.maps.LatLng(37.8833509, 127.5489707)
+					},
+					{
+						title: '가평 사과나무 캠핑장',
+						latlng: new kakao.maps.LatLng(37.7895015, 127.358428)
+					},
+					{
+						title: '가평 운악홀리데이 캠핑장',
+						latlng: new kakao.maps.LatLng(37.8536510, 127.5102426)
+					},
+					{
+						title: '구름게곡캠핑장',
+						latlng: new kakao.maps.LatLng(37.8879007, 127.5387410)
+					},
+					{
+						title: '국립유명산자연휴양림',
+						latlng: new kakao.maps.LatLng(37.5817426, 127.4838359)
+					}
+				];
+				*/
+				
+				var arr = new Array();
+				arr[0] = ["가평사계절캠핑장", 37.8833509, 127.5489707, "주소주소", "./campview.do?facltNm=001" ];
+				arr[1] = ["가평 사과나무 캠핑장", 37.7895015, 127.358428, "주소주소", "./campview.do?facltNm=001" ];
+				arr[2] = ["가평 운악홀리데이 캠핑장", 37.8536510, 127.5102426, "주소주소", "./campview.do?facltNm=001" ];
+				arr[3] = ["구름게곡캠핑장", 37.8879007, 127.5387410, "주소주소", "./campview.do?facltNm=001" ];
+				arr[4] = ["국립유명산자연휴양림", 37.5817426, 127.4838359, "주소주소", "./campview.do?facltNm=001" ];
+				
+				
+				//var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+				
+				/*
+				for ( var i=0; i<positions.length; i++ ){
+					
+					//var imageSize = new kakao.maps.Size(24, 35); 
+					//var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+					
+					var marker = new kakao.maps.Marker({
+						map: map, //마커를 표시할 지도
+						position: positions[i].latlng, //마커표시할 위치
+						title : positions[i].title, //마커에 마우스 올리면 표시되는 타이틀.. 표시하기
+						//image : markerImage
+					});
+				}
+				*/
+				
+				for (var i=0; i<arr.length; i++ ){
+					var marker = new kakao.maps.Marker({
+						position: new kakao.maps.LatLng( arr[i][1], arr[i][2] ),
+						title: arr[i][0],
+						map: map
+					});
+					
+					//커스텀오버레이에 표시할 컨텐츠
+					//사용자가 자유롭게 구성하고 이번트 제어할 수 있음.
+					var content = '<div class="wrap">' +
+					  '	<div class="info">' +
+					  '		<div class="title">' +
+					  		arr[i][0] +
+					  '			<div class="close" onclick="closeOverlay()" title="닫기"></div>'	+
+					  '		</div>' +
+					  '		<div class="body">' +
+					  '			<div class="desc">' +
+					  '        		<div class="ellipsis">' + arr[i][3] + '</div>' + 
+			          '        		<div><a href="./campview.do" target="_blank" class="link">상세보기</a></div>' + 
+			          '      	</div>' + 
+			          '     </div>' + 
+			          ' </div>' +    
+			          '</div>';
+
+			        
+					// 마커 위에 커스텀오버레이를 표시합니다
+					// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+					var overlay = new kakao.maps.CustomOverlay({
+						content: content,
+						map: map,
+						position: new kakao.maps.LatLng( arr[i][1], arr[i][2] )
+					});
+					
+					//customOverlay.setMap(null); // 지도에서 제거한다.         
+				}
+					     
+				// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+				kakao.maps.event.addListener(marker, 'click', function() {
+				    overlay.setMap(map);
+				});
+
+				// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+				function closeOverlay() {
+				    overlay.setMap(null);     
+				}
+					          
+				// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+				var mapTypeControl = new kakao.maps.MapTypeControl();
+
+				// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+				// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+				map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+				// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+				var zoomControl = new kakao.maps.ZoomControl();
+				map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+				// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+				// marker.setMap(null);
+				
+				
+			</script>
     <script>
       // ------------------------------------------------------- //
       //   Inject SVG Sprite - 
