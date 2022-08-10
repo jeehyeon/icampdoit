@@ -438,7 +438,7 @@
                 </div>
               </div>
             </div>
-            -->
+           
             <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e33b1527bfe2abaf92">
               <div class="card h-100 border-0 shadow">
                 <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="./resources/bootstrap-5/html/img/noimage.jpg" alt="Modern, Well-Appointed Room"/><a class="tile-link" href="./campview.do"></a>               
@@ -453,7 +453,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div>-->
           </div>
           
           <!-- Pagination -->

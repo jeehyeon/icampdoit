@@ -54,13 +54,49 @@ public class SearchkeyDAO {
 	               //System.out.println( "3" );
 	               
 	               SearchkeyTO kto = new SearchkeyTO();
-	               kto.setFacltNm(getValue( "facltNm", element ));
-	               kto.setAddr1(getValue( "addr1", element ));
-	               kto.setInduty(getValue( "induty", element ));
-	               kto.setFirstImageUrl(getValue( "firstImageUrl", element ));
 	               
+	               try {
+	            	   kto.setFirstImageUrl(getValue( "firstImageUrl", element ));
+					} catch (java.lang.NullPointerException e1) {
+						// TODO Auto-generated catch block
+						kto.setFirstImageUrl("./resources/bootstrap-5/html/img/noimage.jpg");
+					}
 	               
-	               kto.setContentId(getValue( "contentId", element ));
+	               try {
+	            	   kto.setInduty(getValue( "induty", element ));
+					} catch (java.lang.NullPointerException e1) {
+						// TODO Auto-generated catch block
+						kto.setInduty("");
+					}
+	               
+	               try {
+	            	   kto.setFacltNm(getValue( "facltNm", element ));
+					} catch (java.lang.NullPointerException e1) {
+						// TODO Auto-generated catch block
+						kto.setFacltNm("");
+					}
+	               
+	               try {
+	            	   kto.setAddr1(getValue( "addr1", element ));
+					} catch (java.lang.NullPointerException e1) {
+						// TODO Auto-generated catch block
+						kto.setAddr1("");
+					}
+	               
+	               try {
+	            	   kto.setContentId(getValue( "contentId", element ));
+					} catch (java.lang.NullPointerException e1) {
+						// TODO Auto-generated catch block
+						kto.setContentId("");
+					}
+ 
+	               try {		
+						kto.setIntro(getValue( "intro", element ));
+					} catch (java.lang.NullPointerException e) {
+						// TODO Auto-generated catch block
+						kto.setIntro("");
+					}
+	               
 	               /*
 	               kto.setIntro(getValue( "intro", element ));
 	               kto.setAnimalCmgCl(getValue( "animalCmgCl", element ));
