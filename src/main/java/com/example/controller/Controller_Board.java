@@ -333,27 +333,6 @@ public class Controller_Board {
 		return modelAndView;
 	}
 	
-	@RequestMapping( value="/hboardlist.do" )
-	public ModelAndView hboardlist(HttpServletRequest request, HttpSession session) {
-		System.out.println( "hboardlist()호출" );
-		
-		ModelAndView modelAndView = new ModelAndView();
-		
-		modelAndView.setViewName( "/board/hboard_list" );
-		
-		return modelAndView;
-	}
-	
-	@RequestMapping( value="/hboardview.do" )
-	public ModelAndView hboardview(HttpServletRequest request, HttpSession session) {
-		System.out.println( "hboardview() 호출" );
-		
-		ModelAndView modelAndView = new ModelAndView();
-		
-		modelAndView.setViewName( "/board/hboard_view" );
-		
-		return modelAndView;
-	}
 	
 	@RequestMapping( value="/writecancel.do" )
 	public void writecancel(HttpServletRequest request, HttpSession session) {
