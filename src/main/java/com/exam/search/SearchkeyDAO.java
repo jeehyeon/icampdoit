@@ -11,7 +11,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -19,12 +18,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.exam.mboard.BoardListTO;
-import com.exam.mboard.BoardTO;
-
 @Repository
 public class SearchkeyDAO {
-		
+	
 	public List<SearchkeyTO> searchkeyDAO(String keysearch) {
 	      // TODO Auto-generated method stub
 		
@@ -43,31 +39,14 @@ public class SearchkeyDAO {
 	         System.out.println( root.toString() );	// [response: null] 출력됨
 	         
 	         NodeList nodes = document.getElementsByTagName("item");
-	         //System.out.println( "1" );
 	         
 	         for ( int i = 0; i < nodes.getLength(); i++ ) {
 	            Node node = nodes.item(i);
-	            //System.out.println( "2" );
 	            
 	            if ( node.getNodeType() == Node.ELEMENT_NODE ) { // node객체가 앨리먼트인것만 화면에 출력
-	               Element element = (Element) node;	               
-	               //System.out.println( "3" );
+	               Element element = (Element) node;	
 	               
 	               SearchkeyTO kto = new SearchkeyTO();
-	               
-	               try {
-	            	   kto.setFirstImageUrl(getValue( "firstImageUrl", element ));
-					} catch (java.lang.NullPointerException e1) {
-						// TODO Auto-generated catch block
-						kto.setFirstImageUrl("./resources/bootstrap-5/html/img/noimage.jpg");
-					}
-	               
-	               try {
-	            	   kto.setInduty(getValue( "induty", element ));
-					} catch (java.lang.NullPointerException e1) {
-						// TODO Auto-generated catch block
-						kto.setInduty("");
-					}
 	               
 	               try {
 	            	   kto.setFacltNm(getValue( "facltNm", element ));
@@ -84,6 +63,27 @@ public class SearchkeyDAO {
 					}
 	               
 	               try {
+	            	   kto.setAddr1(getValue( "addr2", element ));
+					} catch (java.lang.NullPointerException e1) {
+						// TODO Auto-generated catch block
+						kto.setAddr2("");
+					}
+	               
+	               try {
+	            	   kto.setInduty(getValue( "induty", element ));
+					} catch (java.lang.NullPointerException e1) {
+						// TODO Auto-generated catch block
+						kto.setInduty("");
+					}
+	               
+	               try {
+	            	   kto.setFirstImageUrl(getValue( "firstImageUrl", element ));
+					} catch (java.lang.NullPointerException e1) {
+						// TODO Auto-generated catch block
+						kto.setFirstImageUrl("./resources/bootstrap-5/html/img/noimage.jpg");
+					}
+	                       
+	               try {
 	            	   kto.setContentId(getValue( "contentId", element ));
 					} catch (java.lang.NullPointerException e1) {
 						// TODO Auto-generated catch block
@@ -96,29 +96,7 @@ public class SearchkeyDAO {
 						// TODO Auto-generated catch block
 						kto.setIntro("");
 					}
-	               
-	               /*
-	               kto.setIntro(getValue( "intro", element ));
-	               kto.setAnimalCmgCl(getValue( "animalCmgCl", element ));
-	               kto.setTrlerAcmpnyAt(getValue( "trlerAcmpnyAt", element ));
-	               kto.setCaravAcmpnyAt(getValue( "caravAcmpnyAt", element ));
-	               kto.setLctCl(getValue( "lctCl", element ));
-	               kto.setBrazierCl(getValue( "brazierCl", element ));
-	               kto.setSiteBottomCl1(getValue( "siteBottomCl1", element ));
-	               kto.setSiteBottomCl2(getValue( "siteBottomCl2", element ));
-	               kto.setSiteBottomCl3(getValue( "siteBottomCl3", element ));
-	               kto.setSiteBottomCl4(getValue( "siteBottomCl4", element ));
-	               kto.setSiteBottomCl5(getValue( "siteBottomCl5", element ));
-	               kto.setSbrsCl(getValue( "sbrsCl", element ));
-	               */
-	               
-	               //System.out.println( "4" );
-	               
-	               //System.out.println("캠핑장명 : " + getValue( "facltNm", element ));	
-	               //System.out.println("캠핑장 유형 : " + getValue( "induty", element ));
-	               //System.out.println("캠핑장 주소 : " + getValue( "addr1", element ));
-	               //System.out.println("캠핑장 대표사진 : " + getValue( "firstImageUrl", element ));
-	               
+	               	               
 	               datas.add(kto);
 	            }
 	         }
