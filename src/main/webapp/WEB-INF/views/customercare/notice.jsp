@@ -42,9 +42,9 @@
 		sbHtml.append( "<td class=\"text-center\">" + seq + "</td>" );
 		sbHtml.append( "<td class=\"fw-bold text-center\">" + title + "</td>" );
         sbHtml.append( "<td></td>" );
-        sbHtml.append( "<td class=\"text-end\">" + writer + "</td>" );
-        sbHtml.append( "<td class=\"text-end\">" + wdate + "</td>" );
-        sbHtml.append( "<td class=\"text-end\">" + hit + "</td>" );
+        sbHtml.append( "<td class=\"text-center\">" + writer + "</td>" );
+        sbHtml.append( "<td class=\"text-center\">" + wdate + "</td>" );
+        sbHtml.append( "<td class=\"text-center\">" + hit + "</td>" );
         sbHtml.append( "</tr>" );
 	}
 %>
@@ -168,9 +168,9 @@
                     <th class="text-center">No</th>
                     <th class="text-center">제목</th>
                     <th></th>
-                    <th class="text-end">작성자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                    <th class="text-end">작성날짜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                    <th class="text-end">조회수</th>
+                    <th class="text-center">작성자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th class="text-center">작성날짜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th class="text-center">조회수</th>
                   </tr>
                 </thead>
                 <tbody>

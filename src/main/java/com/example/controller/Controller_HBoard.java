@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import com.exam.hboard.HBoardDAO;
+import com.exam.hboard.HBoardListTO;
 
 //import com.oreilly.servlet.MultipartRequest;
 //import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -20,20 +21,35 @@ import com.exam.hboard.HBoardDAO;
 public class Controller_HBoard {
 	
 	@Autowired
-	private HBoardDAO hdao;
+	private HBoardDAO dao;
 		 
 	String url = System.getProperty("user.dir");
 	private String hUploadPath = url +"/src/main/webapp/h_upload/";
-	
-
 		
 	@RequestMapping( value="/hboardlist.do" )
 	public ModelAndView hboardlist(HttpServletRequest request, HttpSession session) {
 		System.out.println( "hboardlist()호출" );
 		
+		int cpage = 1;
+		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		HBoardListTO listTO = new HBoardListTO();
+		listTO.setCpage( cpage );
+		
+		listTO = dao.boardList( listTO );
+		
 		ModelAndView modelAndView = new ModelAndView();
 		
+		if(session.getAttribute("ucode") == null) {
+			modelAndView.setViewName( "/login/nousers" );
+			return modelAndView;
+		}
+		
 		modelAndView.setViewName( "/board/hboard_list" );
+		modelAndView.addObject( "listTO", listTO );
+		modelAndView.addObject( "cpage", cpage );
 		
 		return modelAndView;
 	}
