@@ -379,7 +379,7 @@ if(session.getAttribute("id") != null){
 					markers.push(marker);
 				}
 				
-				for( var i=0; i<positions.length; i++ ){
+				for( let i=0; i<positions.length; i++ ){
 					
 					//html 디자인
 					var wrap = document.createElement('div');
@@ -407,7 +407,7 @@ if(session.getAttribute("id") != null){
 					close.style.height= 17 + "px";
 					close.style.background= "url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png')";
 					close.onclick = function() {
-						overlay.setMap(null);
+						overlays[i].setMap(null);
 					};
 					title.appendChild(close);
 					
@@ -442,15 +442,22 @@ if(session.getAttribute("id") != null){
 						//map: map,
 						position: markers[i].getPosition()
 						//content: wrap
-					}); 
+					});
+					
 					overlay.setContent(wrap);
+
+					overlays.push(overlay);
 					
 					kakao.maps.event.addListener( markers[i], 'click', function() {
-						overlay.setMap(map);
+						console.log(marker)
+						console.log("1");
+						overlays[i].setMap(map);
 					});
 					
 				}
 			
+				
+				
 					          
 				// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
 				var mapTypeControl = new kakao.maps.MapTypeControl();
