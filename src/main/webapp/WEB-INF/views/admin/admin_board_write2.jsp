@@ -214,7 +214,7 @@
 		});
 	}
 	 
-       document.getElementById( 'wbtn' ).onclick = function() {	
+	   document.getElementById( 'wbtn' ).onclick = function() {
 		 var subject = $('#subject').val();
 		 var title = $('#title').val();
 		 var content = $('#summernote').val();
@@ -224,7 +224,6 @@
 		 		 
 	     var data = {'subject' : subject , 'title' : title , 'content' : content, 'vcode' : vcode, 'filename' : filename, 'filesize' : filesize};	    	
 
-	     if(($('#subject').val() != '')&&($('#title').val() != '')&&($('#summernote').val() != '')){	        
 					
 			$.ajax({
 				data : data,				
@@ -245,11 +244,7 @@
 					alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
 		        }
 			});
-	     } else {
-		        alert('말머리를 선택하고 빈칸을 모두 입력해주세요.');
-		        $('#subject').focus();
-		 } 
-	   }
+		}
 	
 	$(document).ready(function() {
 		let date = new Date().getTime().toString(36);
@@ -289,11 +284,7 @@
 	
 	// 이미지 파일 업로드
 	function sendFile(file, editor, welEditable) {
-		var imgUrl = '';
-		var mImgUrl = './upload/';
-		var hImgUrl = './h_upload/';
-		var nImgUrl = './n_upload/';
-		
+		var imgUrl = './upload/';
 		var data = new FormData();
 		data.append('image', file);
 		data.append('subject', $('#subject').val());
@@ -307,19 +298,10 @@
 			enctype : 'multipart/form-data',
 			processData : false,
 			success : function(result) {
-				
 				console.log("result : " +result);
-				
 				let str= result.split('@');
-				 var subject = $('#subject').val();
 				
-				if( $('#subject').val() == 4 ) {
-					imgUrl = hImgUrl + str[0];
-				} else if( $('#subject').val() == 5 ) {
-					imgUrl = nImgUrl + str[0];
-				} else {
-					imgUrl = mImgUrl + str[0];
-				}
+				imgUrl = imgUrl + str[0];
 				
 				$('#summernote').summernote( 'insertImage', imgUrl );
 				
@@ -333,7 +315,7 @@
             	};
 			},
 			error: function() {
-	        	alert('말머리를 선택해주세요.');
+	        	alert('error222');
 	        }
 		});
 	}
