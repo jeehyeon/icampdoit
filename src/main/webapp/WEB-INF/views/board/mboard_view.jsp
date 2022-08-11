@@ -194,7 +194,7 @@ for(CmtTO cto : cmtArr){
             <!-- /comments-->
             
             <!-- comment form-->
-            <div class="mb-4">
+            <div class="mb-6">
               <div class="collapse.show" id="leaveComment"> 
                 <form class="form" id="comment-form" method="post">
                 <input type="hidden" name="ucode" value="<%=ucode%>"/>
@@ -204,7 +204,9 @@ for(CmtTO cto : cmtArr){
                      <label class="form-label" for="comment"> <span class="required"></span></label>
                      <textarea class="form-control" name="comment" id="comment" rows="3" placeholder="내용을 입력해주세요." required data-msg="Please enter your comment"></textarea>
                      </div>
-                    <div class="btn btn-outline-primary right-float" align="right" onclick="cmtInsert()"><i class="far fa-comment"></i>등록하기</div>
+                     
+                    <div class="btn btn-outline-primary" onclick="cmtInsert()" style="float: right;"><i class="far fa-comment"></i>등록하기</div>
+                    
                 </form>
               </div>
             </div>
