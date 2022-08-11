@@ -11,3 +11,8 @@ img.weatherimage{
 div.tit_weather{
 text-align: center;
 }
+
+.right-float{
+	float:right;
+	
+}

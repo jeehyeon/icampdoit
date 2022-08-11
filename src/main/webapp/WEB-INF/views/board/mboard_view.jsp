@@ -204,7 +204,7 @@ for(CmtTO cto : cmtArr){
                      <label class="form-label" for="comment"> <span class="required"></span></label>
                      <textarea class="form-control" name="comment" id="comment" rows="3" placeholder="내용을 입력해주세요." required data-msg="Please enter your comment"></textarea>
                      </div>
-                    <div class="btn btn-outline-primary" align="right" onclick="cmtInsert()"><i class="far fa-comment"></i>등록하기</div>
+                    <div class="btn btn-outline-primary right-float" align="right" onclick="cmtInsert()"><i class="far fa-comment"></i>등록하기</div>
                 </form>
               </div>
             </div>
@@ -259,7 +259,7 @@ for(CmtTO cto : cmtArr){
   			var sendData = {"replyseq": replyseq}
   			//console.log("댓글 데이터 : " + replyseq);
     		//console.log("댓글 데이터 테스트 : " + $(this).attr("value"));
-
+  			cmtDelete(sendData);
 	  })
    };
    
@@ -318,12 +318,9 @@ for(CmtTO cto : cmtArr){
         										+'</div>'
         										+'</div>'
         										+'<hr/>');
-        					
-        					
-        					
+
         				});*/
-        				 
-        				
+			
         				
         			}, 
         			fail: function(error){
