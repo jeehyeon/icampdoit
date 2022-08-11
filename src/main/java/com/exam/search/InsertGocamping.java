@@ -269,11 +269,11 @@ public class InsertGocamping {
 							//24 sigunguNm
 							try {
 								System.out.println( "시군구: " + getValue("sigunguNm", element) );
-								kto.setMapY( getValue("sigunguNm", element) );
+								kto.setSigunguNm( getValue("sigunguNm", element) );
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
 								System.out.println( "시군구: 없음" );
-								kto.setMapY( "default" );
+								kto.setSigunguNm( "default" );
 							}
 							
 							lists.add(kto);
