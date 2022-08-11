@@ -37,5 +37,6 @@ public class SearchkeyTO {
 	private String homepage;		// 21. 캠핑장 사이트주소
 	private String mapX;			// 22. 경도(X)
 	private String mapY;			// 23. 위도(Y)
+	private String sigunguNm;		// 24. 시군구
 
 }
