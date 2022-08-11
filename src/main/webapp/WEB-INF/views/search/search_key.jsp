@@ -25,7 +25,7 @@
 		String addr1 = kto.getAddr1();
 		String firstImageUrl = kto.getFirstImageUrl();
 		if( firstImageUrl.equals("default") ) {
-			firstImageUrl = "./resources/bootstrap-5/html/img/noimage.jpg";
+			firstImageUrl = "./resources/bootstrap-5/html/img/noimage.svg";
 		}
 		
 		//System.out.println( "출력: "+ facltNm );
