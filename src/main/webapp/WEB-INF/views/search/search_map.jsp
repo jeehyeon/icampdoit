@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <%
-//session 값 가져오기
-int ucode = -1;
-String id ="";
-if(session.getAttribute("id") != null){
-	ucode = (int)session.getAttribute("ucode");
-	id = (String)session.getAttribute("id");
-}
+	//session 값 가져오기
+	int ucode = -1;
+	String id ="";
+	if(session.getAttribute("id") != null){
+		ucode = (int)session.getAttribute("ucode");
+		id = (String)session.getAttribute("id");
+	}
+
 %>
 
 <!DOCTYPE html>
@@ -128,19 +130,17 @@ if(session.getAttribute("id") != null){
           <form action="#" autocomplete="off">
             <div class="row">
               <div class="col-xl-4 col-md-6 mb-4">
-                <label class="form-label" for="form_guests">전체/시,도</label>
-                <select class="selectpicker form-control" name="guests" id="sido" data-style="btn-selectpicker" title=" ">
+                <label class="form-label" for="sido">전체/시,도</label>
+                <select class="selectpicker form-control" name="sido" id="sido" data-style="btn-selectpicker">
                   <option value="seoul">서울시    </option>
                   <option value="incheon">인천시    </option>
                   <option value="gyeonggi">경기도    </option>
                 </select>
               </div>
               <div class="col-xl-4 col-md-6 mb-4">
-                <label class="form-label" for="form_type">전체/시,구</label>
-                <select class="selectpicker form-control" name="type" id="gugun" multiple data-style="btn-selectpicker" data-none-selected-text="">
-                  <option value="type_0">Entire place    </option>
-                  <option value="type_1">Private room    </option>
-                  <option value="type_2">Shared room    </option>
+                <label class="form-label" for="gugun">전체/시,구</label>
+                <select class="selectpicker form-control" name="gugun" id="gugun" multiple data-style="btn-selectpicker" data-none-selected-text="">
+                  <option value="시구">시/구 선택   </option>
                 </select>
               </div>
               <div class="col-sm-6 mb-4">
@@ -282,7 +282,34 @@ if(session.getAttribute("id") != null){
         </div>
       </div>
     </footer>
+    <!-- jQuery-->
+    <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
     <!-- JavaScript files-->
+    <script>
+    	$(document).ready(function(){
+    		$('#sido').on('change', function() {
+    			let sidoVal = $( '#sido option:selected' ).text();
+    			console.log(sidoVal);
+    			
+    			$.ajax({
+    				url: '/searchmapsido.do',
+    				type: "POST", 
+    				data : sidoVal,
+    				success: function(data){
+    					$('#gugun').html( '<option value="시구">시/구 선택   </option>' );
+    					$.each( data, function( index, item ){
+    						$( '#gugun' ).append( '<option value="' + item.sigunguNm + '">' + item.sigunguNm + '</option>' );
+    					});
+    					$('#gugun').selectpicker( 'refresh' );
+    				},
+    				error: function(e){
+    					alert( '[에러]' + e.status );
+    				}
+    			});
+    		});
+    	});
+    
+    </script>
     <script>
 				var mapContainer = document.getElementById('map'), //지도 표시할 div id
 					mapOptions = {
@@ -500,8 +527,7 @@ if(session.getAttribute("id") != null){
       injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg'); 
       
     </script>
-    <!-- jQuery-->
-    <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
+    
     <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
     <script src="./resources/bootstrap-5/html/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Magnific Popup - Lightbox for the gallery-->
