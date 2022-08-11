@@ -266,6 +266,15 @@ public class InsertGocamping {
 								System.out.println( "위도(Y): 없음" );
 								kto.setMapY( "default" );
 							}
+							//24 sigunguNm
+							try {
+								System.out.println( "시군구: " + getValue("sigunguNm", element) );
+								kto.setMapY( getValue("sigunguNm", element) );
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								System.out.println( "시군구: 없음" );
+								kto.setMapY( "default" );
+							}
 							
 							lists.add(kto);
 						}
@@ -300,8 +309,8 @@ public class InsertGocamping {
 		   
 		   for( SearchkeyTO kto : lists ) {
 			   
-			   String sql = "insert into go_api values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			   int result = jdbcTemplate.update(sql, kto.getFacltNm(), kto.getAddr1(), kto.getAddr2(), kto.getInduty(), kto.getFirstImageUrl(), kto.getContentId(), kto.getIntro(), kto.getAnimalCmgCl(), kto.getTrlerAcmpnyAt(), kto.getCaravAcmpnyAt(), kto.getLctCl(), kto.getBrazierCl(), kto.getSiteBottomCl1(), kto.getSiteBottomCl2(), kto.getSiteBottomCl3(), kto.getSiteBottomCl4(), kto.getSiteBottomCl5(), kto.getSbrsCl(), kto.getDoNm(), kto.getEqpmnLendCl(), kto.getHomepage(), kto.getMapX(), kto.getMapY() ); 
+			   String sql = "insert into go_api values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			   int result = jdbcTemplate.update(sql, kto.getFacltNm(), kto.getAddr1(), kto.getAddr2(), kto.getInduty(), kto.getFirstImageUrl(), kto.getContentId(), kto.getIntro(), kto.getAnimalCmgCl(), kto.getTrlerAcmpnyAt(), kto.getCaravAcmpnyAt(), kto.getLctCl(), kto.getBrazierCl(), kto.getSiteBottomCl1(), kto.getSiteBottomCl2(), kto.getSiteBottomCl3(), kto.getSiteBottomCl4(), kto.getSiteBottomCl5(), kto.getSbrsCl(), kto.getDoNm(), kto.getEqpmnLendCl(), kto.getHomepage(), kto.getMapX(), kto.getMapY(), kto.getSigunguNm()); 
 
 			   //String sql = "insert into go_api ( facltNm, addr1, addr2, induty, firstImageUrl, contentId, intro, animalCmgCl, trlerAcmpnyAt, caravAcmpnyAt, lctCl, brazierCl, siteBottomCl1, siteBottomCl2, siteBottomCl3, siteBottomCl4, siteBottomCl5, sbrsCl, doNm, eqpmnLendCl, homepage, mapX, mapY ) select ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? from dual where not exists ( select facltNm from go_api where facltNm=? )";
 			   //int result = jdbcTemplate.update(sql, kto.getFacltNm(), kto.getAddr1(), kto.getAddr2(), kto.getInduty(), kto.getFirstImageUrl(), kto.getContentId(), kto.getIntro(), kto.getAnimalCmgCl(), kto.getTrlerAcmpnyAt(), kto.getCaravAcmpnyAt(), kto.getLctCl(), kto.getBrazierCl(), kto.getSiteBottomCl1(), kto.getSiteBottomCl2(), kto.getSiteBottomCl3(), kto.getSiteBottomCl4(), kto.getSiteBottomCl5(), kto.getSbrsCl(), kto.getDoNm(), kto.getEqpmnLendCl(), kto.getHomepage(), kto.getMapX(), kto.getMapY(), kto.getFacltNm() ); 
