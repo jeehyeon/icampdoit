@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.exam.hboard.HBoardTO" %>
+<%@ page import="com.exam.hboard.HBoardListTO" %>
+<%@ page import="java.util.ArrayList" %>	
 <%
 	//session 값 가져오기
 	int ucode = -1;
@@ -7,6 +10,78 @@
 	if(session.getAttribute("id") != null){
 		ucode = (int)session.getAttribute("ucode");
 		id = (String)session.getAttribute("id");
+	}
+	
+	HBoardListTO listTO = (HBoardListTO)request.getAttribute("listTO");
+	int cpage = (Integer)request.getAttribute( "cpage" );
+	
+	int recordPerPage = listTO.getRecordPerPage();
+	int totalPage = listTO.getTotalPage();
+	int blockPerPage = listTO.getBlockPerPage();
+	int startBlock = listTO.getStartBlock();
+	int endBlock = listTO.getEndBlock();
+	int totalRecord = listTO.getTotalRecord();
+	
+	ArrayList<HBoardTO> lists = listTO.getBoardLists();
+	
+	StringBuilder sbHtml = new StringBuilder();
+	
+	for( int i=0 ; i<recordPerPage ; i++ ) {
+		String seq = "";
+		String subject = "";
+		String title = "";
+		String writer = "";
+		String content = "";
+		String filename = "";
+		String wdate = "";
+		String hit = "";
+		
+		if( i < lists.size() ) {
+			HBoardTO to = lists.get(i);
+			seq = to.getSeq();
+			subject = to.getSubject();
+			title = to.getTitle();
+			writer = to.getWriter();
+			content = to.getContent();
+			filename = to.getFilename() == null ? "./resources/bootstrap-5/html/img/noimage.png" : "./h_upload/" + to.getFilename();
+			wdate = to.getWdate();
+			hit = to.getHit();
+		}
+	
+		
+  /* <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
+        <div class="card shadow border-0 h-100">
+        <a href="./hboardview.do">
+        <img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/원플리1.jpg" alt="..."/>
+        </a>
+          <div class="card-body">
+          <a class="text-uppercase text-muted text-sm letter-spacing-2" href="#"># playlist </a>
+            <h5 class="my-2"><a class="text-dark" href="./hboardview.do">Late Spring breeze          </a></h5>
+            <p class="text-gray-500 text-sm my-3"><i class="far fa-clock me-2"></i>July 26, 2022</p>
+            <p class="my-2 text-muted text-sm">내용</p><a class="btn btn-link ps-0" href="./hboardview.do">더보기<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
+          </div>
+        </div>
+      </div> */
+		
+		sbHtml.append( "<div class='col-lg-4 col-sm-6 mb-4 hover-animate'>" );
+		sbHtml.append( "<div class='card shadow border-0 h-100'>" );
+		sbHtml.append( "<a href='./hboardview.do?cpage=" + cpage + "&seq=" + seq + "'>" );
+		if( seq.equals( "" ) ) {
+			sbHtml.append( "<img class='img-fluid card-img-top' src='./resources/bootstrap-5/html/img/noimage.svg' alt='image'/>" );
+		} else {
+			sbHtml.append( "<img class='img-fluid card-img-top' src='" + filename + "' alt='image'/>" );
+		}		
+		sbHtml.append( "</a>" );
+		sbHtml.append( "<div class='card-body'>" );
+		sbHtml.append( "<a class='text-uppercase text-muted text-sm letter-spacing-2' ># content </a>" );
+		sbHtml.append( "<h5 class='my-2'><a class='text-dark' href='./hboardview.do?cpage=" + cpage + "&seq=" + seq + "'>" + title +"</a></h5>" );
+		sbHtml.append( "<p class='text-gray-500 text-sm my-3'><i class='far fa-clock me-2'></i>" + wdate + "</p>" );
+		sbHtml.append( "<p class='my-2 text-muted text-sm'><i class='fa-solid fa-bullhorn'<i class='fa-solid fa-bullhorn'></i><strong>&nbsp;&nbsp; Content update for August</strong></p>" );
+		sbHtml.append( "<a class='btn btn-link ps-0' href='./hboardview.do?cpage=" + cpage + "&seq=" + seq + "'>더보기<i class='fa fa-long-arrow-alt-right ms-2'></i></a>" );
+		sbHtml.append( "</div>" );
+		sbHtml.append( "</div>" );
+		sbHtml.append( "</div>" );
+		
 	}
 %>
 
@@ -19,6 +94,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
     <link rel="stylesheet" href="./resources/bootstrap-5/html/css/font.css" type="text/css">
+     <!-- Font Awesome 이거 추가함 -->
+    <script src="https://kit.fontawesome.com/5251502df3.js" crossorigin="anonymous"></script>   
     <!-- Price Slider Stylesheets -->
     <link rel="stylesheet" href="./resources/bootstrap-5/html/vendor/nouislider/nouislider.css">
     <!-- Google fonts - Playfair Display-->
@@ -120,7 +197,7 @@
     <section class="py-6">
       <div class="container">
         <div class="row mb-5">
-          <!-- blog item-->
+          <!-- blog item
           <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
             <div class="card shadow border-0 h-100"><a href="./hboardview.do"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/원플리1.jpg" alt="..."/></a>
               <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#"># playlist </a>
@@ -130,7 +207,7 @@
               </div>
             </div>
           </div>
-          <!-- blog item-->
+         
           <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
             <div class="card shadow border-0 h-100"><a href="./hboardview.do"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/원플리2.jpg" alt="..."/></a>
               <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#"># playlist </a>
@@ -140,7 +217,7 @@
               </div>
             </div>
           </div>
-          <!-- blog item-->
+          
           <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
             <div class="card shadow border-0 h-100"><a href="./hboardview.do"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/원플리3.jpg" alt="..."/></a>
               <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#"># playlist </a>
@@ -150,7 +227,7 @@
               </div>
             </div>
           </div>
-          <!-- blog item-->
+          
           <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
             <div class="card shadow border-0 h-100"><a href="./hboardview.do"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/인턴.png" alt="..."/></a>
               <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#"># movie </a>
@@ -160,7 +237,7 @@
               </div>
             </div>
           </div>
-          <!-- blog item-->
+          
           <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
             <div class="card shadow border-0 h-100"><a href="./hboardview.do"><img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/너의이름은.jpg" alt="..."/></a>
               <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#"># movie </a>
@@ -170,9 +247,55 @@
               </div>
             </div>
           </div>
-          
+          -->
+          <%=sbHtml.toString() %>
         <!-- 페이징 -->
+        <nav aria-label="Page navigation example">  
+          <ul class="pagination pagination-template d-flex justify-content-center">
+         <%			
+	//페이지 하단의 << 버튼
+	if ( startBlock == 1 ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-thin fa-angles-left'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='hboardlist.do?cpage="+ (startBlock - blockPerPage) +"'><i class='fa fa-thin fa-angles-left'></i></a></li> ");
+	}
+	//out.println(" &nbsp; ");
+	//페이지 하단의 < 버튼 => (cpage-1) 한페이지 앞으로 이동
+	if ( cpage == 1 ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'> <i class='fa fa-angle-left'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='hboardlist.do?cpage="+ (cpage-1) +"'><i class='fa fa-angle-left'></i></a></li> ");
+	}
+	//out.println(" &nbsp;&nbsp; ");
+	//현재 페이지
+	for ( int i=startBlock; i<=endBlock; i++ ) {
+		if ( cpage == i ) { 
+			out.println(" <li class='page-item active'><a class='page-link' href='#'>" + i + "</a></li> ");
+		} else {
+			out.println(" <li class='page-item'><a class='page-link' href='hboardlist.do?cpage=" + i + "'>" + i + "</a></li> ");
+		}
+	}
+	//out.println(" &nbsp;&nbsp; ");
+	//페이지 하단의 > 버튼
+	if ( cpage == totalPage ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-angle-right'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='hboardlist.do?cpage="+ (cpage+1) +"'><i class='fa fa-angle-right'></i></a></li> ");
+	}
+	//out.println(" &nbsp; ");
+	//페이지 하단의 >> 버튼
+	if ( endBlock == totalPage ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='hboardlist.do?cpage="+ (startBlock + blockPerPage) +"'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
+	}
+	//out.println(" &nbsp; ");
+
+%>        
+          </ul>
+        </nav>
       </div>
+      
     </section>
     <!-- Footer - 관리자 페이지 이동 부분 넣을 곳 -->
     <footer class="position-relative z-index-10 d-print-none">
