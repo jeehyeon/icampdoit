@@ -42,39 +42,14 @@ public class HBoardDAO {
 		String pseq;
 		System.out.println("vcode : " + hto.getVcode());
 		
-		//파일이 있으면 진행 없으면 진행 X		
-		if(hto.getContent().indexOf(hto.getFilename()) != -1) {
-			try {
-				sql = "select seq from h_board where vcode=?";
-				pseq = jdbcTemplate.queryForObject(sql, String.class, hto.getVcode());
-				System.out.println("pseq 결과값 : " + pseq);
-			} catch (DataAccessException e) {
-				// TODO Auto-generated catch block
-				System.out.println("seq값 찾기 오류");
-				return flag;
-			}
-
-						
-			sql = "insert into m_file values ( 0, ?, ?, ? )";
-			result = jdbcTemplate.update(sql, pseq, hto.getFilename(), hto.getFilesize());
-	
-			if( result != 1 ) {
-				System.out.println("fileinsert 오류");
-				flag = 1;
-			}else {
-				flag=0;
-			}
-		
-		};
-		
 		return flag;		
 	}
 	
 	//파일 검사 및 이동
-	public void filecnd(BoardTO to, FileTO fto) {
+	public void filecnd(HBoardTO hto) {
 		//삭제했을 경우 임시 파일 삭제
-		if(to.getContent().indexOf(fto.getFilename()) == -1) {
-			String delurl = hUploadPath + fto.getFilename();
+		if(hto.getContent().indexOf(hto.getFilename()) == -1) {
+			String delurl = hUploadPath + hto.getFilename();
 			File delFile = new File(delurl);
 			if(delFile.exists()) {//파일이 존재하는지 확인
 				delFile.delete();
