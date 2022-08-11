@@ -20,6 +20,8 @@ public class BoardDAO {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	String url = System.getProperty("user.dir");
+	private String mUploadPath = url +"/src/main/webapp/upload/";	
 		
 	// write
 	public void mboardWrite() {		
@@ -27,8 +29,7 @@ public class BoardDAO {
 		
 	// write_ok
 	public int mboardWriteOk(BoardTO to, FileTO fto) {	
-		
-		
+				
 		int flag = 1;
 		
 		SignUpTO sto = new SignUpTO();
@@ -201,8 +202,7 @@ public class BoardDAO {
 		}		
 		return blistTO;
 	}
-	
-	
+		
 	// view
 	public BoardTO mboardView(BoardTO to) {	
 		
@@ -222,8 +222,7 @@ public class BoardDAO {
 		String sql = "select seq, pseq, writer, content, date_format(wdate, '%Y.%m.%d') wdate, ucode from m_cmt where pseq=? order by seq desc";
 		ArrayList<CmtTO> lists = (ArrayList<CmtTO>)jdbcTemplate.query(
 				sql, new BeanPropertyRowMapper<CmtTO>(CmtTO.class), cto.getPseq());
-		
-		
+				
 		return lists;
 		
 	}
@@ -311,12 +310,7 @@ public class BoardDAO {
 		
 		sql = "delete from m_cmt where pseq=?";
 		int cmtresult = jdbcTemplate.update(sql, cto.getPseq() );
-		
-		
-		
-		
-		
-		
+	
 		return flag;
 	}
 	
@@ -324,7 +318,7 @@ public class BoardDAO {
 	public void filecnd(BoardTO to, FileTO fto) {
 		//삭제했을 경우 임시 파일 삭제
 		if(to.getContent().indexOf(fto.getFilename()) == -1) {
-			String delurl = "C:/Users/kkk/Documents/Git/src/main/webapp/upload/" + fto.getFilename();
+			String delurl = mUploadPath + fto.getFilename();
 			File delFile = new File(delurl);
 			if(delFile.exists()) {//파일이 존재하는지 확인
 				delFile.delete();
@@ -341,7 +335,7 @@ public class BoardDAO {
 			//삭제했을 경우 임시 파일 삭제
 			System.out.println("파일삭제 메서드 : " + filename);
 			if(filename != "default") {
-				String delurl = "C:/Users/kkk/Documents/Git/src/main/webapp/upload/" + filename;
+				String delurl = mUploadPath + filename;
 				File delFile = new File(delurl);
 				if(delFile.exists()) {//파일이 존재하는지 확인
 					delFile.delete();

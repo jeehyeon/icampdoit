@@ -13,5 +13,6 @@ public class NBoardTO {
 	private String content;
 	private String wdate;
 	private String hit;
-	private String ucode;
+	private int ucode;
+	private String vcode;
 }

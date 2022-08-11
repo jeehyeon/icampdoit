@@ -17,63 +17,39 @@ public class HBoardDAO {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	
+	String url = System.getProperty("user.dir");
+	private String hUploadPath = url +"/src/main/webapp/h_upload/";
+
 	// write_ok
-	public int aboardWriteOk(BoardTO to, FileTO fto) {	
-		
+	public int aboardWriteOk(HBoardTO hto) {			
 		
 		int flag = 1;
 		
 		SignUpTO sto = new SignUpTO();
 		
-		String sql = "insert into m_board values  ( 0, ?, ?, ?, ?, now(), 0, ?, 0, ?)";
-		int result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(), to.getUcode(), to.getVcode());
+		String sql = "insert into h_board values  ( 0, ?, ?, ?, ?, now(), 0, ?, ?, ?, ?)";
+		int result = jdbcTemplate.update(sql, hto.getSubject(), hto.getTitle(), hto.getWriter(), hto.getContent(), 
+				hto.getUcode(), hto.getFilename(), hto.getFilesize(), hto.getVcode() );
 					System.out.println(result);
 					
 		//위에 들어가 부분에 seq값을 다시 들고 나와야 함
 		if( result != 1 ) {
-			System.out.println("m_board insert 오류");
+			System.out.println("h_board insert 오류");
 			return flag;	
 		}else {
 			flag=0;
 		}
 		String pseq;
-		System.out.println("vcode : " + to.getVcode());
-		
-		//파일이 있으면 진행 없으면 진행 X
-		
-		if(to.getContent().indexOf(fto.getFilename()) != -1) {
-			try {
-				sql = "select seq from m_board where vcode=?";
-				pseq = jdbcTemplate.queryForObject(sql, String.class, to.getVcode());
-				System.out.println("pseq 결과값 : " + pseq);
-			} catch (DataAccessException e) {
-				// TODO Auto-generated catch block
-				System.out.println("seq값 찾기 오류");
-				return flag;
-			}
-
-						
-			sql = "insert into m_file values ( 0, ?, ?, ? )";
-			result = jdbcTemplate.update(sql, pseq, fto.getFilename(), fto.getFilesize());
-	
-			if( result != 1 ) {
-				System.out.println("fileinsert 오류");
-				flag = 1;
-			}else {
-				flag=0;
-			}
-		
-		};
+		System.out.println("vcode : " + hto.getVcode());
 		
 		return flag;		
 	}
 	
 	//파일 검사 및 이동
-	public void filecnd(BoardTO to, FileTO fto) {
+	public void filecnd(HBoardTO hto) {
 		//삭제했을 경우 임시 파일 삭제
-		if(to.getContent().indexOf(fto.getFilename()) == -1) {
-			String delurl = "C:/Users/kkk/Documents/Git/src/main/webapp/upload/" + fto.getFilename();
+		if(hto.getContent().indexOf(hto.getFilename()) == -1) {
+			String delurl = hUploadPath + hto.getFilename();
 			File delFile = new File(delurl);
 			if(delFile.exists()) {//파일이 존재하는지 확인
 				delFile.delete();
@@ -90,7 +66,7 @@ public class HBoardDAO {
 		//삭제했을 경우 임시 파일 삭제
 		System.out.println("파일삭제 메서드 : " + filename);
 		if(filename != "default") {
-			String delurl = "C:/Users/kkk/Documents/Git/src/main/webapp/upload/" + filename;
+			String delurl = hUploadPath + filename;
 			File delFile = new File(delurl);
 			if(delFile.exists()) {//파일이 존재하는지 확인
 				delFile.delete();

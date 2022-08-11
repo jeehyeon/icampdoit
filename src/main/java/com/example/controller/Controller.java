@@ -48,7 +48,7 @@ public class Controller {
 	public ModelAndView insertgocamping(HttpServletRequest request, HttpSession session) {
 		System.out.println( "insertgocamping() 호출" );
 		
-		ArrayList<SearchkeyTO> lists = gocamp.gocampingparse( "서울시" );
+		ArrayList<SearchkeyTO> lists = gocamp.gocampingparse( "경기도" );
 		int flag = gocamp.insertapi(lists);
 		
 		ModelAndView modelAndView = new ModelAndView();

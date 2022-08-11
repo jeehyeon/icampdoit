@@ -34,7 +34,7 @@
   <link rel="stylesheet" href="./resources/bootstrap-5/html/summernote/summernote-lite.css" />
  
  <script type="text/javascript">  
-	window.onload = function() {
+	/* window.onload = function() {
 		document.getElementById( 'wbtn' ).onclick = function() {
 
 			var subject = afrm.subject.value;
@@ -60,7 +60,7 @@
 			 
 			document.afrm.submit();
 		};	
-	};	
+	};	 */
 </script> 
 
   </head>
@@ -74,7 +74,7 @@
 			</a>
 		</div>
 		<hr class="horizontal light mt-0 mb-2">
-			<!-- 원래 div 태그 있던 위치...  -->
+		 <div class="collapse navbar-collapse  w-auto" id="sidenav-collapse-main">
 		  <ul class="navbar-nav">		  
 	    	<li class="nav-item">
  				<a class="nav-link text-white " href="./admin.do">   
@@ -119,17 +119,12 @@
 			  </a>
 			</li>    
 		  </ul>
-		  		
+		 </div>		
 	</aside>
-		  <div class="collapse navbar-collapse  w-auto" id="sidenav-collapse-main"></div>
-		  <!-- ㄴ 이게 문제의 그 태그...ㅠㅠ -->
-
- 			
+		   			
 	<!-- Write Section-->
-	<div class="main-content px-5">
-		<!-- <div class="container-fluid px-2 px-md-4 py-2"> -->
-		
-		  <form action="./aboardwrite_ok.do" method="post" id="afrm" name="afrm" enctype="multipart/form-data">
+	<div class="main-content px-5">		
+		  <!-- <form action="./aboardwrite_ok.do" method="post" id="afrm" name="afrm" enctype="multipart/form-data"> -->
 		  <input type="hidden" name="writeOk" id="writeOk" value="default"/>
 		  <input type="hidden" name="filesize" id="filesize" value="0000"/>
 		  <input type="hidden" name="vcode" id="vcode" value="default"/>
@@ -166,7 +161,7 @@
 			      </div>
 				</div>
 			</div>
-		  </form>
+		  <!-- </form> -->
 		</div>
 	</div>
 
@@ -200,9 +195,8 @@
 
 	<script>    
     
-/* 	document.getElementById( 'cbtn' ).onclick = function() {
-		
-		
+ 	document.getElementById( 'cbtn' ).onclick = function() {
+				
 		$.ajax({
 			data : {filename: $('#writeOk').val()},
 			type : "GET",
@@ -215,12 +209,65 @@
 	        }
 		});
 	}
-	 */
-	
+	 
+	   document.getElementById( 'wbtn' ).onclick = function() {
+		 var subject = $('#subject').val();
+		 var title = $('#title').val();
+		 var content = $('#summernote').val();
+		 var vcode = $('#vcode').val();
+		 var filename = $('#writeOk').val();
+		 var filesize = $('#filesize').val();
+		 
+		 console.log("filesize : " + filesize);
+	     var data = {'subject' : subject , 'title' : title , 'content' : content, 'vcode' : vcode, 'filename' : filename, 'filesize' : filesize};	    	
+	     
+					
+			$.ajax({
+				data : data,				
+				type : "POST",
+				url : './aboardwrite_ok.do',
+				success : function() {
+					//location.href='/admin_board.do';
+					console.log("subject : " + subject);
+				},
+				error: function() {
+		        	alert('error, 에러');
+		        }
+			});
+		}
+		
+		/* $("#wbtn").click(function(){
+			var subject = $('#subject').val();
+		    var title = $('#title').val();
+			var content = $('#summernote').val();
+	     	var data = {'subject' : subject , 'title' : title , 'content' : content};	    	
+	    	
+		     if(($('#subject').val() != '')&&($('#title').val() != '')&&($('#summernote').val() != '')){	        
+	     
+		        $.ajax({ 	   					
+		            type: 'POST',
+		            url: './aboardwrite_ok.do',
+		            data: data,
+		            dataType: 'text',
+		            success: function() {
+		            	alert('성공');
+		            },
+		            error: function() {
+		            	alert('error, 에러');
+		            }				
+		        });
+		    	 
+		    } else {
+		        alert('빈칸을 모두 입력해주세요.');
+		        $('#subject').focus();
+		    } 				
+		}); */
+		
 	
 	$(document).ready(function() {
 		let date = new Date().getTime().toString(36);
 		$('#vcode').val(date);
+		console.log("date : " +date);
 
 		var fontList = ['맑은 고딕','굴림','돋움','바탕','궁서','NotoSansKR','Arial','Courier New','Verdana','Tahoma'];
 		$('#summernote').summernote({
@@ -267,7 +314,7 @@
 			enctype : 'multipart/form-data',
 			processData : false,
 			success : function(result) {
-				console.log(result);
+				console.log("result : " +result);
 				let str= result.split('@');
 				
 				imgUrl = imgUrl + str[0];
