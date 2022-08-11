@@ -245,6 +245,24 @@ public class BoardDAO {
 		
 		return flag;
 	}
+	//delete Comment
+		public int mboardDeleteComment( CmtTO cto ) {
+			
+			int flag = 1;
+			
+			String sql = "delete from m_cmt where seq=?";
+			int result = jdbcTemplate.update(sql, cto.getPseq());
+						System.out.println(result);
+
+			if( result != 1 ) {
+				System.out.println("m_cmt insert 오류");
+			}else {
+				flag=0;
+			}
+			
+			return flag;
+		}
+	
 	
 	// modify
 	public BoardTO mboardModify(BoardTO to) {

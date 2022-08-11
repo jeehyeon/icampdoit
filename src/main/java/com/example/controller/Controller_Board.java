@@ -9,8 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.http.fileupload.FileUtils;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -394,26 +397,35 @@ public class Controller_Board {
 		return data;
 	}
 	
-	@RequestMapping( value="/cmtList.do" )
-	public JSONObject cmtList(HttpServletRequest request, HttpSession session) throws IOException {
+	@RequestMapping( value="/cmtdelete.do" )
+	public String cmtList(HttpServletRequest request, HttpSession session) throws IOException, ParseException {
 		System.out.println( "mboarddeleteOk() 호출" );
+		int flag = 1;
 		//System.out.println(request.getParameter("ucode"));
 		//System.out.println(request.getParameter("id"));
 		//System.out.println(request.getParameter("seq"));
 		//System.out.println(request.getParameter("comment"));
+		String body = (String)request.getParameter("replyseq");
+		System.out.println("cmtdelete 데이터 : " + body);
+		JSONParser parser = new JSONParser();
+		Object obj = parser.parse(body);
+		JSONObject data = (JSONObject)obj;
+		System.out.println("댓글삭제 데이터 seq : "+ data.get("seq"));
+		System.out.println("댓글삭제 데이터 ucode : "+ data.get("ucode") );
+		System.out.println("댓글삭제 데이터 session ucode : "+ session.getAttribute("ucode"));
+		
+		
+		if(session.getAttribute("ucode") != data.get("ucode")) {
+			flag=2;
+			return Integer.toString(flag);
+		}
 		
 		CmtTO cto = new CmtTO();
-		cto.setPseq(request.getParameter("seq"));
-		cto.setUcode(request.getParameter("ucode"));
-		cto.setWriter(request.getParameter("id"));
-		cto.setContent(request.getParameter("comment"));
+		cto.setSeq((String)data.get("seq"));
 		
-		int flag = dao.mboardWriteComment(cto);
-		JSONObject result = new JSONObject();
-		result.put("flag", flag);
+		flag=dao.mboardDeleteComment(cto);
 		
-		
-		return result;
+		return Integer.toString(flag);
 	}
 	
 }

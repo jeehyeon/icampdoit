@@ -1,3 +1,4 @@
+<%@page import="ch.qos.logback.core.recovery.ResilientSyslogOutputStream"%>
 <%@page import="com.exam.mboard.CmtTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -33,9 +34,11 @@ if(session.getAttribute("id") != null){
 ArrayList<CmtTO> cmtArr = (ArrayList<CmtTO>)request.getAttribute("cmtArr");
 StringBuilder cmtHtml= new StringBuilder();
 for(CmtTO cto : cmtArr){
+	String deldata = "{\"seq\":\"" +cto.getSeq() + "\",\"ucode\":\""+ cto.getUcode()+"\"}";
+	System.out.println("deldata : "+ deldata);
 	cmtHtml.append("<div class=\"row\">");
 	cmtHtml.append("<div class=\"col-9\"><strong>"+cto.getWriter() +"</strong></div>");
-	cmtHtml.append("<div class=\"col-3\" align=\"right\"><a class=\"btn btn-outline-primary\" href=\"\" onclick=\"\" >삭제</a></div>");
+	cmtHtml.append("<input type=\"button\" class=\"dbtn btn btn-outline-primary col-1 ms-auto\" align=\"right\" value=\"삭제\" deldata="+deldata+">");
 	cmtHtml.append("<div>");
 	cmtHtml.append("<p class=\"text-uppercase text-sm text-muted\"><i class=\"far fa-clock\"></i>"+cto.getWdate() +"</p>");
 	cmtHtml.append("<p class=\"text-muted\" style=\"font-family: \"BMJUA\";\">"+ cto.getContent() +"</p>");
@@ -133,8 +136,9 @@ for(CmtTO cto : cmtArr){
              	<button class="btn btn-outline-primary btn-sm" type="button" onclick="location.href='./login.do'">Login</button>
              	<%}else{ %>
              	<span class="mx-2"><strong><%=id%></strong>님 </span>
+             	<input type="hidden" id="ucode" val="<%=ucode%>"/> 
              	<button class="btn btn-outline-primary btn-sm" type="button" onclick="location.href='./logout.do'">Logout</button>
-             	<%}; %>
+             	<%};%>
              </form>
          </div>
       </nav>
@@ -249,20 +253,47 @@ for(CmtTO cto : cmtArr){
     <!-- JavaScript files-->
     <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
     <script type="text/javascript">
-
-    	function deleteBoard() {
-    		$.ajax({
-    			url: './mboarddeleteok.do',
-    			type: 'get',
-    			data : '{data: data}',
-    			success: {
-    				//삭제누른 사람 ucode == 게시글 ucode
-    				//게시글 삭제완료 alert	
-    			}, 
-    			fail: function(error){
-        			alert('작성자만 삭제가 가능합니다.' );
-    			}
-    		});
+   window.onload =function(){
+	  $(".dbtn").on("click", function(){
+		 	var replyseq = $(this).attr("deldata");
+  			var sendData = {"replyseq": replyseq}
+  			console.log("댓글 데이터 : " + replyseq);
+    		console.log("댓글 데이터 테스트 : " + $(this).attr("value"));
+    		
+		  	if(cmtDelete(sendData) == 0){
+		  		console.log("댓글 삭제 성공");
+		  	}
+	  })
+   };
+   
+    	function cmtDelete(sendData) {
+    		
+    		if(confirm( '댓글을 삭제 하시겠습니까?' )){
+    			$.ajax({
+        			url: './cmtdelete.do',
+        			type: 'post',
+        			data : sendData,
+        			dataType : 'text',
+        			success: function(data){
+        				if(data == 0){
+        					//성공
+        					return data;
+        				}else if(data == 2){
+        					//다른 사용자일떄
+        					alert("다른 사용자의 댓글입니다.");
+        				}else{
+							//실패 
+        					alert("댓글 삭제를 실패했습니다.");
+        				}
+        			}, 
+        			fail: function(error){
+            			alert('작성자만 삭제가 가능합니다.' );
+        			}
+        		});
+    		}
+    		
+    		
+    		
     	}
     		
     	function cmtInsert() {
@@ -280,9 +311,9 @@ for(CmtTO cto : cmtArr){
         				$("#comment").val("");
         				$.each(data.cmtList, function(index, cmtList){
         					
-        					$("#cmtbody").append('<div class="row">'
+        					$("#cmtbody").prepend('<div class="row">'
         										+'<div class="col-9"><strong>'+cmtList.writer +'</strong></div>'
-        										+'<div class="col-3" align="right"><a class="btn btn-outline-primary" href="" onclick="" >삭제</a></div>'
+        										+'<div class="col-3" align="right"><a class="btn btn-outline-primary" onclick="" >삭제</a></div>'
         										+'<div>'
         										+'<p class="text-uppercase text-sm text-muted"><i class="far fa-clock"></i>'+cmtList.wdate +'</p>'
         										+'<p class="text-muted" style="font-family: \'BMJUA\';">'+ cmtList.comment+'</p>'
