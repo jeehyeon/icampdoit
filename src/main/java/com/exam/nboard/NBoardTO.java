@@ -14,4 +14,5 @@ public class NBoardTO {
 	private String wdate;
 	private String hit;
 	private String ucode;
+	private String vcode;
 }

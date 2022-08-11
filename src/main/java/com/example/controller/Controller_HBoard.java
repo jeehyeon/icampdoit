@@ -22,8 +22,9 @@ public class Controller_HBoard {
 	@Autowired
 	private HBoardDAO hdao;
 		 
-	String url1 = System.getProperty("user.dir");
-	private String uploadPath = url1 +"/src/main/webapp/upload/";
+	String url = System.getProperty("user.dir");
+	private String hUploadPath = url +"/src/main/webapp/h_upload/";
+	
 
 		
 	@RequestMapping( value="/hboardlist.do" )

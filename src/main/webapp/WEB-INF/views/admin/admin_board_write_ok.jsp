@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<% 
+	int flag = (Integer)request.getAttribute("flag");
 
-</body>
-</html>
+	out.println("<script type='text/javascript'>");
+	if( flag == 0 ) {
+		out.println("alert('글쓰기 성공');");
+		out.println("location.href='./admin_board.do';");
+	} else {
+		out.println("alert('글쓰기 실패');");
+		out.println("history.back();");
+	}
+	out.println("</script>");
+	
+
+%>

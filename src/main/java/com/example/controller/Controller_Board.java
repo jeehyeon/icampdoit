@@ -34,14 +34,9 @@ public class Controller_Board {
 	
 	@Autowired
 	private BoardDAO dao;
-		 
-	// 리나 upload 경로
-	//private String uploadPath = "C:/java/ProjectGit/src/main/webapp/upload/";
-	String url1 = System.getProperty("user.dir");
-	private String uploadPath = url1 +"/src/main/webapp/upload/";
-
-	//private int maxFileSize = 10 * 1024 * 1024;
-	//private String encoding = "utf-8";
+		 	
+	String url = System.getProperty("user.dir");
+	private String uploadPath = url +"/src/main/webapp/upload/";
 	
 	@RequestMapping( value="/mboardlist.do" )
 	public ModelAndView mboardlist(HttpServletRequest request, HttpSession session) {

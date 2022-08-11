@@ -17,12 +17,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.exam.hboard.HBoardDAO;
+import com.exam.hboard.HBoardTO;
 import com.exam.login.SignUpTO;
 import com.exam.mboard.BoardDAO;
 import com.exam.mboard.BoardListTO;
 import com.exam.mboard.BoardTO;
 import com.exam.mboard.FileTO;
 import com.exam.nboard.NBoardDAO;
+import com.exam.nboard.NBoardTO;
 
 
 @RestController
@@ -179,52 +181,112 @@ public class Controller_Admin {
 	@RequestMapping(value = "/aboardwrite_ok.do", method=RequestMethod.POST)
 	public ModelAndView aboardwriteOk(MultipartFile image, HttpServletRequest request, HttpServletResponse response, HttpSession session)
 			throws IOException {
-		System.out.println("mboardwriteOk() 호출");
-		System.out.println(request.getParameter("writeOk"));
-		System.out.println(request.getParameter("filesize"));
-		//String mUploadPath = request.getSession().getServletContext().getRealPath("/upload");
-
-		//MultipartRequest multi = new MultipartRequest(request, mUploadPath, maxFileSize, encoding,
-		//		new DefaultFileRenamePolicy());
+		System.out.println("aboardwriteOk() 호출");
 		
-		SignUpTO sto = new SignUpTO();
-		System.out.println("세션 아이디값 : " + (String) session.getAttribute("id"));
-
 		BoardTO to = new BoardTO();
-		to.setSubject(request.getParameter("subject"));
-		to.setTitle(request.getParameter("title"));
-		to.setWriter((String) session.getAttribute("id"));
-		to.setContent(request.getParameter("content"));
-		to.setUcode((Integer) session.getAttribute("ucode"));
-		to.setVcode(request.getParameter("vcode"));
-		System.out.println("subject : " + request.getParameter("subject"));
-
-		//String file = request.getParameter("writeOk");
-		//System.out.println("파일이름 : " + file);
-		
-		//String filename = file.substring( 0, file.lastIndexOf(",") );
-		//long filesize = Long.parseLong( file.substring(file.lastIndexOf(",")+2) );
-		
+		HBoardTO hto = new HBoardTO();
+		NBoardTO nto = new NBoardTO();	
 		FileTO fto = new FileTO();
-		if(request.getParameter("filesize")!="0") {
-		fto.setFilename(request.getParameter("writeOk"));
-		fto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
-		}
-		/*
-		 * File file = request.getFile("upload"); if (file != null) {
-		 * fto.setFilesize(file.length()); }
-		 */
-		
-		int flag = hdao.aboardWriteOk(to, fto);
 
-		dao.filecnd(to, fto);
+		int flag = 1;
+		
+		if( request.getParameter("subject").equals("1")  ) {
+			String subject = request.getParameter("subject");
+			to.setSubject(subject);
+			to.setTitle(request.getParameter("title"));
+			to.setWriter((String) session.getAttribute("id"));
+			to.setContent(request.getParameter("content"));
+			to.setUcode((Integer) session.getAttribute("ucode"));
+			System.out.println("ucode : " + to.getUcode());
+			to.setVcode(request.getParameter("vcode"));
+			System.out.println("vcode : " + to.getVcode());
+			
+			if(request.getParameter("filesize")!="0") {
+				fto.setFilename(request.getParameter("filename"));
+				fto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
+			}
+			flag = dao.mboardWriteOk(to, fto);
+			System.out.println("flag : " + flag);
+			dao.filecnd(to, fto);
+			
+		} else if( request.getParameter("subject").equals("2")  ) {
+			String subject = request.getParameter("subject");
+			to.setSubject(subject);
+			to.setTitle(request.getParameter("title"));
+			to.setWriter((String) session.getAttribute("id"));
+			to.setContent(request.getParameter("content"));
+			to.setUcode((Integer) session.getAttribute("ucode"));
+			System.out.println("ucode : " + to.getUcode());
+			to.setVcode(request.getParameter("vcode"));
+			System.out.println("vcode : " + to.getVcode());
+			
+			if(request.getParameter("filesize")!="0") {
+				fto.setFilename(request.getParameter("filename"));
+				fto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
+			}
+			flag = dao.mboardWriteOk(to, fto);
+			System.out.println("flag : " + flag);
+			dao.filecnd(to, fto);
+			
+		} else if( request.getParameter("subject").equals("3")  ) {
+			String subject = request.getParameter("subject");
+			to.setSubject(subject);
+			to.setTitle(request.getParameter("title"));
+			to.setWriter((String) session.getAttribute("id"));
+			to.setContent(request.getParameter("content"));
+			to.setUcode((Integer) session.getAttribute("ucode"));
+			System.out.println("ucode : " + to.getUcode());
+			to.setVcode(request.getParameter("vcode"));
+			System.out.println("vcode : " + to.getVcode());
+			
+			if(request.getParameter("filesize")!="0") {
+				fto.setFilename(request.getParameter("filename"));
+				fto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
+			}
+			flag = dao.mboardWriteOk(to, fto);
+			System.out.println("flag : " + flag);
+			dao.filecnd(to, fto);
+			
+		} else if( request.getParameter("subject").equals("4")  ) {
+			String subject = request.getParameter("subject");
+			hto.setSubject(subject);
+			hto.setTitle(request.getParameter("title"));
+			hto.setWriter((String) session.getAttribute("id"));
+			hto.setContent(request.getParameter("content"));
+			hto.setUcode((Integer) session.getAttribute("ucode"));
+			System.out.println("ucode : " + to.getUcode());
+			hto.setVcode(request.getParameter("vcode"));
+			System.out.println("vcode : " + to.getVcode());
+			
+			if(request.getParameter("filesize")!="0") {
+				hto.setFilename(request.getParameter("filename"));
+				hto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
+			}
+			flag = hdao.aboardWriteOk(hto);
+			System.out.println("flag : " + flag);
+			dao.filecnd(to, fto);
+		} 
+
+		
+		
+		/*if( request.getParameter("subject") == "2" ) {
+			to.setSubject("2"); 
+		} if( request.getParameter("subject") == "3" ) {
+			to.setSubject("3"); 
+		} if( request.getParameter("subject") == "4" ) {
+			hto.setSubject("4"); 
+		} if( request.getParameter("subject") == "5" ) {
+			nto.setSubject("5"); */	
+
+
+		
 		ModelAndView modelAndView = new ModelAndView();
 		
 		if (session.getAttribute("ucode") == null) {
 			modelAndView.setViewName("/login/nousers");
 			return modelAndView;
 		}
-		modelAndView.setViewName("/board/mboard_write_ok");
+		modelAndView.setViewName("/board/admin_board_write_ok");
 		modelAndView.addObject("flag", flag);
 
 		return modelAndView;
