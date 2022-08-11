@@ -30,7 +30,7 @@ public class HBoardDAO {
 		String sql = "insert into h_board values  ( 0, ?, ?, ?, ?, now(), 0, ?, ?, ?, ?)";
 		int result = jdbcTemplate.update(sql, hto.getSubject(), hto.getTitle(), hto.getWriter(), hto.getContent(), 
 				hto.getUcode(), hto.getFilename(), hto.getFilesize(), hto.getVcode() );
-					System.out.println(result);
+					System.out.println("dao result "+ result);
 					
 		//위에 들어가 부분에 seq값을 다시 들고 나와야 함
 		if( result != 1 ) {

@@ -132,11 +132,11 @@ public class Controller_Admin {
 	}
 
 	// 파일 중복 체크
-	private String getUniqName(String fileName) {
+	private String getUniqName(String fileName, String url) {
 		System.out.println("getUniqName() 호출");
 
 		String tempName = null;
-		File file = new File(mUploadPath + fileName);
+		File file = new File(url + fileName);
 		System.out.println("file : " + file);
 		int lastIdx = fileName.lastIndexOf(".");
 		int i = 1;
@@ -146,7 +146,7 @@ public class Controller_Admin {
 			}
 			tempName = fileName;
 			tempName = tempName.substring(0, lastIdx) + "_" + i + tempName.substring(lastIdx, tempName.length());
-			file = new File(mUploadPath + tempName);
+			file = new File(url + tempName);
 			i++;
 		}
 		System.out.println("file.getName() : " + file.getName());
@@ -160,14 +160,34 @@ public class Controller_Admin {
 		System.out.println("uploadSummernoteImage() 호출");
 
 		String savename = image.getOriginalFilename();
+		String subject = request.getParameter("subject");
+		System.out.println("이미지 subject : " + subject);
 
 		long filedata = image.getResource().contentLength();
 		String filesize = Long.toString(filedata);
 
-		savename = getUniqName(savename);
-		File target = new File(mUploadPath + savename);
-		System.out.println("파일저장 : ");
-		System.out.println("target : " + target);
+		String uploadPath = "";
+		
+		if( subject.equals("4") ) {
+			savename = getUniqName(savename, hUploadPath);		
+			uploadPath = hUploadPath;
+		} else if( subject.equals("5") ) {
+			savename = getUniqName(savename, nUploadPath);		
+			uploadPath = nUploadPath;
+		} else if( subject.equals("1") ) {
+			savename = getUniqName(savename, mUploadPath);		
+			uploadPath = mUploadPath;
+		} else if( subject.equals("2") ) {
+			savename = getUniqName(savename, mUploadPath);		
+			uploadPath = mUploadPath;
+		} else if( subject.equals("3") ) {
+			savename = getUniqName(savename, mUploadPath);		
+			uploadPath = mUploadPath;
+		}
+		
+		File target = new File(uploadPath, savename);
+		
+		System.out.println("파일저장 : "+ target);
 		System.out.println("savename : " + savename);
 
 		response.setContentType("application/json;charset=utf-8");
@@ -178,12 +198,14 @@ public class Controller_Admin {
 			FileUtils.forceDelete(target); // 실패시 저장된 파일 삭제
 			System.out.println("[에러] " + e.getMessage());
 		}
+		
 		String result = savename + "@" + filesize;
+		
 		return result;
 	}
 	
 	@RequestMapping(value = "/aboardwrite_ok.do", method=RequestMethod.POST)
-	public ModelAndView aboardwriteOk(MultipartFile image, HttpServletRequest request, HttpServletResponse response, HttpSession session)
+	public String aboardwriteOk(MultipartFile image, HttpServletRequest request, HttpServletResponse response, HttpSession session)
 			throws IOException {
 		System.out.println("aboardwriteOk() 호출");
 		
@@ -202,16 +224,16 @@ public class Controller_Admin {
 			to.setWriter((String) session.getAttribute("id"));
 			to.setContent(request.getParameter("content"));
 			to.setUcode((Integer) session.getAttribute("ucode"));
-			System.out.println("ucode : " + to.getUcode());
+			System.out.println("1ucode : " + to.getUcode());
 			to.setVcode(request.getParameter("vcode"));
-			System.out.println("vcode : " + to.getVcode());
+			System.out.println("1vcode : " + to.getVcode());
 			
 			if(request.getParameter("filesize")!="0") {
 				fto.setFilename(request.getParameter("filename"));
 				fto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
 			}
 			flag = dao.mboardWriteOk(to, fto);
-			System.out.println("flag : " + flag);
+			System.out.println("1flag : " + flag);
 			dao.filecnd(to, fto);
 			
 		} else if( request.getParameter("subject").equals("2")  ) {
@@ -221,16 +243,16 @@ public class Controller_Admin {
 			to.setWriter((String) session.getAttribute("id"));
 			to.setContent(request.getParameter("content"));
 			to.setUcode((Integer) session.getAttribute("ucode"));
-			System.out.println("ucode : " + to.getUcode());
+			System.out.println("2ucode : " + to.getUcode());
 			to.setVcode(request.getParameter("vcode"));
-			System.out.println("vcode : " + to.getVcode());
+			System.out.println("2vcode : " + to.getVcode());
 			
 			if(request.getParameter("filesize")!="0") {
 				fto.setFilename(request.getParameter("filename"));
 				fto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
 			}
 			flag = dao.mboardWriteOk(to, fto);
-			System.out.println("flag : " + flag);
+			System.out.println("2flag : " + flag);
 			dao.filecnd(to, fto);
 			
 		} else if( request.getParameter("subject").equals("3")  ) {
@@ -240,16 +262,16 @@ public class Controller_Admin {
 			to.setWriter((String) session.getAttribute("id"));
 			to.setContent(request.getParameter("content"));
 			to.setUcode((Integer) session.getAttribute("ucode"));
-			System.out.println("ucode : " + to.getUcode());
+			System.out.println("3ucode : " + to.getUcode());
 			to.setVcode(request.getParameter("vcode"));
-			System.out.println("vcode : " + to.getVcode());
+			System.out.println("3vcode : " + to.getVcode());
 			
 			if(request.getParameter("filesize")!="0") {
 				fto.setFilename(request.getParameter("filename"));
 				fto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
 			}
 			flag = dao.mboardWriteOk(to, fto);
-			System.out.println("flag : " + flag);
+			System.out.println("3flag : " + flag);
 			dao.filecnd(to, fto);
 			
 		} else if( request.getParameter("subject").equals("4")  ) {
@@ -259,16 +281,18 @@ public class Controller_Admin {
 			hto.setWriter((String) session.getAttribute("id"));
 			hto.setContent(request.getParameter("content"));
 			hto.setUcode((Integer) session.getAttribute("ucode"));
-			System.out.println("ucode : " + hto.getUcode());			
+			System.out.println("4ucode : " + hto.getUcode());			
 			if(request.getParameter("filesize") != "0") {
 				hto.setFilename(request.getParameter("filename"));
 				hto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
 			}
 			hto.setVcode(request.getParameter("vcode"));
-			System.out.println("vcode : " + hto.getVcode());
+			System.out.println("4vcode : " + hto.getVcode());
 			
 			flag = hdao.aboardWriteOk(hto);
-			System.out.println("flag : " + flag);
+			System.out.println("content : " + hto.getContent());			
+			System.out.println("4flag : " + flag);
+			
 			hdao.filecnd(hto);
 			
 		} else if( request.getParameter("subject").equals("5")  ) {
@@ -278,37 +302,39 @@ public class Controller_Admin {
 			nto.setWriter((String) session.getAttribute("id"));
 			nto.setContent(request.getParameter("content"));
 			nto.setUcode((Integer) session.getAttribute("ucode"));
-			System.out.println("ucode : " + nto.getUcode());
+			System.out.println("5ucode : " + nto.getUcode());
 			nto.setVcode(request.getParameter("vcode"));
-			System.out.println("vcode : " + nto.getVcode());
+			System.out.println("5vcode : " + nto.getVcode());
 			
 			if(request.getParameter("filesize")!="0") {
 				nfto.setFilename(request.getParameter("filename"));
 				nfto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
 			}
+			
 			flag = ndao.mboardWriteOk(nto, nfto);
-			System.out.println("flag : " + flag);
+			
+			System.out.println("content : " + nto.getContent());	
+			System.out.println("5flag : " + flag);
+			
 			ndao.filecnd(nto, nfto);
 		}
-		
-		ModelAndView modelAndView = new ModelAndView();
-		
-		if (session.getAttribute("ucode") == null) {
-			modelAndView.setViewName("/login/nousers");
-			return modelAndView;
-		}
-		modelAndView.setViewName("/board/admin_board_write_ok");
-		modelAndView.addObject("flag", flag);
+		System.out.println("최종 flag : " + flag);
 
-		return modelAndView;
+		return Integer.toString(flag);
 	}
 	
 	@RequestMapping(value = "/awritecancel.do")
 	public void hwritecancel(HttpServletRequest request, HttpSession session) {
-		System.out.println("hwritecancel() 호출");
-
-		dao.filedel((String) request.getParameter("filename"));
-
+		System.out.println("awritecancel() 호출");
+		
+		if( request.getParameter("subject").equals("4")  ) {
+			hdao.filedel((String) request.getParameter("filename"));
+		} else if( request.getParameter("subject").equals("5")  ) {
+			ndao.filedel((String) request.getParameter("filename"));
+		} else {
+			dao.filedel((String) request.getParameter("filename"));
+		}
+		
 	}
 
 	@RequestMapping(value = "/admin_board_modify.do")
