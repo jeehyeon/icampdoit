@@ -305,38 +305,52 @@ if(session.getAttribute("id") != null){
 				//marker.setMap(map);
 				
 				//마커 여러개 생성
-				/*
+				
+				var markers = []; // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
+				var contents = [];
+				var overlays = [];
+				
 				var positions = [
 					{
 						title: '가평사계절캠핑장',
-						latlng: new kakao.maps.LatLng(37.8833509, 127.5489707)
+						latlng: new kakao.maps.LatLng(37.8833509, 127.5489707),
+						campaddress: '주소주소',
+						link: './campview.do'
 					},
 					{
 						title: '가평 사과나무 캠핑장',
-						latlng: new kakao.maps.LatLng(37.7895015, 127.358428)
+						latlng: new kakao.maps.LatLng(37.7895015, 127.358428),
+						campaddress: '주소주소',
+						link: './campview.do'
 					},
 					{
 						title: '가평 운악홀리데이 캠핑장',
-						latlng: new kakao.maps.LatLng(37.8536510, 127.5102426)
+						latlng: new kakao.maps.LatLng(37.8536510, 127.5102426),
+						campaddress: '주소주소',
+						link: './campview.do'
 					},
 					{
 						title: '구름게곡캠핑장',
-						latlng: new kakao.maps.LatLng(37.8879007, 127.5387410)
+						latlng: new kakao.maps.LatLng(37.8879007, 127.5387410),
+						campaddress: '주소주소',
+						link: './campview.do'
 					},
 					{
 						title: '국립유명산자연휴양림',
-						latlng: new kakao.maps.LatLng(37.5817426, 127.4838359)
+						latlng: new kakao.maps.LatLng(37.5817426, 127.4838359),
+						campaddress: '주소주소',
+						link: './campview.do'
 					}
 				];
-				*/
 				
+				/*
 				var arr = new Array();
 				arr[0] = ["가평사계절캠핑장", 37.8833509, 127.5489707, "주소주소", "./campview.do?facltNm=001" ];
 				arr[1] = ["가평 사과나무 캠핑장", 37.7895015, 127.358428, "주소주소", "./campview.do?facltNm=001" ];
 				arr[2] = ["가평 운악홀리데이 캠핑장", 37.8536510, 127.5102426, "주소주소", "./campview.do?facltNm=001" ];
 				arr[3] = ["구름게곡캠핑장", 37.8879007, 127.5387410, "주소주소", "./campview.do?facltNm=001" ];
 				arr[4] = ["국립유명산자연휴양림", 37.5817426, 127.4838359, "주소주소", "./campview.do?facltNm=001" ];
-				
+				*/
 				
 				//var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
 				
@@ -355,51 +369,88 @@ if(session.getAttribute("id") != null){
 				}
 				*/
 				
-				for (var i=0; i<arr.length; i++ ){
+				for ( var i=0; i<positions.length; i++ ){
+					
 					var marker = new kakao.maps.Marker({
-						position: new kakao.maps.LatLng( arr[i][1], arr[i][2] ),
-						title: arr[i][0],
+						position: positions[i].latlng,
+						title: positions[i].title,
 						map: map
 					});
+					markers.push(marker);
+				}
+				
+				for( var i=0; i<positions.length; i++ ){
 					
-					//커스텀오버레이에 표시할 컨텐츠
-					//사용자가 자유롭게 구성하고 이번트 제어할 수 있음.
-					var content = '<div class="wrap">' +
-					  '	<div class="info">' +
-					  '		<div class="title">' +
-					  		arr[i][0] +
-					  '			<div class="close" onclick="closeOverlay()" title="닫기"></div>'	+
-					  '		</div>' +
-					  '		<div class="body">' +
-					  '			<div class="desc">' +
-					  '        		<div class="ellipsis">' + arr[i][3] + '</div>' + 
-			          '        		<div><a href="./campview.do" target="_blank" class="link">상세보기</a></div>' + 
-			          '      	</div>' + 
-			          '     </div>' + 
-			          ' </div>' +    
-			          '</div>';
-
-			        
-					// 마커 위에 커스텀오버레이를 표시합니다
-					// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+					//html 디자인
+					var wrap = document.createElement('div');
+					wrap.className = "wrap";
+					
+					var info = document.createElement( 'div' );
+					info.className = "info";
+					wrap.appendChild(info);
+					
+					var title = document.createElement( 'div' );
+					title.className = "title";
+					campName = document.createTextNode( positions[i].title );
+					title.appendChild(campName);
+					info.appendChild(title);
+					
+					var close = document.createElement( 'div' );
+					close.ClassName = "close";
+					close.setAttribute( "id", "closebtn" );
+					close.title = "닫기";
+					close.style.position="absolute";
+					close.style.top=10 + "px";
+					close.style.right=10 + "px";
+					close.style.color="#888";
+					close.style.width= 17 + "px";
+					close.style.height= 17 + "px";
+					close.style.background= "url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png')";
+					close.onclick = function() {
+						overlay.setMap(null);
+					};
+					title.appendChild(close);
+					
+					var body = document.createElement( 'div' );
+					body.className = "body";
+					info.appendChild(body);
+					
+					var desc = document.createElement( 'div' );
+					desc.className = "desc";
+					body.appendChild(desc);
+					
+					var ellipsis = document.createElement( 'div' );
+					ellipsis.className = "ellipsis";
+					address = document.createTextNode( positions[i].campaddress );
+					ellipsis.appendChild(address);
+					desc.appendChild(ellipsis);
+					
+					var footerDiv = document.createElement( 'div' );
+					desc.appendChild(footerDiv);
+					
+					var link = document.createElement( 'a' );
+					link.classname = "link";
+					link.target = "_blank";
+					link.setAttribute( "href", positions[i].link);
+					detail = document.createTextNode( "상세보기" );
+					link.appendChild(detail);
+					footerDiv.appendChild(link);
+					
+					console.log(wrap);
+					
 					var overlay = new kakao.maps.CustomOverlay({
-						content: content,
-						map: map,
-						position: new kakao.maps.LatLng( arr[i][1], arr[i][2] )
+						//map: map,
+						position: markers[i].getPosition()
+						//content: wrap
+					}); 
+					overlay.setContent(wrap);
+					
+					kakao.maps.event.addListener( markers[i], 'click', function() {
+						overlay.setMap(map);
 					});
 					
-					//customOverlay.setMap(null); // 지도에서 제거한다.         
 				}
-					     
-				// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
-				kakao.maps.event.addListener(marker, 'click', function() {
-				    overlay.setMap(map);
-				});
-
-				// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
-				function closeOverlay() {
-				    overlay.setMap(null);     
-				}
+			
 					          
 				// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
 				var mapTypeControl = new kakao.maps.MapTypeControl();
