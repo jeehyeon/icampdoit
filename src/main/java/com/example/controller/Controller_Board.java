@@ -410,7 +410,7 @@ public class Controller_Board {
 		System.out.println("댓글삭제 데이터 session ucode : "+ session.getAttribute("ucode"));
 		
 		
-		if(session.getAttribute("ucode") != data.get("ucode")) {
+		if(!(session.getAttribute("ucode").toString()).equals(data.get("ucode").toString())) {
 			flag=2;
 			return Integer.toString(flag);
 		}

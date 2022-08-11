@@ -219,7 +219,7 @@ public class BoardDAO {
 	//view Comment
 	public ArrayList<CmtTO> mboardViewComment( CmtTO cto ){
 		System.out.println("mboardViewComment() seq값 체크 :" + cto.getPseq());
-		String sql = "select seq, pseq, writer, content, date_format(wdate, '%Y.%m.%d') wdate, ucode from m_cmt where pseq=? order by seq desc";
+		String sql = "select seq, pseq, writer, content, date_format(wdate, '%Y.%m.%d') wdate, ucode from m_cmt where pseq=? order by seq asc";
 		ArrayList<CmtTO> lists = (ArrayList<CmtTO>)jdbcTemplate.query(
 				sql, new BeanPropertyRowMapper<CmtTO>(CmtTO.class), cto.getPseq());
 				
@@ -250,11 +250,11 @@ public class BoardDAO {
 			int flag = 1;
 			
 			String sql = "delete from m_cmt where seq=?";
-			int result = jdbcTemplate.update(sql, cto.getPseq());
+			int result = jdbcTemplate.update(sql, cto.getSeq());
 						System.out.println(result);
 
 			if( result != 1 ) {
-				System.out.println("m_cmt insert 오류");
+				System.out.println("m_cmt Delete 오류");
 			}else {
 				flag=0;
 			}

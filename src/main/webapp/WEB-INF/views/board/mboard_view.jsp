@@ -257,12 +257,9 @@ for(CmtTO cto : cmtArr){
 	  $(".dbtn").on("click", function(){
 		 	var replyseq = $(this).attr("deldata");
   			var sendData = {"replyseq": replyseq}
-  			console.log("댓글 데이터 : " + replyseq);
-    		console.log("댓글 데이터 테스트 : " + $(this).attr("value"));
-    		
-		  	if(cmtDelete(sendData) == 0){
-		  		console.log("댓글 삭제 성공");
-		  	}
+  			//console.log("댓글 데이터 : " + replyseq);
+    		//console.log("댓글 데이터 테스트 : " + $(this).attr("value"));
+
 	  })
    };
    
@@ -277,7 +274,7 @@ for(CmtTO cto : cmtArr){
         			success: function(data){
         				if(data == 0){
         					//성공
-        					return data;
+        					 location.reload();
         				}else if(data == 2){
         					//다른 사용자일떄
         					alert("다른 사용자의 댓글입니다.");
@@ -307,13 +304,14 @@ for(CmtTO cto : cmtArr){
         			data : formdata,
         			dataType : 'json',
         			success: function(data){
-        				$("#cmtbody").empty();
+        				location.reload();
+        				/*$("#cmtbody").empty();
         				$("#comment").val("");
         				$.each(data.cmtList, function(index, cmtList){
-        					
+        					let deldata = '{"seq" :"'+cmtList.seq+'", "ucode" : "'+cmtList.ucode +'"  }'
         					$("#cmtbody").prepend('<div class="row">'
         										+'<div class="col-9"><strong>'+cmtList.writer +'</strong></div>'
-        										+'<div class="col-3" align="right"><a class="btn btn-outline-primary" onclick="" >삭제</a></div>'
+        										+'<input type="button" class="dbtn btn btn-outline-primary col-1 ms-auto" align="right" value="삭제" deldata="'+deldata+'">'
         										+'<div>'
         										+'<p class="text-uppercase text-sm text-muted"><i class="far fa-clock"></i>'+cmtList.wdate +'</p>'
         										+'<p class="text-muted" style="font-family: \'BMJUA\';">'+ cmtList.comment+'</p>'
@@ -323,7 +321,7 @@ for(CmtTO cto : cmtArr){
         					
         					
         					
-        				});
+        				});*/
         				 
         				
         				
