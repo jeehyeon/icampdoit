@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.exam.login.SignUpTO;
 import com.exam.login.mypageDAO;
 import com.exam.mboard.BoardListTO;
+import com.exam.mboard.BoardTO;
 import com.exam.mboard.FileTO;
 
 
@@ -96,10 +97,13 @@ public class Controller_Mypage {
 			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
 		}
 		
+		BoardTO to = new BoardTO();
+		to.setUcode((Integer) session.getAttribute("ucode"));
+		
 		BoardListTO listTO = new BoardListTO();
 		listTO.setCpage( cpage );
 		
-		listTO = dao.boardList(listTO);
+		listTO = dao.boardList(listTO, to);
 				
 		ModelAndView modelAndView = new ModelAndView();
 		
