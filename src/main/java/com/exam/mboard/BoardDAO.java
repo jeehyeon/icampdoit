@@ -210,7 +210,7 @@ public class BoardDAO {
 
 		int result = jdbcTemplate.update(sql, to.getSeq() );
 		
-		sql = "select seq, subject, title, writer, content, date_format(wdate, '%Y-%m-%d') wdate, hit from m_board where seq=?";		
+		sql = "select seq, subject, title, writer, content, date_format(wdate, '%Y-%m-%d') wdate, hit, ucode from m_board where seq=?";		
 		to = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<BoardTO>(BoardTO.class), to.getSeq() );
 		
 		return to;
@@ -346,6 +346,35 @@ public class BoardDAO {
 				}
 			
 			}
+		}
+		
+		public FileTO mboarddelfilecheck(BoardTO to) {
+			//삭제했을 경우 임시 파일 삭제
+			//System.out.println("파일삭제 메서드 : " + filename);
+			FileTO fto = new FileTO();
+			String sql = "select filename from m_file where pseq=?";
+			try {
+				fto = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<FileTO>(FileTO.class), to.getSeq() );
+			} catch (DataAccessException e) {
+				// TODO Auto-generated catch block
+				fto.setFilename("null");
+			}
+			
+			return fto;
+			
+			/*
+			if(filename != "default") {
+				String delurl = mUploadPath + filename;
+				File delFile = new File(delurl);
+				if(delFile.exists()) {//파일이 존재하는지 확인
+					delFile.delete();
+					System.out.println("임시파일 삭제 성공");
+					
+				}else {
+					System.out.println("파일이 존재 하지 않습니다.");
+				}
+			
+			}*/
 		}
 
 }

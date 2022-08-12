@@ -329,6 +329,12 @@ public class Controller_Board {
 	@RequestMapping( value="/mboarddelete_ok.do" )
 	public ModelAndView mboarddeleteOk(HttpServletRequest request, HttpSession session) throws IOException {
 		System.out.println( "mboarddeleteOk() 호출" );
+		System.out.println("게시글삭제 컨트롤러 seq값 : " + request.getParameter("viewseq"));
+		//게시글 삭제 전 이미지 파일 확인
+		BoardTO to = new BoardTO();
+		to.setSeq(request.getParameter("viewseq"));
+		dao.mboarddelfilecheck(to);
+		
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
@@ -338,7 +344,7 @@ public class Controller_Board {
 		}
 		modelAndView.setViewName( "/board/mboard_delete_ok" );
 		
-		return modelAndView;
+		return null;
 	}
 	
 	

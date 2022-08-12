@@ -24,6 +24,7 @@ if(session.getAttribute("id") != null){
 	String content = to.getContent();
 	String wdate = to.getWdate();
 	String hit = to.getHit();
+	int viewUcode = to.getUcode();
 	
 	int cpage = (Integer)request.getAttribute("cpage");
 	int subjectValue = (Integer)request.getAttribute( "subjectValue" );
@@ -155,6 +156,8 @@ for(CmtTO cto : cmtArr){
              <span><i class="fa-solid fa-user text-primary"></i> <%=writer %></span>&nbsp;&nbsp;
              <span><i class="fa-solid fa-calendar text-primary"></i> <%=wdate %></span>&nbsp;&nbsp;
              <span><i class="fa-solid fa-check-to-slot text-primary"></i> 조회수 <%=hit %></span>
+             <input type="hidden" id="viewUcode" name="viewUcode" value="<%=viewUcode%>"/>
+             <input type="hidden" id="viewSeq" name="viewSeq" value="<%=seq%>"/>
             </div>
           </div>        
         </div>
@@ -219,7 +222,7 @@ for(CmtTO cto : cmtArr){
 			  </div>
 			  <div class="col-lg-4 text-lg-end">
 				<input type="button" value="수정" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardmodify.do?cpage=&seq='" />
-				<input type="button" value="삭제" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='javascript:deleteBoard()'" />				
+				<input type="button" value="삭제" id="view-dbtn" name="view-dbtn" class="btn btn-primary" style="cursor: pointer;" />				
 			  </div>
             </div>
             
@@ -256,6 +259,32 @@ for(CmtTO cto : cmtArr){
     <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
     <script type="text/javascript">
    window.onload =function(){
+	   
+	   //게시글 삭제 버튼
+	    $("#view-dbtn").on("click", function(){
+		 	var viewUcode = $("#viewUcode").val();
+  			var viewSeq = $("#viewSeq").val();
+  			var sessionUcode = <%=(Integer)session.getAttribute("ucode")%>;
+  			console.log(sessionUcode);
+  			if(viewUcode == sessionUcode){
+  				//삭제 진행
+  				if(confirm("게시글을 삭제 하시겠습니까?")){
+
+  	  				location.href='./mboarddelete_ok.do?viewseq='+ viewSeq;
+  				}
+  			}else{
+  				//삭제 불가
+  				alert("삭제 권한이 없습니다.");
+  			}
+    		//if
+  			//location.href='./logout.do'
+	  })
+	   
+	   
+	   
+	   
+	   
+	   //댓글삭제버튼
 	  $(".dbtn").on("click", function(){
 		 	var replyseq = $(this).attr("deldata");
   			var sendData = {"replyseq": replyseq}
