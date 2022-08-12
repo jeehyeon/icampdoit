@@ -4,15 +4,15 @@
 <%@ page import="com.exam.nboard.NBoardTO" %>
 
 <%
-//session 값 가져오기
-int ucode = -1;
-String id ="";
-if(session.getAttribute("id") != null){
-	ucode = (int)session.getAttribute("ucode");
-	id = (String)session.getAttribute("id");
-}
-
-//view DAO 
+	//session 값 가져오기
+	int ucode = -1;
+	String id ="";
+	if(session.getAttribute("id") != null){
+		ucode = (int)session.getAttribute("ucode");
+		id = (String)session.getAttribute("id");
+	}
+	
+	//view DAO 
 	NBoardTO to = (NBoardTO)request.getAttribute( "to" );
 	
 	String seq = to.getSeq();

@@ -1,13 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.exam.hboard.HBoardTO" %>
+<%@ page import="com.exam.hboard.HBoardListTO" %>    
 <%
-//session 값 가져오기
-int ucode = -1;
-String id ="";
-if(session.getAttribute("id") != null){
-	ucode = (int)session.getAttribute("ucode");
-	id = (String)session.getAttribute("id");
-}
+	//session 값 가져오기
+	int ucode = -1;
+	String id ="";
+	if(session.getAttribute("id") != null){
+		ucode = (int)session.getAttribute("ucode");
+		id = (String)session.getAttribute("id");
+	}
+	
+	int cpage = (Integer)request.getAttribute("cpage");
+	HBoardTO to = (HBoardTO)request.getAttribute("to");
+	
+	String seq = to.getSeq();
+	String subject = to.getSubject();
+	String writer = to.getWriter();
+	String title = to.getTitle();
+	String content = to.getContent();
+	String wdate = to.getWdate();
+	String hit = to.getHit();
+	
 %>   
 <!DOCTYPE html>
   <head>
@@ -110,29 +124,29 @@ if(session.getAttribute("id") != null){
       <div class="container overlay-content">
         <div class="d-flex justify-content-between align-items-start flex-column flex-lg-row align-items-lg-end">
           <div class="text-white mb-4 mb-lg-0">
-            <h1 class="text-shadow verified">제목입니다!!!</h1>
+            <h1 class="text-shadow verified"><%=title %></h1>
             <div>
-             <span><i class="fa-solid fa-user-gear text-primary"></i> 관리자</span>&nbsp;&nbsp;
-             <span><i class="fa-solid fa-calendar text-primary"></i> 2022-07-30</span>&nbsp;&nbsp;
-             <span><i class="fa-solid fa-check-to-slot text-primary"></i> 조회수 16</span>
+             <span><i class="fa-solid fa-user-gear text-primary"></i> <%=writer %></span>&nbsp;&nbsp;
+             <span><i class="fa-solid fa-calendar text-primary"></i> <%=wdate %></span>&nbsp;&nbsp;
+             <span><i class="fa-solid fa-check-to-slot text-primary"></i> 조회수 <%=hit %></span>
             </div>
           </div>        
         </div>
       </div>
     </section>
-    <section>
+    <section class="bg-cover " style="background-image: url('./resources/bootstrap-5/html/img/photo/bg.jpg');">
       <div class="container">
-        <div class="row mt-5">
+        <div class="row">
           <div class="col-xl-8 col-lg-10 mx-auto">           
-            <p class="lead mb-5" style="font-family: 'GangwonEdu_OTFBoldA';"> 혼캠자료실의 상세내용~!!<br /> 관리자가 쓰는 손글씨 너낌으로다가 넣어봤어~ 저기 위에 관리자 아이콘도 다르게 넣었어~~!!ㅋㅋ As am hastily invited <strong>settled at limited</strong> civilly fortune me. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. </p>
+            <p class="lead mb-5" ><%=content %> </p>
           </div>
         </div>
         <div class="row">
-          <div class="col-xl-10 mx-auto"><img class="img-fluid mb-5" src="./resources/bootstrap-5/html/img/photo/photo-1471189641895-16c58a695bcb.jpg" alt=""></div>
+          <div class="col-xl-10 mx-auto"><img class="img-fluid mb-5" src="" alt=""></div>
         </div>       
       <hr>
         <div class="text-center">
-		  <input type="button" value="목록" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardlist.do?cpage='" />
+		  <input type="button" value="목록" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='hboardlist.do?cpage=<%=cpage %>'" />
         </div>
         <br /><br /><br />
     </section>

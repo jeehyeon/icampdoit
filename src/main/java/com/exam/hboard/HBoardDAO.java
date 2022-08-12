@@ -1,9 +1,11 @@
 package com.exam.hboard;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -79,6 +81,66 @@ public class HBoardDAO {
 		}
 	}
 	
+	// listTO
+	public HBoardListTO boardList(HBoardListTO listTO) {
+		
+		int cpage = listTO.getCpage();
+		int recordPerPage = listTO.getRecordPerPage();// 한페이지에 글 개수 5*2=10개
+		int blockPerPage = listTO.getBlockPerPage();// 한 화면에 보이는 페이지수 5개
+		
+		String sql = "select seq, subject, title, writer, content, date_format(wdate, '%Y-%m-%d') wdate, hit, ucode, filename, filesize, vcode from h_board order by seq desc";
+		ArrayList<HBoardTO> boardLists = (ArrayList<HBoardTO>)jdbcTemplate.query(
+				sql, new BeanPropertyRowMapper<HBoardTO>(HBoardTO.class) );
+		
+		// 총 게시글 수 얻기
+		listTO.setTotalRecord( boardLists.size() );
+		
+		// 총 페이지 수 얻기(skip은 시작번호)
+		listTO.setTotalPage( ( (listTO.getTotalRecord() -1 ) / recordPerPage ) + 1 );		
+		int skip = ( cpage - 1 ) * recordPerPage;		
+		
+		ArrayList<HBoardTO> lists = new ArrayList<HBoardTO>();		
+		for( int i=0; i<recordPerPage ; i++ ) {
+			if( skip+i != boardLists.size() ) {
+				HBoardTO to = new HBoardTO();
+				to.setSeq( boardLists.get(skip+i).getSeq() );
+				to.setSubject( boardLists.get(skip+i).getSubject() );
+				to.setTitle( boardLists.get(skip+i).getTitle() );				
+				to.setWriter( boardLists.get(skip+i).getWriter() );
+				to.setContent( boardLists.get(skip+i).getContent() );
+				to.setWdate( boardLists.get(skip+i).getWdate() );
+				to.setHit( boardLists.get(skip+i).getHit() );
+				to.setUcode( boardLists.get(skip+i).getUcode() );
+				to.setFilename( boardLists.get(skip+i).getFilename() );
+				to.setFilesize( boardLists.get(skip+i).getFilesize() );
+				to.setVcode( boardLists.get(skip+i).getVcode() );
+				
+				lists.add(to);
+				
+			} else { break; }
+		}
+		
+		listTO.setBoardLists( lists );
+		listTO.setStartBlock( ( ( cpage-1 ) / blockPerPage ) * blockPerPage + 1);
+		listTO.setEndBlock( ( (cpage-1) / blockPerPage) * blockPerPage + blockPerPage);
+		if(listTO.getEndBlock() >= listTO.getTotalPage()) {
+			listTO.setEndBlock(listTO.getTotalPage());
+		}		
+		return listTO;
+
+	}
+	
+	public HBoardTO boardview( HBoardTO to ) {
+		
+		String sql = "update h_board set hit=hit+1 where seq=?";
+
+		int result = jdbcTemplate.update(sql, to.getSeq() );
+		
+		sql = "select seq, subject, title, writer, content, date_format(wdate, '%Y-%m-%d') wdate, hit from h_board where seq=?";		
+		to = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<HBoardTO>(HBoardTO.class), to.getSeq() );
+		
+		return to;
+	}
 	
 	
 	

@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <%
-//session 값 가져오기
-int ucode = -1;
-String id ="";
-if(session.getAttribute("id") != null){
-	ucode = (int)session.getAttribute("ucode");
-	id = (String)session.getAttribute("id");
-}
+	//session 값 가져오기
+	int ucode = -1;
+	String id ="";
+	if(session.getAttribute("id") != null){
+		ucode = (int)session.getAttribute("ucode");
+		id = (String)session.getAttribute("id");
+	}
+
 %>
 
 <!DOCTYPE html>
@@ -128,34 +130,34 @@ if(session.getAttribute("id") != null){
           <form action="#" autocomplete="off">
             <div class="row">
               <div class="col-xl-4 col-md-6 mb-4">
-                <label class="form-label" for="form_guests">전체/시,도</label>
-                <select class="selectpicker form-control" name="guests" id="sido" data-style="btn-selectpicker" title=" ">
+                <label class="form-label" for="sido">전체/시,도</label>
+                <select class="selectpicker" name="sido" id="sido" data-style="btn-selectpicker" title="시도 선택">
                   <option value="seoul">서울시    </option>
                   <option value="incheon">인천시    </option>
                   <option value="gyeonggi">경기도    </option>
                 </select>
               </div>
               <div class="col-xl-4 col-md-6 mb-4">
-                <label class="form-label" for="form_type">전체/시,구</label>
-                <select class="selectpicker form-control" name="type" id="gugun" multiple data-style="btn-selectpicker" data-none-selected-text="">
-                  <option value="type_0">Entire place    </option>
-                  <option value="type_1">Private room    </option>
-                  <option value="type_2">Shared room    </option>
+                <label class="form-label" for="gugun">전체/시,구</label>
+                <select class="selectpicker" name="gugun" id="gugun" title="시구 선택">
+                  <option value="시구">시/구 선택   </option>
                 </select>
               </div>
+              <!--  
               <div class="col-sm-6 mb-4">
-                <button class="btn btn-primary" type="submit"> <i class="fas fa-search me-1"></i>Search                </button>
+                <button class="btn btn-primary" type="submit" id=""> <i class="fas fa-search me-1"></i>Search                </button>
               </div>
+              -->
             </div>  
           </form>
           <hr class="my-4">
           <div class="d-flex justify-content-between align-items-center flex-column flex-md-row mb-4">
             <div class="me-3">
-              <p class="mb-3 mb-md-0">총  <strong>12</strong> 건</p>
+              <p class="mb-3 mb-md-0" id="number"> </p>
             </div>
           </div>
-          <div class="row">
-            <!-- place item-->
+          <div class="row" id="result">
+            <!-- 
             <div class="col-sm-6 mb-5 hover-animate" data-marker-id="59c0c8e33b1527bfe2abaf92">
               <div class="card h-100 border-0 shadow">
                 <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/photo-1484154218962-a197022b5858.jpg" alt="Modern, Well-Appointed Room"/><a class="tile-link" href="./campview.do"></a>
@@ -171,7 +173,7 @@ if(session.getAttribute("id") != null){
                 </div>
               </div>
             </div>
-            <!-- place item-->
+           
             <div class="col-sm-6 mb-5 hover-animate" data-marker-id="59c0c8e322f3375db4d89128">
               <div class="card h-100 border-0 shadow">
                 <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/photo-1426122402199-be02db90eb90.jpg" alt="Cute Quirky Garden apt, NYC adjacent"/><a class="tile-link" href="./campview.do"></a>
@@ -187,7 +189,7 @@ if(session.getAttribute("id") != null){
                 </div>
               </div>
             </div>
-            <!-- place item-->
+            
             <div class="col-sm-6 mb-5 hover-animate" data-marker-id="59c0c8e3a31e62979bf147c9">
               <div class="card h-100 border-0 shadow">
                 <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/photo-1512917774080-9991f1c4c750.jpg" alt="Modern Apt - Vibrant Neighborhood!"/><a class="tile-link" href="./campview.do"></a>
@@ -203,7 +205,7 @@ if(session.getAttribute("id") != null){
                 </div>
               </div>
             </div>
-            <!-- place item-->
+            
             <div class="col-sm-6 mb-5 hover-animate" data-marker-id="59c0c8e3503eb77d487e8082">
               <div class="card h-100 border-0 shadow">
                 <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/photo-1494526585095-c41746248156.jpg" alt="Sunny Private Studio-Apartment"/><a class="tile-link" href="./campview.do"></a>
@@ -219,7 +221,7 @@ if(session.getAttribute("id") != null){
                 </div>
               </div>
             </div>
-            <!-- place item-->
+            
             <div class="col-sm-6 mb-5 hover-animate" data-marker-id="59c0c8e39aa2eed0626e485d">
               <div class="card h-100 border-0 shadow">
                 <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/photo-1522771739844-6a9f6d5f14af.jpg" alt="Mid-Century Modern Garden Paradise"/><a class="tile-link" href="./campview.do"></a>
@@ -235,7 +237,7 @@ if(session.getAttribute("id") != null){
                 </div>
               </div>
             </div>
-            <!-- place item-->
+            
             <div class="col-sm-6 mb-5 hover-animate" data-marker-id="59c0c8e39aa2edasd626e485d">
               <div class="card h-100 border-0 shadow">
                 <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/photo-1488805990569-3c9e1d76d51c.jpg" alt="Brooklyn Life, Easy to Manhattan"/><a class="tile-link" href="./campview.do"></a>
@@ -252,7 +254,9 @@ if(session.getAttribute("id") != null){
               </div>
             </div>
           </div>
+          -->
         </div>
+        
         <div class="col-lg-6 map-side-lg pe-lg-0">
           <div class="map-full shadow-left" id="map"></div>
           
@@ -282,7 +286,102 @@ if(session.getAttribute("id") != null){
         </div>
       </div>
     </footer>
+    <!-- jQuery-->
+    <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
     <!-- JavaScript files-->
+    <script>
+    	$(document).ready(function(){
+    		$('#sido').on('change', function() {
+    			let sidoVal = $( '#sido option:selected' ).text().trim();
+    			//console.log(sidoVal);
+    			
+    			$( '#gugun' ).empty();
+    			
+    			$.ajax({
+    				url: '/searchmapsido.do',
+    				type: "POST", 
+    				data : {
+    					"sidoVal" : sidoVal	
+    				},
+    				dataType : "json",
+    				success: function(json){
+    					$('#gugun').html( '<option value="시구">시/구 선택   </option>' );
+    					
+    					$.each( json.jsonArray, function( index, jsonArray ){
+    						
+    						$( '#gugun' ).append( '<option value="' + jsonArray.sigunguNm + '">' + jsonArray.sigunguNm + '</option>' );
+    					//console.log( jsonArray.sigunguNm );
+    					
+    					});
+    					
+    					
+    					$('#gugun').selectpicker( 'refresh' );
+    				},
+    				error: function(e){
+    					alert( '[에러]' + e.status );
+    				}
+    			});
+    		});
+    		
+    		$('#gugun').on('change', function() {
+    			let sidoVal = $( '#sido option:selected' ).text().trim();
+    			let gugunVal = $( '#gugun option:selected' ).val();
+    			console.log(gugunVal);
+    			
+    			$( '#result' ).empty();
+    			$( '#number' ).empty();
+    			
+    			$.ajax({
+    				url: '/searchmapgugun.do',
+    				type: "POST", 
+    				data : {
+    					"sidoVal" : sidoVal,
+    					"gugunVal" : gugunVal	
+    				},
+    				dataType : "json",
+    				success: function(json){
+    					let result = "";
+    					$.each( json.jsonArray, function( index, jsonArray ){
+    						
+    						//if( jsonArray.firstImageUrl.equals("default") ) {
+    						//	jsonArray.firstImageUrl.replace( "./resources/bootstrap-5/html/img/noimage.svg" );
+    						//}
+    						   						
+    						result += '<div class="col-sm-6 mb-5 hover-animate" data-marker-id="59c0c8e33b1527bfe2abaf92">';
+    						result += '	 <div class="card h-100 border-0 shadow">';
+    						result += '   	<div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="' + jsonArray.firstImageUrl + '"/><a class="tile-link" href="./campview.do"></a>';
+    						result += '   	</div>';
+    						result += '  	<div class="card-body d-flex align-items-center">';
+    						result += '     	<div class="w-100">';
+    						result += '        		<h5 class="card-title"><a class="text-decoration-none text-dark" href="./campview.do">' + jsonArray.facltNm + '</a></h5>';
+    						result += '         	<div class="d-flex card-subtitle mb-3">';
+    						result += '          		<p class="flex-grow-1 mb-0 text-muted text-sm">' + jsonArray.addr1 + '</p>';
+    						result += '        		</div>';
+    						result += '         	<p class="card-text text-muted">' + jsonArray.induty + '</p>';
+    						result += '      	</div>';
+    						result += '     </div>';
+    						result += '  </div>';
+    						result += '</div>';
+    						
+    						
+    					});
+    					
+    					$( '#result' ).html( result );
+    					
+    					$( '#number' ).html( '총  <strong>' + (index+1) + '</strong> 건'  );
+    					
+    					
+    					//$('#gugun').selectpicker( 'refresh' );
+    				},
+    				error: function(e){
+    					alert( '[에러]' + e.status );
+    				}
+    			});
+    		});
+    		
+    	});
+    
+    </script>
     <script>
 				var mapContainer = document.getElementById('map'), //지도 표시할 div id
 					mapOptions = {
@@ -500,8 +599,7 @@ if(session.getAttribute("id") != null){
       injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg'); 
       
     </script>
-    <!-- jQuery-->
-    <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
+    
     <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
     <script src="./resources/bootstrap-5/html/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Magnific Popup - Lightbox for the gallery-->

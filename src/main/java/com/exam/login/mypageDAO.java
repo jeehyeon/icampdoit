@@ -48,7 +48,7 @@ public class mypageDAO {
 	// list
 	public ArrayList<BoardTO> boardList() {
 				
-		String sql = "select seq, subject, title, writer, content, date_format(wdate, '%Y-%m-%d') wdate, hit, ucode, cmt from m_board order by seq desc";
+		String sql = "select seq, subject, title, writer, content, date_format(wdate, '%Y-%m-%d') wdate, hit, ucode, cmt from m_board where ucode=? order by seq desc";
 		ArrayList<BoardTO> lists = (ArrayList<BoardTO>)jdbcTemplate.query(
 				sql, new BeanPropertyRowMapper<BoardTO>(BoardTO.class) );
 		
@@ -56,15 +56,20 @@ public class mypageDAO {
 	}
 	
 	// listTO
-	public BoardListTO boardList(BoardListTO listTO) {
+	public BoardListTO boardList(BoardListTO listTO, BoardTO to) {
 		
 		int cpage = listTO.getCpage();
 		int recordPerPage = listTO.getRecordPerPage();// 한페이지에 글 개수 5*2=10개
 		int blockPerPage = listTO.getBlockPerPage();// 한 화면에 보이는 페이지수 5개
 		
-		String sql = "select seq, subject, title, writer, content, date_format(wdate, '%Y-%m-%d') wdate, hit, ucode, cmt from m_board order by seq desc";
+		//String sql = "select seq, subject, title, writer, content, date_format(wdate, '%Y-%m-%d') wdate, hit, ucode, cmt from m_board order by seq desc";
+		String sql = "select seq, subject, title, writer, content, date_format(wdate, '%Y-%m-%d') wdate, hit, ucode, cmt from m_board where ucode=? order by seq desc";
+
+		//BoardTO to = new BoardTO();
 		ArrayList<BoardTO> boardLists = (ArrayList<BoardTO>)jdbcTemplate.query(
-				sql, new BeanPropertyRowMapper<BoardTO>(BoardTO.class) );
+				sql, new BeanPropertyRowMapper<BoardTO>(BoardTO.class), to.getUcode() );
+		
+		System.out.println("ucode : " + to.getUcode() );
 		
 		// 총 게시글 수 얻기
 		listTO.setTotalRecord( boardLists.size() );
@@ -76,7 +81,7 @@ public class mypageDAO {
 		ArrayList<BoardTO> lists = new ArrayList<BoardTO>();		
 		for( int i=0; i<recordPerPage ; i++ ) {
 			if( skip+i != boardLists.size() ) {
-				BoardTO to = new BoardTO();
+				//BoardTO to = new BoardTO();
 				to.setSeq( boardLists.get(skip+i).getSeq() );
 				to.setSubject( boardLists.get(skip+i).getSubject() );
 				to.setTitle( boardLists.get(skip+i).getTitle() );
