@@ -131,7 +131,7 @@
             <div class="row">
               <div class="col-xl-4 col-md-6 mb-4">
                 <label class="form-label" for="sido">전체/시,도</label>
-                <select class="selectpicker form-control" name="sido" id="sido" data-style="btn-selectpicker">
+                <select class="selectpicker" name="sido" id="sido" data-style="btn-selectpicker" title="시도 선택">
                   <option value="seoul">서울시    </option>
                   <option value="incheon">인천시    </option>
                   <option value="gyeonggi">경기도    </option>
@@ -139,7 +139,7 @@
               </div>
               <div class="col-xl-4 col-md-6 mb-4">
                 <label class="form-label" for="gugun">전체/시,구</label>
-                <select class="selectpicker form-control" name="gugun" id="gugun" multiple data-style="btn-selectpicker" data-none-selected-text="">
+                <select class="selectpicker" name="gugun" id="gugun" multiple data-style="btn-selectpicker" data-none-selected-text="">
                   <option value="시구">시/구 선택   </option>
                 </select>
               </div>
@@ -288,18 +288,29 @@
     <script>
     	$(document).ready(function(){
     		$('#sido').on('change', function() {
-    			let sidoVal = $( '#sido option:selected' ).text();
+    			let sidoVal = $( '#sido option:selected' ).text().trim();
     			console.log(sidoVal);
+    			
+    			$( '#gugun' ).empty();
     			
     			$.ajax({
     				url: '/searchmapsido.do',
     				type: "POST", 
-    				data : sidoVal,
-    				success: function(data){
+    				data : {
+    					"sidoVal" : sidoVal	
+    				},
+    				dataType : "json",
+    				success: function(json){
     					$('#gugun').html( '<option value="시구">시/구 선택   </option>' );
-    					$.each( data, function( index, item ){
-    						$( '#gugun' ).append( '<option value="' + item.sigunguNm + '">' + item.sigunguNm + '</option>' );
+    					
+    					$.each( json.jsonArray, function( index, jsonArray ){
+    						
+    						$( '#gugun' ).append( '<option value="' + jsonArray.sigunguNm + '">' + jsonArray.sigunguNm + '</option>' );
+    					//console.log( jsonArray.sigunguNm );
+    					
     					});
+    					
+    					
     					$('#gugun').selectpicker( 'refresh' );
     				},
     				error: function(e){

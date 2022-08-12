@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -62,16 +64,19 @@ public class Controller_Search {
 	}
 	
 	@RequestMapping( value="/searchmapsido.do" )
-	public ModelAndView searchmapsido(HttpServletRequest request) {
+	public JSONObject searchmapsido(HttpServletRequest request) {
 		System.out.println( "searchmapsido() 호출" );
 		
 		SearchkeyTO sto = new SearchkeyTO();
 		String sido = "";
 		
-		if( request.getParameter( "sidoVal" ) == "서울시" ) {
+		System.out.println( request.getParameter( "sidoVal" ) );
+		
+		if( request.getParameter( "sidoVal" ).equals("서울시" )) {
 			sto.setDoNm( "서울시" );
 			sido = "서울시";
-		} else if( request.getParameter( "sidoVal" ) == "인천시" ) {
+			
+		} else if( request.getParameter( "sidoVal" ).equals("인천시" ) ){
 			sto.setDoNm( "인천시" );
 			sido = "인천시";
 		} else {
@@ -81,14 +86,29 @@ public class Controller_Search {
 		
 		System.out.println( "doNm : " + sto.getDoNm() );
 		
-		//ArrayList<SearchkeyTO> list = (ArrayList<SearchkeyTO>)mdao.listsigunguNm( sto.getDoNm() );
-
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName( "/search/json_gugun" );
-		//modelAndView.addObject( "list", list );
-		modelAndView.addObject( "sido", sido );
+		ArrayList<SearchkeyTO> list = (ArrayList<SearchkeyTO>)mdao.listsigunguNm( sto.getDoNm() );
 		
-		return modelAndView;
+		JSONObject result = new JSONObject();
+		
+		
+		JSONArray jsonArray = new JSONArray();
+		for( SearchkeyTO to : list ){
+			String sigunguNm = to.getSigunguNm();
+			
+			JSONObject jsonObject = new JSONObject();
+
+			if( !sigunguNm.equals("default") ) {
+				
+				jsonObject.put( "sigunguNm", sigunguNm );
+				jsonArray.add( jsonObject );
+			}
+			
+			
+		}
+		
+		result.put( "jsonArray", jsonArray ); //배열을 다시 json에 담음. => ajax 에서 jsonArray(배열)를 안받아줘서 json 으로 다시 넣음
+		
+		return result;
 	}
 	
 }
