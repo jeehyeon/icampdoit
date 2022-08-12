@@ -32,3 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 src/main/webapp/upload/t_1.jpg
+src/main/webapp/h_upload/구름.jpg
