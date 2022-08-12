@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.exam.hboard.HBoardDAO;
 import com.exam.hboard.HBoardListTO;
+import com.exam.hboard.HBoardTO;
 
 //import com.oreilly.servlet.MultipartRequest;
 //import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -58,9 +59,21 @@ public class Controller_HBoard {
 	public ModelAndView hboardview(HttpServletRequest request, HttpSession session) {
 		System.out.println( "hboardview() 호출" );
 		
+		int cpage = 1;
+		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		HBoardTO  to = new HBoardTO();
+		to.setSeq( request.getParameter( "seq" ) );
+		
+		to = dao.boardview(to);	
+		
 		ModelAndView modelAndView = new ModelAndView();
 		
 		modelAndView.setViewName( "/board/hboard_view" );
+		modelAndView.addObject( "to", to );
+		modelAndView.addObject( "cpage", cpage );
 		
 		return modelAndView;
 	}
