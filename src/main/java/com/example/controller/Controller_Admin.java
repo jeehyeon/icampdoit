@@ -85,7 +85,7 @@ public class Controller_Admin {
 	@RequestMapping(value = "/admin_board.do")
 	public ModelAndView adminBoard(HttpServletRequest request, HttpSession session) {
 		System.out.println("admin_board 호출");
-
+		System.out.println("컨트롤러에서 최초로 받은 말머리 : " + request.getParameter( "subjectValue" ));
 		int cpage = 1;
 		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
 			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
@@ -99,7 +99,9 @@ public class Controller_Admin {
 		
 		if(request.getParameter( "subjectValue" ) != null && !request.getParameter( "subjectValue" ).equals( "" ) ) {
 			subjectValue = request.getParameter( "subjectValue" );		
-		} else if( subjectValue.equals( "1" ) ) {
+		};
+		
+		if( subjectValue.equals( "1" ) ) {
 			listTO = adao.mboardList(listTO, subjectValue);
 			System.out.println("말머리선택 : " + request.getParameter( "subjectValue" ));		
 		} else if( subjectValue.equals( "2" ) ) {

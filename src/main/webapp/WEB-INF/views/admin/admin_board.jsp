@@ -162,7 +162,7 @@
                 <!-- 말머리 드롭다운 -->
                 <div class="subjectdrop">
                	 <div class="me-2 ms-1" style="float:left">
-					<select class="customSelect1" name="sort" id="form_sort" data-style="btn-selectpicker" title="" onchange="location.href='javascript:changeSubject()'">
+					<select class="customSelect1" name="sort" id="form_sort" data-style="btn-selectpicker" title="" onchange='changeSubject()'">
 						<option value="1" >자유</option>
 						<option value="2" >후기</option>
 						<option value="3" >중고</option>
@@ -364,8 +364,8 @@
     <script>
     	
     	function changeSubject(){
-    		subjectValue = $( "#form_sort option:selected" ).val();
-    		console.log( subjectValue );
+    		var subjectValue = $( "#form_sort option:selected" ).val();
+    		alert( subjectValue );
     		
     		location.href='./admin_board.do?subjectValue=' + subjectValue; 
     	};

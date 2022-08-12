@@ -54,7 +54,7 @@ public class AdminDAO {
 				
 			} else { break; }
 		}
-		
+		System.out.println("dao 리스트 : " + lists);
 		listTO.setBoardLists( lists );
 		listTO.setStartBlock( ( ( cpage-1 ) / blockPerPage ) * blockPerPage + 1);
 		listTO.setEndBlock( ( (cpage-1) / blockPerPage) * blockPerPage + blockPerPage);
@@ -141,7 +141,7 @@ public class AdminDAO {
 				
 			} else { break; }
 		}
-		
+		System.out.println("dao 리스트 : " + lists);
 		listTO.setBoardLists( lists );
 		listTO.setStartBlock( ( ( cpage-1 ) / blockPerPage ) * blockPerPage + 1);
 		listTO.setEndBlock( ( (cpage-1) / blockPerPage) * blockPerPage + blockPerPage);
