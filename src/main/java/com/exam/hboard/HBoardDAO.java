@@ -80,16 +80,6 @@ public class HBoardDAO {
 		
 		}
 	}
-	// list
-	//public ArrayList<HBoardTO> boardList() {
-	//			
-	//	String sql = "select seq, subject, writer, cmt, filename, date_format(wdate, '%Y.%m.%d') wdate, hit, datediff(now(), wdate) wgap from album_cmt_board1 order by seq desc";
-	//	ArrayList<HBoardTO> lists = (ArrayList<HBoardTO>)jdbcTemplate.query(
-	//			sql, new BeanPropertyRowMapper<HBoardTO>(HBoardTO.class) );
-	//	
-	//	return lists;	
-	//}
-		
 	
 	// listTO
 	public HBoardListTO boardList(HBoardListTO listTO) {
@@ -137,6 +127,19 @@ public class HBoardDAO {
 			listTO.setEndBlock(listTO.getTotalPage());
 		}		
 		return listTO;
+
+	}
+	
+	public HBoardTO boardview( HBoardTO to ) {
+		
+		String sql = "update h_board set hit=hit+1 where seq=?";
+
+		int result = jdbcTemplate.update(sql, to.getSeq() );
+		
+		sql = "select seq, subject, title, writer, content, date_format(wdate, '%Y-%m-%d') wdate, hit from h_board where seq=?";		
+		to = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<HBoardTO>(HBoardTO.class), to.getSeq() );
+		
+		return to;
 	}
 	
 	
