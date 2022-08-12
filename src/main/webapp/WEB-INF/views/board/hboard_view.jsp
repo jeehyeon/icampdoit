@@ -134,11 +134,11 @@
         </div>
       </div>
     </section>
-    <section>
+    <section class="bg-cover " style="background-image: url('./resources/bootstrap-5/html/img/photo/bg.jpg');">
       <div class="container">
-        <div class="row mt-5">
+        <div class="row">
           <div class="col-xl-8 col-lg-10 mx-auto">           
-            <p class="lead mb-5" style="font-family: 'GangwonEdu_OTFBoldA';"><%=content %> </p>
+            <p class="lead mb-5" ><%=content %> </p>
           </div>
         </div>
         <div class="row">
