@@ -88,8 +88,7 @@ public class Controller_Search {
 		
 		ArrayList<SearchkeyTO> list = (ArrayList<SearchkeyTO>)mdao.listsigunguNm( sto.getDoNm() );
 		
-		JSONObject result = new JSONObject();
-		
+		JSONObject result = new JSONObject();	
 		
 		JSONArray jsonArray = new JSONArray();
 		for( SearchkeyTO to : list ){
@@ -102,13 +101,59 @@ public class Controller_Search {
 				jsonObject.put( "sigunguNm", sigunguNm );
 				jsonArray.add( jsonObject );
 			}
-			
-			
 		}
 		
 		result.put( "jsonArray", jsonArray ); //배열을 다시 json에 담음. => ajax 에서 jsonArray(배열)를 안받아줘서 json 으로 다시 넣음
 		
 		return result;
+	}
+	
+	@RequestMapping( value="/searchmapgugun.do" )
+	public JSONObject searchmapgugun(HttpServletRequest request) {
+		System.out.println( "searchmapgugun() 호출" );
+		
+		SearchkeyTO sto = new SearchkeyTO();
+
+		sto.setDoNm( request.getParameter( "sidoVal" ) );
+		sto.setSigunguNm( request.getParameter( "gugunVal" ) );
+		
+		ArrayList<SearchkeyTO> list = (ArrayList<SearchkeyTO>)mdao.listsearchmap(sto);
+		
+		JSONObject listresult = new JSONObject();	
+		
+		JSONArray jsonArray = new JSONArray();
+		for( SearchkeyTO to : list ){
+			String facltNm = to.getFacltNm();
+			String addr1 = to.getAddr1();
+			String addr2 = to.getAddr2();
+			String induty = to.getInduty();
+			String firstImageUrl = to.getFirstImageUrl();
+			String contentId = to.getContentId();
+			String mapX = to.getMapX();
+			String mapY = to.getMapY();
+			
+			JSONObject jsonObject = new JSONObject();
+				
+			jsonObject.put( "facltNm", facltNm );
+			jsonObject.put( "addr1", addr1 );
+			jsonObject.put( "addr2", addr2 );
+			jsonObject.put( "induty", induty );
+			jsonObject.put( "contentId", contentId );
+			jsonObject.put( "mapX", mapX );
+			jsonObject.put( "mapY", mapY );
+			
+			if( !firstImageUrl.equals( "default" ) ) {
+				jsonObject.put( "firstImageUrl", firstImageUrl );
+			} else {
+				jsonObject.put( "firstImageUrl", "./resources/bootstrap-5/html/img/noimage.svg" );
+			}
+			
+			jsonArray.add( jsonObject );
+		}
+		
+		listresult.put( "jsonArray", jsonArray ); //배열을 다시 json에 담음. => ajax 에서 jsonArray(배열)를 안받아줘서 json 으로 다시 넣음
+		
+		return listresult;
 	}
 	
 }
