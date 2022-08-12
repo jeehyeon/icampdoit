@@ -109,12 +109,10 @@
 			  </a>
 			</li>			  			
 			<li class="nav-item">
-			  <a class="nav-link text-white ">
-			    
+			  <a class="nav-link text-white ">			    
 			      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 			        <i class="material-icons opacity-10">logout</i>
-			      </div>
-			    
+			      </div>			    
 			    <span class="nav-link-text ms-1">Log out</span>
 			  </a>
 			</li>    

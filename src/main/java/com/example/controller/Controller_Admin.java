@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.exam.admin.AdminDAO;
+import com.exam.admin.AdminListTO;
 import com.exam.hboard.HBoardDAO;
 import com.exam.hboard.HBoardTO;
 import com.exam.login.SignUpTO;
@@ -38,6 +40,9 @@ public class Controller_Admin {
 
 	@Autowired
 	private NBoardDAO ndao;
+	
+	@Autowired
+	private AdminDAO adao;
 
 	String url = System.getProperty("user.dir");
 	private String mUploadPath = url + "/src/main/webapp/upload/";
@@ -81,6 +86,38 @@ public class Controller_Admin {
 	public ModelAndView adminBoard(HttpServletRequest request, HttpSession session) {
 		System.out.println("admin_board 호출");
 
+		int cpage = 1;
+		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		AdminListTO listTO = new AdminListTO();
+		listTO.setCpage( cpage );
+		
+		String subjectValue = "5";
+		System.out.println("컨트롤러 도착");
+		
+		if(request.getParameter( "subjectValue" ) != null && !request.getParameter( "subjectValue" ).equals( "" ) ) {
+			subjectValue = request.getParameter( "subjectValue" );		
+		} else if( subjectValue.equals( "1" ) ) {
+			listTO = adao.mboardList(listTO, subjectValue);
+			System.out.println("말머리선택 : " + request.getParameter( "subjectValue" ));		
+		} else if( subjectValue.equals( "2" ) ) {
+			listTO = adao.mboardList(listTO, subjectValue);
+			System.out.println("말머리선택 : " + request.getParameter( "subjectValue" ));		
+		} else if( subjectValue.equals( "3" ) ) {
+			listTO = adao.mboardList(listTO, subjectValue);
+			System.out.println("말머리선택 : " + request.getParameter( "subjectValue" ));		
+		} else if( subjectValue.equals( "4" ) ) {
+			listTO = adao.hboardList(listTO, subjectValue);
+			System.out.println("말머리선택 : " + request.getParameter( "subjectValue" ));		
+		} else if( subjectValue.equals( "5" ) ) {
+			listTO = adao.nboardList(listTO, subjectValue);
+			System.out.println("말머리선택 : " + request.getParameter( "subjectValue" ));					
+		}
+				
+		System.out.println(" 최종 말머리선택 : " + request.getParameter( "subjectValue" ));
+		
 		ModelAndView modelAndView = new ModelAndView();
 
 		if (session.getAttribute("ucode") == null) {
@@ -88,6 +125,10 @@ public class Controller_Admin {
 			return modelAndView;
 		}
 		modelAndView.setViewName("admin/admin_board");
+		modelAndView.addObject( "listTO", listTO );
+		modelAndView.addObject( "cpage", cpage );
+		modelAndView.addObject( "subjectValue", subjectValue );
+		
 
 		return modelAndView;
 	}

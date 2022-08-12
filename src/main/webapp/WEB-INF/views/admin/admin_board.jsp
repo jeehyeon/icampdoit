@@ -1,18 +1,75 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.exam.admin.AdminTO" %>
+<%@ page import="com.exam.admin.AdminListTO" %>
+<%@ page import="java.util.ArrayList" %>  
+<%
+	//session 값 가져오기
+	int ucode = -1;
+	String id ="";
+	if(session.getAttribute("id") != null){
+		ucode = (int)session.getAttribute("ucode");
+		id = (String)session.getAttribute("id");
+	}
+
+	AdminListTO listTO = (AdminListTO)request.getAttribute("listTO");
+	int cpage = (Integer)request.getAttribute( "cpage" );
+	
+	int recordPerPage = listTO.getRecordPerPage();
+	int totalPage = listTO.getTotalPage();
+	int blockPerPage = listTO.getBlockPerPage();
+	int startBlock = listTO.getStartBlock();
+	int endBlock = listTO.getEndBlock();
+	int totalRecord = listTO.getTotalRecord();
+	
+	System.out.println("관리자페이지 말머리 리스트 : " + request.getAttribute( "subjectValue" ));
+	
+	String subjectValue = (String)request.getAttribute( "subjectValue" );
+	
+	//String subject = subjectValue;
+	
+	ArrayList<AdminTO> lists = listTO.getBoardLists();
+	
+	StringBuilder sbHtml = new StringBuilder();
+		
+	for( AdminTO to : lists ) {
+		String seq = to.getSeq();
+		String subject = to.getSubject();
+		String writer = to.getWriter();
+		String title = to.getTitle();
+		String wdate = to.getWdate();
+		String hit = to.getHit();
+		
+		sbHtml.append( "<tr class='listdata'>" );
+		sbHtml.append( "<td onclick='moveMo()'>" );
+		sbHtml.append( "<div class='d-flex px-2 py-1'>" );
+		sbHtml.append( "<div class='d-flex flex-column justify-content-center'><h6 class='mb-0 text-sm'>" + subject + "</h6></div>" );
+		sbHtml.append( "</div>" );
+		sbHtml.append( "</td>" );
+		sbHtml.append( "<td onclick='moveMo()'><p class='text-xs font-weight-bold mb-0'>" + writer + "</p></td>" );
+		sbHtml.append( "<td onclick='moveMo()'><p class='text-xs font-weight-bold mb-0'>" + title + "</p></td>" );
+		sbHtml.append( "<td class='align-middle text-center text-sm' onclick='moveMo()'><span>" + wdate + "</span></td>" );
+		sbHtml.append( "<td class='align-middle text-center' onclick='moveMo()'><span class='text-secondary text-xs font-weight-bold'>" + hit + "</span></td>" );
+		sbHtml.append( "<td class='align-middle'>" );
+		sbHtml.append( "<a href='javascript:;' class='text-secondary font-weight-bold text-xs' data-toggle='tooltip' data-original-title='Edit user'>삭제</a>" );
+		sbHtml.append( "</td>" );
+		sbHtml.append( "</tr>" );
+
+	}
+	
+
+%>
+  
 <!DOCTYPE html>
-
 <html>
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="./resources/bootstrap-5/html/admin/img/apple-icon.png">
   <link rel="icon" type="image/png" href="./resources/bootstrap-5/html/img/logo2.svg">
-  <title>
-    I Camp Do It admin users
-  </title>
-  
+  <title>I Camp Do It admin users</title>
+  <!-- Font Awesome 이거 추가함 -->
+  <script src="https://kit.fontawesome.com/5251502df3.js" crossorigin="anonymous"></script>    
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
   <!-- Nucleo Icons -->
@@ -24,96 +81,62 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="./resources/bootstrap-5/html/admin/css/material-dashboard.css?v=3.0.4" rel="stylesheet" />
-  
-  
-  
-</head>
+ </head>
 
 <body class="g-sidenav-show  bg-gray-200">
-  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
-
-  <div class="sidenav-header" style="text-align:center" >
-    <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-    <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
-      
-      <span class="ms-1 font-weight-bold text-white" >I CAMP DO IT<br/>administer</span>
-    </a>
-  </div>
-
-
-  <hr class="horizontal light mt-0 mb-2">
-
-  <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
-    <ul class="navbar-nav">
-      
-
-      
-        
-
-          
-
-          
-  
-<li class="nav-item">
-  <a class="nav-link text-white " href="./admin.do">
-    
-      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-        <i class="material-icons opacity-10">dashboard</i>
-      </div>
-    
-    <span class="nav-link-text ms-1">관리자 홈</span>
-  </a>
-</li>
-
-
-<li class="nav-item">
-  <a class="nav-link text-white " href="./admin_users.do">
-    
-      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-        <i class="material-icons opacity-10">person</i>
-      </div>
-    
-    <span class="nav-link-text ms-1">회원 관리</span>
-  </a>
-</li>
-  
-<li class="nav-item">
-  <a class="nav-link text-white " href="./admin_board.do">
-    
-      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-        <i class="material-icons opacity-10">table_view</i>
-      </div>
-    
-    <span class="nav-link-text ms-1">게시판 관리</span>
-  </a>
-</li>
-<li class="nav-item">
-  <a class="nav-link text-white " href="./home.do">
-    
-      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-        <i class="material-icons opacity-10">assignment</i>
-      </div>
-    
-    <span class="nav-link-text ms-1">사용자 페이지</span>
-  </a>
-</li>
-  
-
-<li class="nav-item">
-  <a class="nav-link text-white ">
-    
-      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-        <i class="material-icons opacity-10">logout</i>
-      </div>
-    
-    <span class="nav-link-text ms-1">Log out</span>
-  </a>
-</li>       
-     
-    </ul>
-  </div>
-   
-</aside>
+	<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark" id="sidenav-main">
+		<div class="sidenav-header" style="text-align: center">
+			<i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i> 
+			<a class="navbar-brand m-0" href="./admin.do" target="_blank"> 
+			  <span class="ms-1 font-weight-bold text-white">I CAMP DO IT<br />administer </span>
+			</a>
+		</div>
+		<hr class="horizontal light mt-0 mb-2">
+		 <div class="collapse navbar-collapse  w-auto" id="sidenav-collapse-main">
+		  <ul class="navbar-nav">		  
+	    	<li class="nav-item">
+ 				<a class="nav-link text-white " href="./admin.do">   
+     				<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+      				 <i class="material-icons opacity-10">dashboard</i>
+     				</div>   
+				<span class="nav-link-text ms-1">관리자 홈</span>
+			  </a>
+			</li>						
+			<li class="nav-item">
+			  <a class="nav-link text-white " href="./admin_users.do">			    
+			      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+			        <i class="material-icons opacity-10">person</i>
+			      </div>			    
+			    <span class="nav-link-text ms-1">회원 관리</span>
+			  </a>
+			</li>			  
+			<li class="nav-item">
+			  <a class="nav-link text-white " href="./admin_board.do">			    
+			      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+			        <i class="material-icons opacity-10">table_view</i>
+			      </div>			    
+			    <span class="nav-link-text ms-1">게시판 관리</span>
+			  </a>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link text-white " href="./home.do">			    
+			      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+			        <i class="material-icons opacity-10">assignment</i>
+			      </div>			    
+			    <span class="nav-link-text ms-1">사용자 페이지</span>
+			  </a>
+			</li>			  			
+			<li class="nav-item">
+			  <a class="nav-link text-white ">			    
+			      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+			        <i class="material-icons opacity-10">logout</i>
+			      </div>			    
+			    <span class="nav-link-text ms-1">Log out</span>
+			  </a>
+			</li>    
+		  </ul>
+		 </div>		
+	</aside>
 
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
@@ -139,14 +162,12 @@
                 <!-- 말머리 드롭다운 -->
                 <div class="subjectdrop">
                	 <div class="me-2 ms-1" style="float:left">
-					<select name="sort"
-						id="form_sort" class="customSelect1">
-						<option value="sortBy_default" href="#">말머리</option>
-						<option value="sortBy_0" href="#">공지</option>
-						<option value="sortBy_1" href="#">혼캠</option>
-						<option value="sortBy_2" href="#">자유</option>
-						<option value="sortBy_3" href="#">후기</option>
-						<option value="sortBy_4" href="#">중고</option>
+					<select class="customSelect1" name="sort" id="form_sort" data-style="btn-selectpicker" title="" onchange="location.href='javascript:changeSubject()'">
+						<option value="1" >자유</option>
+						<option value="2" >후기</option>
+						<option value="3" >중고</option>
+						<option value="4" >혼캠</option>
+						<option value="5" >공지</option>
 					</select>
 				 </div>
 				 
@@ -172,119 +193,54 @@
                       <th class="text-secondary opacity-7"></th>
                     </tr>
                   </thead>
+                  
                   <tbody>
-                    <tr class="listdata">
-                    	
-                      <td onclick="moveMo()">
-                        <div class="d-flex px-2 py-1">  
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">공지</h6> 
-                          </div>
-                        </div>
-                      </td>
-                      <td onclick="moveMo()">                 
-                        <p class="text-xs font-weight-bold mb-0">홍길동</p>
-                      </td>
-                      <td onclick="moveMo()">
-                        <p class="text-xs font-weight-bold mb-0">공지사항입니다</p>                 
-                      </td>
-                      <td class="align-middle text-center text-sm" onclick="moveMo()">
-                        <span>2022-07-31</span>
-                      </td >
-                      <td class="align-middle text-center" onclick="moveMo()">
-                        <span class="text-secondary text-xs font-weight-bold">8</span>
-                      </td>
-                      
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          삭제
-                        </a>
-                      </td>
-                      
-                    </tr>
-                    
-                    <tr class="listdata">
-                    
-                      <td onclick="moveMo()">
-                      
+                   <!--                    
+                    <tr class="listdata">                   
+                      <td onclick="moveMo()">                     
                         <div class="d-flex px-2 py-1">  
                           <div class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm">자유</h6> 
                           </div>
-                        </div>
-                        
+                        </div>                        
                       </td>
-                      <td onclick="moveMo()">   
-                                   
-                        <p class="text-xs font-weight-bold mb-0">홍길동</p>
-                        
+                      <td onclick="moveMo()">                                      
+                        <p class="text-xs font-weight-bold mb-0">홍길동</p>                        
                       </td>
-                      <td onclick="moveMo()">
-                      
-                        <p class="text-xs font-weight-bold mb-0">자유게시글입니다</p> 
-                                     
+                      <td onclick="moveMo()">                      
+                        <p class="text-xs font-weight-bold mb-0">자유게시글입니다</p>                                     
                       </td>
-                      <td class="align-middle text-center text-sm" onclick="moveMo()">
-                      	
-                        <span>2022-07-31</span>
-                       
+                      <td class="align-middle text-center text-sm" onclick="moveMo()">                      	
+                        <span>2022-07-31</span>                      
                       </td>
-                      <td class="align-middle text-center" onclick="moveMo()">
-                     
-                        <span class="text-secondary text-xs font-weight-bold">2</span>
-                       
+                      <td class="align-middle text-center" onclick="moveMo()">                     
+                        <span class="text-secondary text-xs font-weight-bold">2</span>                       
                       </td>
                       <td class="align-middle">
                         <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           삭제
                         </a>
-                      </td>
-                     
+                      </td>                     
                     </tr>
-                    
-                    <tr class="listdata">
-                      <td onclick="moveMo()">
-                        <div class="d-flex px-2 py-1">  
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">후기</h6> 
-                          </div>
-                        </div>
-                      </td>
-                      <td onclick="moveMo()">                 
-                        <p class="text-xs font-weight-bold mb-0">김병찬</p>
-                      </td>
-                      <td onclick="moveMo()">
-                        <p class="text-xs font-weight-bold mb-0">후기 게시글입니다</p>                 
-                      </td>
-                      <td class="align-middle text-center text-sm" onclick="moveMo()">
-                        <span>2022-07-31</span>
-                      </td>
-                      <td class="align-middle text-center" onclick="moveMo()">
-                        <span class="text-secondary text-xs font-weight-bold">8</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          삭제
-                        </a>
-                      </td>
-                    </tr>
-                    
-                    
-                    
+                    -->
+ <%=sbHtml.toString() %>                   
+                                       
                   </tbody>
                 </table>
               </div>
             </div>
- 
           </div>
+          
+         <input type="hidden" value="<%=subjectValue %>" id="subjectInput" />         
           
           <!-- 페이징 버튼 -->
           <div class="pagenu">
           <ul class="pagination pagination-info">
+          <!--
 		    <li class="page-item">
 		      <a class="page-link" href="#link" aria-label="Previous">
 		        <span aria-hidden="true">
-		          <span class="material-icons">
+		           <span class="material-icons">
 		            keyboard_arrow_left
 		          </span>
 		        </span>
@@ -311,17 +267,56 @@
 		          <span class="material-icons">
 		            keyboard_arrow_right
 		          </span>
+		          
 		        </span>
 		      </a>
-		    </li>
+		    </li> -->
+		    
+<%			
+	//페이지 하단의 << 버튼
+	if ( startBlock == 1 ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-thin fa-angles-left'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='admin_board.do?cpage="+ (startBlock - blockPerPage) +"&subjectValue="+ subjectValue +"'><i class='fa fa-thin fa-angles-left'></i></a></li>");
+	}
+	//out.println(" &nbsp; ");
+	//페이지 하단의 < 버튼 => (cpage-1) 한페이지 앞으로 이동
+	if ( cpage == 1 ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'> <i class='fa fa-angle-left'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='admin_board.do?cpage="+ (cpage-1) +"&subjectValue="+ subjectValue + "'><i class='fa fa-angle-left'></i></a></li> ");
+	}
+	//out.println(" &nbsp;&nbsp; ");
+	//현재 페이지
+	for ( int i=startBlock; i<=endBlock; i++ ) {
+		if ( cpage == i ) { 
+			out.println(" <li class='page-item active'><a class='page-link' href='#'>" + i + "</a></li> ");
+		} else {
+			out.println(" <li class='page-item'><a class='page-link' href='admin_board.do?subjectValue=" + subjectValue + "&cpage=" + i + "'>" + i + "</a></li> ");
+		}
+	}
+	//out.println(" &nbsp;&nbsp; ");
+	//페이지 하단의 > 버튼
+	if ( cpage == totalPage ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-angle-right'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='admin_board.do?cpage="+ (cpage+1) +"&subjectValue="+ subjectValue + "'><i class='fa fa-angle-right'></i></a></li> ");
+	}
+	//out.println(" &nbsp; ");
+	//페이지 하단의 >> 버튼
+	if ( endBlock == totalPage ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='admin_board.do?cpage="+ (startBlock + blockPerPage) +"&subjectValue="+ subjectValue + "'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
+	}
+	//out.println(" &nbsp; ");
+
+%>		    
           </ul>
          </div> 
           
         </div>
-      </div>
-      
-                          
-      
+      </div>     
   </main>
   
   <!--   Core JS Files   -->
@@ -343,6 +338,38 @@
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
+  <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
+    <!-- JavaScript files-->
+    <script>
+	    window.onload = function(){
+	    	if (  $( "#subjectInput" ).val() == 1 ) {
+	    		$("#form_sort").val("1");
+	    		console.log( "1로 변경");
+	    	} else if ( $( "#subjectInput" ).val() == 2 ) {
+	    		$("#form_sort").val("2");
+	    		console.log( "2로 변경");
+	    	} else if ( $( "#subjectInput" ).val() == 3 ) {
+	    		$("#form_sort").val("3");
+	    		console.log( "3로 변경");
+	    	} else if ( $( "#subjectInput" ).val() == 4 ) {
+	    		$("#form_sort").val("4");
+	    		console.log( "4로 변경");
+	    	} else if ( $( "#subjectInput" ).val() == 5 ) {
+	    		$("#form_sort").val("5");
+	    		console.log( "5로 변경");
+	    	}
+	    		    	
+	    }
+    </script>
+    <script>
+    	
+    	function changeSubject(){
+    		subjectValue = $( "#form_sort option:selected" ).val();
+    		console.log( subjectValue );
+    		
+    		location.href='./admin_board.do?subjectValue=' + subjectValue; 
+    	};
+    </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
