@@ -466,7 +466,7 @@
         data: {
           labels: ["0~9세", "10대", "20대", "30대"],
           datasets: [{
-            label: "Sales",
+            label: "회원 수",
             tension: 0.4,
             borderWidth: 0,
             borderRadius: 4,

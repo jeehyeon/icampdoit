@@ -30,6 +30,8 @@ public class Controller {
 		if(session != null) {
 			System.out.println("세션값 ucode : " + session.getAttribute("ucode"));
 			System.out.println("세션값 id : " + session.getAttribute("id"));
+		} else {
+			request.getSession(true);
 		}
 
 		if( session.isNew() ) {
