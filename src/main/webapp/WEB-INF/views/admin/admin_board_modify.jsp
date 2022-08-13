@@ -121,7 +121,7 @@
 						<div class="input-group input-group-outline pb-3 ">
 							<input class="form-control" value="<%=title %>" id="title" name="title" type="title" placeholder="제목을 입력해주세요." />
 						</div>
-						<textarea id="summernote" name="content" value="<%=content %>"></textarea>
+						<textarea id="summernote" name="content"><%=content %></textarea>
 					</div>
 				</div>
                  <input type="hidden" name="seq" value="<%=seq%>" />   

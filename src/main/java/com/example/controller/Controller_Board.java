@@ -333,7 +333,13 @@ public class Controller_Board {
 		//게시글 삭제 전 이미지 파일 확인
 		BoardTO to = new BoardTO();
 		to.setSeq(request.getParameter("viewseq"));
-		dao.mboarddelfilecheck(to);
+		FileTO fto = new FileTO();
+		fto=dao.mboarddelfilecheck(to);
+		
+		if(fto.getFilename() !="null") {
+			//파일이 존재 => 삭제
+			System.out.println("파일이 존재");
+		}
 		
 		
 		ModelAndView modelAndView = new ModelAndView();
