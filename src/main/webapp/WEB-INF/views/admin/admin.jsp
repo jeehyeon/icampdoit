@@ -12,12 +12,23 @@
 	String countTodayVisitor = (String)request.getAttribute( "countTodayVisitor" );
 	
 	ArrayList<SignUpTO> lists = (ArrayList<SignUpTO>)request.getAttribute("lists");
-
-	//이건 좀 아닌데....
-	for( SignUpTO sto : lists ) {
-		String age = sto.getAge();
-		String total = sto.getTotal();
-	}
+	
+	String age0 = lists.get(0).getAge();
+	int total0 = Integer.parseInt(lists.get(0).getTotal());
+	String age10 = lists.get(1).getAge();
+	int total10 = Integer.parseInt(lists.get(1).getTotal());
+	String age20 = lists.get(2).getAge();
+	int total20 = Integer.parseInt(lists.get(2).getTotal());
+	String age30 = lists.get(3).getAge();
+	int total30 = Integer.parseInt(lists.get(3).getTotal());
+	//String age40 = lists.get(4).getAge();
+	//String total40 = lists.get(4).getTotal();
+	//String age50 = lists.get(5).getAge();
+	//String total50 = lists.get(5).getTotal();
+	
+	System.out.println( age10 );
+	System.out.println( total10 );
+	
 %>
 <!--
 =========================================================
@@ -451,82 +462,82 @@
     var ctx = document.getElementById("chart-bars").getContext("2d");
 
     new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: ["20대", "30대", "40대", "50대"],
-        datasets: [{
-          label: "Sales",
-          tension: 0.4,
-          borderWidth: 0,
-          borderRadius: 4,
-          borderSkipped: false,
-          backgroundColor: "rgba(255, 255, 255, .8)",
-          data: [34, 38, 19, 9],
-          maxBarThickness: 6
-        }, ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
+        type: "bar",
+        data: {
+          labels: ["0~9세", "10대", "20대", "30대"],
+          datasets: [{
+            label: "Sales",
+            tension: 0.4,
+            borderWidth: 0,
+            borderRadius: 4,
+            borderSkipped: false,
+            backgroundColor: "rgba(255, 255, 255, .8)",
+            data: [<%=total0%>, <%=total10%>, <%=total20%>, <%=total30%>],
+            maxBarThickness: 6
+          }, ],
         },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
-            },
-            ticks: {
-              suggestedMin: 0,
-              suggestedMax: 500,
-              beginAtZero: true,
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-              color: "#fff"
-            },
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
-            },
-            ticks: {
-              display: true,
-              color: '#f8f9fa',
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false,
             }
           },
+          interaction: {
+            intersect: false,
+            mode: 'index',
+          },
+          scales: {
+            y: {
+              grid: {
+                drawBorder: false,
+                display: true,
+                drawOnChartArea: true,
+                drawTicks: false,
+                borderDash: [5, 5],
+                color: 'rgba(255, 255, 255, .2)'
+              },
+              ticks: {
+                suggestedMin: 0,
+                suggestedMax: 500,
+                beginAtZero: true,
+                padding: 10,
+                font: {
+                  size: 14,
+                  weight: 300,
+                  family: "Roboto",
+                  style: 'normal',
+                  lineHeight: 2
+                },
+                color: "#fff"
+              },
+            },
+            x: {
+              grid: {
+                drawBorder: false,
+                display: true,
+                drawOnChartArea: true,
+                drawTicks: false,
+                borderDash: [5, 5],
+                color: 'rgba(255, 255, 255, .2)'
+              },
+              ticks: {
+                display: true,
+                color: '#f8f9fa',
+                padding: 10,
+                font: {
+                  size: 14,
+                  weight: 300,
+                  family: "Roboto",
+                  style: 'normal',
+                  lineHeight: 2
+                },
+              }
+            },
+          },
         },
-      },
-    });
+      });
 
 
     var ctx2 = document.getElementById("chart-line").getContext("2d");
