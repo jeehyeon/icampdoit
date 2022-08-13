@@ -52,21 +52,6 @@ public class Controller_Admin {
 	private String nUploadPath = url + "/src/main/webapp/n_upload/";
 
 	// 관리자페이지
-	@RequestMapping(value = "/admin.do")
-	public ModelAndView admin(HttpServletRequest request, HttpSession session) {
-		System.out.println("admin() 호출");
-
-		ModelAndView modelAndView = new ModelAndView();
-
-		if (session.getAttribute("ucode") == null) {
-			modelAndView.setViewName("/login/nousers");
-			return modelAndView;
-		}
-		modelAndView.setViewName("admin/admin");
-
-		return modelAndView;
-	}
-
 	@RequestMapping(value = "/admin_users.do")
 	public ModelAndView adminUsers(HttpServletRequest request, HttpSession session) {
 		System.out.println("admin_users");
@@ -95,7 +80,6 @@ public class Controller_Admin {
 		listTO.setCpage( cpage );
 		
 		String subjectValue = "5";
-		System.out.println("컨트롤러 도착");
 		
 		if(request.getParameter( "subjectValue" ) != null && !request.getParameter( "subjectValue" ).equals( "" ) ) {
 			subjectValue = request.getParameter( "subjectValue" );		
@@ -118,7 +102,6 @@ public class Controller_Admin {
 			System.out.println("말머리선택 : " + request.getParameter( "subjectValue" ));					
 		}
 				
-		System.out.println(" 최종 말머리선택 : " + request.getParameter( "subjectValue" ));
 		
 		ModelAndView modelAndView = new ModelAndView();
 
@@ -361,7 +344,6 @@ public class Controller_Admin {
 			
 			ndao.filecnd(nto, nfto);
 		}
-		System.out.println("최종 flag : " + flag);
 
 		return Integer.toString(flag);
 	}
@@ -502,21 +484,25 @@ public class Controller_Admin {
 		to.setWriter((String) session.getAttribute("id"));
 		to.setContent(request.getParameter("content"));
 		to.setUcode((Integer) session.getAttribute("ucode"));
-		System.out.println("4ucode : " + to.getUcode());			
 		if(request.getParameter("filesize") != "0") {
 			to.setFilename(request.getParameter("filename"));
 			to.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
+			System.out.println("filename : " + request.getParameter("filename"));
+		}
+		if(request.getParameter("newfilesize") != "0") {
+			to.setNewFilename(request.getParameter("Newfilename"));
+			to.setNewFilesize(Long.parseLong(request.getParameter("Newfilesize").trim()) );
+			System.out.println("Newfilename : " + request.getParameter("Newfilename"));
 		}
 		to.setVcode(request.getParameter("vcode"));
-		System.out.println("4vcode : " + to.getVcode());
 		
 		int flag = 1;
 		
 		flag = adao.boardModifyOk(to);
-		System.out.println("content : " + to.getContent());			
-		System.out.println("4flag : " + flag);
+		System.out.println("adao.boardModifyOk 연결성공 : ");			
+		System.out.println("flag : " + flag);
 		
-		hdao.filecnd(to);		
+		//hdao.filecnd(to);		
 
 		return Integer.toString(flag);
 	}

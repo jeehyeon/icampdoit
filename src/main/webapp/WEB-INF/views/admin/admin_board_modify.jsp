@@ -20,10 +20,12 @@
 	String writer = to.getWriter();
 	String title = to.getTitle();
 	String content = to.getContent();
-	System.out.println( "내용 : "+to.getContent() );
 	String wdate = to.getWdate();
 	String hit = to.getHit();	
 	String filename = to.getFilename();
+	System.out.println("[filename]" + filename);
+	System.out.println("[content]" + content);
+	long filesize = to.getFilesize();
 	
 %>
 
@@ -106,8 +108,8 @@
   <!-- Write Section-->
 	<div class="main-content px-5">		
 		  <!-- <form action="./aboardwrite_ok.do" method="post" id="afrm" name="afrm" enctype="multipart/form-data"> -->
-		  <input type="hidden" name="writeOk" id="writeOk" value="default"/>
-		  <input type="hidden" name="filesize" id="filesize" value="0000"/>
+		  <input type="hidden" name="modifyOk" id="modifyOk" value="default"/>
+		  <input type="hidden" name="newfilesize" id="newfilesize" value="0000"/>
 		  <input type="hidden" name="vcode" id="vcode" value="default"/>
 	
 			<div class="card my-2 px-5 justify-content-center">
@@ -127,6 +129,7 @@
                  <input type="hidden" name="seq" value="<%=seq%>" />   
                  <input type="hidden" name="cpage" value="<%=cpage%>"/>  
                  <input type="hidden" id="filename" name="filename" value="<%=filename%>"/>  
+                 <input type="hidden" id="filesize" name="filesize" value="<%=filesize%>"/>  
 				<div class="row">
 				  <div class="col-lg-8">
 			        <input type="button" value="목록" class="btn btn-success" style="cursor: pointer;" onclick="location.href='admin_board.do?subjectValue=<%=subjectValue%>&cpage=<%=cpage %>'" />
@@ -170,7 +173,7 @@
 	
  	document.getElementById( 'cbtn' ).onclick = function() { 		
  		var subject = $('#subject').val();
- 		var filename = $('#writeOk').val();
+ 		var filename = $('#modifyOk').val();
  		
 	    var data = {'subject' : subject , 'filename' : filename };	    	
  		
@@ -188,16 +191,17 @@
 	}
 	 
        document.getElementById( 'mbtn' ).onclick = function() {	
-		 var subject = $('#subject').val();
 		 var title = $('#title').val();
 		 var content = $('#summernote').val();
 		 var vcode = $('#vcode').val();
-		 var filename = $('#writeOk').val();
+		 var filename = $('#filename').val();
+		 var Newfilename = $('#modifyOk').val();
 		 var filesize = $('#filesize').val();
+		 var Newfilesize = $('#newfilesize').val();
 		 		 
-	     var data = {'subject' : subject , 'title' : title , 'content' : content, 'vcode' : vcode, 'filename' : filename, 'filesize' : filesize};	    	
+	     var data = {'title' : title , 'content' : content, 'vcode' : vcode, 'filename' : filename, 'Newfilename' : Newfilename, 'filesize' : filesize, 'Newfilesize' : Newfilesize};	    	
 
-	     if(($('#subject').val() != '')&&($('#title').val() != '')&&($('#summernote').val() != '')){	        
+	     if(($('#title').val() != '')&&($('#summernote').val() != '')){	        
 					
 			$.ajax({
 				data : data,				
@@ -219,8 +223,8 @@
 		        }
 			});
 	     } else {
-		        alert('말머리를 선택하고 빈칸을 모두 입력해주세요.');
-		        $('#subject').focus();
+		        alert('에러남.');
+		        $('#title').focus();
 		 } 
 	   }
 	
@@ -253,28 +257,25 @@
                 ['view', ['codeview', 'help']]
             ],
             
-
-			/* callbacks: { //이미지를 첨부하는 부분
+		    callbacks: { //이미지를 첨부하는 부분
 				onImageUpload : function(files, editor, welEditable) {					
 					for (var i = 0; i < files.length; i++) {
 						sendFile(files[i], editor, welEditable);
 					}
 					
 				}
-				//function modifyImage(files, editor, welEditable);
-			} */
+			} 
         });
-		$('#summernote').summernote('focus');
 	});
 	
-	function modifyImage(files, editor, welEditable) {
+<%-- 	function modifyImage(files, editor, welEditable) {
 		var imgUrl = './h_upload/';
-		<%-- imgUrl = imgUrl + <%=filename%>; --%>
+		imgUrl = imgUrl + <%=filename%>;
 		var mimgUrl = imgUrl + $('#filename').val()
 		console.log("filename : "+mimgUrl);
 		$('#summernote').summernote( 'insertImage', mimgUrl );
 	}
-	
+	 --%>
 	
 	// 이미지 파일 업로드
 	function sendFile(file, editor, welEditable) {
@@ -300,8 +301,8 @@
 				
 				if(str[0] != null){
             				               
-					$('#writeOk').val(str[0]);
-					$('#filesize').val(str[1]);
+					$('#modifyOk').val(str[0]);
+					$('#newfilesize').val(str[1]);
 	                
             	}else{
             		alert("error");
