@@ -1,8 +1,11 @@
 package com.exam.admin;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -19,6 +22,9 @@ public class AdminDAO {
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	String url = System.getProperty("user.dir");
+	private String hUploadPath = url + "/src/main/webapp/h_upload/";
 	
 	// listTO
 	public AdminListTO mboardList(AdminListTO listTO, String subjectValue ) {
@@ -152,6 +158,66 @@ public class AdminDAO {
 		
 	}
 	
-
+	//modify
+	public HBoardTO boardModify(HBoardTO to) {		
+			
+		String sql = "select seq, subject, title, writer, content, ucode, filename, vcode from h_board where seq=?";		
+		try {
+			to = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<HBoardTO>(HBoardTO.class), to.getSeq() );
+		} catch (EmptyResultDataAccessException e) {
+			// TODO Auto-generated catch block
+			System.out.println("[에러]" + e.getMessage());
+			to.setFilename("null");			
+		}
+	
+		return to;
+	}
+	
+	//modify_ok
+	public int boardModifyOk(HBoardTO to) {
+	
+		HBoardTO to1 = new HBoardTO();
+		
+		String sql = "select filename from h_board where seq=?";
+		try {
+		to1 = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<HBoardTO>(HBoardTO.class), to.getSeq() );
+		} catch (EmptyResultDataAccessException e) {
+			System.out.println("[에러]" + e.getMessage());
+			to.setFilename("null");		
+		}
+		String oldFilename = to1.getFilename();
+		
+		int result = 0;
+		int flag=1;
+		
+		if(to.getNewFilename() != null){
+			sql = "update h_board set subject=?, title=?, writer=?, content=?, filename= ?, filesize=?, vcode=? where seq=? and ucode=?";
+			result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(), to.getNewFilename(),
+					to.getNewFilesize(), to.getVcode(), to.getSeq(), to.getUcode() );
+		}else{
+			sql = "update h_board set subject=?, title=?, writer=?, content=?, vcode=? where seq=? and ucode=?";
+			result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(), to.getVcode(), to.getSeq(), to.getUcode() );
+		}
+		
+		
+		if( result == 0 ) {
+			flag = 1;
+			//새로운 파일 삭제
+			if( to.getNewFilename() != null ) {
+				String delurl = hUploadPath + to.getNewFilename();
+				File file  = new File(delurl);
+				file.delete(); 
+			}
+		} else if( result == 1 ) {
+			flag =0;
+			//기존 파일 삭제
+			if( to.getNewFilename() != null && oldFilename != null ) {
+				String delurl = hUploadPath + oldFilename;
+				File file  = new File(delurl);
+				file.delete();
+			}
+		}	
+		return flag;
+	}
 
 }

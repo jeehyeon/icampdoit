@@ -34,7 +34,6 @@ public class HBoardDAO {
 				hto.getUcode(), hto.getFilename(), hto.getFilesize(), hto.getVcode() );
 					System.out.println("dao result "+ result);
 					
-		//위에 들어가 부분에 seq값을 다시 들고 나와야 함
 		if( result != 1 ) {
 			System.out.println("h_board insert 오류");
 			return flag;	
@@ -141,7 +140,7 @@ public class HBoardDAO {
 		
 		return to;
 	}
-	
+
 	
 	
 }

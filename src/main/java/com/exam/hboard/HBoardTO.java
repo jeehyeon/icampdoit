@@ -17,4 +17,8 @@ public class HBoardTO {
 	private String filename;
 	private long filesize;
 	private String vcode;
+	private String newFilename;
+	private long newFilesize;
+	private String oldFilename;
+	private long oldFilesize;
 }

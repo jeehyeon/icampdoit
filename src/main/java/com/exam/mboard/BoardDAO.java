@@ -245,22 +245,22 @@ public class BoardDAO {
 		return flag;
 	}
 	//delete Comment
-		public int mboardDeleteComment( CmtTO cto ) {
-			
-			int flag = 1;
-			
-			String sql = "delete from m_cmt where seq=?";
-			int result = jdbcTemplate.update(sql, cto.getSeq());
-						System.out.println(result);
+	public int mboardDeleteComment( CmtTO cto ) {
+		
+		int flag = 1;
+		
+		String sql = "delete from m_cmt where seq=?";
+		int result = jdbcTemplate.update(sql, cto.getSeq());
+					System.out.println(result);
 
-			if( result != 1 ) {
-				System.out.println("m_cmt Delete 오류");
-			}else {
-				flag=0;
-			}
-			
-			return flag;
+		if( result != 1 ) {
+			System.out.println("m_cmt Delete 오류");
+		}else {
+			flag=0;
 		}
+		
+		return flag;
+	}
 	
 	
 	// modify

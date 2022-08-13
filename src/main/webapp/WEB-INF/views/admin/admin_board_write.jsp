@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="./resources/bootstrap-5/html/admin/img/apple-icon.png">
   <link rel="icon" type="image/png" href="./resources/bootstrap-5/html/img/logo2.svg">
-  <title>I CAMP DO IT</title> 
+  <title>I Camp Do It Administrator</title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
   <!-- Nucleo Icons -->
@@ -32,37 +32,6 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="./resources/bootstrap-5/html/admin/css/material-dashboard.css?v=3.0.4" rel="stylesheet" />
   <link rel="stylesheet" href="./resources/bootstrap-5/html/summernote/summernote-lite.css" />
- 
- <script type="text/javascript">  
-	/* window.onload = function() {
-		document.getElementById( 'wbtn' ).onclick = function() {
-
-			var subject = afrm.subject.value;
-	     	var title = afrm.title.value;
-	     	var content = afrm.content.value;
-	     	console.log(subject);
-	     	console.log(title);
-	     	
-	     	//var postData = {'subject' : subject , 'title' : title , 'content' : content};
-     	
-			if(subject.trim() == '') {
-				alert( '말머리를 선택하셔야 합니다.' );
-				return false;
-			}
-			if(title.trim() == '') {
-				alert( '제목을 입력하셔야 합니다.' );
-				return false;
-			}
-			if(content.trim() == '') {
-				alert( '내용을 입력하셔야 합니다.' );
-				return false;
-			}
-			 
-			document.afrm.submit();
-		};	
-	};	 */
-</script> 
-
   </head>
   
 <body class="g-sidenav-show  bg-gray-200">
@@ -161,7 +130,6 @@
 			</div>
 		  <!-- </form> -->
 		</div>
-	</div>
 
 	
 	<!--   Core JS Files   -->

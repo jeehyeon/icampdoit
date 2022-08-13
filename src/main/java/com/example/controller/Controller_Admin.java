@@ -379,11 +379,92 @@ public class Controller_Admin {
 		}
 		
 	}
+	
+	// 파일 중복 체크
+	private String getUniqName(String fileName) {	
+		System.out.println("getUniqName() 호출");
+		
+		String tempName = null;
+		File file = new File(hUploadPath + fileName);
+		System.out.println("file : " + file);
+		int lastIdx = fileName.lastIndexOf(".");
+		int i = 1;
+		while(true) {
+			if(!file.exists()) {
+				break;
+			}
+			tempName = fileName;
+			tempName = tempName.substring(0, lastIdx) + "_" + i + tempName.substring(lastIdx, tempName.length());
+			file = new File(hUploadPath + tempName);
+			i++;
+		}
+		System.out.println("file.getName() : " + file.getName());
+		return file.getName();
+	}
+
+	// summernote 이미지 업로드
+	@RequestMapping(value = "/amodify_image.do", method=RequestMethod.POST)
+	public String uploadSummernoteImage(MultipartFile image, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("uploadSummernoteImage() 호출");	
+		
+		String savename = image.getOriginalFilename();
+		
+		long filedata = image.getResource().contentLength();
+		String filesize = Long.toString(filedata);
+		
+		savename = getUniqName(savename);
+		File target = new File(hUploadPath + savename);
+		System.out.println("파일저장 : ");
+		System.out.println("target : " + target);	
+		System.out.println("savename : " + savename);	
+		
+		//FileCopyUtils.copy(image.getBytes(), target);
+		
+		//String[] savename = {originname, filesize};
+		
+		response.setContentType("application/json;charset=utf-8");
+		//response.getWriter().print(savename);
+		//return new String[] {savename, filesize};
+		
+		try {
+			FileCopyUtils.copy(image.getBytes(), target);
+        } catch (IOException e) {
+            FileUtils.forceDelete(target);	// 실패시 저장된 파일 삭제	 
+            System.out.println( "[에러] " + e.getMessage() );
+        }
+		String result= savename + "@" + filesize;
+		return result;
+	}
 
 	@RequestMapping(value = "/admin_board_modify.do")
 	public ModelAndView adminBoardModify(HttpServletRequest request, HttpSession session) {
 		System.out.println("admin_board_modify 호출");
-
+		
+		String subjectValue = "5";
+		if(request.getParameter( "subjectValue" ) != null && !request.getParameter( "subjectValue" ).equals( "" ) ) {
+			subjectValue = request.getParameter( "subjectValue" );		
+		};
+		
+		int cpage = 1;
+		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		HBoardTO hto = new HBoardTO();
+		//NBoardTO nto = new NBoardTO();
+		//NFileTO nfto = new NFileTO();
+		
+		hto.setUcode( (Integer) session.getAttribute("ucode") );
+		hto.setSeq( request.getParameter( "seq" ) );
+		hto = adao.boardModify(hto);
+		
+		//if( request.getParameter("subject").equals("4")  ) {
+		//	hto.setSeq( request.getParameter( "seq" ) );
+		//	hto = adao.boardModify(hto);
+		//} else if( request.getParameter("subject").equals("5")  ) {
+		//	nto.setSeq( request.getParameter( "seq" ) );
+		//}
+		
 		ModelAndView modelAndView = new ModelAndView();
 
 		if (session.getAttribute("ucode") == null) {
@@ -391,8 +472,53 @@ public class Controller_Admin {
 			return modelAndView;
 		}
 		modelAndView.setViewName("admin/admin_board_modify");
+		modelAndView.addObject("hto", hto);
+		modelAndView.addObject("cpage", cpage);
+		modelAndView.addObject( "subjectValue", subjectValue );
 
 		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/admin_board_modify_ok.do")
+	public String adminBoardModifyOk(HttpServletRequest request, HttpSession session) {
+		System.out.println("adminBoardModifyOk 호출");
+		
+		String subjectValue = "5";
+		if(request.getParameter( "subjectValue" ) != null && !request.getParameter( "subjectValue" ).equals( "" ) ) {
+			subjectValue = request.getParameter( "subjectValue" );		
+		};
+		
+		int cpage = 1;
+		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		AdminListTO listTO = new AdminListTO();
+		listTO.setCpage(cpage);
+		
+		HBoardTO to = new HBoardTO();
+		to.setSubject(request.getParameter( "subjectValue" ));
+		to.setTitle(request.getParameter("title"));
+		to.setWriter((String) session.getAttribute("id"));
+		to.setContent(request.getParameter("content"));
+		to.setUcode((Integer) session.getAttribute("ucode"));
+		System.out.println("4ucode : " + to.getUcode());			
+		if(request.getParameter("filesize") != "0") {
+			to.setFilename(request.getParameter("filename"));
+			to.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
+		}
+		to.setVcode(request.getParameter("vcode"));
+		System.out.println("4vcode : " + to.getVcode());
+		
+		int flag = 1;
+		
+		flag = adao.boardModifyOk(to);
+		System.out.println("content : " + to.getContent());			
+		System.out.println("4flag : " + flag);
+		
+		hdao.filecnd(to);		
+
+		return Integer.toString(flag);
 	}
 
 }

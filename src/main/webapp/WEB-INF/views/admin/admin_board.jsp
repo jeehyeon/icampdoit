@@ -35,28 +35,40 @@
 	for( AdminTO to : lists ) {
 		String seq = to.getSeq();
 		String subject = to.getSubject();
+		if( subject.equals("1") ) {
+			subject = "자유 게시판";
+		} else if( subject.equals("2") ) {
+			subject = "후기 게시판";
+		} else if( subject.equals("3") ) {
+			subject = "중고거래 게시판";
+		} else if( subject.equals("4") ) {
+			subject = "혼캠 자료실";
+		} else if( subject.equals("5") ) {
+			subject = "공지 게시판";
+		}
 		String writer = to.getWriter();
 		String title = to.getTitle();
 		String wdate = to.getWdate();
 		String hit = to.getHit();
 		
 		sbHtml.append( "<tr class='listdata'>" );
-		sbHtml.append( "<td onclick='moveMo()'>" );
+		sbHtml.append( "<td><a href='admin_board_modify.do?cpage=" + cpage + "&seq=" + seq + "&subjectValue=" + subjectValue + "'>" );
 		sbHtml.append( "<div class='d-flex px-2 py-1'>" );
-		sbHtml.append( "<div class='d-flex flex-column justify-content-center'><h6 class='mb-0 text-sm'>" + subject + "</h6></div>" );
+		sbHtml.append( "<div class='d-flex flex-column justify-content-center'><p class='text-sm font-weight-bold mb-0'>" + subject + "</p></div>" );
 		sbHtml.append( "</div>" );
 		sbHtml.append( "</td>" );
-		sbHtml.append( "<td onclick='moveMo()'><p class='text-xs font-weight-bold mb-0'>" + writer + "</p></td>" );
-		sbHtml.append( "<td onclick='moveMo()'><p class='text-xs font-weight-bold mb-0'>" + title + "</p></td>" );
-		sbHtml.append( "<td class='align-middle text-center text-sm' onclick='moveMo()'><span>" + wdate + "</span></td>" );
-		sbHtml.append( "<td class='align-middle text-center' onclick='moveMo()'><span class='text-secondary text-xs font-weight-bold'>" + hit + "</span></td>" );
+		sbHtml.append( "<td><a href='admin_board_modify.do?cpage=" + cpage + "&seq=" + seq + "&subjectValue=" + subjectValue + "'><p class='text-sm font-weight-bold mb-0'>" + writer + "</p></td>" );
+		sbHtml.append( "<td><a href='admin_board_modify.do?cpage=" + cpage + "&seq=" + seq + "&subjectValue=" + subjectValue + "'><p class='text-sm font-weight-bold mb-0'>" + title + "</p></td>" );
+		sbHtml.append( "<td class='align-middle text-center text-sm'><a href='admin_board_modify.do?cpage=" + cpage + "&seq=" + seq + "&subjectValue=" + subjectValue + "'><span>" + wdate + "</span></td>" );
+		sbHtml.append( "<td class='align-middle text-center'><a href='admin_board_modify.do?cpage=" + cpage + "&seq=" + seq + "&subjectValue=" + subjectValue + "'><span class='text-secondary text-sm font-weight-bold'>" + hit + "</span></td>" );
 		sbHtml.append( "<td class='align-middle'>" );
-		sbHtml.append( "<a href='javascript:;' class='text-secondary font-weight-bold text-xs' data-toggle='tooltip' data-original-title='Edit user'>삭제</a>" );
+		sbHtml.append( "<a href='javascript:;' class='text-secondary font-weight-bold text-sm' data-toggle='tooltip' data-original-title='Edit user'>삭제</a>" );
+		//sbHtml.append( "<a href=''><button type='button' style='height:40px;width:70px' class='btn btn-xs me-1 bg-gradient-dark'>삭제</button>" );
+		//sbHtml.append( "</a>" );
 		sbHtml.append( "</td>" );
 		sbHtml.append( "</tr>" );
-
 	}
-	
+	// <a href='admin_board_modify.do?cpage=" + cpage + "&seq=" + seq + "'>
 
 %>
   
@@ -162,12 +174,13 @@
                 <!-- 말머리 드롭다운 -->
                 <div class="subjectdrop">
                	 <div class="me-2 ms-1" style="float:left">
-					<select class="customSelect1" name="sort" id="form_sort" data-style="btn-selectpicker" title="" onchange='changeSubject()'">
-						<option value="1" >자유</option>
-						<option value="2" >후기</option>
-						<option value="3" >중고</option>
-						<option value="4" >혼캠</option>
-						<option value="5" >공지</option>
+					<select class="customSelect1" name="sort" id="form_sort" data-style="btn-selectpicker" onchange="changeSubject()">
+						<option value="0">말머리 선택 &nbsp;&nbsp;</option>
+						<option value="1">자유</option>
+						<option value="2">후기</option>
+						<option value="3">중고</option>
+						<option value="4">혼캠</option>
+						<option value="5">공지</option>
 					</select>
 				 </div>
 				 
@@ -185,16 +198,18 @@
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">말머리</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> 작성자</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">제목</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">작성일자</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">조회수</th>
+                      <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-10">말머리</th>
+                      <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-10 ps-2"> 작성자</th>
+                      <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-10 ps-3">제목</th>
+                      <th class="text-center text-uppercase text-secondary text-md font-weight-bolder opacity-10">작성일자</th>
+                      <th class="text-center text-uppercase text-secondary text-md font-weight-bolder opacity-10">조회수</th>
                       <th class="text-secondary opacity-7"></th>
                     </tr>
                   </thead>
                   
                   <tbody>
+				<input type="hidden" id="seq" name="seq" value="" />
+		        <input type="hidden" id="cpage" name="cpage" value="<%= cpage %>">
                    <!--                    
                     <tr class="listdata">                   
                       <td onclick="moveMo()">                     
@@ -325,10 +340,6 @@
   <script src="./resources/bootstrap-5/html/admin/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="./resources/bootstrap-5/html/admin/js/plugins/smooth-scrollbar.min.js"></script>
   <script>
-  function moveMo() {
-		location.href = "admin_board_modify.do";
-	}
-  
   
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -340,7 +351,7 @@
   </script>
   <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
     <!-- JavaScript files-->
-    <script>
+    <!-- <script>
 	    window.onload = function(){
 	    	if (  $( "#subjectInput" ).val() == 1 ) {
 	    		$("#form_sort").val("1");
@@ -360,12 +371,12 @@
 	    	}
 	    		    	
 	    }
-    </script>
+    </script> -->
     <script>
     	
     	function changeSubject(){
     		var subjectValue = $( "#form_sort option:selected" ).val();
-    		alert( subjectValue );
+    		//alert( subjectValue );
     		
     		location.href='./admin_board.do?subjectValue=' + subjectValue; 
     	};
