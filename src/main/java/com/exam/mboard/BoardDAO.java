@@ -1,6 +1,7 @@
 package com.exam.mboard;
 
 import java.io.File;
+import java.nio.file.spi.FileSystemProvider;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -347,8 +348,8 @@ public class BoardDAO {
 			
 			}
 		}
-		
-		public FileTO mboarddelfilecheck(BoardTO to) {
+		//게시글 삭제메서드
+		public FileTO mboardDelFileCheck(BoardTO to) {
 			//삭제했을 경우 임시 파일 삭제
 			//System.out.println("파일삭제 메서드 : " + filename);
 			FileTO fto = new FileTO();
@@ -360,21 +361,42 @@ public class BoardDAO {
 				fto.setFilename("null");
 			}
 			
-			return fto;
-			
-			/*
-			if(filename != "default") {
-				String delurl = mUploadPath + filename;
-				File delFile = new File(delurl);
-				if(delFile.exists()) {//파일이 존재하는지 확인
-					delFile.delete();
-					System.out.println("임시파일 삭제 성공");
-					
-				}else {
-					System.out.println("파일이 존재 하지 않습니다.");
-				}
-			
-			}*/
+			return fto;	
 		}
+		//게시글 삭제메서드
+		public Integer fileDBDel(BoardTO to) {
+			//삭제했을 경우 임시 파일 삭제
+			//System.out.println("파일삭제 메서드 : " + filename);
+			int flag = 1;
+			
+			String sql = "delete from m_file where pseq=?";
+			int result = jdbcTemplate.update(sql, to.getSeq());
+						System.out.println(result);
+
+			if( result != 1 ) {
+				System.out.println("filedbDel() 오류");
+			}else {
+				flag=0;
+			}
+			
+			return flag;
+		}
+		//게시글 삭제메서드
+		public int mboardDeleteCmtAll(BoardTO to) {
+			
+			int flag = 1;
+			
+			String sql = "delete from m_cmt where pseq=?";
+			int result = jdbcTemplate.update(sql, to.getSeq());
+			System.out.println("mboardDeleteCmtAll  : " + result);
+			if( result != 1 ) {
+				System.out.println("m_cmt Delete 오류");
+			}else {
+				flag=0;
+			}
+			
+			return flag;
+		}
+		
 
 }

@@ -246,7 +246,7 @@
             </div>
           </div>
           
-         <input type="hidden" value="<%=subjectValue %>" id="subjectInput" />         
+         <input type="hidden" value="<%=subjectValue%>" id="subjectInput" />         
           
           <!-- 페이징 버튼 -->
           <div class="pagenu">
@@ -340,6 +340,7 @@
   <script src="./resources/bootstrap-5/html/admin/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="./resources/bootstrap-5/html/admin/js/plugins/smooth-scrollbar.min.js"></script>
   <script>
+ 
   
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -351,27 +352,6 @@
   </script>
   <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
     <!-- JavaScript files-->
-    <!-- <script>
-	    window.onload = function(){
-	    	if (  $( "#subjectInput" ).val() == 1 ) {
-	    		$("#form_sort").val("1");
-	    		console.log( "1로 변경");
-	    	} else if ( $( "#subjectInput" ).val() == 2 ) {
-	    		$("#form_sort").val("2");
-	    		console.log( "2로 변경");
-	    	} else if ( $( "#subjectInput" ).val() == 3 ) {
-	    		$("#form_sort").val("3");
-	    		console.log( "3로 변경");
-	    	} else if ( $( "#subjectInput" ).val() == 4 ) {
-	    		$("#form_sort").val("4");
-	    		console.log( "4로 변경");
-	    	} else if ( $( "#subjectInput" ).val() == 5 ) {
-	    		$("#form_sort").val("5");
-	    		console.log( "5로 변경");
-	    	}
-	    		    	
-	    }
-    </script> -->
     <script>
     	
     	function changeSubject(){
@@ -380,6 +360,25 @@
     		
     		location.href='./admin_board.do?subjectValue=' + subjectValue; 
     	};
+    	
+	  	
+    		  	if (  $( "#subjectInput" ).val() == 1 ) {
+    		  		$("#form_sort").val("1");
+    		  		//alert( "1로 변경");
+    		  	} else if ( $( "#subjectInput" ).val() == 2 ) {
+    		  		$("#form_sort").val("2");
+    		  		//alert( "2로 변경");
+    		  	} else if ( $( "#subjectInput" ).val() == 3 ) {
+    		  		$("#form_sort").val("3");
+    		  		//alert( "3로 변경");
+    		  	} else if ( $( "#subjectInput" ).val() == 4 ) {
+    		  		$("#form_sort").val("4");
+    		  		//alert( "4로 변경");
+    		  	} else if ( $( "#subjectInput" ).val() == 5 ) {
+    		  		$("#form_sort").val("5");
+    		  		//alert( "5로 변경");
+    		  	}	  	
+
     </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>

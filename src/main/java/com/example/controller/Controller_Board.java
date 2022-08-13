@@ -334,12 +334,22 @@ public class Controller_Board {
 		BoardTO to = new BoardTO();
 		to.setSeq(request.getParameter("viewseq"));
 		FileTO fto = new FileTO();
-		fto=dao.mboarddelfilecheck(to);
-		
+		fto=dao.mboardDelFileCheck(to);
+		int flag = 2;
 		if(fto.getFilename() !="null") {
 			//파일이 존재 => 삭제
 			System.out.println("파일이 존재");
+			//dao.filedel(fto.getFilename());
+			//flag= dao.fileDBDel(to);
 		}
+		
+		if(flag != 1) {
+			//파일삭제 성공 또는 파일없음 => 댓글 삭제
+			dao.mboardDeleteCmtAll(to);
+		}else if(flag ==1) {
+			System.out.println("파일 삭제 DAO 오류");
+		}
+		
 		
 		
 		ModelAndView modelAndView = new ModelAndView();

@@ -179,9 +179,9 @@ public class AdminDAO {
 		int flag = 1;	
 		System.out.println("to.getFilename : " + to.getFilename());
 		System.out.println("dao seq : " + to.getSeq());
-		if( to.getFilename() != null ){
+		/*if( to.getFilename() != null ){
 			try {
-				String sql = "select filename from h_board where seq=?";		
+				String sql = "select filename as oldFilename from h_board where seq=?";		
 				to = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<HBoardTO>(HBoardTO.class), to.getSeq() );
 				System.out.println("to 결과값 : " + to);
 				flag = 0;
@@ -190,7 +190,7 @@ public class AdminDAO {
 				System.out.println("파일이름 찾기 오류");
 				return flag;
 			} 
-		}		
+		}	*/	
 		String oldFilename = to.getFilename();
 		System.out.println("oldFilename : " + to.getFilename());
 		System.out.println("flag 결과값 : " + flag);
@@ -198,13 +198,14 @@ public class AdminDAO {
 		
 		int result = 0;							
 		
-		if( to.getNewFilename() != null ){
+		if( to.getNewFilename() == "default" ){
 			String	sql = "update h_board set subject=?, title=?, writer=?, content=?, filename=?, filesize=? where seq=? and ucode=?";
 			result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(), to.getNewFilename(),
 					to.getNewFilesize(), to.getSeq(), to.getUcode() );
 		} else {
 			String	sql = "update h_board set subject=?, title=?, writer=?, content=? where seq=? and ucode=?";
 			result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(), to.getSeq(), to.getUcode() );
+			result = 2;
 		}
 		System.out.println("dao result : " + result);
 	
@@ -212,7 +213,7 @@ public class AdminDAO {
 		if( result == 0 ) {
 			flag = 1;// 비정상 실행
 			//새로운 파일 삭제
-			if( to.getNewFilename() != null ) {
+			if( to.getNewFilename() == "default" ) {
 				String delurl = hUploadPath + to.getNewFilename();
 				System.out.println("delurl : " + delurl);
 				File file  = new File(delurl);
@@ -222,14 +223,16 @@ public class AdminDAO {
 		} else if( result == 1 ) {
 			flag = 0;// 정상 실행
 			//기존 파일 삭제
-			if( to.getNewFilename() != null && oldFilename != null ) {
+			if( to.getNewFilename() != "default" && oldFilename != null ) {
 				String delurl = hUploadPath + oldFilename;
 				File file  = new File(delurl);
 				file.delete();
 				System.out.println("기존 파일 삭제완료 : ");
 
 			}
-		}	
+		}else if(result ==2) {
+			flag =0;
+		}
 		return flag;
 	}
 

@@ -1,3 +1,4 @@
+<%@page import="ch.qos.logback.core.recovery.ResilientSyslogOutputStream"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.exam.hboard.HBoardTO" %>
@@ -12,6 +13,7 @@
 	int cpage = (Integer)request.getAttribute("cpage");
 	
 	String subjectValue = (String)request.getAttribute( "subjectValue" );
+	System.out.println("수정.jsp 말머리 : " + subjectValue);
 	
 	HBoardTO to = (HBoardTO)request.getAttribute("hto");
 	
@@ -26,7 +28,7 @@
 	System.out.println("[filename]" + filename);
 	System.out.println("[content]" + content);
 	long filesize = to.getFilesize();
-	
+	System.out.println("수정.jsp 말머리2 : " + to.getSubject());
 %>
 
 <!DOCTYPE html>
@@ -126,6 +128,7 @@
 						<textarea id="summernote" name="content"><%=content %></textarea>
 					</div>
 				</div>
+				 <input type="hidden" id="subject" name="subject" value="<%=subject%>" />   
                  <input type="hidden" id="seq" name="seq" value="<%=seq%>" />   
                  <input type="hidden" id="cpage" name="cpage" value="<%=cpage%>"/>  
                  <input type="hidden" id="filename" name="filename" value="<%=filename%>"/>  
@@ -135,7 +138,7 @@
 			        <input type="button" value="목록" class="btn btn-success" style="cursor: pointer;" onclick="location.href='admin_board.do?subjectValue=<%=subjectValue%>&cpage=<%=cpage %>'" />
 			      </div>
 			      <div class="col-lg-4 text-lg-end">
-			        <input type="button" value="수정" id="mbtn" class="btn btn-success" style="cursor: pointer;" onclick="location.href='admin_board_modify_ok.do'" /> 
+			        <input type="button" value="수정" id="mbtn" class="btn btn-success" style="cursor: pointer;"/> 
 			        <input type="button" value="취소" id="cbtn" class="btn btn-success" style="cursor: pointer;" onclick="location.href='/admin_board.do?subjectValue=<%=subjectValue%>&cpage=<%=cpage %>'" />
 			      </div>
 				</div>
@@ -172,10 +175,10 @@
 	<script>    
 	
  	document.getElementById( 'cbtn' ).onclick = function() { 		
- 		var subject = $('#subject').val();
+ 		//var subject = $('#subject').val();
  		var filename = $('#modifyOk').val();
  		
-	    var data = {'subject' : subject , 'filename' : filename };	    	
+	    var data = {'filename' : filename };	    	
  		
 		$.ajax({
 			data : data,
@@ -191,16 +194,18 @@
 	}
 	 
        document.getElementById( 'mbtn' ).onclick = function() {	
+    	  alert( $('#subject').val() );
+    	 var subject = $('#subject').val();
 		 var title = $('#title').val();
 		 var content = $('#summernote').val();
 		 var vcode = $('#vcode').val();
-		 var filename = $('#filename').val();
+		 var filename = $('#filename').val(); 
 		 var newFilename = $('#modifyOk').val();
 		 var filesize = $('#filesize').val();
 		 var newFilesize = $('#newFilesize').val();
 		 var seq = $('#seq').val();
 		 		 
-	     var data = {'title' : title , 'content' : content, 'vcode' : vcode, 'filename' : filename, 'newFilename' : newFilename, 'filesize' : filesize, 'newFilesize' : newFilesize, 'seq' : seq};	    	
+	     var data = {'subject': subject, 'title' : title , 'content' : content, 'vcode' : vcode, 'filename' : filename, 'newFilename' : newFilename, 'filesize' : filesize, 'newFilesize' : newFilesize, 'seq' : seq};	    	
 
 	     if(($('#title').val() != '')&&($('#summernote').val() != '')){	        
 					

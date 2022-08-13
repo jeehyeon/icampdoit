@@ -481,7 +481,8 @@ public class Controller_Admin {
 		HBoardTO to = new HBoardTO();
 		to.setSeq(request.getParameter( "seq" ));
 		System.out.println("seq : " + to.getSeq());
-		to.setSubject(request.getParameter( "subjectValue" ));
+		to.setSubject(request.getParameter( "subject" ));
+		System.out.println("관리자 컨트롤러 setsubject : " + to.getSubject());
 		to.setTitle(request.getParameter("title"));
 		to.setWriter((String) session.getAttribute("id"));
 		to.setContent(request.getParameter("content"));
@@ -500,13 +501,16 @@ public class Controller_Admin {
 		}
 		to.setVcode(request.getParameter("vcode"));
 		
+		
+		//if newfilsize != "0"{
+		//  }
 		int flag = 1;
 		
 		flag = adao.boardModifyOk(to);
 		System.out.println("adao.boardModifyOk 연결성공");			
 		System.out.println("flag : " + flag);
 		
-		hdao.filecnd(to);		
+		//hdao.filecnd(to);		
 
 		return Integer.toString(flag);
 	}
