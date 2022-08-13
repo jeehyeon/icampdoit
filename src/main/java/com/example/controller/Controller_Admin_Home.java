@@ -2,6 +2,7 @@ package com.example.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -69,6 +70,8 @@ public class Controller_Admin_Home {
 		String countTotalVisitor = sdao.countTotalVisitor(); //총 방문자 수
 		String countTodayVisitor = sdao.countTodayVisitor(); //오늘 방문자 수
 		//연령대 별 회원 수
+		SignUpTO sto = new SignUpTO();
+		ArrayList<SignUpTO> lists = sdao.countbyAge(sto);
 		
 		System.out.println( "countBoardResult : " + countBoardResult );
 
@@ -86,6 +89,7 @@ public class Controller_Admin_Home {
 		modelAndView.addObject( "countReviews", countReviews );
 		modelAndView.addObject( "countTotalVisitor", countTotalVisitor );
 		modelAndView.addObject( "countTodayVisitor", countTodayVisitor );
+		modelAndView.addObject( "lists", lists );
 
 		return modelAndView;
 	}

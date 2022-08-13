@@ -1,8 +1,13 @@
 package com.exam.admin;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import com.exam.login.SignUpTO;
 
 @Repository
 public class AdminStatDAO {
@@ -58,7 +63,7 @@ public class AdminStatDAO {
 	}
 	
 	//연령대 별 회원 수 count
-	public AdminTO countbyAge() {
+	public ArrayList<SignUpTO> countbyAge(SignUpTO sto) {
 		
 		String sql = "select * from("
 					+ "select floor((date_format( now(), '%Y')-substring(birth,1,4))/10)*10 as age, "
@@ -67,7 +72,10 @@ public class AdminStatDAO {
 					+ "group by age) s "
 					+ "where s.age >=0 and s.age<=100";
 		
-		return null;
+		ArrayList<SignUpTO> ageList = (ArrayList<SignUpTO>)jdbcTemplate.query(sql, new BeanPropertyRowMapper<SignUpTO>(SignUpTO.class) );
+		
+		
+		return ageList;
 	}
 	
 	//세션 생성시 방문자 수 증가 위해 테이블에 날짜 추가

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.exam.login.SignUpTO" %>
+<%@page import="java.util.ArrayList"%>
 <%
 	String countBoardResult = (String)request.getAttribute( "countBoardResult" );
 	String countFemale = (String)request.getAttribute( "countFemale" );
@@ -8,6 +10,14 @@
 	String countReviews = (String)request.getAttribute( "countReviews" );
 	String countTotalVisitor = (String)request.getAttribute( "countTotalVisitor" );
 	String countTodayVisitor = (String)request.getAttribute( "countTodayVisitor" );
+	
+	ArrayList<SignUpTO> lists = (ArrayList<SignUpTO>)request.getAttribute("lists");
+
+	//이건 좀 아닌데....
+	for( SignUpTO sto : lists ) {
+		String age = sto.getAge();
+		String total = sto.getTotal();
+	}
 %>
 <!--
 =========================================================
