@@ -334,18 +334,26 @@ public class Controller_Board {
 		BoardTO to = new BoardTO();
 		to.setSeq(request.getParameter("viewseq"));
 		FileTO fto = new FileTO();
+		//DB에 파일 데이터가 있는지 조회
 		fto=dao.mboardDelFileCheck(to);
 		int flag = 2;
 		if(fto.getFilename() !="null") {
 			//파일이 존재 => 삭제
 			System.out.println("파일이 존재");
-			//dao.filedel(fto.getFilename());
-			//flag= dao.fileDBDel(to);
+			//디렉터리 폴더에 파일 삭제
+			dao.filedel(fto.getFilename());
+			//DB table에서 항목 삭제
+			flag= dao.fileDBDel(to);
 		}
 		
 		if(flag != 1) {
 			//파일삭제 성공 또는 파일없음 => 댓글 삭제
-			dao.mboardDeleteCmtAll(to);
+			//m_cmt에 해당하는 댓글 삭제
+			flag=dao.mboardDeleteCmtAll(to);
+			if(flag==0) {
+				//게시판 DB에 게시글 삭제
+				flag=dao.mboardDeleteOk(to);
+			}
 		}else if(flag ==1) {
 			System.out.println("파일 삭제 DAO 오류");
 		}
@@ -359,8 +367,8 @@ public class Controller_Board {
 			return modelAndView;
 		}
 		modelAndView.setViewName( "/board/mboard_delete_ok" );
-		
-		return null;
+		modelAndView.addObject("flag", flag);
+		return modelAndView;
 	}
 	
 	
