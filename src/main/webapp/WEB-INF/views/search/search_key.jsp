@@ -23,6 +23,30 @@
 		String facltNm = kto.getFacltNm();
 		String induty = kto.getInduty();
 		String addr1 = kto.getAddr1();
+		/*
+		String regex = "[0-9]+";
+		if( addr1.matches(regex) ) {
+			addr1 = kto.getDoNm() + " " + kto.getSigunguNm() + " " + kto.getAddr1();
+		}
+		
+		if( addr1.indexOf("시") == -1 || addr1.indexOf("도") == -1 ){
+			addr1 = kto.getDoNm() + " " + kto.getSigunguNm() + " " + kto.getAddr1();
+		}
+		
+		if( addr1.indexOf("시") == -1 && addr1.indexOf("도") == -1 && addr1.indexOf("[0-9]+") == -1 ){
+			addr1 = kto.getDoNm() + " " + kto.getSigunguNm() + " " + kto.getAddr1();
+	
+		}
+		if( addr1.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*") == false ){
+			addr1 = kto.getDoNm() + " " + kto.getSigunguNm() + " " + kto.getAddr1();
+		} else if ( addr1.matches("^[가-힣]+$") ) {
+			addr1 = kto.getDoNm() + " " + kto.getSigunguNm() + " " + kto.getAddr1();
+		}
+		*/
+		if( addr1.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*") == false ){
+			addr1 = kto.getDoNm() + " " + kto.getSigunguNm() + " " + kto.getAddr1();
+		}
+		
 		String firstImageUrl = kto.getFirstImageUrl();
 		if( firstImageUrl.equals("default") ) {
 			firstImageUrl = "./resources/bootstrap-5/html/img/noimage.svg";
@@ -158,7 +182,7 @@
           <form class="pe-xl-3" action="#" autocomplete="off">
             <div class="mb-4">   
               <label class="form-label" for="keyword">키워드</label>
-              <input class="form-control" type="text" name="keyword" id="keyword" placeholder="키워드나 캠핑장 이름을 입력해주세요.">
+              <input class="form-control" type="text" name="keysearch" id="keysearch" placeholder="키워드나 캠핑장 이름을 입력해주세요.">
             </div>
             <div class="mb-4">
 				<label class="form-label">업종</label>

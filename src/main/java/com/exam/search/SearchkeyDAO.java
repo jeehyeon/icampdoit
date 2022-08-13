@@ -17,7 +17,7 @@ public class SearchkeyDAO {
 	public List<SearchkeyTO> searchkeyDAO(String keysearch) {
 	      // TODO Auto-generated method stub
 		
-		String sql = "select facltNm, addr1, addr2, induty, firstImageUrl, contentId from go_api where facltNm like ? or addr1 like ? or induty like ?";
+		String sql = "select facltNm, addr1, addr2, induty, firstImageUrl, contentId, doNm, sigunguNm from go_api where facltNm like ? or addr1 like ? or induty like ?";
 		ArrayList<SearchkeyTO> datas = (ArrayList<SearchkeyTO>)jdbcTemplate.query(sql, new BeanPropertyRowMapper<SearchkeyTO>(SearchkeyTO.class), "%"+keysearch+"%", "%"+keysearch+"%","%"+keysearch+"%" );
 		
 		return datas;
