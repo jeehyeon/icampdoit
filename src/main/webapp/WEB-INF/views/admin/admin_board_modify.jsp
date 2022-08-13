@@ -109,7 +109,7 @@
 	<div class="main-content px-5">		
 		  <!-- <form action="./aboardwrite_ok.do" method="post" id="afrm" name="afrm" enctype="multipart/form-data"> -->
 		  <input type="hidden" name="modifyOk" id="modifyOk" value="default"/>
-		  <input type="hidden" name="newfilesize" id="newfilesize" value="0000"/>
+		  <input type="hidden" name="newFilesize" id="newFilesize" value="0000"/>
 		  <input type="hidden" name="vcode" id="vcode" value="default"/>
 	
 			<div class="card my-2 px-5 justify-content-center">
@@ -126,8 +126,8 @@
 						<textarea id="summernote" name="content"><%=content %></textarea>
 					</div>
 				</div>
-                 <input type="hidden" name="seq" value="<%=seq%>" />   
-                 <input type="hidden" name="cpage" value="<%=cpage%>"/>  
+                 <input type="hidden" id="seq" name="seq" value="<%=seq%>" />   
+                 <input type="hidden" id="cpage" name="cpage" value="<%=cpage%>"/>  
                  <input type="hidden" id="filename" name="filename" value="<%=filename%>"/>  
                  <input type="hidden" id="filesize" name="filesize" value="<%=filesize%>"/>  
 				<div class="row">
@@ -195,11 +195,12 @@
 		 var content = $('#summernote').val();
 		 var vcode = $('#vcode').val();
 		 var filename = $('#filename').val();
-		 var Newfilename = $('#modifyOk').val();
+		 var newFilename = $('#modifyOk').val();
 		 var filesize = $('#filesize').val();
-		 var Newfilesize = $('#newfilesize').val();
+		 var newFilesize = $('#newFilesize').val();
+		 var seq = $('#seq').val();
 		 		 
-	     var data = {'title' : title , 'content' : content, 'vcode' : vcode, 'filename' : filename, 'Newfilename' : Newfilename, 'filesize' : filesize, 'Newfilesize' : Newfilesize};	    	
+	     var data = {'title' : title , 'content' : content, 'vcode' : vcode, 'filename' : filename, 'newFilename' : newFilename, 'filesize' : filesize, 'newFilesize' : newFilesize, 'seq' : seq};	    	
 
 	     if(($('#title').val() != '')&&($('#summernote').val() != '')){	        
 					
@@ -302,7 +303,7 @@
 				if(str[0] != null){
             				               
 					$('#modifyOk').val(str[0]);
-					$('#newfilesize').val(str[1]);
+					$('#newFilesize').val(str[1]);
 	                
             	}else{
             		alert("error");

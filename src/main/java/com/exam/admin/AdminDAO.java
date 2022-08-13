@@ -147,7 +147,7 @@ public class AdminDAO {
 				
 			} else { break; }
 		}
-		System.out.println("dao 리스트 : " + lists);
+		//System.out.println("dao 리스트 : " + lists);
 		listTO.setBoardLists( lists );
 		listTO.setStartBlock( ( ( cpage-1 ) / blockPerPage ) * blockPerPage + 1);
 		listTO.setEndBlock( ( (cpage-1) / blockPerPage) * blockPerPage + blockPerPage);
@@ -175,52 +175,59 @@ public class AdminDAO {
 	
 	//modify_ok
 	public int boardModifyOk(HBoardTO to) {
-	
-		int flag = 1;
-		
-		HBoardTO to1 = new HBoardTO();
-		
-		if( to1.getFilename() != null ){
+			
+		int flag = 1;	
+		System.out.println("to.getFilename : " + to.getFilename());
+		System.out.println("dao seq : " + to.getSeq());
+		if( to.getFilename() != null ){
 			try {
 				String sql = "select filename from h_board where seq=?";		
-				to1 = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<HBoardTO>(HBoardTO.class), to.getSeq() );
+				to = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<HBoardTO>(HBoardTO.class), to.getSeq() );
+				System.out.println("to 결과값 : " + to);
+				flag = 0;
 			} catch (DataAccessException e) {
 				// TODO Auto-generated catch block
 				System.out.println("파일이름 찾기 오류");
 				return flag;
 			} 
 		}		
+		String oldFilename = to.getFilename();
+		System.out.println("oldFilename : " + to.getFilename());
+		System.out.println("flag 결과값 : " + flag);
+		System.out.println("새파일이름 : " + to.getNewFilename());
 		
-		String oldFilename = to1.getFilename();
+		int result = 0;							
 		
-		int result = 0;		
-		
-		if( to.getFilename() != null ){
-			String	sql = "update h_board set subject=?, title=?, writer=?, content=?, filename= ?, filesize=?, vcode=? where seq=? and ucode=?";
+		if( to.getNewFilename() != null ){
+			String	sql = "update h_board set subject=?, title=?, writer=?, content=?, filename=?, filesize=? where seq=? and ucode=?";
 			result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(), to.getNewFilename(),
-					to.getNewFilesize(), to.getVcode(), to.getSeq(), to.getUcode() );
+					to.getNewFilesize(), to.getSeq(), to.getUcode() );
 		} else {
-			String	sql = "update h_board set subject=?, title=?, writer=?, content=?, vcode=? where seq=? and ucode=?";
-			result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(), to.getVcode(), to.getSeq(), to.getUcode() );
+			String	sql = "update h_board set subject=?, title=?, writer=?, content=? where seq=? and ucode=?";
+			result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(), to.getSeq(), to.getUcode() );
 		}
 		System.out.println("dao result : " + result);
+	
 		
 		if( result == 0 ) {
 			flag = 1;// 비정상 실행
 			//새로운 파일 삭제
-			if( to.getFilename() != null ) {
-				String delurl = hUploadPath + to.getFilename();
+			if( to.getNewFilename() != null ) {
+				String delurl = hUploadPath + to.getNewFilename();
 				System.out.println("delurl : " + delurl);
 				File file  = new File(delurl);
 				file.delete(); 
+				System.out.println("새 파일 삭제완료 : ");
 			}
 		} else if( result == 1 ) {
-			flag =0;// 정상 실행
+			flag = 0;// 정상 실행
 			//기존 파일 삭제
-			if( to.getFilename() != null && oldFilename != null ) {
+			if( to.getNewFilename() != null && oldFilename != null ) {
 				String delurl = hUploadPath + oldFilename;
 				File file  = new File(delurl);
 				file.delete();
+				System.out.println("기존 파일 삭제완료 : ");
+
 			}
 		}	
 		return flag;

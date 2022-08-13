@@ -479,6 +479,8 @@ public class Controller_Admin {
 		listTO.setCpage(cpage);
 		
 		HBoardTO to = new HBoardTO();
+		to.setSeq(request.getParameter( "seq" ));
+		System.out.println("seq : " + to.getSeq());
 		to.setSubject(request.getParameter( "subjectValue" ));
 		to.setTitle(request.getParameter("title"));
 		to.setWriter((String) session.getAttribute("id"));
@@ -489,20 +491,22 @@ public class Controller_Admin {
 			to.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
 			System.out.println("filename : " + request.getParameter("filename"));
 		}
-		if(request.getParameter("newfilesize") != "0") {
-			to.setNewFilename(request.getParameter("Newfilename"));
-			to.setNewFilesize(Long.parseLong(request.getParameter("Newfilesize").trim()) );
-			System.out.println("Newfilename : " + request.getParameter("Newfilename"));
+		if( request.getParameter("newFilesize") != "0" ) {
+			//if( !request.getParameter("newFilename").equals("default") ) {
+			to.setNewFilename(request.getParameter("newFilename"));
+			to.setNewFilesize(Long.parseLong(request.getParameter("newFilesize").trim()) );
+			System.out.println("newFilename : " + request.getParameter("newFilename"));
+			System.out.println("11newFilename : " + to.getNewFilename());
 		}
 		to.setVcode(request.getParameter("vcode"));
 		
 		int flag = 1;
 		
 		flag = adao.boardModifyOk(to);
-		System.out.println("adao.boardModifyOk 연결성공 : ");			
+		System.out.println("adao.boardModifyOk 연결성공");			
 		System.out.println("flag : " + flag);
 		
-		//hdao.filecnd(to);		
+		hdao.filecnd(to);		
 
 		return Integer.toString(flag);
 	}
