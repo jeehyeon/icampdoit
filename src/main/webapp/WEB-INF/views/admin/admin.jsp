@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String countBoardResult = (String)request.getAttribute( "countBoardResult" );
+	String countFemale = (String)request.getAttribute( "countFemale" );
+	String countMale = (String)request.getAttribute( "countMale" );
+	String weeklyRegistered = (String)request.getAttribute( "weeklyRegistered" );
+	String countReviews = (String)request.getAttribute( "countReviews" );
+	String countTotalVisitor = (String)request.getAttribute( "countTotalVisitor" );
+	String countTodayVisitor = (String)request.getAttribute( "countTodayVisitor" );
+%>
 <!--
 =========================================================
 * Material Dashboard 2 - v3.0.4
@@ -271,7 +280,7 @@
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">게시판 게시글수</p>
-                <h4 class="mb-0">1000</h4>
+                <h4 class="mb-0"><%=countBoardResult %></h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -288,7 +297,7 @@
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">여성 회원 수</p>
-                <h4 class="mb-0">200</h4>
+                <h4 class="mb-0"><%=countFemale %></h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -305,7 +314,7 @@
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">남성 회원 수</p>
-                <h4 class="mb-0">200</h4>
+                <h4 class="mb-0"><%=countMale %></h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -322,7 +331,7 @@
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">이번주 가입자 수</p>
-                <h4 class="mb-0">+20</h4>
+                <h4 class="mb-0">+<%=weeklyRegistered %></h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -333,6 +342,69 @@
         </div>
       </div>
       <div class="row mt-4">
+        
+        
+        <div class="col-lg-4 mt-4 mb-3">
+          <div class="card z-index-2 ">
+            
+	            <div class="card">
+	            <div class="card-header p-3 pt-2">
+	              <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+	                <i class="material-icons opacity-10">weekend</i>
+	              </div>
+	              <div class="text-end pt-1">
+	                <p class="text-sm mb-0 text-capitalize">등록된 리뷰 수</p>
+	                <h4 class="mb-0"><%=countReviews %></h4>
+	              </div>
+	            </div>
+	            <hr class="dark horizontal my-0">
+	            <div class="card-footer p-3">
+	              
+	            </div>
+	          </div>
+	            
+	          </div>
+        </div>
+         <div class="col-lg-4 mt-4 mb-3">
+          <div class="card z-index-2 ">
+            
+	            <div class="card">
+		            <div class="card-header p-3 pt-2">
+		              <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+		                <i class="material-icons opacity-10">weekend</i>
+		              </div>
+		              <div class="text-end pt-1">
+		                <p class="text-sm mb-0 text-capitalize">총 방문자 수</p>
+		                <h4 class="mb-0"><%=countTotalVisitor %></h4>
+		              </div>
+		            </div>
+		            <hr class="dark horizontal my-0">
+		            <div class="card-footer p-3">
+	              
+	            	</div>
+	          	</div>
+          </div>
+        </div>
+        <div class="col-lg-4 mt-4 mb-3">
+          <div class="card z-index-2 ">
+            
+	            <div class="card">
+		            <div class="card-header p-3 pt-2">
+		              <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+		                <i class="material-icons opacity-10">weekend</i>
+		              </div>
+		              <div class="text-end pt-1">
+		                <p class="text-sm mb-0 text-capitalize">오늘 방문자 수</p>
+		                <h4 class="mb-0"><%=countTodayVisitor %></h4>
+		              </div>
+		            </div>
+		            <hr class="dark horizontal my-0">
+		            <div class="card-footer p-3">
+	              
+	            	</div>
+	          	</div>
+          </div>
+        </div>
         <div class="col-lg-4 col-md-6 mt-4 mb-4">
           <div class="card z-index-2 ">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
@@ -353,48 +425,6 @@
           </div>
         </div>
         
-        
-        <div class="col-lg-4 mt-4 mb-3">
-          <div class="card z-index-2 ">
-            
-	            <div class="card">
-	            <div class="card-header p-3 pt-2">
-	              <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-	                <i class="material-icons opacity-10">weekend</i>
-	              </div>
-	              <div class="text-end pt-1">
-	                <p class="text-sm mb-0 text-capitalize">등록된 리뷰 수</p>
-	                <h4 class="mb-0">300</h4>
-	              </div>
-	            </div>
-	            <hr class="dark horizontal my-0">
-	            <div class="card-footer p-3">
-	              
-	            </div>
-	          </div>
-	            
-	          </div>
-        </div>
-         <div class="col-lg-4 mt-4 mb-3">
-          <div class="card z-index-2 ">
-            
-	            <div class="card">
-	            <div class="card-header p-3 pt-2">
-	              <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-	                <i class="material-icons opacity-10">weekend</i>
-	              </div>
-	              <div class="text-end pt-1">
-	                <p class="text-sm mb-0 text-capitalize">리뷰 댓글 수</p>
-	                <h4 class="mb-0">200</h4>
-	              </div>
-	            </div>
-	            <hr class="dark horizontal my-0">
-	            <div class="card-footer p-3">
-	              
-	            </div>
-	          	</div>
-          </div>
-        </div>
         
       </div>
       

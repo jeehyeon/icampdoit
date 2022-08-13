@@ -18,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.exam.admin.AdminDAO;
 import com.exam.admin.AdminListTO;
+import com.exam.admin.AdminStatDAO;
+import com.exam.admin.VisitTO;
 import com.exam.hboard.HBoardDAO;
 import com.exam.hboard.HBoardTO;
 import com.exam.login.SignUpTO;
@@ -43,6 +45,9 @@ public class Controller_Admin_Home {
 	
 	@Autowired
 	private AdminDAO adao;
+	
+	@Autowired
+	private AdminStatDAO sdao;
 
 	String url = System.getProperty("user.dir");
 	private String mUploadPath = url + "/src/main/webapp/upload/";
@@ -55,6 +60,17 @@ public class Controller_Admin_Home {
 	@RequestMapping(value = "/admin.do")
 	public ModelAndView admin(HttpServletRequest request, HttpSession session) {
 		System.out.println("admin() 호출");
+		
+		String countBoardResult = sdao.countBoard();  //총 게시글 수
+		String countFemale = sdao.countFemale(); //여성회원수
+		String countMale = sdao.countMale(); //남성회원수
+		String weeklyRegistered = sdao.weeklyRegistered(); //이번주 가입자수
+		String countReviews = sdao.countReviews();  //review 갯수
+		String countTotalVisitor = sdao.countTotalVisitor(); //총 방문자 수
+		String countTodayVisitor = sdao.countTodayVisitor(); //오늘 방문자 수
+		//연령대 별 회원 수
+		
+		System.out.println( "countBoardResult : " + countBoardResult );
 
 		ModelAndView modelAndView = new ModelAndView();
 
@@ -63,6 +79,13 @@ public class Controller_Admin_Home {
 			return modelAndView;
 		}
 		modelAndView.setViewName("admin/admin");
+		modelAndView.addObject( "countBoardResult", countBoardResult );
+		modelAndView.addObject( "countFemale", countFemale );
+		modelAndView.addObject( "countMale", countMale );
+		modelAndView.addObject( "weeklyRegistered", weeklyRegistered );
+		modelAndView.addObject( "countReviews", countReviews );
+		modelAndView.addObject( "countTotalVisitor", countTotalVisitor );
+		modelAndView.addObject( "countTodayVisitor", countTodayVisitor );
 
 		return modelAndView;
 	}

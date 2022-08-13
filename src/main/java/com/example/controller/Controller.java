@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.exam.admin.AdminStatDAO;
+import com.exam.admin.VisitTO;
 import com.exam.search.InsertGocamping;
 import com.exam.search.SearchkeyTO;
 
@@ -19,6 +21,9 @@ public class Controller {
 	@Autowired
 	private InsertGocamping gocamp;	
 	
+	@Autowired
+	private AdminStatDAO sdao;
+	
 	@RequestMapping( value="/home.do" )
 	public ModelAndView home(HttpServletRequest request, HttpSession session) {
 		System.out.println( "list() 호출" );
@@ -27,6 +32,11 @@ public class Controller {
 			System.out.println("세션값 id : " + session.getAttribute("id"));
 		}
 
+		if( session.isNew() ) {
+			//vto.setVdate( (Long.toString( session.getCreationTime() ) ) );
+			sdao.increaseVisitor();
+		}
+		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "home" );
 		
