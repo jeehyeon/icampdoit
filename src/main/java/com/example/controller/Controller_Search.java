@@ -3,6 +3,8 @@ package com.example.controller;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.exam.search.CampviewCmtTO;
 import com.exam.search.SearchkeyDAO;
 import com.exam.search.SearchkeyTO;
 import com.exam.search.SearchmapDAO;
@@ -30,7 +33,7 @@ public class Controller_Search {
 		
 		SearchkeyTO kto = new SearchkeyTO();
 		kto.setKeysearch( request.getParameter( "keysearch" ) );
-		System.out.println( "키워드 : " + kto.getKeysearch());
+		//System.out.println( "키워드 : " + kto.getKeysearch());
 		
 		ArrayList<SearchkeyTO> datas = (ArrayList<SearchkeyTO>)kdao.searchkeyDAO(kto.getKeysearch());
 		
@@ -53,12 +56,13 @@ public class Controller_Search {
 	}
 	
 	@RequestMapping( value="/campview.do" )
-	public ModelAndView campview(HttpServletRequest request) {
+	public ModelAndView campview(HttpServletRequest request, HttpSession session) {
 		System.out.println( "campview() 호출" );
-		System.out.println("컨트롤러 request.getParameter(contentID) : " + request.getParameter("contentId"));
+		//System.out.println("컨트롤러 request.getParameter(contentID) : " + request.getParameter("contentId"));
 		SearchkeyTO kto = new SearchkeyTO();
+		CampviewCmtTO cto = new CampviewCmtTO();
 		kto.setContentId(request.getParameter("contentId"));
-		
+		cto.setContentId(request.getParameter("contentId"));
 		//campview 테이블에 해당 캠핑장 데이터가 있는지 검사
 		kto= kdao.campViewTableExist(kto);
 			//System.out.println("컨트롤러 kdao.viewTableExist : " + kto.getSeq()+ " / " + kto.getContentId());
@@ -76,15 +80,46 @@ public class Controller_Search {
 		//campview page 정보 불러오기
 		kto = kdao.campView(kto);
 		
-		System.out.println("campview 컨트롤러 데이터 : " + kto.getAddr1());
-		System.out.println("campview 컨트롤러 데이터 : " + kto.getContentId());
-		System.out.println("campview 컨트롤러 데이터 : " + kto.getHomepage());
+		//campview 사진데이터
+		ArrayList<SearchkeyTO> lists = kdao.gocampimgparse(kto);
+		
+		//for(SearchkeyTO ito : lists) {
+			//System.out.println("campview 컨트롤러 이미지 : " + ito.getImageUrl());
+		//}
+		
+		//System.out.println("campview 컨트롤러 데이터 : " + kto.getAddr1());
+		//System.out.println("campview 컨트롤러 데이터 : " + kto.getContentId());
+		//System.out.println("campview 컨트롤러 데이터 : " + kto.getHomepage());
+		ArrayList<CampviewCmtTO> clists= kdao.campViewCmt(cto);
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "/search/campview" );
 		modelAndView.addObject("kto", kto);
+		modelAndView.addObject("lists", lists);
+		modelAndView.addObject("clists", clists);
 		return modelAndView;
 	}
+	@RequestMapping(value="/campviewCmt.do")
+	public String campviewCmt(HttpServletRequest request, HttpSession session) {
+		int flag =1;
+		//System.out.println("댓글 달기 평점: "+request.getParameter("rating"));
+		//System.out.println("댓글 달기 내용: "+request.getParameter("review"));
+		if(session.getAttribute("ucode") == null) {
+			flag=2;
+			return Integer.toString(flag);
+		}
+		CampviewCmtTO cto = new CampviewCmtTO();
+		int ucode = (Integer)session.getAttribute("ucode");
+		cto.setWriter((String)session.getAttribute("id"));
+		cto.setMark(request.getParameter("rating"));
+		cto.setContent(request.getParameter("review"));
+		cto.setContentId(request.getParameter("contentId"));
+		cto.setUcode(Integer.toString(ucode));
+		
+		flag=kdao.campViewCmtInsert(cto);
+		return Integer.toString(flag);
+	}
+	
 	
 	@RequestMapping( value="/searchmapsido.do" )
 	public JSONObject searchmapsido(HttpServletRequest request) {
