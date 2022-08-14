@@ -58,7 +58,7 @@ public class AdminUsersDAO {
 	//회원 정보 modify
 	public SignUpTO userView(SignUpTO sto) {
 		
-		String sql = "select ucode, id, name, gen, email, STR_TO_DATE( birth, '%Y%m%d' ) birth, DATE_FORMAT( rdate, '%Y-%m-%d' ) rdate from users where ucode=?";
+		String sql = "select ucode, id, name, gen, email, birth, DATE_FORMAT( rdate, '%Y-%m-%d' ) rdate from users where ucode=?";
 		sto = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<SignUpTO>(SignUpTO.class), sto.getUcode() );
 		
 		return sto;
@@ -67,9 +67,16 @@ public class AdminUsersDAO {
 	//회원정보 modifyOk
 	public int usersModifyOK(SignUpTO sto) {
 		int flag = 2;
+		System.out.println( "birth: " + sto.getBirth() );
+		System.out.println("Name: " + sto.getName() );
+		System.out.println( "Gen: " +sto.getGen() );
+		System.out.println( "Email: " +sto.getEmail() );
+		System.out.println( "Ucode: " +sto.getUcode() );
 		
 		String sql = "update users set name=?, gen=?, email=?, birth=? where ucode=?";
-		int result = jdbcTemplate.update(sql, sto.getName(), sto.getGen(), sto.getEmail(), sto.getBirth() );
+		int result = jdbcTemplate.update(sql, sto.getName(), sto.getGen(), sto.getEmail(), sto.getBirth(), sto.getUcode() );
+		
+		System.out.println( result );
 		
 		if( result == 0 ) {
 			flag = 1;

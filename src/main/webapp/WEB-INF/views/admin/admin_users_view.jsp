@@ -20,6 +20,8 @@
 <%
 	SignUpTO sto = (SignUpTO)request.getAttribute( "sto" );
 
+	int cpage = (Integer)request.getAttribute("cpage");
+
 	String name = sto.getName();
 	String id = sto.getId();
 	String email = sto.getEmail();
@@ -182,8 +184,8 @@
                             <h6 class="mb-0 text-sm">이름  :</h6> 
                           </div>
                           <div class="input-group input-group-static my-2 px-3 w-xxl-30">
-						      <label class="form-label"><%=name %></label>
-						      <input type="text" class="form-control" name="name">
+						      <!-- <label class="form-label"><%=name %></label> -->
+						      <input type="text" class="form-control" name="name" id="name" value="<%=name%>">
 						    </div>
                         </div>
                       </td>
@@ -195,8 +197,8 @@
                             <h6 class="mb-0 text-sm">이메일 :</h6> 
                           </div>
                           <div class="input-group input-group-static my-2 px-3 w-xxl-30">
-						      <label class="form-label"><%=email %></label>
-						      <input type="text" class="form-control" name="email">
+						      <!--<label class="form-label"><%=email %></label>  -->
+						      <input type="text" class="form-control" name="email" id="email" value="<%=email%>">
 						    </div>
                         </div>
                       </td>
@@ -208,8 +210,8 @@
                             <h6 class="mb-0 text-sm">생년월일 :</h6> 
                           </div>
                           <div class="input-group input-group-static my-2 px-3 w-xxl-30">
-						      <label class="form-label"><%=birth %></label>
-						       <input type="text" class="form-control" name="birth">
+						      <!--<label class="form-label"><%=birth %></label>  -->
+						       <input type="text" class="form-control" name="birth" id="birth" value="<%=birth%>">
 						    </div>
                         </div>
                       </td>
@@ -221,9 +223,14 @@
                             <h6 class="mb-0 text-sm">성별 :</h6> 
                           </div>
                           <div class="input-group input-group-static my-2 px-3 w-xxl-30">
-						     <select class="form-control" id="exampleFormControlSelect1">
-						       <option>남</option>
-						       <option>여</option>
+						     <select class="form-select" id="exampleFormControlSelect1" name="gen" id="gen" >
+						     	<%if( gen.equals("여")){ %>
+						     		<option value="여" selected>여</option>
+						     		<option value="남">남</option>
+						     	<% } else { %>
+						       		<option value="여" >여</option>
+						     		<option value="남" selected>남</option>
+						     	<% } %>
 						     </select>
 						    </div>
                         </div>
@@ -240,10 +247,11 @@
 						      <input type="text" class="form-control" disabled>
 						    </div>
                         </div>
+                         <input type="hidden" id="ucode" name="ucode" value="<%=ucode%>" />
                       </td>
                       <td>
                       	<button type="button" class="btn btn-danger float-end mx-1 my-1" >회원삭제</button>
-						<button type="button" class="btn btn-success float-end mx-1 my-1" onclick="location.href='admin_users_modifyOk.do?ucode=<%=ucode %>'">수정완료</button>
+						<button type="button" id="mbtn" class="btn btn-success float-end mx-1 my-1">수정완료</button>
                       </td>
                     </tr>   
                     
@@ -261,6 +269,49 @@
   <script src="./resources/bootstrap-5/html/admin/js/core/bootstrap.min.js"></script>
   <script src="./resources/bootstrap-5/html/admin/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="./resources/bootstrap-5/html/admin/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
+  <script>
+  
+  document.getElementById( 'mbtn' ).onclick = function() {	
+	 var name = $('#name').val();
+	 var email = $('#email').val();
+	 var birth = $('#birth').val();
+	 var gen = $('.form-select option:selected').val();
+	 alert( "gen option: " + gen );
+	 var ucode = $('#ucode').val();
+	 
+	//console.log( name );
+	 		 
+     var data = {'name': name, 'email' : email , 'birth' : birth, 'gen' : gen, 'ucode' : ucode };	    	
+
+     if(($('#name').val() != '')&&($('#email').val() != '')&&($('#birth').val() != '')&&($('#gen').val() != '')){	        
+				
+		$.ajax({
+			data : data,				
+			type : "POST",
+			url : './admin_users_modifyOk.do',
+			dataType : 'text',
+			success : function(flag) {					
+				
+				if( flag == "0" ) {
+					alert('회원정보 수정 성공');
+					location.href= '/admin_users.do';
+				} else {
+					alert('회원정보 수정 실패');
+					history.back();
+				}
+			},
+			error: function(request, status, error) {
+				alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
+	        }
+		});
+     } else {
+	        alert('에러남.');
+	        $('#title').focus();
+	 } 
+   }
+  </script>
+  
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {

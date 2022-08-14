@@ -154,28 +154,30 @@ public class Controller_Admin_Home {
 	}
 	
 	@RequestMapping(value = "/admin_users_modifyOk.do")
-	public ModelAndView adminUsersModifyOk(HttpServletRequest request, HttpSession session) {
+	public String adminUsersModifyOk(HttpServletRequest request, HttpSession session) {
 		System.out.println("admin_users_view 호출");
 		
-		SignUpTO sto = new SignUpTO();
-		sto.setName( request.getParameter( "name" ) );
-		
-		sto = udao.userView(sto);
+		int cpage = 1;
+		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
 		
 		UsersListTO ulistTO = new UsersListTO();
-		int cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		ulistTO.setCpage(cpage);
+		
+		SignUpTO sto = new SignUpTO();
+		sto.setUcode( request.getParameter( "ucode" ) );
+		System.out.println( "ucode : " + sto.getUcode() );
+		sto.setName( request.getParameter( "name" ) );
+		sto.setEmail( request.getParameter( "email" ) );
+		sto.setGen( request.getParameter( "gen" ) );
+		sto.setBirth( request.getParameter( "birth" ) );
+		
+		int flag = 1;
+		
+		flag = udao.usersModifyOK(sto);
 
-		ModelAndView modelAndView = new ModelAndView();
-
-		if (session.getAttribute("ucode") == null) {
-			modelAndView.setViewName("/login/nousers");
-			return modelAndView;
-		}
-		modelAndView.setViewName("admin/admin_users_view");
-		modelAndView.addObject( "sto", sto );
-		modelAndView.addObject( "cpage", cpage );
-
-		return modelAndView;
+		return Integer.toString(flag);
 	}
 
 }

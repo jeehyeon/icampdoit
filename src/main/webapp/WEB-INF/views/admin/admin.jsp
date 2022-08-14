@@ -13,6 +13,26 @@
 	
 	ArrayList<SignUpTO> lists = (ArrayList<SignUpTO>)request.getAttribute("lists");
 	
+	int total0 = 0;
+	int total10 = 0;
+	int total20 = 0;
+	int total30 = 0;
+	int total40 = 0;
+	for( SignUpTO list : lists ){
+		if( list.getAge() != null && list.getAge().equals( "10" ) ){
+			total10 = Integer.parseInt(list.getTotal());
+		} else if( list.getAge() != null && list.getAge().equals( "20" ) ){
+			total20 = Integer.parseInt(list.getTotal());
+		} else if( list.getAge() != null && list.getAge().equals( "30" ) ){
+			total30 = Integer.parseInt(list.getTotal());
+		} else if( list.getAge() != null && list.getAge().equals( "0" )) {
+			total0 = Integer.parseInt(list.getTotal());
+		} else if( list.getAge() != null && list.getAge().equals( "40" )) {
+			total40 = Integer.parseInt(list.getTotal());
+		}
+	}
+	
+	/*
 	String age0 = lists.get(0).getAge();
 	int total0 = Integer.parseInt(lists.get(0).getTotal());
 	String age10 = lists.get(1).getAge();
@@ -21,13 +41,14 @@
 	int total20 = Integer.parseInt(lists.get(2).getTotal());
 	String age30 = lists.get(3).getAge();
 	int total30 = Integer.parseInt(lists.get(3).getTotal());
+	*/
 	//String age40 = lists.get(4).getAge();
 	//String total40 = lists.get(4).getTotal();
 	//String age50 = lists.get(5).getAge();
 	//String total50 = lists.get(5).getTotal();
 	
-	System.out.println( age10 );
-	System.out.println( total10 );
+	//System.out.println( age10 );
+	//System.out.println( total10 );
 	
 %>
 <!--
@@ -464,7 +485,7 @@
     new Chart(ctx, {
         type: "bar",
         data: {
-          labels: ["0~9세", "10대", "20대", "30대"],
+          labels: ["0~9세", "10대", "20대", "30대", "40대이상"],
           datasets: [{
             label: "회원 수",
             tension: 0.4,
@@ -472,7 +493,7 @@
             borderRadius: 4,
             borderSkipped: false,
             backgroundColor: "rgba(255, 255, 255, .8)",
-            data: [<%=total0%>, <%=total10%>, <%=total20%>, <%=total30%>],
+            data: [<%=total0%>, <%=total10%>, <%=total20%>, <%=total30%>, <%=total40%> ],
             maxBarThickness: 6
           }, ],
         },
