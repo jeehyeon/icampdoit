@@ -177,8 +177,6 @@ public class AdminDAO {
 	public int boardModifyOk(HBoardTO to) {
 			
 		int flag = 1;	
-		System.out.println("to.getFilename : " + to.getFilename());
-		System.out.println("dao seq : " + to.getSeq());
 		/*if( to.getFilename() != null ){
 			try {
 				String sql = "select filename as oldFilename from h_board where seq=?";		
@@ -193,26 +191,36 @@ public class AdminDAO {
 		}	*/	
 		String oldFilename = to.getFilename();
 		System.out.println("oldFilename : " + to.getFilename());
-		System.out.println("flag 결과값 : " + flag);
 		System.out.println("새파일이름 : " + to.getNewFilename());
 		
 		int result = 0;							
 		
-		if( to.getNewFilename() == "default" ){
+		// 새파일 첨부시
+		if( !to.getNewFilename().equals("default") ){
 			String	sql = "update h_board set subject=?, title=?, writer=?, content=?, filename=?, filesize=? where seq=? and ucode=?";
 			result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(), to.getNewFilename(),
 					to.getNewFilesize(), to.getSeq(), to.getUcode() );
-		} else {
+			System.out.println("dao1 result : " + result);
+		// 기존 파일 그대로일 경우
+		} else if( to.getContent().indexOf(to.getFilename()) != -1) {
+			String	sql = "update h_board set subject=?, title=?, writer=?, content=?, filename=?, filesize=? where seq=? and ucode=?";
+			result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(), to.getFilename(), to.getFilesize(), to.getSeq(), to.getUcode() );
+			result = 2;
+			System.out.println("dao2 result : " + result);
+			System.out.println("dao2 filename : " + to.getFilename());
+		// 기존 파일 삭제시
+		}  else if( to.getContent().indexOf(to.getFilename()) == -1) {
 			String	sql = "update h_board set subject=?, title=?, writer=?, content=? where seq=? and ucode=?";
 			result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(), to.getSeq(), to.getUcode() );
-			result = 2;
+			result = 3;
+			System.out.println("dao3 result : " + result);
 		}
 		System.out.println("dao result : " + result);
 	
 		
 		if( result == 0 ) {
 			flag = 1;// 비정상 실행
-			//새로운 파일 삭제
+			// 새로운 파일 삭제
 			if( to.getNewFilename() == "default" ) {
 				String delurl = hUploadPath + to.getNewFilename();
 				System.out.println("delurl : " + delurl);
@@ -222,16 +230,23 @@ public class AdminDAO {
 			}
 		} else if( result == 1 ) {
 			flag = 0;// 정상 실행
-			//기존 파일 삭제
-			if( to.getNewFilename() != "default" && oldFilename != null ) {
+			// 새파일 첨부시 -> 기존 파일 삭제
+			if( !to.getNewFilename().equals("default") && oldFilename != null ) {
 				String delurl = hUploadPath + oldFilename;
 				File file  = new File(delurl);
 				file.delete();
 				System.out.println("기존 파일 삭제완료 : ");
-
 			}
-		}else if(result ==2) {
-			flag =0;
+		} else if( result == 2 ) {
+			flag = 0;
+			System.out.println("파일 그대로일 경우 : ");
+		} else if( result == 3 ) { 
+			flag = 0;			
+			String delurl = hUploadPath + oldFilename;
+			System.out.println("delurl : " + delurl);
+			File file  = new File(delurl);
+			file.delete(); 			
+			System.out.println("기존 파일 삭제시 작동 : ");
 		}
 		return flag;
 	}

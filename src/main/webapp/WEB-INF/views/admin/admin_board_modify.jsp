@@ -13,7 +13,7 @@
 	int cpage = (Integer)request.getAttribute("cpage");
 	
 	String subjectValue = (String)request.getAttribute( "subjectValue" );
-	System.out.println("수정.jsp 말머리 : " + subjectValue);
+	//System.out.println("수정.jsp 말머리 : " + subjectValue);
 	
 	HBoardTO to = (HBoardTO)request.getAttribute("hto");
 	
@@ -28,7 +28,7 @@
 	System.out.println("[filename]" + filename);
 	System.out.println("[content]" + content);
 	long filesize = to.getFilesize();
-	System.out.println("수정.jsp 말머리2 : " + to.getSubject());
+	//System.out.println("수정.jsp 말머리2 : " + to.getSubject());
 %>
 
 <!DOCTYPE html>
@@ -273,16 +273,7 @@
 			} 
         });
 	});
-	
-<%-- 	function modifyImage(files, editor, welEditable) {
-		var imgUrl = './h_upload/';
-		imgUrl = imgUrl + <%=filename%>;
-		var mimgUrl = imgUrl + $('#filename').val()
-		console.log("filename : "+mimgUrl);
-		$('#summernote').summernote( 'insertImage', mimgUrl );
-	}
-	 --%>
-	
+
 	// 이미지 파일 업로드
 	function sendFile(file, editor, welEditable) {
 		var imgUrl = './h_upload/';

@@ -31,9 +31,13 @@
 	ArrayList<AdminTO> lists = listTO.getBoardLists();
 	
 	StringBuilder sbHtml = new StringBuilder();
-		
+	
+	AdminTO to1 = new AdminTO();
+	String seq = to1.getSeq();
+	int viewUcode = to1.getUcode();
+	
 	for( AdminTO to : lists ) {
-		String seq = to.getSeq();
+		seq = to.getSeq();
 		String subject = to.getSubject();
 		if( subject.equals("1") ) {
 			subject = "자유 게시판";
@@ -61,10 +65,11 @@
 		sbHtml.append( "<td><a href='admin_board_modify.do?cpage=" + cpage + "&seq=" + seq + "&subjectValue=" + subjectValue + "'><p class='text-sm font-weight-bold mb-0'>" + title + "</p></td>" );
 		sbHtml.append( "<td class='align-middle text-center text-sm'><a href='admin_board_modify.do?cpage=" + cpage + "&seq=" + seq + "&subjectValue=" + subjectValue + "'><span>" + wdate + "</span></td>" );
 		sbHtml.append( "<td class='align-middle text-center'><a href='admin_board_modify.do?cpage=" + cpage + "&seq=" + seq + "&subjectValue=" + subjectValue + "'><span class='text-secondary text-sm font-weight-bold'>" + hit + "</span></td>" );
-		sbHtml.append( "<td class='align-middle'>" );
-		sbHtml.append( "<a href='javascript:;' class='text-secondary font-weight-bold text-sm' data-toggle='tooltip' data-original-title='Edit user'>삭제</a>" );
+		sbHtml.append( "<td class='align-middle text-center'>" );
+		sbHtml.append( "<a href='./nboarddelete_ok.do?viewseq=" + seq + "' class='dbtn font-weight-bold text-sm' data-toggle='tooltip' data-original-title='Edit user'>" );
+		sbHtml.append( "<button type='button' id='dbtn' name='dbtn' style='height:35px;width:75px;' class='btn btn-xs me-1 bg-gradient-dark ps-3v'>삭제</button>" );
 		//sbHtml.append( "<a href=''><button type='button' style='height:40px;width:70px' class='btn btn-xs me-1 bg-gradient-dark'>삭제</button>" );
-		//sbHtml.append( "</a>" );
+		sbHtml.append( "</a>" );
 		sbHtml.append( "</td>" );
 		sbHtml.append( "</tr>" );
 	}
@@ -92,7 +97,7 @@
   <!-- Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
-  <link id="pagestyle" href="./resources/bootstrap-5/html/admin/css/material-dashboard.css?v=3.0.4" rel="stylesheet" />
+  <link id="pagestyle" href="./resources/bootstrap-5/html/admin/css/material-dashboard.css?v=3.0.4" rel="stylesheet" /> 
  </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -208,8 +213,9 @@
                   </thead>
                   
                   <tbody>
-				<input type="hidden" id="seq" name="seq" value="" />
+				<input type="hidden" id="seq" name="seq" value="<%=seq%>" />
 		        <input type="hidden" id="cpage" name="cpage" value="<%= cpage %>">
+           
                    <!--                    
                     <tr class="listdata">                   
                       <td onclick="moveMo()">                     
@@ -238,8 +244,10 @@
                       </td>                     
                     </tr>
                     -->
+               <input type="hidden" id="viewUcode" name="viewUcode" value="<%=viewUcode%>"/>
+               <input type="hidden" id="viewSeq" name="viewSeq" value="<%=seq%>"/>      
  <%=sbHtml.toString() %>                   
-                                       
+                                      
                   </tbody>
                 </table>
               </div>
@@ -339,9 +347,7 @@
   <script src="./resources/bootstrap-5/html/admin/js/core/bootstrap.min.js"></script>
   <script src="./resources/bootstrap-5/html/admin/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="./resources/bootstrap-5/html/admin/js/plugins/smooth-scrollbar.min.js"></script>
-  <script>
- 
-  
+  <script>  
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
       var options = {
@@ -350,18 +356,39 @@
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
+  <!-- JavaScript files-->  
   <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
-    <!-- JavaScript files-->
-    <script>
-    	
+   
+   <script type="text/javascript">
+    <%-- window.onload =function(){ 	   
+  	   //게시글 삭제 버튼
+  	    $("#dbtn").on("click", function() {
+  		 	var viewUcode = $("#viewUcode").val();
+   			var viewSeq = $("#viewSeq").val();
+   			var sessionUcode = <%=(Integer)session.getAttribute("ucode")%>;
+   			console.log(sessionUcode);
+   			
+   			if(viewUcode == sessionUcode){
+   				//삭제 진행
+   				if(confirm("게시글을 삭제 하시겠습니까?")){
+
+   	  				location.href='./nboarddelete_ok.do?viewseq='+ viewSeq;
+   				}
+   			}else{
+   				//삭제 불가
+   				alert("삭제 권한이 없습니다.");
+   			}
+      
+  	    })
+    }; --%>
+        	
     	function changeSubject(){
     		var subjectValue = $( "#form_sort option:selected" ).val();
     		//alert( subjectValue );
     		
     		location.href='./admin_board.do?subjectValue=' + subjectValue; 
     	};
-    	
-	  	
+    		  	
     		  	if (  $( "#subjectInput" ).val() == 1 ) {
     		  		$("#form_sort").val("1");
     		  		//alert( "1로 변경");

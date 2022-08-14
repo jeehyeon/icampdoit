@@ -52,25 +52,10 @@ public class Controller_Admin {
 	private String nUploadPath = url + "/src/main/webapp/n_upload/";
 
 	// 관리자페이지
-	@RequestMapping(value = "/admin_users.do")
-	public ModelAndView adminUsers(HttpServletRequest request, HttpSession session) {
-		System.out.println("admin_users");
-
-		ModelAndView modelAndView = new ModelAndView();
-
-		if (session.getAttribute("ucode") == null) {
-			modelAndView.setViewName("/login/nousers");
-			return modelAndView;
-		}
-		modelAndView.setViewName("admin/admin_users");
-
-		return modelAndView;
-	}
-
 	@RequestMapping(value = "/admin_board.do")
 	public ModelAndView adminBoard(HttpServletRequest request, HttpSession session) {
 		System.out.println("admin_board 호출");
-		System.out.println("컨트롤러에서 최초로 받은 말머리 : " + request.getParameter( "subjectValue" ));
+		//System.out.println("컨트롤러에서 최초로 받은 말머리 : " + request.getParameter( "subjectValue" ));
 		int cpage = 1;
 		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
 			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
@@ -87,19 +72,19 @@ public class Controller_Admin {
 		
 		if( subjectValue.equals( "1" ) ) {
 			listTO = adao.mboardList(listTO, subjectValue);
-			System.out.println("말머리선택 : " + request.getParameter( "subjectValue" ));		
+			//System.out.println("말머리선택 : " + request.getParameter( "subjectValue" ));		
 		} else if( subjectValue.equals( "2" ) ) {
 			listTO = adao.mboardList(listTO, subjectValue);
-			System.out.println("말머리선택 : " + request.getParameter( "subjectValue" ));		
+			//System.out.println("말머리선택 : " + request.getParameter( "subjectValue" ));		
 		} else if( subjectValue.equals( "3" ) ) {
 			listTO = adao.mboardList(listTO, subjectValue);
-			System.out.println("말머리선택 : " + request.getParameter( "subjectValue" ));		
+			//System.out.println("말머리선택 : " + request.getParameter( "subjectValue" ));		
 		} else if( subjectValue.equals( "4" ) ) {
 			listTO = adao.hboardList(listTO, subjectValue);
-			System.out.println("말머리선택 : " + request.getParameter( "subjectValue" ));		
+			//System.out.println("말머리선택 : " + request.getParameter( "subjectValue" ));		
 		} else if( subjectValue.equals( "5" ) ) {
 			listTO = adao.nboardList(listTO, subjectValue);
-			System.out.println("말머리선택 : " + request.getParameter( "subjectValue" ));					
+			//System.out.println("말머리선택 : " + request.getParameter( "subjectValue" ));					
 		}
 				
 		
@@ -114,21 +99,6 @@ public class Controller_Admin {
 		modelAndView.addObject( "cpage", cpage );
 		modelAndView.addObject( "subjectValue", subjectValue );
 		
-
-		return modelAndView;
-	}
-
-	@RequestMapping(value = "/admin_users_view.do")
-	public ModelAndView adminUsersView(HttpServletRequest request, HttpSession session) {
-		System.out.println("admin_users_view 호출");
-
-		ModelAndView modelAndView = new ModelAndView();
-
-		if (session.getAttribute("ucode") == null) {
-			modelAndView.setViewName("/login/nousers");
-			return modelAndView;
-		}
-		modelAndView.setViewName("admin/admin_users_view");
 
 		return modelAndView;
 	}
@@ -187,7 +157,7 @@ public class Controller_Admin {
 
 		String savename = image.getOriginalFilename();
 		String subject = request.getParameter("subject");
-		System.out.println("이미지 subject : " + subject);
+		//System.out.println("이미지 subject : " + subject);
 
 		long filedata = image.getResource().contentLength();
 		String filesize = Long.toString(filedata);
@@ -213,8 +183,8 @@ public class Controller_Admin {
 		
 		File target = new File(uploadPath, savename);
 		
-		System.out.println("파일저장 : "+ target);
-		System.out.println("savename : " + savename);
+		//System.out.println("파일저장 : "+ target);
+		//System.out.println("savename : " + savename);
 
 		response.setContentType("application/json;charset=utf-8");
 
@@ -250,16 +220,16 @@ public class Controller_Admin {
 			to.setWriter((String) session.getAttribute("id"));
 			to.setContent(request.getParameter("content"));
 			to.setUcode((Integer) session.getAttribute("ucode"));
-			System.out.println("1ucode : " + to.getUcode());
+			//System.out.println("1ucode : " + to.getUcode());
 			to.setVcode(request.getParameter("vcode"));
-			System.out.println("1vcode : " + to.getVcode());
+			//System.out.println("1vcode : " + to.getVcode());
 			
 			if(request.getParameter("filesize")!="0") {
 				fto.setFilename(request.getParameter("filename"));
 				fto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
 			}
 			flag = dao.mboardWriteOk(to, fto);
-			System.out.println("1flag : " + flag);
+			//System.out.println("1flag : " + flag);
 			dao.filecnd(to, fto);
 			
 		} else if( request.getParameter("subject").equals("2")  ) {
@@ -269,16 +239,16 @@ public class Controller_Admin {
 			to.setWriter((String) session.getAttribute("id"));
 			to.setContent(request.getParameter("content"));
 			to.setUcode((Integer) session.getAttribute("ucode"));
-			System.out.println("2ucode : " + to.getUcode());
+			//System.out.println("2ucode : " + to.getUcode());
 			to.setVcode(request.getParameter("vcode"));
-			System.out.println("2vcode : " + to.getVcode());
+			//System.out.println("2vcode : " + to.getVcode());
 			
 			if(request.getParameter("filesize")!="0") {
 				fto.setFilename(request.getParameter("filename"));
 				fto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
 			}
 			flag = dao.mboardWriteOk(to, fto);
-			System.out.println("2flag : " + flag);
+			//System.out.println("2flag : " + flag);
 			dao.filecnd(to, fto);
 			
 		} else if( request.getParameter("subject").equals("3")  ) {
@@ -288,16 +258,16 @@ public class Controller_Admin {
 			to.setWriter((String) session.getAttribute("id"));
 			to.setContent(request.getParameter("content"));
 			to.setUcode((Integer) session.getAttribute("ucode"));
-			System.out.println("3ucode : " + to.getUcode());
+			//System.out.println("3ucode : " + to.getUcode());
 			to.setVcode(request.getParameter("vcode"));
-			System.out.println("3vcode : " + to.getVcode());
+			//System.out.println("3vcode : " + to.getVcode());
 			
 			if(request.getParameter("filesize")!="0") {
 				fto.setFilename(request.getParameter("filename"));
 				fto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
 			}
 			flag = dao.mboardWriteOk(to, fto);
-			System.out.println("3flag : " + flag);
+			//System.out.println("3flag : " + flag);
 			dao.filecnd(to, fto);
 			
 		} else if( request.getParameter("subject").equals("4")  ) {
@@ -307,17 +277,17 @@ public class Controller_Admin {
 			hto.setWriter((String) session.getAttribute("id"));
 			hto.setContent(request.getParameter("content"));
 			hto.setUcode((Integer) session.getAttribute("ucode"));
-			System.out.println("4ucode : " + hto.getUcode());			
+			//System.out.println("4ucode : " + hto.getUcode());			
 			if(request.getParameter("filesize") != "0") {
 				hto.setFilename(request.getParameter("filename"));
 				hto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
 			}
 			hto.setVcode(request.getParameter("vcode"));
-			System.out.println("4vcode : " + hto.getVcode());
+			//System.out.println("4vcode : " + hto.getVcode());
 			
 			flag = hdao.aboardWriteOk(hto);
-			System.out.println("content : " + hto.getContent());			
-			System.out.println("4flag : " + flag);
+			//System.out.println("content : " + hto.getContent());			
+			//System.out.println("4flag : " + flag);
 			
 			hdao.filecnd(hto);
 			
@@ -328,19 +298,19 @@ public class Controller_Admin {
 			nto.setWriter((String) session.getAttribute("id"));
 			nto.setContent(request.getParameter("content"));
 			nto.setUcode((Integer) session.getAttribute("ucode"));
-			System.out.println("5ucode : " + nto.getUcode());
+			//System.out.println("5ucode : " + nto.getUcode());
 			nto.setVcode(request.getParameter("vcode"));
-			System.out.println("5vcode : " + nto.getVcode());
+			//System.out.println("5vcode : " + nto.getVcode());
 			
 			if(request.getParameter("filesize")!="0") {
 				nfto.setFilename(request.getParameter("filename"));
 				nfto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
 			}
 			
-			flag = ndao.mboardWriteOk(nto, nfto);
+			flag = ndao.nboardWriteOk(nto, nfto);
 			
-			System.out.println("content : " + nto.getContent());	
-			System.out.println("5flag : " + flag);
+			//System.out.println("content : " + nto.getContent());	
+			//System.out.println("5flag : " + flag);
 			
 			ndao.filecnd(nto, nfto);
 		}
@@ -380,7 +350,7 @@ public class Controller_Admin {
 			file = new File(hUploadPath + tempName);
 			i++;
 		}
-		System.out.println("file.getName() : " + file.getName());
+		//System.out.println("file.getName() : " + file.getName());
 		return file.getName();
 	}
 
@@ -396,9 +366,9 @@ public class Controller_Admin {
 		
 		savename = getUniqName(savename);
 		File target = new File(hUploadPath + savename);
-		System.out.println("파일저장 : ");
-		System.out.println("target : " + target);	
-		System.out.println("savename : " + savename);	
+		//System.out.println("파일저장 : ");
+		//System.out.println("target : " + target);	
+		//System.out.println("savename : " + savename);	
 		
 		//FileCopyUtils.copy(image.getBytes(), target);
 		
@@ -433,19 +403,10 @@ public class Controller_Admin {
 		}
 		
 		HBoardTO hto = new HBoardTO();
-		//NBoardTO nto = new NBoardTO();
-		//NFileTO nfto = new NFileTO();
 		
 		hto.setUcode( (Integer) session.getAttribute("ucode") );
 		hto.setSeq( request.getParameter( "seq" ) );
 		hto = adao.boardModify(hto);
-		
-		//if( request.getParameter("subject").equals("4")  ) {
-		//	hto.setSeq( request.getParameter( "seq" ) );
-		//	hto = adao.boardModify(hto);
-		//} else if( request.getParameter("subject").equals("5")  ) {
-		//	nto.setSeq( request.getParameter( "seq" ) );
-		//}
 		
 		ModelAndView modelAndView = new ModelAndView();
 
@@ -480,13 +441,14 @@ public class Controller_Admin {
 		
 		HBoardTO to = new HBoardTO();
 		to.setSeq(request.getParameter( "seq" ));
-		System.out.println("seq : " + to.getSeq());
+		//System.out.println("seq : " + to.getSeq());
 		to.setSubject(request.getParameter( "subject" ));
-		System.out.println("관리자 컨트롤러 setsubject : " + to.getSubject());
+		//System.out.println("관리자 컨트롤러 setsubject : " + to.getSubject());
 		to.setTitle(request.getParameter("title"));
 		to.setWriter((String) session.getAttribute("id"));
 		to.setContent(request.getParameter("content"));
 		to.setUcode((Integer) session.getAttribute("ucode"));
+		
 		if(request.getParameter("filesize") != "0") {
 			to.setFilename(request.getParameter("filename"));
 			to.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
@@ -500,19 +462,71 @@ public class Controller_Admin {
 			System.out.println("11newFilename : " + to.getNewFilename());
 		}
 		to.setVcode(request.getParameter("vcode"));
-		
-		
-		//if newfilsize != "0"{
-		//  }
+				
 		int flag = 1;
 		
 		flag = adao.boardModifyOk(to);
-		System.out.println("adao.boardModifyOk 연결성공");			
+		//System.out.println("adao.boardModifyOk 연결성공");			
 		System.out.println("flag : " + flag);
 		
-		//hdao.filecnd(to);		
+		hdao.filecnd(to);		
 
 		return Integer.toString(flag);
+	}
+	
+	@RequestMapping( value="/nboarddelete_ok.do" )
+	public ModelAndView mboarddeleteOk(HttpServletRequest request, HttpSession session) throws IOException {
+		System.out.println( "nboarddeleteOk() 호출" );
+		
+		//게시글 삭제 전 이미지 파일 확인
+		NBoardTO to = new NBoardTO();
+		to.setSeq( request.getParameter("viewseq") );
+		to = ndao.findViewUcode(to);
+		
+		   //(Integer) session.getAttribute("ucode");
+		
+		int flag = 2;
+		
+		if ( ((Integer) session.getAttribute("ucode")).equals(to.getUcode()) ) {
+			to.setSeq( request.getParameter("viewseq") );
+
+			NFileTO fto = new NFileTO();
+			//DB에 파일 데이터가 있는지 조회
+			fto = ndao.nboardDelFileCheck(to);
+			
+			if( fto.getFilename() != "null" ) {
+				//파일이 존재 => 삭제
+				System.out.println("파일이 존재");
+				//디렉터리 폴더에 파일 삭제
+				ndao.filedel( fto.getFilename() );
+				//DB table에서 항목 삭제
+				flag= ndao.fileDBDel(to);
+				System.out.println("flag1 : " + flag);
+			}
+			
+			if( flag != 1 ) {
+				//파일삭제 성공 또는 파일없음 => 댓글 삭제
+				
+				if( flag == 0 ) {
+					//게시판 DB에 게시글 삭제
+					flag = ndao.nboardDeleteOk(to);
+					System.out.println("flag2 : " + flag);
+				}		
+			} else if( flag == 1 ) {
+				System.out.println("파일 삭제 DAO 오류");
+				System.out.println("flag3 : " + flag);
+			}
+		}
+
+		ModelAndView modelAndView = new ModelAndView();
+		
+		if(session.getAttribute("ucode") == null) {
+			modelAndView.setViewName( "/login/nousers" );
+			return modelAndView;
+		}
+		modelAndView.setViewName( "/admin/admin_board_delete_ok" );
+		modelAndView.addObject("flag", flag);
+		return modelAndView;
 	}
 
 }

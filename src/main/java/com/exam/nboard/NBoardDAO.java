@@ -19,6 +19,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.exam.login.SignUpTO;
+import com.exam.mboard.BoardTO;
+import com.exam.mboard.FileTO;
 
 @Repository
 public class NBoardDAO {
@@ -97,7 +99,7 @@ public class NBoardDAO {
 	}
 	
 	// write_ok
-	public int mboardWriteOk(NBoardTO to, NFileTO fto) {	
+	public int nboardWriteOk(NBoardTO to, NFileTO fto) {	
 				
 		int flag = 1;
 		
@@ -177,5 +179,68 @@ public class NBoardDAO {
 			}
 		
 		}
+	}
+	
+	//게시글 ucode 찾기
+	public NBoardTO findViewUcode(NBoardTO to) {
+
+		String sql = "select ucode from n_board where seq=?";
+			to = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<NBoardTO>(NBoardTO.class), to.getSeq() );
+			System.out.println("findViewUcode 성공");	
+		return to;	
+	}
+	
+	//게시글 삭제메서드
+	public NFileTO nboardDelFileCheck(NBoardTO to) {
+		//삭제했을 경우 임시 파일 삭제
+		//System.out.println("파일삭제 메서드 : " + filename);
+		NFileTO fto = new NFileTO();
+		String sql = "select filename from n_file where pseq=?";
+		try {
+			fto = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<NFileTO>(NFileTO.class), to.getSeq() );
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			fto.setFilename("null");
+		}
+		
+		return fto;	
+	}
+	
+	//게시글 삭제메서드
+	public Integer fileDBDel(NBoardTO to) {
+		//삭제했을 경우 임시 파일 삭제
+		//System.out.println("파일삭제 메서드 : " + filename);
+		int flag = 1;
+		
+		String sql = "delete from n_file where pseq=?";
+		int result = jdbcTemplate.update(sql, to.getSeq());
+					System.out.println(result);
+
+		if( result != 1 ) {
+			System.out.println("filedbDel() 오류");
+		}else {
+			flag=0;
+		}
+		
+		return flag;
+	}
+	
+	
+	// delete_ok
+	public int nboardDeleteOk(NBoardTO to) {
+		
+		int flag = 2;
+		
+		String sql = "delete from n_board where seq=?";
+		int result = jdbcTemplate.update(sql, to.getSeq() );
+	
+		if(result == 0) {
+			System.out.println("nboardDeleteOk 오류");
+			flag=1;
+		}else {
+			flag=0;
+		}
+	
+		return flag;
 	}
 }

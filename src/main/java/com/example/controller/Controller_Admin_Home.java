@@ -93,5 +93,35 @@ public class Controller_Admin_Home {
 
 		return modelAndView;
 	}
+	
+	@RequestMapping(value = "/admin_users.do")
+	public ModelAndView adminUsers(HttpServletRequest request, HttpSession session) {
+		System.out.println("admin_users");
+
+		ModelAndView modelAndView = new ModelAndView();
+
+		if (session.getAttribute("ucode") == null) {
+			modelAndView.setViewName("/login/nousers");
+			return modelAndView;
+		}
+		modelAndView.setViewName("admin/admin_users");
+
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/admin_users_view.do")
+	public ModelAndView adminUsersView(HttpServletRequest request, HttpSession session) {
+		System.out.println("admin_users_view 호출");
+
+		ModelAndView modelAndView = new ModelAndView();
+
+		if (session.getAttribute("ucode") == null) {
+			modelAndView.setViewName("/login/nousers");
+			return modelAndView;
+		}
+		modelAndView.setViewName("admin/admin_users_view");
+
+		return modelAndView;
+	}
 
 }
