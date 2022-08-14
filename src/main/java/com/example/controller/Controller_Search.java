@@ -55,11 +55,34 @@ public class Controller_Search {
 	@RequestMapping( value="/campview.do" )
 	public ModelAndView campview(HttpServletRequest request) {
 		System.out.println( "campview() 호출" );
+		System.out.println("컨트롤러 request.getParameter(contentID) : " + request.getParameter("contentId"));
+		SearchkeyTO kto = new SearchkeyTO();
+		kto.setContentId(request.getParameter("contentId"));
 		
-
+		//campview 테이블에 해당 캠핑장 데이터가 있는지 검사
+		kto= kdao.campViewTableExist(kto);
+			//System.out.println("컨트롤러 kdao.viewTableExist : " + kto.getSeq()+ " / " + kto.getContentId());
+		int flag=1;
+		//있다면 조회수 +1 / 없다면 Insert 후 조회수 +1
+		if(kto.getSeq() != "-1") {
+			//campview table 존재
+			flag=kdao.campViewHit(kto);
+		}else {
+			//campview 테이블이 없을떄
+			flag=kdao.campViewTableInsert(kto);
+		}
+		
+		
+		//campview page 정보 불러오기
+		kto = kdao.campView(kto);
+		
+		System.out.println("campview 컨트롤러 데이터 : " + kto.getAddr1());
+		System.out.println("campview 컨트롤러 데이터 : " + kto.getContentId());
+		System.out.println("campview 컨트롤러 데이터 : " + kto.getHomepage());
+		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "/search/campview" );
-		
+		modelAndView.addObject("kto", kto);
 		return modelAndView;
 	}
 	

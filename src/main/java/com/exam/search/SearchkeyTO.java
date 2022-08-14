@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SearchkeyTO {
+	private String seq;				//viewpage용
 	
 	private String keysearch;		// 검색키워드
 	
