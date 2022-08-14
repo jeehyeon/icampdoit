@@ -18,4 +18,5 @@ public class SignUpTO {
 	private String ucode;
 	private String age;
 	private String total;
+	private String rdate;
 }

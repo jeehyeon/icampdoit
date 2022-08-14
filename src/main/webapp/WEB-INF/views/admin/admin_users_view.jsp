@@ -15,6 +15,19 @@
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.exam.login.SignUpTO" %>
+<%@ page import="com.exam.admin.AdminUsersDAO" %>
+<%
+	SignUpTO sto = (SignUpTO)request.getAttribute( "sto" );
+
+	String name = sto.getName();
+	String id = sto.getId();
+	String email = sto.getEmail();
+	String gen = sto.getGen();
+	String rdate = sto.getRdate();
+	String birth = sto.getBirth();
+	String ucode = sto.getUcode();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +36,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="./resources/bootstrap-5/html/admin/img/apple-icon.png">
   <link rel="icon" type="image/png" href="./resources/bootstrap-5/html/img/logo2.svg">
   <title>
-    Material Dashboard 2 by Creative Tim
+   	I CAMP DO IT admin users view
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -156,7 +169,7 @@
                             <h6 class="mb-0 text-sm">아이디 :</h6> 
                           </div>
                           <div class="input-group input-group-static my-2 px-3 w-xxl-30">
-						      <label class="form-label">testID</label>
+						      <label class="form-label"><%=id %></label>
 						      <input type="text" class="form-control" disabled/>
 						    </div>
                         </div>
@@ -169,8 +182,8 @@
                             <h6 class="mb-0 text-sm">이름  :</h6> 
                           </div>
                           <div class="input-group input-group-static my-2 px-3 w-xxl-30">
-						      <label class="form-label">홍길동</label>
-						      <input type="text" class="form-control">
+						      <label class="form-label"><%=name %></label>
+						      <input type="text" class="form-control" name="name">
 						    </div>
                         </div>
                       </td>
@@ -182,8 +195,8 @@
                             <h6 class="mb-0 text-sm">이메일 :</h6> 
                           </div>
                           <div class="input-group input-group-static my-2 px-3 w-xxl-30">
-						      <label class="form-label">test@test.com</label>
-						      <input type="text" class="form-control">
+						      <label class="form-label"><%=email %></label>
+						      <input type="text" class="form-control" name="email">
 						    </div>
                         </div>
                       </td>
@@ -195,8 +208,8 @@
                             <h6 class="mb-0 text-sm">생년월일 :</h6> 
                           </div>
                           <div class="input-group input-group-static my-2 px-3 w-xxl-30">
-						      <label class="form-label"></label>
-						       <input type="text" class="form-control">
+						      <label class="form-label"><%=birth %></label>
+						       <input type="text" class="form-control" name="birth">
 						    </div>
                         </div>
                       </td>
@@ -223,14 +236,14 @@
                             <h6 class="mb-0 text-sm">가입일 :</h6> 
                           </div>
                           <div class="input-group input-group-static my-2 px-3 w-xxl-30">
-						      <label class="form-label">2022.07.29</label>
+						      <label class="form-label"><%=rdate %></label>
 						      <input type="text" class="form-control" disabled>
 						    </div>
                         </div>
                       </td>
                       <td>
-                      	<button type="button" class="btn btn-danger float-end mx-1 my-1">회원삭제</button>
-						<button type="button" class="btn btn-success float-end mx-1 my-1">수정완료</button>
+                      	<button type="button" class="btn btn-danger float-end mx-1 my-1" >회원삭제</button>
+						<button type="button" class="btn btn-success float-end mx-1 my-1" onclick="location.href='admin_users_modifyOk.do?ucode=<%=ucode %>'">수정완료</button>
                       </td>
                     </tr>   
                     

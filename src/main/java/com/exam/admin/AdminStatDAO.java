@@ -46,8 +46,7 @@ public class AdminStatDAO {
 	public String weeklyRegistered() {
 		
 		String sql = "select count(*) from users where "
-					+ "date(rdate) between subdate(curdate(), date_format(curdate(), '%w')-1) "
-					+ "and subdate(curdate(), date_format(curdate(), '%w')-7)";
+					+ "rdate > now() - interval 1 week";
 		String registeredResult = (String)jdbcTemplate.queryForObject(sql, String.class);
 		
 		return registeredResult;

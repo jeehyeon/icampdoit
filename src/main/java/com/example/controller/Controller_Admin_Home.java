@@ -20,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.exam.admin.AdminDAO;
 import com.exam.admin.AdminListTO;
 import com.exam.admin.AdminStatDAO;
+import com.exam.admin.AdminUsersDAO;
+import com.exam.admin.UsersListTO;
 import com.exam.admin.VisitTO;
 import com.exam.hboard.HBoardDAO;
 import com.exam.hboard.HBoardTO;
@@ -49,6 +51,9 @@ public class Controller_Admin_Home {
 	
 	@Autowired
 	private AdminStatDAO sdao;
+	
+	@Autowired
+	private AdminUsersDAO udao;
 
 	String url = System.getProperty("user.dir");
 	private String mUploadPath = url + "/src/main/webapp/upload/";
@@ -98,13 +103,27 @@ public class Controller_Admin_Home {
 	public ModelAndView adminUsers(HttpServletRequest request, HttpSession session) {
 		System.out.println("admin_users");
 
+		int cpage = 1;
+		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		System.out.println("test cpage" + cpage);
+		
+		UsersListTO ulistTO = new UsersListTO();
+		ulistTO.setCpage(cpage);
+		
+		ulistTO = udao.usersList(ulistTO);
+		
 		ModelAndView modelAndView = new ModelAndView();
 
 		if (session.getAttribute("ucode") == null) {
 			modelAndView.setViewName("/login/nousers");
 			return modelAndView;
 		}
+
 		modelAndView.setViewName("admin/admin_users");
+		modelAndView.addObject( "ulistTO", ulistTO );
+		modelAndView.addObject( "cpage", cpage );
 
 		return modelAndView;
 	}
@@ -112,6 +131,14 @@ public class Controller_Admin_Home {
 	@RequestMapping(value = "/admin_users_view.do")
 	public ModelAndView adminUsersView(HttpServletRequest request, HttpSession session) {
 		System.out.println("admin_users_view 호출");
+		
+		SignUpTO sto = new SignUpTO();
+		sto.setUcode( request.getParameter( "ucode" ) );
+		
+		sto = udao.userView(sto);
+		
+		UsersListTO ulistTO = new UsersListTO();
+		int cpage = Integer.parseInt( request.getParameter( "cpage" ) );
 
 		ModelAndView modelAndView = new ModelAndView();
 
@@ -120,6 +147,33 @@ public class Controller_Admin_Home {
 			return modelAndView;
 		}
 		modelAndView.setViewName("admin/admin_users_view");
+		modelAndView.addObject( "sto", sto );
+		modelAndView.addObject( "cpage", cpage );
+
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/admin_users_modifyOk.do")
+	public ModelAndView adminUsersModifyOk(HttpServletRequest request, HttpSession session) {
+		System.out.println("admin_users_view 호출");
+		
+		SignUpTO sto = new SignUpTO();
+		sto.setName( request.getParameter( "name" ) );
+		
+		sto = udao.userView(sto);
+		
+		UsersListTO ulistTO = new UsersListTO();
+		int cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+
+		ModelAndView modelAndView = new ModelAndView();
+
+		if (session.getAttribute("ucode") == null) {
+			modelAndView.setViewName("/login/nousers");
+			return modelAndView;
+		}
+		modelAndView.setViewName("admin/admin_users_view");
+		modelAndView.addObject( "sto", sto );
+		modelAndView.addObject( "cpage", cpage );
 
 		return modelAndView;
 	}

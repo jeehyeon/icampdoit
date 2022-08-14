@@ -1,5 +1,62 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.exam.admin.UsersListTO" %>
+<%@ page import="com.exam.admin.AdminUsersDAO" %>
+<%@ page import="com.exam.login.SignUpTO" %>
+<%@page import="java.util.ArrayList"%>
+
+<%
+	UsersListTO ulistTO = (UsersListTO)request.getAttribute( "ulistTO" );
+
+	int cpage = (Integer)request.getAttribute( "cpage" );
+	
+	int recordPerPage = ulistTO.getRecordPerPage();
+	int totalPage = ulistTO.getTotalPage();
+	int blockPerPage = ulistTO.getBlockPerPage();
+	int startBlock = ulistTO.getStartBlock();
+	int endBlock = ulistTO.getEndBlock();
+	int totalRecord = ulistTO.getTotalRecord();
+	
+	ArrayList<SignUpTO> lists = ulistTO.getUsersLists();
+	
+	StringBuilder sbHtml = new StringBuilder();
+	
+	for( SignUpTO sto : lists ){
+		String name = sto.getName();
+		String id = sto.getId();
+		String email = sto.getEmail();
+		String gen = sto.getGen();
+		String birth = sto.getBirth();
+		String ucode = sto.getUcode();
+		
+		sbHtml.append( "<tr>" );
+		sbHtml.append( "	<td>" );
+		sbHtml.append( "  		<div class=\"d-flex px-2 py-1\">");  
+		sbHtml.append( "    		<div class=\"d-flex flex-column justify-content-center\">");
+		sbHtml.append( "      			<h6 class=\"mb-0 text-sm\">" + name + "</h6>"); 
+		sbHtml.append( "    		</div>");
+		sbHtml.append( "  		</div>");
+		sbHtml.append( "	</td>");
+		sbHtml.append( "	<td>");              
+		sbHtml.append( "  		<p class=\"text-xs font-weight-bold mb-0\">" + id + "</p>");
+		sbHtml.append( "	</td>");
+		sbHtml.append( "	<td>");
+		sbHtml.append( "  		<p class=\"text-xs font-weight-bold mb-0\">" + email + "</p>");                 
+		sbHtml.append( "	</td>");
+		sbHtml.append( "	<td class=\"align-middle text-center text-sm\">");
+		sbHtml.append( "		<span>" + birth + "</span>");
+		sbHtml.append( "	</td>");
+		sbHtml.append( "	<td class=\"align-middle text-center\">");
+		sbHtml.append( "  		<span class=\"text-secondary text-xs font-weight-bold\">" + gen + "</span>");
+		sbHtml.append( "	</td>");
+		sbHtml.append( "	<td class=\"align-middle\">");
+		sbHtml.append( "  		<a href='./admin_users_view.do?cpage=" + cpage + "&ucode=" + ucode + "' class=\"text-secondary font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Edit user\">");
+		sbHtml.append( "    		Edit");
+		sbHtml.append( "  		</a>");
+		sbHtml.append( "	</td>");
+		sbHtml.append( "</tr>");
+	}
+%>
 
 <!DOCTYPE html>
 <html>
@@ -149,6 +206,7 @@
                     </tr>
                   </thead>
                   <tbody>
+                  	<!--  
                     <tr>
                       <td>
                         <div class="d-flex px-2 py-1">  
@@ -337,7 +395,8 @@
                         </a>
                       </td>
                     </tr>
-                    
+                    -->
+                    <%=sbHtml.toString() %>
                   </tbody>
                 </table>
               </div>
@@ -348,39 +407,29 @@
           <!-- 페이징 버튼 -->
           <div class="pagenu">
           <ul class="pagination pagination-info">
-		    <li class="page-item">
-		      <a class="page-link" href="#link" aria-label="Previous">
-		        <span aria-hidden="true">
-		          <span class="material-icons">
-		            keyboard_arrow_left
-		          </span>
-		        </span>
-		      </a>
-		    </li>
-		    <li class="page-item">
-		      <a class="page-link" href="#link">1</a>
-		    </li>
-		    <li class="page-item active">
-		      <a class="page-link" href="#link">2</a>
-		    </li>
-		    <li class="page-item">
-		      <a class="page-link" href="#link">3</a>
-		    </li>
-		    <li class="page-item">
-		      <a class="page-link" href="#link">4</a>
-		    </li>
-		    <li class="page-item">
-		      <a class="page-link" href="#link">5</a>
-		    </li>
-		    <li class="page-item">
-		      <a class="page-link" href="#link" aria-label="Next">
-		        <span aria-hidden="true">
-		          <span class="material-icons">
-		            keyboard_arrow_right
-		          </span>
-		        </span>
-		      </a>
-		    </li>
+          
+<%
+			if ( cpage == 1 ){
+				out.println( "<li class='page-item'><a class='page-link' href='#link' aria-label='Previous'><span aria-hidden='true'><span class='material-icons'> keyboard_arrow_left </span></span></a></li>");
+			} else {
+				out.println( "<li class='page-item'><a class='page-link' href='admin_users.do?cpage=" + (cpage-1) + "' aria-label='Previous'><span aria-hidden='true'><span class='material-icons'> keyboard_arrow_left </span></span></a></li>");
+			}
+
+			for ( int i=startBlock; i<=endBlock; i++ ) {
+				if ( cpage == i ) { 
+					out.println("<li class='page-item'><a class='page-link' href='#link'>" + i + "</a>");
+				} else {
+					out.println("<li class='page-item'><a class='page-link' href='admin_users.do?cpage=" + i + "'>");
+				}
+			}
+			
+			if ( cpage == totalPage ) {
+				out.println("<li class='page-item'><a class='page-link' href='#link' aria-label='Next'><span aria-hidden='true'><span class='material-icons'>keyboard_arrow_right</span></span></a></li>");
+			} else {
+				out.println("<li class='page-item'><a class='page-link' href='admin_users.do?cpage=" + (cpage+1) + "' aria-label='Next'><span aria-hidden='true'><span class='material-icons'>keyboard_arrow_right</span></span></a></li>");
+			}
+%>
+		   
           </ul>
          </div> 
           
