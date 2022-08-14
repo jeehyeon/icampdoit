@@ -1,3 +1,5 @@
+<%@page import="com.exam.search.CampviewCmtTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.exam.search.SearchkeyTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -9,6 +11,19 @@ if(session.getAttribute("id") != null){
 	ucode = (int)session.getAttribute("ucode");
 	id = (String)session.getAttribute("id");
 }
+//사진데이터
+StringBuilder imghtml = new StringBuilder();
+ArrayList<SearchkeyTO> lists = (ArrayList<SearchkeyTO>)request.getAttribute("lists");
+for(SearchkeyTO ito : lists){
+	if(ito.getImageUrl() == null || ito.getImageUrl().equals("default")){
+		imghtml.append("<div class=\"col-lg-4 col-6 px-1 mb-2\"><a href=\"./resources/bootstrap-5/html/img/noimage.svg\" data-fancybox=\"gallery\"><img class=\"img-fluid\" src=\"./resources/bootstrap-5/html/img/noimage.svg\" alt=\"...\"></a></div>");
+	}else{
+		imghtml.append("<div class=\"col-lg-4 col-6 px-1 mb-2\"><a href=\""+ito.getImageUrl() +"\" data-fancybox=\"gallery\"><img class=\"img-fluid\" src=\""+ito.getImageUrl() +"\" alt=\"...\"></a></div>");
+	}
+}
+
+
+
 
 SearchkeyTO kto = (SearchkeyTO)request.getAttribute("kto");
 
@@ -33,28 +48,106 @@ if(kto.getIntro().equals("default")){
 	intro = kto.getIntro();
 };
 
+//홈페이지
+String homepage="";
+if(kto.getHomepage().equals("default")){
+	homepage = " ";
+}else if(kto.getHomepage().indexOf("http") != -1){
+	homepage = kto.getHomepage();
+}else{
+	homepage = " ";
+}
+//주요 시설
+
+String induty="";
+if(kto.getInduty().equals("default")){
+	induty = "정보 없음";
+}else{
+	induty = kto.getInduty();
+}
+
+//입지
+String lctCl="";
+if(kto.getLctCl().equals("default")){
+	lctCl = "정보 없음";
+}else{
+	lctCl = kto.getLctCl();
+}
+
+//바닥형태
+String siteBottom=" ";
+
+if(!kto.getSiteBottomCl1().equals("0")){
+	siteBottom += "잔디/";
+}
+if(!kto.getSiteBottomCl2().equals("0")){
+	siteBottom += "파쇄석/";
+}
+if(!kto.getSiteBottomCl3().equals("0")){
+	siteBottom += "테크/";
+}
+if(!kto.getSiteBottomCl4().equals("0")){
+	siteBottom += "자갈/";
+}
+if(!kto.getSiteBottomCl5().equals("0")){
+	siteBottom += "맨흙/";
+}
+siteBottom = siteBottom.substring(0, siteBottom.length()-1);
+
+//캠핑장비 대여
+String eqpmnLendCl="";
+if(kto.getEqpmnLendCl().equals("default")){
+	eqpmnLendCl = "정보 없음";
+}else{
+	eqpmnLendCl = kto.getEqpmnLendCl();
+}
+
+//애완동물/개인트레일러/개인카라반
+String petCaravan=" ";
+if(kto.getAnimalCmgCl().equals("default")){
+	petCaravan += "반려동물 : 정보 없음/";
+}else{
+	petCaravan += "반려동물 : "+kto.getAnimalCmgCl()+"/";
+}
+
+if(kto.getTrlerAcmpnyAt().equals("Y")){
+	petCaravan += "개인 트레일러 가능/";
+}else{
+	petCaravan += "개인 트레일러 불가능/";
+}
+
+if(kto.getCaravAcmpnyAt().equals("Y")){
+	petCaravan += "개인 카라반 가능/";
+}else{
+	petCaravan += "개인 카라반 불가능/";
+}
+petCaravan = petCaravan.substring(0, petCaravan.length()-1);
+
+
+
+
 //캠핑장 시설정보
 StringBuilder campInfo1 = new StringBuilder();
 StringBuilder campInfo2 = new StringBuilder();
  
 kto.getSbrsCl();
 if(kto.getSbrsCl().indexOf("전기") != -1){
-	System.out.println("전기있음");
+	//System.out.println("전기있음");
 	campInfo1.append( "<li class=\"mb-2\"> <i class=\"fa fa-bolt text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">전기</span></li>");
 }
 
 if(kto.getSbrsCl().indexOf("와이파이") != -1){
-	System.out.println("와이파이");
+	//System.out.println("와이파이");
 	campInfo1.append( "<li class=\"mb-2\"> <i class=\"fa fa-wifi text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">와이파이</span></li>");
 };
 
 if(kto.getSbrsCl().indexOf("온수") != -1){
-	System.out.println("온수");
+	//System.out.println("온수");
 	campInfo1.append( "<li class=\"mb-2\"> <i class=\"fa fa-solid fa-shower text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">온수</span></li>");
 };
 
 if(kto.getSbrsCl().indexOf("물놀이장") != -1){
-	System.out.println("물놀이장");
+	//System.out.println("물놀이장");
 	campInfo1.append( "<li class=\"mb-2\"> <i class=\"fa fa-regular fa-water text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">물놀이장</span></li>");
 };
 
@@ -71,6 +164,27 @@ if(kto.getSbrsCl().indexOf("운동시설") != -1){
 if(kto.getSbrsCl().indexOf("마트") != -1 || kto.getSbrsCl().indexOf("편의점") != -1){
 	campInfo2.append( "<li class=\"mb-2\"> <i class=\"fa fa-regular fa-store text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">마트,편의점</span></li>");
 };
+
+
+
+//댓글 부분
+ArrayList<CampviewCmtTO> clists= (ArrayList<CampviewCmtTO>)request.getAttribute("clists");
+StringBuilder cmthtml = new StringBuilder();
+for(CampviewCmtTO cto : clists){
+	cmthtml.append("<div class=\"d-flex d-block d-sm-flex review\">");
+	cmthtml.append("<div>");
+	cmthtml.append(" <h6 class=\"mt-2 mb-1\">"+cto.getWriter()+"</h6>");
+	cmthtml.append(" <div class=\"mb-2\">");
+	for(int i=0; i<Integer.parseInt(cto.getMark()); i++){
+		cmthtml.append("<i class=\"fa fa-xs fa-star text-primary\"></i>");
+	};
+	cmthtml.append("</div>");
+	cmthtml.append("<p class=\"text-muted text-sm\">"+cto.getContent() +"</p>");
+	cmthtml.append("</div>");
+	cmthtml.append("</div>");
+	
+}
+
 %>
 
 <!DOCTYPE html>
@@ -173,6 +287,7 @@ if(kto.getSbrsCl().indexOf("마트") != -1 || kto.getSbrsCl().indexOf("편의점
           <div class="text-block">
             <p class="text-primary" style="font-family: 'GmarketSansMedium';"><i class="fa-map-marker-alt fa me-1"></i><%=titleaddr%></p>
             <h1 style="font-family: 'GmarketSansBold';"><%=kto.getFacltNm()%></h1>
+            <h8 style="font-family: 'GmarketSansBold';"><a href="<%=homepage%>"><%=homepage%></a></h8>
             <br />
             
             
@@ -234,35 +349,35 @@ if(kto.getSbrsCl().indexOf("마트") != -1 || kto.getSbrsCl().indexOf("편의점
                 <tbody>
                   <tr>
                     <td class="fw-bold" style="font-family: 'GmarketSansMedium';">주요시설</td>
-                    <td>일반야영장 / 자동차야영장사이트 / 카라반 / 개인카라반사이트</td>
+                    <td><%=kto.getInduty() %></td>
                     <td class="text-end"></td>
                     <td class="text-center"></td>
                     <td class="text-end"></td>
                   </tr>
                   <tr>
                     <td class="fw-bold" style="font-family: 'GmarketSansMedium';">입지</td>
-                    <td>섬 / 강</td>
+                    <td><%=lctCl%></td>
                     <td class="text-end"></td>
                     <td class="text-center"></td>
                     <td class="text-end"></td>
                   </tr>
                   <tr>
                     <td class="fw-bold" style="font-family: 'GmarketSansMedium';">바닥형태</td>
-                    <td>테크 / 맨흙</td>
+                    <td><%=siteBottom%></td>
                     <td class="text-end"></td>
                     <td class="text-center"></td>
                     <td class="text-end"></td>
                   </tr>
                   <tr>
                     <td class="fw-bold" style="font-family: 'GmarketSansMedium';">캠핑장비 대여</td>
-                    <td>화로대</td>
+                    <td><%=eqpmnLendCl %></td>
                     <td class="text-end"></td>
                     <td class="text-center"></td>
                     <td class="text-end"></td>
                   </tr>
                   <tr>
                     <td class="fw-bold" style="font-family: 'GmarketSansMedium';">기타정보</td>
-                    <td>개인 트레일러 입장가능 / 반려동물 동반 불가능</td>
+                    <td><%=petCaravan %></td>
                     <td class="text-end"></td>
                     <td class="text-center"></td>
                     <td class="text-end"></td>
@@ -276,22 +391,14 @@ if(kto.getSbrsCl().indexOf("마트") != -1 || kto.getSbrsCl().indexOf("편의점
            <div class="text-block">
 	         <h4 class="mb-4" style="font-family: 'GmarketSansMedium';">갤러리</h4>
 	         <div class="row gallery mb-3 ms-n1 me-n1">
-	            <div class="col-lg-4 col-6 px-1 mb-2"><a href="./resources/bootstrap-5/html/img/photo/자라1.jpg" data-fancybox="gallery" title="Our street"><img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/자라1.jpg" alt="..."></a></div>
-	            <div class="col-lg-4 col-6 px-1 mb-2"><a href="./resources/bootstrap-5/html/img/photo/자라2.jpg" data-fancybox="gallery" title="Outside"><img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/자라2.jpg" alt="..."></a></div>
-	            <div class="col-lg-4 col-6 px-1 mb-2"><a href="./resources/bootstrap-5/html/img/photo/자라3.jpg" data-fancybox="gallery" title="Rear entrance"><img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/자라3.jpg" alt="..."></a></div>
-	            <div class="col-lg-4 col-6 px-1 mb-2"><a href="./resources/bootstrap-5/html/img/photo/자라4.jpg" data-fancybox="gallery" title="Kitchen"><img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/자라4.jpg" alt="..."></a></div>
-	            <div class="col-lg-4 col-6 px-1 mb-2"><a href="./resources/bootstrap-5/html/img/photo/자라5.jpg" data-fancybox="gallery" title="Bedroom"><img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/자라5.jpg" alt="..."></a></div>
-	            <div class="col-lg-4 col-6 px-1 mb-2"><a href="./resources/bootstrap-5/html/img/photo/자라6.jpg" data-fancybox="gallery" title="Bedroom"><img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/자라6.jpg" alt="..."></a></div>
+	            <%=imghtml.toString()%>
 	         </div>
            </div>
           
            <!-- 리뷰 댓글보기 -->
            <div class="text-block">
 	         <h4 class="mb-4" style="font-family: 'GmarketSansMedium';">평점리뷰</h4>
-	         <div class="d-flex d-block d-sm-flex review">
-              <!--
-              <div class="text-md-center flex-shrink-0 me-4 me-xl-5"><img class="d-block avatar avatar-xl p-2 mb-2" src="img/avatar/avatar-8.jpg" alt="PadmÃ© Amidala"><span class="text-uppercase text-muted text-sm">Dec 2018</span></div>
-              -->
+	         <!-- <div class="d-flex d-block d-sm-flex review">  
               <div>
                 <h6 class="mt-2 mb-1">rina</h6>
                 <div class="mb-2"><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i>
@@ -299,46 +406,20 @@ if(kto.getSbrsCl().indexOf("마트") != -1 || kto.getSbrsCl().indexOf("편의점
                 <p class="text-muted text-sm">잘 다녀갑니다. 재방문 의사 있어요.     </p>
               </div>
 	         </div>
-	         <div class="d-flex d-block d-sm-flex review">
+	         <div class="d-flex d-block d-sm-flex review"> -->
               <!--
               <div class="text-md-center flex-shrink-0 me-4 me-xl-5"><img class="d-block avatar avatar-xl p-2 mb-2" src="img/avatar/avatar-2.jpg" alt="Luke Skywalker"><span class="text-uppercase text-muted text-sm">Dec 2018</span></div>
               -->
-	          <div>
-                <h6 class="mt-2 mb-1">byeongchan</h6>
-                <div class="mb-2"><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-gray-200"></i>
-                </div>
-                <p class="text-muted text-sm">시설이 편리하게 되어있어 좋았습니다.     </p>
-              </div>
-            </div>
-            <div class="d-flex d-block d-sm-flex review">
-              <!--
-              <div class="text-md-center flex-shrink-0 me-4 me-xl-5"><img class="d-block avatar avatar-xl p-2 mb-2" src="img/avatar/avatar-3.jpg" alt="Princess Leia"><span class="text-uppercase text-muted text-sm">Dec 2018</span></div>
-              -->
-              <div>
-                <h6 class="mt-2 mb-1">soyeon</h6>
-                <div class="mb-2"><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-gray-200"></i><i class="fa fa-xs fa-star text-gray-200"></i>
-                </div>
-                <p class="text-muted text-sm">깔끔하고 좋아요.     </p>
-              </div>
-            </div>
-            <div class="d-flex d-block d-sm-flex review">
-              <!--
-              <div class="text-md-center flex-shrink-0 me-4 me-xl-5"><img class="d-block avatar avatar-xl p-2 mb-2" src="img/avatar/avatar-4.jpg" alt="Jabba Hut"><span class="text-uppercase text-muted text-sm">Dec 2018</span></div>
-              -->
-              <div>
-                <h6 class="mt-2 mb-1">jeehyeon</h6>
-                <div class="mb-2"><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i>
-                </div>
-                <p class="text-muted text-sm">힐링하고 갑니다! 자라섬 캠핑장 추천해요!    </p>
-              </div>
-	         </div>
+	          <%=cmthtml.toString()%>
+            
 	         
 	         <!-- 리뷰 등록 -->
 	         <div class="py-5">
               <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#leaveReview" aria-expanded="false" aria-controls="leaveReview">리뷰남기기</button>
               <div class="collapse mt-4" id="leaveReview">
                 <!--<h5 class="mb-4">Leave a review</h5>-->
-                <form class="form" id="contact-form" method="get" action="#">
+                <form class="form" id="contact-form" method="post">
+                <input type="hidden" name="contentId" value="<%=kto.getContentId()%>"/>
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="mb-4">
@@ -357,7 +438,7 @@ if(kto.getSbrsCl().indexOf("마트") != -1 || kto.getSbrsCl().indexOf("편의점
                     <label class="form-label" for="review">리뷰내용 *</label>
                     <textarea class="form-control" rows="4" name="review" id="review" placeholder="리뷰를 남겨주세요." required="required"></textarea>
                   </div>
-                  <button class="btn btn-primary" type="submit">리뷰 등록</button>
+                  <button class="btn btn-primary" onclick="cmtInsert()">리뷰 등록</button>
                 </form>
               </div>
 	         </div>
@@ -416,6 +497,37 @@ if(kto.getSbrsCl().indexOf("마트") != -1 || kto.getSbrsCl().indexOf("편의점
       // https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg
       //- injectSvgSprite('${path}icons/orion-svg-sprite.svg'); 
       injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg'); 
+      
+      function cmtInsert() {
+
+	  		var formdata = $("#contact-form").serialize() ;
+	  		
+	  		
+	      		$.ajax({
+	      			url: './campviewCmt.do',
+	      			type: 'post',
+	      			data : formdata,
+	      			dataType : 'text',
+	      			success: function(data){
+	      				if(data == "2"){
+	      					alert("로그인이 필요합니다.");
+	      				}else if(data == "0"){
+	      					alert("리뷰 달기 성공");
+	      					location.reload();
+	      				}else{
+	      					alert("리뷰 달기 실패");
+	      				}
+	      				
+	      			}, 
+	      			fail: function(error){
+	          			alert('댓글달기 실패' );
+	      		}
+	      	});
+  	    	
+      
+  	}
+      
+      
       
     </script>
     <!-- jQuery-->
