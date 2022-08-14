@@ -190,12 +190,12 @@ public class NBoardDAO {
 		return to;	
 	}
 	
-	//게시글 삭제메서드
+	//게시글 파일체크
 	public NFileTO nboardDelFileCheck(NBoardTO to) {
 		//삭제했을 경우 임시 파일 삭제
 		//System.out.println("파일삭제 메서드 : " + filename);
 		NFileTO fto = new NFileTO();
-		String sql = "select filename from n_file where pseq=?";
+		String sql = "select filename from n_file where nseq=?";
 		try {
 			fto = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<NFileTO>(NFileTO.class), to.getSeq() );
 		} catch (DataAccessException e) {
@@ -212,14 +212,14 @@ public class NBoardDAO {
 		//System.out.println("파일삭제 메서드 : " + filename);
 		int flag = 1;
 		
-		String sql = "delete from n_file where pseq=?";
+		String sql = "delete from n_file where nseq=?";
 		int result = jdbcTemplate.update(sql, to.getSeq());
 					System.out.println(result);
-
+		System.out.println("fileDBDel flag : " + flag);
 		if( result != 1 ) {
 			System.out.println("filedbDel() 오류");
 		}else {
-			flag=0;
+			flag = 0;
 		}
 		
 		return flag;

@@ -15,4 +15,5 @@ public class NBoardTO {
 	private String hit;
 	private int ucode;
 	private String vcode;
+	
 }

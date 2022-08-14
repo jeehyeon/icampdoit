@@ -25,9 +25,7 @@
 	System.out.println("관리자페이지 말머리 리스트 : " + request.getAttribute( "subjectValue" ));
 	
 	String subjectValue = (String)request.getAttribute( "subjectValue" );
-	
-	//String subject = subjectValue;
-	
+		
 	ArrayList<AdminTO> lists = listTO.getBoardLists();
 	
 	StringBuilder sbHtml = new StringBuilder();
@@ -66,14 +64,12 @@
 		sbHtml.append( "<td class='align-middle text-center text-sm'><a href='admin_board_modify.do?cpage=" + cpage + "&seq=" + seq + "&subjectValue=" + subjectValue + "'><span>" + wdate + "</span></td>" );
 		sbHtml.append( "<td class='align-middle text-center'><a href='admin_board_modify.do?cpage=" + cpage + "&seq=" + seq + "&subjectValue=" + subjectValue + "'><span class='text-secondary text-sm font-weight-bold'>" + hit + "</span></td>" );
 		sbHtml.append( "<td class='align-middle text-center'>" );
-		sbHtml.append( "<a href='./nboarddelete_ok.do?viewseq=" + seq + "' class='dbtn font-weight-bold text-sm' data-toggle='tooltip' data-original-title='Edit user'>" );
+		sbHtml.append( "<a href='./aboarddelete_ok.do?viewseq=" + seq + "&subjectValue=" + subjectValue + "' class='dbtn font-weight-bold text-sm' data-toggle='tooltip' data-original-title='Edit user'>" );
 		sbHtml.append( "<button type='button' id='dbtn' name='dbtn' style='height:35px;width:75px;' class='btn btn-xs me-1 bg-gradient-dark ps-3v'>삭제</button>" );
-		//sbHtml.append( "<a href=''><button type='button' style='height:40px;width:70px' class='btn btn-xs me-1 bg-gradient-dark'>삭제</button>" );
 		sbHtml.append( "</a>" );
 		sbHtml.append( "</td>" );
 		sbHtml.append( "</tr>" );
 	}
-	// <a href='admin_board_modify.do?cpage=" + cpage + "&seq=" + seq + "'>
 
 %>
   
@@ -144,11 +140,11 @@
 			  </a>
 			</li>			  			
 			<li class="nav-item">
-			  <a class="nav-link text-white ">			    
+			  <a class="nav-link text-white " href='./logout.do'">			    
 			      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 			        <i class="material-icons opacity-10">logout</i>
 			      </div>			    
-			    <span class="nav-link-text ms-1">Log out</span>
+			    <span class="nav-link-text ms-1" >Log out</span>
 			  </a>
 			</li>    
 		  </ul>
@@ -360,27 +356,6 @@
   <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
    
    <script type="text/javascript">
-    <%-- window.onload =function(){ 	   
-  	   //게시글 삭제 버튼
-  	    $("#dbtn").on("click", function() {
-  		 	var viewUcode = $("#viewUcode").val();
-   			var viewSeq = $("#viewSeq").val();
-   			var sessionUcode = <%=(Integer)session.getAttribute("ucode")%>;
-   			console.log(sessionUcode);
-   			
-   			if(viewUcode == sessionUcode){
-   				//삭제 진행
-   				if(confirm("게시글을 삭제 하시겠습니까?")){
-
-   	  				location.href='./nboarddelete_ok.do?viewseq='+ viewSeq;
-   				}
-   			}else{
-   				//삭제 불가
-   				alert("삭제 권한이 없습니다.");
-   			}
-      
-  	    })
-    }; --%>
         	
     	function changeSubject(){
     		var subjectValue = $( "#form_sort option:selected" ).val();

@@ -193,8 +193,13 @@
                     <div class="mb-4 col-md-6">
                       <label class="form-label" for="phone">성별</label>
                       <select class="selectpicker form-control" name="gen" id="gen" data-style="btn-selectpicker" value="<%=gen%>">
-                      	<option value="남">남    </option>
-                        <option value="여">여    </option>
+                      	<%if( gen.equals("여")){ %>
+				     		<option value="여" selected>여</option>
+				     		<option value="남">남</option>
+				     	<% } else { %>
+				       		<option value="여" >여</option>
+				     		<option value="남" selected>남</option>
+				     	<% } %>
                       </select>
                     </div>
                     <div class="mb-4 col-md-6">
