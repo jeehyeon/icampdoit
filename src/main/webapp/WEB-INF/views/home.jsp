@@ -41,6 +41,8 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!-- Font Awesome 이거 추가함 -->
+    <script src="https://kit.fontawesome.com/5251502df3.js" crossorigin="anonymous"></script>
   </head>
   <body style="padding-top: 72px;">
     <header class="header">
@@ -128,7 +130,7 @@
                     <input class="form-control border-0 shadow-0" type="text" name="keysearch" id="keysearch" placeholder="키워드 검색">
                   </div>
                   <div class="col-lg-3 d-flex align-items-center form-group no-divider">
-                    <button type="button" class="btn btn-outline-light text-dark" id="filteringButton" data-style="btn-form-control" data-bs-toggle="modal" data-bs-target="#filteringModal">
+                    <button type="button" class="btn btn-outline-white" id="filteringButton" data-style="btn-form-control" data-bs-toggle="modal" data-bs-target="#filteringModal"><i class="fa-solid fa-magnifying-glass-plus"></i>
                       캠핑장 상세 조건 검색
                     </button>
                   </div>
@@ -144,22 +146,22 @@
     </section>
     
     <!-- 상세보기 팝업 -->
+    <form id="campSearchForm" action="./searchkey.do" method="get">
     <div class="modal fade" id="filteringModal">
 		<div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
 					
 				<!-- Modal Header -->
 				<div class="modal-header">
-					<h4 class="modal-title">캠핑장 상세조건을 설정해주세요</h4>
+					<h4 class="modal-title" style="font-family: 'GmarketSansBold';"><img src="./resources/bootstrap-5/html/img/photo/캠핑아이콘.png">&nbsp;&nbsp;캠핑장 상세조건을 설정해주세요.</h4>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 				</div>
 					
 				<!-- Modal body -->
 				<div class="modal-body">
-					<form id="campSearchForm" action="./searchkey.do" method="get">
 						<!-- 지역 필터링 -->
 						<div class="form-group row" id="locationFilter">
-							<div class="col-sm-2"><strong>지역</strong></div>
+							<div class="col-sm-2" style="font-family: 'GmarketSansBold';">&nbsp;<strong>지역</strong></div>
 							<div class="col-sm-10">
 								<div class="form-check form-check-inline">
 									<input class="form-check-input" type="checkbox" id="locationSeoul">
@@ -184,7 +186,7 @@
 						<br>
 						<!-- 시설 종류 -->
 						<div class="form-group row" id="typeFilter">
-							<div class="col-sm-2"><strong>시설 종류</strong></div>
+							<div class="col-sm-2" style="font-family: 'GmarketSansBold';">&nbsp;<strong>시설 종류</strong></div>
 							<div class="col-sm-10">
 								<div class="form-check form-check-inline">
 									<input class="form-check-input" type="checkbox" id="typeCamping">
@@ -215,7 +217,7 @@
 						<br>
 						<!-- 입지 -->
 						<div class="form-group row" id="placeFilter">
-							<div class="col-sm-2"><strong>입지</strong></div>
+							<div class="col-sm-2" style="font-family: 'GmarketSansBold';">&nbsp;<strong>입지</strong></div>
 							<div class="col-sm-10">
 								<div class="form-check form-check-inline">
 									<input class="form-check-input" type="checkbox" id="placeMountain">
@@ -270,7 +272,7 @@
 						<br>
 						<!-- 바닥형태 -->
 						<div class="form-group row" id="floorFilter">
-							<div class="col-sm-2"><strong>바닥 형태</strong></div>
+							<div class="col-sm-2" style="font-family: 'GmarketSansBold';">&nbsp;<strong>바닥 형태</strong></div>
 							<div class="col-sm-10">
 								<div class="form-check form-check-inline">
 									<input class="form-check-input" type="checkbox" id="floorGrass">
@@ -307,7 +309,7 @@
 						<br>
 						<!-- 부대시설 -->
 						<div class="form-group row" id="facilityFilter">
-							<div class="col-sm-2"><strong>부대 시설</strong></div>
+							<div class="col-sm-2" style="font-family: 'GmarketSansBold';">&nbsp;<strong>부대 시설</strong></div>
 							<div class="col-sm-10">
 								<div class="form-check form-check-inline">
 									<input class="form-check-input" type="checkbox" id="facElectro">
@@ -380,7 +382,7 @@
 						<br>
 						<!-- 캠핑장비 대여 -->
 						<div class="form-group row" id="rentFilter">
-							<div class="col-sm-2"><strong>캠핑장비 대여</strong></div>
+							<div class="col-sm-2" style="font-family: 'GmarketSansBold';">&nbsp;<strong>캠핑장비 대여</strong></div>
 							<div class="col-sm-10">
 								<div class="form-check form-check-inline">
 									<input class="form-check-input" type="checkbox" id="rentTent">
@@ -423,7 +425,7 @@
 						<br>
 						<!-- 기타정보 -->
 						<div class="form-group row" id="etcFilter">
-							<div class="col-sm-2"><strong>기타정보</strong></div>
+							<div class="col-sm-2" style="font-family: 'GmarketSansBold';">&nbsp;<i class="fa-solid fa-period"></i><strong>기타정보</strong></div>
 							<div class="col-sm-10">
 								<div class="form-check form-check-inline">
 									<input class="form-check-input" type="checkbox" id="etcTrailer">
@@ -445,23 +447,24 @@
 								</div>					
 							</div>
 						</div>
-					</form>
 				</div>
 					
 				<!-- Modal footer -->
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-bs-dismiss="modal">검색하기</button>
+				<div class="modal-footer justify-content-between">
+					<button type="button" class="btn btn-dark" id="allNonChk">&nbsp;&nbsp;초기화&nbsp;&nbsp;</button>
+					<button type="submit" class="btn btn-primary text-white" id="detailSearch">&nbsp;&nbsp;검색하기&nbsp;&nbsp;</button>
 				</div>
 			</div>
 		</div>
 	</div>
+	</form>
 	
 <!-- 소연 시작 -->
 	<section class="py-6">
       <div class="container">
         <div class="row mb-5">
           <div class="col-md-8">
-            <p class="subtitle text-primary" style="font-family: 'Recipekorea';"><font size=-1>MOST POPULAR CAMPSITES</font></p>
+            <p class="subtitle text-primary">MOST POPULAR CAMPSITES</p>
             <h2 style="font-family: 'Recipekorea';">캠핑장 조회수 TOP 5</h2>
           </div>
           <div class="col-md-4 d-lg-flex align-items-center justify-content-end"><a class="text-muted text-sm" href="./searchkey.do" style="font-family: 'BMJUA';">
@@ -787,6 +790,16 @@
       injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg'); 
       
     </script>
+    
+    <script type="text/javascript">
+ 	window.onload = function() {
+ 		// 전체 선택해제
+ 		document.getElementById( 'allNonChk' ).onclick = function() {
+ 			 $(":checkbox").prop("checked",false);
+ 		}
+ 	}
+  	</script>
+  	
     <!-- jQuery-->
     <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
     <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->

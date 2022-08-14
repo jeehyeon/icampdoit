@@ -14,6 +14,11 @@
 	//키워드검색 캠핑장 목록
 	ArrayList<SearchkeyTO> datas = (ArrayList<SearchkeyTO>)request.getAttribute( "datas" );
 
+	String keysearch = request.getParameter("keysearch");
+	if( keysearch == null || keysearch == "") {
+		keysearch = "키워드나&nbsp;캠핑장&nbsp;이름을&nbsp;입력해주세요.";
+	}
+	
 	int totalRecord = datas.size();
 	System.out.println( "토탈: " + totalRecord );
 	
@@ -24,30 +29,9 @@
 		String facltNm = kto.getFacltNm();
 		String induty = kto.getInduty();
 		String addr1 = kto.getAddr1();
-		/*
-		String regex = "[0-9]+";
-		if( addr1.matches(regex) ) {
-			addr1 = kto.getDoNm() + " " + kto.getSigunguNm() + " " + kto.getAddr1();
-		}
-		
-		if( addr1.indexOf("시") == -1 || addr1.indexOf("도") == -1 ){
-			addr1 = kto.getDoNm() + " " + kto.getSigunguNm() + " " + kto.getAddr1();
-		}
-		
-		if( addr1.indexOf("시") == -1 && addr1.indexOf("도") == -1 && addr1.indexOf("[0-9]+") == -1 ){
-			addr1 = kto.getDoNm() + " " + kto.getSigunguNm() + " " + kto.getAddr1();
-	
-		}
-		if( addr1.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*") == false ){
-			addr1 = kto.getDoNm() + " " + kto.getSigunguNm() + " " + kto.getAddr1();
-		} else if ( addr1.matches("^[가-힣]+$") ) {
-			addr1 = kto.getDoNm() + " " + kto.getSigunguNm() + " " + kto.getAddr1();
-		}
-		*/
 		if( addr1.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*") == false ){
 			addr1 = kto.getDoNm() + " " + kto.getSigunguNm() + " " + kto.getAddr1();
 		}
-		
 		String firstImageUrl = kto.getFirstImageUrl();
 		if( firstImageUrl.equals("default") ) {
 			firstImageUrl = "./resources/bootstrap-5/html/img/noimage.svg";
@@ -180,13 +164,13 @@
     <div class="container-fluid py-5 px-lg-5">
       <div class="row">
         <div class="col-lg-3 pt-3">
-          <form class="pe-xl-3" action="#" autocomplete="off">
+          <form class="pe-xl-3" action="./searchkey.do" autocomplete="off">
             <div class="mb-4">   
-              <label class="form-label" for="keyword">키워드</label>
-              <input class="form-control" type="text" name="keysearch" id="keysearch" placeholder="키워드나 캠핑장 이름을 입력해주세요.">
+              <label class="form-label" for="keyword" style="font-family: 'GmarketSansBold';'"><font size=+0.5>키워드</font></label>
+              <input class="form-control" type="text" name="keysearch" id="keysearch" placeholder=<%=keysearch %>>
             </div>
             <div class="mb-4">
-				<label class="form-label">업종</label>
+				<label class="form-label" style="font-family: 'GmarketSansBold';'"><font size=+0.5>업종</font></label>
                 <ul class="list-inline mt-xl-1 mb-0">
                       <li class="list-inline-item">
                         <div class="form-check">
@@ -215,7 +199,7 @@
                 </ul>
             </div>
              <div class="mb-4">
-				<label class="form-label">입지</label>
+				<label class="form-label" style="font-family: 'GmarketSansBold';'"><font size=+0.5>입지</font></label>
                 <ul class="list-inline mt-xl-1 mb-0">
                       <li class="list-inline-item">
                         <div class="form-check">
@@ -268,7 +252,7 @@
                 </ul>
             </div>
             <div class="mb-4">
-				<label class="form-label">바닥 형태</label>
+				<label class="form-label" style="font-family: 'GmarketSansBold';'"><font size=+0.5>바닥 형태</font></label>
                 <ul class="list-inline mt-xl-1 mb-0">
                       <li class="list-inline-item">
                         <div class="form-check">
@@ -303,7 +287,7 @@
                 </ul>
             </div>
             <div class="mb-4">
-				<label class="form-label">부대 시설</label>
+				<label class="form-label" style="font-family: 'GmarketSansBold';'"><font size=+0.5>부대 시설</font></label>
                 <ul class="list-inline mt-xl-1 mb-0">
                       <li class="list-inline-item">
                         <div class="form-check">
@@ -317,12 +301,14 @@
                           <label class="form-check-label" for="facWarmwater">온수                                            </label>
                         </div>
                       </li>
+                      <!--  
                       <li class="list-inline-item">
                         <div class="form-check">
                           <input class="form-check-input" type="checkbox" id="facPlay" name="type[]">
                           <label class="form-check-label" for="facPlay">놀이터                                            </label>
                         </div>
                       </li>
+                      -->
                       <li class="list-inline-item">
                         <div class="form-check">
                           <input class="form-check-input" type="checkbox" id="facGym" name="type[]">
@@ -341,12 +327,14 @@
                           <label class="form-check-label" for="facWood">장작판매                                            </label>
                         </div>
                       </li>
+                      <!-- 
                       <li class="list-inline-item">
                         <div class="form-check">
                           <input class="form-check-input" type="checkbox" id="facTrampoline" name="type[]">
                           <label class="form-check-label" for="facTrampoline">트램폴린                                            </label>
                         </div>
                       </li>
+                      -->
                       <li class="list-inline-item">
                         <div class="form-check">
                           <input class="form-check-input" type="checkbox" id="facPool" name="type[]">
@@ -374,7 +362,7 @@
                 </ul>
             </div>
             <div class="mb-4">
-				<label class="form-label">캠핑 장비 대여</label>
+				<label class="form-label" style="font-family: 'GmarketSansBold';'"><font size=+0.5>캠핑 장비 대여</font></label>
                 <ul class="list-inline mt-xl-1 mb-0">
                       <li class="list-inline-item">
                         <div class="form-check">
@@ -415,7 +403,7 @@
                 </ul>
             </div>
             <div class="mb-4"> 
-                  <label class="form-label">기타</label>
+                  <label class="form-label" style="font-family: 'GmarketSansBold';'"><font size=+0.5>기타</font></label>
                   <ul class="list-unstyled mb-0">
                     <li>
                       <div class="form-check">
@@ -437,15 +425,16 @@
                     </li>
                   </ul>
                 </div>
-              <div class="mb-4" style="float:right">
-                <input class="btn btn-primary" type="submit" value="검색하기"/>
-              </div>
+              <div>
+					<button type="button" class="btn btn-dark" id="allNonChk">&emsp;&emsp;&emsp; 초기화 &emsp;&emsp;&emsp;</button>
+					<button type="submit" class="btn btn-primary text-white" style="float:right" id="detailSearch">&emsp;&emsp;&emsp; 검색하기 &emsp;&emsp;&emsp;</button>
+				</div>
           </form>
         </div>
         <div class="col-lg-9">
           <div class="d-flex justify-content-between align-items-center flex-column flex-md-row mb-4">
-            <div class="me-3">
-              <p class="mb-3 mb-md-0">총  <strong><%=totalRecord %></strong> 건</p>
+            <div class="me-3" style="font-family: 'GmarketSansMedium';'">
+              <p class="mb-3 mb-md-0">총  <strong style="font-family: 'GmarketSansBold';'"><%=totalRecord %></strong> 건</p>
             </div>
           </div>
           <div class="row">
@@ -545,6 +534,16 @@
       injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg'); 
       
     </script>
+    
+    <script type="text/javascript">
+ 	window.onload = function() {
+ 		// 전체 선택해제
+ 		document.getElementById( 'allNonChk' ).onclick = function() {
+ 			 $(":checkbox").prop("checked",false);
+ 		}
+ 	}
+  	</script>
+    
     <!-- jQuery-->
     <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
     <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
