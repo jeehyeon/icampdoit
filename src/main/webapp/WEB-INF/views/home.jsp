@@ -146,7 +146,7 @@
     </section>
     
     <!-- 상세보기 팝업 -->
-    <form id="campSearchForm" action="./searchkey.do" method="get">
+    <form id="campSearchForm" action="./searchdetail.do" method="post">
     <div class="modal fade" id="filteringModal">
 		<div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
@@ -160,23 +160,23 @@
 				<!-- Modal body -->
 				<div class="modal-body">
 						<!-- 지역 필터링 -->
-						<div class="form-group row" id="locationFilter">
+						<div class="form-group row" id="doNm">
 							<div class="col-sm-2" style="font-family: 'GmarketSansBold';">&nbsp;<strong>지역</strong></div>
 							<div class="col-sm-10">
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="locationSeoul">
+									<input class="form-check-input" type="checkbox" id="locationSeoul" name="doNmS" value="서울">
 									<label class="from-check-label" for="locationSeoul">
 										서울시
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="locationIncheon">
+									<input class="form-check-input" type="checkbox" id="locationIncheon" name="doNmI" value="인천">
 									<label class="from-check-label" for="locationIncheon">
 										인천시
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="locationGyeonggi">
+									<input class="form-check-input" type="checkbox" id="locationGyeonggi" name="doNmG" value="경기">
 									<label class="from-check-label" for="locationGyeonggi">
 										경기도
 									</label>
@@ -184,30 +184,30 @@
 							</div>
 						</div>
 						<br>
-						<!-- 시설 종류 -->
-						<div class="form-group row" id="typeFilter">
-							<div class="col-sm-2" style="font-family: 'GmarketSansBold';">&nbsp;<strong>시설 종류</strong></div>
+						<!-- 캠핑장 유형 -->
+						<div class="form-group row" id="induty">
+							<div class="col-sm-2" style="font-family: 'GmarketSansBold';">&nbsp;<strong>캠핑 유형</strong></div>
 							<div class="col-sm-10">
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="typeCamping">
+									<input class="form-check-input" type="checkbox" id="typeCamping" name="indutyNor" value="일반야영장">
 									<label class="from-check-label" for="typeCamping">
 										일반 야영장
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="typeCar">
+									<input class="form-check-input" type="checkbox" id="typeCar" name="indutyCar" value="자동차야영장">
 									<label class="from-check-label" for="typeCar">
 										자동차 야영장
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="typeGlamping">
+									<input class="form-check-input" type="checkbox" id="typeGlamping" name="indutyGl" value="글램핑">
 									<label class="from-check-label" for="typeGlamping">
 										글램핑
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="typeCaraban">
+									<input class="form-check-input" type="checkbox" id="typeCaraban" name="indutyVan" value="카라반">
 									<label class="from-check-label" for="typeCaraban">
 										카라반
 									</label>
@@ -216,53 +216,53 @@
 						</div>
 						<br>
 						<!-- 입지 -->
-						<div class="form-group row" id="placeFilter">
+						<div class="form-group row" id="lctCl">
 							<div class="col-sm-2" style="font-family: 'GmarketSansBold';">&nbsp;<strong>입지</strong></div>
 							<div class="col-sm-10">
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="placeMountain">
+									<input class="form-check-input" type="checkbox" id="placeMountain" name="lctClMount" value="산">
 									<label class="from-check-label" for="placeMountain">
 										산
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="placeForest">
+									<input class="form-check-input" type="checkbox" id="placeForest" name="lctClForest" value="숲">
 									<label class="from-check-label" for="placeForest">
 										숲
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="placeStream">
+									<input class="form-check-input" type="checkbox" id="placeStream" name="lctClValley" value="계곡">
 									<label class="from-check-label" for="placeStream">
 										계곡
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="placeCity">
+									<input class="form-check-input" type="checkbox" id="placeCity" name="lctClCity" value="도심">
 									<label class="from-check-label" for="placeCity">
 										도심
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="placeRiver">
+									<input class="form-check-input" type="checkbox" id="placeRiver" name="lctClRiver" value="강">
 									<label class="from-check-label" for="placeRiver">
 										강
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="placeLake">
+									<input class="form-check-input" type="checkbox" id="placeLake" name="lctClLake" value="호수">
 									<label class="from-check-label" for="placeLake">
 										호수
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="placeBeach">
+									<input class="form-check-input" type="checkbox" id="placeBeach" name="lctClBeach" value="해변">
 									<label class="from-check-label" for="placeBeach">
 										해변
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="placeIsland">
+									<input class="form-check-input" type="checkbox" id="placeIsland" name="lctClIsland" value="섬">
 									<label class="from-check-label" for="placeIsland">
 										섬
 									</label>
@@ -271,35 +271,35 @@
 						</div>
 						<br>
 						<!-- 바닥형태 -->
-						<div class="form-group row" id="floorFilter">
+						<div class="form-group row" id="siteBottomCl">
 							<div class="col-sm-2" style="font-family: 'GmarketSansBold';">&nbsp;<strong>바닥 형태</strong></div>
 							<div class="col-sm-10">
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="floorGrass">
+									<input class="form-check-input" type="checkbox" id="floorGrass" name="siteBottomCl1" value="잔디">
 									<label class="from-check-label" for="floorGrass">
 										잔디
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="floorRock">
+									<input class="form-check-input" type="checkbox" id="floorRock" name="siteBottomCl2" value="파쇄석">
 									<label class="from-check-label" for="floorRock">
 										파쇄석
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="floorTeck">
+									<input class="form-check-input" type="checkbox" id="floorTeck" name="siteBottomCl3" value="테크">
 									<label class="from-check-label" for="floorTeck">
 										테크
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="floorPebble">
+									<input class="form-check-input" type="checkbox" id="floorPebble" name="siteBottomCl4" value="자갈">
 									<label class="from-check-label" for="floorPebble">
 										자갈
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="floorDirt">
+									<input class="form-check-input" type="checkbox" id="floorDirt" name="siteBottomCl5" value="맨흙">
 									<label class="from-check-label" for="floorDirt">
 										맨흙
 									</label>
@@ -308,71 +308,59 @@
 						</div>
 						<br>
 						<!-- 부대시설 -->
-						<div class="form-group row" id="facilityFilter">
+						<div class="form-group row" id="sbrsCl">
 							<div class="col-sm-2" style="font-family: 'GmarketSansBold';">&nbsp;<strong>부대 시설</strong></div>
 							<div class="col-sm-10">
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="facElectro">
+									<input class="form-check-input" type="checkbox" id="facElectro" name="sbrsClElectro" value="전기">
 									<label class="from-check-label" for="facElectro">
 										전기
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="facWarmwater">
+									<input class="form-check-input" type="checkbox" id="facWarmwater" name="sbrsClHwater" value="온수">
 									<label class="from-check-label" for="facWarmwater">
 										온수
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="facPlay">
-									<label class="from-check-label" for="facPlay">
-										놀이터
-									</label>
-								</div>
-								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="facGym">
+									<input class="form-check-input" type="checkbox" id="facGym" name="sbrsClGym" value="운동시설">
 									<label class="from-check-label" for="facGym">
 										운동시설
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="facWifi">
+									<input class="form-check-input" type="checkbox" id="facWifi" name="sbrsClWifi" value="무선인터넷">
 									<label class="from-check-label" for="facWifi">
 										무선인터넷
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="facWood">
+									<input class="form-check-input" type="checkbox" id="facWood" name="sbrsClFirewood" value="장작판매">
 									<label class="from-check-label" for="facWood">
 										장작판매
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="facTrampoline">
-									<label class="from-check-label" for="facTrampoline">
-										트램폴린
-									</label>
-								</div>
-								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="facPool">
+									<input class="form-check-input" type="checkbox" id="facPool" name="sbrsClPool" value="물놀이장">
 									<label class="from-check-label" for="facPool">
 										물놀이장
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="facMart">
+									<input class="form-check-input" type="checkbox" id="facMart" name="sbrsClMart" value="마트">
 									<label class="from-check-label" for="facMart">
 										마트
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="facConv">
+									<input class="form-check-input" type="checkbox" id="facConv" name="sbrsClCstore" value="편의점">
 									<label class="from-check-label" for="facConv">
 										편의점
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="facWalk">
+									<input class="form-check-input" type="checkbox" id="facWalk" name="sbrsClWalk" value="산책로">
 									<label class="from-check-label" for="facWalk">
 										산책로
 									</label>
@@ -381,41 +369,41 @@
 						</div>
 						<br>
 						<!-- 캠핑장비 대여 -->
-						<div class="form-group row" id="rentFilter">
+						<div class="form-group row" id="eqpmnLendCl">
 							<div class="col-sm-2" style="font-family: 'GmarketSansBold';">&nbsp;<strong>캠핑장비 대여</strong></div>
 							<div class="col-sm-10">
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="rentTent">
+									<input class="form-check-input" type="checkbox" id="rentTent" name="eqpmnLendClTent" value="텐트">
 									<label class="from-check-label" for="rentTent">
 										텐트
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="rentFire">
+									<input class="form-check-input" type="checkbox" id="rentFire" name="eqpmnLendClBrazier" value="화로대">
 									<label class="from-check-label" for="rentFire">
 										화로대
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="rentHeat">
+									<input class="form-check-input" type="checkbox" id="rentHeat" name="eqpmnLendClHeater" value="난방기구">
 									<label class="from-check-label" for="rentHeat">
 										난방기구
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="rentDish">
+									<input class="form-check-input" type="checkbox" id="rentDish" name="eqpmnLendClTableware" value="식기">
 									<label class="from-check-label" for="rentDish">
 										식기
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="rentBed">
+									<input class="form-check-input" type="checkbox" id="rentBed" name="eqpmnLendClSbag" value="침낭">
 									<label class="from-check-label" for="rentBed">
 										침낭
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="rentWire">
+									<input class="form-check-input" type="checkbox" id="rentWire" name="eqpmnLendClRwire" value="릴선">
 									<label class="from-check-label" for="rentWire">
 										릴선
 									</label>
@@ -425,24 +413,24 @@
 						<br>
 						<!-- 기타정보 -->
 						<div class="form-group row" id="etcFilter">
-							<div class="col-sm-2" style="font-family: 'GmarketSansBold';">&nbsp;<i class="fa-solid fa-period"></i><strong>기타정보</strong></div>
+							<div class="col-sm-2" style="font-family: 'GmarketSansBold';">&nbsp;<i class="fa-solid fa-period"></i><strong>기타 정보</strong></div>
 							<div class="col-sm-10">
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="etcTrailer">
+									<input class="form-check-input" type="checkbox" id="etcTrailer" name="trlerAcmpnyAt" value="개인트레일러">
 									<label class="from-check-label" for="etcTrailer">
 										개인 트레일러 입장 가능
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="etcCaraban">
+									<input class="form-check-input" type="checkbox" id="etcCaraban" name="caravAcmpnyAt" value="개인카라반">
 									<label class="from-check-label" for="etcCaraban">
 										개인 카라반 입장 가능
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="etcPet">
+									<input class="form-check-input" type="checkbox" id="etcPet" name="animalCmgCl" value="반려견">
 									<label class="from-check-label" for="etcPet">
-										반려견 입장 가능
+										반려견 동반 가능
 									</label>
 								</div>					
 							</div>
@@ -796,6 +784,10 @@
  		// 전체 선택해제
  		document.getElementById( 'allNonChk' ).onclick = function() {
  			 $(":checkbox").prop("checked",false);
+ 		}
+ 		
+ 		document.getElementById( 'detailSearch' ).onclick = function() {
+ 			$("#searchdetail").submit();
  		}
  	}
   	</script>

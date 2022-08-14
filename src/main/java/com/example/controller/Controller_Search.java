@@ -44,6 +44,109 @@ public class Controller_Search {
 		return modelAndView;
 	}
 	
+	@RequestMapping( value="/searchdetail.do" )
+	public ModelAndView searchdetail(HttpServletRequest request) {
+		System.out.println( "searchdetail()호출" );
+		
+		// 지역 3개
+		String doNmS = request.getParameter( "doNmS" );
+		System.out.println( "doNmS : " + doNmS );
+		String doNmI = request.getParameter( "doNmI" );
+		System.out.println( "doNmS : " + doNmI );
+		String doNmG = request.getParameter( "doNmG" );
+		System.out.println( "doNmS : " + doNmG );
+		
+		// 캠핑유형 4개
+		String indutyNor = request.getParameter( "indutyNor" );
+		System.out.println( "indutyNor : " + indutyNor );
+		String indutyCar = request.getParameter( "indutyCar" );
+		System.out.println( "indutyCar : " + indutyCar );
+		String indutyGl = request.getParameter( "indutyGl" );
+		System.out.println( "indutyGl : " + indutyGl );
+		String indutyVan = request.getParameter( "indutyVan" );
+		System.out.println( "indutyVan : " + indutyVan );
+		
+		// 입지 8개
+		String lctClMount = request.getParameter( "lctClMount" );
+		System.out.println( "lctClMount : " + lctClMount );
+		String lctClForest = request.getParameter( "lctClForest" );
+		System.out.println( "lctClForest : " + lctClForest );
+		String lctClValley = request.getParameter( "lctClValley" );
+		System.out.println( "lctClValley : " + lctClValley );
+		String lctClCity = request.getParameter( "lctClCity" );
+		System.out.println( "lctClCity  : " + lctClCity  );
+		String lctClRiver = request.getParameter( "lctClRiver" );
+		System.out.println( "lctClRiver : " + lctClRiver );
+		String lctClLake = request.getParameter( "lctClLake" );
+		System.out.println( "lctClLake : " + lctClLake);
+		String lctClBeach = request.getParameter( "lctClBeach" );
+		System.out.println( "lctClBeach : " + lctClBeach );
+		String lctClIsland = request.getParameter( "lctClIsland" );
+		System.out.println( "lctClIsland : " + lctClIsland );
+
+		// 바닥형태 5개
+		String siteBottomCl1 = request.getParameter( "siteBottomCl1" );
+		System.out.println( "siteBottomCl1 : " + siteBottomCl1 );
+		String siteBottomCl2 = request.getParameter( "siteBottomCl2" );
+		System.out.println( "siteBottomCl2 : " + siteBottomCl2 );
+		String siteBottomCl3 = request.getParameter( "siteBottomCl3" );
+		System.out.println( "siteBottomCl3 : " + siteBottomCl3 );
+		String siteBottomCl4 = request.getParameter( "siteBottomCl4" );
+		System.out.println( "siteBottomCl4 : " + siteBottomCl4 );
+		String siteBottomCl5 = request.getParameter( "siteBottomCl5" );
+		System.out.println( "siteBottomCl5 : " + siteBottomCl5 );
+		
+		// 부대시설 9개
+		String sbrsClElectro = request.getParameter( "sbrsClElectro" );
+		System.out.println( "sbrsClElectro : " + sbrsClElectro );
+		String sbrsClHwater = request.getParameter( "sbrsClHwater" );
+		System.out.println( "sbrsClHwater : " + sbrsClHwater );
+		String sbrsClGym = request.getParameter( "sbrsClGym" );
+		System.out.println( "sbrsClGym : " + sbrsClGym );
+		String sbrsClWifi = request.getParameter( "sbrsClWifi" );
+		System.out.println( "sbrsClWifi : " + sbrsClWifi );
+		String sbrsClFirewood = request.getParameter( "sbrsClFirewood" );
+		System.out.println( "sbrsClFirewood : " + sbrsClFirewood );
+		String sbrsClPool = request.getParameter( "sbrsClPool" );
+		System.out.println( "sbrsClPool : " + sbrsClPool );
+		String sbrsClMart = request.getParameter( "sbrsClMart" );
+		System.out.println( "sbrsClMart : " + sbrsClMart );
+		String sbrsClCstore = request.getParameter( "sbrsClCstore" );
+		System.out.println( "sbrsClCstore : " + sbrsClCstore );
+		String sbrsClWalk = request.getParameter( "sbrsClWalk" );
+		System.out.println( "sbrsClWalk : " + sbrsClWalk );
+		
+		// 캠핑장비 대여 6개
+		String eqpmnLendClTent = request.getParameter( "eqpmnLendClTent" );
+		System.out.println( "eqpmnLendClTent : " + eqpmnLendClTent );
+		String eqpmnLendClBrazier = request.getParameter( "eqpmnLendClBrazier" );
+		System.out.println( "eqpmnLendClBrazier : " + eqpmnLendClBrazier );
+		String eqpmnLendClHeater = request.getParameter( "eqpmnLendClHeater" );
+		System.out.println( "eqpmnLendClHeater : " + eqpmnLendClHeater );
+		String eqpmnLendClTableware = request.getParameter( "eqpmnLendClTableware" );
+		System.out.println( "eqpmnLendClTableware : " + eqpmnLendClTableware );
+		String eqpmnLendClSbag = request.getParameter( "eqpmnLendClSbag" );
+		System.out.println( "eqpmnLendClSbag : " + eqpmnLendClSbag );
+		String eqpmnLendClRwire = request.getParameter( "eqpmnLendClRwire" );
+		System.out.println( "eqpmnLendClRwire : " + eqpmnLendClRwire );
+		
+		// 기타정보 3개
+		String trlerAcmpnyAt = request.getParameter( "trlerAcmpnyAt" );
+		System.out.println( "trlerAcmpnyAt : " + trlerAcmpnyAt );
+		String caravAcmpnyAt = request.getParameter( "caravAcmpnyAt" );
+		System.out.println( "caravAcmpnyAt : " + caravAcmpnyAt );
+		String animalCmgCl = request.getParameter( "animalCmgCl" );
+		System.out.println( "animalCmgCl : " + animalCmgCl );
+		
+		ArrayList<SearchkeyTO> datas = (ArrayList<SearchkeyTO>)kdao.searchdetailDAO(doNmS, doNmI, doNmG, indutyNor, indutyCar, indutyGl, indutyVan, lctClMount, lctClForest, lctClValley, lctClCity, lctClRiver, lctClLake, lctClBeach, lctClIsland, sbrsClElectro, sbrsClHwater, sbrsClGym, sbrsClWifi, sbrsClFirewood, sbrsClPool, sbrsClMart, sbrsClCstore, sbrsClWalk, eqpmnLendClTent, eqpmnLendClBrazier, eqpmnLendClHeater, eqpmnLendClTableware, eqpmnLendClSbag, eqpmnLendClRwire);		
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName( "/search/search_key" );
+		modelAndView.addObject("datas", datas);
+		
+		return modelAndView;
+	}
+	
 	@RequestMapping( value="/searchmap.do" )
 	public ModelAndView searchmap(HttpServletRequest request) {
 		System.out.println( "searchmap() 호출" );

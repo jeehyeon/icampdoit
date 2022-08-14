@@ -170,7 +170,7 @@
               <input class="form-control" type="text" name="keysearch" id="keysearch" placeholder=<%=keysearch %>>
             </div>
             <div class="mb-4">
-				<label class="form-label" style="font-family: 'GmarketSansBold';'"><font size=+0.5>업종</font></label>
+				<label class="form-label" style="font-family: 'GmarketSansBold';'"><font size=+0.5>캠핑 유형</font></label>
                 <ul class="list-inline mt-xl-1 mb-0">
                       <li class="list-inline-item">
                         <div class="form-check">
@@ -362,7 +362,7 @@
                 </ul>
             </div>
             <div class="mb-4">
-				<label class="form-label" style="font-family: 'GmarketSansBold';'"><font size=+0.5>캠핑 장비 대여</font></label>
+				<label class="form-label" style="font-family: 'GmarketSansBold';'"><font size=+0.5>캠핑장비 대여</font></label>
                 <ul class="list-inline mt-xl-1 mb-0">
                       <li class="list-inline-item">
                         <div class="form-check">
@@ -403,7 +403,7 @@
                 </ul>
             </div>
             <div class="mb-4"> 
-                  <label class="form-label" style="font-family: 'GmarketSansBold';'"><font size=+0.5>기타</font></label>
+                  <label class="form-label" style="font-family: 'GmarketSansBold';'"><font size=+0.5>기타 정보</font></label>
                   <ul class="list-unstyled mb-0">
                     <li>
                       <div class="form-check">
