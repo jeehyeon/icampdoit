@@ -310,8 +310,6 @@
 	        $('#title').focus();
 	 } 
    }
-  
-  
   </script>
   
   <script>
