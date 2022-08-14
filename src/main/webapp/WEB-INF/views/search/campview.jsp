@@ -1,3 +1,4 @@
+<%@page import="com.exam.search.SearchkeyTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
@@ -8,6 +9,68 @@ if(session.getAttribute("id") != null){
 	ucode = (int)session.getAttribute("ucode");
 	id = (String)session.getAttribute("id");
 }
+
+SearchkeyTO kto = (SearchkeyTO)request.getAttribute("kto");
+
+String address="";
+String titleaddr="";
+if( kto.getAddr1().matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*") == false ){
+	address = kto.getDoNm() + " " + kto.getSigunguNm() + " " + kto.getAddr1();
+}
+
+if(kto.getDoNm().equals("default") && !kto.getSigunguNm().equals("default")){
+	titleaddr= kto.getSigunguNm();
+}else if(!kto.getDoNm().equals("default") && kto.getSigunguNm().equals("default")){
+	titleaddr= kto.getDoNm();
+}else if(!kto.getDoNm().equals("default") && !kto.getSigunguNm().equals("default")){
+	titleaddr= kto.getDoNm() + " " +kto.getSigunguNm();
+}
+
+String intro="";
+if(kto.getIntro().equals("default")){
+	intro = " ";
+}else{
+	intro = kto.getIntro();
+};
+
+//캠핑장 시설정보
+StringBuilder campInfo1 = new StringBuilder();
+StringBuilder campInfo2 = new StringBuilder();
+ 
+kto.getSbrsCl();
+if(kto.getSbrsCl().indexOf("전기") != -1){
+	System.out.println("전기있음");
+	campInfo1.append( "<li class=\"mb-2\"> <i class=\"fa fa-bolt text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">전기</span></li>");
+}
+
+if(kto.getSbrsCl().indexOf("와이파이") != -1){
+	System.out.println("와이파이");
+	campInfo1.append( "<li class=\"mb-2\"> <i class=\"fa fa-wifi text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">와이파이</span></li>");
+};
+
+if(kto.getSbrsCl().indexOf("온수") != -1){
+	System.out.println("온수");
+	campInfo1.append( "<li class=\"mb-2\"> <i class=\"fa fa-solid fa-shower text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">온수</span></li>");
+};
+
+if(kto.getSbrsCl().indexOf("물놀이장") != -1){
+	System.out.println("물놀이장");
+	campInfo1.append( "<li class=\"mb-2\"> <i class=\"fa fa-regular fa-water text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">물놀이장</span></li>");
+};
+
+
+if(kto.getSbrsCl().indexOf("장작판매") != -1){
+	campInfo2.append( "<li class=\"mb-2\"> <i class=\"fa fa-regular fa-fire text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">장작판매</span></li>");
+};
+if(kto.getSbrsCl().indexOf("산책로") != -1){
+	campInfo2.append( "<li class=\"mb-2\"> <i class=\"fa fa-solid fa-shoe-prints text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">산책로</span></li>");
+};
+if(kto.getSbrsCl().indexOf("운동시설") != -1){
+	campInfo2.append( "<li class=\"mb-2\"> <i class=\"fa fa-solid fa-dumbbell text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">운동시설</span></li>");
+};
+if(kto.getSbrsCl().indexOf("마트") != -1 || kto.getSbrsCl().indexOf("편의점") != -1){
+	campInfo2.append( "<li class=\"mb-2\"> <i class=\"fa fa-regular fa-store text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">마트,편의점</span></li>");
+};
 %>
 
 <!DOCTYPE html>
@@ -108,8 +171,8 @@ if(session.getAttribute("id") != null){
       <div class="row">
         <div class="col-lg-8"> 
           <div class="text-block">
-            <p class="text-primary" style="font-family: 'GmarketSansMedium';"><i class="fa-map-marker-alt fa me-1"></i>경기도 용인시</p>
-            <h1 style="font-family: 'GmarketSansBold';">자라섬 캠핑장</h1>
+            <p class="text-primary" style="font-family: 'GmarketSansMedium';"><i class="fa-map-marker-alt fa me-1"></i><%=titleaddr%></p>
+            <h1 style="font-family: 'GmarketSansBold';"><%=kto.getFacltNm()%></h1>
             <br />
             
             
@@ -127,7 +190,7 @@ if(session.getAttribute("id") != null){
            <!-- 캠핑장 소개 -->
            <div class="text-block">
            	 <h4 class="mb-4" style="font-family: 'GmarketSansMedium';">캠핑장 소개</h4>
-             <p class="text-muted fw-light">자라섬캠핑장은 경기도 가평군 가평읍 자라섬 테마파크에 위치한 대단위 캠핑시설. 가평군시설관리공단이 운영 중으로 저렴하게 일반, 오토캠핑과 카라반 3가지를 이용할 수 있고 수상레저 또한 즐길 수 있는 여유로움이 넘치는 캠핑장이다. 북한강변에 위치하고 있으며 바로 아래의 남이섬과도 지척의 거리다. 캠핑장은 오토캠핑이 가능한 일반 사이트 191면(오토캠핑, A사이트, B사이트) 카라반 40대(B카라반, C카라반), 개인카라반사이트 100면등 다양한 사이트를 운영 중이다. 캠핑장내 공용화장실, 샤워실, 공용개수대가 운영되며 관리상태 양호하고 깨끗한 상태를 유지한다. 야외수영장(8월 여름철 운영), 매점(개인)을 운영 중이다. 매년 10월에 열리는 ‘자라섬 국제 재즈페스티벌’이 열리는 중도에서 이용이 가능하다. 이외에 여름철 카페와 수상클럽하우스를 이용할 수 있다. 자전거 대여소를 운영 중이며 개인 카라반과 개인 트레일러 이용이 가능하지만 반려동물 입장은 불허한다. 3개동의 공용샤워실과 3개동 공용화장실은 3개동 개수대가 오토캠핑장과 카라반 사이트 장소에 설치되어 있다. 관리상태 양호하고 청결하게 관리중이다. </p>
+             <p class="text-muted fw-light"><%=intro%></p>
            </div>
           	
            <!-- 캠핑장 시설정보 -->
@@ -136,20 +199,26 @@ if(session.getAttribute("id") != null){
 	           <div class="row"> 
               	 <div class="col-md-6">
 		           <ul class="list-unstyled text-muted">
+		          <!-- 
 		             <li class="mb-2"> <i class="fa fa-wifi text-secondary w-1rem me-3 text-center"></i><span class="text-sm">와이파이</span></li>
 		             <li class="mb-2"><i class="fa fa-solid fa-bolt text-secondary w-1rem me-3 text-center"></i><span class="text-sm">전기</span></li>
 		             <li class="mb-2"><i class="fa fa-solid fa-shower text-secondary w-1rem me-3 text-center"></i><span class="text-sm">온수</span></li>
 		             <li class="mb-2"><i class="fa fa-regular fa-water text-secondary w-1rem me-3 text-center"></i><span class="text-sm">물놀이장</span></li>
+		              -->
+		              <%=campInfo1.toString()%>
+		             
 		           </ul>
                  </div>
                  <div class="col-md-6">
 		           <ul class="list-unstyled text-muted">
+		           		<%=campInfo2.toString()%>
+		           <!--  
 		             <li class="mb-2"><i class="fa fa-regular fa-fire text-secondary w-1rem me-3 text-center"></i><span class="text-sm">장작판매</span></li>
 		             <li class="mb-2"><i class="fa fa-solid fa-shoe-prints text-secondary w-1rem me-3 text-center"></i><span class="text-sm">산책로</span></li>
 		             <li class="mb-2"><i class="fa fa-solid fa-dumbbell text-secondary w-1rem me-3 text-center"></i><span class="text-sm">운동시설</span></li>
 		             <li class="mb-2"><i class="fa fa-regular fa-store text-secondary w-1rem me-3 text-center"></i><span class="text-sm">마트,편의점</span></li>
 		             
-		             <!-- 
+		           
 		             <li class="mb-2"> <i class="fa fa-bed me-1 text-secondary w-1rem me-3 text-center"></i><span class="text-sm">bed</span></li>
 		             -->
 		           </ul>
@@ -295,7 +364,7 @@ if(session.getAttribute("id") != null){
           </div>
         </div>
         <div class="col-lg-4">        
-          <div class="p-4 shadow ms-lg-4 rounded sticky-top" style="top: 100px; width: 400px; height: 500px;"><img class="bg-image" style="border-radius: 8px;" src="./resources/bootstrap-5/html/img/photo/자라섬상세.jpg" alt="Card image">
+          <div class="p-4 shadow ms-lg-4 rounded sticky-top" style="top: 100px; width: 400px; height: 500px;"><img class="bg-image" style="border-radius: 8px;" src="<%=kto.getFirstImageUrl() %>" alt="Card image">
           </div>
         </div>
       </div>
