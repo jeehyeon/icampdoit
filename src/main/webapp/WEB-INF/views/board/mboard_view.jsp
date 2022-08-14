@@ -6,15 +6,15 @@
 <%@ page import="com.exam.mboard.BoardDAO" %>
 <%@ page import="com.exam.mboard.BoardTO" %>
 <%
-//session 값 가져오기
-int ucode = -1;
-String id ="";
-if(session.getAttribute("id") != null){
-	ucode = (int)session.getAttribute("ucode");
-	id = (String)session.getAttribute("id");
-}
-
-//view
+	//session 값 가져오기
+	int ucode = -1;
+	String id ="";
+	if(session.getAttribute("id") != null){
+		ucode = (int)session.getAttribute("ucode");
+		id = (String)session.getAttribute("id");
+	}
+	
+	//view
 	BoardTO to = (BoardTO)request.getAttribute( "to" );
 
 	String seq = to.getSeq();
@@ -30,23 +30,23 @@ if(session.getAttribute("id") != null){
 	int subjectValue = (Integer)request.getAttribute( "subjectValue" );
 	System.out.println("view페이지 session id : "+id);
 	System.out.println("view페이지 seq : "+seq);
-	
-//cmt
-ArrayList<CmtTO> cmtArr = (ArrayList<CmtTO>)request.getAttribute("cmtArr");
-StringBuilder cmtHtml= new StringBuilder();
-for(CmtTO cto : cmtArr){
-	String deldata = "{\"seq\":\"" +cto.getSeq() + "\",\"ucode\":\""+ cto.getUcode()+"\"}";
-	System.out.println("deldata : "+ deldata);
-	cmtHtml.append("<div class=\"row\">");
-	cmtHtml.append("<div class=\"col-9\"><strong>"+cto.getWriter() +"</strong></div>");
-	cmtHtml.append("<input type=\"button\" class=\"dbtn btn btn-outline-primary col-1 ms-auto\" align=\"right\" value=\"삭제\" deldata="+deldata+">");
-	cmtHtml.append("<div>");
-	cmtHtml.append("<p class=\"text-uppercase text-sm text-muted\"><i class=\"far fa-clock\"></i>"+cto.getWdate() +"</p>");
-	cmtHtml.append("<p class=\"text-muted\" style=\"font-family: \"BMJUA\";\">"+ cto.getContent() +"</p>");
-	cmtHtml.append("</div>");
-	cmtHtml.append("</div>");
-	cmtHtml.append("<hr/>");
-}
+		
+	//cmt
+	ArrayList<CmtTO> cmtArr = (ArrayList<CmtTO>)request.getAttribute("cmtArr");
+	StringBuilder cmtHtml= new StringBuilder();
+	for(CmtTO cto : cmtArr){
+		String deldata = "{\"seq\":\"" +cto.getSeq() + "\",\"ucode\":\""+ cto.getUcode()+"\"}";
+		System.out.println("deldata : "+ deldata);
+		cmtHtml.append("<div class=\"row\">");
+		cmtHtml.append("<div class=\"col-9\"><strong>"+cto.getWriter() +"</strong></div>");
+		cmtHtml.append("<input type=\"button\" class=\"dbtn btn btn-outline-primary col-1 ms-auto\" align=\"right\" value=\"삭제\" deldata="+deldata+">");
+		cmtHtml.append("<div>");
+		cmtHtml.append("<p class=\"text-uppercase text-sm text-muted\"><i class=\"far fa-clock\"></i>"+cto.getWdate() +"</p>");
+		cmtHtml.append("<p class=\"text-muted\" style=\"font-family: \"BMJUA\";\">"+ cto.getContent() +"</p>");
+		cmtHtml.append("</div>");
+		cmtHtml.append("</div>");
+		cmtHtml.append("<hr/>");
+	}
 %>
     
 <!DOCTYPE html>

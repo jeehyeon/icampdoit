@@ -277,7 +277,7 @@
 				console.log("result : " +result);
 				
 				let str= result.split('@');
-				 var subject = $('#subject').val();
+				var subject = $('#subject').val();
 				
 				if( $('#subject').val() == 4 ) {
 					imgUrl = hImgUrl + str[0];

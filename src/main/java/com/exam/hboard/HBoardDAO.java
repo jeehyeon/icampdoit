@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Repository;
 import com.exam.login.SignUpTO;
 import com.exam.mboard.BoardTO;
 import com.exam.mboard.FileTO;
+import com.exam.nboard.NBoardTO;
+import com.exam.nboard.NFileTO;
 
 @Repository
 public class HBoardDAO {
@@ -140,7 +143,67 @@ public class HBoardDAO {
 		
 		return to;
 	}
-
 	
+	//게시글 ucode 찾기
+	public HBoardTO findViewUcode(HBoardTO to) {
+
+		String sql = "select ucode from h_board where seq=?";
+		to = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<HBoardTO>(HBoardTO.class), to.getSeq() );
+		System.out.println("findViewUcode 성공");	
+		return to;	
+	}
+	
+	// 파일체크
+	public HBoardTO hboardDelFileCheck(HBoardTO to) {
+		//삭제했을 경우 임시 파일 삭제
+		//System.out.println("파일삭제 메서드 : " + filename);
+		String sql = "select filename from h_board where seq=?";
+		try {
+			to = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<HBoardTO>(HBoardTO.class), to.getSeq() );
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			to.setFilename("null");
+		}
+		
+		return to;	
+	}
+	
+	//게시글 삭제메서드
+	public int fileDBDel(HBoardTO to) {
+		//삭제했을 경우 임시 파일 삭제
+		//System.out.println("파일삭제 메서드 : " + filename);
+		int flag = 1;
+		
+		String sql = "delete from h_board where seq=?";
+		int result = jdbcTemplate.update(sql, to.getSeq());
+		System.out.println("fileDBDel seq : " + to.getSeq());
+		System.out.println("fileDBDel flag : " + flag);
+		if( result != 1 ) {
+			System.out.println("filedbDel() 오류");
+		}else {
+			flag = 0;
+		}
+		
+		return flag;
+	}
+	
+	
+	// delete_ok
+	public int hboardDeleteOk(HBoardTO to) {
+		
+		int flag = 2;
+		
+		String sql = "delete from h_board where seq=?";
+		int result = jdbcTemplate.update(sql, to.getSeq() );
+	
+		if(result == 0) {
+			System.out.println("hboardDeleteOk 오류");
+			flag=1;
+		}else {
+			flag=0;
+		}
+	
+		return flag;
+	}
 	
 }

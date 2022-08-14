@@ -2,6 +2,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.exam.hboard.HBoardTO" %>
+<%@ page import="com.exam.nboard.NBoardTO" %>
+<%@ page import="com.exam.nboard.NFileTO" %>
+<%@ page import="com.exam.mboard.BoardTO" %>
+<%@ page import="com.exam.mboard.FileTO" %>
 <%
 	//session 값 가져오기
 	int ucode = -1;
@@ -14,20 +18,49 @@
 	
 	String subjectValue = (String)request.getAttribute( "subjectValue" );
 	//System.out.println("수정.jsp 말머리 : " + subjectValue);
-	
-	HBoardTO to = (HBoardTO)request.getAttribute("hto");
-	
-	String seq = to.getSeq();
-	String subject = to.getSubject();
-	String writer = to.getWriter();
-	String title = to.getTitle();
-	String content = to.getContent();
-	String wdate = to.getWdate();
-	String hit = to.getHit();	
-	String filename = to.getFilename();
+	String seq = "";
+	String subject = "";
+	String writer = "";
+	String title = "";
+	String content = "";
+	String wdate = "";
+	String hit = "";	
+	String filename = "";
 	System.out.println("[filename]" + filename);
-	System.out.println("[content]" + content);
-	long filesize = to.getFilesize();
+	long filesize = 0;	
+	
+	if( subjectValue.equals("4")  ) {
+		HBoardTO hto = (HBoardTO)request.getAttribute("hto");
+		
+		seq = hto.getSeq();
+		subject = hto.getSubject();
+		writer = hto.getWriter();
+		title = hto.getTitle();
+		content = hto.getContent();
+		wdate = hto.getWdate();
+		hit = hto.getHit();	
+		filename = hto.getFilename();
+		filesize = hto.getFilesize();
+		System.out.println("[filename]" + filename);
+		//System.out.println("[content]" + content);
+		
+	} else if( subjectValue.equals("5")  ) {
+		NBoardTO nto = (NBoardTO)request.getAttribute("nto");
+		NFileTO nfto = (NFileTO)request.getAttribute("nfto");
+		
+		seq = nto.getSeq();
+		subject = nto.getSubject();
+		writer = nto.getWriter();
+		title = nto.getTitle();
+		content = nto.getContent();
+		wdate = nto.getWdate();
+		hit = nto.getHit();	
+		filename = nfto.getFilename();
+		filesize = nfto.getFilesize();
+		System.out.println("[filename]" + filename);
+		
+	}
+	
 	//System.out.println("수정.jsp 말머리2 : " + to.getSubject());
 %>
 
@@ -216,11 +249,11 @@
 				dataType : 'text',
 				success : function(flag) {					
 					
-					if( flag == "0" ) {
-						alert('글쓰기 성공');
+					if( flag == 0 ) {
+						alert('글수정 성공');
 						location.href='/admin_board.do';
 					} else {
-						alert('글쓰기 실패');
+						alert('글수정 실패');
 						history.back();
 					}
 				},
@@ -276,9 +309,13 @@
 
 	// 이미지 파일 업로드
 	function sendFile(file, editor, welEditable) {
-		var imgUrl = './h_upload/';
+		var imgUrl = '';
+		var mImgUrl = './upload/';
+		var hImgUrl = './h_upload/';
+		var nImgUrl = './n_upload/';
 		var data = new FormData();
 		data.append('image', file);
+		data.append('subject', $('#subject').val());
 		$.ajax({
 			data : data,
 			type : "POST",
@@ -289,9 +326,17 @@
 			processData : false,
 			success : function(result) {
 				console.log("result : "+result);
+				
 				let str= result.split('@');
-								
-				imgUrl = imgUrl + str[0];
+				var subject = $('#subject').val();
+				
+				if( $('#subject').val() == 4 ) {
+					imgUrl = hImgUrl + str[0];
+				} else if( $('#subject').val() == 5 ) {
+					imgUrl = nImgUrl + str[0];
+				} else {
+					imgUrl = mImgUrl + str[0];
+				}				
 				console.log("imgUrl : "+imgUrl);				
 				
 				$('#summernote').summernote( 'insertImage', imgUrl );

@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.exam.hboard.HBoardTO;
 import com.exam.login.SignUpTO;
 import com.exam.mboard.BoardListTO;
 import com.exam.mboard.BoardTO;
@@ -390,6 +391,14 @@ public class BoardDAO {
 		
 		return flag;
 	}
-		
+	
+	//게시글 ucode 찾기
+	public BoardTO findViewUcode(BoardTO to) {
 
+		String sql = "select ucode from m_board where seq=?";
+			to = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<BoardTO>(BoardTO.class), to.getSeq() );
+			System.out.println("findViewUcode 성공");	
+		return to;	
+	}
+		
 }
