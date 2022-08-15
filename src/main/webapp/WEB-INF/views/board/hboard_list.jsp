@@ -26,43 +26,18 @@
 	
 	StringBuilder sbHtml = new StringBuilder();
 	
-	for( int i=0 ; i<recordPerPage ; i++ ) {
-		String seq = "";
-		String subject = "";
-		String title = "";
-		String writer = "";
-		String content = "";
-		String filename = "";
-		String wdate = "";
-		String hit = "";
-		
-		if( i < lists.size() ) {
-			HBoardTO to = lists.get(i);
-			seq = to.getSeq();
-			subject = to.getSubject();
-			title = to.getTitle();
-			writer = to.getWriter();
-			content = to.getContent();
-			filename = to.getFilename() == null ? "./resources/bootstrap-5/html/img/noimage.png" : "./h_upload/" + to.getFilename();
-			wdate = to.getWdate();
-			hit = to.getHit();
-		}
 	
-		
-  /* <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-        <div class="card shadow border-0 h-100">
-        <a href="./hboardview.do">
-        <img class="img-fluid card-img-top" src="./resources/bootstrap-5/html/img/photo/원플리1.jpg" alt="..."/>
-        </a>
-          <div class="card-body">
-          <a class="text-uppercase text-muted text-sm letter-spacing-2" href="#"># playlist </a>
-            <h5 class="my-2"><a class="text-dark" href="./hboardview.do">Late Spring breeze          </a></h5>
-            <p class="text-gray-500 text-sm my-3"><i class="far fa-clock me-2"></i>July 26, 2022</p>
-            <p class="my-2 text-muted text-sm">내용</p><a class="btn btn-link ps-0" href="./hboardview.do">더보기<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
-          </div>
-        </div>
-      </div> */
-		
+	for( HBoardTO to : lists ) {
+	String seq = to.getSeq();
+	String subject = to.getSubject();
+	String title = to.getTitle();
+	String writer = to.getWriter();
+	String content = to.getContent();
+	String filename = to.getFilename() == null ? "./resources/bootstrap-5/html/img/noimage.png" : "./h_upload/" + to.getFilename();
+	String wdate = to.getWdate();
+	String hit = to.getHit();
+	
+	
 		sbHtml.append( "<div class='col-lg-4 col-sm-6 mb-4 hover-animate'>" );
 		sbHtml.append( "<div class='card shadow border-0 h-100'>" );
 		sbHtml.append( "<a href='./hboardview.do?cpage=" + cpage + "&seq=" + seq + "'>" );
@@ -194,7 +169,7 @@
         </div>
       </div>
     </section>
-    <section class="py-6">
+    <section class="pb-4 pt-6">
       <div class="container">
         <div class="row mb-5">
           <!-- blog item
@@ -251,7 +226,7 @@
           <%=sbHtml.toString() %>
         <!-- 페이징 -->
         <nav aria-label="Page navigation example">  
-          <ul class="pagination pagination-template d-flex justify-content-center">
+          <ul class="pagination pagination-template d-flex justify-content-center pt-5">
          <%			
 	//페이지 하단의 << 버튼
 	if ( startBlock == 1 ) {
@@ -295,7 +270,7 @@
           </ul>
         </nav>
       </div>
-      
+     </div>
     </section>
     <!-- Footer - 관리자 페이지 이동 부분 넣을 곳 -->
     <footer class="position-relative z-index-10 d-print-none">

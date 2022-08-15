@@ -91,8 +91,20 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <style type="text/css">
+  		#wrap {
+  			min-height: 100%;
+		    position: relative;
+		    padding-bottom: 380px;
+  		}
+  		#footer {
+  			position: relative;
+    		transform: translatY(-100%);
+  		}
+  	</style>
   </head>
   <body style="padding-top: 72px;">
+   <div id="wrap">
     <header class="header">
       <!-- Navbar 로고부분-->
       <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
@@ -256,9 +268,9 @@
         </nav>
       </div>
     </section>
-    
+    </div>
     <!-- Footer - 관리자 페이지 이동 부분 넣을 곳 -->
-    <footer class="position-relative z-index-10 d-print-none">
+    <footer class="position-relative z-index-10 d-print-none" id="footer">
            
       <!-- Copyright section of the footer-->
       <div class="py-4 fw-light bg-gray-800 text-gray-300">

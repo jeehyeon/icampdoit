@@ -156,10 +156,8 @@
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
-          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            
-          </ol>
-          <h6 class="font-weight-bolder mb-0">게시판 관리</h6>
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5"></ol>
+           <h6 class="font-weight-bolder mb-0">게시판 관리</h6> 
         </nav>
         
       </div>
@@ -183,10 +181,8 @@
 						<option value="4">혼캠</option>
 						<option value="5">공지</option>
 					</select>
-				 </div>
-				 
+				 </div>				 
                 </div>
-                
 	               <div class="writebtn">
 		               <a href="admin_board_write.do">
 		                <button type="button" class="btn btn-lg me-1 bg-gradient-dark">글쓰기</button>
