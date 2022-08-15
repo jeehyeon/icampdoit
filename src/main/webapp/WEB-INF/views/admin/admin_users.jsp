@@ -69,6 +69,8 @@
   <title>
     I Camp Do It admin users
   </title>
+   <!-- Font Awesome 이거 추가함 -->
+  <script src="https://kit.fontawesome.com/5251502df3.js" crossorigin="anonymous"></script> 
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
   <!-- Nucleo Icons -->
@@ -376,28 +378,47 @@
           <!-- 페이징 버튼 -->
           <div class="pagenu">
           <ul class="pagination pagination-info">
-          
-<%
-			if ( cpage == 1 ){
-				out.println( "<li class='page-item'><a class='page-link' href='#link' aria-label='Previous'><span aria-hidden='true'><span class='material-icons'> keyboard_arrow_left </span></span></a></li>");
-			} else {
-				out.println( "<li class='page-item'><a class='page-link' href='admin_users.do?cpage=" + (cpage-1) + "' aria-label='Previous'><span aria-hidden='true'><span class='material-icons'> keyboard_arrow_left </span></span></a></li>");
-			}
 
-			for ( int i=startBlock; i<=endBlock; i++ ) {
-				if ( cpage == i ) { 
-					out.println("<li class='page-item'><a class='page-link' href='#link'>" + i + "</a>");
-				} else {
-					out.println("<li class='page-item'><a class='page-link' href='admin_users.do?cpage=" + i + "'>");
-				}
-			}
-			
-			if ( cpage == totalPage ) {
-				out.println("<li class='page-item'><a class='page-link' href='#link' aria-label='Next'><span aria-hidden='true'><span class='material-icons'>keyboard_arrow_right</span></span></a></li>");
-			} else {
-				out.println("<li class='page-item'><a class='page-link' href='admin_users.do?cpage=" + (cpage+1) + "' aria-label='Next'><span aria-hidden='true'><span class='material-icons'>keyboard_arrow_right</span></span></a></li>");
-			}
-%>
+<%			
+	//페이지 하단의 << 버튼
+	if ( startBlock == 1 ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-thin fa-angles-left'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='admin_users.do?cpage="+ (startBlock - blockPerPage) + "'><i class='fa fa-thin fa-angles-left'></i></a></li>");
+	}
+	//out.println(" &nbsp; ");
+	//페이지 하단의 < 버튼 => (cpage-1) 한페이지 앞으로 이동
+	if ( cpage == 1 ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'> <i class='fa fa-angle-left'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='admin_users.do?cpage="+ (cpage-1) + "'><i class='fa fa-angle-left'></i></a></li> ");
+	}
+	//out.println(" &nbsp;&nbsp; ");
+	//현재 페이지
+	for ( int i=startBlock; i<=endBlock; i++ ) {
+		if ( cpage == i ) { 
+			out.println(" <li class='page-item active'><a class='page-link' href='#'>" + i + "</a></li> ");
+		} else {
+			out.println(" <li class='page-item'><a class='page-link' href='admin_users.do?cpage=" + i + "'>" + i + "</a></li> ");
+		}
+	}
+	//out.println(" &nbsp;&nbsp; ");
+	//페이지 하단의 > 버튼
+	if ( cpage == totalPage ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-angle-right'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='admin_users.do?cpage="+ (cpage+1) + "'><i class='fa fa-angle-right'></i></a></li> ");
+	}
+	//out.println(" &nbsp; ");
+	//페이지 하단의 >> 버튼
+	if ( endBlock == totalPage ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='admin_users.do?cpage="+ (startBlock + blockPerPage) + "'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
+	}
+	//out.println(" &nbsp; ");
+
+%>	
 		   
           </ul>
          </div> 
@@ -423,6 +444,8 @@
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
+  <!-- JavaScript files-->  
+  <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
