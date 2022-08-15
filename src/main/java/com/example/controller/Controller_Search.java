@@ -49,12 +49,25 @@ public class Controller_Search {
 		System.out.println( "searchdetail()호출" );
 		
 		// 지역 3개
-		String doNmS = request.getParameter( "doNmS" );
+		String doNmS = "";
+		if( request.getParameter( "doNmS" )== "null" ) {
+			doNmS ="";
+		} else {
+			doNmS = request.getParameter( "doNmS" );
+		}
 		System.out.println( "doNmS : " + doNmS );
-		String doNmI = request.getParameter( "doNmI" );
-		System.out.println( "doNmS : " + doNmI );
-		String doNmG = request.getParameter( "doNmG" );
-		System.out.println( "doNmS : " + doNmG );
+		
+		String doNmI = "";
+		if( request.getParameter( "doNmI" ) != "null") {
+			doNmI = request.getParameter( "doNmI" );
+		}
+		System.out.println( "doNmI : " + doNmI );
+		
+		String doNmG = "";
+		if( request.getParameter( "doNmG" ) != "null") {
+			doNmG = request.getParameter( "doNmG" );
+		}
+		System.out.println( "doNmG : " + doNmG );
 		
 		// 캠핑유형 4개
 		String indutyNor = request.getParameter( "indutyNor" );
@@ -97,7 +110,8 @@ public class Controller_Search {
 		System.out.println( "siteBottomCl5 : " + siteBottomCl5 );
 		
 		// 부대시설 9개
-		String sbrsClElectro = request.getParameter( "sbrsClElectro" );
+		//String sbrsClElectro = request.getParameter( "sbrsClElectro" );
+		String sbrsClElectro = "";
 		System.out.println( "sbrsClElectro : " + sbrsClElectro );
 		String sbrsClHwater = request.getParameter( "sbrsClHwater" );
 		System.out.println( "sbrsClHwater : " + sbrsClHwater );
