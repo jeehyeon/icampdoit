@@ -86,16 +86,22 @@ public class Controller_Admin_Home {
 			modelAndView.setViewName("/login/nousers");
 			return modelAndView;
 		}
-		modelAndView.setViewName("admin/admin");
-		modelAndView.addObject( "countBoardResult", countBoardResult );
-		modelAndView.addObject( "countFemale", countFemale );
-		modelAndView.addObject( "countMale", countMale );
-		modelAndView.addObject( "weeklyRegistered", weeklyRegistered );
-		modelAndView.addObject( "countReviews", countReviews );
-		modelAndView.addObject( "countTotalVisitor", countTotalVisitor );
-		modelAndView.addObject( "countTodayVisitor", countTodayVisitor );
-		modelAndView.addObject( "lists", lists );
+		
+		if(session.getAttribute("id").equals("admin") ) {
+			modelAndView.setViewName("admin/admin");
+			modelAndView.addObject( "countBoardResult", countBoardResult );
+			modelAndView.addObject( "countFemale", countFemale );
+			modelAndView.addObject( "countMale", countMale );
+			modelAndView.addObject( "weeklyRegistered", weeklyRegistered );
+			modelAndView.addObject( "countReviews", countReviews );
+			modelAndView.addObject( "countTotalVisitor", countTotalVisitor );
+			modelAndView.addObject( "countTodayVisitor", countTodayVisitor );
+			modelAndView.addObject( "lists", lists );
 
+			return modelAndView;
+		}
+		
+		modelAndView.setViewName("admin/admin_only");
 		return modelAndView;
 	}
 	
@@ -155,7 +161,7 @@ public class Controller_Admin_Home {
 	
 	@RequestMapping(value = "/admin_users_modifyOk.do")
 	public String adminUsersModifyOk(HttpServletRequest request, HttpSession session) {
-		System.out.println("admin_users_view 호출");
+		System.out.println("admin_users_modifyOk 호출");
 		
 		int cpage = 1;
 		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
@@ -178,6 +184,28 @@ public class Controller_Admin_Home {
 		flag = udao.usersModifyOK(sto);
 
 		return Integer.toString(flag);
+	}
+	
+	@RequestMapping(value = "/admin_users_deleteOk.do")
+	public ModelAndView adminUsersDeleteOk(HttpServletRequest request, HttpSession session) {
+		System.out.println("admin_users_deleteOk 호출");
+		
+		int flag = 1;
+		
+		SignUpTO sto = new SignUpTO();
+		
+		if ( session.getAttribute("id").equals("admin") ) {
+			sto.setUcode( request.getParameter( "ucode" ) );
+			System.out.println( "ucode : " + sto.getUcode() );	
+
+			flag = udao.usersDeleteOK(sto);
+		}
+		
+		ModelAndView modelAndView = new ModelAndView();
+
+		modelAndView.setViewName( "/admin/admin_users_delete_ok" );
+		modelAndView.addObject("flag", flag);
+		return modelAndView;
 	}
 
 }

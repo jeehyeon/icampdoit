@@ -106,7 +106,7 @@ public class AdminStatDAO {
 	//오늘 방문자 수
 	public String countTodayVisitor() {
 		
-		String sql = "select count(*) as todaycnt from visit where DATE_FORMAT( vdate, 'YYYY-MM-DD') = DATE_FORMAT(sysdate(), 'YYYY-MM-DD');";
+		String sql = "select count(*) as todaycnt from visit where DATE_FORMAT( vdate, '%Y-%m-%d') = DATE_FORMAT(sysdate(), '%Y-%m-%d');";
 		
 		String todayVisitor = (String)jdbcTemplate.queryForObject(sql, String.class);
 		

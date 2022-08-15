@@ -218,13 +218,16 @@
                          <input type="hidden" id="ucode" name="ucode" value="<%=ucode%>" />
                       </td>
                       <td>
-                      	<button type="button" class="btn btn-danger float-end mx-1 my-1" >회원삭제</button>
+                      	<button type="button" id="dbtn" class="btn btn-danger float-end mx-1 my-1" >회원삭제</button>
 						<button type="button" id="mbtn" class="btn btn-success float-end mx-1 my-1">수정완료</button>
                       </td>
                     </tr>   
                     
                   </tbody>
                 </table>
+                <div id="dialog" style="display:none;" title="회원정보 삭제">
+                	<h4>회원 정보를 삭제하시겠습니까? 삭제 후 복구가 불가능합니다.</h4>
+                </div>
               </div>
             </div>
  
@@ -239,46 +242,78 @@
   <script src="./resources/bootstrap-5/html/admin/js/plugins/smooth-scrollbar.min.js"></script>
   <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
   <script>
-  
-  document.getElementById( 'mbtn' ).onclick = function() {	
-	 var name = $('#name').val();
-	 var email = $('#email').val();
-	 var birth = $('#birth').val();
-	 var gen = $('.form-select option:selected').val();
-	 alert( "gen option: " + gen );
-	 var ucode = $('#ucode').val();
-	 
-	//console.log( name );
-	 		 
-     var data = {'name': name, 'email' : email , 'birth' : birth, 'gen' : gen, 'ucode' : ucode };	    	
 
-     if(($('#name').val() != '')&&($('#email').val() != '')&&($('#birth').val() != '')&&($('#gen').val() != '')){	        
-				
-		$.ajax({
-			data : data,				
-			type : "POST",
-			url : './admin_users_modifyOk.do',
-			dataType : 'text',
-			success : function(flag) {					
-				
-				if( flag == "0" ) {
-					alert('회원정보 수정 성공');
-					location.href= '/admin_users.do';
-				} else {
-					alert('회원정보 수정 실패');
-					history.back();
-				}
-			},
-			error: function(request, status, error) {
-				alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
-	        }
-		});
-     } else {
-	        alert('에러남.');
-	        $('#title').focus();
-	 } 
-   }
+	  
+	 // 	
+			 
+		  // }
+			 
+
   
+  document.getElementById( 'dbtn' ).onclick = function() {
+	  if( confirm( "회원 정보를 삭제하시겠습니까? 삭제 후 복구가 불가능합니다.") ) {
+		  var ucode = $('#ucode').val();
+		  
+		  $.ajax({
+				data : ucode,				
+				type : "POST",
+				url : './admin_users_deleteOk.do',
+				dataType : 'text',
+				success : function(flag) {					
+					
+					if( flag == "0" ) {
+						alert('회원정보 삭제 성공');
+						location.href= '/admin_users.do';
+					} else {
+						alert('회원정보 수정 실패');
+						history.back();
+					}
+				},
+				error: function(request, status, error) {
+					alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
+		        }
+			});
+	  }
+  };
+  
+  document.getElementById( 'mbtn' ).onclick = function() {
+	  var name = $('#name').val();
+		var email = $('#email').val();
+		var birth = $('#birth').val();
+		var gen = $('.form-select option:selected').val();
+		 //alert( "gen option: " + gen );
+		var ucode = $('#ucode').val();
+		 
+		//console.log( name );
+		 		 
+	    var data = {'name': name, 'email' : email , 'birth' : birth, 'gen' : gen, 'ucode' : ucode };	    	
+
+	    if(($('#name').val() != '')&&($('#email').val() != '')&&($('#birth').val() != '')&&($('#gen').val() != '')){	        
+					
+			$.ajax({
+				data : data,				
+				type : "POST",
+				url : './admin_users_modifyOk.do',
+				dataType : 'text',
+				success : function(flag) {					
+					
+					if( flag == "0" ) {
+						alert('회원정보 수정 성공');
+						location.href= '/admin_users.do';
+					} else {
+						alert('회원정보 수정 실패');
+						history.back();
+					}
+				},
+				error: function(request, status, error) {
+					alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
+		        }
+			});
+	     } else {
+		        alert('에러남.');
+		        $('#title').focus();
+		 } 
+  }
   
   </script>
   

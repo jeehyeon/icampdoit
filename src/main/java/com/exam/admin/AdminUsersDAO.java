@@ -22,7 +22,7 @@ public class AdminUsersDAO {
 		int recordPerPage = ulistTO.getRecordPerPage();
 		int blockPerPage = ulistTO.getBlockPerPage();
 		
-		String sql = "select ucode, id, name, gen, email, STR_TO_DATE( birth, '%Y%m%d' ) birth from users";
+		String sql = "select ucode, id, name, gen, email, STR_TO_DATE( birth, '%Y%m%d' ) birth from users where name not like ' ' ";
 		ArrayList<SignUpTO> ulists = (ArrayList<SignUpTO>)jdbcTemplate.query(sql, new BeanPropertyRowMapper<SignUpTO>(SignUpTO.class));
 		
 		ulistTO.setTotalRecord( ulists.size() );
@@ -86,4 +86,25 @@ public class AdminUsersDAO {
 		
 		return flag;
 	}
+	
+	//회원정보 deleteOk
+		public int usersDeleteOK(SignUpTO sto) {
+			int flag = 2;
+			
+			System.out.println( "Ucode: " +sto.getUcode() );
+			
+			String sql = "update users set pwd=?, name=?, email=?, birth=?, gen=?, hint=?, answer=?, kid=? where ucode=?";
+			int result = jdbcTemplate.update(sql, " ", " ", " ", " ", " ", " ", " ", " ", sto.getUcode() );
+			
+			System.out.println( result );
+			
+			if( result == 0 ) {
+				System.out.println("삭제가 되지 않았습니다.");
+				flag = 1;
+			} else if( result == 1 ) {
+				flag = 0;
+			}
+			
+			return flag;
+		}
 }
