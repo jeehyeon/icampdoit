@@ -58,13 +58,12 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   	<style type="text/css">
   		#wrap {
-  			min-height: 100%;
-		    position: relative;
-		    padding-bottom: 380px;
+  			min-height: 90vh;
+		  	display: flex;
+		  	flex-direction: column;
   		}
   		#footer {
-  			position: relative;
-    		transform: translatY(-100%);
+    		margin-top: auto;
   		}
   	</style>
   	

@@ -93,13 +93,12 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <style type="text/css">
   		#wrap {
-  			min-height: 100%;
-		    position: relative;
-		    padding-bottom: 380px;
+  			min-height: 90vh; /* 최소 높이를 지정 */
+		  	display: flex;
+		  	flex-direction: column;
   		}
   		#footer {
-  			position: relative;
-    		transform: translatY(-100%);
+    		margin-top: auto;
   		}
   	</style>
   </head>
@@ -169,7 +168,7 @@
       <div class="container border-bottom px-lg-5">
         <!-- Breadcrumbs -->
         <p class="subtitle text-sm text-primary">My Page    </p>
-        <h1 class="hero-heading mb-0" style="font-family: 'Recipekorea';">내가 쓴 글</h1>
+        <h1 class="hero-heading mb-0 pb-3" style="font-family: 'Recipekorea';">내가 쓴 글</h1>
         <p></p>
       </div>
      </section>
@@ -214,7 +213,7 @@
           	       
         <!-- Pagination -->
         <nav aria-label="Page navigation example">  
-          <ul class="pagination pagination-template d-flex justify-content-center">
+          <ul class="pagination pagination-template d-flex justify-content-center pt-2">
            <!--
             <li class="page-item"><a class="page-link" href="#"> <i class="fa fa-angle-left"></i></a></li>
             <li class="page-item active"><a class="page-link" href="#">1</a></li>
@@ -272,7 +271,7 @@
     <!-- Footer - 관리자 페이지 이동 부분 넣을 곳 -->
     <footer class="position-relative z-index-10 d-print-none" id="footer">
            
-      <!-- Copyright section of the footer-->
+      <!-- Copyright section of the footer -->
       <div class="py-4 fw-light bg-gray-800 text-gray-300">
         <div class="container">
           <div class="row align-items-center">
