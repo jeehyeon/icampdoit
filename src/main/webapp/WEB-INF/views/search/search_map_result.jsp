@@ -31,6 +31,7 @@
 	
 	for( SearchkeyTO kto : datas ){
 		String contentId = kto.getContentId();
+		System.out.println( "contentId :" + contentId );
 		String facltNm = kto.getFacltNm();
 		String induty = kto.getInduty();
 		String addr1 = kto.getAddr1();
