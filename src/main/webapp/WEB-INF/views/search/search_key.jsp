@@ -32,7 +32,10 @@
 		keysearch = "키워드나&nbsp;캠핑장&nbsp;이름을&nbsp;입력해주세요.";
 	}
 	
-	//String keyword = (String)request.getAttribute("keysearch");
+	String keyword = (String)request.getAttribute("keysearch");
+	if( keyword == null ) {
+		keyword = "";
+	}
 			
 	StringBuilder sbHtml = new StringBuilder();
 	
@@ -533,33 +536,33 @@
 	if ( startBlock == 1 ) {
 		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-thin fa-angles-left'></i></a></li> ");
 	} else {
-		out.println(" <li class='page-item'><a class='page-link' href='searchkey.do?keysearch="+ keysearch + "&cpage="+ (startBlock - blockPerPage) +"'><i class='fa fa-thin fa-angles-left'></i></a></li> ");
+		out.println(" <li class='page-item'><a class='page-link' href='searchkey.do?keysearch="+ keyword + "&cpage="+ (startBlock - blockPerPage) +"'><i class='fa fa-thin fa-angles-left'></i></a></li> ");
 	}
 	//페이지 하단의 < 버튼 => (cpage-1) 한페이지 앞으로 이동
 	if ( cpage == 1 ) {
 		out.println(" <li class='page-item'><a class='page-link' href='#'> <i class='fa fa-angle-left'></i></a></li> ");
 	} else {
-		out.println(" <li class='page-item'><a class='page-link' href='searchkey.do?keysearch="+ keysearch + "&cpage="+ (cpage-1) +"'><i class='fa fa-angle-left'></i></a></li> ");
+		out.println(" <li class='page-item'><a class='page-link' href='searchkey.do?keysearch="+ keyword + "&cpage="+ (cpage-1) +"'><i class='fa fa-angle-left'></i></a></li> ");
 	}
 	//현재 페이지
 	for ( int i=startBlock; i<=endBlock; i++ ) {
 		if ( cpage == i ) { 
 			out.println(" <li class='page-item active'><a class='page-link' href='#'>" + i + "</a></li> ");
 		} else {
-			out.println(" <li class='page-item'><a class='page-link' href='searchkey.do?keysearch="+ keysearch + "&cpage=" + i + "'>" + i + "</a></li> ");
+			out.println(" <li class='page-item'><a class='page-link' href='searchkey.do?keysearch="+ keyword + "&cpage=" + i + "'>" + i + "</a></li> ");
 		}
 	}
 	//페이지 하단의 > 버튼
 	if ( cpage == totalPage ) {
 		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-angle-right'></i></a></li> ");
 	} else {
-		out.println(" <li class='page-item'><a class='page-link' href='searchkey.do?keysearch="+ keysearch + "&cpage="+ (cpage+1) +"'><i class='fa fa-angle-right'></i></a></li> ");
+		out.println(" <li class='page-item'><a class='page-link' href='searchkey.do?keysearch="+ keyword + "&cpage="+ (cpage+1) +"'><i class='fa fa-angle-right'></i></a></li> ");
 	}
 	//페이지 하단의 >> 버튼
 	if ( endBlock == totalPage ) {
 		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
 	} else {
-		out.println(" <li class='page-item'><a class='page-link' href='searchkey.do?keysearch="+ keysearch + "&cpage="+ (startBlock + blockPerPage) +"'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
+		out.println(" <li class='page-item'><a class='page-link' href='searchkey.do?keysearch="+ keyword + "&cpage="+ (startBlock + blockPerPage) +"'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
 	}
 %> 
             </ul>

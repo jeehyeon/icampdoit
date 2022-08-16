@@ -41,7 +41,7 @@ public class Controller_Search {
 			kto.setKeysearch( request.getParameter( "keysearch" ) );
 		}
 		//System.out.println( "키워드 : " + kto.getKeysearch());	
-		
+				
 		SearchListTO listTO = new SearchListTO();
 		listTO.setCpage( cpage );
 		
@@ -51,6 +51,7 @@ public class Controller_Search {
 		modelAndView.setViewName( "/search/search_key" );
 		modelAndView.addObject( "listTO", listTO );
 		modelAndView.addObject( "cpage", cpage );
+		modelAndView.addObject( "keyword", kto.getKeysearch() );
 		
 		return modelAndView;
 	}
