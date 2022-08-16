@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.exam.admin.AdminStatDAO;
 import com.exam.admin.VisitTO;
+import com.exam.home.HomeDAO;
 import com.exam.search.InsertGocamping;
 import com.exam.search.SearchkeyTO;
 
@@ -24,6 +25,9 @@ public class Controller {
 	@Autowired
 	private AdminStatDAO sdao;
 	
+	@Autowired
+	private HomeDAO dao;
+	
 	@RequestMapping( value="/home.do" )
 	public ModelAndView home(HttpServletRequest request, HttpSession session) {
 		System.out.println( "list() 호출" );
@@ -32,7 +36,9 @@ public class Controller {
 			System.out.println("세션값 id : " + session.getAttribute("id"));
 		} else {
 			request.getSession(true);
-		}
+		}		
+
+		ArrayList<SearchkeyTO> lists = dao.campInfo();
 
 		if( session.isNew() ) {
 			//vto.setVdate( (Long.toString( session.getCreationTime() ) ) );
@@ -41,6 +47,7 @@ public class Controller {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "home" );
+		modelAndView.addObject( "lists", lists );
 		
 		return modelAndView;
 	}
@@ -69,4 +76,6 @@ public class Controller {
 		
 		return modelAndView;
 	}
+	
+
 }

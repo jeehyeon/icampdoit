@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="com.exam.search.SearchkeyTO"%>
+<%@ page import="java.util.ArrayList" %>
 <%
 	//session 값 가져오기
 	int ucode = -1;
@@ -8,6 +10,24 @@
 		ucode = (int)session.getAttribute("ucode");
 		id = (String)session.getAttribute("id");
 	}
+	
+	ArrayList<SearchkeyTO> lists = (ArrayList)request.getAttribute( "lists" ); 
+	
+	StringBuilder sbHtml = new StringBuilder();
+	
+	for( SearchkeyTO to : lists ) {
+		String contentID = to.getContentId();
+		String campNm = to.getFacltNm();
+		String mainImg = to.getFirstImageUrl();
+		String addr1 = to.getDoNm();
+		String addr2 = to.getSigunguNm();
+		//System.out.println( "캠핑장명 : " + contentID );
+		
+		sbHtml.append( "</tr>" );
+	}
+	
+	
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -447,7 +467,7 @@
 	</div>
 	</form>
 	
-<!-- 소연 시작 -->
+<!-- 캠핑장 조회수 TOP 5 -->
 	<section class="py-6">
       <div class="container">
         <div class="row mb-5">
@@ -657,8 +677,7 @@
       </div>
     </section>
     <!-- 설문목록 끝 -->
-    
-    
+        
     <!-- 날씨 -->
     <section class="py-6 " >
       <div class="container">
@@ -723,8 +742,7 @@
 			   	강수 : 10%
             </div>
             
-            
-            
+ 
           </div>
         </div>
       </div>
