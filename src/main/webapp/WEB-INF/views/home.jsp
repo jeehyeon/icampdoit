@@ -315,31 +315,31 @@
 							<div class="col-sm-2" style="font-family: 'GmarketSansBold';">&nbsp;<strong>바닥 형태</strong></div>
 							<div class="col-sm-10">
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="floorGrass" name="siteBottomCl1" value="잔디">
+									<input class="form-check-input" type="checkbox" id="floorGrass" name="siteBottomCl1" value="0">
 									<label class="from-check-label" for="floorGrass">
 										잔디
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="floorRock" name="siteBottomCl2" value="파쇄석">
+									<input class="form-check-input" type="checkbox" id="floorRock" name="siteBottomCl2" value="0">
 									<label class="from-check-label" for="floorRock">
 										파쇄석
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="floorTeck" name="siteBottomCl3" value="테크">
+									<input class="form-check-input" type="checkbox" id="floorTeck" name="siteBottomCl3" value="0">
 									<label class="from-check-label" for="floorTeck">
 										테크
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="floorPebble" name="siteBottomCl4" value="자갈">
+									<input class="form-check-input" type="checkbox" id="floorPebble" name="siteBottomCl4" value="0">
 									<label class="from-check-label" for="floorPebble">
 										자갈
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="floorDirt" name="siteBottomCl5" value="맨흙">
+									<input class="form-check-input" type="checkbox" id="floorDirt" name="siteBottomCl5" value="0">
 									<label class="from-check-label" for="floorDirt">
 										맨흙
 									</label>
@@ -456,19 +456,19 @@
 							<div class="col-sm-2" style="font-family: 'GmarketSansBold';">&nbsp;<i class="fa-solid fa-period"></i><strong>기타 정보</strong></div>
 							<div class="col-sm-10">
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="etcTrailer" name="trlerAcmpnyAt" value="개인트레일러">
+									<input class="form-check-input" type="checkbox" id="etcTrailer" name="trlerAcmpnyAt" value="Y">
 									<label class="from-check-label" for="etcTrailer">
 										개인 트레일러 입장 가능
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="etcCaraban" name="caravAcmpnyAt" value="개인카라반">
+									<input class="form-check-input" type="checkbox" id="etcCaraban" name="caravAcmpnyAt" value="Y">
 									<label class="from-check-label" for="etcCaraban">
 										개인 카라반 입장 가능
 									</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" id="etcPet" name="animalCmgCl" value="반려견">
+									<input class="form-check-input" type="checkbox" id="etcPet" name="animalCmgCl" value="불가능">
 									<label class="from-check-label" for="etcPet">
 										반려견 동반 가능
 									</label>

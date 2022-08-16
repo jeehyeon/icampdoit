@@ -88,6 +88,13 @@ public class Controller_Search {
 			doNmG = request.getParameter( "doNmG" );
 		}
 		System.out.println( "addurl:"+ addurl);
+		if( (request.getParameter( "doNmS" )==null||request.getParameter("doNmS")=="") &&
+			(request.getParameter( "doNmI" )==null||request.getParameter("doNmI")=="") &&
+			(request.getParameter( "doNmG" )==null||request.getParameter("doNmG")=="") ) {
+			doNmS = "";
+			doNmI = "";
+			doNmG = "";
+		}
 		
 		// 캠핑유형 4개
 		String indutyNor = "";
@@ -118,6 +125,15 @@ public class Controller_Search {
 		} else {
 			indutyVan = request.getParameter( "indutyVan" );
 		}
+		if( (request.getParameter( "indutyNor" )==null||request.getParameter("indutyNor")=="") &&
+			(request.getParameter( "indutyCar" )==null||request.getParameter("indutyCar")=="") &&
+			(request.getParameter( "indutyGl" )==null||request.getParameter("indutyGl")=="") &&
+			(request.getParameter( "indutyVan" )==null||request.getParameter("indutyVan")=="") ) {
+			indutyNor = "";
+			indutyCar = "";
+			indutyGl = "";
+			indutyVan = "";
+		}
 				
 		// 입지 8개
 		String lctClMount = ""; 
@@ -135,78 +151,114 @@ public class Controller_Search {
 			lctClMount = request.getParameter( "lctClMount" );
 		}
 		if( (request.getParameter( "lctClForest" )!=null&&request.getParameter( "lctClForest" )!="")  ) {
-			addurl +="lctClForest=" + request.getParameter("lctClForest") +"&";
+			addurl +="indutyVan=" + request.getParameter("indutyVan") +"&";
 			lctClForest = request.getParameter( "lctClForest" );
 		} else {
 			lctClForest = request.getParameter( "lctClForest" );
 		}
-		/*
-		if() {
-			
-		} else {
-			
-		}
-		if() {
-			
-		} else {
-			
-		}
-		if() {
-			
-		} else {
-			
-		}
-		if() {
-			
-		} else {
-			
-		}
-		if() {
-			
-		} else {
-			
-		}
-		if() {
-			
-		} else {
-			
-		}
-		
-		
-		if( 
-			|| 
-			 || 
-			(request.getParameter( "lctClCity" )!=null&&request.getParameter( "lctClCity" )!="") || 
-			(request.getParameter( "lctClRiver" )!=null&&request.getParameter( "lctClRiver" )!="") || 
-			(request.getParameter( "lctClLake" )!=null&&request.getParameter( "lctClLake" )!="") || 
-			(request.getParameter( "lctClBeach" )!=null&&request.getParameter( "lctClBeach" )!="") || 
-			(request.getParameter( "lctClIsland" )!=null&&request.getParameter( "lctClIsland" )!="") ) {
-			//System.out.println("2.1");
-			 
-			
+		if( (request.getParameter( "lctClValley" )!=null&&request.getParameter( "lctClValley" )!="") ) {
+			addurl +="lctClValley=" + request.getParameter("lctClValley") +"&";
 			lctClValley = request.getParameter( "lctClValley" );
+		} else {
+			lctClValley = request.getParameter( "lctClValley" );
+		}
+		if( (request.getParameter( "lctClCity" )!=null&&request.getParameter( "lctClCity" )!="") ) {
+			addurl +="lctClCity=" + request.getParameter("lctClCity") +"&";
 			lctClCity = request.getParameter( "lctClCity" );
+		} else {
+			lctClCity = request.getParameter( "lctClCity" );
+		}
+		if( (request.getParameter( "lctClRiver" )!=null&&request.getParameter( "lctClRiver" )!="") ) {
+			addurl +="lctClRiver=" + request.getParameter("lctClRiver") +"&";
 			lctClRiver = request.getParameter( "lctClRiver" );
+		} else {
+			lctClRiver = request.getParameter( "lctClRiver" );
+		}
+		if( (request.getParameter( "lctClLake" )!=null&&request.getParameter( "lctClLake" )!="") ) {
+			addurl +="lctClLake=" + request.getParameter("lctClLake") +"&";
 			lctClLake = request.getParameter( "lctClLake" );
+		} else {
+			lctClLake = request.getParameter( "lctClLake" );
+		}
+		if( (request.getParameter( "lctClBeach" )!=null&&request.getParameter( "lctClBeach" )!="") ) {
+			addurl +="lctClBeach=" + request.getParameter("lctClBeach") +"&";
 			lctClBeach = request.getParameter( "lctClBeach" );
+		} else {
+			lctClBeach = request.getParameter( "lctClBeach" );
+		}
+		if( (request.getParameter( "lctClIsland" )!=null&&request.getParameter( "lctClIsland" )!="") ) {
+			addurl +="lctClIsland=" + request.getParameter("lctClIsland") +"&";
+			lctClIsland = request.getParameter( "lctClIsland" );
+		} else {
 			lctClIsland = request.getParameter( "lctClIsland" );
 		}
-		*/	
+		if( (request.getParameter( "lctClMount" )==null||request.getParameter( "lctClMount" )=="") &&
+			(request.getParameter( "lctClForest" )==null||request.getParameter( "lctClForest" )=="") &&
+			(request.getParameter( "lctClValley" )==null||request.getParameter( "lctClValley" )=="") &&
+			(request.getParameter( "lctClCity" )==null||request.getParameter( "lctClCity" )=="") &&
+			(request.getParameter( "lctClRiver" )==null||request.getParameter( "lctClRiver" )=="") &&
+			(request.getParameter( "lctClLake" )==null||request.getParameter( "lctClLake" )=="") &&
+			(request.getParameter( "lctClBeach" )==null||request.getParameter( "lctClBeach" )=="") &&
+			(request.getParameter( "lctClIsland" )==null||request.getParameter( "lctClIsland" )=="") ) {
+			lctClMount = "";
+			lctClForest = "";
+			lctClValley = "";
+			lctClCity = "";
+			lctClRiver = "";
+			lctClLake = "";
+			lctClBeach = "";
+			lctClIsland = "";
+		}
+					
 		// 바닥형태 5개
 		String siteBottomCl1 ="";
 		String siteBottomCl2 ="";
 		String siteBottomCl3 ="";
 		String siteBottomCl4 ="";
 		String siteBottomCl5 ="";
-		if( request.getParameter( "siteBottomCl1" )!="null" || request.getParameter( "siteBottomCl2" )!="null" || request.getParameter( "siteBottomCl3" )!="null" || request.getParameter( "siteBottomCl4" )!="null" || request.getParameter( "siteBottomCl5" )!="null") {
-			siteBottomCl1 = request.getParameter( "siteBottomCl1" ); 
+		if( request.getParameter( "siteBottomCl1" )!=null&& request.getParameter( "siteBottomCl1" )!="" ) {
+			addurl +="siteBottomCl1=" + request.getParameter("siteBottomCl1") +"&";
+			siteBottomCl1 = request.getParameter( "siteBottomCl1" );
+			System.out.println( "siteBottomCl1값나오는지 : " + siteBottomCl1 );
+		} else {
+			siteBottomCl1 = request.getParameter( "siteBottomCl1" );
+		}
+		if(request.getParameter( "siteBottomCl2" )!=null&& request.getParameter( "siteBottomCl2" )!="") {
+			addurl +="siteBottomCl2=" + request.getParameter("siteBottomCl2") +"&";
 			siteBottomCl2 = request.getParameter( "siteBottomCl2" );
+		} else {
+			siteBottomCl2 = request.getParameter( "siteBottomCl2" );
+		}
+		if( request.getParameter( "siteBottomCl3" )!=null&& request.getParameter( "siteBottomCl3" )!="" ) {
+			addurl +="siteBottomCl3=" + request.getParameter("siteBottomCl3") +"&";
 			siteBottomCl3 = request.getParameter( "siteBottomCl3" );
+		} else {
+			siteBottomCl3 = request.getParameter( "siteBottomCl3" );
+		}
+		if( request.getParameter( "siteBottomCl4" )!=null&& request.getParameter( "siteBottomCl4" )!="" ) {
+			addurl +="siteBottomCl4=" + request.getParameter("siteBottomCl4") +"&";
 			siteBottomCl4 = request.getParameter( "siteBottomCl4" );
+		} else {
+			siteBottomCl4 = request.getParameter( "siteBottomCl4" );
+		}
+		if( request.getParameter( "siteBottomCl5" )!=null&& request.getParameter( "siteBottomCl5" )!="" ) {
+			addurl +="siteBottomCl5=" + request.getParameter("siteBottomCl5") +"&";
 			siteBottomCl5 = request.getParameter( "siteBottomCl5" );
-			
-		};
-		
+		} else {
+			siteBottomCl5 = request.getParameter( "siteBottomCl5" );
+		}
+		if( (request.getParameter( "siteBottomCl1" )==null||request.getParameter( "siteBottomCl1" )=="" ) &&
+			(request.getParameter( "siteBottomCl2" )==null||request.getParameter( "siteBottomCl2" )=="" ) &&
+			(request.getParameter( "siteBottomCl3" )==null||request.getParameter( "siteBottomCl3" )=="" ) &&
+			(request.getParameter( "siteBottomCl4" )==null||request.getParameter( "siteBottomCl4" )=="" ) &&
+			(request.getParameter( "siteBottomCl5" )==null||request.getParameter( "siteBottomCl5" )=="" ) ){
+			siteBottomCl1 = "";
+			siteBottomCl2 = "";
+			siteBottomCl3 = "";
+			siteBottomCl4 = "";
+			siteBottomCl5 = "";			
+		 }
+				
 		// 부대시설 9개
 		String sbrsClElectro = "";
 		String sbrsClHwater = "";
@@ -217,27 +269,79 @@ public class Controller_Search {
 		String sbrsClMart = "";
 		String sbrsClCstore = "";
 		String sbrsClWalk = "";
-		//System.out.println("3 : "+  request.getParameter( "sbrsClElectro" ));
-		if( (request.getParameter( "sbrsClElectro" )!=null&&request.getParameter( "sbrsClElectro" )!="") || 
-			(request.getParameter( "sbrsClHwater" )!=null&&request.getParameter( "sbrsClHwater" )!="") || 
-			(request.getParameter( "sbrsClGym" )!=null&&request.getParameter( "sbrsClGym" )!="") || 
-			(request.getParameter( "sbrsClWifi" )!=null&&request.getParameter( "sbrsClWifi" )!="") || 
-			(request.getParameter( "sbrsClFirewood" )!=null&&request.getParameter( "sbrsClFirewood" )!="") || 
-			(request.getParameter( "sbrsClPool" )!=null&&request.getParameter( "sbrsClPool" )!="") || 
-			(request.getParameter( "sbrsClMart" )!=null&&request.getParameter( "sbrsClMart" )!="") || 
-			(request.getParameter( "sbrsClCstore" )!=null&&request.getParameter( "sbrsClCstore" )!="") || 
-			(request.getParameter( "sbrsClWalk" )!=null&&request.getParameter( "sbrsClWalk" )!="") ) {
-			System.out.println("3.1");
+		if( (request.getParameter( "sbrsClElectro" )!=null&&request.getParameter( "sbrsClElectro" )!="") ) {
+			addurl +="sbrsClElectro=" + request.getParameter("sbrsClElectro") +"&";
 			sbrsClElectro = request.getParameter( "sbrsClElectro" );
+		} else {
+			sbrsClElectro = request.getParameter( "sbrsClElectro" );
+		}
+		if( (request.getParameter( "sbrsClHwater" )!=null&&request.getParameter( "sbrsClHwater" )!="") ) {
+			addurl +="sbrsClHwater=" + request.getParameter("sbrsClHwater") +"&";
 			sbrsClHwater = request.getParameter( "sbrsClHwater" );
+		} else {
+			sbrsClHwater = request.getParameter( "sbrsClHwater" );
+		}
+		if( (request.getParameter( "sbrsClGym" )!=null&&request.getParameter( "sbrsClGym" )!="") ) {
+			addurl +="sbrsClGym=" + request.getParameter("sbrsClGym") +"&";
 			sbrsClGym = request.getParameter( "sbrsClGym" );
+		} else {
+			sbrsClGym = request.getParameter( "sbrsClGym" );
+		}
+		if( (request.getParameter( "sbrsClWifi" )!=null&&request.getParameter( "sbrsClWifi" )!="") ) {
+			addurl +="sbrsClWifi=" + request.getParameter("sbrsClWifi") +"&";
 			sbrsClWifi = request.getParameter( "sbrsClWifi" );
+		} else {
+			sbrsClWifi = request.getParameter( "sbrsClWifi" );
+		}
+		if( (request.getParameter( "sbrsClFirewood" )!=null&&request.getParameter( "sbrsClFirewood" )!="") ) {
+			addurl +="sbrsClFirewood=" + request.getParameter("sbrsClFirewood") +"&";
 			sbrsClFirewood = request.getParameter( "sbrsClFirewood" );
+		} else {
+			sbrsClFirewood = request.getParameter( "sbrsClFirewood" );
+		}
+		if( (request.getParameter( "sbrsClPool" )!=null&&request.getParameter( "sbrsClPool" )!="") ) {
+			addurl +="sbrsClPool=" + request.getParameter("sbrsClPool") +"&";
 			sbrsClPool = request.getParameter( "sbrsClPool" );
+		} else {
+			sbrsClPool = request.getParameter( "sbrsClPool" );
+		}
+		if( (request.getParameter( "sbrsClMart" )!=null&&request.getParameter( "sbrsClMart" )!="") ) {
+			addurl +="sbrsClMart=" + request.getParameter("sbrsClMart") +"&";
 			sbrsClMart = request.getParameter( "sbrsClMart" );
+		} else {
+			sbrsClMart = request.getParameter( "sbrsClMart" );
+		}
+		if( (request.getParameter( "sbrsClCstore" )!=null&&request.getParameter( "sbrsClCstore" )!="") ) {
+			addurl +="sbrsClCstore=" + request.getParameter("sbrsClCstore") +"&";
 			sbrsClCstore = request.getParameter( "sbrsClCstore" );
+		} else {
+			sbrsClCstore = request.getParameter( "sbrsClCstore" );
+		}
+		if( (request.getParameter( "sbrsClWalk" )!=null&&request.getParameter( "sbrsClWalk" )!="") ) {
+			addurl +="sbrsClWalk=" + request.getParameter("sbrsClWalk") +"&";
 			sbrsClWalk = request.getParameter( "sbrsClWalk" );
-		};
+		} else {
+			sbrsClWalk = request.getParameter( "sbrsClWalk" );
+		}
+		if( (request.getParameter( "sbrsClElectro" )==null||request.getParameter( "sbrsClElectro" )=="") && 
+			(request.getParameter( "sbrsClHwater" )==null||request.getParameter( "sbrsClHwater" )=="") &&
+			(request.getParameter( "sbrsClGym" )==null||request.getParameter( "sbrsClGym" )=="") &&
+			(request.getParameter( "sbrsClWifi" )==null||request.getParameter( "sbrsClWifi" )=="") &&
+			(request.getParameter( "sbrsClFirewood" )==null||request.getParameter( "sbrsClFirewood" )=="") &&
+			(request.getParameter( "sbrsClPool" )==null||request.getParameter( "sbrsClPool" )=="") &&
+			(request.getParameter( "sbrsClMart" )==null||request.getParameter( "sbrsClMart" )=="") &&
+			(request.getParameter( "sbrsClCstore" )==null||request.getParameter( "sbrsClCstore" )=="") &&
+			(request.getParameter( "sbrsClWalk" )==null||request.getParameter( "sbrsClWalk" )=="") ) {
+			sbrsClElectro = "";
+			sbrsClHwater = "";
+			sbrsClGym = "";
+			sbrsClWifi = "";
+			sbrsClFirewood = "";
+			sbrsClPool = "";
+			sbrsClMart = "";
+			sbrsClCstore = "";
+			sbrsClWalk = "";
+		}
 		
 		// 캠핑장비 대여 6개
 		String eqpmnLendClTent = "";
@@ -246,34 +350,92 @@ public class Controller_Search {
 		String eqpmnLendClTableware = "";
 		String eqpmnLendClSbag = "";
 		String eqpmnLendClRwire = "";
-		if( (request.getParameter( "eqpmnLendClTent" )!=null&&request.getParameter( "eqpmnLendClTent" )!="") ||
-			(request.getParameter( "eqpmnLendClBrazier" )!=null&&request.getParameter( "eqpmnLendClBrazier" )!="") ||
-			(request.getParameter( "eqpmnLendClHeater" )!=null&&request.getParameter( "eqpmnLendClHeater" )!="") ||
-			(request.getParameter( "eqpmnLendClTableware" )!=null&&request.getParameter( "eqpmnLendClTableware" )!="") ||
-			(request.getParameter( "eqpmnLendClSbag" )!=null&&request.getParameter( "eqpmnLendClSbag" )!="") ||
-			(request.getParameter( "eqpmnLendClRwire" )!=null&&request.getParameter( "eqpmnLendClRwire" )!="") ) {
+		if( (request.getParameter( "eqpmnLendClTent" )!=null&&request.getParameter( "eqpmnLendClTent" )!="") ) {
+			addurl +="eqpmnLendClTent=" + request.getParameter("eqpmnLendClTent") +"&";
 			eqpmnLendClTent = request.getParameter( "eqpmnLendClTent" );
+		} else {
+			eqpmnLendClTent = request.getParameter( "eqpmnLendClTent" );
+		}
+		if( (request.getParameter( "eqpmnLendClBrazier" )!=null&&request.getParameter( "eqpmnLendClBrazier" )!="") ) {
+			addurl +="eqpmnLendClBrazier=" + request.getParameter("eqpmnLendClBrazier") +"&";
 			eqpmnLendClBrazier = request.getParameter( "eqpmnLendClBrazier" );
+		} else {
+			eqpmnLendClBrazier = request.getParameter( "eqpmnLendClBrazier" );
+		}
+		if( (request.getParameter( "eqpmnLendClHeater" )!=null&&request.getParameter( "eqpmnLendClHeater" )!="") ) {
+			addurl +="eqpmnLendClHeater=" + request.getParameter("eqpmnLendClHeater") +"&";
 			eqpmnLendClHeater = request.getParameter( "eqpmnLendClHeater" );
+		} else {
+			eqpmnLendClHeater = request.getParameter( "eqpmnLendClHeater" );
+		}
+		if( (request.getParameter( "eqpmnLendClTableware" )!=null&&request.getParameter( "eqpmnLendClTableware" )!="") ) {
+			addurl +="eqpmnLendClTableware=" + request.getParameter("eqpmnLendClTableware") +"&";
 			eqpmnLendClTableware = request.getParameter( "eqpmnLendClTableware" );
+		} else {
+			eqpmnLendClTableware = request.getParameter( "eqpmnLendClTableware" );
+		}
+		if( (request.getParameter( "eqpmnLendClSbag" )!=null&&request.getParameter( "eqpmnLendClSbag" )!="") ) {
+			addurl +="eqpmnLendClSbag=" + request.getParameter("eqpmnLendClSbag") +"&";
 			eqpmnLendClSbag = request.getParameter( "eqpmnLendClSbag" );
+		} else {
+			eqpmnLendClSbag = request.getParameter( "eqpmnLendClSbag" );
+		}
+		if( (request.getParameter( "eqpmnLendClRwire" )!=null&&request.getParameter( "eqpmnLendClRwire" )!="") ) {
+			addurl +="eqpmnLendClRwire=" + request.getParameter("eqpmnLendClRwire") +"&";
 			eqpmnLendClRwire = request.getParameter( "eqpmnLendClRwire" );
-		};
+		} else {
+			eqpmnLendClRwire = request.getParameter( "eqpmnLendClRwire" );
+		}
+		if( (request.getParameter( "eqpmnLendClTent" )==null||request.getParameter( "eqpmnLendClTent" )=="") && 
+			(request.getParameter( "eqpmnLendClBrazier" )==null||request.getParameter( "eqpmnLendClBrazier" )=="") &&
+			(request.getParameter( "eqpmnLendClHeater" )==null||request.getParameter( "eqpmnLendClHeater" )=="") &&
+			(request.getParameter( "eqpmnLendClTableware" )==null||request.getParameter( "eqpmnLendClTableware" )=="") &&
+			(request.getParameter( "eqpmnLendClSbag" )==null||request.getParameter( "eqpmnLendClSbag" )=="") &&
+			(request.getParameter( "eqpmnLendClRwire" )==null||request.getParameter( "eqpmnLendClRwire" )=="") ) {
+			eqpmnLendClTent = "";
+			eqpmnLendClBrazier = "";
+			eqpmnLendClHeater = "";
+			eqpmnLendClTableware = "";
+			eqpmnLendClSbag = "";
+			eqpmnLendClRwire = "";
+		}
 		
 		// 기타정보 3개
 		String trlerAcmpnyAt = "";
 		String caravAcmpnyAt = "";
 		String animalCmgCl = "";
-		if( request.getParameter( "trlerAcmpnyAt" )!="null" || request.getParameter( "caravAcmpnyAt" )!="null" || request.getParameter( "animalCmgCl" )!="null" ) {
+		if( (request.getParameter( "trlerAcmpnyAt" )!=null&&request.getParameter( "trlerAcmpnyAt" )!="") ) {
+			addurl +="trlerAcmpnyAt=" + request.getParameter("trlerAcmpnyAt") +"&";
 			trlerAcmpnyAt = request.getParameter( "trlerAcmpnyAt" );
+		} else {
+			trlerAcmpnyAt = request.getParameter( "trlerAcmpnyAt" );
+		}
+		if( (request.getParameter( "caravAcmpnyAt" )!=null&&request.getParameter( "caravAcmpnyAt" )!="") ) {
+			addurl +="caravAcmpnyAt=" + request.getParameter("caravAcmpnyAt") +"&";
 			caravAcmpnyAt = request.getParameter( "caravAcmpnyAt" );
+		} else {
+			caravAcmpnyAt = request.getParameter( "caravAcmpnyAt" );
+		}
+		if( (request.getParameter( "animalCmgCl" )!=null&&request.getParameter( "animalCmgCl" )!="") ) {
+			addurl +="animalCmgCl=" + request.getParameter("animalCmgCl") +"&";
 			animalCmgCl = request.getParameter( "animalCmgCl" );
-		} ;
+		} else {
+			animalCmgCl = request.getParameter( "animalCmgCl" );
+		}
+		if( (request.getParameter( "trlerAcmpnyAt" )==null||request.getParameter( "trlerAcmpnyAt" )=="") ) {
+			trlerAcmpnyAt = "";
+		}
+		if( (request.getParameter( "caravAcmpnyAt" )==null||request.getParameter( "caravAcmpnyAt" )=="") ) {
+			caravAcmpnyAt = "";
+		}
+		if( (request.getParameter( "animalCmgCl" )==null||request.getParameter( "animalCmgCl" )=="") ) {
+			animalCmgCl = "";
+		}
 		
 		SearchListTO listTO = new SearchListTO();
 		listTO.setCpage( cpage );
 		
-		listTO = kdao.searchdetailDAO( listTO, doNmS, doNmI, doNmG, indutyNor, indutyCar, indutyGl, indutyVan, lctClMount, lctClForest, lctClValley, lctClCity, lctClRiver, lctClLake, lctClBeach, lctClIsland, sbrsClElectro, sbrsClHwater, sbrsClGym, sbrsClWifi, sbrsClFirewood, sbrsClPool, sbrsClMart, sbrsClCstore, sbrsClWalk, eqpmnLendClTent, eqpmnLendClBrazier, eqpmnLendClHeater, eqpmnLendClTableware, eqpmnLendClSbag, eqpmnLendClRwire);		
+		listTO = kdao.searchdetailDAO( listTO, doNmS, doNmI, doNmG, indutyNor, indutyCar, indutyGl, indutyVan, lctClMount, lctClForest, lctClValley, lctClCity, lctClRiver, lctClLake, lctClBeach, lctClIsland, siteBottomCl1, siteBottomCl2, siteBottomCl3, siteBottomCl4, siteBottomCl5, sbrsClElectro, sbrsClHwater, sbrsClGym, sbrsClWifi, sbrsClFirewood, sbrsClPool, sbrsClMart, sbrsClCstore, sbrsClWalk, eqpmnLendClTent, eqpmnLendClBrazier, eqpmnLendClHeater, eqpmnLendClTableware, eqpmnLendClSbag, eqpmnLendClRwire, trlerAcmpnyAt, caravAcmpnyAt, animalCmgCl);		
 	
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "/search/search_detail" );

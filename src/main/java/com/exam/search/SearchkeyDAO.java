@@ -295,48 +295,50 @@ public class SearchkeyDAO {
 		}
 	
 		// 상세검색DAO
-		public SearchListTO searchdetailDAO(SearchListTO listTO, String doNmS, String doNmI, String doNmG, String indutyNor, String indutyCar, String indutyGl, String indutyVan, String lctClMount, String lctClForest, String lctClValley, String lctClCity, String lctClRiver, String lctClLake, String lctClBeach, String lctClIsland, String sbrsClElectro, String sbrsClHwater, String sbrsClGym, String sbrsClWifi, String sbrsClFirewood, String sbrsClPool, String sbrsClMart, String sbrsClCstore, String sbrsClWalk, String eqpmnLendClTent, String eqpmnLendClBrazier, String eqpmnLendClHeater, String eqpmnLendClTableware, String eqpmnLendClSbag, String eqpmnLendClRwire ) {
-			  // TODO Auto-generated method stub
-			System.out.println( "doNmS:"+doNmS);
-			System.out.println( "doNmI:"+doNmI);
-			System.out.println( "doNmG:"+doNmG);
-			int cpage = listTO.getCpage();
-			int recordPerPage = listTO.getRecordPerPage();
-			int blockPerPage = listTO.getBlockPerPage();
-			
-			String sql = "select facltNm, doNm, sigunguNm, addr1, addr2, induty, firstImageUrl, contentId from go_api where (doNm like ? or doNm like ? or doNm like ?) and (induty like ? or induty like ? or induty like ? or induty like ?) and (lctCl like ? or lctCl like ? or lctCl like ? or lctCl like ? or lctCl like ? or lctCl like ? or lctCl like ? or lctCl like ?) and (sbrsCl like ? or sbrsCl like ? or sbrsCl like ? or sbrsCl like ? or sbrsCl like ? or sbrsCl like ? or sbrsCl like ? or sbrsCl like ? or sbrsCl like ?) and (eqpmnLendCl like ? or eqpmnLendCl like ? or eqpmnLendCl like ? or eqpmnLendCl like ? or eqpmnLendCl like ? or eqpmnLendCl like ?)";
-			ArrayList<SearchkeyTO> searchLists = (ArrayList<SearchkeyTO>)jdbcTemplate.query(sql, new BeanPropertyRowMapper<SearchkeyTO>(SearchkeyTO.class), "%"+doNmS+"%", "%"+doNmI+"%", "%"+doNmG+"%", "%"+indutyNor+"%", "%"+indutyCar+"%", "%"+indutyGl+"%", "%"+indutyVan+"%", "%"+lctClMount+"%", "%"+lctClForest+"%", "%"+lctClValley+"%", "%"+lctClCity+"%", "%"+lctClRiver+"%", "%"+lctClLake+"%", "%"+lctClBeach+"%", "%"+lctClIsland+"%", "%"+sbrsClElectro+"%", "%"+sbrsClHwater+"%", "%"+sbrsClGym+"%", "%"+sbrsClWifi+"%", "%"+sbrsClFirewood+"%", "%"+sbrsClPool+"%", "%"+sbrsClMart+"%", "%"+sbrsClCstore+"%", "%"+sbrsClWalk+"%", "%"+eqpmnLendClTent+"%", "%"+eqpmnLendClBrazier+"%", "%"+eqpmnLendClHeater+"%", "%"+eqpmnLendClTableware+"%", "%"+eqpmnLendClSbag+"%", "%"+eqpmnLendClRwire+"%");
-			
-			listTO.setTotalRecord( searchLists.size() );
-			
-			listTO.setTotalPage( ( (listTO.getTotalRecord() -1 ) / recordPerPage ) + 1 );		
-			int skip = ( cpage - 1 ) * recordPerPage;	
-			
-			ArrayList<SearchkeyTO> lists = new ArrayList<SearchkeyTO>();		
-			for( int i=0; i<recordPerPage ; i++ ) {
-				if( skip+i != searchLists.size() ) {
-					SearchkeyTO kto = new SearchkeyTO();
-					kto.setFacltNm( searchLists.get(skip+i).getFacltNm() );
-					kto.setAddr1( searchLists.get(skip+i).getAddr1() );
-					kto.setAddr2( searchLists.get(skip+i).getAddr2() );
-					kto.setInduty( searchLists.get(skip+i).getInduty() );				
-					kto.setFirstImageUrl( searchLists.get(skip+i).getFirstImageUrl() );
-					kto.setContentId( searchLists.get(skip+i).getContentId() );
-					kto.setDoNm( searchLists.get(skip+i).getDoNm() );
-					kto.setSigunguNm( searchLists.get(skip+i).getSigunguNm() );
+				public SearchListTO searchdetailDAO(SearchListTO listTO, String doNmS, String doNmI, String doNmG, String indutyNor, String indutyCar, String indutyGl, String indutyVan, String lctClMount, String lctClForest, String lctClValley, String lctClCity, String lctClRiver, String lctClLake, String lctClBeach, String lctClIsland, String siteBottomCl1, String siteBottomCl2, String siteBottomCl3, String siteBottomCl4, String siteBottomCl5, String sbrsClElectro, String sbrsClHwater, String sbrsClGym, String sbrsClWifi, String sbrsClFirewood, String sbrsClPool, String sbrsClMart, String sbrsClCstore, String sbrsClWalk, String eqpmnLendClTent, String eqpmnLendClBrazier, String eqpmnLendClHeater, String eqpmnLendClTableware, String eqpmnLendClSbag, String eqpmnLendClRwire, String trlerAcmpnyAt, String caravAcmpnyAt, String animalCmgCl ) {
+					  // TODO Auto-generated method stub
+					System.out.println( "siteBottom1dao:"+siteBottomCl1);
+					System.out.println( "siteBottom2dao:"+siteBottomCl2);
+					System.out.println( "siteBottom3dao:"+siteBottomCl3);
+					System.out.println( "siteBottom4dao:"+siteBottomCl4);
+					System.out.println( "siteBottom5dao:"+siteBottomCl5);
+					int cpage = listTO.getCpage();
+					int recordPerPage = listTO.getRecordPerPage();
+					int blockPerPage = listTO.getBlockPerPage();
 					
-					lists.add( kto );
+					String sql = "select facltNm, doNm, sigunguNm, addr1, addr2, induty, firstImageUrl, contentId from go_api where (doNm like ? or doNm like ? or doNm like ?) and (induty like ? or induty like ? or induty like ? or induty like ?) and (lctCl like ? or lctCl like ? or lctCl like ? or lctCl like ? or lctCl like ? or lctCl like ? or lctCl like ? or lctCl like ?) and (siteBottomCl1 != ? or siteBottomCl2 != ? or siteBottomCl3 != ? or siteBottomCl4 != ? or siteBottomCl5 != ?) and (sbrsCl like ? or sbrsCl like ? or sbrsCl like ? or sbrsCl like ? or sbrsCl like ? or sbrsCl like ? or sbrsCl like ? or sbrsCl like ? or sbrsCl like ?) and (eqpmnLendCl like ? or eqpmnLendCl like ? or eqpmnLendCl like ? or eqpmnLendCl like ? or eqpmnLendCl like ? or eqpmnLendCl like ?) and trlerAcmpnyAt like ? and caravAcmpnyAt like ? and animalCmgCl != ?";
+					ArrayList<SearchkeyTO> searchLists = (ArrayList<SearchkeyTO>)jdbcTemplate.query(sql, new BeanPropertyRowMapper<SearchkeyTO>(SearchkeyTO.class), "%"+doNmS+"%", "%"+doNmI+"%", "%"+doNmG+"%", "%"+indutyNor+"%", "%"+indutyCar+"%", "%"+indutyGl+"%", "%"+indutyVan+"%", "%"+lctClMount+"%", "%"+lctClForest+"%", "%"+lctClValley+"%", "%"+lctClCity+"%", "%"+lctClRiver+"%", "%"+lctClLake+"%", "%"+lctClBeach+"%", "%"+lctClIsland+"%", "%"+sbrsClElectro+"%", "%"+siteBottomCl1+"%", "%"+siteBottomCl2+"%", "%"+siteBottomCl3+"%", "%"+siteBottomCl4+"%", "%"+siteBottomCl5+"%", "%"+sbrsClHwater+"%", "%"+sbrsClGym+"%", "%"+sbrsClWifi+"%", "%"+sbrsClFirewood+"%", "%"+sbrsClPool+"%", "%"+sbrsClMart+"%", "%"+sbrsClCstore+"%", "%"+sbrsClWalk+"%", "%"+eqpmnLendClTent+"%", "%"+eqpmnLendClBrazier+"%", "%"+eqpmnLendClHeater+"%", "%"+eqpmnLendClTableware+"%", "%"+eqpmnLendClSbag+"%", "%"+eqpmnLendClRwire+"%", "%"+trlerAcmpnyAt+"%", "%"+caravAcmpnyAt+"%", "%"+animalCmgCl+"%");
 					
-				} else { break; }
-			}
-			
-			listTO.setSearchLists( lists );
-			listTO.setStartBlock( ( ( cpage-1 ) / blockPerPage ) * blockPerPage + 1);
-			listTO.setEndBlock( ( (cpage-1) / blockPerPage) * blockPerPage + blockPerPage);
-			if(listTO.getEndBlock() >= listTO.getTotalPage()) {
-				listTO.setEndBlock(listTO.getTotalPage());
-			}		
-			
-			return listTO;
-		}
+					listTO.setTotalRecord( searchLists.size() );
+					
+					listTO.setTotalPage( ( (listTO.getTotalRecord() -1 ) / recordPerPage ) + 1 );		
+					int skip = ( cpage - 1 ) * recordPerPage;	
+					
+					ArrayList<SearchkeyTO> lists = new ArrayList<SearchkeyTO>();		
+					for( int i=0; i<recordPerPage ; i++ ) {
+						if( skip+i != searchLists.size() ) {
+							SearchkeyTO kto = new SearchkeyTO();
+							kto.setFacltNm( searchLists.get(skip+i).getFacltNm() );
+							kto.setAddr1( searchLists.get(skip+i).getAddr1() );
+							kto.setAddr2( searchLists.get(skip+i).getAddr2() );
+							kto.setInduty( searchLists.get(skip+i).getInduty() );				
+							kto.setFirstImageUrl( searchLists.get(skip+i).getFirstImageUrl() );
+							kto.setContentId( searchLists.get(skip+i).getContentId() );
+							kto.setDoNm( searchLists.get(skip+i).getDoNm() );
+							kto.setSigunguNm( searchLists.get(skip+i).getSigunguNm() );
+							
+							lists.add( kto );
+							
+						} else { break; }
+					}
+					
+					listTO.setSearchLists( lists );
+					listTO.setStartBlock( ( ( cpage-1 ) / blockPerPage ) * blockPerPage + 1);
+					listTO.setEndBlock( ( (cpage-1) / blockPerPage) * blockPerPage + blockPerPage);
+					if(listTO.getEndBlock() >= listTO.getTotalPage()) {
+						listTO.setEndBlock(listTO.getTotalPage());
+					}		
+					
+					return listTO;
+				}
 }
