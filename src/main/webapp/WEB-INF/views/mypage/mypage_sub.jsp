@@ -22,7 +22,7 @@
 		String campNm = to.getFacltNm();
 		String mainImg = to.getFirstImageUrl();
 		if( mainImg.equals("default") ) {
-			mainImg = "./resources/bootstrap-5/html/img/noimage.svg";
+			mainImg = "./resources/bootstrap-5/html/img/흑백.png";
 		}
 		String addr1 = to.getAddr1();
 		
@@ -32,11 +32,11 @@
 		sbHtml.append( "</div>" );
 		sbHtml.append( "<div class='col-sm-10'>" );
 		sbHtml.append( "<div align='right'>" );
-		sbHtml.append( "<button type='button' class='btn btn-danger' id='subscribebtn'>" );
+		sbHtml.append( "<button type='button' class='btn btn-outline-danger' id='subscribebtn' onclick=\"location.href='./delsub.do?contentId=" + contentId + "'\"'>" );
 		sbHtml.append( "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-heart' viewBox='0 0 16 16'>" );
 		sbHtml.append( "<path fill-rule='evenodd' d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z'></path>" );
 		sbHtml.append( "</svg>" );
-		sbHtml.append( "<span id='subspan'> 찜완료</span>" );
+		sbHtml.append( "<span id='subspan'> 찜취소</span>" );
 		sbHtml.append( "</button>" );
 		sbHtml.append( "</div>" );
 		sbHtml.append( "<h4 class='mt-2 mb-1'><a href='./campview.do?contentId=" + contentId + "'>" + campNm + "</a></h4>" );
@@ -278,39 +278,7 @@
       // https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg
       //- injectSvgSprite('${path}icons/orion-svg-sprite.svg'); 
       injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg'); 
-      
-      /* $("#subscribebtn").on("click",function(){
-   	   
-    		
-  		var data ={"contentId" : $("#contentId").val()};
-  		$.ajax({
-  				url: './subscribe.do',
-  				type: 'post',
-  				data : data,
-  				dataType : 'text',
-  				success: function(data){
-  					if(data == "2"){
-  						alert("로그인이 필요합니다.");
-  					}else if(data == "0"){
-  						location.reload();
-  					}else{
-  						location.reload();
-  					}
-  					
-  				}, 
-  				fail: function(error){
-  	  			alert('댓글달기 실패' );
-  			}
-  		});
-  	
-  	
-     });
-        
-     $('#subscribebtn').hover(function() {
-    	 $('#subspan').text("찜취소");
-     }, function(){
- 		$('#subspan').text("찜완료");
-     });*/
+
       
     </script>
     <!-- jQuery-->
