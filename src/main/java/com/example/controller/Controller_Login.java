@@ -10,13 +10,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.exam.login.LoginTO;
 import com.exam.login.SignUpTO;
-import com.exam.login.loginDAO;
+import com.exam.login.LoginDAO;
 
 
 @RestController
 public class Controller_Login {
 	@Autowired
-	private loginDAO dao;
+	private LoginDAO dao;
 	
 	@RequestMapping( value="/login.do" )
 	public ModelAndView login(HttpServletRequest request) {
