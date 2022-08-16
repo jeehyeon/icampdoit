@@ -57,6 +57,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
     <link rel="stylesheet" href="./resources/bootstrap-5/html/css/font.css" type="text/css">
+    <!-- Font Awesome 이거 추가함 -->
+    <script src="https://kit.fontawesome.com/5251502df3.js" crossorigin="anonymous"></script>   
     <!-- Price Slider Stylesheets -->
     <!--<link rel="stylesheet" href="vendor/nouislider/nouislider.css"> -->
     <link rel="stylesheet" href="./resources/bootstrap-5/html/vendor/nouislider/nouislider.css">
