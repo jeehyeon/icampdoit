@@ -16,37 +16,24 @@
 	StringBuilder sbHtml = new StringBuilder();
 	
 	for( SearchkeyTO to : lists ) {
-		String contentID = to.getContentId();
+		String contentId = to.getContentId();
 		String campNm = to.getFacltNm();
 		String mainImg = to.getFirstImageUrl();
 		String addr1 = to.getDoNm();
 		String addr2 = to.getSigunguNm();
-		//System.out.println( "캠핑장명 : " + contentID );
-		/*
-		<div class="swiper-slide h-auto px-2">
-          <div class="card card-poster gradient-overlay hover-animate mb-4 mb-lg-0">
-          <a class="tile-link" href="./campview.do"></a>
-          <img class="bg-image" src="./resources/bootstrap-5/html/img/photo/top1예시.jpg" alt="Card image">
-            <div class="card-body overlay-content">
-              <h5 class="card-title text-shadow text-uppercase" style="font-family: 'Recipekorea';">대궐 오토캠핑장</h5>
-              <p class="card-text text-sm" style="font-family: 'BMJUA';">경기도 포천시</p>
-            </div>
-          </div>
-        </div>*/
-		
+		//System.out.println( "contentId : " + contentId );
+
 		sbHtml.append( "<div class='swiper-slide h-auto px-2'>" );
 		sbHtml.append( "<div class='card card-poster gradient-overlay hover-animate mb-4 mb-lg-0'>" );
-		sbHtml.append( "<a class='tile-link' href='./campview.do'></a>" );
-		sbHtml.append( "<img class='bg-image' src='' alt='Card image'>" );
+		sbHtml.append( "<a class='tile-link' href='./campview.do?contentId=" + contentId + "'></a>" );
+		sbHtml.append( "<img class='bg-image' src='" + mainImg + "' alt='Card image'>" );
 		sbHtml.append( "<div class='card-body overlay-content'>" );
-		sbHtml.append( "<h5 class='card-title text-shadow text-uppercase' style=\"font-family: 'Recipekorea';\">대궐 오토캠핑장</h5>" );
-		sbHtml.append( "<p class='card-text text-sm' style=\"font-family: 'BMJUA';\">경기도 포천시</p>" );
+		sbHtml.append( "<h5 class='card-title text-shadow text-uppercase' style=\"font-family: 'Recipekorea';\">" + campNm + "</h5>" );
+		sbHtml.append( "<p class='card-text text-sm' style=\"font-family: 'BMJUA';\">" + addr1 + addr2 + "</p>" );
 		sbHtml.append( "</div>" );
 		sbHtml.append( "</div>" );
 		sbHtml.append( "</div>" );
 	}
-	
-	
 	
 %>
 <!DOCTYPE html>
@@ -542,6 +529,7 @@
                 </div>
               </div>
             </div>-->
+            <%=sbHtml.toString() %>
           </div>
           <div class="swiper-pagination d-md-none"> </div>
         </div>
