@@ -44,8 +44,10 @@ public class SearchmapDAO {
 		int recordPerPage = listTO.getRecordPerPage();
 		int blockPerPage = listTO.getBlockPerPage();
 		
+		//총 게시글 수
 		listTO.setTotalRecord( searchLists.size() );
 		
+		//총페이지 수
 		listTO.setTotalPage( ( (listTO.getTotalRecord() -1 ) / recordPerPage ) + 1 );		
 		int skip = ( cpage - 1 ) * recordPerPage;
 		
@@ -60,6 +62,8 @@ public class SearchmapDAO {
 				sto.setContentId( searchLists.get(skip+i).getContentId() );
 				sto.setDoNm( searchLists.get(skip+i).getDoNm() );
 				sto.setSigunguNm( searchLists.get(skip+i).getSigunguNm() );
+				sto.setMapX( searchLists.get(skip+i).getMapX() );
+				sto.setMapY( searchLists.get(skip+i).getMapY() );
 				
 				lists.add( sto );
 				
