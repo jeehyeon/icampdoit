@@ -15,6 +15,7 @@ import com.exam.login.MypageDAO;
 import com.exam.mboard.BoardListTO;
 import com.exam.mboard.BoardTO;
 import com.exam.mboard.FileTO;
+import com.exam.search.SearchkeyDAO;
 import com.exam.search.SearchkeyTO;
 
 
@@ -23,6 +24,9 @@ public class Controller_Mypage {
 	
 	@Autowired
 	private MypageDAO dao;
+	
+	@Autowired
+	SearchkeyDAO kdao;
 	
 	@RequestMapping( value="/mypage.do" )
 	public ModelAndView mypage(HttpServletRequest request, HttpSession session) {
@@ -124,11 +128,33 @@ public class Controller_Mypage {
 		ArrayList<SearchkeyTO> lists = dao.subList(to);
 		System.out.println( "mysublist() 호출" );		
 		
-		modelAndView.setViewName( "/mypage//mypage_sub" );
+		modelAndView.setViewName( "/mypage/mypage_sub" );
 		modelAndView.addObject( "lists", lists );
 		
 		return modelAndView;
 	}	
+	
+	@RequestMapping(value="/delsub.do")
+	public ModelAndView campsubscribe(HttpServletRequest request, HttpSession session) {
+		int flag =1;
+		System.out.println("campsubscribe 찜취소");
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
+		if( session.getAttribute("ucode") == null ) {
+			flag = 2;
+			return modelAndView;
+		}	
+		int ucode = (Integer)session.getAttribute("ucode");
+		int sub = kdao.campSubscribeCheck( Integer.toString(ucode), request.getParameter("contentId") );
+		if( sub == 0 ) {
+			//찜DB존재 => 찜 삭제
+			flag = kdao.campSubscribeDel( Integer.toString(ucode), request.getParameter("contentId") );
+		}		
+		modelAndView.setViewName( "/mypage/mypage_sub_ok" );
+		modelAndView.addObject( "flag", flag );
+		return modelAndView;
+	}
 	
 	
 }

@@ -106,21 +106,21 @@ if(kto.getEqpmnLendCl().equals("default")){
 //애완동물/개인트레일러/개인카라반
 String petCaravan=" ";
 if(kto.getAnimalCmgCl().equals("default")){
-	petCaravan += "반려동물 : 정보 없음/";
+	petCaravan += "반려동물 : 정보 없음 / ";
 }else{
-	petCaravan += "반려동물 : "+kto.getAnimalCmgCl()+"/";
+	petCaravan += "반려동물 : "+kto.getAnimalCmgCl()+" / ";
 }
 
 if(kto.getTrlerAcmpnyAt().equals("Y")){
-	petCaravan += "개인 트레일러 가능/";
+	petCaravan += "개인 트레일러 가능 / ";
 }else{
-	petCaravan += "개인 트레일러 불가능/";
+	petCaravan += "개인 트레일러 불가능 / ";
 }
 
 if(kto.getCaravAcmpnyAt().equals("Y")){
-	petCaravan += "개인 카라반 가능/";
+	petCaravan += "개인 카라반 가능 / ";
 }else{
-	petCaravan += "개인 카라반 불가능/";
+	petCaravan += "개인 카라반 불가능 / ";
 }
 petCaravan = petCaravan.substring(0, petCaravan.length()-1);
 

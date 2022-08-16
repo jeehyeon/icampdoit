@@ -118,21 +118,5 @@ public class MypageDAO {
 		return lists;
 	}
 	
-	//찜삭제
-	public int campSubscribeDel(String ucode, String contentId) {	
-		int flag=1;
-		String sql = "delete from subscribe where ucode=? and contentId=?";
-		int result = jdbcTemplate.update(sql, ucode, contentId);
-		System.out.println(result);
-		if( result != 1 ) {
-			System.out.println("campSubscribeDel 오류");
-			return flag;	
-		}else {
-			flag=0;
-		}
-		return flag;	
-	
-	}
-	
 
 }
