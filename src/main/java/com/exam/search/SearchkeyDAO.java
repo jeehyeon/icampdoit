@@ -152,21 +152,38 @@ public class SearchkeyDAO {
 		
 		}
 		// 찜하기 체크
-				public int campSubscribeCheck(String ucode, String contentId) {	
-					int flag=1;
-					String sql = "select count(*) from subscribe where ucode=? and contentId=? ";
-					int result = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<Integer>(Integer.class), ucode, contentId);
-					System.out.println(result);
-					if( result == 0 ) {
-						System.out.println("campViewTableInsert 오류");
-						return flag;	
-					}else {
-						flag=0;
-					}
-					return flag;	
+	public int campSubscribeCheck(String ucode, String contentId) {	
+			int flag=1;
+			String result;
+			try {
+				String sql = "select seq from subscribe where ucode=? and contentId=? ";
+				result = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<String>(String.class), ucode, contentId);
+			} catch (DataAccessException e) {
+				// TODO Auto-generated catch block
+				return flag;
+			}
+			System.out.println(" result : "+result);
+			if( result!=""&&result!=null) {
+				flag=0;
+			}
+			return flag;	
 				
-				}	
+	}	
+	//찜삭제
+	public int campSubscribeDel(String ucode, String contentId) {	
+		int flag=1;
+		String sql = "delete from subscribe where ucode=? and contentId=?";
+		int result = jdbcTemplate.update(sql, ucode, contentId);
+		System.out.println(result);
+		if( result != 1 ) {
+			System.out.println("campSubscribeDel 오류");
+			return flag;	
+		}else {
+			flag=0;
+		}
+		return flag;	
 	
+	}
 	
 		//campview 이미지 불러오기
 	public ArrayList<SearchkeyTO> gocampimgparse(SearchkeyTO kto) {
@@ -261,12 +278,12 @@ public class SearchkeyDAO {
 		
 		
 		public ArrayList<CampviewCmtTO> campViewCmt(CampviewCmtTO cto) {
-			System.out.println("campViewCmtInsert() 호출") ;
+			System.out.println("campViewCmt() 호출") ;
 			
 			CampviewCmtTO dto = new CampviewCmtTO();
 			String sql = "select seq from campview where contentId=?";
 			dto = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<CampviewCmtTO>(CampviewCmtTO.class), cto.getContentId());
-			//System.out.println("1@ : " + dto.getSeq());
+			System.out.println("1@ : " + dto.getSeq());
 			
 			
 			

@@ -316,8 +316,12 @@ public class Controller_Search {
 		ArrayList<CampviewCmtTO> clists= kdao.campViewCmt(cto);
 		
 		//찜하기
+		
 		int ucode = (Integer)session.getAttribute("ucode");
+		
 		int sub =kdao.campSubscribeCheck(Integer.toString(ucode), kto.getContentId());
+		System.out.println("sub : " + sub);
+		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "/search/campview" );
 		modelAndView.addObject("kto", kto);
@@ -354,9 +358,18 @@ public class Controller_Search {
 		if(session.getAttribute("ucode") == null) {
 			flag=2;
 			return Integer.toString(flag);
-		}
+		}	
 		int ucode = (Integer)session.getAttribute("ucode");
-		flag= kdao.campSubscribe(Integer.toString(ucode), request.getParameter("contentId"));
+		int sub =kdao.campSubscribeCheck(Integer.toString(ucode), request.getParameter("contentId"));
+		if(sub == 0) {
+			//찜DB존재 => 찜 삭제
+			flag=kdao.campSubscribeDel(Integer.toString(ucode), request.getParameter("contentId"));
+		}else {
+			//찜DB에 없음 => 찜추가
+			flag= kdao.campSubscribe(Integer.toString(ucode), request.getParameter("contentId"));
+		}
+		
+		
 		
 		return Integer.toString(flag);
 	}

@@ -294,7 +294,7 @@ for(CampviewCmtTO cto : clists){
             
             <!-- 찜버튼 3 -->
             <div align="right">
-            <%if(sub ==0){ %>
+            <%if(sub != 0){ %>
              <button type="button" class="btn btn-outline-danger" id="subscribebtn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
  				 <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path>
@@ -306,7 +306,7 @@ for(CampviewCmtTO cto : clists){
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
  				 <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path>
 				</svg>
-				<span>찜하기</span>
+				<span id="subspan">찜완료</span>
              </button>
              
              <%} %>
@@ -552,9 +552,9 @@ for(CampviewCmtTO cto : clists){
 					if(data == "2"){
 						alert("로그인이 필요합니다.");
 					}else if(data == "0"){
-						alert("찜하기 성공");
+						location.reload();
 					}else{
-						alert("찜하기 실패");
+						location.reload();
 					}
 					
 				}, 
@@ -566,6 +566,12 @@ for(CampviewCmtTO cto : clists){
 	
    });
       
+   $('#subscribebtn').hover(function(){
+	   $('#subspan').text("찜취소");
+	},function(){
+		$('#subspan').text("찜완료");
+	});   
+   
     </script>
     <!-- jQuery-->
     
