@@ -258,17 +258,18 @@ public class Controller_Search {
 			siteBottomCl5 = request.getParameter( "siteBottomCl5" );
 		}
 		if( (request.getParameter( "siteBottomCl1" )==null||request.getParameter( "siteBottomCl1" )=="" ) &&
-			(request.getParameter( "siteBottomCl2" )==null||request.getParameter( "siteBottomCl2" )=="" ) &&
-			(request.getParameter( "siteBottomCl3" )==null||request.getParameter( "siteBottomCl3" )=="" ) &&
-			(request.getParameter( "siteBottomCl4" )==null||request.getParameter( "siteBottomCl4" )=="" ) &&
-			(request.getParameter( "siteBottomCl5" )==null||request.getParameter( "siteBottomCl5" )=="" ) ){
-			siteBottomCl1 = "";
-			siteBottomCl2 = "";
-			siteBottomCl3 = "";
-			siteBottomCl4 = "";
-			siteBottomCl5 = "";			
-		 }
-				
+				(request.getParameter( "siteBottomCl2" )==null||request.getParameter( "siteBottomCl2" )=="" ) &&
+				(request.getParameter( "siteBottomCl3" )==null||request.getParameter( "siteBottomCl3" )=="" ) &&
+				(request.getParameter( "siteBottomCl4" )==null||request.getParameter( "siteBottomCl4" )=="" ) &&
+				(request.getParameter( "siteBottomCl5" )==null||request.getParameter( "siteBottomCl5" )=="" ) ){
+				siteBottomCl1 = "";
+				siteBottomCl2 = "";
+				siteBottomCl3 = "";
+				siteBottomCl4 = "";
+				siteBottomCl5 = "";			
+		}
+		
+		
 		// 부대시설 9개
 		String sbrsClElectro = "";
 		String sbrsClHwater = "";

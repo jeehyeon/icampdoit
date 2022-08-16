@@ -31,7 +31,7 @@ public class Controller_SearchMap {
 	@RequestMapping( value="/searchmap.do" )
 	public ModelAndView searchmap(HttpServletRequest request) {
 		System.out.println( "searchmap() 호출" );
-		
+
 
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "/search/search_map" );
@@ -46,7 +46,7 @@ public class Controller_SearchMap {
 		SearchkeyTO sto = new SearchkeyTO();
 		String sido = "";
 		
-		System.out.println( request.getParameter( "sidoVal" ) );
+		System.out.println( "시도 넘어왔나:" + request.getParameter( "sidoVal" ) );
 		
 		if( request.getParameter( "sidoVal" ).equals("서울시" )) {
 			sto.setDoNm( "서울시" );
@@ -55,12 +55,12 @@ public class Controller_SearchMap {
 		} else if( request.getParameter( "sidoVal" ).equals("인천시" ) ){
 			sto.setDoNm( "인천시" );
 			sido = "인천시";
-		} else {
+		} else if( request.getParameter( "sidoVal" ).equals("경기도" ) ){
 			sto.setDoNm( "경기도" );
 			sido = "경기도";
 		}
 		
-		System.out.println( "doNm : " + sto.getDoNm() );
+		System.out.println( "doNm TO 에 잘 넣어진거 가져왔나: " + sto.getDoNm() );
 		
 		ArrayList<SearchkeyTO> list = (ArrayList<SearchkeyTO>)mdao.listsigunguNm( sto.getDoNm() );
 		
@@ -84,6 +84,7 @@ public class Controller_SearchMap {
 		return result;
 	}
 	
+	/*
 	@RequestMapping( value="/searchmapgugun.do" )
 	public JSONObject searchmapgugun(HttpServletRequest request) {
 		System.out.println( "searchmapgugun() 호출" );
@@ -148,7 +149,7 @@ public class Controller_SearchMap {
 		
 		return listresult;
 		
-		*/
+		
 		
 		
 		SearchkeyTO sto = new SearchkeyTO();
@@ -194,6 +195,60 @@ public class Controller_SearchMap {
 		
 		return listresult;
 		
+	}
+	
+	*/
+	
+	@RequestMapping( value="/searchmapgugun.do" )
+	public ModelAndView searchmapgugun(HttpServletRequest request) {
+		
+		System.out.println( "searchmapgugun() 호출" );
+		
+		int cpage = 1;
+		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		SearchkeyTO sto = new SearchkeyTO();
+		sto.setDoNm( request.getParameter( "sidoInput" ) );
+		sto.setSigunguNm( request.getParameter( "gugunInput" ) );
+		
+		System.out.println( "시도 파라메터 잘 받아왔니 :" + request.getParameter( "sidoInput" ) );
+		System.out.println( "구군 파라메터 잘 받아왔니 :" + request.getParameter( "gugunInput" ) );
+		
+		System.out.println( "sto에 DoNm 잘 들어갔나 :" + sto.getDoNm() );
+		System.out.println( "sto에 SigunguNm 잘 들어갔나 :" + sto.getSigunguNm() );
+		
+		SearchListMapTO slistTO = new SearchListMapTO();
+		slistTO.setCpage(cpage);
+		System.out.println( "slistTO 나오나보자 : " + slistTO.getCpage() );
+
+		slistTO = mdao.searchmapList(slistTO, sto );
+		
+		
+		/*
+		StringBuilder sbHtml = new StringBuilder();
+		
+		ArrayList<SearchkeyTO> lists = slistTO.getSearchLists();
+		for( SearchkeyTO to : lists ) {
+			String firstImgUrl = to.getFirstImageUrl();
+			String facltNum = to.getFacltNm();
+			String addr1 = to.getAddr1();
+			String addr2 = to.getAddr2();
+			String induty = to.getInduty();
+			String contentId = to.getContentId();
+			String doNm = to.getDoNm();
+			String sigunguNm = to.getSigunguNm();
+			String mapX = to.getMapX();
+			String mapY = to.getMapY();
+		}
+		*/
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName( "/search/search_map_result" );
+		modelAndView.addObject( "cpage", cpage );
+		modelAndView.addObject( "slistTO", slistTO );
+		return modelAndView;
 	}
 	
 }

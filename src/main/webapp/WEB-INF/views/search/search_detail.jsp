@@ -107,6 +107,8 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!-- Font Awesome 이거 추가함 -->
+    <script src="https://kit.fontawesome.com/5251502df3.js" crossorigin="anonymous"></script> 
     <style type="text/css">
   		#wrap {
   			min-height: 90vh;

@@ -12,6 +12,61 @@
 		ucode = (int)session.getAttribute("ucode");
 		id = (String)session.getAttribute("id");
 	}
+	
+	SearchListMapTO slistTO = (SearchListMapTO)request.getAttribute( "slistTO" );
+	int cpage = (Integer)request.getAttribute( "cpage" );
+	
+	int recordPerPage = slistTO.getRecordPerPage();
+	int totalPage = slistTO.getTotalPage();
+	int blockPerPage = slistTO.getBlockPerPage();
+	int startBlock = slistTO.getStartBlock();
+	int endBlock = slistTO.getEndBlock();
+	int totalRecord = slistTO.getTotalRecord();
+	
+	System.out.println( "totalRecord 크기 봐봐:" + totalRecord );
+	
+	ArrayList<SearchkeyTO> datas = slistTO.getSearchLists();
+	
+	StringBuilder sbHtml = new StringBuilder();
+	
+	for( SearchkeyTO kto : datas ){
+		String contentId = kto.getContentId();
+		System.out.println( "contentId :" + contentId );
+		String facltNm = kto.getFacltNm();
+		String induty = kto.getInduty();
+		String addr1 = kto.getAddr1();
+		if( addr1.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*") == false ){
+			addr1 = kto.getDoNm() + " " + kto.getSigunguNm() + " " + kto.getAddr1();
+		}
+		System.out.println( "제발 좀 나와줘바 DoNM :" + kto.getDoNm() );
+		System.out.println( "제발 좀 나와줘바 SigunguNm :" + kto.getSigunguNm() );
+		System.out.println( "제발 좀 나와줘바 facltNm :" + kto.getFacltNm() );
+		
+		String firstImageUrl = kto.getFirstImageUrl();
+		if( firstImageUrl.equals("default") ) {
+			firstImageUrl = "./resources/bootstrap-5/html/img/noimage.svg";
+		}
+		String mapX = kto.getMapX();
+		String mapY = kto.getMapY();
+		
+		
+		sbHtml.append( "<div class='col-sm-6 mb-5 hover-animate' data-marker-id='59c0c8e33b1527bfe2abaf92'>");
+		sbHtml.append( "	<div class='card h-100 border-0 shadow'>");
+		sbHtml.append( "		<div class='card-img-top overflow-hidden gradient-overlay'> <img class='img-fluid' src='" + firstImageUrl + "'/><a class='tile-link' href='./campview.do?contentId='" + contentId + "></a>");
+		sbHtml.append( "		</div>");			
+		sbHtml.append( "		<div class='card-body d-flex align-items-center'>");
+		sbHtml.append( "			<div class='w-100'>");
+		sbHtml.append( "				<h5 class='card-title'><a class='text-decoration-none text-dark' href='./campview.do?contentId=" + contentId + "'>" + facltNm + "</a></h5>");
+		sbHtml.append( "				<div class='d-flex card-subtitle mb-3'>");
+		sbHtml.append( "					<p class='flex-grow-1 mb-0 text-muted text-sm'>" + addr1 + "</p>");
+		sbHtml.append( "				</div>");
+		sbHtml.append( "				<p class='card-text text-muted'>" + induty + "</p>");
+		sbHtml.append( "			</div>");
+		sbHtml.append( "		</div>");
+		sbHtml.append( "	</div>");
+		sbHtml.append( "</div>");			
+	}
+	
 						
 %>
 
@@ -173,6 +228,7 @@
             </div>
           </div>
           <div class="row" id="result">
+          	<%=sbHtml.toString() %>
             <!-- 
             <div class="col-sm-6 mb-5 hover-animate" data-marker-id="59c0c8e33b1527bfe2abaf92">
               <div class="card h-100 border-0 shadow">
@@ -333,7 +389,8 @@
     					//console.log( jsonArray.sigunguNm );
     					
     					});
-				
+    					
+    					
     					$('#gugun').selectpicker( 'refresh' );
     				},
     				error: function(e){
