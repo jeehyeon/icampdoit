@@ -69,4 +69,29 @@ public class Controller {
 		
 		return modelAndView;
 	}
+	
+	
+	
+	
+	@RequestMapping( value="/insertCampImage.do" )
+	public ModelAndView insertimage(HttpServletRequest request, HttpSession session) {
+		System.out.println( "insertgocamping() 호출" );
+		
+		ArrayList<SearchkeyTO> lists = gocamp.contentIdList();
+		
+		for(SearchkeyTO kto : lists) {
+			
+		}
+
+		ModelAndView modelAndView = new ModelAndView();
+		//modelAndView.setViewName( "insert_ok" );
+		//modelAndView.addObject( "flag", flag );
+		
+		return modelAndView;
+	}
+	
+	
+	
+	
+	
 }

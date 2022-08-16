@@ -464,7 +464,8 @@ for(CampviewCmtTO cto : clists){
     
     
     <!-- Footer-->
-    <footer class="position-relative z-index-10 d-print-none">
+     <footer class="position-relative z-index-10 d-print-none">
+           
       <!-- Copyright section of the footer-->
       <div class="py-4 fw-light bg-gray-800 text-gray-300">
         <div class="container">
@@ -473,11 +474,11 @@ for(CampviewCmtTO cto : clists){
               <p class="text-sm mb-md-0">&copy; 2022, Your company.  All rights reserved.</p>
             </div>
             <div class="col-md-6">
-              <ul class="list-inline mb-0 mt-2 mt-md-0 text-center text-md-end">
-                <li class="list-inline-item"><img class="w-2rem" src="./resources/bootstrap-5/html/img/visa.svg" alt="..."></li>
-                <li class="list-inline-item"><img class="w-2rem" src="./resources/bootstrap-5/html/img/mastercard.svg" alt="..."></li>
-                <li class="list-inline-item"><img class="w-2rem" src="./resources/bootstrap-5/html/img/paypal.svg" alt="..."></li>
-                <li class="list-inline-item"><img class="w-2rem" src="./resources/bootstrap-5/html/img/western-union.svg" alt="..."></li>
+             <!-- 관리자페이지 바로가기 -->
+             	
+              	<ul class="list-inline mb-0 mt-2 mt-md-0 text-center text-md-end">
+                <li class="list-inline-item"><a class="text-muted text-sm" href="./admin.do" >
+              	관리자 페이지</a></li>
               </ul>
             </div>
           </div>
