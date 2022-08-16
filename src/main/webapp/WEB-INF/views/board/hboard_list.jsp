@@ -33,19 +33,15 @@
 	String title = to.getTitle();
 	String writer = to.getWriter();
 	String content = to.getContent();
-	String filename = to.getFilename() == null ? "./resources/bootstrap-5/html/img/noimage.png" : "./h_upload/" + to.getFilename();
+	String filename = to.getFilename().equals("default") ? "./resources/bootstrap-5/html/img/noimage.svg" : "./h_upload/" + to.getFilename();
+	System.out.println( "filename : " + filename );
 	String wdate = to.getWdate();
 	String hit = to.getHit();
-	
 	
 		sbHtml.append( "<div class='col-lg-4 col-sm-6 mb-4 hover-animate'>" );
 		sbHtml.append( "<div class='card shadow border-0 h-100'>" );
 		sbHtml.append( "<a href='./hboardview.do?cpage=" + cpage + "&seq=" + seq + "'>" );
-		if( seq.equals( "" ) ) {
-			sbHtml.append( "<img class='img-fluid card-img-top' src='./resources/bootstrap-5/html/img/noimage.svg' alt='image'/>" );
-		} else {
-			sbHtml.append( "<img class='img-fluid card-img-top' src='" + filename + "' alt='image'/>" );
-		}		
+		sbHtml.append( "<img class='img-fluid card-img-top' src='" + filename + "' alt='image'/>" );
 		sbHtml.append( "</a>" );
 		sbHtml.append( "<div class='card-body'>" );
 		sbHtml.append( "<a class='text-uppercase text-muted text-sm letter-spacing-2' ># content </a>" );

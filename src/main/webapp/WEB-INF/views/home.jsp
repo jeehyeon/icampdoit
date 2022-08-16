@@ -19,17 +19,20 @@
 		String contentId = to.getContentId();
 		String campNm = to.getFacltNm();
 		String mainImg = to.getFirstImageUrl();
+		if( mainImg.equals("default") ) {
+			mainImg = "./resources/bootstrap-5/html/img/noimage.svg";
+		}
 		String addr1 = to.getDoNm();
 		String addr2 = to.getSigunguNm();
-		//System.out.println( "contentId : " + contentId );
 
 		sbHtml.append( "<div class='swiper-slide h-auto px-2'>" );
 		sbHtml.append( "<div class='card card-poster gradient-overlay hover-animate mb-4 mb-lg-0'>" );
 		sbHtml.append( "<a class='tile-link' href='./campview.do?contentId=" + contentId + "'></a>" );
 		sbHtml.append( "<img class='bg-image' src='" + mainImg + "' alt='Card image'>" );
+		sbHtml.append( "<img class='bg-image' src='" + mainImg + "' alt='Card image'>" );
 		sbHtml.append( "<div class='card-body overlay-content'>" );
 		sbHtml.append( "<h5 class='card-title text-shadow text-uppercase' style=\"font-family: 'Recipekorea';\">" + campNm + "</h5>" );
-		sbHtml.append( "<p class='card-text text-sm' style=\"font-family: 'BMJUA';\">" + addr1 + addr2 + "</p>" );
+		sbHtml.append( "<p class='card-text text-sm' style=\"font-family: 'BMJUA';\">" + addr1 + " " + addr2 + "</p>" );
 		sbHtml.append( "</div>" );
 		sbHtml.append( "</div>" );
 		sbHtml.append( "</div>" );
