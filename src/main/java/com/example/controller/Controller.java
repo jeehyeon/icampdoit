@@ -67,7 +67,7 @@ public class Controller {
 	public ModelAndView insertgocamping(HttpServletRequest request, HttpSession session) {
 		System.out.println( "insertgocamping() 호출" );
 		
-		ArrayList<SearchkeyTO> lists = gocamp.gocampingparse( "경기도" );
+		ArrayList<SearchkeyTO> lists = gocamp.gocampingparse( "인천시" );
 		int flag = gocamp.insertapi(lists);
 		
 		ModelAndView modelAndView = new ModelAndView();
@@ -79,20 +79,19 @@ public class Controller {
 	
 
 	@RequestMapping( value="/insertCampImage.do" )
-	public ModelAndView insertimage(HttpServletRequest request, HttpSession session) {
+	public void insertimage(HttpServletRequest request, HttpSession session) {
 		System.out.println( "insertgocamping() 호출" );
 		
 		ArrayList<SearchkeyTO> lists = gocamp.contentIdList();
 		
 		for(SearchkeyTO kto : lists) {
-			
+			System.out.println(kto.getContentId());
+			gocamp.insertImage(kto);
 		}
 
-		ModelAndView modelAndView = new ModelAndView();
-		//modelAndView.setViewName( "insert_ok" );
-		//modelAndView.addObject( "flag", flag );
+		System.out.println("이미지 Insert완료");
 		
-		return modelAndView;
+		
 	}
 	
 	
