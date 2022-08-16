@@ -360,17 +360,22 @@ public class InsertGocamping {
 		    for(int i = 0; i < nList.getLength(); i++) {
 			//System.out.println(nList.item(i).getAttributes().getNamedItem("facltNm").getNodeValue());
 			Node node = nList.item(i);
-			SearchkeyTO ito = new SearchkeyTO();
+			
 				if(node.getNodeType() == Node.ELEMENT_NODE) {
 					Element element = (Element) node;
 		
 					if(( getValue("imageUrl", element) != " " )){	
 							try {	
-								ito.setImageUrl(getValue("imageUrl", element));
+								String url = (getValue("imageUrl", element));
 								//System.out.println( "캠핑장 이미지 불러오기: " + ito.getImageUrl() );
+								
+								 String sql = "insert into campviewimg values(0, ?, ?)";
+								 int result = jdbcTemplate.update(sql, kto.getContentId(), url);
+								 System.out.println("i : " + result);
+								 
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
-								System.out.println( "캠핑장명: 없음" );
+								System.out.println( "insert 오류" );
 								
 							}
 						

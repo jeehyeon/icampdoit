@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@page import="com.exam.search.SearchkeyTO"%>
+<%@page import="com.exam.search.SearchListMapTO"%>
+<%@page import="com.exam.search.SearchmapDAO"%>
+<%@page import="java.util.ArrayList"%>
 <%
 	//session 값 가져오기
 	int ucode = -1;
@@ -9,7 +12,15 @@
 		ucode = (int)session.getAttribute("ucode");
 		id = (String)session.getAttribute("id");
 	}
-
+	
+	SearchListMapTO listTO = new SearchListMapTO();
+	int recordPerPage = listTO.getRecordPerPage();
+	int totalPage = listTO.getTotalPage();
+	int blockPerPage = listTO.getBlockPerPage();
+	int startBlock = listTO.getStartBlock();
+	int endBlock = listTO.getEndBlock();
+	int totalRecord = listTO.getTotalRecord();
+	
 %>
 
 <!DOCTYPE html>
@@ -152,11 +163,11 @@
                   <option value="시구">시/구 선택   </option>
                 </select>
               </div>
-              <!--  
+               
               <div class="col-sm-6 mb-4">
                 <button class="btn btn-primary" type="submit" id=""> <i class="fas fa-search me-1"></i>Search                </button>
               </div>
-              -->
+             
             </div>  
           </form>
           <hr class="my-4">
@@ -265,6 +276,8 @@
           </div>
           -->
         </div>
+        <div id="pagenation">
+        </div>
         
         <div class="col-lg-6 map-side-lg pe-lg-0">
           <div class="map-full shadow-left" id="map"></div>
@@ -350,7 +363,11 @@
     				},
     				dataType : "json",
     				success: function(json){
+    					
+    					
+    					
     					let result = "";
+    					let totalNum = "";
     					$.each( json.jsonArray, function( index, jsonArray ){
     						
     						//if( jsonArray.firstImageUrl.equals("default") ) {
@@ -373,15 +390,58 @@
     						result += '  </div>';
     						result += '</div>';
     						
+    						totalNum += '총  <strong>' + (index+1) + '</strong> 건'
+    					});
+    					
+    					/*
+						$.each( json.pageArray, function( index, pageArray ){
+    						
+    						//if( jsonArray.firstImageUrl.equals("default") ) {
+    						//	jsonArray.firstImageUrl.replace( "./resources/bootstrap-5/html/img/noimage.svg" );
+    						//}
+    						   						
+    						if ( startBlock == 1 ) {
+    							result += " <li class='page-item'><a class='page-link' href='#'><i class='fa fa-thin fa-angles-left'></i></a></li> ");
+    						} else {
+    							result += " <li class='page-item'><a class='page-link' href='searchmap.do?cpage="+ (startBlock - blockPerPage) +"'><i class='fa fa-thin fa-angles-left'></i></a></li>");
+    						}
+    					
+    						if ( cpage == 1 ) {
+    							result += " <li class='page-item'><a class='page-link' href='#'> <i class='fa fa-angle-left'></i></a></li> ");
+    						} else {
+    							result += " <li class='page-item'><a class='page-link' href='searchmap.do?cpage="+ (pageArray.cpage-1) + "'><i class='fa fa-angle-left'></i></a></li> ");
+    						}
+    				
+    						for ( int i=startBlock; i<=endBlock; i++ ) {
+    							if ( cpage == i ) { 
+    								result += " <li class='page-item active'><a class='page-link' href='#'>" + i + "</a></li> ");
+    							} else {
+    								result += " <li class='page-item'><a class='page-link' href='searchmap.do?" + "cpage=" + i + "'>" + i + "</a></li> ");
+    							}
+    						}
+    					//out.println(" &nbsp;&nbsp; ");
+    					//페이지 하단의 > 버튼
+    						if ( cpage == totalPage ) {
+    							result += " <li class='page-item'><a class='page-link' href='#'><i class='fa fa-angle-right'></i></a></li> ");
+    						} else {
+    							result += " <li class='page-item'><a class='page-link' href='searchmap.do?cpage="+ (pageArray.cpage+1) +"'><i class='fa fa-angle-right'></i></a></li> ");
+    						}
+    					//out.println(" &nbsp; ");
+    					//페이지 하단의 >> 버튼
+    						if ( endBlock == totalPage ) {
+    							result += " <li class='page-item'><a class='page-link' href='#'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
+    						} else {
+    							result += " <li class='page-item'><a class='page-link' href='searchmap.do?cpage="+ (startBlock + blockPerPage) + "'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
+    						}
     						
     					});
     					
-    					$( '#result' ).html( result );
-    					
-    					$( '#number' ).html( '총  <strong>' + (index+1) + '</strong> 건'  );
+    					$( '#pagenation' ).html( result );
     					
     					
     					//$('#gugun').selectpicker( 'refresh' );
+    					
+    					*/
     				},
     				error: function(e){
     					alert( '[에러]' + e.status );
