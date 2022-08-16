@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.exam.login.SignUpTO;
-import com.exam.login.MypageDAO;
+import com.exam.login.mypageDAO;
 import com.exam.mboard.BoardListTO;
 import com.exam.mboard.BoardTO;
 import com.exam.mboard.FileTO;
@@ -21,7 +21,7 @@ import com.exam.mboard.FileTO;
 public class Controller_Mypage {
 	
 	@Autowired
-	private MypageDAO dao;
+	private mypageDAO dao;
 	
 	@RequestMapping( value="/mypage.do" )
 	public ModelAndView mypage(HttpServletRequest request, HttpSession session) {

@@ -13,7 +13,7 @@ import com.exam.mboard.BoardTO;
 import com.exam.mboard.FileTO;
 
 @Repository
-public class MypageDAO {
+public class mypageDAO {
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;

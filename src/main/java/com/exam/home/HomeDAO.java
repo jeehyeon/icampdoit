@@ -26,5 +26,14 @@ public class HomeDAO {
 		return lists;
 	}
 	
+	/*
+	// 조회수
+	public HomeTO hitList(HomeTO to) {
+				
+		String sql = "select seq, contentId, hit from campview order by hit desc";
+		to = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<HomeTO>(HomeTO.class), to.getSeq() );
+		
+		return to;		
+	}*/
 
 }
