@@ -160,7 +160,7 @@
                   </div>
                   <div class="col-lg-3 d-flex align-items-center form-group no-divider">
                     <button type="button" class="btn btn-outline-white" id="filteringButton" data-style="btn-form-control" data-bs-toggle="modal" data-bs-target="#filteringModal"><i class="fa-solid fa-magnifying-glass-plus"></i>
-                      캠핑장 상세 조건 검색
+                      캠핑장 상세조건 검색
                     </button>
                   </div>
                   <div class="col-lg-2 d-grid">
