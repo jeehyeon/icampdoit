@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 
 @SpringBootApplication
-@ComponentScan( basePackages = { "com.example.controller", "com.exam.login", "com.exam.mboard", "com.exam.nboard", "com.exam.search", "com.exam.hboard", "com.exam.admin" } )
+@ComponentScan( basePackages = { "com.example.controller", "com.exam.login", "com.exam.mboard", "com.exam.nboard", "com.exam.search", "com.exam.hboard", "com.exam.admin", "com.exam.home" } )
 
 public class ICampDoItApplication {
 
