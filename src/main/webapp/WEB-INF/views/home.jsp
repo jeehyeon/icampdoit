@@ -153,7 +153,7 @@
 					
 				<!-- Modal Header -->
 				<div class="modal-header">
-					<h4 class="modal-title" style="font-family: 'GmarketSansBold';"><img src="./resources/bootstrap-5/html/img/photo/캠핑아이콘.png">&nbsp;&nbsp;캠핑장 상세조건을 설정해주세요.</h4>
+					<h4 class="modal-title" style="font-family: 'GmarketSansBold';"><img src="./resources/bootstrap-5/html/img/photo/캠핑아이콘.png">&nbsp;&nbsp;원하는 캠핑장의 상세조건을 검색해보세요.</h4>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 				</div>
 					

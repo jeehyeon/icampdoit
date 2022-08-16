@@ -23,7 +23,10 @@
 	int startBlock = listTO.getStartBlock();
 	int endBlock = listTO.getEndBlock();
 	int totalRecord = listTO.getTotalRecord();
-	//System.out.println( "토탈: " + totalRecord );
+	System.out.println( "토탈detail: " + totalRecord );
+	
+	String addurl = (String)request.getAttribute( "addurl" );
+	System.out.println( "addurljsp: " + addurl );
 	
 	ArrayList<SearchkeyTO> datas = listTO.getSearchLists();
 	
@@ -31,9 +34,11 @@
 	if( keysearch == null || keysearch == "") {
 		keysearch = "키워드나&nbsp;캠핑장&nbsp;이름을&nbsp;입력해주세요.";
 	}
-	
-	//String keyword = (String)request.getAttribute("keysearch");
-			
+	/*
+	String doNmS = request.getParameter( "doNmS");
+	System.out.println( "나오나doNmS: " + doNmS);
+	String indutyCar = request.getParameter("indutyCar");
+	*/
 	StringBuilder sbHtml = new StringBuilder();
 	
 	for( SearchkeyTO kto : datas ){
@@ -189,8 +194,8 @@
         <div class="col-lg-3 pt-3">
         	<!-- 탭 -->
 	        <div class="tab mb-2">
-			  <button class="tablinks" onclick="openCity(event, 'searchkey')" id="defaultOpen" style="font-family: 'GmarketSansBold';'">키워드</button>
-			  <button class="tablinks" onclick="location.href='./searchdetail.do'" style="font-family: 'GmarketSansBold';'">상세검색</button>
+			  <button class="tablinks" onclick="location.href='./searchkey.do'" style="font-family: 'GmarketSansBold';'">키워드</button>
+			  <button class="tablinks" onclick="openCity(event, 'searchdetail')" id="defaultOpen" style="font-family: 'GmarketSansBold';'">상세검색</button>
 			</div>
 			<!-- 키워드 -->
 			<div id="searchkey" class="tabcontent">
@@ -319,31 +324,31 @@
                 <ul class="list-inline mt-xl-1 mb-0">
                       <li class="list-inline-item">
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="floorGrass" name="siteBottomCl1" value="0">
+                          <input class="form-check-input" type="checkbox" id="floorGrass" name="siteBottomCl1" value="잔디">
                           <label class="form-check-label" for="floorGrass">잔디</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="floorRock" name="siteBottomCl2" value="0">
+                          <input class="form-check-input" type="checkbox" id="floorRock" name="siteBottomCl2" value="파쇄석">
                           <label class="form-check-label" for="floorRock">파쇄석</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="floorTeck" name="siteBottomCl3" value="0">
+                          <input class="form-check-input" type="checkbox" id="floorTeck" name="siteBottomCl3" value="테크">
                           <label class="form-check-label" for="floorTeck">테크</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="floorPebble" name="siteBottomCl4" value="0">
+                          <input class="form-check-input" type="checkbox" id="floorPebble" name="siteBottomCl4" value="자갈">
                           <label class="form-check-label" for="floorPebble">자갈</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="floorDirt" name="siteBottomCl5" value="0">
+                          <input class="form-check-input" type="checkbox" id="floorDirt" name="siteBottomCl5" value="맨흙">
                           <label class="form-check-label" for="floorDirt">흙</label>
                         </div>
                       </li>
@@ -533,33 +538,33 @@
 	if ( startBlock == 1 ) {
 		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-thin fa-angles-left'></i></a></li> ");
 	} else {
-		out.println(" <li class='page-item'><a class='page-link' href='searchkey.do?keysearch="+ keysearch + "&cpage="+ (startBlock - blockPerPage) +"'><i class='fa fa-thin fa-angles-left'></i></a></li> ");
+		out.println(" <li class='page-item'><a class='page-link' href='searchdetail.do"+ addurl +"cpage="+ (startBlock - blockPerPage) +"'><i class='fa fa-thin fa-angles-left'></i></a></li> ");
 	}
 	//페이지 하단의 < 버튼 => (cpage-1) 한페이지 앞으로 이동
 	if ( cpage == 1 ) {
 		out.println(" <li class='page-item'><a class='page-link' href='#'> <i class='fa fa-angle-left'></i></a></li> ");
 	} else {
-		out.println(" <li class='page-item'><a class='page-link' href='searchkey.do?keysearch="+ keysearch + "&cpage="+ (cpage-1) +"'><i class='fa fa-angle-left'></i></a></li> ");
+		out.println(" <li class='page-item'><a class='page-link' href='searchdetail.do"+ addurl +"cpage="+ (cpage-1) +"'><i class='fa fa-angle-left'></i></a></li> ");
 	}
 	//현재 페이지
 	for ( int i=startBlock; i<=endBlock; i++ ) {
 		if ( cpage == i ) { 
 			out.println(" <li class='page-item active'><a class='page-link' href='#'>" + i + "</a></li> ");
 		} else {
-			out.println(" <li class='page-item'><a class='page-link' href='searchkey.do?keysearch="+ keysearch + "&cpage=" + i + "'>" + i + "</a></li> ");
+			out.println(" <li class='page-item'><a class='page-link' href='searchdetail.do"+ addurl +"cpage=" + i + "'>" + i + "</a></li> ");
 		}
 	}
 	//페이지 하단의 > 버튼
 	if ( cpage == totalPage ) {
 		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-angle-right'></i></a></li> ");
 	} else {
-		out.println(" <li class='page-item'><a class='page-link' href='searchkey.do?keysearch="+ keysearch + "&cpage="+ (cpage+1) +"'><i class='fa fa-angle-right'></i></a></li> ");
+		out.println(" <li class='page-item'><a class='page-link' href='searchdetail.do"+ addurl +"cpage="+ (cpage+1) +"'><i class='fa fa-angle-right'></i></a></li> ");
 	}
 	//페이지 하단의 >> 버튼
 	if ( endBlock == totalPage ) {
 		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
 	} else {
-		out.println(" <li class='page-item'><a class='page-link' href='searchkey.do?keysearch="+ keysearch + "&cpage="+ (startBlock + blockPerPage) +"'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
+		out.println(" <li class='page-item'><a class='page-link' href='searchdetail.do"+ addurl +"cpage="+ (startBlock + blockPerPage) +"'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
 	}
 %> 
             </ul>
