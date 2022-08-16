@@ -37,9 +37,9 @@ public class SearchmapDAO {
 	
 	public SearchListMapTO searchmapList(SearchListMapTO listTO, SearchkeyTO sto){
 		
-		String sql = "select facltNm, addr1, addr2, induty, firstImageUrl, contentId, mapX, mapY from go_api where doNm=? and sigunguNm=?";
+		String sql = "select facltNm, doNm, sigunguNm, addr1, addr2, induty, firstImageUrl, contentId, mapX, mapY from go_api where doNm=? and sigunguNm=?";
 		ArrayList<SearchkeyTO> searchLists = (ArrayList<SearchkeyTO>)jdbcTemplate.query(sql, new BeanPropertyRowMapper<SearchkeyTO>(SearchkeyTO.class), sto.getDoNm(), sto.getSigunguNm() );
-		
+
 		int cpage = listTO.getCpage();
 		int recordPerPage = listTO.getRecordPerPage();
 		int blockPerPage = listTO.getBlockPerPage();
