@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class SearchkeyTO {
 	private String seq;				//viewpage용
-	private String imageUrl;        //이미지 불러오기용
+	private String imgurl;        //이미지 불러오기용
 	
 	private String keysearch;		// 검색키워드
 	
