@@ -200,20 +200,18 @@ public class Controller_Search {
 		//campview 사진데이터
 		ArrayList<SearchkeyTO> lists = kdao.gocampimgparse(kto);
 		
-		//for(SearchkeyTO ito : lists) {
-			//System.out.println("campview 컨트롤러 이미지 : " + ito.getImageUrl());
-		//}
-		
-		//System.out.println("campview 컨트롤러 데이터 : " + kto.getAddr1());
-		//System.out.println("campview 컨트롤러 데이터 : " + kto.getContentId());
-		//System.out.println("campview 컨트롤러 데이터 : " + kto.getHomepage());
+		//댓글
 		ArrayList<CampviewCmtTO> clists= kdao.campViewCmt(cto);
 		
+		//찜하기
+		int ucode = (Integer)session.getAttribute("ucode");
+		int sub =kdao.campSubscribeCheck(Integer.toString(ucode), kto.getContentId());
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "/search/campview" );
 		modelAndView.addObject("kto", kto);
 		modelAndView.addObject("lists", lists);
 		modelAndView.addObject("clists", clists);
+		modelAndView.addObject("sub", sub);
 		return modelAndView;
 	}
 	@RequestMapping(value="/campviewCmt.do")
@@ -234,6 +232,20 @@ public class Controller_Search {
 		cto.setUcode(Integer.toString(ucode));
 		
 		flag=kdao.campViewCmtInsert(cto);
+		return Integer.toString(flag);
+	}
+	@RequestMapping(value="/subscribe.do")
+	public String campsubscribe(HttpServletRequest request, HttpSession session) {
+		int flag =1;
+		System.out.println("댓글 달기 컨텐트ID: "+request.getParameter("contentId"));
+		//System.out.println("댓글 달기 내용: "+request.getParameter("review"));
+		if(session.getAttribute("ucode") == null) {
+			flag=2;
+			return Integer.toString(flag);
+		}
+		int ucode = (Integer)session.getAttribute("ucode");
+		flag= kdao.campSubscribe(Integer.toString(ucode), request.getParameter("contentId"));
+		
 		return Integer.toString(flag);
 	}
 	

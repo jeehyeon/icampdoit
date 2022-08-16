@@ -16,3 +16,17 @@ text-align: center;
 	float:right;
 	
 }
+
+
+.btn-outline-danger1 {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-outline-danger1:hover {
+  color: #dc3545;
+  background-color: #fff;
+  border-color: #dc3545;
+  
+}

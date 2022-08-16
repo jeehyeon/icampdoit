@@ -102,6 +102,38 @@ public class SearchkeyDAO {
 	return kto;
 	}
 	
+	// 찜하기
+		public int campSubscribe(String ucode, String contentId) {	
+			int flag=1;
+			String sql = "insert into subscribe values  ( 0, ?, ?)";
+			int result = jdbcTemplate.update(sql, contentId, ucode);
+			System.out.println(result);
+			if( result != 1 ) {
+				System.out.println("campViewTableInsert 오류");
+				return flag;	
+			}else {
+				flag=0;
+			}
+			return flag;	
+		
+		}
+		// 찜하기 체크
+				public int campSubscribeCheck(String ucode, String contentId) {	
+					int flag=1;
+					String sql = "select count(*) from subscribe where ucode=? and contentId=? ";
+					int result = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<Integer>(Integer.class), ucode, contentId);
+					System.out.println(result);
+					if( result == 0 ) {
+						System.out.println("campViewTableInsert 오류");
+						return flag;	
+					}else {
+						flag=0;
+					}
+					return flag;	
+				
+				}	
+	
+	
 		//campview 이미지 불러오기
 	public ArrayList<SearchkeyTO> gocampimgparse(SearchkeyTO kto) {
 			

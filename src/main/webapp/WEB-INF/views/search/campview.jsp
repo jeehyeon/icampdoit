@@ -22,8 +22,8 @@ for(SearchkeyTO ito : lists){
 	}
 }
 
-
-
+//찜하기
+int sub= (Integer)request.getAttribute("sub");
 
 SearchkeyTO kto = (SearchkeyTO)request.getAttribute("kto");
 
@@ -286,6 +286,7 @@ for(CampviewCmtTO cto : clists){
         <div class="col-lg-8"> 
           <div class="text-block">
             <p class="text-primary" style="font-family: 'GmarketSansMedium';"><i class="fa-map-marker-alt fa me-1"></i><%=titleaddr%></p>
+            <input type="hidden" name="contentId" id="contentId" value="<%=kto.getContentId()%>"/>
             <h1 style="font-family: 'GmarketSansBold';"><%=kto.getFacltNm()%></h1>
             <h8 style="font-family: 'GmarketSansBold';"><a href="<%=homepage%>"><%=homepage%></a></h8>
             <br />
@@ -293,12 +294,22 @@ for(CampviewCmtTO cto : clists){
             
             <!-- 찜버튼 3 -->
             <div align="right">
-             <button type="button" class="btn btn-outline-danger">
+            <%if(sub ==0){ %>
+             <button type="button" class="btn btn-outline-danger" id="subscribebtn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
  				 <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path>
 				</svg>
-				찜하기
+				<span>찜하기</span>
              </button>
+             <%}else{ %>
+             <button type="button" class="btn btn-outline-danger1" id="subscribebtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+ 				 <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path>
+				</svg>
+				<span>찜하기</span>
+             </button>
+             
+             <%} %>
             </div>
           </div>
             
@@ -473,6 +484,7 @@ for(CampviewCmtTO cto : clists){
         </div>
       </div>
     </footer>
+    <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
     <!-- JavaScript files-->
     <script>
       // ------------------------------------------------------- //
@@ -527,11 +539,36 @@ for(CampviewCmtTO cto : clists){
       
   	}
       
-      
+   $("#subscribebtn").on("click",function(){
+	   
+	
+		var data ={"contentId" : $("#contentId").val()};
+		$.ajax({
+				url: './subscribe.do',
+				type: 'post',
+				data : data,
+				dataType : 'text',
+				success: function(data){
+					if(data == "2"){
+						alert("로그인이 필요합니다.");
+					}else if(data == "0"){
+						alert("찜하기 성공");
+					}else{
+						alert("찜하기 실패");
+					}
+					
+				}, 
+				fail: function(error){
+	  			alert('댓글달기 실패' );
+			}
+		});
+	
+	
+   });
       
     </script>
     <!-- jQuery-->
-    <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
+    
     <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
     <script src="./resources/bootstrap-5/html/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Magnific Popup - Lightbox for the gallery-->
