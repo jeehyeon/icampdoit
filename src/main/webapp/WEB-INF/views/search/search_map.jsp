@@ -58,9 +58,18 @@
 	    .info .body {position: relative;overflow: hidden;}
 	    .info .desc {position: relative;margin: 13px 0 0 10px;height: 75px;}
 	    .info .link {color: #5085BB;}
+	    #wrapall {
+  			min-height: 100vh;
+		  	display: flex;
+		  	flex-direction: column;
+  		}
+  		#footer {
+    		margin-top: auto;
+  		}
 	</style>
   </head>
   <body style="padding-top: 72px;">
+  	<div id="wrapall">
     <header class="header">
     
       <!-- Navbar 로고부분-->
@@ -264,8 +273,9 @@
         </div>
       </div>
     </div>
+    </div>
     <!-- Footer - 관리자 페이지 이동 부분 넣을 곳 -->
-    <footer class="position-relative z-index-10 d-print-none">
+    <footer class="position-relative z-index-10 d-print-none" id="footer">
            
       <!-- Copyright section of the footer-->
       <div class="py-4 fw-light bg-gray-800 text-gray-300">
