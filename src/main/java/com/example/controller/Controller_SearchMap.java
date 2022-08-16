@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.exam.search.CampviewCmtTO;
+import com.exam.search.SearchListMapTO;
 import com.exam.search.SearchListTO;
 import com.exam.search.SearchkeyDAO;
 import com.exam.search.SearchkeyTO;
@@ -87,6 +88,69 @@ public class Controller_SearchMap {
 	public JSONObject searchmapgugun(HttpServletRequest request) {
 		System.out.println( "searchmapgugun() 호출" );
 		
+		/*
+		int cpage = 1;
+		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		SearchListMapTO slistTO = new SearchListMapTO();
+		slistTO.setCpage(cpage);
+		
+		SearchkeyTO sto = new SearchkeyTO();
+		sto.setDoNm( request.getParameter( "sidoVal" ) );
+		sto.setSigunguNm( request.getParameter( "gugunVal" ) );
+		
+		slistTO = mdao.searchmapList(slistTO, sto );
+		System.out.println( sto.getDoNm() );
+		System.out.println( sto.getSigunguNm() );
+		
+		ArrayList<SearchkeyTO> lists = slistTO.getSearchLists();
+		
+		JSONObject listresult = new JSONObject();
+		
+		JSONArray pageArray = new JSONArray();
+		JSONObject pageObject = new JSONObject();
+		pageObject.put( "cpage", slistTO.getCpage() );
+		
+		JSONArray jsonArray = new JSONArray();
+		for( SearchkeyTO to : lists ){
+			String facltNm = to.getFacltNm();
+			String addr1 = to.getAddr1();
+			String addr2 = to.getAddr2();
+			String induty = to.getInduty();
+			String firstImageUrl = to.getFirstImageUrl();
+			String contentId = to.getContentId();
+			String mapX = to.getMapX();
+			String mapY = to.getMapY();
+			
+			JSONObject jsonObject = new JSONObject();
+				
+			jsonObject.put( "facltNm", facltNm );
+			jsonObject.put( "addr1", addr1 );
+			jsonObject.put( "addr2", addr2 );
+			jsonObject.put( "induty", induty );
+			jsonObject.put( "contentId", contentId );
+			jsonObject.put( "mapX", mapX );
+			jsonObject.put( "mapY", mapY );
+			
+			if( !firstImageUrl.equals( "default" ) ) {
+				jsonObject.put( "firstImageUrl", firstImageUrl );
+			} else {
+				jsonObject.put( "firstImageUrl", "./resources/bootstrap-5/html/img/noimage.svg" );
+			}
+			
+			jsonArray.add( jsonObject );
+		}
+		
+		listresult.put( "jsonArray", jsonArray );
+		listresult.put( "pageArray", pageArray );
+		
+		return listresult;
+		
+		*/
+		
+		
 		SearchkeyTO sto = new SearchkeyTO();
 
 		sto.setDoNm( request.getParameter( "sidoVal" ) );
@@ -129,6 +193,7 @@ public class Controller_SearchMap {
 		listresult.put( "jsonArray", jsonArray ); //배열을 다시 json에 담음. => ajax 에서 jsonArray(배열)를 안받아줘서 json 으로 다시 넣음
 		
 		return listresult;
+		
 	}
 	
 }
