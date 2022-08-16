@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-//session 값 가져오기
-int ucode = -1;
-String id ="";
-if(session.getAttribute("id") != null){
-	ucode = (int)session.getAttribute("ucode");
-	id = (String)session.getAttribute("id");
-}
+	//session 값 가져오기
+	int ucode = -1;
+	String id ="";
+	if(session.getAttribute("id") != null){
+		ucode = (int)session.getAttribute("ucode");
+		id = (String)session.getAttribute("id");
+	}
 %>
 <!DOCTYPE html>
   <head>
@@ -112,11 +112,9 @@ if(session.getAttribute("id") != null){
       <!-- /Navbar -->
     </header>
     
-	<section class="pt-5">
-	    <div class="container px-lg-6">      	
-	      <!-- Breadcrumbs -->
-	      <h1 class="hero-heading mb-0" style="font-family: 'Recipekorea';">글 수정</h1>
-	      <p></p>
+	<section class="pt-5 mb-0">
+	    <div class="container px-lg-5">    
+	      <h1 class="hero-heading mb-0" style="font-family: 'GmarketSansBold';">게시글 수정 >></h1>
 	    </div>
     </section>
 
@@ -125,8 +123,8 @@ if(session.getAttribute("id") != null){
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-12">
-            <div class="p-3 position-relative mt-4 pb-2 z-index-2">
-              <div class="bg-primary border-radius-lg pt-4 pb-3 px-3" style="border-radius: 10px;">
+            <div class="p-3 position-relative mt-4 pb-0 z-index-2">
+              <div class="border-radius-lg pt-4 pb-2 px-2" style="border-radius: 10px;">
 				 <!-- 게시판종류 드롭박스 -->
 				 <div class="me-2">
 					<select class="selectpicker bg-gray-100" name="sort"
@@ -141,7 +139,7 @@ if(session.getAttribute("id") != null){
           <div class="card-header p-4 border-0 px-print-0" style="background-color: white">
             <div class="mb-4">
               <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-13">
                   <a class="form-text small text-primary" href="#"></a> 
                   <input class="form-control" name="title" id="title" type="title" placeholder="제목을 입력해주세요." />
                 </div>

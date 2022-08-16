@@ -34,7 +34,12 @@ public class Controller_Search {
 		}
 				
 		SearchkeyTO kto = new SearchkeyTO();
-		kto.setKeysearch( request.getParameter( "keysearch" ) );
+		
+		if(  request.getParameter( "keysearch" ) == null ) {
+			kto.setKeysearch("");
+		} else {
+			kto.setKeysearch( request.getParameter( "keysearch" ) );
+		}
 		//System.out.println( "키워드 : " + kto.getKeysearch());	
 		
 		SearchListTO listTO = new SearchListTO();
