@@ -9,6 +9,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.w3c.dom.Document;
@@ -16,6 +17,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import com.exam.mboard.BoardTO;
 
 @Repository
 public class InsertGocamping {
@@ -328,6 +331,67 @@ public class InsertGocamping {
 		   return flag;
 	   }
 	
+	
+	
+	public ArrayList<SearchkeyTO> contentIdList() {
+		
+		String sql = "select contentId from go_api";
+		ArrayList<SearchkeyTO> lists = (ArrayList<SearchkeyTO>)jdbcTemplate.query(
+				sql, new BeanPropertyRowMapper<SearchkeyTO>(SearchkeyTO.class) );
+		
+		return lists;		
+	}
+	
+	
+	
+	
+	public void insertImage(SearchkeyTO kto) {
+		try {
+			
+			DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
+			Document document = dBuilder.parse( new URL("https://api.visitkorea.or.kr/openapi/service/rest/GoCamping/imageList?ServiceKey=74rd5r1MwtY%2F3dFG0s9I1UDtFBJBj1zjmm0VdZBNsJoslwPnviVh2PeV1vCg%2BtaHuMvN8G1f1PWIwKh3I%2BI0oQ%3D%3D&MobileOS=ETC&MobileApp=AppTest&contentId="+kto.getContentId()).openStream());
+				
+			Element root = document.getDocumentElement();
+		    System.out.println( root.toString() );
+		         
+		    NodeList nList = document.getElementsByTagName("item"); 
+		    	
+		    for(int i = 0; i < nList.getLength(); i++) {
+			//System.out.println(nList.item(i).getAttributes().getNamedItem("facltNm").getNodeValue());
+			Node node = nList.item(i);
+			SearchkeyTO ito = new SearchkeyTO();
+				if(node.getNodeType() == Node.ELEMENT_NODE) {
+					Element element = (Element) node;
+		
+					if(( getValue("imageUrl", element) != " " )){	
+							try {	
+								ito.setImageUrl(getValue("imageUrl", element));
+								//System.out.println( "캠핑장 이미지 불러오기: " + ito.getImageUrl() );
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								System.out.println( "캠핑장명: 없음" );
+								
+							}
+						
+						}
+						
+					}
+				
+			};
+				//System.out.println("끝");
+				
+			} catch (ParserConfigurationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SAXException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+	}
 }
-
 

@@ -478,11 +478,16 @@ public class Controller_Search {
 		ArrayList<CampviewCmtTO> clists= kdao.campViewCmt(cto);
 		
 		//찜하기
+		int sub;
+		if(session.getAttribute("ucode") == null) {
+			sub= 2;
+		}else {
+			int ucode = (Integer)session.getAttribute("ucode");
+			
+			sub =kdao.campSubscribeCheck(Integer.toString(ucode), kto.getContentId());
+			System.out.println("sub : " + sub);
+		}
 		
-		int ucode = (Integer)session.getAttribute("ucode");
-		
-		int sub =kdao.campSubscribeCheck(Integer.toString(ucode), kto.getContentId());
-		System.out.println("sub : " + sub);
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "/search/campview" );
