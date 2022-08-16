@@ -15,10 +15,11 @@ if(session.getAttribute("id") != null){
 StringBuilder imghtml = new StringBuilder();
 ArrayList<SearchkeyTO> lists = (ArrayList<SearchkeyTO>)request.getAttribute("lists");
 for(SearchkeyTO ito : lists){
-	if(ito.getImageUrl() == null || ito.getImageUrl().equals("default")){
+	System.out.println("사진 url : " + ito.getImgurl());
+	if(ito.getImgurl() == null || ito.getImgurl().equals("default")){
 		imghtml.append("<div class=\"col-lg-4 col-6 px-1 mb-2\"><a href=\"./resources/bootstrap-5/html/img/noimage.svg\" data-fancybox=\"gallery\"><img class=\"img-fluid\" src=\"./resources/bootstrap-5/html/img/noimage.svg\" alt=\"...\"></a></div>");
 	}else{
-		imghtml.append("<div class=\"col-lg-4 col-6 px-1 mb-2\"><a href=\""+ito.getImageUrl() +"\" data-fancybox=\"gallery\"><img class=\"img-fluid\" src=\""+ito.getImageUrl() +"\" alt=\"...\"></a></div>");
+		imghtml.append("<div class=\"col-lg-4 col-6 px-1 mb-2\"><a href=\""+ito.getImgurl() +"\" data-fancybox=\"gallery\"><img class=\"img-fluid\" src=\""+ito.getImgurl() +"\" alt=\"...\"></a></div>");
 	}
 }
 

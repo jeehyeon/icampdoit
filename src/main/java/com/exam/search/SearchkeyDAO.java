@@ -187,68 +187,11 @@ public class SearchkeyDAO {
 	
 		//campview 이미지 불러오기
 	public ArrayList<SearchkeyTO> gocampimgparse(SearchkeyTO kto) {
-			
-		ArrayList<SearchkeyTO> lists = new ArrayList<SearchkeyTO>();
-			
-		try {
-				
-			DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
-			DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
-			Document document = dBuilder.parse( new URL("https://api.visitkorea.or.kr/openapi/service/rest/GoCamping/imageList?ServiceKey=74rd5r1MwtY%2F3dFG0s9I1UDtFBJBj1zjmm0VdZBNsJoslwPnviVh2PeV1vCg%2BtaHuMvN8G1f1PWIwKh3I%2BI0oQ%3D%3D&MobileOS=ETC&MobileApp=AppTest&contentId="+kto.getContentId()).openStream());
-				
-			Element root = document.getDocumentElement();
-		    System.out.println( root.toString() );
-		         
-		    NodeList nList = document.getElementsByTagName("item"); 
-		    	
-		    for(int i = 0; i < nList.getLength(); i++) {
-			//System.out.println(nList.item(i).getAttributes().getNamedItem("facltNm").getNodeValue());
-			Node node = nList.item(i);
-			SearchkeyTO ito = new SearchkeyTO();
-				if(node.getNodeType() == Node.ELEMENT_NODE) {
-					Element element = (Element) node;
+		System.out.println("컨텐츠 아이디DAO : "+kto.getContentId());
+		String sql = "select imgurl from campviewimg where contentId=?";
+		ArrayList<SearchkeyTO> searchLists = (ArrayList<SearchkeyTO>)jdbcTemplate.query(sql, new BeanPropertyRowMapper<SearchkeyTO>(SearchkeyTO.class), kto.getContentId());
 		
-					if(( getValue("imageUrl", element) != " " )){	
-							try {	
-								ito.setImageUrl(getValue("imageUrl", element));
-								//System.out.println( "캠핑장 이미지 불러오기: " + ito.getImageUrl() );
-							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								//System.out.println( "캠핑장명: 없음" );
-								ito.setImageUrl( "default" );
-							}
-							lists.add(ito);	
-												
-						}
-						
-					}
-				
-			};
-				//System.out.println("끝");
-				
-			} catch (ParserConfigurationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SAXException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			//System.out.println("lists size:"+  lists.size() );
-			return lists;
-		
-		}
-		
-		private static String getValue(String tag, Element element) {
-			if(element.getElementsByTagName(tag).item(0)== null) {
-				return " ";
-			}
-			NodeList nodes = element.getElementsByTagName(tag).item(0).getChildNodes();
-			Node node =(Node) nodes.item(0);	
-			return node.getNodeValue();
+		return searchLists;
 		}
 		
 		//DBINSERT campviewCmt
