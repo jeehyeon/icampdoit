@@ -20,7 +20,7 @@
 		String campNm = to.getFacltNm();
 		String mainImg = to.getFirstImageUrl();
 		if( mainImg.equals("default") ) {
-			mainImg = "./resources/bootstrap-5/html/img/noimage.svg";
+			mainImg = "./resources/bootstrap-5/html/img/noimg.png";
 		}
 		String addr1 = to.getDoNm();
 		String addr2 = to.getSigunguNm();
