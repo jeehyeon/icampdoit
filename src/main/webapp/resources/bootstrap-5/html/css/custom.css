@@ -16,7 +16,10 @@ text-align: center;
 	float:right;
 	
 }
-
+.left-float{
+	float:left;
+	
+}
 
 .btn-outline-danger1 {
   color: #fff;
@@ -28,6 +31,9 @@ text-align: center;
   color: #dc3545;
   background-color: #fff;
   border-color: #dc3545;
-  
-  
+}
+
+.cvcmt{
+
+
 }

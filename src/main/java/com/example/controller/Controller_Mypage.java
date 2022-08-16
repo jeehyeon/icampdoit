@@ -40,10 +40,11 @@ public class Controller_Mypage {
 		}		
 		
 		SignUpTO sto = new SignUpTO();
+		System.out.println("1");
 		sto.setUcode( String.valueOf( session.getAttribute("ucode") ) );
-		
+		System.out.println("2");
 		sto = dao.mypageView(sto);
-		
+		System.out.println("3");
 		modelAndView.setViewName( "/mypage/mypage" );
 		modelAndView.addObject("sto", sto);
 		

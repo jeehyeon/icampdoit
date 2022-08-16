@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,11 +8,14 @@ import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.exam.mboard.CmtTO;
 import com.exam.search.CampviewCmtTO;
 import com.exam.search.SearchListTO;
 import com.exam.search.SearchkeyDAO;
@@ -549,5 +553,38 @@ public class Controller_Search {
 		
 		return Integer.toString(flag);
 	}
+	
+	
+	@RequestMapping( value="/campviewcmtdelete.do" )
+	public String cmtList(HttpServletRequest request, HttpSession session) throws IOException, ParseException {
+		System.out.println( "mboarddeleteOk() 호출" );
+		int flag = 1;
+		//System.out.println(request.getParameter("ucode"));
+		//System.out.println(request.getParameter("id"));
+		//System.out.println(request.getParameter("seq"));
+		//System.out.println(request.getParameter("comment"));
+		String body = (String)request.getParameter("replyseq");
+		System.out.println("cmtdelete 데이터 : " + body);
+		JSONParser parser = new JSONParser();
+		Object obj = parser.parse(body);
+		JSONObject data = (JSONObject)obj;
+		System.out.println("댓글삭제 데이터 seq : "+ data.get("seq"));
+		System.out.println("댓글삭제 데이터 ucode : "+ data.get("ucode") );
+		System.out.println("댓글삭제 데이터 session ucode : "+ session.getAttribute("ucode"));
+		
+		
+		if(!(session.getAttribute("ucode").toString()).equals(data.get("ucode").toString())) {
+			flag=2;
+			return Integer.toString(flag);
+		}
+		
+		SearchkeyTO kto = new SearchkeyTO();
+		kto.setSeq((String)data.get("seq"));
+		
+		flag=kdao.campviewDeleteComment(kto);
+		
+		return Integer.toString(flag);
+	}
+	
 	
 }

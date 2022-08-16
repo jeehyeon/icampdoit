@@ -280,4 +280,24 @@ public class SearchkeyDAO {
 					
 					return listTO;
 				}
+				
+				
+				//delete Comment
+	public int campviewDeleteComment( SearchkeyTO kto ) {
+					
+		int flag = 1;
+					
+		String sql = "delete from campview_cmt where seq=?";
+		int result = jdbcTemplate.update(sql, kto.getSeq());
+		System.out.println(result);
+
+		if( result != 1 ) {
+			System.out.println("m_cmt Delete 오류");
+		}else {
+			flag=0;
+		}
+					
+		return flag;
+	}
+				
 }

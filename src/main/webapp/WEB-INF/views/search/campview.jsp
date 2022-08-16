@@ -172,17 +172,26 @@ if(kto.getSbrsCl().indexOf("마트") != -1 || kto.getSbrsCl().indexOf("편의점
 ArrayList<CampviewCmtTO> clists= (ArrayList<CampviewCmtTO>)request.getAttribute("clists");
 StringBuilder cmthtml = new StringBuilder();
 for(CampviewCmtTO cto : clists){
-	cmthtml.append("<div class=\"d-flex d-block d-sm-flex review\">");
+	
+	String deldata = "{\"seq\":\"" +cto.getSeq() + "\",\"ucode\":\""+ cto.getUcode()+"\"}";
+	
 	cmthtml.append("<div>");
-	cmthtml.append(" <h6 class=\"mt-2 mb-1\">"+cto.getWriter()+"</h6>");
-	cmthtml.append(" <div class=\"mb-2\">");
+	cmthtml.append("<div>");
+	
+	cmthtml.append(" <div class=\"mt-2 mb-1 right-left\">"+cto.getWriter()+"</div>");
+	cmthtml.append("<div class=\"cvcmt btn right-float btn-outline-primary\" value=\"삭제\" deldata="+deldata+">삭제</div>");
+	
+	cmthtml.append(" <div>");
 	for(int i=0; i<Integer.parseInt(cto.getMark()); i++){
 		cmthtml.append("<i class=\"fa fa-xs fa-star text-primary\"></i>");
 	};
 	cmthtml.append("</div>");
-	cmthtml.append("<p class=\"text-muted text-sm\">"+cto.getContent() +"</p>");
+	
+	cmthtml.append("<p  class=\"text-muted text-sm\">"+cto.getContent() +"</p>");
 	cmthtml.append("</div>");
 	cmthtml.append("</div>");
+	cmthtml.append("<hr/>");
+	
 	
 }
 
@@ -409,6 +418,8 @@ for(CampviewCmtTO cto : clists){
           
            <!-- 리뷰 댓글보기 -->
            <div class="text-block">
+	         
+	         <div id="cmtbody" class="mt-4"> 
 	         <h4 class="mb-4" style="font-family: 'GmarketSansMedium';">평점리뷰</h4>
 	         <!-- <div class="d-flex d-block d-sm-flex review">  
               <div>
@@ -424,7 +435,7 @@ for(CampviewCmtTO cto : clists){
               -->
 	          <%=cmthtml.toString()%>
             
-	         
+	         </div>
 	         <!-- 리뷰 등록 -->
 	         <div class="py-5">
               <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#leaveReview" aria-expanded="false" aria-controls="leaveReview">리뷰남기기</button>
@@ -574,6 +585,53 @@ for(CampviewCmtTO cto : clists){
 		$('#subspan').text("찜완료");
 	});   
    
+   
+   
+   $(".cvcmt").on("click", function(){
+	   
+	 	var replyseq = $(this).attr("deldata");
+			var sendData = {"replyseq": replyseq}
+			console.log("댓글 데이터 : " + replyseq);
+		console.log("댓글 데이터 테스트 : " + $(this).attr("value"));
+		
+		
+			cmtDelete(sendData);
+	 });
+
+
+	function cmtDelete(sendData) {
+		
+		if(confirm( '댓글을 삭제 하시겠습니까?' )){
+			$.ajax({
+   			url: './campviewcmtdelete.do',
+   			type: 'post',
+   			data : sendData,
+   			dataType : 'text',
+   			success: function(data){
+   				if(data == 0){
+   					//성공
+   					 location.reload();
+   				}else if(data == 2){
+   					//다른 사용자일떄
+   					alert("다른 사용자의 댓글입니다.");
+   				}else{
+						//실패 
+   					alert("댓글 삭제를 실패했습니다.");
+   				}
+   			}, 
+   			fail: function(error){
+       			alert('작성자만 삭제가 가능합니다.' );
+   			}
+   		});
+		}
+		
+		
+		
+	}
+ 
+   
+   
+   
     </script>
     <!-- jQuery-->
     
@@ -605,6 +663,10 @@ for(CampviewCmtTO cto : clists){
           circleShow: true,
           circlePosition: [40.732346, -74.0014247]
       })
+      
+       
+      
+      
       
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"> </script>
