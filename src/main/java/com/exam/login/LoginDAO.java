@@ -14,7 +14,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class loginDAO {
+public class LoginDAO {
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
