@@ -32,7 +32,7 @@ public class Controller_Search {
 		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
 			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
 		}
-				
+		System.out.println("@@ : " + request.getParameter( "keysearch" ));
 		SearchkeyTO kto = new SearchkeyTO();
 		kto.setKeysearch( request.getParameter( "keysearch" ) );
 		//System.out.println( "키워드 : " + kto.getKeysearch());	
