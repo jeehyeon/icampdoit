@@ -482,8 +482,8 @@
                 </div>
 				<hr>
                 <div class="mt-4">
-					<button type="button" class="btn btn-dark" id="allNonChk">&emsp;&emsp;&emsp; 초기화 &emsp;&emsp;&emsp;</button>
-					<button type="submit" class="btn btn-primary text-white" style="float:right" id="detailSearch">&emsp;&emsp;&emsp; 검색하기 &emsp;&emsp;&emsp;</button>
+					<button type="button" class="btn btn-dark" id="allNonChk">&emsp;초기화&emsp;</button>
+					<button type="submit" class="btn btn-primary text-white" style="float:right" id="detailSearch">&emsp;검색하기&emsp;</button>
 				</div>
 			  </form>
 			</div>
