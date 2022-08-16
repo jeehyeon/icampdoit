@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="com.exam.mboard.FileTO"%>
+<%@page import="com.exam.mboard.BoardTO"%>
 <%
 	//session 값 가져오기
 	int ucode = -1;
@@ -8,6 +10,34 @@
 		ucode = (int)session.getAttribute("ucode");
 		id = (String)session.getAttribute("id");
 	}
+
+	int cpage = (Integer)request.getAttribute("cpage");
+	
+	String subjectValue = (String)request.getAttribute( "subjectValue" );
+	System.out.println("수정.jsp 말머리 : " + subjectValue);
+	String seq = "";
+	String subject = "";
+	String writer = "";
+	String title = "";
+	String content = "";
+	String filename = "";
+	long filesize = 0;	
+	
+	if(subjectValue.equals("1")||subjectValue.equals("2")||subjectValue.equals("3")){
+		BoardTO to = (BoardTO)request.getAttribute("to");
+		FileTO fto = (FileTO)request.getAttribute("fto");
+		
+		seq = to.getSeq();
+		subject = to.getSubject();
+		writer = to.getWriter();
+		title = to.getTitle();
+		content = to.getContent();
+		filename = fto.getFilename();
+		filesize = fto.getFilesize();
+		System.out.println("[filename]" + filename);
+	}
+	
+	
 %>
 <!DOCTYPE html>
   <head>
@@ -45,6 +75,8 @@
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
 	<!-- Font Awesome Icons -->
 	<script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+	<!-- Font Awesome 이거 추가함 -->
+    <script src="https://kit.fontawesome.com/5251502df3.js" crossorigin="anonymous"></script>
 	<!-- Material Icons -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 	<!-- CSS Files -->
@@ -112,26 +144,39 @@
       <!-- /Navbar -->
     </header>
     
-	<section class="pt-5 mb-0">
+	<section class="pt-5 mb-0 mt-3">
 	    <div class="container px-lg-5">    
-	      <h1 class="hero-heading mb-0" style="font-family: 'GmarketSansBold';">게시글 수정 >></h1>
+	      <h1 class="hero-heading mb-0" style="font-family: 'GmarketSansBold';">게시글 수정 <i class="fa-solid fa-file-circle-plus"></i></h1>
 	    </div>
     </section>
 
 	<!-- Write Section-->
 	<section class=" pb-7">
+			<input type="hidden" name="modifyOk" id="modifyOk" value="default"/>
+		  <input type="hidden" name="newFilesize" id="newFilesize" value="0000"/>
+		  <input type="hidden" name="vcode" id="vcode" value="default"/>
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-12">
             <div class="p-3 position-relative mt-4 pb-0 z-index-2">
-              <div class="border-radius-lg pt-4 pb-2 px-2" style="border-radius: 10px;">
+              <div class="bg-primary border-radius-lg pt-3 pb-3 px-3" style="border-radius: 10px;">
 				 <!-- 게시판종류 드롭박스 -->
 				 <div class="me-2">
 					<select class="selectpicker bg-gray-100" name="sort"
 						id="form_sort" data-style="btn-selectpicker" title="말머리">
-						<option value="sortBy_0" id="subject1" href="#">자유</option>
-						<option value="sortBy_1" id="subject2" disabled href="#">후기</option>
-						<option value="sortBy_2" id="subject3" disabled href="#">중고</option>
+						<%if(subjectValue.equals("1")){ %>
+							<option value="1" id="subject1" selected>자유</option>
+							<option value="2" id="subject2">후기</option>
+							<option value="3" id="subject3">중고</option>
+						<% } else if(subjectValue.equals("2")) { %>	
+							<option value="1" id="subject1">자유</option>
+							<option value="2" id="subject2" selected>후기</option>
+							<option value="3" id="subject3">중고</option>
+						<% } else if(subjectValue.equals("3")) { %>
+							<option value="1" id="subject1">자유</option>
+							<option value="2" id="subject2">후기</option>
+							<option value="3" id="subject3" selected>중고</option>
+						<% } %>
 					</select>
 				 </div>
               </div>
@@ -141,29 +186,30 @@
               <div class="row">
                 <div class="col-lg-13">
                   <a class="form-text small text-primary" href="#"></a> 
-                  <input class="form-control" name="title" id="title" type="title" placeholder="제목을 입력해주세요." />
+                  <input class="form-control" name="title" id="title" type="title" value="<%=title %>" placeholder="제목을 입력해주세요." />
                 </div>
               </div>
             </div>
-              <div id="summernote"></div>
+            	<!-- Write Section-->
+            	<textarea id="summernote" name="content"><%=content %></textarea>
             </div>
           </div>
         </div>
-     <!-- Write Section-->
-
+		<input type="hidden" id="subject" name="subject" value="<%=subject%>" />   
+        <input type="hidden" id="seq" name="seq" value="<%=seq%>" />   
+        <input type="hidden" id="cpage" name="cpage" value="<%=cpage%>"/> 
 
 		<!-- 목록 시작 -->
 		<div class="row">
 		  <div class="col-lg-8">
-	        <input type="button" value="목록" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardlist.do?cpage='" />
+	        <input type="button" value="목록" class="btn btn-dark text-white" style="cursor: pointer;" onclick="location.href='mboardlist.do?subjectValue=<%=subjectValue%>&cpage=<%=cpage %>'" />
 	      </div>
 	      <div class="col-lg-4 text-lg-end">
-	        <input type="button" value="수정" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardmodifyOk.do?cpage=&seq='" /> 
-	        <input type="button" value="취소" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardlist.do?cpage='" />
+	        <input type="button" value="수정" id="mbtn" class="btn btn-primary text-white" style="cursor: pointer;" /> 
+	        <input type="button" value="취소" id="cbtn" class="btn btn-dark" style="cursor: pointer;" onclick="location.href='mboardlist.do?subjectValue=<%=subjectValue%>&cpage=<%=cpage %>'" />
 	      </div>
 		</div>
 		<!-- 목록 끝 -->
-	
         </div>
 	  </div>
 	</section>
@@ -201,6 +247,159 @@
 		  //subject1.option = disabled; //..? 맞나
 	 	  //아니면 $("select option[id='subject1']").prop('disabled', true); 이 방식도 있음
 		});
+	
+	
+	</script>
+	<script>
+	document.getElementById( 'cbtn' ).onclick = function() { 		
+ 		//var subject = $('#subject').val();
+ 		var filename = $('#modifyOk').val();
+ 		
+	    var data = {'filename' : filename };	    	
+ 		
+		$.ajax({
+			data : data,
+			type : "GET",
+			url : '/awritecancel.do',
+			success : function() {
+				location.href='/mboardlist.do';
+			},
+			error: function() {
+	        	alert('error, 에러');
+	        }
+		});
+	}
+	 
+       document.getElementById( 'mbtn' ).onclick = function() {	
+    	  alert( $('#subject').val() );
+    	 var subject = $('#subject').val();
+		 var title = $('#title').val();
+		 var content = $('#summernote').val();
+		 var vcode = $('#vcode').val();
+		 var filename = $('#filename').val(); 
+		 var newFilename = $('#modifyOk').val();
+		 var filesize = $('#filesize').val();
+		 var newFilesize = $('#newFilesize').val();
+		 var seq = $('#seq').val();
+		 		 
+	     var data = {'subject': subject, 'title' : title , 'content' : content, 'vcode' : vcode, 'filename' : filename, 'newFilename' : newFilename, 'filesize' : filesize, 'newFilesize' : newFilesize, 'seq' : seq};	    	
+
+	     if(($('#title').val() != '')&&($('#summernote').val() != '')){	        
+					
+			$.ajax({
+				data : data,				
+				type : "POST",
+				url : './mboardmodifyOk.do',
+				dataType : 'text',
+				success : function(flag) {					
+					
+					if( flag == 0 ) {
+						alert('글수정 성공');
+						location.href='/mboardlist.do';
+					} else {
+						alert('글수정 실패');
+						history.back();
+					}
+				},
+				error: function(request, status, error) {
+					alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
+		        }
+			});
+	     } else {
+		        alert('에러남.');
+		        $('#title').focus();
+		 } 
+	   }
+	
+	$(document).ready(function() {
+		let date = new Date().getTime().toString(36);
+		$('#vcode').val(date);
+		console.log("date : " +date);
+		var imgUrl = './upload/';
+		var mimgUrl = imgUrl + $('#filename').val()
+		console.log("filename : "+ mimgUrl);
+
+		var fontList = ['맑은 고딕','굴림','돋움','바탕','궁서','NotoSansKR','Arial','Courier New','Verdana','Tahoma'];
+		$('#summernote').summernote({
+			placeholder : '내용을 입력해주세요. (이미지는 1장만 업로드 가능합니다.)',
+			minHeight : null,
+			maxHeight : null,
+			tabsize : 2,
+			height : 550,
+			width : 1100,
+			lang : 'ko-KR',
+			fontNames: fontList,
+			maximumImageFileSize: 10485760,
+            fontNamesIgnoreCheck: fontList,
+			toolbar: [
+                ['style', ['style']],
+                ['font', ['fontname','fontsize']],
+                ['fontstyle', ['bold','italic','underline','strikethrough','forecolor','backcolor','color','clear']],
+                ['paragraph', ['paragraph','height','ul','ol']],
+                ['insert', ['table','hr','link','picture']],
+                ['view', ['codeview', 'help']]
+            ],
+            
+		    callbacks: { //이미지를 첨부하는 부분
+				onImageUpload : function(files, editor, welEditable) {					
+					for (var i = 0; i < files.length; i++) {
+						sendFile(files[i], editor, welEditable);
+					}
+					
+				}
+			} 
+        });
+	});
+
+	// 이미지 파일 업로드
+	function sendFile(file, editor, welEditable) {
+		var imgUrl = '';
+		var mImgUrl = './upload/';
+		var hImgUrl = './h_upload/';
+		var nImgUrl = './n_upload/';
+		var data = new FormData();
+		data.append('image', file);
+		data.append('subject', $('#subject').val());
+		$.ajax({
+			data : data,
+			type : "POST",
+			url : '/amodify_image.do',
+			cache : false,
+			contentType : false,
+			enctype : 'multipart/form-data',
+			processData : false,
+			success : function(result) {
+				console.log("result : "+result);
+				
+				let str= result.split('@');
+				var subject = $('#subject').val();
+				
+				if( $('#subject').val() == 4 ) {
+					imgUrl = hImgUrl + str[0];
+				} else if( $('#subject').val() == 5 ) {
+					imgUrl = nImgUrl + str[0];
+				} else {
+					imgUrl = mImgUrl + str[0];
+				}				
+				console.log("imgUrl : "+imgUrl);				
+				
+				$('#summernote').summernote( 'insertImage', imgUrl );
+				
+				if(str[0] != null){
+            				               
+					$('#modifyOk').val(str[0]);
+					$('#newFilesize').val(str[1]);
+	                
+            	}else{
+            		alert("error");
+            	};
+			},
+			error: function() {
+	        	alert('error, 이미지 사이즈는 10MB 미만이어야 합니다.');
+	        }
+		});
+	}
+	    
 	</script>
 	<script>
 		// ------------------------------------------------------- //

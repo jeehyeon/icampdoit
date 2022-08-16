@@ -28,6 +28,7 @@
 	
 	int cpage = (Integer)request.getAttribute("cpage");
 	int subjectValue = (Integer)request.getAttribute( "subjectValue" );
+	System.out.println("view페이지 subjectValue: "+subjectValue);
 	System.out.println("view페이지 session id : "+id);
 	System.out.println("view페이지 seq : "+seq);
 		
@@ -221,7 +222,7 @@
 				<input type="button" value="목록" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardlist.do?subjectValue=<%=subjectValue%>&cpage=<%=cpage%>'" />
 			  </div>
 			  <div class="col-lg-4 text-lg-end">
-				<input type="button" value="수정" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardmodify.do?cpage=&seq='" />
+				<input type="button" value="수정" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardmodify.do?subjectValue=<%=subjectValue%>&cpage=<%=cpage %>&seq=<%=seq %>'" />
 				<input type="button" value="삭제" id="view-dbtn" name="view-dbtn" class="btn btn-primary" style="cursor: pointer;" />				
 			  </div>
             </div>

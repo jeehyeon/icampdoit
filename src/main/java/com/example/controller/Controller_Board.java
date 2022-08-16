@@ -26,6 +26,7 @@ import com.exam.mboard.BoardListTO;
 import com.exam.mboard.BoardTO;
 import com.exam.mboard.CmtTO;
 import com.exam.mboard.FileTO;
+import com.exam.admin.AdminListTO;
 import com.exam.login.SignUpTO;
 import com.exam.mboard.BoardDAO;
 //import com.oreilly.servlet.MultipartRequest;
@@ -300,6 +301,27 @@ public class Controller_Board {
 	public ModelAndView mboardmodify(HttpServletRequest request, HttpSession session) {
 		System.out.println( "mboardmodify() 호출" );
 		
+		String subjectValue = "";
+		if(request.getParameter( "subjectValue" ) != null && !request.getParameter( "subjectValue" ).equals( "" ) ) {
+			subjectValue = request.getParameter( "subjectValue" );		
+		};
+		
+		int cpage = 1;
+		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		BoardTO to = new BoardTO();
+		FileTO fto = new FileTO();
+		
+		if(subjectValue.equals( "1") || subjectValue.equals( "2") || subjectValue.equals( "3")) {
+			to.setUcode((Integer) session.getAttribute("ucode"));
+			to.setSeq(request.getParameter( "seq" ));
+			to = dao.mboardModify(to);
+			
+			fto = dao.findNFile(to);
+		}
+		
 		ModelAndView modelAndView = new ModelAndView();
 		
 		if(session.getAttribute("ucode") == null) {
@@ -307,23 +329,71 @@ public class Controller_Board {
 			return modelAndView;
 		}
 		modelAndView.setViewName( "/board/mboard_modify" );
+		modelAndView.addObject("to", to);
+		modelAndView.addObject("fto", fto);
+		modelAndView.addObject("cpage", cpage);
+		modelAndView.addObject("subjectValue", subjectValue);
 		
 		return modelAndView;
 	}
 	
-	@RequestMapping( value="/mboardmodify_ok.do" )
-	public ModelAndView mboardmodifyOk(HttpServletRequest request, HttpSession session) throws IOException {
+	@RequestMapping( value="/mboardmodifyOk.do" )
+	public String mboardmodifyOk(HttpServletRequest request, HttpSession session) throws IOException {
 		System.out.println( "mboardmodifyOk() 호출" );
 		
-		ModelAndView modelAndView = new ModelAndView();
+		String subjectValue = "";
+		if(request.getParameter( "subject" ) != null && !request.getParameter( "subject" ).equals( "" ) ) {
+			subjectValue = request.getParameter( "subject" );		
+		};
 		
-		if(session.getAttribute("ucode") == null) {
-			modelAndView.setViewName( "/login/nousers" );
-			return modelAndView;
+		int cpage = 1;
+		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
 		}
-		modelAndView.setViewName( "/board/mboard_modify_ok" );
 		
-		return modelAndView;
+		int flag = 1;
+		
+		BoardListTO listTO = new BoardListTO();
+		listTO.setCpage(cpage);
+		
+		System.out.println("modify_ok subjectValue : " + request.getParameter( "subject" ));
+		
+		if ( session.getAttribute("id").equals("admin") ) {
+			
+			if(subjectValue.equals("1")||subjectValue.equals("2")||subjectValue.equals("3")){
+				BoardTO to = new BoardTO();
+				FileTO fto = new FileTO();
+				
+				to.setSeq(request.getParameter( "seq" ));
+				to.setSubject(request.getParameter( "subject" ));
+				to.setTitle(request.getParameter("title"));
+				to.setWriter((String) session.getAttribute("id"));
+				to.setContent(request.getParameter("content"));
+				to.setUcode((Integer) session.getAttribute("ucode"));
+				to.setVcode(request.getParameter("vcode"));
+				
+				// 게시글에 기존 파일이 있으면
+				if(request.getParameter("filesize") != "0"&&request.getParameter("filename")!=null) {
+					fto.setFilename(request.getParameter("filename"));
+					fto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
+					System.out.println("filename : " + request.getParameter("filename"));
+				}
+				// 게시글에 새 파일이 있으면
+				if(request.getParameter("newFilesize") != "0"&&request.getParameter("newfilename")!=null) {
+					//if( !request.getParameter("newFilename").equals("default") ) {
+					fto.setNewFilename(request.getParameter("newFilename"));
+					fto.setNewFilesize(Long.parseLong(request.getParameter("newFilesize").trim()) );
+					System.out.println("newFilename : " + request.getParameter("newFilename"));
+					System.out.println("11newFilename : " + fto.getNewFilename());
+				}
+				flag = dao.mboardModifyOk(to, fto);
+				
+				dao.filecnd(to, fto);
+			} 
+		}
+		System.out.println("최종flag : " + flag);
+		
+		return Integer.toString(flag);
 	}
 	
 	@RequestMapping( value="/mboarddelete_ok.do" )

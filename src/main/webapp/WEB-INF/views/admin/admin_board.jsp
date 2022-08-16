@@ -53,22 +53,41 @@
 		String wdate = to.getWdate();
 		String hit = to.getHit();
 		
+		if( subjectValue.equals("1")||subjectValue.equals("2")||subjectValue.equals("3") ){
 		sbHtml.append( "<tr class='listdata'>" );
-		sbHtml.append( "<td><a href='admin_board_modify.do?cpage=" + cpage + "&seq=" + seq + "&subjectValue=" + subjectValue + "'>" );
+		sbHtml.append( "<td><a href='mboardview.do?cpage=" + cpage + "&seq=" + seq + "&subjectValue=" + subjectValue + "'>" );
 		sbHtml.append( "<div class='d-flex px-2 py-1'>" );
 		sbHtml.append( "<div class='d-flex flex-column justify-content-center'><p class='text-sm font-weight-bold mb-0'>" + subject + "</p></div>" );
 		sbHtml.append( "</div>" );
 		sbHtml.append( "</td>" );
-		sbHtml.append( "<td><a href='admin_board_modify.do?cpage=" + cpage + "&seq=" + seq + "&subjectValue=" + subjectValue + "'><p class='text-sm font-weight-bold mb-0'>" + writer + "</p></td>" );
-		sbHtml.append( "<td><a href='admin_board_modify.do?cpage=" + cpage + "&seq=" + seq + "&subjectValue=" + subjectValue + "'><p class='text-sm font-weight-bold mb-0'>" + title + "</p></td>" );
-		sbHtml.append( "<td class='align-middle text-center text-sm'><a href='admin_board_modify.do?cpage=" + cpage + "&seq=" + seq + "&subjectValue=" + subjectValue + "'><span>" + wdate + "</span></td>" );
-		sbHtml.append( "<td class='align-middle text-center'><a href='admin_board_modify.do?cpage=" + cpage + "&seq=" + seq + "&subjectValue=" + subjectValue + "'><span class='text-secondary text-sm font-weight-bold'>" + hit + "</span></td>" );
+		sbHtml.append( "<td><a href='mboardview.do?cpage=" + cpage + "&seq=" + seq + "&subjectValue=" + subjectValue + "'><p class='text-sm font-weight-bold mb-0'>" + writer + "</p></td>" );
+		sbHtml.append( "<td><a href='mboardview.do?cpage=" + cpage + "&seq=" + seq + "&subjectValue=" + subjectValue + "'><p class='text-sm font-weight-bold mb-0'>" + title + "</p></td>" );
+		sbHtml.append( "<td class='align-middle text-center text-sm'><a href='mboardview.do?cpage=" + cpage + "&seq=" + seq + "&subjectValue=" + subjectValue + "'><span>" + wdate + "</span></td>" );
+		sbHtml.append( "<td class='align-middle text-center'><a href='mboardview.do?cpage=" + cpage + "&seq=" + seq + "&subjectValue=" + subjectValue + "'><span class='text-secondary text-sm font-weight-bold'>" + hit + "</span></td>" );
 		sbHtml.append( "<td class='align-middle text-center'>" );
 		sbHtml.append( "<a href='./aboarddelete_ok.do?viewseq=" + seq + "&subjectValue=" + subjectValue + "' class='dbtn font-weight-bold text-sm' data-toggle='tooltip' data-original-title='Edit user'>" );
 		sbHtml.append( "<button type='button' id='dbtn' name='dbtn' style='height:35px;width:75px;' class='btn btn-xs me-1 bg-gradient-dark ps-3v'>삭제</button>" );
 		sbHtml.append( "</a>" );
 		sbHtml.append( "</td>" );
 		sbHtml.append( "</tr>" );
+		} else {
+			sbHtml.append( "<tr class='listdata'>" );
+			sbHtml.append( "<td><a href='admin_board_modify.do?cpage=" + cpage + "&seq=" + seq + "&subjectValue=" + subjectValue + "'>" );
+			sbHtml.append( "<div class='d-flex px-2 py-1'>" );
+			sbHtml.append( "<div class='d-flex flex-column justify-content-center'><p class='text-sm font-weight-bold mb-0'>" + subject + "</p></div>" );
+			sbHtml.append( "</div>" );
+			sbHtml.append( "</td>" );
+			sbHtml.append( "<td><a href='admin_board_modify.do?cpage=" + cpage + "&seq=" + seq + "&subjectValue=" + subjectValue + "'><p class='text-sm font-weight-bold mb-0'>" + writer + "</p></td>" );
+			sbHtml.append( "<td><a href='admin_board_modify.do?cpage=" + cpage + "&seq=" + seq + "&subjectValue=" + subjectValue + "'><p class='text-sm font-weight-bold mb-0'>" + title + "</p></td>" );
+			sbHtml.append( "<td class='align-middle text-center text-sm'><a href='admin_board_modify.do?cpage=" + cpage + "&seq=" + seq + "&subjectValue=" + subjectValue + "'><span>" + wdate + "</span></td>" );
+			sbHtml.append( "<td class='align-middle text-center'><a href='admin_board_modify.do?cpage=" + cpage + "&seq=" + seq + "&subjectValue=" + subjectValue + "'><span class='text-secondary text-sm font-weight-bold'>" + hit + "</span></td>" );
+			sbHtml.append( "<td class='align-middle text-center'>" );
+			sbHtml.append( "<a href='./aboarddelete_ok.do?viewseq=" + seq + "&subjectValue=" + subjectValue + "' class='dbtn font-weight-bold text-sm' data-toggle='tooltip' data-original-title='Edit user'>" );
+			sbHtml.append( "<button type='button' id='dbtn' name='dbtn' style='height:35px;width:75px;' class='btn btn-xs me-1 bg-gradient-dark ps-3v'>삭제</button>" );
+			sbHtml.append( "</a>" );
+			sbHtml.append( "</td>" );
+			sbHtml.append( "</tr>" );
+		}
 	}
 
 %>

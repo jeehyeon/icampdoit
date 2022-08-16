@@ -241,11 +241,11 @@ public class SearchkeyDAO {
 				public SearchListTO searchdetailDAO(SearchListTO listTO, String doNmS, String doNmI, String doNmG, String indutyNor, String indutyCar, String indutyGl, String indutyVan, String lctClMount, String lctClForest, String lctClValley, String lctClCity, String lctClRiver, String lctClLake, String lctClBeach, String lctClIsland, String siteBottomCl1, String siteBottomCl2, String siteBottomCl3, String siteBottomCl4, String siteBottomCl5, String sbrsClElectro, String sbrsClHwater, String sbrsClGym, String sbrsClWifi, String sbrsClFirewood, String sbrsClPool, String sbrsClMart, String sbrsClCstore, String sbrsClWalk, String eqpmnLendClTent, String eqpmnLendClBrazier, String eqpmnLendClHeater, String eqpmnLendClTableware, String eqpmnLendClSbag, String eqpmnLendClRwire, String trlerAcmpnyAt, String caravAcmpnyAt, String animalCmgCl ) {
 					  // TODO Auto-generated method stub
 					
-					System.out.println( "sitebottom1 : " + siteBottomCl1);
-					System.out.println( "sitebottom2 : " + siteBottomCl2);
-					System.out.println( "sitebottom3 : " + siteBottomCl3);
-					System.out.println( "sitebottom4 : " + siteBottomCl4);
-					System.out.println( "sitebottom5 : " + siteBottomCl5);
+					//System.out.println( "sitebottom1 : " + siteBottomCl1);
+					//System.out.println( "sitebottom2 : " + siteBottomCl2);
+					//System.out.println( "sitebottom3 : " + siteBottomCl3);
+					//System.out.println( "sitebottom4 : " + siteBottomCl4);
+					//System.out.println( "sitebottom5 : " + siteBottomCl5);
 					
 					int cpage = listTO.getCpage();
 					int recordPerPage = listTO.getRecordPerPage();

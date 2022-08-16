@@ -10,4 +10,6 @@ public class FileTO {
 	private String pseq;
 	private String filename;
 	private long filesize;
+	private String newFilename;
+	private long newFilesize;
 }
