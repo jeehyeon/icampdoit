@@ -92,34 +92,37 @@ public class Controller_Search {
 			doNmG = request.getParameter( "doNmG" );
 		}
 		System.out.println( "addurl:"+ addurl);
-		/*
-		if( (request.getParameter( "doNmS" )!=null&&request.getParameter("doNmS")!="") || 
-			(request.getParameter( "doNmI" )!=null&&request.getParameter("doNmI")!="") || 
-			(request.getParameter( "doNmG" )!=null&&request.getParameter("doNmG")!="") ) {
-			
-			doNmS = request.getParameter( "doNmS" );
-			System.out.println( "값들어갔는지: " + doNmS );
-			doNmI = request.getParameter( "doNmI" );
-			doNmG = request.getParameter( "doNmG" );
-		} 
-		//System.out.println("1 : "+  request.getParameter( "indutyNor" ));
-		*/
+		
 		// 캠핑유형 4개
 		String indutyNor = "";
 		String indutyCar = "";
 		String indutyGl = "";
 		String indutyVan = "";
-		if( (request.getParameter( "indutyNor" )!=null&&request.getParameter("indutyNor")!="") || 
-			(request.getParameter( "indutyCar" )!=null&&request.getParameter("indutyCar")!="") || 
-			(request.getParameter( "indutyGl" )!=null&&request.getParameter("indutyGl")!="") || 
-			(request.getParameter( "indutyVan" )!=null&&request.getParameter("indutyVan")!="") ) {
-			System.out.println("1.1");
+		if( (request.getParameter( "indutyNor" )!=null&&request.getParameter("indutyNor")!="") ) {
+			addurl +="indutyNor=" + request.getParameter("indutyNor") +"&";
 			indutyNor = request.getParameter( "indutyNor" );
+		} else {
+			indutyNor = request.getParameter( "indutyNor" );
+		}
+		if( (request.getParameter( "indutyCar" )!=null&&request.getParameter("indutyCar")!="") ) {
+			addurl +="indutyCar=" + request.getParameter("indutyCar") +"&";
 			indutyCar = request.getParameter( "indutyCar" );
+		} else {
+			indutyCar = request.getParameter( "indutyCar" );
+		}
+		if( (request.getParameter( "indutyGl" )!=null&&request.getParameter("indutyGl")!="") ) {
+			addurl +="indutyGl=" + request.getParameter("indutyGl") +"&";
 			indutyGl = request.getParameter( "indutyGl" );
+		} else {
+			indutyGl = request.getParameter( "indutyGl" );
+		}
+		if( (request.getParameter( "indutyVan" )!=null&&request.getParameter("indutyVan")!="") ) {
+			addurl +="indutyVan=" + request.getParameter("indutyVan") +"&";
+			indutyVan = request.getParameter( "indutyVan" );
+		} else {
 			indutyVan = request.getParameter( "indutyVan" );
 		}
-		
+				
 		// 입지 8개
 		String lctClMount = ""; 
 		String lctClForest = "";
@@ -129,18 +132,60 @@ public class Controller_Search {
 		String lctClLake = "";
 		String lctClBeach = "";
 		String lctClIsland = "";
-		//System.out.println("2 : "+  request.getParameter( "lctClMount" ));
-		if( (request.getParameter( "lctClMount" )!=null&&request.getParameter( "lctClMount" )!="") || 
-			(request.getParameter( "lctClForest" )!=null&&request.getParameter( "lctClForest" )!="") || 
-			(request.getParameter( "lctClValley" )!=null&&request.getParameter( "lctClValley" )!="") || 
+		if( (request.getParameter( "lctClMount" )!=null&&request.getParameter( "lctClMount" )!="") ) {
+			lctClMount = request.getParameter( "lctClMount" );
+		} else {
+			lctClMount = request.getParameter( "lctClMount" );
+		}
+		if( (request.getParameter( "lctClForest" )!=null&&request.getParameter( "lctClForest" )!="")  ) {
+			lctClForest = request.getParameter( "lctClForest" );
+		} else {
+			lctClForest = request.getParameter( "lctClForest" );
+		}
+		/*
+		if() {
+			
+		} else {
+			
+		}
+		if() {
+			
+		} else {
+			
+		}
+		if() {
+			
+		} else {
+			
+		}
+		if() {
+			
+		} else {
+			
+		}
+		if() {
+			
+		} else {
+			
+		}
+		if() {
+			
+		} else {
+			
+		}
+		
+		
+		if( 
+			|| 
+			 || 
 			(request.getParameter( "lctClCity" )!=null&&request.getParameter( "lctClCity" )!="") || 
 			(request.getParameter( "lctClRiver" )!=null&&request.getParameter( "lctClRiver" )!="") || 
 			(request.getParameter( "lctClLake" )!=null&&request.getParameter( "lctClLake" )!="") || 
 			(request.getParameter( "lctClBeach" )!=null&&request.getParameter( "lctClBeach" )!="") || 
 			(request.getParameter( "lctClIsland" )!=null&&request.getParameter( "lctClIsland" )!="") ) {
 			//System.out.println("2.1");
-			lctClMount = request.getParameter( "lctClMount" ); 
-			lctClForest = request.getParameter( "lctClForest" );
+			 
+			
 			lctClValley = request.getParameter( "lctClValley" );
 			lctClCity = request.getParameter( "lctClCity" );
 			lctClRiver = request.getParameter( "lctClRiver" );
@@ -148,7 +193,7 @@ public class Controller_Search {
 			lctClBeach = request.getParameter( "lctClBeach" );
 			lctClIsland = request.getParameter( "lctClIsland" );
 		}
-			
+		*/	
 		// 바닥형태 5개
 		String siteBottomCl1 ="";
 		String siteBottomCl2 ="";

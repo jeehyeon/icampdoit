@@ -324,31 +324,31 @@
                 <ul class="list-inline mt-xl-1 mb-0">
                       <li class="list-inline-item">
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="floorGrass" name="siteBottomCl1" value="잔디">
+                          <input class="form-check-input" type="checkbox" id="floorGrass" name="siteBottomCl1" value="0">
                           <label class="form-check-label" for="floorGrass">잔디</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="floorRock" name="siteBottomCl2" value="파쇄석">
+                          <input class="form-check-input" type="checkbox" id="floorRock" name="siteBottomCl2" value="0">
                           <label class="form-check-label" for="floorRock">파쇄석</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="floorTeck" name="siteBottomCl3" value="테크">
+                          <input class="form-check-input" type="checkbox" id="floorTeck" name="siteBottomCl3" value="0">
                           <label class="form-check-label" for="floorTeck">테크</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="floorPebble" name="siteBottomCl4" value="자갈">
+                          <input class="form-check-input" type="checkbox" id="floorPebble" name="siteBottomCl4" value="0">
                           <label class="form-check-label" for="floorPebble">자갈</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="floorDirt" name="siteBottomCl5" value="맨흙">
+                          <input class="form-check-input" type="checkbox" id="floorDirt" name="siteBottomCl5" value="0">
                           <label class="form-check-label" for="floorDirt">흙</label>
                         </div>
                       </li>
@@ -462,19 +462,19 @@
                   <ul class="list-unstyled mb-0">
                     <li>
                       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="etcTrailer" name="trlerAcmpnyAt" value="개인트레일러">
+                        <input class="form-check-input" type="checkbox" id="etcTrailer" name="trlerAcmpnyAt" value="Y">
                         <label class="form-check-label" for="etcTrailer">개인 트레일러 입장 가능</label>
                       </div>
                     </li>
                     <li>
                       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="etcCaraban" name="caravAcmpnyAt" value="개인카라반">
+                        <input class="form-check-input" type="checkbox" id="etcCaraban" name="caravAcmpnyAt" value="Y">
                         <label class="form-check-label" for="etcCaraban">개인 카라반 입장 가능</label>
                       </div>
                     </li>
                     <li>
                       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="etcPet" name="animalCmgCl" value="반려견">
+                        <input class="form-check-input" type="checkbox" id="etcPet" name="animalCmgCl" value="불가능">
                         <label class="form-check-label" for="etcPet">반려견 동반 가능</label>
                       </div>
                     </li>
