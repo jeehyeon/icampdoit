@@ -65,25 +65,25 @@ public class Controller_Search {
 		String doNmS = "";
 		String doNmI = "";
 		String doNmG = "";
-		System.out.println( "공백확인 : "+ doNmS);
+		//System.out.println( "공백확인 : "+ doNmS);
 		if( (request.getParameter( "doNmS" )!=null&&request.getParameter("doNmS")!="") ) {
 			addurl +="doNmS=" + request.getParameter("doNmS") +"&";
 			doNmS = request.getParameter( "doNmS" );
-			System.out.println( "값들어갔는지S: " + doNmS );
+			//System.out.println( "값들어갔는지S: " + doNmS );
 		} else {
 			doNmS = request.getParameter( "doNmS" );
 		}
 		if( (request.getParameter( "doNmI" )!=null&&request.getParameter("doNmI")!="") ) {
 			addurl +="doNmI=" + request.getParameter("doNmI") +"&";
 			doNmI = request.getParameter( "doNmI" );
-			System.out.println( "값들어갔는지I: " + doNmI );
+			//System.out.println( "값들어갔는지I: " + doNmI );
 		} else {
 			doNmI = request.getParameter( "doNmI" );
 		}
 		if( (request.getParameter( "doNmG" )!=null&&request.getParameter("doNmG")!="") ) {
 			addurl +="doNmG=" + request.getParameter("doNmG") +"&";
 			doNmG = request.getParameter( "doNmG" );
-			System.out.println( "값들어갔는지G: " + doNmG );
+			//System.out.println( "값들어갔는지G: " + doNmG );
 		} else {
 			doNmG = request.getParameter( "doNmG" );
 		}

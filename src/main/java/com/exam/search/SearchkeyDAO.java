@@ -297,11 +297,7 @@ public class SearchkeyDAO {
 		// 상세검색DAO
 				public SearchListTO searchdetailDAO(SearchListTO listTO, String doNmS, String doNmI, String doNmG, String indutyNor, String indutyCar, String indutyGl, String indutyVan, String lctClMount, String lctClForest, String lctClValley, String lctClCity, String lctClRiver, String lctClLake, String lctClBeach, String lctClIsland, String siteBottomCl1, String siteBottomCl2, String siteBottomCl3, String siteBottomCl4, String siteBottomCl5, String sbrsClElectro, String sbrsClHwater, String sbrsClGym, String sbrsClWifi, String sbrsClFirewood, String sbrsClPool, String sbrsClMart, String sbrsClCstore, String sbrsClWalk, String eqpmnLendClTent, String eqpmnLendClBrazier, String eqpmnLendClHeater, String eqpmnLendClTableware, String eqpmnLendClSbag, String eqpmnLendClRwire, String trlerAcmpnyAt, String caravAcmpnyAt, String animalCmgCl ) {
 					  // TODO Auto-generated method stub
-					System.out.println( "siteBottom1dao:"+siteBottomCl1);
-					System.out.println( "siteBottom2dao:"+siteBottomCl2);
-					System.out.println( "siteBottom3dao:"+siteBottomCl3);
-					System.out.println( "siteBottom4dao:"+siteBottomCl4);
-					System.out.println( "siteBottom5dao:"+siteBottomCl5);
+					
 					int cpage = listTO.getCpage();
 					int recordPerPage = listTO.getRecordPerPage();
 					int blockPerPage = listTO.getBlockPerPage();
