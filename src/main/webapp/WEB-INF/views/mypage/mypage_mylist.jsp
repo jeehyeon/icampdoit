@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@page import="com.exam.mboard.BoardTO"%> 
 <%@page import="com.exam.mboard.BoardListTO"%> 
-<%@page import="com.exam.mboard.FileTO"%> 
 <%@page import="java.util.ArrayList"%>
 <%
 	//session 값 가져오기

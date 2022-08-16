@@ -15,6 +15,7 @@ import com.exam.login.MypageDAO;
 import com.exam.mboard.BoardListTO;
 import com.exam.mboard.BoardTO;
 import com.exam.mboard.FileTO;
+import com.exam.search.SearchkeyTO;
 
 
 @RestController
@@ -73,9 +74,9 @@ public class Controller_Mypage {
 		return modelAndView;
 	}
 	
-	@RequestMapping( value="/mypagesub.do" )
-	public ModelAndView mypagesub(HttpServletRequest request, HttpSession session) {
-		System.out.println( "mypagesub() 호출" );
+	@RequestMapping( value="/mypagemylist.do" )
+	public ModelAndView mypagemylist(HttpServletRequest request, HttpSession session) {
+		System.out.println( "mypagemylist() 호출" );
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
@@ -83,14 +84,6 @@ public class Controller_Mypage {
 			modelAndView.setViewName( "/login/nousers" );
 			return modelAndView;
 		}
-		modelAndView.setViewName( "/mypage/mypage_sub" );
-		
-		return modelAndView;
-	}
-	
-	@RequestMapping( value="/mypagemylist.do" )
-	public ModelAndView mypagemylist(HttpServletRequest request, HttpSession session) {
-		System.out.println( "mypagemylist() 호출" );
 		
 		int cpage = 1;
 		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
@@ -105,16 +98,37 @@ public class Controller_Mypage {
 		
 		listTO = dao.boardList(listTO, to);
 				
-		ModelAndView modelAndView = new ModelAndView();
-		
-		if(session.getAttribute("ucode") == null) {
-			modelAndView.setViewName( "/login/nousers" );
-			return modelAndView;
-		}
 		modelAndView.setViewName( "/mypage/mypage_mylist" );
 		modelAndView.addObject( "cpage", cpage );
 		modelAndView.addObject( "listTO", listTO );
 		
 		return modelAndView;
 	}	
+	
+	@RequestMapping( value="/mypagesub.do" )
+	public ModelAndView mypagesub(HttpServletRequest request, HttpSession session) {
+		System.out.println( "mysublist() 호출" );
+
+		ModelAndView modelAndView = new ModelAndView();
+		
+		if(session.getAttribute("ucode") == null) {
+			modelAndView.setViewName( "/login/nousers" );
+			return modelAndView;
+		}
+		
+		SignUpTO to = new SignUpTO();
+		to.setUcode( String.valueOf( session.getAttribute("ucode") ) );
+		
+		int ucode = (Integer)session.getAttribute("ucode");
+				
+		ArrayList<SearchkeyTO> lists = dao.subList(to);
+		System.out.println( "mysublist() 호출" );		
+		
+		modelAndView.setViewName( "/mypage//mypage_sub" );
+		modelAndView.addObject( "lists", lists );
+		
+		return modelAndView;
+	}	
+	
+	
 }

@@ -29,7 +29,6 @@
 		sbHtml.append( "<div class='card card-poster gradient-overlay hover-animate mb-4 mb-lg-0'>" );
 		sbHtml.append( "<a class='tile-link' href='./campview.do?contentId=" + contentId + "'></a>" );
 		sbHtml.append( "<img class='bg-image' src='" + mainImg + "' alt='Card image'>" );
-		sbHtml.append( "<img class='bg-image' src='" + mainImg + "' alt='Card image'>" );
 		sbHtml.append( "<div class='card-body overlay-content'>" );
 		sbHtml.append( "<h5 class='card-title text-shadow text-uppercase' style=\"font-family: 'Recipekorea';\">" + campNm + "</h5>" );
 		sbHtml.append( "<p class='card-text text-sm' style=\"font-family: 'BMJUA';\">" + addr1 + " " + addr2 + "</p>" );
@@ -551,14 +550,14 @@
         </div>
         <div class="row">  
           <div class="d-flex align-items-lg-stretch mb-4 col-lg-8">
-            <div class="card shadow-lg border-0 w-100 border-0 hover-animate" data-bs-toggle="tooltip" title="경기도 양주" style="background: center center url(./resources/bootstrap-5/html/img/photo/해피캠핑장.jpg) no-repeat; background-size: cover;"><a class="tile-link" href="./campview.do"> </a>
+            <div class="card shadow-lg border-0 w-100 border-0 hover-animate" data-bs-toggle="tooltip" title="경기도 양주" style="background: center center url(./resources/bootstrap-5/html/img/photo/해피캠핑장.jpg) no-repeat; background-size: cover;"><a class="tile-link" href="./campview.do?contentId=3472"> </a>
               <div class="d-flex align-items-center h-100 text-white justify-content-center py-6 py-lg-7">
                 <h3 class="text-shadow text-uppercase mb-0" style="font-family: 'Recipekorea';">해피 캠핑장</h3>
               </div>
             </div>
           </div>
           <div class="d-flex align-items-lg-stretch mb-4 col-lg-4">
-            <div class="card shadow-lg border-0 w-100 border-0 hover-animate" data-bs-toggle="tooltip" title="경기도 연천" style="background: center center url(./resources/bootstrap-5/html/img/photo/한탄강캠핑장.jpg) no-repeat; background-size: cover;"><a class="tile-link" href="./campview.do"> </a>
+            <div class="card shadow-lg border-0 w-100 border-0 hover-animate" data-bs-toggle="tooltip" title="경기도 연천" style="background: center center url(./resources/bootstrap-5/html/img/photo/한탄강캠핑장.jpg) no-repeat; background-size: cover;"><a class="tile-link" href="./campview.do?contentId=3423"> </a>
               <div class="d-flex align-items-center h-100 text-white justify-content-center py-6 py-lg-7">
                 <h3 class="text-shadow text-uppercase mb-0" style="font-family: 'Recipekorea';">한탄강 오토캠핑장</h3>
               </div>
@@ -567,21 +566,21 @@
         </div>
         <div class="row">
           <div class="d-flex align-items-lg-stretch mb-4 col-lg-4">
-            <div class="card shadow-lg border-0 w-100 border-0 hover-animate" data-bs-toggle="tooltip" data-bs-placement="bottom" title="경기도 포천" style="background: center center url(./resources/bootstrap-5/html/img/photo/광릉숲이야기캠핑장.jpg) no-repeat; background-size: cover;"><a class="tile-link" href="./campview.do"> </a>
+            <div class="card shadow-lg border-0 w-100 border-0 hover-animate" data-bs-toggle="tooltip" data-bs-placement="bottom" title="경기도 포천" style="background: center center url(./resources/bootstrap-5/html/img/photo/광릉숲이야기캠핑장.jpg) no-repeat; background-size: cover;"><a class="tile-link" href="./campview.do?contentId=329"> </a>
               <div class="d-flex align-items-center h-100 text-white justify-content-center py-6 py-lg-7">
-                <h3 class="text-shadow text-uppercase mb-0" style="font-family: 'Recipekorea';">광릉숲이야기 캠핑장</h3>
+                <h3 class="text-shadow text-uppercase mb-0" style="font-family: 'Recipekorea';">광릉숲 이야기 관광농원</h3>
               </div>
             </div>
           </div>
           <div class="d-flex align-items-lg-stretch mb-4 col-lg-4">
-            <div class="card shadow-lg border-0 w-100 border-0 hover-animate" data-bs-toggle="tooltip" data-bs-placement="bottom" title="경기도 가평" style="background: center center url(./resources/bootstrap-5/html/img/photo/자라섬캠핑장.jpg) no-repeat; background-size: cover;"><a class="tile-link" href="./campview.do"> </a>
+            <div class="card shadow-lg border-0 w-100 border-0 hover-animate" data-bs-toggle="tooltip" data-bs-placement="bottom" title="경기도 가평" style="background: center center url(./resources/bootstrap-5/html/img/photo/자라섬캠핑장.jpg) no-repeat; background-size: cover;"><a class="tile-link" href="./campview.do?contentId=2616"> </a>
               <div class="d-flex align-items-center h-100 text-white justify-content-center py-6 py-lg-7">
                 <h3 class="text-shadow text-uppercase mb-0" style="font-family: 'Recipekorea';">자라섬 캠핑장</h3>
               </div>
             </div>
           </div>
           <div class="d-flex align-items-lg-stretch mb-4 col-lg-4">
-            <div class="card shadow-lg border-0 w-100 border-0 hover-animate" data-bs-toggle="tooltip" data-bs-placement="bottom" title="경기도 양평" style="background: center center url(./resources/bootstrap-5/html/img/photo/중미산자연휴양림.jpg) no-repeat; background-size: cover;"><a class="tile-link" href="./campview.do"> </a>
+            <div class="card shadow-lg border-0 w-100 border-0 hover-animate" data-bs-toggle="tooltip" data-bs-placement="bottom" title="경기도 양평" style="background: center center url(./resources/bootstrap-5/html/img/photo/중미산자연휴양림.jpg) no-repeat; background-size: cover;"><a class="tile-link" href="./campview.do?contentId=2782"> </a>
               <div class="d-flex align-items-center h-100 text-white justify-content-center py-6 py-lg-7">
                 <h3 class="text-shadow text-uppercase mb-0" style="font-family: 'Recipekorea';">중미산 자연휴양림</h3>
               </div>

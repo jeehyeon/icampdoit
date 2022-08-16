@@ -3,6 +3,7 @@ package com.exam.login;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -11,6 +12,7 @@ import com.exam.login.SignUpTO;
 import com.exam.mboard.BoardListTO;
 import com.exam.mboard.BoardTO;
 import com.exam.mboard.FileTO;
+import com.exam.search.SearchkeyTO;
 
 @Repository
 public class MypageDAO {
@@ -104,6 +106,32 @@ public class MypageDAO {
 			listTO.setEndBlock(listTO.getTotalPage());
 		}		
 		return listTO;
+	}
+	
+	// 찜한 목록
+	public ArrayList<SearchkeyTO> subList(SignUpTO sto) {	
+			
+		String sql = "select s.ucode, g.contentId, g.facltNm, g.firstImageUrl, g.addr1 from go_api g inner join subscribe s on (g.contentId = s.contentId) where s.ucode=? order by s.seq asc";		
+		ArrayList<SearchkeyTO> lists = (ArrayList<SearchkeyTO>)jdbcTemplate.query(
+				sql, new BeanPropertyRowMapper<SearchkeyTO>(SearchkeyTO.class), sto.getUcode());
+				
+		return lists;
+	}
+	
+	//찜삭제
+	public int campSubscribeDel(String ucode, String contentId) {	
+		int flag=1;
+		String sql = "delete from subscribe where ucode=? and contentId=?";
+		int result = jdbcTemplate.update(sql, ucode, contentId);
+		System.out.println(result);
+		if( result != 1 ) {
+			System.out.println("campSubscribeDel 오류");
+			return flag;	
+		}else {
+			flag=0;
+		}
+		return flag;	
+	
 	}
 	
 

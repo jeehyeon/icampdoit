@@ -40,5 +40,7 @@ public class SearchkeyTO {
 	private String mapX;			// 22. 경도(X)
 	private String mapY;			// 23. 위도(Y)
 	private String sigunguNm;		// 24. 시군구
+	
+	private String ucode;
 
 }

@@ -1,13 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.exam.search.SearchkeyTO"%>
+<%@page import="java.util.ArrayList"%>    
 <%
-//session 값 가져오기
-int ucode = -1;
-String id ="";
-if(session.getAttribute("id") != null){
-	ucode = (int)session.getAttribute("ucode");
-	id = (String)session.getAttribute("id");
-}
+	//session 값 가져오기
+	int ucode = -1;
+	String id ="";
+	if(session.getAttribute("id") != null){
+		ucode = (int)session.getAttribute("ucode");
+		id = (String)session.getAttribute("id");
+	}
+	
+	ArrayList<SearchkeyTO> lists = (ArrayList)request.getAttribute( "lists" ); 
+	
+	StringBuilder sbHtml = new StringBuilder();
+	
+	for( SearchkeyTO to : lists ) {
+		String subUcode = to.getUcode();
+		System.out.println("ucode : " + to.getUcode());
+		String contentId = to.getContentId();
+		String campNm = to.getFacltNm();
+		String mainImg = to.getFirstImageUrl();
+		if( mainImg.equals("default") ) {
+			mainImg = "./resources/bootstrap-5/html/img/noimage.svg";
+		}
+		String addr1 = to.getAddr1();
+		
+		sbHtml.append( "<div class='d-flex d-block d-sm-flex review'>" );
+		sbHtml.append( "<div class='text-md-center flex-shrink-0 me-4 me-xl-5'>" );
+		sbHtml.append( "<img class='d-block avatar avatar-xl p-2 mb-2' src='" + mainImg + "' alt='site img'>" );
+		sbHtml.append( "</div>" );
+		sbHtml.append( "<div class='col-sm-10'>" );
+		sbHtml.append( "<div align='right'>" );
+		sbHtml.append( "<button type='button' class='btn btn-danger' id='subscribebtn'>" );
+		sbHtml.append( "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-heart' viewBox='0 0 16 16'>" );
+		sbHtml.append( "<path fill-rule='evenodd' d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z'></path>" );
+		sbHtml.append( "</svg>" );
+		sbHtml.append( "<span id='subspan'> 찜완료</span>" );
+		sbHtml.append( "</button>" );
+		sbHtml.append( "</div>" );
+		sbHtml.append( "<h4 class='mt-2 mb-1'><a href='./campview.do?contentId=" + contentId + "'>" + campNm + "</a></h4>" );
+		sbHtml.append( "<h6 class='mt-3 mb-1'>" + addr1 + "</h6>" );
+		sbHtml.append( "</div>" );
+		sbHtml.append( "</div>" );
+	}
+	
+	
+	
 %>
 <!DOCTYPE html>
   <head>
@@ -40,10 +79,20 @@ if(session.getAttribute("id") != null){
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    	<style type="text/css">
+  		#wrap {
+  			min-height: 90vh;
+		  	display: flex;
+		  	flex-direction: column;
+  		}
+  		#footer {
+    		margin-top: auto;
+  		}
+  	</style>
   </head>
   <body style="padding-top: 72px;">
-    <header class="header">
-    
+  <div id="wrap">
+    <header class="header">    
       <!-- Navbar 로고부분-->
       <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
         <div class="container-fluid">
@@ -112,27 +161,26 @@ if(session.getAttribute("id") != null){
               <p class="subtitle text-sm text-primary">My Page    </p>
               <h2 class="mb-4" style="font-family: 'Recipekorea';">내가 찜한 목록 </h2>
               <hr>
-			  <div class="d-flex d-block d-sm-flex review">										
+              <!-- 찜목록
+			  <div class="d-flex d-block d-sm-flex review">				  									
 			  	<div class="text-md-center flex-shrink-0 me-4 me-xl-5"><img class="d-block avatar avatar-xl p-2 mb-2" src="./resources/bootstrap-5/html/img/photo/해피캠핑장.jpg" alt="Padm챕 Amidala"></div>
-                <div class="col-sm-10">
-                <!-- 찜버튼 -->
+                <div class="col-sm-10">                
 				<div align="right">
-					<button type="button" class="btn btn-outline-danger">
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-							<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path>
-						</svg>
-						찜취소
-					</button>
+	             <button type="button" class="btn btn-outline-danger" id="subscribebtn">
+	                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+	 				 <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path>
+					</svg>
+					<span>찜완료</span>
+	             </button>	           
 				</div>
                   <h4 class="mt-2 mb-1"><a href="./campview.do">해피 캠핑장</a></h4>                 
                   <h6 class="mt-3 mb-1">경기 양주시 백석읍 기산로471번길 98</h6>
                 </div>
               </div>
               
-              <div class="d-flex d-block d-sm-flex review">
+               <div class="d-flex d-block d-sm-flex review">
                 <div class="text-md-center flex-shrink-0 me-4 me-xl-5"><img class="d-block avatar avatar-xl p-2 mb-2" src="./resources/bootstrap-5/html/img/photo/한탄강캠핑장.jpg" alt="Luke Skywalker"></div>
                 <div class="col-sm-10">
-                <!-- 찜버튼 -->
 				<div align="right">
 					<button type="button" class="btn btn-outline-danger">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
@@ -149,7 +197,6 @@ if(session.getAttribute("id") != null){
               <div class="d-flex d-block d-sm-flex review">
                 <div class="text-md-center flex-shrink-0 me-4 me-xl-5"><img class="d-block avatar avatar-xl p-2 mb-2" src="./resources/bootstrap-5/html/img/photo/광릉숲이야기캠핑장.jpg" alt="Princess Leia"></div>
                 <div class="col-sm-10">
-                <!-- 찜버튼 -->
 				<div align="right">
 					<button type="button" class="btn btn-outline-danger">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
@@ -165,7 +212,6 @@ if(session.getAttribute("id") != null){
               <div class="d-flex d-block d-sm-flex review">
                 <div class="text-md-center flex-shrink-0 me-4 me-xl-5"><img class="d-block avatar avatar-xl p-2 mb-2" src="./resources/bootstrap-5/html/img/photo/자라섬캠핑장.jpg" alt="Jabba Hut"></div>
                 <div class="col-sm-10">
-                <!-- 찜버튼 -->
 				<div align="right">
 					<button type="button" class="btn btn-outline-danger">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
@@ -177,13 +223,14 @@ if(session.getAttribute("id") != null){
                   <h4 class="mt-2 mb-1"><a href="./campview.do">자라섬 캠핑장</a></h4>
                   <h6 class="mt-3 mb-1">경기 가평군 가평읍 자라섬로 60</h6>
                 </div>
-              </div>
+              </div> --> 
+              <%=sbHtml.toString()  %>
             </div>
           </div>
         </div>
       </div>
     </section>
-    
+    </div>
     <!-- Footer - 관리자 페이지 이동 부분 넣을 곳 -->
     <footer class="position-relative z-index-10 d-print-none">
            
@@ -206,6 +253,7 @@ if(session.getAttribute("id") != null){
         </div>
       </div>
     </footer>
+    <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
     <!-- JavaScript files-->
     <script>
       // ------------------------------------------------------- //
@@ -230,6 +278,39 @@ if(session.getAttribute("id") != null){
       // https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg
       //- injectSvgSprite('${path}icons/orion-svg-sprite.svg'); 
       injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg'); 
+      
+      /* $("#subscribebtn").on("click",function(){
+   	   
+    		
+  		var data ={"contentId" : $("#contentId").val()};
+  		$.ajax({
+  				url: './subscribe.do',
+  				type: 'post',
+  				data : data,
+  				dataType : 'text',
+  				success: function(data){
+  					if(data == "2"){
+  						alert("로그인이 필요합니다.");
+  					}else if(data == "0"){
+  						location.reload();
+  					}else{
+  						location.reload();
+  					}
+  					
+  				}, 
+  				fail: function(error){
+  	  			alert('댓글달기 실패' );
+  			}
+  		});
+  	
+  	
+     });
+        
+     $('#subscribebtn').hover(function() {
+    	 $('#subspan').text("찜취소");
+     }, function(){
+ 		$('#subspan').text("찜완료");
+     });*/
       
     </script>
     <!-- jQuery-->
