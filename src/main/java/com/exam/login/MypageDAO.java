@@ -111,7 +111,7 @@ public class MypageDAO {
 	// 찜한 목록
 	public ArrayList<SearchkeyTO> subList(SignUpTO sto) {	
 			
-		String sql = "select s.ucode, g.contentId, g.facltNm, g.firstImageUrl, g.addr1 from go_api g inner join subscribe s on (g.contentId = s.contentId) where s.ucode=? order by s.seq asc";		
+		String sql = "select s.ucode, g.contentId, g.facltNm, g.firstImageUrl, g.addr1, g.doNm, g.sigunguNm from go_api g inner join subscribe s on (g.contentId = s.contentId) where s.ucode=? order by s.seq asc";		
 		ArrayList<SearchkeyTO> lists = (ArrayList<SearchkeyTO>)jdbcTemplate.query(
 				sql, new BeanPropertyRowMapper<SearchkeyTO>(SearchkeyTO.class), sto.getUcode());
 				

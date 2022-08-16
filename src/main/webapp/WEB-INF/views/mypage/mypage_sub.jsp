@@ -24,7 +24,11 @@
 		if( mainImg.equals("default") ) {
 			mainImg = "./resources/bootstrap-5/html/img/흑백.png";
 		}
+		//String addr1 = to.getAddr1();
 		String addr1 = to.getAddr1();
+	      if( addr1.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*") == false ){
+	         addr1 = to.getDoNm() + " " + to.getSigunguNm() + " " + to.getAddr1();
+	      }
 		
 		sbHtml.append( "<div class='d-flex d-block d-sm-flex review'>" );
 		sbHtml.append( "<div class='text-md-center flex-shrink-0 me-4 me-xl-5'>" );
