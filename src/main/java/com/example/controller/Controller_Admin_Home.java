@@ -74,6 +74,7 @@ public class Controller_Admin_Home {
 		String countReviews = sdao.countReviews();  //review 갯수
 		String countTotalVisitor = sdao.countTotalVisitor(); //총 방문자 수
 		String countTodayVisitor = sdao.countTodayVisitor(); //오늘 방문자 수
+		String countSocialId = sdao.countSocialId(); // 소셜 가입자 수
 		//연령대 별 회원 수
 		SignUpTO sto = new SignUpTO();
 		ArrayList<SignUpTO> lists = sdao.countbyAge(sto);
@@ -96,6 +97,7 @@ public class Controller_Admin_Home {
 			modelAndView.addObject( "countReviews", countReviews );
 			modelAndView.addObject( "countTotalVisitor", countTotalVisitor );
 			modelAndView.addObject( "countTodayVisitor", countTodayVisitor );
+			modelAndView.addObject( "countSocialId", countSocialId );
 			modelAndView.addObject( "lists", lists );
 
 			return modelAndView;
