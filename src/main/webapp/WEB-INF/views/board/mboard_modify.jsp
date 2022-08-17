@@ -13,6 +13,8 @@
 
 	int cpage = (Integer)request.getAttribute("cpage");
 	
+	BoardTO to = (BoardTO)request.getAttribute("to");
+	
 	String subjectValue = (String)request.getAttribute( "subjectValue" );
 	System.out.println("수정.jsp 말머리 : " + subjectValue);
 	String seq = "";
@@ -20,11 +22,13 @@
 	String writer = "";
 	String title = "";
 	String content = "";
-	String filename = "default";
+	String filename = "";
+	System.out.println("[filename]" + filename);
 	long filesize = 0;	
+	int modifyUcode = to.getUcode();
 	
 	if(subjectValue.equals("1")||subjectValue.equals("2")||subjectValue.equals("3")){
-		BoardTO to = (BoardTO)request.getAttribute("to");
+		
 		FileTO fto = (FileTO)request.getAttribute("fto");
 		
 		seq = to.getSeq();
@@ -35,6 +39,7 @@
 		filename = fto.getFilename();
 		filesize = fto.getFilesize();
 		System.out.println("[filename]" + filename);
+		System.out.println("[사용자게시판filename]" + filename);
 	}
 	
 	
@@ -152,11 +157,10 @@
 
 	<!-- Write Section-->
 	<section class=" pb-7">
-		<input type="hidden" name="modifyOk" id="modifyOk" value="<%=filename%>"/>
-		<input type="hidden" name="filesize" id="filesize" value="<%=filesize%>"/>
-		<input type="hidden" name="newfilename" id="newfilename" value="default"/>
-		  <input type="hidden" name="newFilesize" id="newFilesize" value="0000"/>
-		  <input type="hidden" name="vcode" id="vcode" value="default"/>
+		 <input type="hidden" name="modifyOk" id="modifyOk" value="default"/>
+	<!--<input type="hidden" name="newfilename" id="newfilename" value="default"/>-->
+		<input type="hidden" name="newFilesize" id="newFilesize" value="0000"/>
+		<input type="hidden" name="vcode" id="vcode" value="default"/>
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-12">
@@ -200,7 +204,10 @@
 		<input type="hidden" id="subject" name="subject" value="<%=subject%>" />   
         <input type="hidden" id="seq" name="seq" value="<%=seq%>" />   
         <input type="hidden" id="cpage" name="cpage" value="<%=cpage%>"/> 
-
+        <input type="hidden" id="subjectValue" name="subjectValue" value="<%=subjectValue%>"/> 
+        <input type="hidden" id="modifyUcode" name="modifyUcode" value="<%=modifyUcode%>"/>
+		<input type="hidden" name="filename" id="filename" value="<%=filename%>"/>
+		<input type="hidden" name="filesize" id="filesize" value="<%=filesize%>"/>
 		<!-- 목록 시작 -->
 		<div class="row">
 		  <div class="col-lg-8">
@@ -267,34 +274,22 @@
 	<script src="./resources/bootstrap-5/html/summernote/summernote-lite.js"></script>
 	<script src="./resources/bootstrap-5/html/summernote/lang/summernote-ko-KR.js"></script>
 	
-	
-	
-	<script>
-	$(function(){
-		  
-		  var subject1 = $( '#subject1' );
-		  var subject2 = $( '#subject2' );
-		  var subject3 = $( '#subject3' );
-		  // if (TO의 subject 값 = id 값) 
-		  //subject1.option = disabled; //..? 맞나
-	 	  //아니면 $("select option[id='subject1']").prop('disabled', true); 이 방식도 있음
-		});
-	
-	
-	</script>
 	<script>
 	document.getElementById( 'cbtn' ).onclick = function() { 		
- 		//var subject = $('#subject').val();
+ 		var subject = $('#subject').val();
  		var filename = $('#modifyOk').val();
+ 		var cpage = $( '#cpage').val();
+ 		var subjectValue = $('#subjectValue').val();
+ 		alert(cpage);
  		
-	    var data = {'filename' : filename };	    	
+	    var data = {'filename' : filename, 'subject' : subject, 'cpage' : cpage, 'subjectValue' : subjectValue};	    	
  		
 		$.ajax({
 			data : data,
 			type : "GET",
-			url : '/awritecancel.do',
+			url : '/writecancel.do',
 			success : function() {
-				location.href='/mboardlist.do';
+				location.href='/mboardlist.do?subjectValue='+subjectValue+'&cpage='+cpage;
 			},
 			error: function() {
 	        	alert('error, 에러');
@@ -303,18 +298,22 @@
 	}
 	 
        document.getElementById( 'mbtn' ).onclick = function() {	
-    	  alert( $('#subject').val() );
+    	   //alert( $('#filename').val() );
+    	  //alert( $('#newfilename').val() );
     	 var subject = $('#subject').val();
 		 var title = $('#title').val();
 		 var content = $('#summernote').val();
 		 var vcode = $('#vcode').val();
-		 var filename = $('#modifyOk').val(); 
-		 var newFilename = $('#newfilename').val();
+		 var filename = $('#filename').val(); 
+		 var newFilename = $('#modifyOk').val();
 		 var filesize = $('#filesize').val();
 		 var newFilesize = $('#newFilesize').val();
 		 var seq = $('#seq').val();
+		 var cpage = $( '#cpage').val();
+	 	 var subjectValue = $('#subjectValue').val();
+	 	 var modifyUcode = $('#modifyUcode').val();
 		 		 
-	     var data = {'subject': subject, 'title' : title , 'content' : content, 'vcode' : vcode, 'filename' : filename, 'newFilename' : newFilename, 'filesize' : filesize, 'newFilesize' : newFilesize, 'seq' : seq};	    	
+	     var data = {'subject': subject, 'title' : title , 'content' : content, 'vcode' : vcode, 'filename' : filename, 'newFilename' : newFilename, 'filesize' : filesize, 'newFilesize' : newFilesize, 'seq' : seq, 'cpage' : cpage, 'subjectValue' : subjectValue, 'modifyUcode' : modifyUcode};	    	
 
 	     if(($('#title').val() != '')&&($('#summernote').val() != '')){	        
 					
@@ -327,7 +326,7 @@
 					
 					if( flag == 0 ) {
 						alert('글수정 성공');
-						location.href='/mboardlist.do';
+						location.href='/mboardview.do?subjectValue='+subjectValue+'&cpage='+cpage+'&seq='+seq;
 					} else {
 						alert('글수정 실패');
 						history.back();
@@ -347,10 +346,7 @@
 		let date = new Date().getTime().toString(36);
 		$('#vcode').val(date);
 		console.log("date : " +date);
-		var imgUrl = './upload/';
-		var mimgUrl = imgUrl + $('#filename').val()
-		console.log("filename : "+ mimgUrl);
-
+		
 		var fontList = ['맑은 고딕','굴림','돋움','바탕','궁서','NotoSansKR','Arial','Courier New','Verdana','Tahoma'];
 		$('#summernote').summernote({
 			placeholder : '내용을 입력해주세요. (이미지는 1장만 업로드 가능합니다.)',
@@ -358,7 +354,7 @@
 			maxHeight : null,
 			tabsize : 2,
 			height : 550,
-			width : 1100,
+			width : 1250,
 			lang : 'ko-KR',
 			fontNames: fontList,
 			maximumImageFileSize: 10485760,
@@ -394,29 +390,34 @@
 		$.ajax({
 			data : data,
 			type : "POST",
-			url : '/amodify_image.do',
+			url : '/imageUpload.do',
 			cache : false,
 			contentType : false,
 			enctype : 'multipart/form-data',
 			processData : false,
 			success : function(result) {
-				console.log("result : "+result);
+				console.log("imagupload result : "+result);
 				
 				let str= result.split('@');
 				var subject = $('#subject').val();
 				
-								
-				
+				//if($('#subject').val() == 1||$('#subject').val() == 2||$('#subject').val() == 3){
+					mImgUrl = mImgUrl + str[0];
+				//}
+	
 				$('#summernote').summernote( 'insertImage', mImgUrl );
+				console.log("imgUrl : "+ mImgUrl);
 				
 				if(str[0] != null){
             				               
-					$('#newFilename').val(str[0]);
+					$('#modifyOk').val(str[0]);
 					$('#newFilesize').val(str[1]);
 	                
-            	}else{
+            	} else{
             		alert("error");
             	};
+            	
+            		
 			},
 			error: function() {
 	        	alert('error, 이미지 사이즈는 10MB 미만이어야 합니다.');

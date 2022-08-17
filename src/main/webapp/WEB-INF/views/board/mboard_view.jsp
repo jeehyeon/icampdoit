@@ -159,6 +159,8 @@
              <span><i class="fa-solid fa-check-to-slot text-primary"></i> 조회수 <%=hit %></span>
              <input type="hidden" id="viewUcode" name="viewUcode" value="<%=viewUcode%>"/>
              <input type="hidden" id="viewSeq" name="viewSeq" value="<%=seq%>"/>
+             <input type="hidden" id="subjectValue" name="viewSeq" value="<%=subjectValue%>"/>
+             <input type="hidden" id="cpage" name="viewSeq" value="<%=cpage%>"/>
             </div>
           </div>        
         </div>
@@ -222,7 +224,7 @@
 				<input type="button" value="목록" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardlist.do?subjectValue=<%=subjectValue%>&cpage=<%=cpage%>'" />
 			  </div>
 			  <div class="col-lg-4 text-lg-end">
-				<input type="button" value="수정" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='mboardmodify.do?subjectValue=<%=subjectValue%>&cpage=<%=cpage %>&seq=<%=seq %>'" />
+				<input type="button" value="수정" id="view-mbtn" class="btn btn-primary" style="cursor: pointer;" />
 				<input type="button" value="삭제" id="view-dbtn" name="view-dbtn" class="btn btn-primary" style="cursor: pointer;" />				
 			  </div>
             </div>
@@ -260,6 +262,24 @@
     <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
     <script type="text/javascript">
    window.onload =function(){
+	   
+	 //게시글 수정 버튼
+	    $("#view-mbtn").on("click", function(){
+		 	var modifyUcode = $("#viewUcode").val();
+		 	var subjectValue = $("#subjectValue").val();
+		 	var seq = $("#viewSeq").val();
+		 	var cpage = $("#cpage").val();
+ 			var sessionUcode = <%=(Integer)session.getAttribute("ucode")%>;
+ 			//alert(viewUcode);
+ 			if(modifyUcode == sessionUcode){
+ 	  				location.href='./mboardmodify.do?subjectValue='+ subjectValue +'&cpage='+ cpage+'&seq='+seq+'&modifyUcode='+modifyUcode;
+ 			} else if(sessionUcode=="1") {
+ 					location.href='./mboardmodify.do?subjectValue='+ subjectValue +'&cpage='+ cpage+'&seq='+seq+'&modifyUcode='+modifyUcode;
+ 			} else {
+ 				alert("수정 권한이 없습니다.");
+ 			}
+	  })
+	   
 	   
 	   //게시글 삭제 버튼
 	    $("#view-dbtn").on("click", function(){
@@ -410,6 +430,7 @@
     <!-- Available tile layers-->
     <script src="./resources/bootstrap-5/html/js/map-layers.js"> </script>
     <script src="./resources/bootstrap-5/html/js/map-detail.js"></script>
+    <!--  
     <script>
       createDetailMap({
           mapId: 'detailMap',
@@ -419,5 +440,6 @@
           markerPath: 'img/marker.svg',
       })
     </script>
+    -->
   </body>
 </html>

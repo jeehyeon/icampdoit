@@ -215,20 +215,23 @@ public class Controller_Board {
 		System.out.println("uploadSummernoteImage() 호출");	
 		
 		String savename = image.getOriginalFilename();
+				
+		
+		String subject = request.getParameter("subject");
+		System.out.println("이미지 subject : " + subject);
 		
 		long filedata = image.getResource().contentLength();
 		String filesize = Long.toString(filedata);
 		
-		savename = getUniqName(savename);
+		if( subject.equals("1")||subject.equals("2")||subject.equals("3")) {
+			savename = getUniqName(savename);
+		}
+		
 		File target = new File(uploadPath + savename);
-		System.out.println("파일저장 : ");
+		System.out.println("파일저장");
 		System.out.println("target : " + target);	
 		System.out.println("savename : " + savename);	
-		
-		//FileCopyUtils.copy(image.getBytes(), target);
-		
-		//String[] savename = {originname, filesize};
-		
+				
 		response.setContentType("application/json;charset=utf-8");
 		//response.getWriter().print(savename);
 		//return new String[] {savename, filesize};
@@ -350,18 +353,25 @@ public class Controller_Board {
 		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
 			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
 		}
-		
+				
 		int flag = 1;
 		
 		BoardListTO listTO = new BoardListTO();
 		listTO.setCpage(cpage);
+
+		BoardTO to = new BoardTO();
+		String modifyUcode = request.getParameter("modifyUcode");	// 작성자ucode
+		int ucode = (int)session.getAttribute("ucode");				// 수정자ucode
 		
 		System.out.println("modify_ok subjectValue : " + request.getParameter( "subject" ));
-		
-		if ( session.getAttribute("id").equals("admin") ) {
-			
-			
-				BoardTO to = new BoardTO();
+		System.out.println( "작성자ucode1: "+modifyUcode);
+		System.out.println( "수정자ucode1: "+ucode);
+
+		// 작성자ucode와 수정자ucode가 같거나 ucode가 1(admin)일때..
+		if (  modifyUcode.equals(Integer.toString(ucode)) || ucode==1) {
+				System.out.println( "작성자ucode2: "+modifyUcode);
+				System.out.println( "수정자ucode2: "+ucode);
+				
 				FileTO fto = new FileTO();
 				
 				to.setSeq(request.getParameter( "seq" ));
@@ -379,12 +389,13 @@ public class Controller_Board {
 					System.out.println("filename : " + request.getParameter("filename"));
 				}
 				// 게시글에 새 파일이 있으면
-				if(request.getParameter("newFilesize") != "0"&&request.getParameter("newfilename")!="default") {
+				if(request.getParameter("newFilesize") != "0"&&request.getParameter("newFilename")!="default") {
 					//if( !request.getParameter("newFilename").equals("default") ) {
+					//&&request.getParameter("newFilename")!="default"
 					fto.setNewFilename(request.getParameter("newFilename"));
 					fto.setNewFilesize(Long.parseLong(request.getParameter("newFilesize").trim()) );
-					//System.out.println("newFilename : " + request.getParameter("newFilename"));
-					//System.out.println("11newFilename : " + fto.getNewFilename());
+					System.out.println("newFilename : " + request.getParameter("newFilename"));
+					System.out.println("11newFilename : " + fto.getNewFilename());
 				}
 				flag = dao.mboardModifyOk(to, fto);
 				

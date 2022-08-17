@@ -161,7 +161,7 @@
         <div class="row justify-content-center">
           <div class="col-lg-12">
             <div class="p-3 position-relative mt-4 pb-2 z-index-2">
-              <div class="bg-primary border-radius-lg pt-4 pb-3 px-3" style="border-radius: 10px;">
+              <div class="bg-primary border-radius-lg pt-3 pb-3 px-3" style="border-radius: 10px;">
 				 <!-- 게시판종류 드롭박스 -->
 				 <div class="me-2">
 					<select class="selectpicker bg-gray-100" id="subject" name="subject" data-style="btn-selectpicker" title="말머리">
