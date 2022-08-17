@@ -13,6 +13,8 @@
 		id = (String)session.getAttribute("id");
 	}
 	
+	
+	//여기서부터 지도검색
 	SearchListMapTO slistTO = (SearchListMapTO)request.getAttribute( "slistTO" );
 	int cpage = (Integer)request.getAttribute( "cpage" );
 	
@@ -25,11 +27,24 @@
 	
 	System.out.println( "totalRecord 크기 봐봐:" + totalRecord );
 	
+	SearchkeyTO sto = (SearchkeyTO)request.getAttribute( "sto" );
+	
+	String sido = sto.getDoNm();
+	String gugun = sto.getSigunguNm();
+	
+	System.out.println( "sido 봐봐:" + sido );
+	System.out.println( "gugun 봐봐:" + gugun );
+	
+	//SearchmapDAO mdao = new SearchmapDAO();
+	//SearchkeyTO to = new SearchkeyTO();
+	
 	ArrayList<SearchkeyTO> datas = slistTO.getSearchLists();
 	
 	StringBuilder sbHtml = new StringBuilder();
 	
 	for( SearchkeyTO kto : datas ){
+		//kto = (SearchkeyTO)request.getAttribute( "sto" );
+
 		String contentId = kto.getContentId();
 		System.out.println( "contentId :" + contentId );
 		String facltNm = kto.getFacltNm();
@@ -52,7 +67,7 @@
 		
 		sbHtml.append( "<div class='col-sm-6 mb-5 hover-animate' data-marker-id='59c0c8e33b1527bfe2abaf92'>");
 		sbHtml.append( "	<div class='card h-100 border-0 shadow'>");
-		sbHtml.append( "		<div class='card-img-top overflow-hidden gradient-overlay'> <img class='img-fluid' src='" + firstImageUrl + "'/><a class='tile-link' href='./campview.do?contentId='" + contentId + "></a>");
+		sbHtml.append( "		<div class='card-img-top overflow-hidden gradient-overlay'> <img class='img-fluid' src='" + firstImageUrl + "'/><a class='tile-link' href='./campview.do?contentId=" + contentId + "'></a>");
 		sbHtml.append( "		</div>");			
 		sbHtml.append( "		<div class='card-body d-flex align-items-center'>");
 		sbHtml.append( "			<div class='w-100'>");
@@ -64,8 +79,12 @@
 		sbHtml.append( "			</div>");
 		sbHtml.append( "		</div>");
 		sbHtml.append( "	</div>");
-		sbHtml.append( "</div>");			
+		sbHtml.append( "</div>");
+		
+		System.out.println( "x좌표 뽑아보자 : " + mapX );
 	}
+	
+	//System.out.println( "x좌표 뽑아보자 : " + mapX );
 	
 						
 %>
@@ -201,9 +220,9 @@
               <div class="col-xl-4 col-md-6 mb-4">
                 <label class="form-label" for="sido">전체/시,도</label>
                 <select class="selectpicker" name="sido" id="sido" data-style="btn-selectpicker" title="시도 선택">
-                  <option value="seoul">서울시    </option>
-                  <option value="incheon">인천시    </option>
-                  <option value="gyeonggi">경기도    </option>
+                  <option value="서울시">서울시    </option>
+                  <option value="인천시">인천시    </option>
+                  <option value="경기도">경기도    </option>
                 </select>
               </div>
               <div class="col-xl-4 col-md-6 mb-4">
@@ -216,15 +235,13 @@
               <div class="col-sm-6 mb-4">
                 <button class="btn btn-primary" type="submit" id="searchlist"> <i class="fas fa-search me-1"></i>Search                </button>
               </div>
-             
             </div>  
-            <input type="hidden" name="sidoInput" id="sidoInput" />
-            <input type="hidden" name="gugunInput" id="gugunInput" />
+            
           </form>
           <hr class="my-4">
           <div class="d-flex justify-content-between align-items-center flex-column flex-md-row mb-4">
-            <div class="me-3">
-              <p class="mb-3 mb-md-0" id="number"> </p>
+            <div class="me-3"  style="font-family: 'GmarketSansMedium';'">
+              <p class="mb-3 mb-md-0" id="number">총  <strong style="font-family: 'GmarketSansBold';'"><%=totalRecord %></strong> 건</p>
             </div>
           </div>
           <div class="row" id="result">
@@ -325,17 +342,51 @@
                 </div>
               </div>
             </div>
+             -->
           </div>
-          -->
+         	<div id="pagenation">
+         		<nav aria-label="Page navigation example">
+            		<ul class="pagination pagination-template d-flex justify-content-center">
+ <%			
+	//페이지 하단의 << 버튼
+	if ( startBlock == 1 ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-thin fa-angles-left'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='searchmapgugun.do?sido="+ sido + "&gugun=" + gugun + "&cpage="+ (startBlock - blockPerPage) +"'><i class='fa fa-thin fa-angles-left'></i></a></li> ");
+	}
+	//페이지 하단의 < 버튼 => (cpage-1) 한페이지 앞으로 이동
+	if ( cpage == 1 ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'> <i class='fa fa-angle-left'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='searchmapgugun.do?sido="+ sido + "&gugun=" + gugun + "&cpage="+ (cpage-1) +"'><i class='fa fa-angle-left'></i></a></li> ");
+	}
+	//현재 페이지
+	for ( int i=startBlock; i<=endBlock; i++ ) {
+		if ( cpage == i ) { 
+			out.println(" <li class='page-item active'><a class='page-link' href='#'>" + i + "</a></li> ");
+		} else {
+			out.println(" <li class='page-item'><a class='page-link' href='searchmapgugun.do?sido="+ sido + "&gugun=" + gugun + "&cpage=" + i + "'>" + i + "</a></li> ");
+		}
+	}
+	//페이지 하단의 > 버튼
+	if ( cpage == totalPage ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-angle-right'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='searchmapgugun.do?sido="+ sido + "&gugun=" + gugun + "&cpage="+ (cpage+1) +"'><i class='fa fa-angle-right'></i></a></li> ");
+	}
+	//페이지 하단의 >> 버튼
+	if ( endBlock == totalPage ) {
+		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
+	} else {
+		out.println(" <li class='page-item'><a class='page-link' href='searchmapgugun.do?sido="+ sido + "&gugun=" + gugun + "&cpage="+ (startBlock + blockPerPage) +"'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
+	}
+%>
+            		</ul>
+          		</nav>
+        	</div>
         </div>
-        <div id="pagenation">
- 
-        </div>
-        
         <div class="col-lg-6 map-side-lg pe-lg-0">
-          <div class="map-full shadow-left" id="map"></div>
-          
-          
+          <div class="map-full shadow-left" id="map"></div>  
         </div>
       </div>
     </div>
@@ -403,10 +454,7 @@
     			let sidoVal = $( '#sido option:selected' ).text().trim();
     			let gugunVal = $( '#gugun option:selected' ).val();
     			console.log(gugunVal);
-	
-    			$( '#sidoInput' ).val( sidoVal );
-    			$( '#gugunInput' ).val( gugunVal );
-    			
+
     			$("searchform").submit();
     			
     			$( '#result' ).empty();

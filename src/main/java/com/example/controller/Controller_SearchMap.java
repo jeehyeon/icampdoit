@@ -210,20 +210,22 @@ public class Controller_SearchMap {
 		}
 		
 		SearchkeyTO sto = new SearchkeyTO();
-		sto.setDoNm( request.getParameter( "sidoInput" ) );
-		sto.setSigunguNm( request.getParameter( "gugunInput" ) );
+		sto.setDoNm( request.getParameter( "sido" ) );
+		sto.setSigunguNm( request.getParameter( "gugun" ) );
 		
-		System.out.println( "시도 파라메터 잘 받아왔니 :" + request.getParameter( "sidoInput" ) );
-		System.out.println( "구군 파라메터 잘 받아왔니 :" + request.getParameter( "gugunInput" ) );
+		System.out.println( "시도 파라메터 잘 받아왔니 :" + request.getParameter( "sido" ) );
+		System.out.println( "구군 파라메터 잘 받아왔니 :" + request.getParameter( "gugun" ) );
 		
 		System.out.println( "sto에 DoNm 잘 들어갔나 :" + sto.getDoNm() );
 		System.out.println( "sto에 SigunguNm 잘 들어갔나 :" + sto.getSigunguNm() );
 		
 		SearchListMapTO slistTO = new SearchListMapTO();
 		slistTO.setCpage(cpage);
-		System.out.println( "slistTO 나오나보자 : " + slistTO.getCpage() );
+		System.out.println( "slistTO cpage 나오나보자 : " + slistTO.getCpage() );
 
 		slistTO = mdao.searchmapList(slistTO, sto );
+		System.out.println( "총페이지. 누가 이가나 보자: " + slistTO.getTotalPage() );
+		System.out.println( "총게시글수. 누가 이가나 보자: " + slistTO.getTotalRecord() );
 		
 		
 		/*
@@ -248,6 +250,7 @@ public class Controller_SearchMap {
 		modelAndView.setViewName( "/search/search_map_result" );
 		modelAndView.addObject( "cpage", cpage );
 		modelAndView.addObject( "slistTO", slistTO );
+		modelAndView.addObject( "sto", sto );
 		return modelAndView;
 	}
 	

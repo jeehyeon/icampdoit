@@ -146,9 +146,9 @@
               <div class="col-xl-4 col-md-6 mb-4">
                 <label class="form-label" for="sido">전체/시,도</label>
                 <select class="selectpicker" name="sido" id="sido" data-style="btn-selectpicker" title="시도 선택">
-                  <option value="seoul">서울시    </option>
-                  <option value="incheon">인천시    </option>
-                  <option value="gyeonggi">경기도    </option>
+                  <option value="서울시">서울시    </option>
+                  <option value="인천시">인천시    </option>
+                  <option value="경기도">경기도    </option>
                 </select>
               </div>
               <div class="col-xl-4 col-md-6 mb-4">
@@ -163,8 +163,6 @@
               </div>
              
             </div>  
-            <input type="hidden" name="sidoInput" id="sidoInput" />
-            <input type="hidden" name="gugunInput" id="gugunInput" />
           </form>
           <hr class="my-4">
           <div class="d-flex justify-content-between align-items-center flex-column flex-md-row mb-4">
@@ -346,9 +344,6 @@
     			let sidoVal = $( '#sido option:selected' ).text().trim();
     			let gugunVal = $( '#gugun option:selected' ).val();
     			console.log(gugunVal);
-	
-    			$( '#sidoInput' ).val( sidoVal );
-    			$( '#gugunInput' ).val( gugunVal );
     			
     			$("searchform").submit();
     			
