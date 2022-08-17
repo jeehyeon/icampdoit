@@ -42,7 +42,7 @@ public class SearchmapDAO {
 		System.out.println( "sto.getgugunNm 갑 보자: " + sto.getSigunguNm() );
 		
 		String sql = "select facltNm, doNm, sigunguNm, addr1, addr2, induty, firstImageUrl, contentId, mapX, mapY from go_api where doNm like ? and sigunguNm like ?";
-		ArrayList<SearchkeyTO> searchLists = (ArrayList<SearchkeyTO>)jdbcTemplate.query(sql, new BeanPropertyRowMapper<SearchkeyTO>(SearchkeyTO.class), sto.getDoNm(), sto.getSigunguNm() );
+		ArrayList<SearchkeyTO> searchLists = (ArrayList<SearchkeyTO>)jdbcTemplate.query(sql, new BeanPropertyRowMapper<SearchkeyTO>(SearchkeyTO.class), "%"+sto.getDoNm()+"%", "%"+sto.getSigunguNm()+"%" );
 
 		int cpage = listTO.getCpage();
 		int recordPerPage = listTO.getRecordPerPage();

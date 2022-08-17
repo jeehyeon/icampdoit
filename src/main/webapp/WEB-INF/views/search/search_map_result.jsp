@@ -30,47 +30,23 @@
 	int endBlock = slistTO.getEndBlock();
 	int totalRecord = slistTO.getTotalRecord();
 	
-	//System.out.println( "totalRecord 크기 봐봐:" + totalRecord );
+	
 	
 	SearchkeyTO sto = (SearchkeyTO)request.getAttribute( "sto" );
 	
 	String sido = sto.getDoNm();
 	String gugun = sto.getSigunguNm();
 	
-	//System.out.println( "sido 봐봐:" + sido );
-	//System.out.println( "gugun 봐봐:" + gugun );
-	
-	//SearchmapDAO mdao = new SearchmapDAO();
-	//SearchkeyTO to = new SearchkeyTO();
+
 	
 	ArrayList<SearchkeyTO> datas = slistTO.getSearchLists();
 	
 	StringBuilder sbHtml = new StringBuilder();
 	
-	/*
-	HashMap<String, String> hm = new HashMap<>();
-	List<Map<String, String>> list = new ArrayList<>();
 	
-	String contentId = "";
-	String facltNm = "";
-	String induty = "";
-	String addr1 = "";
-	if( addr1.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*") == false ){
-		addr1 = sido + " " + gugun + " " + addr1;
-	}
-	String firstImageUrl = "";
-	if( firstImageUrl.equals("default") ) {
-		firstImageUrl = "./resources/bootstrap-5/html/img/noimage.svg";
-	}
-	String mapX = "";
-	String mapY = "";
-	String latlngadd = "";
-	
-	String[] arrStr = new String[1];
-	*/
 	
 	for( SearchkeyTO kto : datas ){
-		//kto = (SearchkeyTO)request.getAttribute( "sto" );
+		
 
 		String contentId = kto.getContentId();
 		System.out.println( "contentId :" + contentId );
@@ -80,10 +56,7 @@
 		if( addr1.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*") == false ){
 			addr1 = kto.getDoNm() + " " + kto.getSigunguNm() + " " + kto.getAddr1();
 		}
-		//System.out.println( "제발 좀 나와줘바 DoNM :" + kto.getDoNm() );
-		//System.out.println( "제발 좀 나와줘바 SigunguNm :" + kto.getSigunguNm() );
-		//System.out.println( "제발 좀 나와줘바 facltNm :" + kto.getFacltNm() );
-		
+	
 		String firstImageUrl = kto.getFirstImageUrl();
 		if( firstImageUrl.equals("default") ) {
 			firstImageUrl = "./resources/bootstrap-5/html/img/noimage.svg";
@@ -127,25 +100,38 @@
 		
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put( "title", title );
-		jsonObject.put( "latlng", latlngadd );
-		jsonObject.put( "campaddress", campaddress );
+		jsonObject.put( "latlng", latlngadd);
+		jsonObject.put( "campaddress", campaddress);
 		jsonObject.put( "link", link );
 		
 		jsonArray.add( jsonObject );
 	}
-	result.put( "jsonArray", jsonArray );
-	System.out.println( jsonArray.toString() );
-	System.out.println(  result.toString() );
-	
-	
-	/*
-	for( int i=0; i<recordPerPage; i++ ){
-		arrStr
+	String flatlng = "37.541, 126.986";
+	if(jsonArray.get(0) !=null){
+	JSONObject obj = (JSONObject)jsonArray.get(0);
+	flatlng= (String)obj.get("latlng");
 	}
 	
-	System.out.println( hm.toString() );
-	//System.out.println( "x좌표 뽑아보자 : " + mapX );
-	*/
+	StringBuilder kmap = new StringBuilder();
+	for(int i= 0; i<jsonArray.size(); i++){
+		JSONObject element = (JSONObject)jsonArray.get(i);
+		kmap.append("{");
+		kmap.append("title: '" +(String)element.get("title") +"',");
+		kmap.append("latlng: new kakao.maps.LatLng("+(String)element.get("latlng") +"),");
+		kmap.append("campaddress: '"+(String)element.get("campaddress") +"',");
+		kmap.append("link: '"+ (String)element.get("link")+"'");
+		kmap.append("},");
+	}
+	
+	String resultk = kmap.toString();
+	resultk = resultk.substring(0, resultk.length()-1);
+	
+	
+	String arrdata = jsonArray.toString();
+	result.put( "jsonArray", jsonArray );
+	
+	System.out.println(  arrdata );
+	
 						
 %>
 
@@ -306,103 +292,7 @@
           </div>
           <div class="row" id="result">
           	<%=sbHtml.toString() %>
-            <!-- 
-            <div class="col-sm-6 mb-5 hover-animate" data-marker-id="59c0c8e33b1527bfe2abaf92">
-              <div class="card h-100 border-0 shadow">
-                <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/photo-1484154218962-a197022b5858.jpg" alt="Modern, Well-Appointed Room"/><a class="tile-link" href="./campview.do"></a>
-                </div>
-                <div class="card-body d-flex align-items-center">
-                  <div class="w-100">
-                    <h5 class="card-title"><a class="text-decoration-none text-dark" href="./campview.do">캠핑장 이름</a></h5>
-                    <div class="d-flex card-subtitle mb-3">
-                      <p class="flex-grow-1 mb-0 text-muted text-sm">캠핑장 full address</p>
-                    </div>
-                    <p class="card-text text-muted">업종(일반 야영장)</p>
-                  </div>
-                </div>
-              </div>
-            </div>
            
-            <div class="col-sm-6 mb-5 hover-animate" data-marker-id="59c0c8e322f3375db4d89128">
-              <div class="card h-100 border-0 shadow">
-                <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/photo-1426122402199-be02db90eb90.jpg" alt="Cute Quirky Garden apt, NYC adjacent"/><a class="tile-link" href="./campview.do"></a>
-                </div>
-                <div class="card-body d-flex align-items-center">
-                  <div class="w-100">
-                    <h5 class="card-title"><a class="text-decoration-none text-dark" href="./campview.do">캠핑장 이름</a></h5>
-                    <div class="d-flex card-subtitle mb-3">
-                      <p class="flex-grow-1 mb-0 text-muted text-sm">캠핑장 full address</p>
-                    </div>
-                    <p class="card-text text-muted">업종(일반 야영장)</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-sm-6 mb-5 hover-animate" data-marker-id="59c0c8e3a31e62979bf147c9">
-              <div class="card h-100 border-0 shadow">
-                <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/photo-1512917774080-9991f1c4c750.jpg" alt="Modern Apt - Vibrant Neighborhood!"/><a class="tile-link" href="./campview.do"></a>
-                </div>
-                <div class="card-body d-flex align-items-center">
-                  <div class="w-100">
-                    <h5 class="card-title"><a class="text-decoration-none text-dark" href="./campview.do">캠핑장 이름</a></h5>
-                    <div class="d-flex card-subtitle mb-3">
-                      <p class="flex-grow-1 mb-0 text-muted text-sm">캠핑장 full address</p>
-                    </div>
-                    <p class="card-text text-muted">업종(일반 야영장)</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-sm-6 mb-5 hover-animate" data-marker-id="59c0c8e3503eb77d487e8082">
-              <div class="card h-100 border-0 shadow">
-                <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/photo-1494526585095-c41746248156.jpg" alt="Sunny Private Studio-Apartment"/><a class="tile-link" href="./campview.do"></a>
-                </div>
-                <div class="card-body d-flex align-items-center">
-                  <div class="w-100">
-                    <h5 class="card-title"><a class="text-decoration-none text-dark" href="./campview.do">캠핑장 이름</a></h5>
-                    <div class="d-flex card-subtitle mb-3">
-                      <p class="flex-grow-1 mb-0 text-muted text-sm">캠핑장 full address</p>
-                    </div>
-                    <p class="card-text text-muted">업종(일반 야영장)</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-sm-6 mb-5 hover-animate" data-marker-id="59c0c8e39aa2eed0626e485d">
-              <div class="card h-100 border-0 shadow">
-                <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/photo-1522771739844-6a9f6d5f14af.jpg" alt="Mid-Century Modern Garden Paradise"/><a class="tile-link" href="./campview.do"></a>
-                </div>
-                <div class="card-body d-flex align-items-center">
-                  <div class="w-100">
-                    <h5 class="card-title"><a class="text-decoration-none text-dark" href="./campview.do">캠핑장 이름</a></h5>
-                    <div class="d-flex card-subtitle mb-3">
-                      <p class="flex-grow-1 mb-0 text-muted text-sm">캠핑장 full address</p>
-                    </div>
-                    <p class="card-text text-muted">업종(일반 야영장)</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-sm-6 mb-5 hover-animate" data-marker-id="59c0c8e39aa2edasd626e485d">
-              <div class="card h-100 border-0 shadow">
-                <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/photo-1488805990569-3c9e1d76d51c.jpg" alt="Brooklyn Life, Easy to Manhattan"/><a class="tile-link" href="./campview.do"></a>
-                </div>
-                <div class="card-body d-flex align-items-center">
-                  <div class="w-100">
-                    <h5 class="card-title"><a class="text-decoration-none text-dark" href="./campview.do">캠핑장 이름</a></h5>
-                    <div class="d-flex card-subtitle mb-3">
-                      <p class="flex-grow-1 mb-0 text-muted text-sm">캠핑장 full address</p>
-                    </div>
-                    <p class="card-text text-muted">업종(일반 야영장)</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-             -->
           </div>
          	<div id="pagenation">
          		<nav aria-label="Page navigation example">
@@ -480,7 +370,7 @@
     	$(document).ready(function(){
     		$('#sido').on('change', function() {
     			let sidoVal = $( '#sido option:selected' ).text().trim();
-    			//console.log(sidoVal);
+    			
     			
     			$( '#gugun' ).empty();
     			
@@ -497,7 +387,7 @@
     					$.each( json.jsonArray, function( index, jsonArray ){
     						
     						$( '#gugun' ).append( '<option value="' + jsonArray.sigunguNm + '">' + jsonArray.sigunguNm + '</option>' );
-    					//console.log( jsonArray.sigunguNm );
+    					
     					
     					});
     					
@@ -527,7 +417,7 @@
 	    	$( '#mapval' ).each( function( index, item ) {
 	    		latlngArr.push($(item).text());
 	    	});
-	    	alert( latlngArr );
+	    	
     	});
     	
     	
@@ -537,7 +427,7 @@
     <script>
 				var mapContainer = document.getElementById('map'), //지도 표시할 div id
 					mapOptions = {
-						center: new kakao.maps.LatLng(37.5817426, 127.4838359), //center = 지도 중심 좌표
+						center: new kakao.maps.LatLng(<%=flatlng%>), //center = 지도 중심 좌표
 						level: 9 //지도 확대 레벨. 기본값=3
 					};
 		
@@ -561,64 +451,17 @@
 				var contents = [];
 				var overlays = [];
 				
-				//var pos [] = 
-				/*
-				for( SearchkeyTO kto : datas ){			
-					String contentId = kto.getContentId();
-					String facltNm = kto.getFacltNm();
-					String induty = kto.getInduty();
-					String addr1 = kto.getAddr1();
-					if( addr1.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*") == false ){
-						addr1 = kto.getDoNm() + " " + kto.getSigunguNm() + " " + kto.getAddr1();
-					}
-					String firstImageUrl = kto.getFirstImageUrl();
-					if( firstImageUrl.equals("default") ) {
-						firstImageUrl = "./resources/bootstrap-5/html/img/noimage.svg";
-					}
-					String mapX = kto.getMapX();
-					String mapY = kto.getMapY();
-					
-					
-				}
-				*/
+			
 				
-				var param = <%=jsonArray.toString() %>
+				var param = <%=arrdata%>
 				console.log( param );
 				
 				
 				
-				var positions = [
-					{
-						title: '가평사계절캠핑장',
-						latlng: new kakao.maps.LatLng(37.8833509, 127.5489707),
-						campaddress: '주소주소',
-						link: './campview.do'
-					},
-					{
-						title: '가평 사과나무 캠핑장',
-						latlng: new kakao.maps.LatLng(37.7895015, 127.358428),
-						campaddress: '주소주소',
-						link: './campview.do'
-					},
-					{
-						title: '가평 운악홀리데이 캠핑장',
-						latlng: new kakao.maps.LatLng(37.8536510, 127.5102426),
-						campaddress: '주소주소',
-						link: './campview.do'
-					},
-					{
-						title: '구름게곡캠핑장',
-						latlng: new kakao.maps.LatLng(37.8879007, 127.5387410),
-						campaddress: '주소주소',
-						link: './campview.do'
-					},
-					{
-						title: '국립유명산자연휴양림',
-						latlng: new kakao.maps.LatLng(37.5817426, 127.4838359),
-						campaddress: '주소주소',
-						link: './campview.do'
-					}
+				var positions =[
+					<%=resultk%>
 				];
+
 				
 				
 				for ( var i=0; i<positions.length; i++ ){
