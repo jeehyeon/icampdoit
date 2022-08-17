@@ -181,30 +181,24 @@ public class AdminDAO {
 	public int hboardModifyOk(HBoardTO to) {
 			
 		int flag = 1;	
-		/*if( to.getFilename() != null ){
-			try {
-				String sql = "select filename as oldFilename from h_board where seq=?";		
-				to = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<HBoardTO>(HBoardTO.class), to.getSeq() );
-				System.out.println("to 결과값 : " + to);
-				flag = 0;
-			} catch (DataAccessException e) {
-				// TODO Auto-generated catch block
-				System.out.println("파일이름 찾기 오류");
-				return flag;
-			} 
-		}	*/	
+	
 		String oldFilename = to.getFilename();
 		System.out.println("oldFilename : " + to.getFilename());
 		System.out.println("새파일이름 : " + to.getNewFilename());
 		
 		int result = 0;							
 		
-		// 새파일 첨부시
-		if( !to.getNewFilename().equals("default") ){
+		// 새파일 첨부하고 저장시
+		if( !to.getNewFilename().equals("default") && to.getContent().indexOf(to.getNewFilename()) != -1 ) {
 			String	sql = "update h_board set subject=?, title=?, writer=?, content=?, filename=?, filesize=? where seq=? and ucode=?";
 			result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(), to.getNewFilename(),
 					to.getNewFilesize(), to.getSeq(), to.getUcode() );
-			System.out.println("dao1 result : " + result);
+			
+			/*
+			 * // 새파일이 추가하고 저장전에 지웠을 경우 if( to.getContent().indexOf( to.getNewFilename()) ==
+			 * -1 ) { result = 4; } System.out.println("dao1 result : " + result);
+			 */
+			
 		// 기존 파일 그대로일 경우
 		} else if( to.getContent().indexOf(to.getFilename()) != -1) {
 			String	sql = "update h_board set subject=?, title=?, writer=?, content=?, filename=?, filesize=? where seq=? and ucode=?";
@@ -212,13 +206,29 @@ public class AdminDAO {
 			result = 2;
 			System.out.println("dao2 result : " + result);
 			System.out.println("dao2 filename : " + to.getFilename());
-		// 기존 파일 삭제시
-		}  else if( to.getContent().indexOf(to.getFilename()) == -1) {
-			String	sql = "update h_board set subject=?, title=?, writer=?, content=? where seq=? and ucode=?";
-			result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(), to.getSeq(), to.getUcode() );
+			
+		// 기존파일 삭제시
+		}  else if( to.getContent().indexOf(to.getFilename()) == -1 && to.getNewFilename().equals("default")) {
+			String	sql = "update h_board set subject=?, title=?, writer=?, content=?, filename=?, filesize=? where seq=? and ucode=?";
+			result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(), "default", 0, to.getSeq(), to.getUcode() );
 			result = 3;
 			System.out.println("dao3 result : " + result);
+		
+		// 기존 텍스트 -> 새파일 올리고 지우고 저장시
+		}  else if( to.getContent().indexOf(to.getFilename()) == -1 && to.getContent().indexOf(to.getNewFilename()) == -1 && !to.getNewFilename().equals("default")) {
+			String	sql = "update h_board set subject=?, title=?, writer=?, content=?, filename=?, filesize=? where seq=? and ucode=?";
+			result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(), "default", 0, to.getSeq(), to.getUcode() );
+			result = 4;
+			System.out.println("dao3 result : " + result);
 		}
+		// 기존 텍스트 -> 텍스트 저장시
+		else if( to.getContent().indexOf(to.getFilename()) == -1 && to.getNewFilename().equals("default")) {
+			String	sql = "update h_board set subject=?, title=?, writer=?, content=?, filename=?, filesize=? where seq=? and ucode=?";
+			result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(), "default", 0, to.getSeq(), to.getUcode() );
+			result = 2;
+			System.out.println("dao4 result : " + result);
+		}
+		
 		System.out.println("dao result : " + result);
 	
 		
@@ -251,6 +261,13 @@ public class AdminDAO {
 			File file  = new File(delurl);
 			file.delete(); 			
 			System.out.println("기존 파일 삭제시 작동 : ");
+		} else if( result == 4 ) { 
+			flag = 0;			
+			String delurl = hUploadPath + to.getNewFilename();
+			System.out.println("delurl : " + delurl);
+			File file  = new File(delurl);
+			file.delete(); 			
+			System.out.println("임시파일 삭제시 작동 : ");
 		}
 		return flag;
 	}
@@ -285,90 +302,71 @@ public class AdminDAO {
 	public int nboardModifyOk(NBoardTO nto, NFileTO nfto) {
 			
 		int flag = 1;	
-		/*if( nfto.getFilename() != null ){
-			try {
-				String sql = "select filename from h_board where pseq=?";		
-				nfto = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<NFileTO>(NFileTO.class), nto.getSeq() );
-				System.out.println("nfto 결과값 : " + nfto);
-				flag = 0;
-			} catch (DataAccessException e) {
-				// TODO Auto-generated catch block
-				System.out.println("파일이름 찾기 오류");
-				return flag;
-			} 
-		}	*/
+
 		String oldFilename = nfto.getFilename();
-		System.out.println("oldFilename : " + nfto.getFilename());
-		System.out.println("새파일이름 : " + nfto.getNewFilename());
 		
 		int result = 0;	
-		String nseq;
 		
-		// 새파일 첨부시
+		// 새파일 첨부시 -> 기존파일 삭제되어야함
 		if( !nfto.getNewFilename().equals("default") ){
 			String	sql = "update n_board set subject=?, title=?, writer=?, content=? where seq=? and ucode=?";
 			result = jdbcTemplate.update(sql, nto.getSubject(), nto.getTitle(), nto.getWriter(), nto.getContent(),
 					 nto.getSeq(), nto.getUcode() );
-			result = 5;
-			System.out.println("1result : "+result);
+			result = 1;			
 			
-			// 새파일 첨부하고 저장까지 한 경우
-			if( nto.getContent().indexOf(nfto.getNewFilename()) != -1) {
+			// 기존 텍스트 -> 새파일 첨부시 : n_file insert
+			if( nto.getContent().indexOf( nfto.getNewFilename() ) != -1 && nfto.getFilesize() == 0  ) {
+				sql = "insert into n_file values ( 0, ?, ?, ? )";
+				result = jdbcTemplate.update(sql, nto.getSeq(), nfto.getNewFilename(), nfto.getNewFilesize());
+				result = 3;
+			}
+			// 기존파일 -> 새파일 첨부하고 저장까지 한 경우 : n_file 업데이트
+			else if( nto.getContent().indexOf( nfto.getNewFilename()) != -1 && oldFilename != null ) {
+				System.out.println("22뉴파일 : "+nfto.getNewFilename());
+				System.out.println("22nseq : "+nto.getSeq());
 				sql = "update n_file set filename=?, filesize=? where nseq=?";
 				result = jdbcTemplate.update(sql, nfto.getNewFilename(), nfto.getNewFilesize(), nto.getSeq());
 				result = 1;
-				System.out.println("2result : "+result);
-			}
+			
+			// 새파일이 추가하고 저장전에 지웠을 경우	
+			} else if( !nfto.getNewFilename().equals("default") && nto.getContent().indexOf(nfto.getNewFilename()) == -1) {
+				sql = "update n_board set subject=?, title=?, writer=?, content=? where seq=? and ucode=?";
+				result = jdbcTemplate.update(sql, nto.getSubject(), nto.getTitle(), nto.getWriter(), nto.getContent(),
+						 nto.getSeq(), nto.getUcode() );
+				result = 4;
+			} 				
+			
 			if( result != 1 ) {
 				System.out.println("fileinsert 오류");
 				flag = 1;
 			}else {
 				flag = 0;
-			}			
+			}						
 			
-			System.out.println("dao1 result : " + result);
 		// 기존 파일 그대로일 경우
 		} else if( nto.getContent().indexOf(nfto.getFilename()) != -1) {
 			String	sql = "update n_board set subject=?, title=?, writer=?, content=? where seq=? and ucode=?";
 			result = jdbcTemplate.update(sql, nto.getSubject(), nto.getTitle(), nto.getWriter(), nto.getContent(),
 					 nto.getSeq(), nto.getUcode() );
-			System.out.println("2result : "+result);
 			result = 2;
-			System.out.println("dao2 result : " + result);
+			
 		// 기존 파일 삭제 또는 원래 파일이 없을 경우
 		} else if( nto.getContent().indexOf(nfto.getFilename()) == -1) {
-			//System.out.println("3seq : "+nto.getSeq());
-			//System.out.println("3ucode : "+nto.getUcode());
 			String	sql = "update n_board set subject=?, title=?, writer=?, content=? where seq=? and ucode=?";
 			result = jdbcTemplate.update(sql, nto.getSubject(), nto.getTitle(), nto.getWriter(), nto.getContent(),
 					 nto.getSeq(), nto.getUcode() );
-			result = 4;
-			System.out.println("3result : "+result);
+			result = 3;
 			
 			if( oldFilename != null ) {
 				try {
-					//sql = "select seq from n_board where vcode=?";
-					//nseq = jdbcTemplate.queryForObject(sql, String.class, nto.getVcode());
-					//System.out.println("3nseq : "+nseq);
-				
 					sql = "delete from n_file where nseq=?";
 					result = jdbcTemplate.update(sql, nto.getSeq());		
-					System.out.println("3result : "+result);
-					result = 3;
-					System.out.println("dao3 result : " + result);
+					result = 1;
 				} catch (DataAccessException e) {
-					//return result;
 				}
 			}
-		} else if( nto.getContent().indexOf(nfto.getNewFilename()) == -1) {
-			String	sql = "update n_board set subject=?, title=?, writer=?, content=? where seq=? and ucode=?";
-			result = jdbcTemplate.update(sql, nto.getSubject(), nto.getTitle(), nto.getWriter(), nto.getContent(),
-					 nto.getSeq(), nto.getUcode() );
-			result = 4;
-			System.out.println("3result : "+result);
-	
+			
 		} 
-		System.out.println("dao result : " + result);	
 		
 		if( result == 0 ) {
 			flag = 1;// 비정상 실행
@@ -378,37 +376,30 @@ public class AdminDAO {
 				System.out.println("delurl : " + delurl);
 				File file  = new File(delurl);
 				file.delete(); 
-				System.out.println("새 파일 삭제완료 : ");
+				System.out.println("n새 파일 삭제완료 : ");
 			}
 		} else if( result == 1 ) {
 			flag = 0;// 정상 실행
 			// 새파일 첨부시 -> 기존 파일 삭제
-			if( !nfto.getNewFilename().equals("default") && oldFilename != null ) {
+			if( oldFilename != null ) {
 				String delurl = nUploadPath + oldFilename;
 				File file  = new File(delurl);
 				file.delete();
-				System.out.println("기존 파일 삭제완료 : ");
+				System.out.println("n기존 파일 삭제완료 : ");
 			}
 		} else if( result == 2 ) {
 			flag = 0;
-			System.out.println("파일 그대로일 경우 : ");
+			System.out.println("n파일 그대로일 경우 : ");
 		} else if( result == 3 ) { 
-			flag = 0;			
-			String delurl = nUploadPath + oldFilename;
-			System.out.println("delurl : " + delurl);
-			File file  = new File(delurl);
-			file.delete(); 			
-			System.out.println("기존 파일 삭제시 작동 : ");
-		} else if( result == 4 ) { 
 			flag = 0;
-			System.out.println("원래 파일이 없었음 : ");
-		} else if( result == 5 ) { 
+			System.out.println("n원래 파일이 없었음 : ");
+		} else if( result == 4 ) { 
 			flag = 0;			
 			String delurl = nUploadPath + nfto.getNewFilename();
 			System.out.println("delurl : " + delurl);
 			File file  = new File(delurl);
 			file.delete(); 			
-			System.out.println("임시파일 삭제 ");
+			System.out.println("n임시파일 삭제 ");
 		}
 		return flag;
 	}

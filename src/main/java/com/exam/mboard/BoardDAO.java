@@ -63,7 +63,6 @@ public class BoardDAO {
 				System.out.println("seq값 찾기 오류");
 				return flag;
 			}
-
 						
 			sql = "insert into m_file values ( 0, ?, ?, ? )";
 			result = jdbcTemplate.update(sql, pseq, fto.getFilename(), fto.getFilesize());
