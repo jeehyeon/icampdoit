@@ -279,11 +279,12 @@ public class BoardDAO {
 	public int mboardModifyOk(BoardTO to, FileTO fto) {	
 		
 		int flag = 1;
-		
-		String oldFilename = fto.getFilename();
-		System.out.println("oldFilename : " + fto.getFilename());
-		System.out.println("새파일이름 : " + fto.getNewFilename());
-		
+		String oldFilename ="";
+		if(fto.getFilesize() != 0) {
+		oldFilename = fto.getFilename();
+		//System.out.println("oldFilename : " + fto.getFilename());
+		//System.out.println("새파일이름 : " + fto.getNewFilename());
+		}
 		int result = 0;	
 		//String pseq;
 		

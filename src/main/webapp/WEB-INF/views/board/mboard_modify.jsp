@@ -20,7 +20,7 @@
 	String writer = "";
 	String title = "";
 	String content = "";
-	String filename = "";
+	String filename = "default";
 	long filesize = 0;	
 	
 	if(subjectValue.equals("1")||subjectValue.equals("2")||subjectValue.equals("3")){
@@ -152,7 +152,9 @@
 
 	<!-- Write Section-->
 	<section class=" pb-7">
-			<input type="hidden" name="modifyOk" id="modifyOk" value="default"/>
+		<input type="hidden" name="modifyOk" id="modifyOk" value="<%=filename%>"/>
+		<input type="hidden" name="filesize" id="filesize" value="<%=filesize%>"/>
+		<input type="hidden" name="newfilename" id="newfilename" value="default"/>
 		  <input type="hidden" name="newFilesize" id="newFilesize" value="0000"/>
 		  <input type="hidden" name="vcode" id="vcode" value="default"/>
       <div class="container">
@@ -237,6 +239,36 @@
       </div>
     </footer>
 	<!-- JavaScript files-->
+	<!-- jQuery-->
+	<script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
+	<!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
+	<script src="./resources/bootstrap-5/html/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- Magnific Popup - Lightbox for the gallery-->
+	<script src="./resources/bootstrap-5/html/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+	<!-- Smooth scroll-->
+	<script src="./resources/bootstrap-5/html/vendor/smooth-scroll/smooth-scroll.polyfills.min.js"></script>
+	<!-- Bootstrap Select-->
+	<script src="./resources/bootstrap-5/html/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+	<!-- Object Fit Images - Fallback for browsers that don't support object-fit-->
+	<script src="./resources/bootstrap-5/html/vendor/object-fit-images/ofi.min.js"></script>
+	<!-- Swiper Carousel                       -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
+	<script> var basePath = '' </script>
+	<!-- Main Theme JS file    -->
+	<script src="./resources/bootstrap-5/html/js/theme.js"></script>
+	<!-- Map-->
+	<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+	<!-- Available tile layers-->
+	<script src="./resources/bootstrap-5/html/js/map-layers.js"></script>
+	<script src="./resources/bootstrap-5/html/js/map-detail.js"></script>
+	<!-- jquery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<!-- summernote -->
+	<script src="./resources/bootstrap-5/html/summernote/summernote-lite.js"></script>
+	<script src="./resources/bootstrap-5/html/summernote/lang/summernote-ko-KR.js"></script>
+	
+	
+	
 	<script>
 	$(function(){
 		  
@@ -276,8 +308,8 @@
 		 var title = $('#title').val();
 		 var content = $('#summernote').val();
 		 var vcode = $('#vcode').val();
-		 var filename = $('#filename').val(); 
-		 var newFilename = $('#modifyOk').val();
+		 var filename = $('#modifyOk').val(); 
+		 var newFilename = $('#newfilename').val();
 		 var filesize = $('#filesize').val();
 		 var newFilesize = $('#newFilesize').val();
 		 var seq = $('#seq').val();
@@ -353,10 +385,9 @@
 
 	// 이미지 파일 업로드
 	function sendFile(file, editor, welEditable) {
-		var imgUrl = '';
+		
 		var mImgUrl = './upload/';
-		var hImgUrl = './h_upload/';
-		var nImgUrl = './n_upload/';
+		
 		var data = new FormData();
 		data.append('image', file);
 		data.append('subject', $('#subject').val());
@@ -374,20 +405,13 @@
 				let str= result.split('@');
 				var subject = $('#subject').val();
 				
-				if( $('#subject').val() == 4 ) {
-					imgUrl = hImgUrl + str[0];
-				} else if( $('#subject').val() == 5 ) {
-					imgUrl = nImgUrl + str[0];
-				} else {
-					imgUrl = mImgUrl + str[0];
-				}				
-				console.log("imgUrl : "+imgUrl);				
+								
 				
-				$('#summernote').summernote( 'insertImage', imgUrl );
+				$('#summernote').summernote( 'insertImage', mImgUrl );
 				
 				if(str[0] != null){
             				               
-					$('#modifyOk').val(str[0]);
+					$('#newFilename').val(str[0]);
 					$('#newFilesize').val(str[1]);
 	                
             	}else{
@@ -425,58 +449,9 @@
 		//- injectSvgSprite('${path}icons/orion-svg-sprite.svg'); 
 		injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg');
 	</script>
-	<!-- jQuery-->
-	<script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
-	<!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
-	<script src="./resources/bootstrap-5/html/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<!-- Magnific Popup - Lightbox for the gallery-->
-	<script src="./resources/bootstrap-5/html/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-	<!-- Smooth scroll-->
-	<script src="./resources/bootstrap-5/html/vendor/smooth-scroll/smooth-scroll.polyfills.min.js"></script>
-	<!-- Bootstrap Select-->
-	<script src="./resources/bootstrap-5/html/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
-	<!-- Object Fit Images - Fallback for browsers that don't support object-fit-->
-	<script src="./resources/bootstrap-5/html/vendor/object-fit-images/ofi.min.js"></script>
-	<!-- Swiper Carousel                       -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
-	<script> var basePath = '' </script>
-	<!-- Main Theme JS file    -->
-	<script src="./resources/bootstrap-5/html/js/theme.js"></script>
-	<!-- Map-->
-	<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
-	<!-- Available tile layers-->
-	<script src="./resources/bootstrap-5/html/js/map-layers.js"></script>
-	<script src="./resources/bootstrap-5/html/js/map-detail.js"></script>
+	
 
 
-	<!-- jquery -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<!-- summernote -->
-	<script src="./resources/bootstrap-5/html/summernote/summernote-lite.js"></script>
-	<script src="./resources/bootstrap-5/html/summernote/lang/summernote-ko-KR.js"></script>
-
-	<script>
-		var win = navigator.platform.indexOf('Win') > -1;
-		if (win && document.querySelector('#sidenav-scrollbar')) {
-			var options = {
-				damping : '0.5'
-			}
-			Scrollbar.init(document.querySelector('#sidenav-scrollbar'),
-					options);
-		}
-
-		$(document).ready(function() {
-			$('#summernote').summernote({
-				placeholder : 'Hello bootstrap 5',
-				minHeight : null,
-				maxHeight : null,
-				tabsize : 2,
-				height : 550,
-				width : 1250,
-				lang : 'ko-KR'
-
-			});
-		});
-	</script>
+	
   </body>
 </html>

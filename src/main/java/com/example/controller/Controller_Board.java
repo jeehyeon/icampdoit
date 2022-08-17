@@ -360,7 +360,7 @@ public class Controller_Board {
 		
 		if ( session.getAttribute("id").equals("admin") ) {
 			
-			if(subjectValue.equals("1")||subjectValue.equals("2")||subjectValue.equals("3")){
+			
 				BoardTO to = new BoardTO();
 				FileTO fto = new FileTO();
 				
@@ -371,25 +371,25 @@ public class Controller_Board {
 				to.setContent(request.getParameter("content"));
 				to.setUcode((Integer) session.getAttribute("ucode"));
 				to.setVcode(request.getParameter("vcode"));
-				
+				System.out.println("request.getfilename : " + request.getParameter("filename"));
 				// 게시글에 기존 파일이 있으면
-				if(request.getParameter("filesize") != "0"&&request.getParameter("filename")!=null) {
+				if(request.getParameter("filesize") != "0"&&request.getParameter("filename")!="default") {
 					fto.setFilename(request.getParameter("filename"));
 					fto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
 					System.out.println("filename : " + request.getParameter("filename"));
 				}
 				// 게시글에 새 파일이 있으면
-				if(request.getParameter("newFilesize") != "0"&&request.getParameter("newfilename")!=null) {
+				if(request.getParameter("newFilesize") != "0"&&request.getParameter("newfilename")!="default") {
 					//if( !request.getParameter("newFilename").equals("default") ) {
 					fto.setNewFilename(request.getParameter("newFilename"));
 					fto.setNewFilesize(Long.parseLong(request.getParameter("newFilesize").trim()) );
-					System.out.println("newFilename : " + request.getParameter("newFilename"));
-					System.out.println("11newFilename : " + fto.getNewFilename());
+					//System.out.println("newFilename : " + request.getParameter("newFilename"));
+					//System.out.println("11newFilename : " + fto.getNewFilename());
 				}
 				flag = dao.mboardModifyOk(to, fto);
 				
 				dao.filecnd(to, fto);
-			} 
+			
 		}
 		System.out.println("최종flag : " + flag);
 		
