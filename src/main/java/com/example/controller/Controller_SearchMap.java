@@ -60,7 +60,7 @@ public class Controller_SearchMap {
 			sido = "경기도";
 		}
 		
-		System.out.println( "doNm TO 에 잘 넣어진거 가져왔나: " + sto.getDoNm() );
+		//System.out.println( "doNm TO 에 잘 넣어진거 가져왔나: " + sto.getDoNm() );
 		
 		ArrayList<SearchkeyTO> list = (ArrayList<SearchkeyTO>)mdao.listsigunguNm( sto.getDoNm() );
 		
@@ -84,120 +84,6 @@ public class Controller_SearchMap {
 		return result;
 	}
 	
-	/*
-	@RequestMapping( value="/searchmapgugun.do" )
-	public JSONObject searchmapgugun(HttpServletRequest request) {
-		System.out.println( "searchmapgugun() 호출" );
-		
-		/*
-		int cpage = 1;
-		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
-			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
-		}
-		
-		SearchListMapTO slistTO = new SearchListMapTO();
-		slistTO.setCpage(cpage);
-		
-		SearchkeyTO sto = new SearchkeyTO();
-		sto.setDoNm( request.getParameter( "sidoVal" ) );
-		sto.setSigunguNm( request.getParameter( "gugunVal" ) );
-		
-		slistTO = mdao.searchmapList(slistTO, sto );
-		System.out.println( sto.getDoNm() );
-		System.out.println( sto.getSigunguNm() );
-		
-		ArrayList<SearchkeyTO> lists = slistTO.getSearchLists();
-		
-		JSONObject listresult = new JSONObject();
-		
-		JSONArray pageArray = new JSONArray();
-		JSONObject pageObject = new JSONObject();
-		pageObject.put( "cpage", slistTO.getCpage() );
-		
-		JSONArray jsonArray = new JSONArray();
-		for( SearchkeyTO to : lists ){
-			String facltNm = to.getFacltNm();
-			String addr1 = to.getAddr1();
-			String addr2 = to.getAddr2();
-			String induty = to.getInduty();
-			String firstImageUrl = to.getFirstImageUrl();
-			String contentId = to.getContentId();
-			String mapX = to.getMapX();
-			String mapY = to.getMapY();
-			
-			JSONObject jsonObject = new JSONObject();
-				
-			jsonObject.put( "facltNm", facltNm );
-			jsonObject.put( "addr1", addr1 );
-			jsonObject.put( "addr2", addr2 );
-			jsonObject.put( "induty", induty );
-			jsonObject.put( "contentId", contentId );
-			jsonObject.put( "mapX", mapX );
-			jsonObject.put( "mapY", mapY );
-			
-			if( !firstImageUrl.equals( "default" ) ) {
-				jsonObject.put( "firstImageUrl", firstImageUrl );
-			} else {
-				jsonObject.put( "firstImageUrl", "./resources/bootstrap-5/html/img/noimage.svg" );
-			}
-			
-			jsonArray.add( jsonObject );
-		}
-		
-		listresult.put( "jsonArray", jsonArray );
-		listresult.put( "pageArray", pageArray );
-		
-		return listresult;
-		
-		
-		
-		
-		SearchkeyTO sto = new SearchkeyTO();
-
-		sto.setDoNm( request.getParameter( "sidoVal" ) );
-		sto.setSigunguNm( request.getParameter( "gugunVal" ) );
-		
-		ArrayList<SearchkeyTO> list = (ArrayList<SearchkeyTO>)mdao.listsearchmap(sto);
-		
-		JSONObject listresult = new JSONObject();	
-		
-		JSONArray jsonArray = new JSONArray();
-		for( SearchkeyTO to : list ){
-			String facltNm = to.getFacltNm();
-			String addr1 = to.getAddr1();
-			String addr2 = to.getAddr2();
-			String induty = to.getInduty();
-			String firstImageUrl = to.getFirstImageUrl();
-			String contentId = to.getContentId();
-			String mapX = to.getMapX();
-			String mapY = to.getMapY();
-			
-			JSONObject jsonObject = new JSONObject();
-				
-			jsonObject.put( "facltNm", facltNm );
-			jsonObject.put( "addr1", addr1 );
-			jsonObject.put( "addr2", addr2 );
-			jsonObject.put( "induty", induty );
-			jsonObject.put( "contentId", contentId );
-			jsonObject.put( "mapX", mapX );
-			jsonObject.put( "mapY", mapY );
-			
-			if( !firstImageUrl.equals( "default" ) ) {
-				jsonObject.put( "firstImageUrl", firstImageUrl );
-			} else {
-				jsonObject.put( "firstImageUrl", "./resources/bootstrap-5/html/img/noimage.svg" );
-			}
-			
-			jsonArray.add( jsonObject );
-		}
-		
-		listresult.put( "jsonArray", jsonArray ); //배열을 다시 json에 담음. => ajax 에서 jsonArray(배열)를 안받아줘서 json 으로 다시 넣음
-		
-		return listresult;
-		
-	}
-	
-	*/
 	
 	@RequestMapping( value="/searchmapgugun.do" )
 	public ModelAndView searchmapgugun(HttpServletRequest request) {
@@ -213,38 +99,19 @@ public class Controller_SearchMap {
 		sto.setDoNm( request.getParameter( "sido" ) );
 		sto.setSigunguNm( request.getParameter( "gugun" ) );
 		
-		System.out.println( "시도 파라메터 잘 받아왔니 :" + request.getParameter( "sido" ) );
-		System.out.println( "구군 파라메터 잘 받아왔니 :" + request.getParameter( "gugun" ) );
+		//System.out.println( "시도 파라메터 잘 받아왔니 :" + request.getParameter( "sido" ) );
+		//System.out.println( "구군 파라메터 잘 받아왔니 :" + request.getParameter( "gugun" ) );
 		
-		System.out.println( "sto에 DoNm 잘 들어갔나 :" + sto.getDoNm() );
-		System.out.println( "sto에 SigunguNm 잘 들어갔나 :" + sto.getSigunguNm() );
+		//System.out.println( "sto에 DoNm 잘 들어갔나 :" + sto.getDoNm() );
+		//System.out.println( "sto에 SigunguNm 잘 들어갔나 :" + sto.getSigunguNm() );
 		
 		SearchListMapTO slistTO = new SearchListMapTO();
 		slistTO.setCpage(cpage);
-		System.out.println( "slistTO cpage 나오나보자 : " + slistTO.getCpage() );
+		//System.out.println( "slistTO cpage 나오나보자 : " + slistTO.getCpage() );
 
 		slistTO = mdao.searchmapList(slistTO, sto );
-		System.out.println( "총페이지. 누가 이가나 보자: " + slistTO.getTotalPage() );
-		System.out.println( "총게시글수. 누가 이가나 보자: " + slistTO.getTotalRecord() );
-		
-		
-		/*
-		StringBuilder sbHtml = new StringBuilder();
-		
-		ArrayList<SearchkeyTO> lists = slistTO.getSearchLists();
-		for( SearchkeyTO to : lists ) {
-			String firstImgUrl = to.getFirstImageUrl();
-			String facltNum = to.getFacltNm();
-			String addr1 = to.getAddr1();
-			String addr2 = to.getAddr2();
-			String induty = to.getInduty();
-			String contentId = to.getContentId();
-			String doNm = to.getDoNm();
-			String sigunguNm = to.getSigunguNm();
-			String mapX = to.getMapX();
-			String mapY = to.getMapY();
-		}
-		*/
+		//System.out.println( "총페이지. 누가 이가나 보자: " + slistTO.getTotalPage() );
+		//System.out.println( "총게시글수. 누가 이가나 보자: " + slistTO.getTotalRecord() );
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "/search/search_map_result" );

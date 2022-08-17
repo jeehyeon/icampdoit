@@ -48,9 +48,10 @@ public class SearchmapDAO {
 		int recordPerPage = listTO.getRecordPerPage();
 		int blockPerPage = listTO.getBlockPerPage();
 		
-		System.out.println( "cpage 뽑아봐봐 : " + listTO.getCpage() );
-		System.out.println( "recordPerPage 뽑아봐봐 : " + listTO.getRecordPerPage() );
-		System.out.println( "2번째 인덱스 값 : " + searchLists.get(1).getContentId() );
+		//System.out.println( "cpage 뽑아봐봐 : " + listTO.getCpage() );
+		
+		//System.out.println( "recordPerPage 뽑아봐봐 : " + listTO.getRecordPerPage() );
+		//System.out.println( "2번째 인덱스 값 : " + searchLists.get(0).getContentId() ); //인덱스 1하면 자료 1개 있는거 에러남~
 		
 		//총 게시글 수
 		listTO.setTotalRecord( searchLists.size() );
@@ -66,19 +67,19 @@ public class SearchmapDAO {
 		//cpage 별로 나눠서 데이터 출력
 		for( int i=0; i<recordPerPage ; i++ ) { //i가 0부터 5까지 증가
 			if( skip+i != searchLists.size() ) {  //skip+i 해서 전체 데이터 출력
-				//SearchkeyTO to = new SearchkeyTO(); 이거 하고 아래 sto 를 to 로 바꾸면 에러 남
-				sto.setFacltNm( searchLists.get(skip+i).getFacltNm() );
-				sto.setAddr1( searchLists.get(skip+i).getAddr1() );
-				sto.setAddr2( searchLists.get(skip+i).getAddr2() );
-				sto.setInduty( searchLists.get(skip+i).getInduty() );				
-				sto.setFirstImageUrl( searchLists.get(skip+i).getFirstImageUrl() );
-				sto.setContentId( searchLists.get(skip+i).getContentId() );
-				//sto.setDoNm( searchLists.get(skip+i).getDoNm() );  //얘넨 주석처리 해도 안해도 결과 잘 나옴
-				//sto.setSigunguNm( searchLists.get(skip+i).getSigunguNm() );
-				sto.setMapX( searchLists.get(skip+i).getMapX() );
-				sto.setMapY( searchLists.get(skip+i).getMapY() );
+				SearchkeyTO to = new SearchkeyTO(); 
+				to.setFacltNm( searchLists.get(skip+i).getFacltNm() );
+				to.setAddr1( searchLists.get(skip+i).getAddr1() );
+				to.setAddr2( searchLists.get(skip+i).getAddr2() );
+				to.setInduty( searchLists.get(skip+i).getInduty() );				
+				to.setFirstImageUrl( searchLists.get(skip+i).getFirstImageUrl() );
+				to.setContentId( searchLists.get(skip+i).getContentId() );
+				to.setDoNm( searchLists.get(skip+i).getDoNm() );  //얘넨 주석처리 해도 안해도 결과 잘 나옴
+				to.setSigunguNm( searchLists.get(skip+i).getSigunguNm() );
+				to.setMapX( searchLists.get(skip+i).getMapX() );
+				to.setMapY( searchLists.get(skip+i).getMapY() );
 				
-				lists.add( sto );
+				lists.add( to );
 				
 			} else { break; }
 		}
@@ -90,7 +91,8 @@ public class SearchmapDAO {
 			listTO.setEndBlock(listTO.getTotalPage());
 		}		
 		
-		System.out.println( "DoNm 뽑아봐봐 : " + sto.getDoNm() );
+		//System.out.println( "DoNm 뽑아봐봐 : " + sto.getDoNm() );
+		//System.out.println( "facltNm 뽑아봐봐 : " + sto.getFacltNm() );
 		
 		return listTO;
 	}

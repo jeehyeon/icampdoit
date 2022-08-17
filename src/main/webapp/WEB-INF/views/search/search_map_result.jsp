@@ -1,3 +1,8 @@
+<%@page import="org.json.simple.JSONArray"%>
+<%@page import="org.json.simple.JSONObject"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="com.exam.search.SearchkeyTO"%>
@@ -25,15 +30,15 @@
 	int endBlock = slistTO.getEndBlock();
 	int totalRecord = slistTO.getTotalRecord();
 	
-	System.out.println( "totalRecord 크기 봐봐:" + totalRecord );
+	//System.out.println( "totalRecord 크기 봐봐:" + totalRecord );
 	
 	SearchkeyTO sto = (SearchkeyTO)request.getAttribute( "sto" );
 	
 	String sido = sto.getDoNm();
 	String gugun = sto.getSigunguNm();
 	
-	System.out.println( "sido 봐봐:" + sido );
-	System.out.println( "gugun 봐봐:" + gugun );
+	//System.out.println( "sido 봐봐:" + sido );
+	//System.out.println( "gugun 봐봐:" + gugun );
 	
 	//SearchmapDAO mdao = new SearchmapDAO();
 	//SearchkeyTO to = new SearchkeyTO();
@@ -41,6 +46,28 @@
 	ArrayList<SearchkeyTO> datas = slistTO.getSearchLists();
 	
 	StringBuilder sbHtml = new StringBuilder();
+	
+	/*
+	HashMap<String, String> hm = new HashMap<>();
+	List<Map<String, String>> list = new ArrayList<>();
+	
+	String contentId = "";
+	String facltNm = "";
+	String induty = "";
+	String addr1 = "";
+	if( addr1.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*") == false ){
+		addr1 = sido + " " + gugun + " " + addr1;
+	}
+	String firstImageUrl = "";
+	if( firstImageUrl.equals("default") ) {
+		firstImageUrl = "./resources/bootstrap-5/html/img/noimage.svg";
+	}
+	String mapX = "";
+	String mapY = "";
+	String latlngadd = "";
+	
+	String[] arrStr = new String[1];
+	*/
 	
 	for( SearchkeyTO kto : datas ){
 		//kto = (SearchkeyTO)request.getAttribute( "sto" );
@@ -53,9 +80,9 @@
 		if( addr1.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*") == false ){
 			addr1 = kto.getDoNm() + " " + kto.getSigunguNm() + " " + kto.getAddr1();
 		}
-		System.out.println( "제발 좀 나와줘바 DoNM :" + kto.getDoNm() );
-		System.out.println( "제발 좀 나와줘바 SigunguNm :" + kto.getSigunguNm() );
-		System.out.println( "제발 좀 나와줘바 facltNm :" + kto.getFacltNm() );
+		//System.out.println( "제발 좀 나와줘바 DoNM :" + kto.getDoNm() );
+		//System.out.println( "제발 좀 나와줘바 SigunguNm :" + kto.getSigunguNm() );
+		//System.out.println( "제발 좀 나와줘바 facltNm :" + kto.getFacltNm() );
 		
 		String firstImageUrl = kto.getFirstImageUrl();
 		if( firstImageUrl.equals("default") ) {
@@ -63,6 +90,7 @@
 		}
 		String mapX = kto.getMapX();
 		String mapY = kto.getMapY();
+		String latlngadd = mapY + ", " + mapX;
 		
 		
 		sbHtml.append( "<div class='col-sm-6 mb-5 hover-animate' data-marker-id='59c0c8e33b1527bfe2abaf92'>");
@@ -71,21 +99,53 @@
 		sbHtml.append( "		</div>");			
 		sbHtml.append( "		<div class='card-body d-flex align-items-center'>");
 		sbHtml.append( "			<div class='w-100'>");
-		sbHtml.append( "				<h5 class='card-title'><a class='text-decoration-none text-dark' href='./campview.do?contentId=" + contentId + "'>" + facltNm + "</a></h5>");
+		sbHtml.append( "				<h5 class='card-title'><a class='text-decoration-none text-dark' id='linkid' href='./campview.do?contentId=" + contentId + "'>" + facltNm + "</a></h5>");
 		sbHtml.append( "				<div class='d-flex card-subtitle mb-3'>");
-		sbHtml.append( "					<p class='flex-grow-1 mb-0 text-muted text-sm'>" + addr1 + "</p>");
+		sbHtml.append( "					<p class='flex-grow-1 mb-0 text-muted text-sm' id='campaddr' >" + addr1 + "</p>");
 		sbHtml.append( "				</div>");
+		sbHtml.append( "				<div id='mapval' style='display: none;'>" + latlngadd + "</div>" );
 		sbHtml.append( "				<p class='card-text text-muted'>" + induty + "</p>");
 		sbHtml.append( "			</div>");
 		sbHtml.append( "		</div>");
 		sbHtml.append( "	</div>");
 		sbHtml.append( "</div>");
 		
-		System.out.println( "x좌표 뽑아보자 : " + mapX );
+		//System.out.println( "x좌표 뽑아보자 : " + mapX );
+		
 	}
 	
-	//System.out.println( "x좌표 뽑아보자 : " + mapX );
+	JSONObject result = new JSONObject();
+	JSONArray jsonArray = new JSONArray();
+	for( SearchkeyTO to : datas ){
+		String latlngadd = to.getMapY() + ", " + to.getMapX();
+		String title = to.getFacltNm();
+		String link = "campview.do?contentId=" + to.getContentId();
+		String campaddress = to.getAddr1();
+		if( campaddress.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*") == false ){
+			campaddress = to.getDoNm() + " " + to.getSigunguNm() + " " + to.getAddr1();
+		}
+		
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put( "title", title );
+		jsonObject.put( "latlng", latlngadd );
+		jsonObject.put( "campaddress", campaddress );
+		jsonObject.put( "link", link );
+		
+		jsonArray.add( jsonObject );
+	}
+	result.put( "jsonArray", jsonArray );
+	System.out.println( jsonArray.toString() );
+	System.out.println(  result.toString() );
 	
+	
+	/*
+	for( int i=0; i<recordPerPage; i++ ){
+		arrStr
+	}
+	
+	System.out.println( hm.toString() );
+	//System.out.println( "x좌표 뽑아보자 : " + mapX );
+	*/
 						
 %>
 
@@ -460,111 +520,25 @@
     			$( '#result' ).empty();
     			$( '#number' ).empty();
     			
-    			/*
-    			$.ajax({
-    				url: '/searchmapgugun.do',
-    				type: "POST", 
-    				data : {
-    					"sidoVal" : sidoVal,
-    					"gugunVal" : gugunVal	
-    				},
-    				dataType : "json",
-    				success: function(json){
-    					
-    					let result = "";
-    					let totalNum = "";
-    					$.each( json.jsonArray, function( index, jsonArray ){
-    						
-    						//if( jsonArray.firstImageUrl.equals("default") ) {
-    						//	jsonArray.firstImageUrl.replace( "./resources/bootstrap-5/html/img/noimage.svg" );
-    						//}
-    						   						
-    						result += '<div class="col-sm-6 mb-5 hover-animate" data-marker-id="59c0c8e33b1527bfe2abaf92">';
-    						result += '	 <div class="card h-100 border-0 shadow">';
-    						result += '   	<div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="' + jsonArray.firstImageUrl + '"/><a class="tile-link" href="./campview.do"></a>';
-    						result += '   	</div>';
-    						result += '  	<div class="card-body d-flex align-items-center">';
-    						result += '     	<div class="w-100">';
-    						result += '        		<h5 class="card-title"><a class="text-decoration-none text-dark" href="./campview.do">' + jsonArray.facltNm + '</a></h5>';
-    						result += '         	<div class="d-flex card-subtitle mb-3">';
-    						result += '          		<p class="flex-grow-1 mb-0 text-muted text-sm">' + jsonArray.addr1 + '</p>';
-    						result += '        		</div>';
-    						result += '         	<p class="card-text text-muted">' + jsonArray.induty + '</p>';
-    						result += '      	</div>';
-    						result += '     </div>';
-    						result += '  </div>';
-    						result += '</div>';
-    						
-    						totalNum += '총  <strong>' + (index+1) + '</strong> 건'
-    					});
-    					
-    					$( '#result' ).html( result );
-    					
-    					/*
-						$.each( json.pageArray, function( index, pageArray ){
-    						
-    						//if( jsonArray.firstImageUrl.equals("default") ) {
-    						//	jsonArray.firstImageUrl.replace( "./resources/bootstrap-5/html/img/noimage.svg" );
-    						//}
-    						   						
-    						if ( startBlock == 1 ) {
-    							result += " <li class='page-item'><a class='page-link' href='#'><i class='fa fa-thin fa-angles-left'></i></a></li> ");
-    						} else {
-    							result += " <li class='page-item'><a class='page-link' href='searchmap.do?cpage="+ (startBlock - blockPerPage) +"'><i class='fa fa-thin fa-angles-left'></i></a></li>");
-    						}
-    					
-    						if ( cpage == 1 ) {
-    							result += " <li class='page-item'><a class='page-link' href='#'> <i class='fa fa-angle-left'></i></a></li> ");
-    						} else {
-    							result += " <li class='page-item'><a class='page-link' href='searchmap.do?cpage="+ (pageArray.cpage-1) + "'><i class='fa fa-angle-left'></i></a></li> ");
-    						}
-    				
-    						for ( int i=startBlock; i<=endBlock; i++ ) {
-    							if ( cpage == i ) { 
-    								result += " <li class='page-item active'><a class='page-link' href='#'>" + i + "</a></li> ");
-    							} else {
-    								result += " <li class='page-item'><a class='page-link' href='searchmap.do?" + "cpage=" + i + "'>" + i + "</a></li> ");
-    							}
-    						}
-    					//out.println(" &nbsp;&nbsp; ");
-    					//페이지 하단의 > 버튼
-    						if ( cpage == totalPage ) {
-    							result += " <li class='page-item'><a class='page-link' href='#'><i class='fa fa-angle-right'></i></a></li> ");
-    						} else {
-    							result += " <li class='page-item'><a class='page-link' href='searchmap.do?cpage="+ (pageArray.cpage+1) +"'><i class='fa fa-angle-right'></i></a></li> ");
-    						}
-    					//out.println(" &nbsp; ");
-    					//페이지 하단의 >> 버튼
-    						if ( endBlock == totalPage ) {
-    							result += " <li class='page-item'><a class='page-link' href='#'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
-    						} else {
-    							result += " <li class='page-item'><a class='page-link' href='searchmap.do?cpage="+ (startBlock + blockPerPage) + "'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
-    						}
-    						
-    					});
-    					
-    					$( '#pagenation' ).html( result );
-    					
-    					
-    					//$('#gugun').selectpicker( 'refresh' );
-    					
-    					
-    				},
-    				error: function(e){
-    					alert( '[에러]' + e.status );
-    				}
-    			});
-    			*/
+    			
     		});
     		
+    		var latlngArr = new Array();
+	    	$( '#mapval' ).each( function( index, item ) {
+	    		latlngArr.push($(item).text());
+	    	});
+	    	alert( latlngArr );
     	});
+    	
+    	
+    	
     
     </script>
     <script>
 				var mapContainer = document.getElementById('map'), //지도 표시할 div id
 					mapOptions = {
 						center: new kakao.maps.LatLng(37.5817426, 127.4838359), //center = 지도 중심 좌표
-						level: 3 //지도 확대 레벨. 기본값=3
+						level: 9 //지도 확대 레벨. 기본값=3
 					};
 		
 				var map = new kakao.maps.Map(mapContainer, mapOptions); //지도를 표시할 div와 지도 옵션으로 지도를 생성함
@@ -586,6 +560,32 @@
 				var markers = []; // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
 				var contents = [];
 				var overlays = [];
+				
+				//var pos [] = 
+				/*
+				for( SearchkeyTO kto : datas ){			
+					String contentId = kto.getContentId();
+					String facltNm = kto.getFacltNm();
+					String induty = kto.getInduty();
+					String addr1 = kto.getAddr1();
+					if( addr1.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*") == false ){
+						addr1 = kto.getDoNm() + " " + kto.getSigunguNm() + " " + kto.getAddr1();
+					}
+					String firstImageUrl = kto.getFirstImageUrl();
+					if( firstImageUrl.equals("default") ) {
+						firstImageUrl = "./resources/bootstrap-5/html/img/noimage.svg";
+					}
+					String mapX = kto.getMapX();
+					String mapY = kto.getMapY();
+					
+					
+				}
+				*/
+				
+				var param = <%=jsonArray.toString() %>
+				console.log( param );
+				
+				
 				
 				var positions = [
 					{
@@ -620,31 +620,6 @@
 					}
 				];
 				
-				/*
-				var arr = new Array();
-				arr[0] = ["가평사계절캠핑장", 37.8833509, 127.5489707, "주소주소", "./campview.do?facltNm=001" ];
-				arr[1] = ["가평 사과나무 캠핑장", 37.7895015, 127.358428, "주소주소", "./campview.do?facltNm=001" ];
-				arr[2] = ["가평 운악홀리데이 캠핑장", 37.8536510, 127.5102426, "주소주소", "./campview.do?facltNm=001" ];
-				arr[3] = ["구름게곡캠핑장", 37.8879007, 127.5387410, "주소주소", "./campview.do?facltNm=001" ];
-				arr[4] = ["국립유명산자연휴양림", 37.5817426, 127.4838359, "주소주소", "./campview.do?facltNm=001" ];
-				*/
-				
-				//var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-				
-				/*
-				for ( var i=0; i<positions.length; i++ ){
-					
-					//var imageSize = new kakao.maps.Size(24, 35); 
-					//var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-					
-					var marker = new kakao.maps.Marker({
-						map: map, //마커를 표시할 지도
-						position: positions[i].latlng, //마커표시할 위치
-						title : positions[i].title, //마커에 마우스 올리면 표시되는 타이틀.. 표시하기
-						//image : markerImage
-					});
-				}
-				*/
 				
 				for ( var i=0; i<positions.length; i++ ){
 					
