@@ -41,7 +41,7 @@
 		hit = hto.getHit();	
 		filename = hto.getFilename();
 		filesize = hto.getFilesize();
-		System.out.println("[filename]" + filename);
+		System.out.println("[jsp 혼캠filename]" + filename);
 		//System.out.println("[content]" + content);
 		
 	} else if( subjectValue.equals("5")  ) {
@@ -57,7 +57,7 @@
 		hit = nto.getHit();	
 		filename = nfto.getFilename();
 		filesize = nfto.getFilesize();
-		System.out.println("[filename]" + filename);
+		System.out.println("[jsp 공지filename]" + filename);
 		
 	}
 	
@@ -208,10 +208,10 @@
 	<script>    
 	
  	document.getElementById( 'cbtn' ).onclick = function() { 		
- 		//var subject = $('#subject').val();
+ 		var subject = $('#subject').val();
  		var filename = $('#modifyOk').val();
  		
-	    var data = {'filename' : filename };	    	
+	    var data = {'filename' : filename, 'subject' : subject };	    	
  		
 		$.ajax({
 			data : data,
@@ -271,9 +271,6 @@
 		let date = new Date().getTime().toString(36);
 		$('#vcode').val(date);
 		console.log("date : " +date);
-		var imgUrl = './h_upload/';
-		var mimgUrl = imgUrl + $('#filename').val()
-		console.log("filename : "+ mimgUrl);
 
 		var fontList = ['맑은 고딕','굴림','돋움','바탕','궁서','NotoSansKR','Arial','Courier New','Verdana','Tahoma'];
 		$('#summernote').summernote({
