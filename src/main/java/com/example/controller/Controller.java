@@ -15,6 +15,7 @@ import com.exam.admin.VisitTO;
 import com.exam.home.HomeDAO;
 import com.exam.search.InsertGocamping;
 import com.exam.search.SearchkeyTO;
+import com.exam.weather.WeatherTO;
 
 
 @RestController
@@ -40,6 +41,7 @@ public class Controller {
 
 		ArrayList<SearchkeyTO> lists = dao.campInfo();
 
+		ArrayList<WeatherTO> wlists = dao.weatherInfo();
 		if( session.isNew() ) {
 			//vto.setVdate( (Long.toString( session.getCreationTime() ) ) );
 			sdao.increaseVisitor();
@@ -48,6 +50,7 @@ public class Controller {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "home" );
 		modelAndView.addObject( "lists", lists );
+		modelAndView.addObject( "wlists", wlists );
 		
 		return modelAndView;
 	}

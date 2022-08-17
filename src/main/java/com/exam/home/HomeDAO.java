@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.exam.mboard.BoardTO;
 import com.exam.search.SearchkeyTO;
+import com.exam.weather.WeatherTO;
 
 
 @Repository
@@ -26,5 +27,18 @@ public class HomeDAO {
 		return lists;
 	}
 	
+	
+	//날씨 정보
+	public ArrayList<WeatherTO> weatherInfo() {	
+		
+		String sql = "select date, taMin, taMax, pop, sky from weather";		
+		ArrayList<WeatherTO> lists = (ArrayList<WeatherTO>)jdbcTemplate.query(
+				sql, new BeanPropertyRowMapper<WeatherTO>(WeatherTO.class) );
+		
+		//for(WeatherTO to : lists) {
+			//System.out.println("dao 날짜"+to.getDate());
+		//}
+		return lists;
+	}
 
 }

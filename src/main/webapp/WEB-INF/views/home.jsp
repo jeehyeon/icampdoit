@@ -1,3 +1,4 @@
+<%@page import="com.exam.weather.WeatherTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="com.exam.search.SearchkeyTO"%>
@@ -36,6 +37,36 @@
 		sbHtml.append( "</div>" );
 		sbHtml.append( "</div>" );
 	}
+	
+	
+	//날씨 
+	ArrayList<WeatherTO> wlists = (ArrayList)request.getAttribute( "wlists" );
+	
+	StringBuilder wHtml = new StringBuilder();
+	
+	for( WeatherTO wto : wlists ) {
+		
+	wHtml.append("<div class=\"swiper-slide h-auto d-flex align-items-center justify-content-center\">");
+	wHtml.append("<div class=\"tit_weather\"> <strong>"+ wto.getDate()+"</strong><br/></div>");
+	if(Integer.parseInt(wto.getPop())>=30){
+		wHtml.append("<img class=\"weatherimage\" src=\"./resources/bootstrap-5/html/img/weathericon/NB03.png\"/>");
+	}else if( (wto.getSky()=="6"||wto.getSky()=="7"||wto.getSky()=="8"||wto.getSky()=="9"||wto.getSky()=="10")&&(Integer.parseInt(wto.getPop())>30)){
+		wHtml.append("<img class=\"weatherimage\" src=\"./resources/bootstrap-5/html/img/weathericon/NB03.png\"/>");
+	}else if(wto.getSky().indexOf("눈")!= -1){
+		wHtml.append("<img class=\"weatherimage\" src=\"./resources/bootstrap-5/html/img/weathericon/NB04.png\"/>");
+	}else if(wto.getSky().equals("1")||wto.getSky().equals("2")||wto.getSky().equals("3")||wto.getSky().equals("4")||wto.getSky()=="5"||wto.getSky().indexOf("맑음")!= -1){
+		wHtml.append("<img class=\"weatherimage\" src=\"./resources/bootstrap-5/html/img/weathericon/NB01.png\"/>");
+	}else{
+		wHtml.append("<img class=\"weatherimage\" src=\"./resources/bootstrap-5/html/img/weathericon/NB02.png\"/>");
+	}
+	
+	wHtml.append( wto.getTaMin()+"°C/"+wto.getTaMax() +"°C<br/>");
+	wHtml.append("강수 : "+wto.getPop() +"%");
+	wHtml.append("</div>");
+		
+	}
+	
+	
 	
 %>
 <!DOCTYPE html>
@@ -696,15 +727,15 @@
         <!-- Brands Slider-->
         <div class="swiper-container brands-slider">
           <div class="swiper-wrapper pb-5">
+          <%=wHtml.toString()%>
             <!-- today -->
+            <!--  
             <div class="swiper-slide h-auto d-flex align-items-center justify-content-center">
 			   	<div class="tit_weather"> <strong>7.26</strong><br/>화</div>
 			   	<img class="weatherimage" src="./resources/bootstrap-5/html/img/weathericon/NB01.png"/>
 			   	25°C/32°C<br/>
 			    강수 : 10%
 		   	</div>
-		   	
-            <!-- today+1-->
             <div class="swiper-slide h-auto d-flex align-items-center justify-content-center">
 	           <div class="tit_weather"> <strong>7.27</strong><br/>수</div>
 			   	<img class="weatherimage" src="./resources/bootstrap-5/html/img/weathericon/NB01.png"/>
@@ -712,7 +743,7 @@
 			   	강수 : 30%
             </div>
             
-            <!--  today+2-->
+            
             <div class="swiper-slide h-auto d-flex align-items-center justify-content-center">
 	            <div class="tit_weather"><strong>7.28</strong><br/>목 </div>
 			   	<img class="weatherimage" src="./resources/bootstrap-5/html/img/weathericon/NB03.png"/>
@@ -720,7 +751,7 @@
 			   	강수 : 0%
             </div>
             
-            <!--  today+3-->
+            
             <div class="swiper-slide h-auto d-flex align-items-center justify-content-center">
 	            <div class="tit_weather"><strong>7.29</strong><br/>금 </div>
 			   	<img class="weatherimage" src="./resources/bootstrap-5/html/img/weathericon/NB03.png"/>
@@ -728,7 +759,7 @@
 			   	강수 : 50%
             </div>
             
-            <!--  today+4-->
+           
             <div class="swiper-slide h-auto d-flex align-items-center justify-content-center">
 	            <div class="tit_weather"><strong>7.30</strong> <br/>토</div>
 			   	<img class="weatherimage" src="./resources/bootstrap-5/html/img/weathericon/NB03.png"/>
@@ -736,7 +767,7 @@
 			   	강수 : 50%
             </div>
             
-            <!--  today+5-->
+            
             <div class="swiper-slide h-auto d-flex align-items-center justify-content-center">
 	            <div class="tit_weather"><strong>7.31</strong><br/>일 </div>
 			   	<img class="weatherimage" src="./resources/bootstrap-5/html/img/weathericon/NB01.png"/>
@@ -744,15 +775,14 @@
 			   	강수 : 0%
             </div>
             
-            <!--  today+6-->
+           
             <div class="swiper-slide h-auto d-flex align-items-center justify-content-center">
 	            <div class="tit_weather"><strong>8.01</strong> <br/>월</div>
 			   	<img class="weatherimage" src="./resources/bootstrap-5/html/img/weathericon/NB01.png"/>
 			   	25°C/34°C<br/>
 			   	강수 : 10%
-            </div>
-            
- 
+            </div>            
+ -->
           </div>
         </div>
       </div>
