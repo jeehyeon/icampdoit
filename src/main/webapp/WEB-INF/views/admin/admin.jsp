@@ -384,7 +384,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-4 mt-4 mb-3">
+        <div class="col-lg-4 mt-2 mb-3">
           <div class="card z-index-2 ">           
 	        <div class="card">
 	          <div class="card-header p-3 pt-2">
@@ -403,7 +403,7 @@
 	        </div>	            
 	      </div>
         </div>
-        <div class="col-lg-4 mt-4 mb-3">
+        <div class="col-lg-4 mt-2 mb-2 ">
           <div class="card z-index-2 ">           
 	        <div class="card">
 	          <div class="card-header p-3 pt-2">
