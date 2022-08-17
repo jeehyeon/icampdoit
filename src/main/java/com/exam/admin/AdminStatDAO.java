@@ -112,4 +112,14 @@ public class AdminStatDAO {
 		
 		return todayVisitor;
 	}
+	
+	//소셜 가입자 수
+	public String countSocialId() {
+		
+		String sql = "select count(*) from users where kid != 0";
+		
+		String countSocialId = (String)jdbcTemplate.queryForObject(sql, String.class );
+		
+		return countSocialId;
+	}
 }

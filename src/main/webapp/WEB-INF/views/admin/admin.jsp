@@ -10,6 +10,7 @@
 	String countReviews = (String)request.getAttribute( "countReviews" );
 	String countTotalVisitor = (String)request.getAttribute( "countTotalVisitor" );
 	String countTodayVisitor = (String)request.getAttribute( "countTodayVisitor" );
+	String countSocialId = (String)request.getAttribute( "countSocialId" );
 	
 	ArrayList<SignUpTO> lists = (ArrayList<SignUpTO>)request.getAttribute("lists");
 	
@@ -73,35 +74,24 @@
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+<!-- Font Awesome 이거 추가함 -->
+<script src="https://kit.fontawesome.com/5251502df3.js" crossorigin="anonymous"></script>   
 <link rel="apple-touch-icon" sizes="76x76" href="./resources/bootstrap-5/html/admin/img/apple-icon.png">
 <link rel="icon" type="image/png" href="./resources/bootstrap-5/html/img/logo2.svg">
-<title>
- 
-  ICAMPDOITADMIN
-
-</title>
-
-
-
+<title>I Camp Do It Administrator</title>
 <!--     Fonts and icons     -->
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
-
 <!-- Nucleo Icons -->
 <link href="./resources/bootstrap-5/html/admin/css/nucleo-icons.css" rel="stylesheet" />
 <link href="./resources/bootstrap-5/html/admin/css/nucleo-svg.css" rel="stylesheet" />
-
 <!-- Font Awesome Icons -->
 <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-
 <!-- Material Icons -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-
 <!-- CSS Files -->
-
 <link id="pagestyle" href="./resources/bootstrap-5/html/admin/css/material-dashboard.css?v=3.0.4" rel="stylesheet" />
+</head>
 
- </head>
 <body class="g-sidenav-show  bg-gray-200">
 	<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark" id="sidenav-main">
 		<div class="sidenav-header" style="text-align: center">
@@ -166,7 +156,6 @@
       
       <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
         
-        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">I Camp Do It</li>
       </ol>
       <h6 class="font-weight-bolder mb-0">DashBoard</h6>
       
@@ -257,16 +246,193 @@
 </nav>
 
 <!-- End Navbar -->
-
     <div class="container-fluid py-4">
-      <div class="row">
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+      <div class="row">       
+        <div class="col-lg-4 mb-3">
+          <div class="card z-index-2 ">           
+	        <div class="card">
+	          <div class="card-header p-3 pt-2">
+	            <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+	              <!-- <i class="material-icons opacity-10">weekend</i> -->
+	              <i class="fa-solid fa-person-dress opacity-10"></i>
+	            </div>
+	            <div class="text-end pt-1">
+	              <p class="text-sm mb-0 text-capitalize">여성 회원 수</p>
+                  <h4 class="mb-0"><%=countFemale %></h4>
+	            </div>
+	          </div>
+	          <hr class="dark horizontal my-0">
+	          <div class="card-footer p-3">	              
+	          </div>
+	        </div>	            
+	      </div>
+        </div>
+        <div class="col-lg-4 mb-3">
+          <div class="card z-index-2 ">           
+	        <div class="card">
+	          <div class="card-header p-3 pt-2">
+	            <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
+                <!-- <i class="material-icons opacity-10">person</i> -->
+                <i class="fa-solid fa-person opacity-10"></i>
+	            </div>
+	            <div class="text-end pt-1">
+	              <p class="text-sm mb-0 text-capitalize">남성 회원 수</p>
+                <h4 class="mb-0"><%=countMale %></h4>
+	            </div>
+	          </div>
+	          <hr class="dark horizontal my-0">
+	          <div class="card-footer p-3">	              
+	          </div>
+	        </div>	            
+	      </div>
+        </div>
+        <div class="col-lg-4 mb-3">
+          <div class="card z-index-2 ">           
+	        <div class="card">
+	          <div class="card-header p-3 pt-2">
+	            <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+                <i class="material-icons opacity-10">person_add</i>
+	            </div>
+	            <div class="text-end pt-1">
+	              <p class="text-sm mb-0 text-capitalize">이번주 가입자 수</p>
+                  <h4 class="mb-0">+ <%=weeklyRegistered %></h4>
+	            </div>
+	          </div>
+	          <hr class="dark horizontal my-0">
+	          <div class="card-footer p-3">	              
+	          </div>
+	        </div>	            
+	      </div>
+        </div>
+        
+      <div class="row mt-4">    
+        <div class="col-lg-4 mb-3">
+          <div class="card z-index-2 ">           
+	        <div class="card">
+	          <div class="card-header p-3 pt-2">
+	            <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+	              <!-- <i class="material-icons opacity-10">weekend</i> -->
+	              <i class="fa-solid fa-file-lines opacity-10"></i>
+	            </div>
+	            <div class="text-end pt-1">
+	              <p class="text-sm mb-0 text-capitalize">게시판 게시글수</p>
+                  <h4 class="mb-0"><%=countBoardResult %></h4>
+	            </div>
+	          </div>
+	          <hr class="dark horizontal my-0">
+	          <div class="card-footer p-3">	              
+	          </div>
+	        </div>	            
+	      </div>
+        </div>    
+        <div class="col-lg-4 mb-3">
+          <div class="card z-index-2 ">           
+	        <div class="card">
+	          <div class="card-header p-3 pt-2">
+	            <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+	              <!-- <i class="material-icons opacity-10">weekend</i> -->
+	              <i class="fa-solid fa-align-right opacity-10"></i>
+	            </div>
+	            <div class="text-end pt-1">
+	              <p class="text-sm mb-0 text-capitalize">등록된 리뷰 수</p>
+	              <h4 class="mb-0"><%=countReviews %></h4>
+	            </div>
+	          </div>
+	          <hr class="dark horizontal my-0">
+	          <div class="card-footer p-3">	              
+	          </div>
+	        </div>	            
+	      </div>
+        </div>
+        <div class="col-lg-4 mb-3">
+          <div class="card z-index-2 ">           
+	        <div class="card">
+	          <div class="card-header p-3 pt-2">
+	            <div class="icon icon-lg icon-shape bg-gradient-warning shadow-warning text-center border-radius-xl mt-n4 position-absolute">
+	              <!-- <i class="material-icons opacity-10">weekend</i> -->
+	              <i class="fa-solid fa-comment opacity-10"></i>
+	            </div>
+	            <div class="text-end pt-1">
+	              <p class="text-sm mb-0 text-capitalize">소셜 가입자 수</p>
+		          <h4 class="mb-0"><%=countSocialId %></h4>
+	            </div>
+	          </div>
+	          <hr class="dark horizontal my-0">
+	          <div class="card-footer p-3">	              
+	          </div>
+	        </div>	            
+	      </div>
+        </div> 
+        
+      <div class="row mt-4">  
+        <div class="col-lg-4 col-md-6 mt-4 mb-4">
+          <div class="card z-index-2 ">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+              <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
+                <div class="chart">
+                  <canvas id="chart-bars" class="chart-canvas" height="330" ></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <h6 class="mb-0 ">연령 분포</h6>
+              
+              <hr class="dark horizontal">
+              <div class="d-flex ">
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 mt-4 mb-3">
+          <div class="card z-index-2 ">           
+	        <div class="card">
+	          <div class="card-header p-3 pt-2">
+	            <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+	              <!-- <i class="material-icons opacity-10">weekend</i> -->
+	              <i class="fa-solid fa-arrow-right-to-bracket opacity-10"></i>
+	            </div>
+	            <div class="text-end pt-1">
+	              <p class="text-sm mb-0 text-capitalize">오늘 방문자 수</p>
+		          <h4 class="mb-0"><%=countTodayVisitor %></h4>
+	            </div>
+	          </div>
+	          <hr class="dark horizontal my-0">
+	          <div class="card-footer p-3">	              
+	          </div>
+	        </div>	            
+	      </div>
+        </div>
+        <div class="col-lg-4 mt-4 mb-3">
+          <div class="card z-index-2 ">           
+	        <div class="card">
+	          <div class="card-header p-3 pt-2">
+	            <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+	              <!-- <i class="material-icons opacity-10">weekend</i> -->
+	              <i class="fa-solid fa-people-line opacity-10"></i>
+	            </div>
+	            <div class="text-end pt-1">
+	              <p class="text-sm mb-0 text-capitalize">총 방문자 수</p>
+		          <h4 class="mb-0"><%=countTotalVisitor %></h4>
+	            </div>
+	          </div>
+	          <hr class="dark horizontal my-0">
+	          <div class="card-footer p-3">	              
+	          </div>
+	        </div>	            
+	      </div>
+        </div>
+       </div>      
+     </div>
+      
+      <%-- <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
           <div class="card">
             <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                <i class="material-icons opacity-10">weekend</i>
+              <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+                <!-- <i class="material-icons opacity-10">weekend</i> -->
+                <i class="fa-solid fa-file-lines opacity-10"></i>
               </div>
-              <div class="text-end pt-1">
+              <div class="text-end pt-1 ">
                 <p class="text-sm mb-0 text-capitalize">게시판 게시글수</p>
                 <h4 class="mb-0"><%=countBoardResult %></h4>
               </div>
@@ -276,12 +442,13 @@
              
             </div>
           </div>
-        </div>
+        </div> 
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
           <div class="card">
             <div class="card-header p-3 pt-2">
               <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
-                <i class="material-icons opacity-10">person</i>
+                <!-- <i class="material-icons opacity-10">person</i> -->
+                <i class="fa-solid fa-person-dress opacity-10"></i>
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">여성 회원 수</p>
@@ -297,8 +464,9 @@
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
           <div class="card">
             <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                <i class="material-icons opacity-10">person</i>
+              <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
+                <!-- <i class="material-icons opacity-10">person</i> -->
+                <i class="fa-solid fa-person opacity-10"></i>
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">남성 회원 수</p>
@@ -314,12 +482,12 @@
         <div class="col-xl-3 col-sm-6">
           <div class="card">
             <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
+              <div class="icon icon-lg icon-shape bg-gradient-warning shadow-warning text-center border-radius-xl mt-n4 position-absolute">
                 <i class="material-icons opacity-10">person_add</i>
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">이번주 가입자 수</p>
-                <h4 class="mb-0">+<%=weeklyRegistered %></h4>
+                <h4 class="mb-0">+ <%=weeklyRegistered %></h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -328,95 +496,7 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="row mt-4">
-        
-        
-        <div class="col-lg-4 mt-4 mb-3">
-          <div class="card z-index-2 ">
-            
-	            <div class="card">
-	            <div class="card-header p-3 pt-2">
-	              <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-	                <i class="material-icons opacity-10">weekend</i>
-	              </div>
-	              <div class="text-end pt-1">
-	                <p class="text-sm mb-0 text-capitalize">등록된 리뷰 수</p>
-	                <h4 class="mb-0"><%=countReviews %></h4>
-	              </div>
-	            </div>
-	            <hr class="dark horizontal my-0">
-	            <div class="card-footer p-3">
-	              
-	            </div>
-	          </div>
-	            
-	          </div>
-        </div>
-         <div class="col-lg-4 mt-4 mb-3">
-          <div class="card z-index-2 ">
-            
-	            <div class="card">
-		            <div class="card-header p-3 pt-2">
-		              <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-		                <i class="material-icons opacity-10">weekend</i>
-		              </div>
-		              <div class="text-end pt-1">
-		                <p class="text-sm mb-0 text-capitalize">총 방문자 수</p>
-		                <h4 class="mb-0"><%=countTotalVisitor %></h4>
-		              </div>
-		            </div>
-		            <hr class="dark horizontal my-0">
-		            <div class="card-footer p-3">
-	              
-	            	</div>
-	          	</div>
-          </div>
-        </div>
-        <div class="col-lg-4 mt-4 mb-3">
-          <div class="card z-index-2 ">
-            
-	            <div class="card">
-		            <div class="card-header p-3 pt-2">
-		              <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-		                <i class="material-icons opacity-10">weekend</i>
-		              </div>
-		              <div class="text-end pt-1">
-		                <p class="text-sm mb-0 text-capitalize">오늘 방문자 수</p>
-		                <h4 class="mb-0"><%=countTodayVisitor %></h4>
-		              </div>
-		            </div>
-		            <hr class="dark horizontal my-0">
-		            <div class="card-footer p-3">
-	              
-	            	</div>
-	          	</div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 mt-4 mb-4">
-          <div class="card z-index-2 ">
-            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-              <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                <div class="chart">
-                  <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-              <h6 class="mb-0 ">연령 분포</h6>
-              
-              <hr class="dark horizontal">
-              <div class="d-flex ">
-                
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        
-      </div>
-      
-                
+      </div> --%>          
 
 
 <!--   Core JS Files   -->
