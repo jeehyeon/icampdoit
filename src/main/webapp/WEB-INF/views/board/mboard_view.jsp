@@ -84,7 +84,7 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <!-- sweet alert -->
+    <!-- Sweet Alert -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
   </head>
@@ -325,8 +325,11 @@
   			  if (result.isConfirmed) {
   				if(viewUcode == sessionUcode){
   	  				//삭제 진행
-					location.href='./mboarddelete_ok.do?viewseq='+ viewSeq;
-  	  				
+  	  				if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
+   
+  	  				location.href='./mboarddelete_ok.do?viewseq='+ viewSeq;
+   					}
+					
   	  			}else{
   	  				//삭제 불가
   	  				Toast.fire({
