@@ -91,7 +91,7 @@ public class AdminUsersDAO {
 		public int usersDeleteOK(SignUpTO sto) {
 			int flag = 2;
 			
-			System.out.println( "Ucode: " +sto.getUcode() );
+			System.out.println( "Ucode deleteDAO 에서: " +sto.getUcode() );
 			
 			String sql = "update users set pwd=?, name=?, email=?, birth=?, gen=?, hint=?, answer=?, kid=? where ucode=?";
 			int result = jdbcTemplate.update(sql, " ", " ", " ", " ", " ", " ", " ", " ", sto.getUcode() );

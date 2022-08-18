@@ -34,6 +34,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="./resources/bootstrap-5/html/admin/css/material-dashboard.css?v=3.0.4" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -224,6 +225,7 @@
   <script src="./resources/bootstrap-5/html/admin/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="./resources/bootstrap-5/html/admin/js/plugins/smooth-scrollbar.min.js"></script>
   <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
   <script>
 
 	  
@@ -235,21 +237,45 @@
   
   document.getElementById( 'dbtn' ).onclick = function() {
 	  if( confirm( "회원 정보를 삭제하시겠습니까? 삭제 후 복구가 불가능합니다.") ) {
-		  var ucode = $('#ucode').val();
+		  //var ucode = $('#ucode').val();
+		  //alert( ucode );
 		  
 		  $.ajax({
-				data : ucode,				
+				data : {ucode: $('#ucode').val()},				
 				type : "POST",
 				url : './admin_users_deleteOk.do',
 				dataType : 'text',
 				success : function(flag) {					
-					
+					//alert( "flag값 ajax:" + flag );
 					if( flag == "0" ) {
-						alert('회원정보 삭제 성공');
-						location.href= '/admin_users.do';
+						//alert('회원정보 삭제 성공');
+						Swal.fire({
+							title: '회원 정보 삭제 성공',  
+							text:	'',
+							icon:	'success',
+							confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
+							confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+					
+						}).then((result) => {
+				
+	  			 			if (result.isConfirmed) {
+	  				 			location.href='/admin_users.do';
+	  			 			} 
+	  					})
 					} else {
-						alert('회원정보 수정 실패');
-						history.back();
+						Swal.fire({
+							title: '회원 정보 삭제 실패',     
+							text:	'다시 시도해 주세요.', 
+							icon:	'error',
+							confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
+							confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+							
+						}).then((result) => {
+						
+			  			 	if (result.isConfirmed) {
+			  					history.back();
+			  			 	} 
+			  			})
 					}
 				},
 				error: function(request, status, error) {

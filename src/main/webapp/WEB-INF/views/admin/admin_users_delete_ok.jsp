@@ -41,7 +41,7 @@
 			    }
 			})
 			
-			if( flag != 1 ) {
+			if( flag == 0 ) {
 				Swal.fire({
 					title: '회원 정보 삭제 성공',  
 					text:	'',
