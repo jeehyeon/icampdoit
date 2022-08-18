@@ -22539,6 +22539,10 @@ label,
   background-image: linear-gradient(195deg, #49a3f1 0%, #1A73E8 100%);
 }
 
+.bg-gradient-admin {
+  background-image: linear-gradient(195deg, #6f42c1 0%, #6f42c1 100%);
+}
+
 .bg-gradient-warning {
   background-image: linear-gradient(195deg, #FFA726 0%, #FB8C00 100%);
 }

@@ -57,8 +57,19 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <style type="text/css">
+  		#wrap {
+  			min-height: 90vh;
+		  	display: flex;
+		  	flex-direction: column;
+  		}
+  		#footer {
+    		margin-top: auto;
+  		}
+  	</style>
   </head>
   <body style="padding-top: 72px;">
+  <div id="wrap">
     <header class="header">
       <!-- Navbar 로고부분-->
       <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
@@ -84,7 +95,7 @@
 	              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="searchDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                   Search</a>
 	                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="searchDropdownMenuLink">
-	                  <a class="dropdown-item" href="./searchkey.do">일반검색</a><a class="dropdown-item" href="./searchmap.do">지도검색</a>
+	                  <a class="dropdown-item" href="./searchkey.do">일반검색</a><a class="dropdown-item" href="./searchmapgugun.do?sido=&gugun=">지도검색</a>
 	                </div>
 	              </li>
 	              
@@ -134,23 +145,25 @@
         </div>
       </div>
     </section>
-    <section class="bg-cover " style="background-image: url('./resources/bootstrap-5/html/img/photo/bg.jpg');">
+    <!-- <section class="bg-cover " style="background-image: url('./resources/bootstrap-5/html/img/photo/bg.jpg');"> -->
+    <section class="bg-cover" style="background-image: url('./resources/bootstrap-5/html/img/photo/bg.jpg');">
       <div class="container">
-        <div class="row">
-          <div class="col-xl-8 col-lg-10 mx-auto">           
+        <div class="row mb-7">
+          <div class="col-xl-8 col-lg-10 mx-auto mb-7">           
             <p class="lead mb-5" ><%=content %> </p>
           </div>
         </div>
-        <div class="row">
+        <div class="row mb-7">
           <div class="col-xl-10 mx-auto"><img class="img-fluid mb-5" src="" alt=""></div>
         </div>       
-      <hr>
-        <div class="text-center">
+      <hr class="mt-7">
+        <div class="text-center ">
 		  <input type="button" value="목록" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='hboardlist.do?cpage=<%=cpage %>'" />
         </div>
         <br /><br /><br />
+      </div>
     </section>
-
+	</div>
      <!-- Footer - 관리자 페이지 이동 부분 넣을 곳 -->
     <footer class="position-relative z-index-10 d-print-none">
            

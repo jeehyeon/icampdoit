@@ -253,7 +253,6 @@
 	        <div class="card">
 	          <div class="card-header p-3 pt-2">
 	            <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
-	              <!-- <i class="material-icons opacity-10">weekend</i> -->
 	              <i class="fa-solid fa-person-dress opacity-10"></i>
 	            </div>
 	            <div class="text-end pt-1">
@@ -305,8 +304,8 @@
 	      </div>
         </div>
         
-      <div class="row mt-4">    
-        <div class="col-lg-4 mb-3">
+      <!-- <div class="row mt-4"> -->    
+        <div class="col-lg-4 mb-3 mt-4">
           <div class="card z-index-2 ">           
 	        <div class="card">
 	          <div class="card-header p-3 pt-2">
@@ -325,7 +324,7 @@
 	        </div>	            
 	      </div>
         </div>    
-        <div class="col-lg-4 mb-3">
+        <div class="col-lg-4 mb-3 mt-4">
           <div class="card z-index-2 ">           
 	        <div class="card">
 	          <div class="card-header p-3 pt-2">
@@ -344,7 +343,7 @@
 	        </div>	            
 	      </div>
         </div>
-        <div class="col-lg-4 mb-3">
+        <div class="col-lg-4 mb-3 mt-4">
           <div class="card z-index-2 ">           
 	        <div class="card">
 	          <div class="card-header p-3 pt-2">
@@ -362,15 +361,15 @@
 	          </div>
 	        </div>	            
 	      </div>
-        </div> 
+        </div>
         
-      <div class="row mt-4">  
-        <div class="col-lg-4 col-md-6 mt-4 mb-4">
+      <!-- <div class="row mt-4"> --> 
+        <div class="col-lg-4 col-md-5 mt-5 mb-4">
           <div class="card z-index-2 ">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
               <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
                 <div class="chart">
-                  <canvas id="chart-bars" class="chart-canvas" height="330" ></canvas>
+                  <canvas id="chart-bars" class="chart-canvas" height="200" ></canvas>
                 </div>
               </div>
             </div>
@@ -384,11 +383,11 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-4 mt-2 mb-3">
+        <div class="col-lg-4 mt-2 mb-3 mt-5">
           <div class="card z-index-2 ">           
 	        <div class="card">
 	          <div class="card-header p-3 pt-2">
-	            <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+	            <div class="icon icon-lg icon-shape bg-gradient-admin shadow-admin text-center border-radius-xl mt-n4 position-absolute">
 	              <!-- <i class="material-icons opacity-10">weekend</i> -->
 	              <i class="fa-solid fa-arrow-right-to-bracket opacity-10"></i>
 	            </div>
@@ -403,11 +402,11 @@
 	        </div>	            
 	      </div>
         </div>
-        <div class="col-lg-4 mt-2 mb-2 ">
+        <div class="col-lg-4 mt-2 mb-2 mt-5">
           <div class="card z-index-2 ">           
 	        <div class="card">
 	          <div class="card-header p-3 pt-2">
-	            <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+	            <div class="icon icon-lg icon-shape bg-gradient-admin shadow-admin text-center border-radius-xl mt-n4 position-absolute">
 	              <!-- <i class="material-icons opacity-10">weekend</i> -->
 	              <i class="fa-solid fa-people-line opacity-10"></i>
 	            </div>
@@ -423,7 +422,7 @@
 	      </div>
         </div>
        </div>      
-     </div>
+     <!-- </div> -->
       
       <%-- <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
           <div class="card">
