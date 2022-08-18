@@ -32,6 +32,9 @@
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+  	<!-- Sweet Alert -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
   </head>
   <body>
     <div class="container-fluid px-3">
@@ -280,6 +283,18 @@
 
     </script>
     <script type="text/javascript">
+    const Toast = Swal.mixin({
+	    toast: true,
+	    position: 'center-center',
+	    showConfirmButton: false,
+	    timer: 3000,
+	    timerProgressBar: false,
+	    didOpen: (toast) => {
+	        toast.addEventListener('mouseenter', Swal.stopTimer)
+	        toast.addEventListener('mouseleave', Swal.resumeTimer)
+	    }
+	})
+    
  	//아이디 찾기 부분
     $("#idbtn").click(function(){
     	var name = $('#idname').val();
@@ -298,9 +313,22 @@
 	            success: function(result) {
 	            	if(result != 0){
 		            	var str = result.substring(0, result.length -2);
-		                alert("회원님의 아이디는 "+ str + "입니다.");
+		            	Swal.fire({
+							title:  ' ',     
+							text:	'회원님의 아이디는 '+str+' 입니다.', 
+							icon:	'info',
+							confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
+							confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+						}).then((result) => {
+							if (result.isConfirmed) {
+				  				location.reload();
+				  			 } 
+				  		 })
 	            	}else{
-	            		alert("회원님의 정보가 없습니다.");
+	            		Toast.fire({
+		 				    icon: 'warning',
+		 				    title: '회원님의 정보가 없습니다.'
+		 				})
 	            	};
 	              
 	            },
@@ -310,7 +338,10 @@
 	        });
 	    	 
 	    } else {
-	        alert('빈칸을 모두 입력해주세요.');
+	    	Toast.fire({
+				    icon: 'warning',
+				    title: '빈칸을 모두 입력해주세요.'
+			})
 	        $('#idname').focus();
 	    } 				
 	});
@@ -339,7 +370,10 @@
 		               	$('#resform').submit();
 		                
 	            	}else{
-	            		alert("회원님의 정보가 없거나 입력사항이 틀립니다.");
+	            		Toast.fire({
+	    				    icon: 'warning',
+	    				    title: '회원님의 정보가 없거나&emsp;&emsp;&emsp;입력 사항이 틀립니다.'
+	    				})
 	            	};
 	              
 	            },
@@ -349,7 +383,10 @@
 	        });
 	    	 
 	    } else {
-	        alert('빈칸을 모두 입력해주세요.');
+	    	Toast.fire({
+			    icon: 'warning',
+			    title: '빈칸을 모두 입력해주세요.'
+			})
 	        $('#pname').focus();
 	    } 				
 	});
