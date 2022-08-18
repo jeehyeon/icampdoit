@@ -205,7 +205,7 @@
             <!-- comment form-->
             <div class="mb-6">
               <div class="collapse.show" id="leaveComment"> 
-                <form class="form" id="comment-form" method="post">
+                <form class="form" id="comment-form" method="post" onsubmit="return false">
                 <input type="hidden" name="ucode" value="<%=ucode%>"/>
                 <input type="hidden" name="id" value="<%=id%>"/>
                 <input type="hidden" name="seq" value="<%=seq%>"/>                   
@@ -422,7 +422,7 @@
    			})
     		
     	}
-    	
+   };
     	function cmtInsert() {
     		
     		var formdata = $("#comment-form").serialize() ;
@@ -436,7 +436,7 @@
         			success: function(data){
         				
         				Swal.fire({
-							title: '댓글을 삭제하였습니다.',     
+							title: '댓글을 등록하였습니다.',     
 							text:	' ', 
 							icon:	'success',
 							confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
@@ -474,7 +474,7 @@
         		}
         	});
     	}
-   };
+  
     </script>
     
     <script>

@@ -229,6 +229,10 @@ for(CampviewCmtTO cto : clists){
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+     <!-- Sweet Alert -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+	
   </head>
   <body style="padding-top: 72px;">
     <header class="header">
@@ -441,7 +445,7 @@ for(CampviewCmtTO cto : clists){
               <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#leaveReview" aria-expanded="false" aria-controls="leaveReview">리뷰남기기</button>
               <div class="collapse mt-4" id="leaveReview">
                 <!--<h5 class="mb-4">Leave a review</h5>-->
-                <form class="form" id="contact-form" method="post">
+                <form class="form" id="contact-form" method="post" onsubmit="return false">
                 <input type="hidden" name="contentId" value="<%=kto.getContentId()%>"/>
                   <div class="row">
                     <div class="col-sm-6">
@@ -461,7 +465,7 @@ for(CampviewCmtTO cto : clists){
                     <label class="form-label" for="review">리뷰내용 *</label>
                     <textarea class="form-control" rows="4" name="review" id="review" placeholder="리뷰를 남겨주세요." required="required"></textarea>
                   </div>
-                  <button class="btn btn-primary" onclick="cmtInsert()">리뷰 등록</button>
+                  <button class="btn btn-primary" onclick="cmtInsert()"><i class="far fa-comment"></i>리뷰 등록</button>
                 </form>
               </div>
 	         </div>
@@ -498,6 +502,70 @@ for(CampviewCmtTO cto : clists){
       </div>
     </footer>
     <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
+    <script>
+    const Toast = Swal.mixin({
+	    toast: true,
+	    position: 'center-center',
+	    showConfirmButton: false,
+	    timer: 3000,
+	    timerProgressBar: false,
+	    didOpen: (toast) => {
+	        toast.addEventListener('mouseenter', Swal.stopTimer)
+	        toast.addEventListener('mouseleave', Swal.resumeTimer)
+	    }
+	})
+    
+    function cmtInsert() {
+
+  		var formdata = $("#contact-form").serialize() ;
+  		
+  		
+      		$.ajax({
+      			url: './campviewCmt.do',
+      			type: 'post',
+      			data : formdata,
+      			dataType : 'text',
+      			success: function(data){
+      				if(data == "2"){
+						Swal.fire({
+							title: '로그인이 필요합니다.',     
+							text:	' ', 
+							icon:	'warning'
+        					})
+					}else if(data == "0"){
+						Swal.fire({
+							title: '댓글을 등록하였습니다.',     
+							text:	' ', 
+							icon:	'success',
+							confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
+							confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+						}).then((result) => {
+							if (result.isConfirmed) {
+				  				location.reload();
+				  			 } 
+				  		 })
+					}else{
+						Swal.fire({
+							title: '실패',     
+							text:	' ', 
+							icon:	'warning'
+        					})
+						
+					}
+      			}, 
+      			fail: function(error){
+      				Toast.fire({
+	 				    icon: 'warning',
+	 				    title: '실패'
+	 				});
+      		}
+      	});
+	    	
+  
+	};
+    
+    
+    </script>
     <!-- JavaScript files-->
     <script>
       // ------------------------------------------------------- //
@@ -505,6 +573,11 @@ for(CampviewCmtTO cto : clists){
       //   see more here 
       //   https://css-tricks.com/ajaxing-svg-sprite/
       // ------------------------------------------------------ //
+     
+      
+      
+      
+      
       function injectSvgSprite(path) {
       
           var ajax = new XMLHttpRequest();
@@ -523,37 +596,12 @@ for(CampviewCmtTO cto : clists){
       //- injectSvgSprite('${path}icons/orion-svg-sprite.svg'); 
       injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg'); 
       
-      function cmtInsert() {
-
-	  		var formdata = $("#contact-form").serialize() ;
-	  		
-	  		
-	      		$.ajax({
-	      			url: './campviewCmt.do',
-	      			type: 'post',
-	      			data : formdata,
-	      			dataType : 'text',
-	      			success: function(data){
-	      				if(data == "2"){
-	      					alert("로그인이 필요합니다.");
-	      				}else if(data == "0"){
-	      					alert("리뷰 달기 성공");
-	      					location.reload();
-	      				}else{
-	      					alert("리뷰 달기 실패");
-	      				}
-	      				
-	      			}, 
-	      			fail: function(error){
-	          			alert('댓글달기 실패' );
-	      		}
-	      	});
-  	    	
+    
+		
       
-  	}
       
    $("#subscribebtn").on("click",function(){
-	   
+	  	alert("subscribebtn");
 	
 		var data ={"contentId" : $("#contentId").val()};
 		$.ajax({
@@ -563,7 +611,11 @@ for(CampviewCmtTO cto : clists){
 				dataType : 'text',
 				success: function(data){
 					if(data == "2"){
-						alert("로그인이 필요합니다.");
+						Swal.fire({
+							title: '로그인이 필요합니다.',     
+							text:	' ', 
+							icon:	'warning',
+        					});
 					}else if(data == "0"){
 						location.reload();
 					}else{
@@ -591,9 +643,7 @@ for(CampviewCmtTO cto : clists){
 	   
 	 	var replyseq = $(this).attr("deldata");
 			var sendData = {"replyseq": replyseq}
-			console.log("댓글 데이터 : " + replyseq);
-		console.log("댓글 데이터 테스트 : " + $(this).attr("value"));
-		
+
 		
 			cmtDelete(sendData);
 	 });

@@ -514,8 +514,8 @@ public class Controller_Search {
 	@RequestMapping(value="/campviewCmt.do")
 	public String campviewCmt(HttpServletRequest request, HttpSession session) {
 		int flag =1;
-		//System.out.println("댓글 달기 평점: "+request.getParameter("rating"));
-		//System.out.println("댓글 달기 내용: "+request.getParameter("review"));
+		System.out.println("댓글 달기 평점: "+request.getParameter("rating"));
+		System.out.println("댓글 달기 내용: "+request.getParameter("review"));
 		if(session.getAttribute("ucode") == null) {
 			flag=2;
 			return Integer.toString(flag);
@@ -529,6 +529,7 @@ public class Controller_Search {
 		cto.setUcode(Integer.toString(ucode));
 		
 		flag=kdao.campViewCmtInsert(cto);
+		System.out.println("댓글 달기 결과: "+flag);
 		return Integer.toString(flag);
 	}
 	@RequestMapping(value="/subscribe.do")
