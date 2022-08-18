@@ -263,23 +263,23 @@
           <hr class="my-4">
           <form action="./searchmapgugun.do" id="searchform" autocomplete="off">
             <div class="row">
-              <div class="col-xl-4 col-md-6 mb-4">
-                <label class="form-label" for="sido">전체/시,도</label>
-                <select class="selectpicker" name="sido" id="sido" data-style="btn-selectpicker" title="시도 선택">
+              <div class="col-md-4">
+                <label class="form-label" for="sido">전체/시,도 :</label>
+                <select class="selectpicker col-md-8" name="sido" id="sido" data-style="btn-selectpicker" title="시도 선택&nbsp;&nbsp;">
                   <option value="서울시">서울시    </option>
                   <option value="인천시">인천시    </option>
                   <option value="경기도">경기도    </option>
                 </select>
               </div>
-              <div class="col-xl-4 col-md-6 mb-4">
-                <label class="form-label" for="gugun">전체/시,구</label>
-                <select class="selectpicker" name="gugun" id="gugun" title="시구 선택">
+              <div class="col-md-4">
+                <label class="form-label" for="gugun">전체/시,구 :</label>
+                <select class="selectpicker col-md-8" name="gugun" id="gugun" title="시구 선택">
                   <option value="시구">시/구 선택   </option>
                 </select>
               </div>
                
-              <div class="col-sm-6 mb-4">
-                <button class="btn btn-primary" type="submit" id="searchlist"> <i class="fas fa-search me-1"></i>Search                </button>
+              <div class="col-md-4">
+                <button class="btn btn-primary col-md-8" type="submit" id="searchlist"> <i class="fas fa-search me-1"></i>Search</button>
               </div>
             </div>  
             
