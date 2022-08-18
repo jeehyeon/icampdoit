@@ -355,38 +355,74 @@
     		//console.log("댓글 데이터 테스트 : " + $(this).attr("value"));
   			cmtDelete(sendData);
 	  })
-   };
+   
    
     	function cmtDelete(sendData) {
     		
-    		if(confirm( '댓글을 삭제 하시겠습니까?' )){
-    			$.ajax({
-        			url: './cmtdelete.do',
-        			type: 'post',
-        			data : sendData,
-        			dataType : 'text',
-        			success: function(data){
-        				if(data == 0){
-        					//성공
-        					 location.reload();
-        				}else if(data == 2){
-        					//다른 사용자일떄
-        					alert("다른 사용자의 댓글입니다.");
-        				}else{
-							//실패 
-        					alert("댓글 삭제를 실패했습니다.");
-        				}
-        			}, 
-        			fail: function(error){
-            			alert('작성자만 삭제가 가능합니다.' );
-        			}
-        		});
-    		}
-    		
-    		
+    		Swal.fire({
+   			   title: '댓글을 삭제 하시겠습니까?',
+   			   text: ' ',
+   			   icon: 'question',
+   			   
+   			   showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+   			   confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
+   			   cancelButtonColor: '#343a40', // cancel 버튼 색깔 지정
+   			   confirmButtonText: '승인', // confirm 버튼 텍스트 지정
+   			   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+   			   
+   			   reverseButtons: true, // 버튼 순서 거꾸로
+   			   
+   			}).then((result) => {
+   			 
+   			  if (result.isConfirmed) {
+   	  				//삭제 진행
+   	  				if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
+	   	  				$.ajax({
+	   	        			url: './cmtdelete.do',
+	   	        			type: 'post',
+	   	        			data : sendData,
+	   	        			dataType : 'text',
+	   	        			success: function(data){
+	   	        				if(data == 0){
+	   	        					//성공
+	   	        					Swal.fire({
+										title: '댓글을 삭제하였습니다.',     
+										text:	' ', 
+										icon:	'success',
+										confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
+										confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+									}).then((result) => {
+										if (result.isConfirmed) {
+							  				location.reload();
+							  			 } 
+							  		 })
+							 				
+	   	        					
+	   	        				}else if(data == 2){
+	   	        					//다른 사용자일떄
+	   	        					Toast.fire({
+					 				    icon: 'warning',
+					 				    title: '삭제 권한이 없습니다.'
+					 				});
+	   	        				}else{
+	   								//실패 
+	   	        					Swal.fire({
+										title: '댓글을 삭제를 실패했습니다.',     
+										text:	' ', 
+										icon:	'warning'
+	   	        					});
+	   	        				}
+	   	        			}, 
+	   	        			fail: function(error){
+	   	            			alert('작성자만 삭제가 가능합니다.' );
+	   	        			}
+	   	        		});
+   	  			}	
+   			  }
+   			})
     		
     	}
-    		
+    	
     	function cmtInsert() {
     		
     		var formdata = $("#comment-form").serialize() ;
@@ -398,7 +434,19 @@
         			data : formdata,
         			dataType : 'json',
         			success: function(data){
-        				location.reload();
+        				
+        				Swal.fire({
+							title: '댓글을 삭제하였습니다.',     
+							text:	' ', 
+							icon:	'success',
+							confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
+							confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+						}).then((result) => {
+							if (result.isConfirmed) {
+				  				location.reload();
+				  			 } 
+				  		 })
+        				
         				/*$("#cmtbody").empty();
         				$("#comment").val("");
         				$.each(data.cmtList, function(index, cmtList){
@@ -418,11 +466,15 @@
         				
         			}, 
         			fail: function(error){
-            			alert('댓글달기 실패' );
+        				Swal.fire({
+							title: '댓글을 달기실패.',     
+							text:	' ', 
+							icon:	'warning'
+       					});
         		}
         	});
     	}
-    
+   };
     </script>
     
     <script>
