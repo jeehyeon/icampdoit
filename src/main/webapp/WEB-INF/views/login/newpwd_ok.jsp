@@ -47,7 +47,7 @@ int flag = (Integer)request.getAttribute("flag");
 			
 			if( flag == 0 ) {
 				Swal.fire({
-					title: '비밀번호가 변경 성공',  
+					title: '비밀번호 변경 성공',  
 					text:	'다시 로그인해 주세요.',
 					icon:	'success',
 					confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
