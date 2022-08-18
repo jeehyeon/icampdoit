@@ -84,6 +84,9 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!-- sweet alert -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
   </head>
   <body style="padding-top: 72px;">
     <header class="header">
@@ -263,22 +266,39 @@
     <script type="text/javascript">
    window.onload =function(){
 	   
+	   const Toast = Swal.mixin({
+		    toast: true,
+		    position: 'center-center',
+		    showConfirmButton: false,
+		    timer: 3000,
+		    timerProgressBar: false,
+		    didOpen: (toast) => {
+		        toast.addEventListener('mouseenter', Swal.stopTimer)
+		        toast.addEventListener('mouseleave', Swal.resumeTimer)
+		    }
+		})
+	   
 	 //게시글 수정 버튼
-	    $("#view-mbtn").on("click", function(){
+	   $("#view-mbtn").on("click", function(){
 		 	var modifyUcode = $("#viewUcode").val();
 		 	var subjectValue = $("#subjectValue").val();
 		 	var seq = $("#viewSeq").val();
 		 	var cpage = $("#cpage").val();
  			var sessionUcode = <%=(Integer)session.getAttribute("ucode")%>;
- 			//alert(viewUcode);
- 			if(modifyUcode == sessionUcode){
- 	  				location.href='./mboardmodify.do?subjectValue='+ subjectValue +'&cpage='+ cpage+'&seq='+seq+'&modifyUcode='+modifyUcode;
- 			} else if(sessionUcode=="1") {
- 					location.href='./mboardmodify.do?subjectValue='+ subjectValue +'&cpage='+ cpage+'&seq='+seq+'&modifyUcode='+modifyUcode;
- 			} else {
- 				alert("수정 권한이 없습니다.");
- 			}
+ 			
+			   
+				   if(modifyUcode == sessionUcode){
+	 	  				location.href='./mboardmodify.do?subjectValue='+ subjectValue +'&cpage='+ cpage+'&seq='+seq+'&modifyUcode='+modifyUcode;
+	 			} else {
+
+	 				Toast.fire({
+	 				    icon: 'warning',
+	 				    title: '수정 권한이 없습니다.'
+	 				})
+	 			}
+			   
 	  })
+	 
 	   
 	   
 	   //게시글 삭제 버튼
@@ -287,18 +307,37 @@
   			var viewSeq = $("#viewSeq").val();
   			var sessionUcode = <%=(Integer)session.getAttribute("ucode")%>;
   			console.log(sessionUcode);
-  			if(viewUcode == sessionUcode){
-  				//삭제 진행
-  				if(confirm("게시글을 삭제 하시겠습니까?")){
-
-  	  				location.href='./mboarddelete_ok.do?viewseq='+ viewSeq;
-  				}
-  			}else{
-  				//삭제 불가
-  				alert("삭제 권한이 없습니다.");
-  			}
-    		//if
-  			//location.href='./logout.do'
+  			Swal.fire({
+  			   title: '게시글을 삭제 하시겠습니까?',
+  			   text: ' ',
+  			   icon: 'question',
+  			   
+  			   showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+  			   confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
+  			   cancelButtonColor: '#343a40', // cancel 버튼 색깔 지정
+  			   confirmButtonText: '승인', // confirm 버튼 텍스트 지정
+  			   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+  			   
+  			   reverseButtons: true, // 버튼 순서 거꾸로
+  			   
+  			}).then((result) => {
+  			 
+  			  if (result.isConfirmed) {
+  				if(viewUcode == sessionUcode){
+  	  				//삭제 진행
+					location.href='./mboarddelete_ok.do?viewseq='+ viewSeq;
+  	  				
+  	  			}else{
+  	  				//삭제 불가
+  	  				Toast.fire({
+	 				    icon: 'warning',
+	 				    title: '삭제 권한이 없습니다.'
+	 				})
+  	  			}
+  			    
+  			  }
+  			})
+  			
 	  })
 	   
 	   

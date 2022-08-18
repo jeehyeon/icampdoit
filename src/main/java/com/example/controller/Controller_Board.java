@@ -364,11 +364,8 @@ public class Controller_Board {
 		int ucode = (int)session.getAttribute("ucode");				// 수정자ucode
 		
 		System.out.println("modify_ok subjectValue : " + request.getParameter( "subject" ));
-		System.out.println( "작성자ucode1: "+modifyUcode);
-		System.out.println( "수정자ucode1: "+ucode);
-
-		// 작성자ucode와 수정자ucode가 같거나 ucode가 1(admin)일때..
-		if (  modifyUcode.equals(Integer.toString(ucode)) || ucode==1) {
+		
+		if (  modifyUcode.equals(Integer.toString(ucode)) ) {
 				System.out.println( "작성자ucode2: "+modifyUcode);
 				System.out.println( "수정자ucode2: "+ucode);
 				
@@ -381,6 +378,7 @@ public class Controller_Board {
 				to.setContent(request.getParameter("content"));
 				to.setUcode((Integer) session.getAttribute("ucode"));
 				to.setVcode(request.getParameter("vcode"));
+				System.out.println("수정title1: "+ to.getTitle());
 				System.out.println("request.getfilename : " + request.getParameter("filename"));
 				// 게시글에 기존 파일이 있으면
 				if(request.getParameter("filesize") != "0"&&request.getParameter("filename")!="default") {
@@ -402,6 +400,7 @@ public class Controller_Board {
 				dao.filecnd(to, fto);
 			
 		}
+		System.out.println("수정title2: "+ to.getTitle());
 		System.out.println("최종flag : " + flag);
 		
 		return Integer.toString(flag);
