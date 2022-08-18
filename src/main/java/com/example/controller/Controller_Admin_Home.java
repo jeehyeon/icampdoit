@@ -142,6 +142,7 @@ public class Controller_Admin_Home {
 		
 		SignUpTO sto = new SignUpTO();
 		sto.setUcode( request.getParameter( "ucode" ) );
+		System.out.println(  "ucode값:" + sto.getUcode() );
 		
 		sto = udao.userView(sto);
 		
@@ -189,8 +190,9 @@ public class Controller_Admin_Home {
 	}
 	
 	@RequestMapping(value = "/admin_users_deleteOk.do")
-	public ModelAndView adminUsersDeleteOk(HttpServletRequest request, HttpSession session) {
+	public int adminUsersDeleteOk(HttpServletRequest request, HttpSession session) {
 		System.out.println("admin_users_deleteOk 호출");
+		//System.out.println("ucode 파라메터: " + request.getParameter( "ucode" ) );
 		
 		int flag = 1;
 		
@@ -198,16 +200,17 @@ public class Controller_Admin_Home {
 		
 		if ( session.getAttribute("id").equals("admin") ) {
 			sto.setUcode( request.getParameter( "ucode" ) );
-			System.out.println( "ucode : " + sto.getUcode() );	
+			//System.out.println( "ucode deleteOk에서 : " + sto.getUcode() );	
 
 			flag = udao.usersDeleteOK(sto);
+			//System.out.println( "flag 값: " + flag);
 		}
 		
-		ModelAndView modelAndView = new ModelAndView();
+		//ModelAndView modelAndView = new ModelAndView();
 
-		modelAndView.setViewName( "/admin/admin_users_delete_ok" );
-		modelAndView.addObject("flag", flag);
-		return modelAndView;
+		//modelAndView.setViewName( "/admin/admin_users_delete_ok" );
+		//modelAndView.addObject("flag", flag);
+		return flag;
 	}
-
+	
 }
