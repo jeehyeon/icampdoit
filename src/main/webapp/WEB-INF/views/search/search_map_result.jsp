@@ -87,7 +87,7 @@
 		
 	}
 	
-	JSONObject result = new JSONObject();
+	//JSONObject result = new JSONObject();
 	JSONArray jsonArray = new JSONArray();
 	for( SearchkeyTO to : datas ){
 		String latlngadd = to.getMapY() + ", " + to.getMapX();
@@ -127,10 +127,10 @@
 	resultk = resultk.substring(0, resultk.length()-1);
 	
 	
-	String arrdata = jsonArray.toString();
-	result.put( "jsonArray", jsonArray );
+	//String arrdata = jsonArray.toString();
+	//result.put( "jsonArray", jsonArray );
 	
-	System.out.println(  arrdata );
+	//System.out.println(  arrdata );
 	
 						
 %>
@@ -451,10 +451,6 @@
 				var contents = [];
 				var overlays = [];
 				
-			
-				
-				var param = <%=arrdata%>
-				console.log( param );
 				
 				
 				
