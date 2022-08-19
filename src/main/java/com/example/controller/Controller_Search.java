@@ -573,7 +573,10 @@ public class Controller_Search {
 		System.out.println("댓글삭제 데이터 seq : "+ data.get("seq"));
 		System.out.println("댓글삭제 데이터 ucode : "+ data.get("ucode") );
 		System.out.println("댓글삭제 데이터 session ucode : "+ session.getAttribute("ucode"));
-		
+		if(session.getAttribute("ucode") == null) {
+			flag=3;
+			return Integer.toString(flag);
+		}	
 		
 		if(!(session.getAttribute("ucode").toString()).equals(data.get("ucode").toString())) {
 			flag=2;

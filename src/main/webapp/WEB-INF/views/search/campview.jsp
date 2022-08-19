@@ -664,7 +664,14 @@ for(CampviewCmtTO cto : clists){
    				}else if(data == 2){
    					//다른 사용자일떄
    					alert("다른 사용자의 댓글입니다.");
+   				}else if(data == 3){
+   					Swal.fire({
+						title: '로그인이 필요합니다.',     
+						text:	' ', 
+						icon:	'warning',
+    					});
    				}else{
+   				
 						//실패 
    					alert("댓글 삭제를 실패했습니다.");
    				}
