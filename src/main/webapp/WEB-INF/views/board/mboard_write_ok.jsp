@@ -28,19 +28,7 @@
 	<script type='text/javascript'>
 		
 		   var flag = <%=(Integer)request.getAttribute("flag")%>;
-		   
-		   const Toast = Swal.mixin({
-			    toast: true,
-			    position: 'center-center',
-			    showConfirmButton: false,
-			    timer: 3000,
-			    timerProgressBar: false,
-			    didOpen: (toast) => {
-			        toast.addEventListener('mouseenter', Swal.stopTimer)
-			        toast.addEventListener('mouseleave', Swal.resumeTimer)
-			    }
-			})
-			
+					
 			if( flag == 0 ) {
 				Swal.fire({
 					title: '글쓰기 성공',  
