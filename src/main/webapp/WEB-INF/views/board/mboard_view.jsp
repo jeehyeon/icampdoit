@@ -329,7 +329,7 @@
   			   confirmButtonText: '승인', // confirm 버튼 텍스트 지정
   			   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
   			   
-  			   reverseButtons: true, // 버튼 순서 거꾸로
+  			   reverseButtons: false, // 버튼 순서 거꾸로
   			   
   			}).then((result) => {
   			 

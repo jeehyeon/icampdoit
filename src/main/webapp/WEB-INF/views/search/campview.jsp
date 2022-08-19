@@ -600,36 +600,39 @@ for(CampviewCmtTO cto : clists){
 		
       
       
-   $("#subscribebtn").on("click",function(){
-	  	alert("subscribebtn");
-	
-		var data ={"contentId" : $("#contentId").val()};
-		$.ajax({
-				url: './subscribe.do',
-				type: 'post',
-				data : data,
-				dataType : 'text',
-				success: function(data){
-					if(data == "2"){
-						Swal.fire({
-							title: '로그인이 필요합니다.',     
-							text:	' ', 
-							icon:	'warning',
-        					});
-					}else if(data == "0"){
-						location.reload();
-					}else{
-						location.reload();
-					}
-					
-				}, 
-				fail: function(error){
-	  			alert('댓글달기 실패' );
-			}
-		});
-	
-	
-   });
+      $("#subscribebtn").on("click",function(){
+  		var data ={"contentId" : $("#contentId").val()};
+  		$.ajax({
+  				url: './subscribe.do',
+  				type: 'post',
+  				data : data,
+  				dataType : 'text',
+  				success: function(data){
+  					if(data == "2"){
+  						Swal.fire({
+  							title: '로그인이 필요합니다.',     
+  							text:	' ', 
+  							icon:	'warning',
+  							confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
+  							confirmButtonText: '확인' // confirm 버튼 텍스트 지정
+  					
+          					});
+  					}else if(data == "0"){
+  						location.reload();
+  					}else{
+  						location.reload();
+  					}
+  					
+  				}, 
+  				fail: function(error){
+  					Swal.fire({
+  						title: '찜하기 실패.',     
+  						text:	'', 
+  						icon:	'error',
+      					});
+  			}
+  		});
+     });
       
    $('#subscribebtn').hover(function(){
 	   $('#subspan').text("찜취소");
@@ -650,41 +653,73 @@ for(CampviewCmtTO cto : clists){
 
 
 	function cmtDelete(sendData) {
+		const Toast = Swal.mixin({
+		    toast: true,
+		    position: 'center-center',
+		    showConfirmButton: false,
+		    timer: 3000,
+		    timerProgressBar: false,
+		    didOpen: (toast) => {
+		        toast.addEventListener('mouseenter', Swal.stopTimer)
+		        toast.addEventListener('mouseleave', Swal.resumeTimer)
+		    }
+		})    	
 		
-		if(confirm( '댓글을 삭제 하시겠습니까?' )){
-			$.ajax({
-   			url: './campviewcmtdelete.do',
-   			type: 'post',
-   			data : sendData,
-   			dataType : 'text',
-   			success: function(data){
-   				if(data == 0){
-   					//성공
-   					 location.reload();
-   				}else if(data == 2){
-   					//다른 사용자일떄
-   					alert("다른 사용자의 댓글입니다.");
-   				}else if(data == 3){
-   					Swal.fire({
-						title: '로그인이 필요합니다.',     
-						text:	' ', 
-						icon:	'warning',
-    					});
-   				}else{
-   				
-						//실패 
-   					alert("댓글 삭제를 실패했습니다.");
-   				}
-   			}, 
-   			fail: function(error){
-       			alert('작성자만 삭제가 가능합니다.' );
-   			}
-   		});
-		}
-		
-		
-		
-	}
+		Swal.fire({
+			title: '댓글을 삭제 하시겠습니까?',  
+			text: '삭제 후 복구가 불가능합니다.',
+			icon: 'question',
+			   
+			showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+			confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
+			cancelButtonColor: '#343a40', // cancel 버튼 색깔 지정
+			confirmButtonText: '승인', // confirm 버튼 텍스트 지정
+			cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+	
+		}).then((result) => {
+
+ 			if (result.isConfirmed) {
+ 				$.ajax({
+ 		   			url: './campviewcmtdelete.do',
+ 		   			type: 'post',
+ 		   			data : sendData,
+ 		   			dataType : 'text',
+ 		   			success: function(data){
+ 		   				if(data == 0){
+ 		   					//성공
+ 		   					location.reload();
+ 		   				}else if(data == 2){
+ 		   					//다른 사용자일떄
+ 		   					Toast.fire({
+							    icon: 'warning',
+							    title: '다른 사용자의 댓글입니다.'
+							})
+ 		   				}else if(data == 3){
+ 		   					Swal.fire({
+ 								title: '로그인이 필요합니다.',     
+ 								text:	'', 
+ 								icon:	'warning',
+ 								confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
+ 								confirmButtonText: '확인' // confirm 버튼 텍스트 지정
+ 		    				});
+ 		   				}else{
+ 							//실패 
+ 							Toast.fire({
+							    icon: 'error',
+							    title: '댓글 삭제에 실패하였습니다.'
+							})
+ 		   				}
+ 		   			}, 
+ 		   			fail: function(error){
+	 		   			Toast.fire({
+						    icon: 'warning',
+						    title: '작성자만 삭제 가능합니다.'
+						})
+ 		   			}
+ 		   		});
+ 			} 
+		})
+  	}
  
    
    
