@@ -315,37 +315,41 @@
     	
     	
     	function isBirthday(dateStr) {
-
-    		var year = Number(dateStr.substr(0,4)); 
-    		var month = Number(dateStr.substr(4,2)); 
-    		var day = Number(dateStr.substr(6,2));
-    		var today = new Date(); 
-    		var yearNow = today.getFullYear(); 
-
-    		if (dateStr.length <=8) {
-    		
-    			if (1900 > year || year > yearNow){
-    				return false;
-    			} else if (month < 1 || month > 12) {
-    				return false;
-    			} else if (day < 1 || day > 31) {
-    				return false;
-    			} else if ((month==4 || month==6 || month==9 || month==11) && day==31) {
-    				return false;
-    			} else if (month == 2) {
-
-    				var isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
-    				if (day>29 || (day==29 && !isleap)) {
-    					return false;
-    				} else {
-    					return true;
-    				} 
-    			} else {
-    				return true;
-    			}
-    		}
-    		else {
-    			
+    		var reg_Birthday = /^[0-9]{8,8}$/;
+    		if(reg_Birthday.test(dateStr)){
+	    		var year = Number(dateStr.substr(0,4)); 
+	    		var month = Number(dateStr.substr(4,2)); 
+	    		var day = Number(dateStr.substr(6,2));
+	    		var today = new Date(); 
+	    		var yearNow = today.getFullYear(); 
+	
+	    		if (dateStr.length <=8) {
+	    		
+	    			if (1900 > year || year > yearNow){
+	    				return false;
+	    			} else if (month < 1 || month > 12) {
+	    				return false;
+	    			} else if (day < 1 || day > 31) {
+	    				return false;
+	    			} else if ((month==4 || month==6 || month==9 || month==11) && day==31) {
+	    				return false;
+	    			} else if (month == 2) {
+	
+	    				var isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+	    				if (day>29 || (day==29 && !isleap)) {
+	    					return false;
+	    				} else {
+	    					return true;
+	    				} 
+	    			} else {
+	    				return true;
+	    			}
+	    		}
+	    		else {
+	    			
+	    			return false;
+	    		}
+    		}else{
     			return false;
     		}
     	}
