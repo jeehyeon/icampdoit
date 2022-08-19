@@ -11,6 +11,8 @@ if(session.getAttribute("id") != null){
 	ucode = (int)session.getAttribute("ucode");
 	id = (String)session.getAttribute("id");
 }
+
+
 //사진데이터
 StringBuilder imghtml = new StringBuilder();
 ArrayList<SearchkeyTO> lists = (ArrayList<SearchkeyTO>)request.getAttribute("lists");
@@ -30,6 +32,16 @@ SearchkeyTO kto = (SearchkeyTO)request.getAttribute("kto");
 
 String address="";
 String titleaddr="";
+
+//대표사진
+String firstImageUrl= "";
+if(kto.getFirstImageUrl().equals("default")){
+	firstImageUrl= "./resources/bootstrap-5/html/img/noimage.svg";
+}else{
+	firstImageUrl=kto.getFirstImageUrl();
+}
+
+
 if( kto.getAddr1().matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*") == false ){
 	address = kto.getDoNm() + " " + kto.getSigunguNm() + " " + kto.getAddr1();
 }
@@ -472,7 +484,7 @@ for(CampviewCmtTO cto : clists){
           </div>
         </div>
         <div class="col-lg-4">        
-          <div class="p-4 shadow ms-lg-4 rounded sticky-top" style="top: 100px; width: 400px; height: 500px;"><img class="bg-image" style="border-radius: 8px;" src="<%=kto.getFirstImageUrl() %>" alt="Card image">
+          <div class="p-4 shadow ms-lg-4 rounded sticky-top" style="top: 100px; width: 400px; height: 500px;"><img class="bg-image" style="border-radius: 8px;" src="<%=firstImageUrl%>" alt="Card image">
           </div>
         </div>
       </div>
