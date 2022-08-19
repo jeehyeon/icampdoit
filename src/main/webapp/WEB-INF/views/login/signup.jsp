@@ -199,11 +199,21 @@
 				if( document.signup.name.value.trim() == '' ) {
 					alert( '이름을 입력해 주세요.' );
 					return false;				
+				}else{
+					if(isName(document.signup.name.value)){
+						$("#name").css('border-color', '#ced4da');
+					}else{
+						$("#name").css('border-color', 'red');
+						alert( '올바른 이름이 아닙니다.(2글자 이상, 한글만 입력해주세요)' );
+						return false;
+					}
 				}
 				if( document.signup.id.value.trim() == '' ) {
 					alert( '아이디를 입력해 주세요.' );
 					return false;				
 				}
+					
+				
 				if( document.signup.pwd.value.trim() == '' ) {
 					alert( '비밀번호를 입력해 주세요.' );
 					return false;				
@@ -211,10 +221,31 @@
 				if( document.signup.birth.value.trim() == '' ) {
 					alert( '생년월일을 입력해 주세요' );
 					return false;				
+				}else{
+					if(isBirthday(document.signup.birth.value)){
+						//유효성 맞음
+						$("#birth").css('border-color', '#ced4da');
+					}else{
+						//유효성 안맞음
+						$("#birth").css('border-color', 'red');
+						alert( '올바른 생년월일이 아닙니다.' );
+						return false;
+					}
 				}
 				if( document.signup.email.value.trim() == '' ) {
 					alert( '이메일을 입력해 주세요' );
 					return false;				
+				}else{
+					if(isEmail(document.signup.email.value)){
+						
+						$("#email").css('border-color', '#ced4da');
+					}else{
+						//유효성 안맞음
+						$("#email").css('border-color', 'red');
+						alert( '올바른 이메일 형식이 아닙니다.' );
+						return false;
+					}
+					
 				}
 				if( document.signup.answer.value.trim() == '' ) {
 					alert( '비밀번호 확인 답변을 입력해 주세요' );
@@ -234,26 +265,106 @@
     		};
     	};
     	
-    	$('#btnCheck').click(function () {		
-    	    if ($('#id').val() != '') {	        
-    	        $.ajax({ 	   					
-    	            type: 'GET',
-    	            url: './idcheck.do',
-    	            data: 'id=' + $('#id').val(),
-    	            dataType: 'json',
-    	            success: function(result) {
-    	                if (result == '1') {
-    	                    $('#result').text('사용 가능한 아이디입니다.');
-    	                    $('#idcheck').val('idChecked');
+    	
+    	function isBirthday(dateStr) {
 
-    	                } else {
-    	                    $('#result').text('이미 사용중인 아이디입니다.');
-    	                }
-    	            },
-    	            error: function(a, b, c) {
-    	                console.log(a, b, c);
-    	            }				
-    	        });
+    		var year = Number(dateStr.substr(0,4)); 
+    		var month = Number(dateStr.substr(4,2)); 
+    		var day = Number(dateStr.substr(6,2));
+    		var today = new Date(); 
+    		var yearNow = today.getFullYear(); 
+
+    		if (dateStr.length <=8) {
+    		
+    			if (1900 > year || year > yearNow){
+    				return false;
+    			} else if (month < 1 || month > 12) {
+    				return false;
+    			} else if (day < 1 || day > 31) {
+    				return false;
+    			} else if ((month==4 || month==6 || month==9 || month==11) && day==31) {
+    				return false;
+    			} else if (month == 2) {
+
+    				var isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+    				if (day>29 || (day==29 && !isleap)) {
+    					return false;
+    				} else {
+    					return true;
+    				} 
+    			} else {
+    				return true;
+    			}
+    		}
+    		else {
+    			
+    			return false;
+    		}
+    	}
+    	function isEmail(emailStr)
+    	{                                                 
+    	     var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+    	     if(!reg_email.test(emailStr)) {                            
+    	          return false;         
+    	     }                            
+    	     else {                       
+    	          return true;         
+    	     }                            
+    	}                            
+    	
+    		
+    	
+    	function isId(id) {            
+    		      
+    		var reg_Id = /^[a-zA-z0-9]{4,12}$/;       
+    		if (!reg_Id.test(id)) {                                 
+    			 return false;        
+    			}        
+    		return true; 
+    	}
+    	
+    	function isName(name) {            
+    		      
+    		var reg_Name = /^[가-힣]{2,}$/;    
+    		if (!reg_Name.test(name)) {                                 
+    			 return false;        
+    			}        
+    		return true; 
+    	}
+    	
+    	
+    	$('#btnCheck').click(function () {		
+    	    if ($('#id').val() != '') {
+    	    	
+    	    	if(isId(document.signup.id.value)){
+					//유효성 맞음
+    	    		$.ajax({ 	   					
+        	            type: 'GET',
+        	            url: './idcheck.do',
+        	            data: 'id=' + $('#id').val(),
+        	            dataType: 'json',
+        	            success: function(result) {
+        	                if (result == '1') {
+        	                    $('#result').text('사용 가능한 아이디입니다.');
+        	                    $("#id").css('border-color', 'green');
+        	                    $('#idcheck').val('idChecked');
+
+        	                } else {
+        	                    $('#result').text('이미 사용중인 아이디입니다.');
+        	                    $("#id").css('border-color', 'red');
+        	                }
+        	            },
+        	            error: function(a, b, c) {
+        	                console.log(a, b, c);
+        	            }				
+        	        });
+					
+				}else{
+					$("#id").css('border-color', 'red');
+					$('#result').text( '영문(대,소문자)와 숫자만 사용가능합니다.' );
+					return false;
+				}
+    	        
     	   				
     	    } else {
     	        alert('아이디를 입력하세요.');
