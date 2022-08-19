@@ -66,7 +66,7 @@
 		String latlngadd = mapY + ", " + mapX;
 		
 		
-		sbHtml.append( "<div class='col-sm-6 mb-5 hover-animate' data-marker-id='59c0c8e33b1527bfe2abaf92'>");
+		sbHtml.append( "<div class='lists col-sm-6 mb-5 hover-animate' data-marker-id='59c0c8e33b1527bfe2abaf92'>");
 		sbHtml.append( "	<div class='card h-100 border-0 shadow'>");
 		sbHtml.append( "		<div class='card-img-top overflow-hidden gradient-overlay'> <img class='img-fluid' src='" + firstImageUrl + "'/><a class='tile-link' href='./campview.do?contentId=" + contentId + "'></a>");
 		sbHtml.append( "		</div>");			
@@ -535,20 +535,43 @@
 						//content: wrap
 					});
 					
+					
+					
 					overlay.setContent(wrap);
 
 					overlays.push(overlay);
 					
-					kakao.maps.event.addListener( markers[i], 'click', function() {
-						console.log(marker)
-						console.log("1");
-						overlays[i].setMap(map);
+					
+					
+					kakao.maps.event.addListener( markers[i], 'mouseover', function() {
+						//console.log(marker)
+						//console.log("1");
+						
+						$('div .card-body:eq('+i+')').css('background-color', '#99CC99');
+					});
+					kakao.maps.event.addListener( markers[i], 'mouseout', function() {
+					    // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+						
+						$('div .card-body:eq('+i+')').css('background-color', 'white');
 					});
 					
+					
+					kakao.maps.event.addListener( markers[i], 'click', function() {
+						//console.log(marker)
+						//console.log("1");
+						overlays[i].setMap(map);
+						$('div .card-body:eq('+i+')').css('background-color', '#99CC99');
+					});
 				}
 			
-				
-				
+				$(".lists").hover(function(){
+					//console.log("인덱스  : "+$(this).index());
+					overlays[$(this).index()].setMap(map);
+					$('div .card-body:eq('+$(this).index()+')').css('background-color', '#99CC99');
+				},function(){
+					overlays[$(this).index()].setMap(null);
+					$('div .card-body:eq('+$(this).index()+')').css('background-color', 'white');
+				});
 					          
 				// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
 				var mapTypeControl = new kakao.maps.MapTypeControl();
