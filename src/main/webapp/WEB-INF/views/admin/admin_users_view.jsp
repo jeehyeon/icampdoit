@@ -205,8 +205,9 @@
                          <input type="hidden" id="ucode" name="ucode" value="<%=ucode%>" />
                       </td>
                       <td>
+                        <button type="button" id="cbtn" class="btn btn-dark float-end mx-1 my-1" onclick="location.href='admin_users.do?cpage=<%=cpage %>'">취소</button>
                       	<button type="button" id="dbtn" class="btn btn-danger float-end mx-1 my-1" >회원삭제</button>
-						<button type="button" id="mbtn" class="btn btn-success float-end mx-1 my-1">수정완료</button>
+						<button type="button" id="mbtn" class="btn btn-success float-end mx-1 my-1">수정완료</button>						
                       </td>
                     </tr>   
                     
