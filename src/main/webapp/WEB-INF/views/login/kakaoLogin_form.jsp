@@ -175,7 +175,43 @@
 		</script>
 
 		<script>
+		function isBirthday(dateStr) {
 
+    		var year = Number(dateStr.substr(0,4)); 
+    		var month = Number(dateStr.substr(4,2)); 
+    		var day = Number(dateStr.substr(6,2));
+    		var today = new Date(); 
+    		var yearNow = today.getFullYear(); 
+
+    		if (dateStr.length <=8) {
+    		
+    			if (1900 > year || year > yearNow){
+    				return false;
+    			} else if (month < 1 || month > 12) {
+    				return false;
+    			} else if (day < 1 || day > 31) {
+    				return false;
+    			} else if ((month==4 || month==6 || month==9 || month==11) && day==31) {
+    				return false;
+    			} else if (month == 2) {
+
+    				var isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+    				if (day>29 || (day==29 && !isleap)) {
+    					return false;
+    				} else {
+    					return true;
+    				} 
+    			} else {
+    				return true;
+    			}
+    		}
+    		else {
+    			
+    			return false;
+    		}
+    	}
+		
+		
 		 window.onload = function() {
 			 const Toast = Swal.mixin({
 				    toast: true,
@@ -188,6 +224,9 @@
 				        toast.addEventListener('mouseleave', Swal.resumeTimer)
 				    }
 				})
+				
+				
+				
 				
 	    		document.getElementById( 'sbtn' ).onclick = function() {
 	    			// 데이터 전송
@@ -225,6 +264,19 @@
 		 				    title: '생년월일을 입력해 주세요.'
 		 				})
 						return false;				
+					}else{
+						if(isBirthday(document.sfrm.birth.value)){
+							//유효성 맞음
+							$("#birth").css('border-color', '#ced4da');
+						}else{
+							//유효성 안맞음
+							$("#birth").css('border-color', 'red');
+							Toast.fire({
+			 				    icon: 'warning',
+			 				    title: '올바른 형식의 생년월일이 아닙니다.'
+			 				})
+							return false;
+						}
 					}
 					if( document.sfrm.email.value.trim() == '' ) {
 						Toast.fire({
@@ -260,6 +312,15 @@
 	    	};
 </script>
 <script>
+			function isId(id) {            
+				      
+				var reg_Id = /^[a-zA-z0-9]{4,12}$/;       
+				if (!reg_Id.test(id)) {                                 
+					 return false;        
+					}        
+				return true; 
+			};
+			
 			
 	    	$(document).on("click", "#btncheck", function () {		
 	    		const Toast = Swal.mixin({
@@ -275,25 +336,34 @@
 				})
 	    		
 	    	    if ($('#id').val() != '') {	        
-	    	        $.ajax({ 	   					
-	    	            type: 'GET',
-	    	            url: './idcheck.do',
-	    	            data: 'id=' + $('#id').val(),
-	    	            dataType: 'json',
-	    	            success: function(result) {
-	    	            	
-	    	                if (result == '1') {
-	    	                    $('#result').text('사용 가능한 아이디입니다.');
-	    	                    $('#idcheck').val('idChecked');
+	    	    	if(isId($('#id').val())){
+						//유효성 맞음
+	    	    		$.ajax({ 	   					
+	        	            type: 'GET',
+	        	            url: './idcheck.do',
+	        	            data: 'id=' + $('#id').val(),
+	        	            dataType: 'json',
+	        	            success: function(result) {
+	        	                if (result == '1') {
+	        	                    $('#result').text('사용 가능한 아이디입니다.');
+	        	                    $("#id").css('border-color', 'green');
+	        	                    $('#idcheck').val('idChecked');
 
-	    	                } else {
-	    	                    $('#result').text('이미 사용중인 아이디입니다.');
-	    	                }
-	    	            },
-	    	            error: function(a, b, c) {
-	    	                console.log(a, b, c);
-	    	            }				
-	    	        });
+	        	                } else {
+	        	                    $('#result').text('이미 사용중인 아이디입니다.');
+	        	                    $("#id").css('border-color', 'red');
+	        	                }
+	        	            },
+	        	            error: function(a, b, c) {
+	        	                console.log(a, b, c);
+	        	            }				
+	        	        });
+						
+					}else{
+						$("#id").css('border-color', 'red');
+						$('#result').text( '영문(대,소문자)와 숫자만 사용가능합니다.' );
+						return false;
+					}
 	    	   				
 	    	    } else {
 	    	    	Toast.fire({
