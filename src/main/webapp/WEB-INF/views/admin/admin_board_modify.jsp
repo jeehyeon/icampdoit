@@ -210,6 +210,18 @@
 
 	<script>    
 	
+	const Toast = Swal.mixin({
+	    toast: true,
+	    position: 'center-center',
+	    showConfirmButton: false,
+	    timer: 3000,
+	    timerProgressBar: false,
+	    didOpen: (toast) => {
+	        toast.addEventListener('mouseenter', Swal.stopTimer)
+	        toast.addEventListener('mouseleave', Swal.resumeTimer)
+	    }
+	})
+	
  	document.getElementById( 'cbtn' ).onclick = function() { 		
  		var subject = $('#subject').val();
  		var filename = $('#modifyOk').val();
@@ -224,7 +236,10 @@
 				location.href='/admin_board.do';
 			},
 			error: function() {
-	        	alert('error, 에러');
+				Toast.fire({
+ 				    icon: 'warning',
+ 				    title: '수정 취소 오류'
+ 				})
 	        }
 		});
 	}
@@ -279,7 +294,10 @@
 		        }
 			});
 	     } else {
-		        alert('에러남.');
+	    	 	Toast.fire({
+				    icon: 'warning',
+				    title: '게시글 수정 오류'
+				})
 		        $('#title').focus();
 		 } 
 	   }
@@ -321,17 +339,7 @@
         });
 	});
 	
-	const Toast = Swal.mixin({
-	    toast: true,
-	    position: 'center-center',
-	    showConfirmButton: false,
-	    timer: 3000,
-	    timerProgressBar: false,
-	    didOpen: (toast) => {
-	        toast.addEventListener('mouseenter', Swal.stopTimer)
-	        toast.addEventListener('mouseleave', Swal.resumeTimer)
-	    }
-	})
+	
 
 	// 이미지 파일 업로드
 	function sendFile(file, editor, welEditable) {
@@ -373,7 +381,10 @@
 					$('#newFilesize').val(str[1]);
 	                
             	}else{
-            		alert("error");
+            		Toast.fire({
+     				    icon: 'warning',
+     				    title: '이미지 파일 업로드 오류'
+     				})
             	};
 			},
 			error: function() {
