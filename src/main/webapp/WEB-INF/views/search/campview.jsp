@@ -542,7 +542,9 @@ for(CampviewCmtTO cto : clists){
 						Swal.fire({
 							title: '로그인이 필요합니다.',     
 							text:	' ', 
-							icon:	'warning'
+							icon:	'warning',
+							confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
+							confirmButtonText: '확인' // confirm 버튼 텍스트 지정
         					})
 					}else if(data == "0"){
 						Swal.fire({
@@ -699,7 +701,17 @@ for(CampviewCmtTO cto : clists){
  		   			success: function(data){
  		   				if(data == 0){
  		   					//성공
- 		   					location.reload();
+ 		   					Swal.fire({
+							title: '댓글을 삭제하였습니다.',     
+							text:	' ', 
+							icon:	'success',
+							confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
+							confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+							}).then((result) => {
+								if (result.isConfirmed) {
+					  				location.reload();
+					  			} 
+					  		})
  		   				}else if(data == 2){
  		   					//다른 사용자일떄
  		   					Toast.fire({

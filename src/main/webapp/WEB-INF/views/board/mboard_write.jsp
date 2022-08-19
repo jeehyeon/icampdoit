@@ -414,14 +414,14 @@
 	            	}else{
 	            		Toast.fire({
 		 				    icon: 'warning',
-		 				    title: '실패'
+		 				    title: '이미지파일 업로드 오류'
 		 				});
 	            	};
 				},
 				error: function() {
 					Toast.fire({
 	 				    icon: 'warning',
-	 				    title: '이미지 업로드 실패'
+	 				    title: '이미지 사이즈는 128MB 미만이어야 합니다.'
 	 				});
 		        }
 			});

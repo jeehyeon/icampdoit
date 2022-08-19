@@ -307,7 +307,7 @@
   };
   
   document.getElementById( 'mbtn' ).onclick = function() {
-	  var name = $('#name').val();
+	  	var name = $('#name').val();
 		var email = $('#email').val();
 		var birth = $('#birth').val();
 		var gen = $('.form-select option:selected').val();

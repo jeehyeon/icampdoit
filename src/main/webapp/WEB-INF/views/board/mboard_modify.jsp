@@ -465,7 +465,7 @@
 			error: function() {
 				Toast.fire({
  				    icon: 'warning',
- 				    title: '이미지 사이즈는 10MB 미만이어야 합니다.'
+ 				    title: '이미지 사이즈는 128MB 미만이어야 합니다.'
  				})
 	        }
 		});

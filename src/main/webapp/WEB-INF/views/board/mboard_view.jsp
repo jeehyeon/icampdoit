@@ -381,7 +381,6 @@
    			   confirmButtonText: '승인', // confirm 버튼 텍스트 지정
    			   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
    			   
-   			   reverseButtons: true, // 버튼 순서 거꾸로
    			   
    			}).then((result) => {
    			 
@@ -402,6 +401,7 @@
 										icon:	'success',
 										confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
 										confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+										
 									}).then((result) => {
 										if (result.isConfirmed) {
 							  				location.reload();
@@ -418,16 +418,18 @@
 	   	        				}else{
 	   								//실패 
 	   	        					Swal.fire({
-										title: '댓글을 삭제를 실패했습니다.',     
+										title: '댓글삭제에 실패하였습니다.',     
 										text:	' ', 
-										icon:	'warning'
+										icon:	'warning',
+										confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
+										confirmButtonText: '확인' // confirm 버튼 텍스트 지정
 	   	        					});
 	   	        				}
 	   	        			}, 
 	   	        			fail: function(error){
 	   	        				Toast.fire({
-	   	 	 				    	icon: 'warning',
-	   	 	 				    	title: '실패'
+	   	 	 				    	icon: 'error',
+	   	 	 				    	title: '댓글 삭제 실패'
 	   	 	 					});
 	   	        			}
 	   	        		});
@@ -438,7 +440,6 @@
     	}
    };
     	function cmtInsert() {
-    		
     		var formdata = $("#comment-form").serialize() ;
     		
     		
@@ -481,7 +482,7 @@
         			}, 
         			fail: function(error){
         				Swal.fire({
-							title: '댓글을 달기실패.',     
+							title: '댓글등록 실패.',     
 							text:	' ', 
 							icon:	'warning'
        					});
