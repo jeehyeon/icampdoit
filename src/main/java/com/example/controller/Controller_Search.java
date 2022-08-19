@@ -161,7 +161,7 @@ public class Controller_Search {
 			lctClMount = request.getParameter( "lctClMount" );
 		}
 		if( (request.getParameter( "lctClForest" )!=null&&request.getParameter( "lctClForest" )!="")  ) {
-			addurl +="indutyVan=" + request.getParameter("indutyVan") +"&";
+			addurl +="lctClForest=" + request.getParameter("lctClForest") +"&";
 			lctClForest = request.getParameter( "lctClForest" );
 		} else {
 			lctClForest = request.getParameter( "lctClForest" );
