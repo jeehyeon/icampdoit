@@ -82,7 +82,10 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="./resources/bootstrap-5/html/admin/css/material-dashboard.css?v=3.0.4" rel="stylesheet" /> 
-  <link rel="stylesheet" href="./resources/bootstrap-5/html/summernote/summernote-lite.css" /> 
+  <link rel="stylesheet" href="./resources/bootstrap-5/html/summernote/summernote-lite.css" />
+  <!-- Sweet Alert -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script> 
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -247,15 +250,29 @@
 				type : "POST",
 				url : './admin_board_modify_ok.do',
 				dataType : 'text',
-				success : function(flag) {					
+				success : function(flag) {	
 					
 					if( flag == 0 ) {
-						alert('글수정 성공');
-						location.href='/admin_board.do';
+						Swal.fire({
+							title: '게시글 수정 성공',     
+							text:	' ', 
+							icon:	'success',
+							confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
+							confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+						}).then((result) => {
+							if (result.isConfirmed) {
+								location.href='/mboardview.do?subjectValue='+subjectValue+'&cpage='+cpage+'&seq='+seq;
+				  			 } 
+				  		 })
 					} else {
-						alert('글수정 실패');
+						Swal.fire({
+							title: '게시글 수정 실패',     
+							text:	' ', 
+							icon:	'warning',
+						})
 						history.back();
 					}
+					
 				},
 				error: function(request, status, error) {
 					alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
@@ -303,6 +320,18 @@
 			} 
         });
 	});
+	
+	const Toast = Swal.mixin({
+	    toast: true,
+	    position: 'center-center',
+	    showConfirmButton: false,
+	    timer: 3000,
+	    timerProgressBar: false,
+	    didOpen: (toast) => {
+	        toast.addEventListener('mouseenter', Swal.stopTimer)
+	        toast.addEventListener('mouseleave', Swal.resumeTimer)
+	    }
+	})
 
 	// 이미지 파일 업로드
 	function sendFile(file, editor, welEditable) {
@@ -348,7 +377,10 @@
             	};
 			},
 			error: function() {
-	        	alert('error, 이미지 사이즈는 10MB 미만이어야 합니다.');
+				Toast.fire({
+ 				    icon: 'warning',
+ 				    title: '이미지 사이즈는 10MB 미만이어야 합니다.'
+ 				})
 	        }
 		});
 	}
