@@ -245,7 +245,7 @@
 	}
 	 
        document.getElementById( 'mbtn' ).onclick = function() {	
-    	  alert( $('#subject').val() );
+    	  //alert( $('#subject').val() );
     	 var subject = $('#subject').val();
 		 var title = $('#title').val();
 		 var content = $('#summernote').val();
@@ -276,7 +276,7 @@
 							confirmButtonText: '확인', // confirm 버튼 텍스트 지정
 						}).then((result) => {
 							if (result.isConfirmed) {
-								location.href='/mboardview.do?subjectValue='+subjectValue+'&cpage='+cpage+'&seq='+seq;
+								location.href='/admin_board.do';
 				  			 } 
 				  		 })
 					} else {
