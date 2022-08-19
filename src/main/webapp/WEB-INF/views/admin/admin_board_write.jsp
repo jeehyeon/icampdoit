@@ -163,7 +163,18 @@
 	<script src="./resources/bootstrap-5/html/summernote/lang/summernote-ko-KR.js"></script>
 
 	<script>    
-    
+	const Toast = Swal.mixin({
+	    toast: true,
+	    position: 'center-center',
+	    showConfirmButton: false,
+	    timer: 3000,
+	    timerProgressBar: false,
+	    didOpen: (toast) => {
+	        toast.addEventListener('mouseenter', Swal.stopTimer)
+	        toast.addEventListener('mouseleave', Swal.resumeTimer)
+	    }
+	})
+	
  	document.getElementById( 'cbtn' ).onclick = function() { 		
  		var subject = $('#subject').val();
  		var filename = $('#writeOk').val();
@@ -178,22 +189,15 @@
 				location.href='/admin_board.do';
 			},
 			error: function() {
-	        	alert('error, 에러');
+				 Toast.fire({
+					    icon: 'warning',
+					    title: '게시글 작성 취소 오류'
+					})
 	        }
 		});
 	}
  	
- 	const Toast = Swal.mixin({
-	    toast: true,
-	    position: 'center-center',
-	    showConfirmButton: false,
-	    timer: 3000,
-	    timerProgressBar: false,
-	    didOpen: (toast) => {
-	        toast.addEventListener('mouseenter', Swal.stopTimer)
-	        toast.addEventListener('mouseleave', Swal.resumeTimer)
-	    }
-	})
+ 	
 	 
        document.getElementById( 'wbtn' ).onclick = function() {	
 		 var subject = $('#subject').val();

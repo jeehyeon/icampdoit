@@ -307,7 +307,10 @@
 				location.href='/mboardlist.do?subjectValue='+subjectValue+'&cpage='+cpage;
 			},
 			error: function() {
-	        	alert('error, 에러');
+				Toast.fire({
+ 				    icon: 'warning',
+ 				    title: '게시글 수정 취소 오류'
+ 				})
 	        }
 		});
 	}
@@ -356,8 +359,14 @@
 							title: '게시글 수정 실패',     
 							text:	' ', 
 							icon:	'warning',
-						})
-						history.back();
+							confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
+							confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+						}).then((result) => {
+							if (result.isConfirmed) {
+								history.back();				  			 
+							} 
+				  		 })
+						
 					}
 				},
 				error: function(request, status, error) {
@@ -365,7 +374,10 @@
 		        }
 			});
 	     } else {
-		        alert('에러남.');
+	    	 	Toast.fire({
+				    icon: 'error',
+				    title: '게시글 수정 오류'
+				})
 		        $('#title').focus();
 		 } 
 	   }
@@ -442,7 +454,10 @@
 					$('#newFilesize').val(str[1]);
 	                
             	} else{
-            		alert("error");
+            		Toast.fire({
+     				    icon: 'warning',
+     				    title: '이미지파일 업로드 오류'
+     				})
             	};
             	
             		

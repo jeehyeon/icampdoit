@@ -34,7 +34,10 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="./resources/bootstrap-5/html/admin/css/material-dashboard.css?v=3.0.4" rel="stylesheet" />
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+  <!-- Sweet Alert -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -236,53 +239,64 @@
 
   
   document.getElementById( 'dbtn' ).onclick = function() {
-	  if( confirm( "회원 정보를 삭제하시겠습니까? 삭제 후 복구가 불가능합니다.") ) {
-		  //var ucode = $('#ucode').val();
-		  //alert( ucode );
-		  
-		  $.ajax({
-				data : {ucode: $('#ucode').val()},				
-				type : "POST",
-				url : './admin_users_deleteOk.do',
-				dataType : 'text',
-				success : function(flag) {					
-					//alert( "flag값 ajax:" + flag );
-					if( flag == "0" ) {
-						//alert('회원정보 삭제 성공');
-						Swal.fire({
-							title: '회원 정보 삭제 성공',  
-							text:	'',
-							icon:	'success',
-							confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
-							confirmButtonText: '확인', // confirm 버튼 텍스트 지정
-					
-						}).then((result) => {
-				
-	  			 			if (result.isConfirmed) {
-	  				 			location.href='/admin_users.do';
-	  			 			} 
-	  					})
-					} else {
-						Swal.fire({
-							title: '회원 정보 삭제 실패',     
-							text:	'다시 시도해 주세요.', 
-							icon:	'error',
-							confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
-							confirmButtonText: '확인', // confirm 버튼 텍스트 지정
-							
-						}).then((result) => {
+	  Swal.fire({
+			title: '회원 정보를 삭제하시겠습니까? ',  
+			text: '삭제 후 복구가 불가능합니다.',
+			icon: 'question',
+			   
+			showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+			confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
+			cancelButtonColor: '#343a40', // cancel 버튼 색깔 지정
+			confirmButtonText: '승인', // confirm 버튼 텍스트 지정
+			cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+	
+		}).then((result) => {
+
+ 			if (result.isConfirmed) {
+	 			$.ajax({
+					data : {ucode: $('#ucode').val()},				
+					type : "POST",
+					url : './admin_users_deleteOk.do',
+					dataType : 'text',
+					success : function(flag) {					
+						//alert( "flag값 ajax:" + flag );
+						if( flag == "0" ) {
+							//alert('회원정보 삭제 성공');
+							Swal.fire({
+								title: '회원 정보 삭제 성공',  
+								text:	'',
+								icon:	'success',
+								confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
+								confirmButtonText: '확인', // confirm 버튼 텍스트 지정
 						
-			  			 	if (result.isConfirmed) {
-			  					history.back();
-			  			 	} 
-			  			})
-					}
-				},
-				error: function(request, status, error) {
-					alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
-		        }
-			});
-	  }
+							}).then((result) => {
+					
+		  			 			if (result.isConfirmed) {
+		  				 			location.href='/admin_users.do';
+		  			 			} 
+		  					})
+						} else {
+							Swal.fire({
+								title: '회원 정보 삭제 실패',     
+								text:	'다시 시도해 주세요.', 
+								icon:	'error',
+								confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
+								confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+								
+							}).then((result) => {
+							
+				  			 	if (result.isConfirmed) {
+				  					history.back();
+				  			 	} 
+				  			})
+						}
+					},
+					error: function(request, status, error) {
+						alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
+			        }
+				});
+ 			} 
+		})
   };
   
   document.getElementById( 'mbtn' ).onclick = function() {
@@ -304,14 +318,36 @@
 				type : "POST",
 				url : './admin_users_modifyOk.do',
 				dataType : 'text',
-				success : function(flag) {					
+				success : function(flag) {
 					
-					if( flag == "0" ) {
-						alert('회원정보 수정 성공');
-						location.href= '/admin_users.do';
+					if( flag == 0 ) {
+						Swal.fire({
+							title: '회원정보 수정 성공',  
+							text:	'',
+							icon:	'success',
+							confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
+							confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+							
+					}).then((result) => {
+						
+			  			 if (result.isConfirmed) {
+			  				 location.href='/admin_users.do';
+			  			 } 
+			  		})
+			 				
 					} else {
-						alert('회원정보 수정 실패');
-						history.back();
+						Swal.fire({
+							title: '회원정보 수정 실패',     
+							text:	'', 
+							icon:	'error'
+							
+					}).then((result) => {
+						
+			  			 if (result.isConfirmed) {
+			  				history.back();
+			  			 } 
+			  		})
+						
 					}
 				},
 				error: function(request, status, error) {
@@ -319,7 +355,10 @@
 		        }
 			});
 	     } else {
-		        alert('에러남.');
+	    	 Toast.fire({
+				    icon: 'error',
+				    title: '회원정보 수정 오류'
+				})
 		        $('#title').focus();
 		 } 
   }
