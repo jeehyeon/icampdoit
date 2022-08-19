@@ -425,7 +425,10 @@
 	   	        				}
 	   	        			}, 
 	   	        			fail: function(error){
-	   	            			alert('작성자만 삭제가 가능합니다.' );
+	   	        				Toast.fire({
+	   	 	 				    	icon: 'warning',
+	   	 	 				    	title: '실패'
+	   	 	 					});
 	   	        			}
 	   	        		});
    	  			}	
