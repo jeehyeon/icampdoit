@@ -31,6 +31,10 @@
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+	<!-- Sweet Alert -->
+  	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+	  
   </head>
   <body>
     <div class="container-fluid px-3">
@@ -46,14 +50,14 @@
               <!-- 이름 -->
               <div class="mb-3">
                 <label class="form-label" for="name"> *NAME</label>
-                <input class="form-control" name="name" id="name" type="Name" placeholder="Name" autocomplete="off" required data-msg="Please enter your Name">
+                <input class="form-control" name="name" id="name" type="Name" placeholder="이름은 2글자 이상, 한글만 입력해주세요." autocomplete="off" required data-msg="Please enter your Name">
               </div>
               
               <!-- 아이디 -->
               <div class="mb-4">
                 <label class="form-label" for="id"> *ID</label>
                 <div style="line-height:15%;">
-                <input name="id" id="id" type="ID" class="form-control" placeholder="ID" autocomplete="off" required data-msg="Please enter your ID" onkeydown="inputIdChk()">
+                <input name="id" id="id" type="ID" class="form-control" placeholder="ID는 영어, 숫자를 포함해 4자 이상 입력해 주세요." autocomplete="off" required data-msg="Please enter your ID" onkeydown="inputIdChk()">
                 <br>
                 <button type="button" id="btnCheck" class="btn btn btn-dark btn-sm" style="float: right; height: 30px; display: flex; align-items:center;">아이디 중복확인</button>
                 </div>
@@ -186,40 +190,68 @@
       //- injectSvgSprite('${path}icons/orion-svg-sprite.svg'); 
       injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg'); 
       
-      
-      
+  
       window.onload = function() {
+    	  const Toast = Swal.mixin({
+  		    toast: true,
+  		    position: 'center-center',
+  		    showConfirmButton: false,
+  		    timer: 3000,
+  		    timerProgressBar: false,
+  		    didOpen: (toast) => {
+  		        toast.addEventListener('mouseenter', Swal.stopTimer)
+  		        toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		    }
+  		})
+  		
     		document.getElementById( 'sbtn' ).onclick = function() {
     			// 데이터 전송
     			if( document.signup.info.checked == false ) {
-				alert( '동의하셔야 합니다.' );
-				return false;
+    				Toast.fire({
+     				    icon: 'warning',
+     				    title: '동의하셔야 합니다.'
+     				})
+					return false;
 				}
-				//alert( '정상' );
 				if( document.signup.name.value.trim() == '' ) {
-					alert( '이름을 입력해 주세요.' );
+					Toast.fire({
+	 				    icon: 'warning',
+	 				    title: '이름을 입력해 주세요.'
+	 				})
 					return false;				
 				}else{
 					if(isName(document.signup.name.value)){
 						$("#name").css('border-color', '#ced4da');
 					}else{
 						$("#name").css('border-color', 'red');
-						alert( '올바른 이름이 아닙니다.(2글자 이상, 한글만 입력해주세요)' );
+						Toast.fire({
+		 				    icon: 'warning',
+		 				    title: '올바른 이름이 아닙니다.'
+		 				})
 						return false;
 					}
 				}
 				if( document.signup.id.value.trim() == '' ) {
-					alert( '아이디를 입력해 주세요.' );
+					Toast.fire({
+	 				    icon: 'warning',
+	 				    title: '아이디를 입력해 주세요.'
+	 				})
 					return false;				
 				}
 					
 				
 				if( document.signup.pwd.value.trim() == '' ) {
-					alert( '비밀번호를 입력해 주세요.' );
+					Toast.fire({
+	 				    icon: 'warning',
+	 				    title: '비밀번호를 입력해 주세요.'
+	 				})
 					return false;				
 				}
 				if( document.signup.birth.value.trim() == '' ) {
-					alert( '생년월일을 입력해 주세요' );
+					Toast.fire({
+	 				    icon: 'warning',
+	 				    title: '생년월일을 입력해 주세요.'
+	 				})
 					return false;				
 				}else{
 					if(isBirthday(document.signup.birth.value)){
@@ -228,12 +260,18 @@
 					}else{
 						//유효성 안맞음
 						$("#birth").css('border-color', 'red');
-						alert( '올바른 생년월일이 아닙니다.' );
+						Toast.fire({
+		 				    icon: 'warning',
+		 				    title: '올바른 생년월일이 아닙니다.'
+		 				})
 						return false;
 					}
 				}
 				if( document.signup.email.value.trim() == '' ) {
-					alert( '이메일을 입력해 주세요' );
+					Toast.fire({
+	 				    icon: 'warning',
+	 				    title: '이메일을 입력해 주세요.'
+	 				})
 					return false;				
 				}else{
 					if(isEmail(document.signup.email.value)){
@@ -242,24 +280,34 @@
 					}else{
 						//유효성 안맞음
 						$("#email").css('border-color', 'red');
-						alert( '올바른 이메일 형식이 아닙니다.' );
+						Toast.fire({
+		 				    icon: 'warning',
+		 				    title: '올바른 이메일 형식이 아닙니다.'
+		 				})
 						return false;
 					}
 					
 				}
 				if( document.signup.answer.value.trim() == '' ) {
-					alert( '비밀번호 확인 답변을 입력해 주세요' );
+					Toast.fire({
+	 				    icon: 'warning',
+	 				    title: '비밀번호 확인 답변을&emsp;&emsp;&emsp;&emsp; 입력해 주세요.'
+	 				})
 					return false;				
 				}
 				if( document.signup.gen.value.trim() == '' ) {
-					alert( '성별을 체크해 주세요' );
+					Toast.fire({
+	 				    icon: 'warning',
+	 				    title: '성별을 체크해 주세요.'
+	 				})
 					return false;				
 				}if( document.signup.idcheck.value != 'idChecked' ) {
-					alert( '아이디 중복체크를 해주세요' );
+					Toast.fire({
+	 				    icon: 'warning',
+	 				    title: '아이디 중복체크를 해주세요.'
+	 				})
 					return false;				
-				}
-    			
-    			
+				}			
     			document.signup.submit();
     			
     		};
@@ -301,8 +349,8 @@
     			return false;
     		}
     	}
-    	function isEmail(emailStr)
-    	{                                                 
+    	
+    	function isEmail(emailStr) {                                                 
     	     var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
     	     if(!reg_email.test(emailStr)) {                            
     	          return false;         
@@ -312,8 +360,7 @@
     	     }                            
     	}                            
     	
-    		
-    	
+
     	function isId(id) {            
     		      
     		var reg_Id = /^[a-zA-z0-9]{4,12}$/;       
@@ -361,7 +408,7 @@
 					
 				}else{
 					$("#id").css('border-color', 'red');
-					$('#result').text( '영문(대,소문자)와 숫자만 사용가능합니다.' );
+					$('#result').text( '영문(대, 소문자)와 숫자만 사용가능합니다.' );
 					return false;
 				}
     	        
