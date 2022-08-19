@@ -198,7 +198,6 @@
 	     				})
 					return false;
 					}
-					//alert( '정상' );
 					if( document.sfrm.name.value.trim() == '' ) {
 						Toast.fire({
 		 				    icon: 'warning',

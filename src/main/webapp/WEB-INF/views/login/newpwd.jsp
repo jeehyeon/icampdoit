@@ -28,8 +28,9 @@ System.out.println(ucode);
     <link rel="stylesheet" href="./resources/bootstrap-5/html/css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="./resources/bootstrap-5/html/img/logo2.svg">
-    
-    
+    <!-- Sweet Alert -->
+  	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>	    
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
@@ -105,33 +106,45 @@ System.out.println(ucode);
       injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg'); 
       
       window.onload = function() {
+    	  const Toast = Swal.mixin({
+  		    toast: true,
+  		    position: 'center-center',
+  		    showConfirmButton: false,
+  		    timer: 3000,
+  		    timerProgressBar: false,
+  		    didOpen: (toast) => {
+  		        toast.addEventListener('mouseenter', Swal.stopTimer)
+  		        toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		    }
+  		})
+  		
   		document.getElementById( 'sbtn' ).onclick = function() {
-  			
-  			
-				
-				
 				if( document.newpwd.pwd.value.trim() == '' ) {
-					alert( '비밀번호를 입력해 주세요.' );
+					Toast.fire({
+	 				    icon: 'warning',
+	 				    title: '새 비밀번호를 입력해 주세요.'
+	 				})
 					return false;				
 				}
 				if( document.newpwd.pwd2.value.trim() == '' ) {
-					alert( '비밀번호 확인을 입력해 주세요.' );
+					Toast.fire({
+	 				    icon: 'warning',
+	 				    title: '새 비밀번호 확인을 입력해 주세요.'
+	 				})
 					return false;				
 				}
 				if( document.newpwd.pwd2.value.trim() != document.newpwd.pwd.value.trim() ) {
-					alert( '비밀번호 입력값이 서로 다릅니다.' );
+					Toast.fire({
+	 				    icon: 'warning',
+	 				    title: '비밀번호 입력값이 서로 다릅니다.'
+	 				})
 					return false;				
-				}
-  			
-  			
+				}		
   			document.newpwd.submit();
   			
   		};
   	};
-      
-      
-    	
-    	
+
     </script>
     
     <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
