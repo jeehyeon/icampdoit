@@ -215,8 +215,7 @@ public class Controller_Board {
 		System.out.println("uploadSummernoteImage() 호출");	
 		
 		String savename = image.getOriginalFilename();
-				
-		
+						
 		String subject = request.getParameter("subject");
 		System.out.println("이미지 subject : " + subject);
 		
