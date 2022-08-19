@@ -86,6 +86,9 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 	<!-- CSS Files -->
 	<link rel="stylesheet" href="./resources/bootstrap-5/html/summernote/summernote-lite.css" />
+	<!-- Sweet Alert -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
   </head>
 
   <body style="padding-top: 72px;">
@@ -275,6 +278,18 @@
 	<script src="./resources/bootstrap-5/html/summernote/lang/summernote-ko-KR.js"></script>
 	
 	<script>
+	const Toast = Swal.mixin({
+		    toast: true,
+		    position: 'center-center',
+		    showConfirmButton: false,
+		    timer: 3000,
+		    timerProgressBar: false,
+		    didOpen: (toast) => {
+		        toast.addEventListener('mouseenter', Swal.stopTimer)
+		        toast.addEventListener('mouseleave', Swal.resumeTimer)
+		    }
+		})    	
+	
 	document.getElementById( 'cbtn' ).onclick = function() { 		
  		var subject = $('#subject').val();
  		var filename = $('#modifyOk').val();
@@ -292,12 +307,15 @@
 				location.href='/mboardlist.do?subjectValue='+subjectValue+'&cpage='+cpage;
 			},
 			error: function() {
-	        	alert('error, 에러');
+				Toast.fire({
+ 				    icon: 'warning',
+ 				    title: '게시글 수정 취소 오류'
+ 				})
 	        }
 		});
 	}
 	 
-       document.getElementById( 'mbtn' ).onclick = function() {	
+    document.getElementById( 'mbtn' ).onclick = function() {	
     	   //alert( $('#filename').val() );
     	  //alert( $('#newfilename').val() );
     	 var subject = $('#subject').val();
@@ -325,11 +343,30 @@
 				success : function(flag) {					
 					
 					if( flag == 0 ) {
-						alert('글수정 성공');
-						location.href='/mboardview.do?subjectValue='+subjectValue+'&cpage='+cpage+'&seq='+seq;
+						Swal.fire({
+							title: '게시글 수정 성공',     
+							text:	' ', 
+							icon:	'success',
+							confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
+							confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+						}).then((result) => {
+							if (result.isConfirmed) {
+								location.href='/mboardview.do?subjectValue='+subjectValue+'&cpage='+cpage+'&seq='+seq;
+				  			 } 
+				  		 })
 					} else {
-						alert('글수정 실패');
-						history.back();
+						Swal.fire({
+							title: '게시글 수정 실패',     
+							text:	' ', 
+							icon:	'warning',
+							confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
+							confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+						}).then((result) => {
+							if (result.isConfirmed) {
+								history.back();				  			 
+							} 
+				  		 })
+						
 					}
 				},
 				error: function(request, status, error) {
@@ -337,7 +374,10 @@
 		        }
 			});
 	     } else {
-		        alert('에러남.');
+	    	 	Toast.fire({
+				    icon: 'error',
+				    title: '게시글 수정 오류'
+				})
 		        $('#title').focus();
 		 } 
 	   }
@@ -414,13 +454,19 @@
 					$('#newFilesize').val(str[1]);
 	                
             	} else{
-            		alert("error");
+            		Toast.fire({
+     				    icon: 'warning',
+     				    title: '이미지파일 업로드 오류'
+     				})
             	};
             	
             		
 			},
 			error: function() {
-	        	alert('error, 이미지 사이즈는 10MB 미만이어야 합니다.');
+				Toast.fire({
+ 				    icon: 'warning',
+ 				    title: '이미지 사이즈는 10MB 미만이어야 합니다.'
+ 				})
 	        }
 		});
 	}

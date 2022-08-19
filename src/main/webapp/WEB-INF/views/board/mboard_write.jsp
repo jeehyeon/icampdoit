@@ -54,10 +54,25 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 	<!-- CSS Files -->
 	<link rel="stylesheet" href="./resources/bootstrap-5/html/summernote/summernote-lite.css" />
+	<!-- Sweet Alert -->
+  	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 	
 	<script type="text/javascript">
   
 	window.onload = function() {
+		const Toast = Swal.mixin({
+		    toast: true,
+		    position: 'center-center',
+		    showConfirmButton: false,
+		    timer: 3000,
+		    timerProgressBar: false,
+		    didOpen: (toast) => {
+		        toast.addEventListener('mouseenter', Swal.stopTimer)
+		        toast.addEventListener('mouseleave', Swal.resumeTimer)
+		    }
+		})
+		
 		document.getElementById( 'wbtn' ).onclick = function() {
 
 			var subject = wfrm.subject.value;
@@ -65,19 +80,26 @@
 	     	var content = wfrm.content.value;
 	     	console.log(subject);
 	     	console.log(title);
-	     	
-	     	//var postData = {'subject' : subject , 'title' : title , 'content' : content};
-     	
+	     	     	
 			if(subject.trim() == '') {
-				alert( '말머리를 선택하셔야 합니다.' );
+				Toast.fire({
+ 				    icon: 'warning',
+ 				    title: '말머리를 선택해 주세요.'
+ 				})
 				return false;
 			}
 			if(title.trim() == '') {
-				alert( '제목을 입력하셔야 합니다.' );
+				Toast.fire({
+ 				    icon: 'warning',
+ 				    title: '제목을 입력해 주세요.'
+ 				})
 				return false;
 			}
 			if(content.trim() == '') {
-				alert( '내용을 입력하셔야 합니다.' );
+				Toast.fire({
+ 				    icon: 'warning',
+ 				    title: '내용을 입력해 주세요.'
+ 				})
 				return false;
 			}
 			 
@@ -284,7 +306,17 @@
 					options);
 		} */
 		document.getElementById( 'cbtn' ).onclick = function() {
-			
+			const Toast = Swal.mixin({
+			    toast: true,
+			    position: 'center-center',
+			    showConfirmButton: false,
+			    timer: 3000,
+			    timerProgressBar: false,
+			    didOpen: (toast) => {
+			        toast.addEventListener('mouseenter', Swal.stopTimer)
+			        toast.addEventListener('mouseleave', Swal.resumeTimer)
+			    }
+			})
 			
 			$.ajax({
 				data : {filename: $('#writeOk').val()},
@@ -294,7 +326,10 @@
 					location.href='/mboardlist.do';
 				},
 				error: function() {
-		        	alert('error, 에러');
+					Toast.fire({
+	 				    icon: 'warning',
+	 				    title: '글작성 취소 실패'
+	 				});
 		        }
 			});
 		}
@@ -338,9 +373,23 @@
 		
 		// 이미지 파일 업로드
 		function sendFile(file, editor, welEditable) {
-			var imgUrl = './upload/';
+			const Toast = Swal.mixin({
+			    toast: true,
+			    position: 'center-center',
+			    showConfirmButton: false,
+			    timer: 3000,
+			    timerProgressBar: false,
+			    didOpen: (toast) => {
+			        toast.addEventListener('mouseenter', Swal.stopTimer)
+			        toast.addEventListener('mouseleave', Swal.resumeTimer)
+			    }
+			})
+			
+			var imgUrl = './upload/';			
 			var data = new FormData();
 			data.append('image', file);
+			data.append('subject', $('#subject').val());
+			
 			$.ajax({
 				data : data,
 				type : "POST",
@@ -363,11 +412,17 @@
 						$('#filesize').val(str[1]);
 		                
 	            	}else{
-	            		alert("error");
+	            		Toast.fire({
+		 				    icon: 'warning',
+		 				    title: '실패'
+		 				});
 	            	};
 				},
 				error: function() {
-		        	alert('error, 이미지 사이즈는 10MB 미만이어야 합니다.');
+					Toast.fire({
+	 				    icon: 'warning',
+	 				    title: '이미지 업로드 실패'
+	 				});
 		        }
 			});
 		}

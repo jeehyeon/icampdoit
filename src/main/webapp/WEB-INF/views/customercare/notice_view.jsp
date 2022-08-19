@@ -59,8 +59,31 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  	<style type="text/css">
+  		#wrap {
+  			min-height: 90vh;
+		  	display: flex;
+		  	flex-direction: column;
+  		}
+  		#wrap3 {
+  			min-height: 40vh;
+		  	display: flex;
+		  	flex-direction: column;
+  		}
+  		/*
+  		#wrap2 {
+  			margin-top: 40vh;
+		  	display: flex;
+		  	flex-direction: column;
+  		} */
+  		#footer {
+    		margin-top: auto;
+  		}
+  	</style>
+  
   </head>
   <body style="padding-top: 72px;">
+  	<div id="wrap">
     <header class="header">
       <!-- Navbar 로고부분-->
       <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
@@ -152,12 +175,13 @@
     -->
     <section>
       <div class="container">
-        <div class="row mt-5 mb-7">
+        <div class="row mt-5 mb-7" id="wrap3">
+        	<!--  
           <div class="col-xl-8 col-lg-10 mx-auto mb-5">
             <div class="p-3 bg-gray-100 bg-opacity-10 border border-gray border-start-0 border-end-0">
               <strong>첨부파일</strong> &nbsp;&nbsp;<a href="./resources/bootstrap-5/html/img/photo/어바웃4.jpg" download><i class="fa-solid fa-file-circle-plus"></i> 2022_야영장업사업자안전교육_최종본.pdf [5606298 byte]</a>
 		    </div>
-		  </div>
+		  </div>-->
           <div class="col-xl-8 col-lg-10 mx-auto" style="font-family: 'GmarketSansMedium';'">           
             <p class="lead mb-3"><%=content %>
           </div>
@@ -166,14 +190,15 @@
           -->
           
         </div> 
-        
+        <div id=wrap2>
         <hr>
         <div class="text-center">
 		  <input type="button" value="목록" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='notice.do?cpage=<%=cpage %>'" />
         </div>
         <br /><br /><br />
+        </div>
     </section>
-
+	</div>
      <!-- Footer - 관리자 페이지 이동 부분 넣을 곳 -->
     <footer class="position-relative z-index-10 d-print-none">
            

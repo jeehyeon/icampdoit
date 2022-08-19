@@ -87,8 +87,19 @@
     <!-- Sweet Alert -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+  	<style type="text/css">
+  		#wrap {
+  			min-height: 90vh;
+		  	display: flex;
+		  	flex-direction: column;
+  		}
+  		#footer {
+    		margin-top: auto;
+  		}
+  	</style>
   </head>
   <body style="padding-top: 72px;">
+  	<div id="wrap">
     <header class="header">
       <!-- Navbar 로고부분-->
       <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
@@ -238,7 +249,7 @@
         </div>
       </div>
     </section>
-     
+    </div> 
     <!-- Footer - 관리자 페이지 이동 부분 넣을 곳 -->
     <footer class="position-relative z-index-10 d-print-none">
            
@@ -414,7 +425,10 @@
 	   	        				}
 	   	        			}, 
 	   	        			fail: function(error){
-	   	            			alert('작성자만 삭제가 가능합니다.' );
+	   	        				Toast.fire({
+	   	 	 				    	icon: 'warning',
+	   	 	 				    	title: '실패'
+	   	 	 					});
 	   	        			}
 	   	        		});
    	  			}	

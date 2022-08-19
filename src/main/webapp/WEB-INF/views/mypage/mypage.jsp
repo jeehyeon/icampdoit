@@ -25,7 +25,7 @@
 	
 %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -56,6 +56,10 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  	<!-- Sweet Alert -->
+  	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+	
   	<style type="text/css">
   		#wrap {
   			min-height: 90vh;
@@ -69,21 +73,45 @@
   	
   <script type="text/javascript">
  	window.onload = function() {// 버튼이벤트
+ 		const Toast = Swal.mixin({
+		    toast: true,
+		    position: 'center-center',
+		    showConfirmButton: false,
+		    timer: 3000,
+		    timerProgressBar: false,
+		    didOpen: (toast) => {
+		        toast.addEventListener('mouseenter', Swal.stopTimer)
+		        toast.addEventListener('mouseleave', Swal.resumeTimer)
+		    }
+		})
+ 		
  		document.getElementById( 'mbtn' ).onclick = function() {
  			if ( document.myfrm.name.value.trim() == '' ) {
- 				alert( '이름을 입력해주세요' );
+ 				Toast.fire({
+ 				    icon: 'warning',
+ 				    title: '이름을 입력해 주세요.'
+ 				})
  				return false;
  			}
  			if ( document.myfrm.gen.value.trim() == '' ) {
- 				alert( '성별을 선택해주세요' );
+ 				Toast.fire({
+ 				    icon: 'warning',
+ 				    title: '성별을 선택해 주세요.'
+ 				})
  				return false;
  			} 	
  			if ( document.myfrm.birth.value.trim() == '' ) {
- 				alert( '생년월일을 입력해주세요' );
+ 				Toast.fire({
+ 				    icon: 'warning',
+ 				    title: '생년월일을 입력해 주세요.'
+ 				})
  				return false;
  			}
  			if ( document.myfrm.email.value.trim() == '' ) {
- 				alert( '이메일을 입력해주세요' );
+ 				Toast.fire({
+ 				    icon: 'warning',
+ 				    title: '이메일을 입력해 주세요.'
+ 				})
  				return false;
  			}
  			document.myfrm.submit();

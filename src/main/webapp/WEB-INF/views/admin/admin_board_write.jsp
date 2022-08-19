@@ -32,6 +32,9 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="./resources/bootstrap-5/html/admin/css/material-dashboard.css?v=3.0.4" rel="stylesheet" />
   <link rel="stylesheet" href="./resources/bootstrap-5/html/summernote/summernote-lite.css" />
+  <!-- Sweet Alert -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
   </head>
   
 <body class="g-sidenav-show  bg-gray-200">
@@ -160,7 +163,18 @@
 	<script src="./resources/bootstrap-5/html/summernote/lang/summernote-ko-KR.js"></script>
 
 	<script>    
-    
+	const Toast = Swal.mixin({
+	    toast: true,
+	    position: 'center-center',
+	    showConfirmButton: false,
+	    timer: 3000,
+	    timerProgressBar: false,
+	    didOpen: (toast) => {
+	        toast.addEventListener('mouseenter', Swal.stopTimer)
+	        toast.addEventListener('mouseleave', Swal.resumeTimer)
+	    }
+	})
+	
  	document.getElementById( 'cbtn' ).onclick = function() { 		
  		var subject = $('#subject').val();
  		var filename = $('#writeOk').val();
@@ -175,10 +189,15 @@
 				location.href='/admin_board.do';
 			},
 			error: function() {
-	        	alert('error, 에러');
+				 Toast.fire({
+					    icon: 'warning',
+					    title: '게시글 작성 취소 오류'
+					})
 	        }
 		});
 	}
+ 	
+ 	
 	 
        document.getElementById( 'wbtn' ).onclick = function() {	
 		 var subject = $('#subject').val();
@@ -197,23 +216,51 @@
 				type : "POST",
 				url : './aboardwrite_ok.do',
 				dataType : 'text',
-				success : function(flag) {					
+				success : function(flag) {	
 					
-					if( flag == "0" ) {
-						alert('글쓰기 성공');
-						location.href='/admin_board.do';
+					if( flag == 0 ) {
+						Swal.fire({
+							title: '글쓰기 성공',  
+							text:	'',
+							icon:	'success',
+							confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
+							confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+							
+					}).then((result) => {
+						
+			  			 if (result.isConfirmed) {
+			  				 location.href='/admin_board.do';
+			  			 } 
+			  		})
+			 				
 					} else {
-						alert('글쓰기 실패');
-						history.back();
+						Swal.fire({
+							title: '글쓰기 실패',     
+							text:	'', 
+							icon:	'error',
+							confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
+							confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+							
+					}).then((result) => {
+						
+			  			 if (result.isConfirmed) {
+			  				history.back();
+			  			 } 
+			  		})
+						
 					}
+					
 				},
 				error: function(request, status, error) {
 					alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
 		        }
 			});
 	     } else {
-		        alert('말머리를 선택하고 빈칸을 모두 입력해주세요.');
-		        $('#subject').focus();
+	    	 Toast.fire({
+				    icon: 'warning',
+				    title: '말머리를 선택하고, 빈칸을 모두 입력해주세요.'
+				})
+		     $('#subject').focus();
 		 } 
 	   }
 	
@@ -299,7 +346,10 @@
             	};
 			},
 			error: function() {
-	        	alert('말머리를 선택해주세요.');
+				Toast.fire({
+				    icon: 'warning',
+				    title: '말머리를 선택해주세요.'
+				})
 	        }
 		});
 	}
