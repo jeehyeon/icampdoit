@@ -231,13 +231,19 @@
   <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
   <script>
-
-	  
-	 // 	
-			 
-		  // }
-			 
-
+  
+  
+  const Toast = Swal.mixin({
+	    toast: true,
+	    position: 'center-center',
+	    showConfirmButton: false,
+	    timer: 3000,
+	    timerProgressBar: false,
+	    didOpen: (toast) => {
+	        toast.addEventListener('mouseenter', Swal.stopTimer)
+	        toast.addEventListener('mouseleave', Swal.resumeTimer)
+	    }
+	})    	
   
   document.getElementById( 'dbtn' ).onclick = function() {
 	  Swal.fire({
@@ -340,7 +346,9 @@
 						Swal.fire({
 							title: '회원정보 수정 실패',     
 							text:	'', 
-							icon:	'error'
+							icon:	'error',
+							confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
+							confirmButtonText: '확인', // confirm 버튼 텍스트 지정
 							
 					}).then((result) => {
 						
