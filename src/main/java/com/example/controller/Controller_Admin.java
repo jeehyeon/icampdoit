@@ -2,6 +2,7 @@ package com.example.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -181,7 +182,7 @@ public class Controller_Admin {
 			uploadPath = mUploadPath;
 		}
 		
-		File target = new File(uploadPath, savename);
+		File target = new File(uploadPath + savename);
 		
 		//System.out.println("파일저장 : "+ target);
 		//System.out.println("savename : " + savename);
@@ -224,13 +225,26 @@ public class Controller_Admin {
 			to.setVcode(request.getParameter("vcode"));
 			//System.out.println("1vcode : " + to.getVcode());
 			
-			if(request.getParameter("filesize")!="0") {
-				fto.setFilename(request.getParameter("filename"));
-				fto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
-			}
-			flag = dao.mboardWriteOk(to, fto);
+			flag = dao.mboardWriteOk(to);
+			
+			System.out.println( "filename 넘어오나:" + request.getParameterValues("filename"));
+			
+			if(request.getParameter("filesize")!=null || request.getParameter("filesize")!="") {
+				String[] filenames = request.getParameterValues("filename");
+				String[] filesizes = request.getParameterValues("filesize");
+				//System.out.println( "컨트롤러에서filenames: " + filenames.toString() );
+				
+				for (int i = 0; i < filenames.length; i++) {            
+					System.out.println(filenames[i]);  
+					fto.setFilename(filenames[i]);
+					fto.setFilesize(Long.parseLong(filesizes[i]) );
+					flag = dao.mboardWriteFileOk(to, fto);
+					dao.filecnd(to, fto);
+				};
+			}			
+			
 			//System.out.println("1flag : " + flag);
-			dao.filecnd(to, fto);
+			//dao.filecnd(to, fto);
 			
 		} else if( request.getParameter("subject").equals("2")  ) {
 			String subject = request.getParameter("subject");
@@ -243,13 +257,23 @@ public class Controller_Admin {
 			to.setVcode(request.getParameter("vcode"));
 			//System.out.println("2vcode : " + to.getVcode());
 			
-			if(request.getParameter("filesize")!="0") {
-				fto.setFilename(request.getParameter("filename"));
-				fto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
-			}
-			flag = dao.mboardWriteOk(to, fto);
+			flag = dao.mboardWriteOk(to);
+			
+			if(request.getParameter("filesize")!=null || request.getParameter("filesize")!="") {
+				String[] filenames = request.getParameterValues("filename");
+				String[] filesizes = request.getParameterValues("filesize");
+				
+				for (int i = 0; i < filenames.length; i++) {            
+					System.out.println(filenames[i]);  
+					fto.setFilename(filenames[i]);
+					fto.setFilesize(Long.parseLong(filesizes[i]) );
+					flag = dao.mboardWriteFileOk(to, fto);
+					dao.filecnd(to, fto);
+				};
+			}		
+			
 			//System.out.println("2flag : " + flag);
-			dao.filecnd(to, fto);
+			//dao.filecnd(to, fto);
 			
 		} else if( request.getParameter("subject").equals("3")  ) {
 			String subject = request.getParameter("subject");
@@ -262,13 +286,22 @@ public class Controller_Admin {
 			to.setVcode(request.getParameter("vcode"));
 			//System.out.println("3vcode : " + to.getVcode());
 			
-			if(request.getParameter("filesize")!="0") {
-				fto.setFilename(request.getParameter("filename"));
-				fto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
+			flag = dao.mboardWriteOk(to);
+			
+			if(request.getParameter("filesize")!=null || request.getParameter("filesize")!="") {
+				String[] filenames = request.getParameterValues("filename");
+				String[] filesizes = request.getParameterValues("filesize");
+				
+				for (int i = 0; i < filenames.length; i++) {            
+					System.out.println(filenames[i]);  
+					fto.setFilename(filenames[i]);
+					fto.setFilesize(Long.parseLong(filesizes[i]) );
+					flag = dao.mboardWriteFileOk(to, fto);
+					dao.filecnd(to, fto);
+				};
 			}
-			flag = dao.mboardWriteOk(to, fto);
 			//System.out.println("3flag : " + flag);
-			dao.filecnd(to, fto);
+			//dao.filecnd(to, fto);
 			
 		} else if( request.getParameter("subject").equals("4")  ) {
 			String subject = request.getParameter("subject");
@@ -302,12 +335,22 @@ public class Controller_Admin {
 			nto.setVcode(request.getParameter("vcode"));
 			//System.out.println("5vcode : " + nto.getVcode());
 			
-			if(request.getParameter("filesize")!="0") {
-				nfto.setFilename(request.getParameter("filename"));
-				nfto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
+			flag = ndao.nboardWriteOk(nto);
+
+			if(request.getParameter("filesize")!=null || request.getParameter("filesize")!="") {
+				String[] filenames = request.getParameterValues("filename");
+				String[] filesizes = request.getParameterValues("filesize");
+				
+				for (int i = 0; i < filenames.length; i++) {            
+					System.out.println(filenames[i]);  
+					fto.setFilename(filenames[i]);
+					fto.setFilesize(Long.parseLong(filesizes[i]) );
+					flag = ndao.nboardWriteFileOk(nto, nfto);
+					ndao.filecnd(nto, nfto);
+				};
 			}
 			
-			flag = ndao.nboardWriteOk(nto, nfto);
+			
 			
 			//System.out.println("content : " + nto.getContent());	
 			//System.out.println("5flag : " + flag);
@@ -549,20 +592,29 @@ public class Controller_Admin {
 			NBoardTO to = new NBoardTO();
 			to.setSeq( request.getParameter("viewseq") );
 			to = ndao.findViewUcode(to);
+			
+			ArrayList<NFileTO> nfileArr = new ArrayList<NFileTO>();
 								
 			if ( session.getAttribute("id").equals("admin") ) {
 				to.setSeq( request.getParameter("viewseq") );
-				NFileTO fto = new NFileTO();
+				//NFileTO fto = new NFileTO();
 				//게시글 삭제 전 이미지 파일 확인
 				//DB에 파일 데이터가 있는지 조회
-				fto = ndao.nboardDelFileCheck(to);
-				if( fto.getFilename() != "null" ) {
+				nfileArr = ndao.nboardDelFileCheck(to);
+				if( nfileArr != null ) {
 					//파일이 존재 => 삭제
 					System.out.println("파일이 존재");
 					//디렉터리 폴더에 파일 삭제
-					ndao.filedel( fto.getFilename() );
+					for(NFileTO nfto : nfileArr) {
+						ndao.filedel(nfto.getFilename());
+					}
 					//DB table에서 항목 삭제
-					flag = ndao.fileDBDel(to);
+					int result= ndao.fileDBDel(to);
+					 if(result == 1) {
+						 flag=0;
+					 }else {
+						 flag=1;
+					 }
 				}
 				if( flag != 1 ) {
 					//파일삭제 성공 또는 파일없음 
@@ -608,20 +660,30 @@ public class Controller_Admin {
 	    	BoardTO to = new BoardTO();
 			to.setSeq( request.getParameter("viewseq") );
 			to = dao.findViewUcode(to);
+			
+			ArrayList<FileTO> fileArr = new ArrayList<FileTO>();
 								
 			if ( session.getAttribute("id").equals("admin") ) {
 				to.setSeq( request.getParameter("viewseq") );
 				FileTO fto = new FileTO();
 				
 				//DB에 파일 데이터가 있는지 조회
-				fto=dao.mboardDelFileCheck(to);
-				if(fto.getFilename() !="null") {
+				fileArr=dao.mboardDelFileCheck(to);
+				flag = 2;
+				if(fileArr != null) {
 					//파일이 존재 => 삭제
 					System.out.println("파일이 존재");
 					//디렉터리 폴더에 파일 삭제
-					dao.filedel(fto.getFilename());
+					for(FileTO mfto : fileArr) {
+						dao.filedel(mfto.getFilename());
+					}
 					//DB table에서 항목 삭제
-					flag= dao.fileDBDel(to);
+					 int result= dao.fileDBDel(to);
+					 if(result == 1) {
+						 flag=0;
+					 }else {
+						 flag=1;
+					 }
 				}
 				
 				if(flag != 1) {
@@ -641,20 +703,30 @@ public class Controller_Admin {
 	    	BoardTO to = new BoardTO();
 			to.setSeq( request.getParameter("viewseq") );
 			to = dao.findViewUcode(to);
+			
+			ArrayList<FileTO> fileArr = new ArrayList<FileTO>();
 								
 			if ( session.getAttribute("id").equals("admin") ) {
 				to.setSeq( request.getParameter("viewseq") );
 				FileTO fto = new FileTO();
 				
 				//DB에 파일 데이터가 있는지 조회
-				fto=dao.mboardDelFileCheck(to);
-				if(fto.getFilename() !="null") {
+				fileArr=dao.mboardDelFileCheck(to);
+				flag = 2;
+				if(fileArr != null) {
 					//파일이 존재 => 삭제
 					System.out.println("파일이 존재");
 					//디렉터리 폴더에 파일 삭제
-					dao.filedel(fto.getFilename());
+					for(FileTO mfto : fileArr) {
+						dao.filedel(mfto.getFilename());
+					}
 					//DB table에서 항목 삭제
-					flag= dao.fileDBDel(to);
+					 int result= dao.fileDBDel(to);
+					 if(result == 1) {
+						 flag=0;
+					 }else {
+						 flag=1;
+					 }
 				}
 				
 				if(flag != 1) {
@@ -674,20 +746,30 @@ public class Controller_Admin {
 	    	BoardTO to = new BoardTO();
 			to.setSeq( request.getParameter("viewseq") );
 			to = dao.findViewUcode(to);
+			
+			ArrayList<FileTO> fileArr = new ArrayList<FileTO>();
 								
 			if ( session.getAttribute("id").equals("admin") ) {
 				to.setSeq( request.getParameter("viewseq") );
 				FileTO fto = new FileTO();
 				
 				//DB에 파일 데이터가 있는지 조회
-				fto=dao.mboardDelFileCheck(to);
-				if(fto.getFilename() !="null") {
+				fileArr=dao.mboardDelFileCheck(to);
+				flag = 2;
+				if(fileArr != null) {
 					//파일이 존재 => 삭제
 					System.out.println("파일이 존재");
 					//디렉터리 폴더에 파일 삭제
-					dao.filedel(fto.getFilename());
+					for(FileTO mfto : fileArr) {
+						dao.filedel(mfto.getFilename());
+					}
 					//DB table에서 항목 삭제
-					flag= dao.fileDBDel(to);
+					 int result= dao.fileDBDel(to);
+					 if(result == 1) {
+						 flag=0;
+					 }else {
+						 flag=1;
+					 }
 				}
 				
 				if(flag != 1) {
