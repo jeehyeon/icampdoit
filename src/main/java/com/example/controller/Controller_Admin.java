@@ -62,6 +62,9 @@ public class Controller_Admin {
 			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
 		}
 		
+		System.out.println( "subval:" + request.getParameter("subjectValue") );
+		System.out.println( "cpage:" + request.getParameter("cpage") );
+		
 		AdminListTO listTO = new AdminListTO();
 		listTO.setCpage( cpage );
 		
@@ -311,9 +314,13 @@ public class Controller_Admin {
 			hto.setContent(request.getParameter("content"));
 			hto.setUcode((Integer) session.getAttribute("ucode"));
 			//System.out.println("4ucode : " + hto.getUcode());			
-			if(request.getParameter("filesize") != "0") {
+			if(request.getParameter("filesize") != null ) {
 				hto.setFilename(request.getParameter("filename"));
-				hto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
+				hto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()));
+				
+				hto.setOldFilename(request.getParameter("filename"));
+				hto.setOldFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
+				System.out.println("컨트롤러write 혼캠 oldfilename :" + hto.getOldFilename() );
 			}
 			hto.setVcode(request.getParameter("vcode"));
 			//System.out.println("4vcode : " + hto.getVcode());
@@ -321,6 +328,8 @@ public class Controller_Admin {
 			flag = hdao.aboardWriteOk(hto);
 			//System.out.println("content : " + hto.getContent());			
 			//System.out.println("4flag : " + flag);
+			
+			System.out.println( "컨트롤로 혼캠 writeok 파일:" + hto.getOldFilename() );
 			
 			hdao.filecnd(hto);
 			
@@ -458,11 +467,14 @@ public class Controller_Admin {
 		HBoardTO hto = new HBoardTO();
 		NBoardTO nto = new NBoardTO();
 		NFileTO nfto = new NFileTO();
+		ArrayList<NFileTO> fileArr = new ArrayList<NFileTO>();
 		
 		if( subjectValue.equals( "4" ) ) {
 			hto.setUcode( (Integer) session.getAttribute("ucode") );
 			hto.setSeq( request.getParameter( "seq" ) );
 			hto = adao.hboardModify(hto);
+			System.out.println( "컨트롤러 modify 파일이름:" + hto.getOldFilename() );  //이게 null 나옴
+			System.out.println( "컨트롤러 modify 파일이름2:" + hto.getFilename() ); //이건 잘 나옴
 			
 		} else if( subjectValue.equals( "5" ) ) {
 			nto.setUcode( (Integer) session.getAttribute("ucode") );
@@ -470,7 +482,7 @@ public class Controller_Admin {
 			nto = adao.nboardModify(nto);
 
 			//게시글 수정 전 이미지 파일이 있는지 확인
-			nfto = adao.findNFile(nto);	
+			fileArr = adao.findNFile(nto);
 		}		
 		
 		ModelAndView modelAndView = new ModelAndView();
@@ -483,6 +495,7 @@ public class Controller_Admin {
 		modelAndView.addObject("hto", hto);
 		modelAndView.addObject("nto", nto);
 		modelAndView.addObject("nfto", nfto);
+		modelAndView.addObject("fileArr", fileArr);
 		modelAndView.addObject("cpage", cpage);
 		modelAndView.addObject( "subjectValue", subjectValue );
 
@@ -492,6 +505,9 @@ public class Controller_Admin {
 	@RequestMapping(value = "/admin_board_modify_ok.do")
 	public String adminBoardModifyOk(HttpServletRequest request, HttpSession session) {
 		System.out.println("adminBoardModifyOk 호출");
+		
+		System.out.println( "subject값:" + request.getParameter("subject"));
+		System.out.println( "새로운 파일 이름:" + request.getParameter("newfilename"));
 		
 		String subjectValue = "";
 		if(request.getParameter( "subject" ) != null && !request.getParameter( "subject" ).equals( "" ) ) {
@@ -522,22 +538,32 @@ public class Controller_Admin {
 				to.setWriter((String) session.getAttribute("id"));
 				to.setContent(request.getParameter("content"));
 				to.setUcode((Integer) session.getAttribute("ucode"));
-				if(request.getParameter("filesize") != "0") {
+				if(request.getParameter("filesize") != null) { //기존 사진이 있으면
 					to.setFilename(request.getParameter("filename"));
 					to.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
-					System.out.println("filename : " + request.getParameter("filename"));
+					
+					to.setOldFilename(request.getParameter("filename"));
+					to.setOldFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
+					System.out.println("컨트롤러 modify filename : " + request.getParameter("filename"));
 				}
-				if( request.getParameter("newFilesize") != "0" ) {
+				if( request.getParameter("newfilesize") != null ) { //새로운 사진이 있으면
 					//if( !request.getParameter("newFilename").equals("default") ) {
-					to.setNewFilename(request.getParameter("newFilename"));
-					to.setNewFilesize(Long.parseLong(request.getParameter("newFilesize").trim()) );
+					to.setNewFilename(request.getParameter("newfilename"));
+					to.setNewFilesize(Long.parseLong(request.getParameter("newfilesize").trim()) );
 					System.out.println("11newFilename : " + to.getNewFilename());
 				}
 				to.setVcode(request.getParameter("vcode"));			
 				
 				flag = adao.hboardModifyOk(to);
 				
-				hdao.filecnd(to);		
+				
+				if( to.getOldFilename() != null ) {
+					hdao.filecnd(to);
+				}
+				if( to.getNewFilename() != null ) {
+					hdao.newfilecnd(to);
+				}		
+				
 				
 			} else if( subjectValue.equals( "5" ) ) {
 				NBoardTO nto = new NBoardTO();
@@ -551,23 +577,48 @@ public class Controller_Admin {
 				nto.setUcode((Integer) session.getAttribute("ucode"));
 				nto.setVcode(request.getParameter("vcode"));
 				
+				flag = adao.nboardModifyOk1(nto);
+				
 				// 게시글에 기존 파일이 있으면
-				if(request.getParameter("filesize") != "0") {
-					nfto.setFilename(request.getParameter("filename"));
-					nfto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
-					System.out.println("filename : " + request.getParameter("filename"));
+				if(request.getParameter("filename")!="" && request.getParameter("filename")!=null) {
+					String[] filenames = request.getParameterValues("filename");
+					String[] filesizes = request.getParameterValues("filesize");
+					
+					for (int i = 0; i < filenames.length; i++) {            
+						System.out.println(filenames[i]);  
+						NFileTO fito = new NFileTO();
+						fito.setFilename(filenames[i]);
+						fito.setFilesize(Long.parseLong(filesizes[i]) );
+						flag = adao.nboardModifyOk2(nto, fito);
+						System.out.println("2 ");
+						ndao.filecnd(nto, fito);
+						//adao.filecnd(nto, fito);
+						//System.out.println("3 ");
+					};
+					if(flag==0) {
+						System.out.println("기존파일 체크 완료");
+					}else {
+						System.out.println("mboardModifyOk2() 오류!");
+					}
 				}
 				// 게시글에 새 파일이 있으면
-				if( request.getParameter("newFilesize") != "0" ) {
-					//if( !request.getParameter("newFilename").equals("default") ) {
-					nfto.setNewFilename(request.getParameter("newFilename"));
-					nfto.setNewFilesize(Long.parseLong(request.getParameter("newFilesize").trim()) );
+				if(request.getParameter("newfilename")!=null && request.getParameter("newfilename")!="") {
+					String[] newfilenames = request.getParameterValues("newfilename");
+					String[] newfilesizes = request.getParameterValues("newfilesize");
 					System.out.println("newFilename : " + request.getParameter("newFilename"));
 					System.out.println("11newFilename : " + nfto.getNewFilename());
+					for (int i = 0; i < newfilenames.length; i++) {            
+						System.out.println(newfilenames[i]);  
+						NFileTO fito = new NFileTO();
+						fito.setFilename(newfilenames[i]);
+						fito.setFilesize(Long.parseLong(newfilesizes[i]) );
+						flag = adao.nboardModifyOk3(nto, fito);
+						ndao.filecnd(nto, fito);
+					}
 				}
-				flag = adao.nboardModifyOk(nto, nfto);
+				//flag = adao.nboardModifyOk(nto, nfto);
 				
-				ndao.filecnd(nto, nfto);
+				//ndao.filecnd(nto, nfto);
 			} 
 		}
 		System.out.println("최종flag : " + flag);

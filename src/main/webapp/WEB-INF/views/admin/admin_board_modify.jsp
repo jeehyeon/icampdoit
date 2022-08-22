@@ -6,6 +6,7 @@
 <%@ page import="com.exam.nboard.NFileTO" %>
 <%@ page import="com.exam.mboard.BoardTO" %>
 <%@ page import="com.exam.mboard.FileTO" %>
+<%@page import="java.util.ArrayList"%>
 <%
 	//session 값 가져오기
 	int ucode = -1;
@@ -28,6 +29,7 @@
 	String filename = "";
 	System.out.println("[filename]" + filename);
 	long filesize = 0;	
+	StringBuilder fileHtml = new StringBuilder();
 	
 	if( subjectValue.equals("4")  ) {
 		HBoardTO hto = (HBoardTO)request.getAttribute("hto");
@@ -43,6 +45,10 @@
 		filesize = hto.getFilesize();
 		System.out.println("[jsp 혼캠filename]" + filename);
 		//System.out.println("[content]" + content);
+
+		fileHtml.append("<input type=\"hidden\" name=\"filename\" value=\"" + filename + "\"/>");
+		fileHtml.append("<input type=\"hidden\" name=\"filesize\" value=\"" + filesize + "\"/>");
+
 		
 	} else if( subjectValue.equals("5")  ) {
 		NBoardTO nto = (NBoardTO)request.getAttribute("nto");
@@ -58,6 +64,14 @@
 		filename = nfto.getFilename();
 		filesize = nfto.getFilesize();
 		System.out.println("[jsp 공지filename]" + filename);
+		
+		ArrayList<NFileTO> fileArr = (ArrayList<NFileTO>) request.getAttribute("fileArr");
+		for (NFileTO fto : fileArr) {
+			filename = fto.getFilename();
+			filesize = fto.getFilesize();
+			fileHtml.append("<input type=\"hidden\" name=\"filename\" value=\"" + filename + "\"/>");
+			fileHtml.append("<input type=\"hidden\" name=\"filesize\" value=\"" + filesize + "\"/>");
+		}
 		
 	}
 	
@@ -145,9 +159,15 @@
 	
   <!-- Write Section-->
 	<div class="main-content px-5">		
-		  <!-- <form action="./aboardwrite_ok.do" method="post" id="afrm" name="afrm" enctype="multipart/form-data"> -->
+		  <form method="post" id="afrm" name="afrm">
 		  <input type="hidden" name="modifyOk" id="modifyOk" value="default"/>
-		  <input type="hidden" name="newFilesize" id="newFilesize" value="0000"/>
+		  <div id="filebody">
+			<%=fileHtml.toString()%>
+		  </div>
+		  <div id="newfilebody">
+			
+		  </div>
+		  <input type="hidden" name="newFilesize" id="newFilesize" value="0000" />
 		  <input type="hidden" name="vcode" id="vcode" value="default"/>
 	
 			<div class="card my-2 px-5 justify-content-center">
@@ -179,7 +199,7 @@
 			      </div>
 				</div>
 			</div>
-		  <!-- </form> -->
+		  </form>
 		</div>
   <!--   Core JS Files   -->
 	<script src="./resources/bootstrap-5/html/admin/js/core/popper.min.js"></script>
@@ -225,15 +245,17 @@
  	document.getElementById( 'cbtn' ).onclick = function() { 		
  		var subject = $('#subject').val();
  		var filename = $('#modifyOk').val();
+ 		var cpage = $( '#cpage').val();
+ 		var subjectValue = $('#subject').val();
  		
-	    var data = {'filename' : filename, 'subject' : subject };	    	
+	    var data = {'filename' : filename, 'subject' : subject, 'cpage' : cpage, 'subjectValue' : subjectValue };	    	
  		
 		$.ajax({
 			data : data,
 			type : "GET",
 			url : '/awritecancel.do',
 			success : function() {
-				location.href='/admin_board.do';
+				location.href='/admin_board.do?subjectValue='+subjectValue+'&cpage='+cpage;
 			},
 			error: function() {
 				Toast.fire({
@@ -246,6 +268,13 @@
 	 
        document.getElementById( 'mbtn' ).onclick = function() {	
     	  //alert( $('#subject').val() );
+    	 var formdata = $("#afrm").serialize();
+    	 var subjectValue = $('#subject').val();
+    	 var cpage = $( '#cpage').val();
+    	 var seq = $('#seq').val();
+    	 var filename = $('input[name=filename]').val();
+    	 alert("파일이름:" + filename );
+    	  <!--
     	 var subject = $('#subject').val();
 		 var title = $('#title').val();
 		 var content = $('#summernote').val();
@@ -257,11 +286,11 @@
 		 var seq = $('#seq').val();
 		 		 
 	     var data = {'subject': subject, 'title' : title , 'content' : content, 'vcode' : vcode, 'filename' : filename, 'newFilename' : newFilename, 'filesize' : filesize, 'newFilesize' : newFilesize, 'seq' : seq};	    	
-
+	     -->
 	     if(($('#title').val() != '')&&($('#summernote').val() != '')){	        
 					
 			$.ajax({
-				data : data,				
+				data : formdata,				
 				type : "POST",
 				url : './admin_board_modify_ok.do',
 				dataType : 'text',
@@ -276,7 +305,7 @@
 							confirmButtonText: '확인', // confirm 버튼 텍스트 지정
 						}).then((result) => {
 							if (result.isConfirmed) {
-								location.href='/admin_board.do';
+								location.href='/admin_board.do?subjectValue='+subjectValue+'&cpage='+cpage+'&seq=' + seq;
 				  			 } 
 				  		 })
 					} else {
@@ -368,17 +397,15 @@
 					imgUrl = hImgUrl + str[0];
 				} else if( $('#subject').val() == 5 ) {
 					imgUrl = nImgUrl + str[0];
-				} else {
-					imgUrl = mImgUrl + str[0];
 				}				
 				console.log("imgUrl : "+imgUrl);				
 				
 				$('#summernote').summernote( 'insertImage', imgUrl );
 				
 				if(str[0] != null){
-            				               
-					$('#modifyOk').val(str[0]);
-					$('#newFilesize').val(str[1]);
+            		
+					$('#newfilebody').append("<input type=\"hidden\" name=\"newfilename\" value=\""+str[0]+"\"/>");
+            		$('#newfilebody').append("<input type=\"hidden\" name=\"newfilesize\" value=\""+str[1]+"\"/>"); 
 	                
             	}else{
             		Toast.fire({

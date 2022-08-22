@@ -19,6 +19,6 @@ public class HBoardTO {
 	private String vcode;
 	private String newFilename;
 	private long newFilesize;
-	//private String oldFilename;
-	//private long oldFilesize;
+	private String oldFilename;
+	private long oldFilesize;
 }

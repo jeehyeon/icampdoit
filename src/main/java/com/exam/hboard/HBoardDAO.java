@@ -34,7 +34,7 @@ public class HBoardDAO {
 		
 		String sql = "insert into h_board values  ( 0, ?, ?, ?, ?, now(), 0, ?, ?, ?, ?)";
 		int result = jdbcTemplate.update(sql, hto.getSubject(), hto.getTitle(), hto.getWriter(), hto.getContent(), 
-				hto.getUcode(), hto.getFilename(), hto.getFilesize(), hto.getVcode() );
+				hto.getUcode(), hto.getOldFilename(), hto.getOldFilesize(), hto.getVcode() );
 					
 		if( result != 1 ) {
 			System.out.println("h_board insert 오류");
@@ -49,8 +49,8 @@ public class HBoardDAO {
 	//파일 검사 및 이동
 	public void filecnd(HBoardTO hto) {
 		//삭제했을 경우 임시 파일 삭제
-		if(hto.getContent().indexOf(hto.getFilename()) == -1) {
-			String delurl = hUploadPath + hto.getFilename();
+		if(hto.getContent().indexOf(hto.getOldFilename()) == -1) {
+			String delurl = hUploadPath + hto.getOldFilename();
 			
 			File delFile = new File(delurl);
 			if(delFile.exists()) {//파일이 존재하는지 확인
@@ -63,6 +63,25 @@ public class HBoardDAO {
 		
 		}
 	}
+	
+	//파일 검사 및 이동
+	public void newfilecnd(HBoardTO hto) {
+		//삭제했을 경우 임시 파일 삭제
+		if(hto.getContent().indexOf(hto.getNewFilename()) == -1) {
+			String delurl = hUploadPath + hto.getNewFilename();
+			
+			File delFile = new File(delurl);
+			if(delFile.exists()) {//파일이 존재하는지 확인
+				delFile.delete();
+				System.out.println("임시파일 삭제 성공");
+				
+			}else {
+				System.out.println("파일이 존재 하지 않습니다.");
+			}
+		
+		}
+	}
+	
 	//글작성하다가 취소 눌렀을 경우 파일 삭제
 	public void filedel(String filename) {
 		//삭제했을 경우 임시 파일 삭제
