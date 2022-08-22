@@ -5,6 +5,7 @@
 <%
 	int ucode = (Integer)request.getAttribute("ucode");
 	SignUpTO sto =(SignUpTO)request.getAttribute("sto"); 
+	String referer=(String)request.getAttribute("referer"); 
 %>
 
 
@@ -24,7 +25,7 @@
    <script type='text/javascript'>
     const ucode = <%=ucode%>;
     if(ucode != -1){
-    	location.href='home.do';
+    	location.href='<%=referer%>';
     }else{
     	document.signupdata.submit()
     };

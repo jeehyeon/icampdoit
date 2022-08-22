@@ -175,8 +175,9 @@
 	<!-- Write Section-->
 	<section class="py-5 pb-7">
 	<form action="./mboardwrite_ok.do" method="post" id="wfrm" name="wfrm" enctype="multipart/form-data">
-	<input type="hidden" name="writeOk" id="writeOk" value="default"/>
-	<input type="hidden" name="filesize" id="filesize" value="0000"/>
+	<div id="filebody" name="filebody">>
+	</div>
+	
 	<input type="hidden" name="vcode" id="vcode" value="default"/>
 	
       <div class="container">
@@ -364,7 +365,7 @@
 				callbacks: { //이미지를 첨부하는 부분
 					onImageUpload : function(files, editor, welEditable) {
 						for (var i = 0; i < files.length; i++) {
-							sendFile(files[i], editor, welEditable);
+							sendFile(files[i], editor, welEditable, i);
 						}										            
 					}					 
 				}
@@ -407,10 +408,10 @@
 					$('#summernote').summernote( 'insertImage', imgUrl );
 					
 					if(str[0] != null){
-	            				               
-						$('#writeOk').val(str[0]);
-						$('#filesize').val(str[1]);
-		                
+						
+	            		$('#filebody').append("<input type=\"hidden\" name=\"filename\" value=\""+str[0]+"\"/>");
+	            		$('#filebody').append("<input type=\"hidden\" name=\"filesize\" value=\""+str[1]+"\"/>"); 
+
 	            	}else{
 	            		Toast.fire({
 		 				    icon: 'warning',

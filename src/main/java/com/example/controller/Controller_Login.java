@@ -149,6 +149,8 @@ public class Controller_Login {
 	
 	@RequestMapping( value="/kakaologin_form.do" )
 	public ModelAndView kakaologin_form(HttpServletRequest request, HttpSession session) {
+		
+		String referer = request.getHeader("referer");
 		System.out.println("kakaologin_form() 실행");
 		SignUpTO sto = new SignUpTO();
 		
@@ -174,6 +176,7 @@ public class Controller_Login {
 		modelAndView.addObject("ucode", ucode);
 		modelAndView.addObject("id", id);
 		modelAndView.addObject("sto", sto);
+		modelAndView.addObject("referer", referer);
 		
 		return modelAndView;
 	}
