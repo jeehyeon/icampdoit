@@ -27,12 +27,12 @@
 	
 	ArrayList<SearchkeyTO> datas = listTO.getSearchLists();
 	
-	String keysearch = request.getParameter("keysearch");
+	String keysearch = request.getParameter("keyword");
 	if( keysearch == null || keysearch == "") {
 		keysearch = "키워드나&nbsp;캠핑장&nbsp;이름을&nbsp;입력해주세요.";
 	}
 	
-	String keyword = (String)request.getAttribute("keysearch");
+	String keyword = (String)request.getAttribute("keyword");
 	if( keyword == null ) {
 		keyword = "";
 	}
