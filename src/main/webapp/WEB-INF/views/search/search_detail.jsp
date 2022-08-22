@@ -29,16 +29,7 @@
 	System.out.println( "addurljsp: " + addurl );
 	
 	ArrayList<SearchkeyTO> datas = listTO.getSearchLists();
-	
-	String keysearch = request.getParameter("keysearch");
-	if( keysearch == null || keysearch == "") {
-		keysearch = "키워드나&nbsp;캠핑장&nbsp;이름을&nbsp;입력해주세요.";
-	}
-	/*
-	String doNmS = request.getParameter( "doNmS");
-	System.out.println( "나오나doNmS: " + doNmS);
-	String indutyCar = request.getParameter("indutyCar");
-	*/
+		
 	StringBuilder sbHtml = new StringBuilder();
 	
 	for( SearchkeyTO kto : datas ){
@@ -53,9 +44,7 @@
 		if( firstImageUrl.equals("default") ) {
 			firstImageUrl = "./resources/bootstrap-5/html/img/noimage.svg";
 		}
-		
-		//System.out.println( "출력: "+ facltNm );
-		
+				
 		sbHtml.append( "<div class='col-sm-6 col-xl-4 mb-5 hover-animate'>" );
 		sbHtml.append( "  <div class='card h-100 border-0 shadow'>" );
 		sbHtml.append( "  	<div class='card-img-top overflow-hidden gradient-overlay'><img class='img-fluid' src='" + firstImageUrl + "'/><a class='tile-link' href='./campview.do?contentId="+contentId +"'></a>" );               		
@@ -179,7 +168,6 @@
              </form>
          </div>
       </nav>
-      <!-- /Navbar -->
     </header>
     
     <div class="container-fluid pt-5 pb-3 border-bottom px-lg-5">
@@ -199,17 +187,9 @@
 			  <button class="tablinks" onclick="location.href='./searchkey.do'" style="font-family: 'GmarketSansBold';'">키워드</button>
 			  <button class="tablinks" onclick="openCity(event, 'searchdetail')" id="defaultOpen" style="font-family: 'GmarketSansBold';'">상세검색</button>
 			</div>
+			
 			<!-- 키워드 -->
-			<div id="searchkey" class="tabcontent">
-			  <form action="searchkey.do" method="post"> 
-			    <div class="mb-3 mt-3">
-			      <input class="form-control" type="text" name="keysearch" id="keysearch" placeholder=<%=keysearch %>>
-			    </div>
-			    <div class="d-grid mb-7">
-                  <button class="btn btn-primary text-white" type="submit">검색하기 </button>
-                </div>
-			  </form>
-			</div>
+						 
 			<!-- 상세검색 -->
 			<div id="searchdetail" class="tabcontent">
 			  <form class="pe-xl-3" action="./searchdetail.do" method="post">
@@ -218,19 +198,31 @@
                 <ul class="list-inline mt-xl-1 mb-0">
                       <li class="list-inline-item">
                         <div class="form-check">
-						  <input class="form-check-input" type="checkbox" id="locationSeoul" name="doNmS" value="서울">
+                          <%if( request.getAttribute("doNmS")==null||request.getAttribute("doNmS")=="" ) { %>
+                          <input class="form-check-input" type="checkbox" id="locationSeoul" name="doNmS" value="서울">
+						  <% } else if( request.getAttribute("doNmS").equals("서울") ){  %>
+						  <input class="form-check-input" type="checkbox" id="locationSeoul" name="doNmS" value="서울" checked>
+                          <% } %>
                           <label class="form-check-label" for="locationSeoul">서울시</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("doNmI")==null||request.getAttribute("doNmI")=="" ) { %>
                           <input class="form-check-input" type="checkbox" id="locationIncheon" name="doNmI" value="인천">
+                          <% } else if( request.getAttribute("doNmI").equals("인천") ){ %>
+                          <input class="form-check-input" type="checkbox" id="locationIncheon" name="doNmI" value="인천" checked>
+                          <% } %>
                           <label class="form-check-label" for="locationIncheon">인천시</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("doNmG")==null||request.getAttribute("doNmG")=="" ) { %>
                           <input class="form-check-input" type="checkbox" id="locationGyeonggi" name="doNmG" value="경기">
+                          <% } else if( request.getAttribute("doNmG").equals("경기") ){ %>
+                          <input class="form-check-input" type="checkbox" id="locationGyeonggi" name="doNmG" value="경기"  checked>
+                          <% } %>
                           <label class="form-check-label" for="typeGlamping">경기도</label>
                         </div>
                       </li>
@@ -242,25 +234,41 @@
                 <ul class="list-inline mt-xl-1 mb-0">
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("indutyNor")==null||request.getAttribute("indutyNor")=="" ) { %>
                           <input class="form-check-input" type="checkbox" id="typeCamping" name="indutyNor" value="일반야영장">
+                          <% } else if( request.getAttribute("indutyNor").equals("일반야영장") ){ %>
+                          <input class="form-check-input" type="checkbox" id="typeCamping" name="indutyNor" value="일반야영장" checked>
+                          <% } %>
                           <label class="form-check-label" for="typeCamping">일반 야영장</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("indutyCar")==null||request.getAttribute("indutyCar")=="" ) { %>
                           <input class="form-check-input" type="checkbox" id="typeCar" name="indutyCar" value="자동차야영장">
+                          <% } else if( request.getAttribute("indutyCar").equals("자동차야영장") ){ %>
+                          <input class="form-check-input" type="checkbox" id="typeCar" name="indutyCar" value="자동차야영장" checked>
+                          <% } %>
                           <label class="form-check-label" for="typeCar">자동차 야영장</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("indutyGl")==null||request.getAttribute("indutyGl")=="" ) { %>
                           <input class="form-check-input" type="checkbox" id="typeGlamping" name="indutyGl" value="글램핑">
+                          <% } else if( request.getAttribute("indutyGl").equals("글램핑") ){ %>
+                          <input class="form-check-input" type="checkbox" id="typeGlamping" name="indutyGl" value="글램핑" checked>
+                          <% } %>                        
                           <label class="form-check-label" for="typeGlamping">글램핑</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("indutyVan")==null||request.getAttribute("indutyVan")=="" ) { %>
                           <input class="form-check-input" type="checkbox" id="typeCaraban" name="indutyVan" value="카라반">
+                          <% } else if( request.getAttribute("indutyVan").equals("카라반") ){ %>
+                          <input class="form-check-input" type="checkbox" id="typeCaraban" name="indutyVan" value="카라반" checked>
+                          <% } %>                        
                           <label class="form-check-label" for="typeCaraban">카라반</label>
                         </div>
                       </li>
@@ -272,49 +280,81 @@
                 <ul class="list-inline mt-xl-1 mb-0">
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("lctClMount")==null||request.getAttribute("lctClMount")=="" ) { %>
                           <input class="form-check-input" type="checkbox" id="placeMountain" name="lctClMount" value="산">
+                          <% } else if( request.getAttribute("lctClMount").equals("산") ){ %>
+                          <input class="form-check-input" type="checkbox" id="placeMountain" name="lctClMount" value="산" checked>
+                          <% } %>       
                           <label class="form-check-label" for="placeMountain">산</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("lctClForest")==null||request.getAttribute("lctClForest")=="" ) { %>                        
                           <input class="form-check-input" type="checkbox" id="placeForest" name="lctClForest" value="숲">
+                          <% } else if( request.getAttribute("lctClForest").equals("숲") ){ %>
+                          <input class="form-check-input" type="checkbox" id="placeForest" name="lctClForest" value="숲" checked>                          
+                          <% } %>                                 
                           <label class="form-check-label" for="placeForest">숲</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("lctClValley")==null||request.getAttribute("lctClValley")=="" ) { %>                        
                           <input class="form-check-input" type="checkbox" id="placeStream" name="lctClValley" value="계곡">
+                          <% } else if( request.getAttribute("lctClValley").equals("계곡") ){ %>
+                          <input class="form-check-input" type="checkbox" id="placeStream" name="lctClValley" value="계곡" checked>                          
+                          <% } %> 
                           <label class="form-check-label" for="placeStream">계곡</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("lctClCity")==null||request.getAttribute("lctClCity")=="" ) { %>                        
                           <input class="form-check-input" type="checkbox" id="placeCity" name="lctClCity" value="도심">
+                          <% } else if( request.getAttribute("lctClCity").equals("도심") ){ %>
+                          <input class="form-check-input" type="checkbox" id="placeCity" name="lctClCity" value="도심" checked>                          
+                          <% } %> 
                           <label class="form-check-label" for="placeCity">도심</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("lctClRiver")==null||request.getAttribute("lctClRiver")=="" ) { %>                        
                           <input class="form-check-input" type="checkbox" id="placeRiver" name="lctClRiver" value="강">
+                          <% } else if( request.getAttribute("lctClRiver").equals("강") ){ %>
+                          <input class="form-check-input" type="checkbox" id="placeRiver" name="lctClRiver" value="강" checked>                          
+                          <% } %> 
                           <label class="form-check-label" for="placeRiver">강</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("lctClLake")==null||request.getAttribute("lctClLake")=="" ) { %>                        
                           <input class="form-check-input" type="checkbox" id="placeLake" name="lctClLake" value="호수">
+                          <% } else if( request.getAttribute("lctClLake").equals("호수") ){ %>
+                          <input class="form-check-input" type="checkbox" id="placeLake" name="lctClLake" value="호수" checked>                          
+                          <% } %> 
                           <label class="form-check-label" for="placeLake">호수</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("lctClBeach")==null||request.getAttribute("lctClBeach")=="" ) { %>                        
                           <input class="form-check-input" type="checkbox" id="placeBeach" name="lctClBeach" value="해변">
+                          <% } else if( request.getAttribute("lctClBeach").equals("해변") ){ %>
+                          <input class="form-check-input" type="checkbox" id="placeBeach" name="lctClBeach" value="해변" checked>                          
+                          <% } %> 
                           <label class="form-check-label" for="placeBeach">해변</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("lctClIsland")==null||request.getAttribute("lctClIsland")=="" ) { %>                        
                           <input class="form-check-input" type="checkbox" id="placeIsland" name="lctClIsland" value="섬">
+                          <% } else if( request.getAttribute("lctClIsland").equals("섬") ){ %>
+                          <input class="form-check-input" type="checkbox" id="placeIsland" name="lctClIsland" value="섬" checked>                          
+                          <% } %> 
                           <label class="form-check-label" for="placeIsland">섬</label>
                         </div>
                       </li>
@@ -326,31 +366,52 @@
                 <ul class="list-inline mt-xl-1 mb-0">
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("siteBottomCl1")==null||request.getAttribute("siteBottomCl1")=="" ) { %>    
                           <input class="form-check-input" type="checkbox" id="floorGrass" name="siteBottomCl1" value="0">
+                          <% } else if( request.getAttribute("siteBottomCl1").equals("0") ){ %>
+                          <input class="form-check-input" type="checkbox" id="floorGrass" name="siteBottomCl1" value="0" checked>                          
+                          <% } %>                           
                           <label class="form-check-label" for="floorGrass">잔디</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("siteBottomCl2")==null||request.getAttribute("siteBottomCl2")=="" ) { %>                                                
                           <input class="form-check-input" type="checkbox" id="floorRock" name="siteBottomCl2" value="0">
+                          <% } else if( request.getAttribute("siteBottomCl2").equals("0") ){ %>
+                          <input class="form-check-input" type="checkbox" id="floorRock" name="siteBottomCl2" value="0" checked>                          
+                          <% } %>
+                          
                           <label class="form-check-label" for="floorRock">파쇄석</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("siteBottomCl3")==null||request.getAttribute("siteBottomCl3")=="" ) { %>                                                
                           <input class="form-check-input" type="checkbox" id="floorTeck" name="siteBottomCl3" value="0">
+                          <% } else if( request.getAttribute("siteBottomCl3").equals("0") ){ %>
+                          <input class="form-check-input" type="checkbox" id="floorTeck" name="siteBottomCl3" value="0" checked>                          
+                          <% } %>
                           <label class="form-check-label" for="floorTeck">테크</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("siteBottomCl4")==null||request.getAttribute("siteBottomCl4")=="" ) { %>                                                
                           <input class="form-check-input" type="checkbox" id="floorPebble" name="siteBottomCl4" value="0">
+                          <% } else if( request.getAttribute("siteBottomCl4").equals("0") ){ %>
+                          <input class="form-check-input" type="checkbox" id="floorPebble" name="siteBottomCl4" value="0" checked>                          
+                          <% } %>
                           <label class="form-check-label" for="floorPebble">자갈</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("siteBottomCl5")==null||request.getAttribute("siteBottomCl5")=="" ) { %>                                               
                           <input class="form-check-input" type="checkbox" id="floorDirt" name="siteBottomCl5" value="0">
+                          <% } else if( request.getAttribute("siteBottomCl5").equals("0") ){ %>
+                          <input class="form-check-input" type="checkbox" id="floorDirt" name="siteBottomCl5" value="0" checked>                          
+                          <% } %>
                           <label class="form-check-label" for="floorDirt">흙</label>
                         </div>
                       </li>
@@ -362,55 +423,92 @@
                 <ul class="list-inline mt-xl-1 mb-0">
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("sbrsClElectro")==null||request.getAttribute("sbrsClElectro")=="" ) { %>           
                           <input class="form-check-input" type="checkbox" id="facElectro" name="sbrsClElectro" value="전기">
-                          <label class="form-check-label" for="facElectro">전기</label>
+						  <% } else if( request.getAttribute("sbrsClElectro").equals("전기") ){ %>                          
+                          <input class="form-check-input" type="checkbox" id="facElectro" name="sbrsClElectro" value="전기" checked>                          
+                          <% } %>
+                          <label class="form-check-label" for="facElectro">전기</label>                         
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("sbrsClHwater")==null||request.getAttribute("sbrsClHwater")=="" ) { %> 
                           <input class="form-check-input" type="checkbox" id="facWarmwater" name="sbrsClHwater" value="온수">
+						  <% } else if( request.getAttribute("sbrsClHwater").equals("온수") ){ %>                          
+                          <input class="form-check-input" type="checkbox" id="facWarmwater" name="sbrsClHwater" value="온수" checked>                          
+                          <% } %>                          
                           <label class="form-check-label" for="facWarmwater">온수</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("sbrsClGym")==null||request.getAttribute("sbrsClGym")=="" ) { %>                         
                           <input class="form-check-input" type="checkbox" id="facGym" name="sbrsClGym" value="운동시설">
+						  <% } else if( request.getAttribute("sbrsClGym").equals("운동시설") ){ %>                          
+                          <input class="form-check-input" type="checkbox" id="facGym" name="sbrsClGym" value="운동시설" checked>                          
+                          <% } %>                                                      
                           <label class="form-check-label" for="facGym">운동시설</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("sbrsClWifi")==null||request.getAttribute("sbrsClWifi")=="" ) { %>                                                   
                           <input class="form-check-input" type="checkbox" id="facWifi" name="sbrsClWifi" value="무선인터넷">
+						  <% } else if( request.getAttribute("sbrsClWifi").equals("무선인터넷") ){ %>
+                          <input class="form-check-input" type="checkbox" id="facWifi" name="sbrsClWifi" value="무선인터넷" checked>
+                          <% } %>                                                      						                                                      
                           <label class="form-check-label" for="facWifi">무선인터넷</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("sbrsClFirewood")==null||request.getAttribute("sbrsClFirewood")=="" ) { %>                                                                           
                           <input class="form-check-input" type="checkbox" id="facWood" name="sbrsClFirewood" value="장작판매">
+						  <% } else if( request.getAttribute("sbrsClFirewood").equals("장작판매") ){ %>
+                          <input class="form-check-input" type="checkbox" id="facWood" name="sbrsClFirewood" value="장작판매" checked>
+                          <% } %>                                                      						                                                      
+                          
                           <label class="form-check-label" for="facWood">장작판매</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("sbrsClPool")==null||request.getAttribute("sbrsClPool")=="" ) { %>     
                           <input class="form-check-input" type="checkbox" id="facPool" name="sbrsClPool" value="물놀이장">
+                          <% } else if( request.getAttribute("sbrsClPool").equals("물놀이장") ){ %>
+                          <input class="form-check-input" type="checkbox" id="facPool" name="sbrsClPool" value="물놀이장" checked>
+                          <% } %>                                  
                           <label class="form-check-label" for="facPool">물놀이장</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("sbrsClMart")==null||request.getAttribute("sbrsClMart")=="" ) { %>     
                           <input class="form-check-input" type="checkbox" id="facMart" name="sbrsClMart" value="마트">
+                          <% } else if( request.getAttribute("sbrsClMart").equals("마트") ){ %>
+                          <input class="form-check-input" type="checkbox" id="facMart" name="sbrsClMart" value="마트" checked>
+                          <% } %>                                                      		
                           <label class="form-check-label" for="facMart">마트</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("sbrsClCstore")==null||request.getAttribute("sbrsClCstore")=="" ) { %>      
                           <input class="form-check-input" type="checkbox" id="facConv" name="sbrsClCstore" value="편의점">
+                          <% } else if( request.getAttribute("sbrsClCstore").equals("편의점") ){ %>
+                          <input class="form-check-input" type="checkbox" id="facConv" name="sbrsClCstore" value="편의점" checked>
+                          <% } %>                                                      	
                           <label class="form-check-label" for="facConv">편의점</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("sbrsClWalk")==null||request.getAttribute("sbrsClWalk")=="" ) { %>        
                           <input class="form-check-input" type="checkbox" id="facWalk" name="sbrsClWalk" value="산책로">
+                          <% } else if( request.getAttribute("sbrsClWalk").equals("산책로") ){ %>
+                          <input class="form-check-input" type="checkbox" id="facWalk" name="sbrsClWalk" value="산책로" checked>
+                          <% } %>                                                      						 
                           <label class="form-check-label" for="facWalk">산책로</label>
                         </div>
                       </li>
@@ -422,37 +520,61 @@
                 <ul class="list-inline mt-xl-1 mb-0">
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("eqpmnLendClTent")==null||request.getAttribute("eqpmnLendClTent")=="" ) { %>    
                           <input class="form-check-input" type="checkbox" id="rentTent" name="eqpmnLendClTent" value="텐트">
+                          <% } else if( request.getAttribute("eqpmnLendClTent").equals("텐트") ){ %>
+                          <input class="form-check-input" type="checkbox" id="rentTent" name="eqpmnLendClTent" value="텐트" checked>
+                          <% } %>                                                      						                                                      
                           <label class="form-check-label" for="rentTent">텐트</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("eqpmnLendClBrazier")==null||request.getAttribute("eqpmnLendClBrazier")=="" ) { %>    
                           <input class="form-check-input" type="checkbox" id="rentFire" name="eqpmnLendClBrazier" value="화로대">
+                          <% } else if( request.getAttribute("eqpmnLendClBrazier").equals("화로대") ){ %>
+                          <input class="form-check-input" type="checkbox" id="rentFire" name="eqpmnLendClBrazier" value="화로대" checked>
+                          <% } %>                                                      						            
                           <label class="form-check-label" for="rentFire">화로대</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("eqpmnLendClHeater")==null||request.getAttribute("eqpmnLendClHeater")=="" ) { %>   
                           <input class="form-check-input" type="checkbox" id="rentHeat" name="eqpmnLendClHeater" value="난방기구">
+                          <% } else if( request.getAttribute("eqpmnLendClHeater").equals("난방기구") ){ %>
+                          <input class="form-check-input" type="checkbox" id="rentHeat" name="eqpmnLendClHeater" value="난방기구" checked>
+                          <% } %>                                                      						                 
                           <label class="form-check-label" for="rentHeat">난방기구</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("eqpmnLendClTableware")==null||request.getAttribute("eqpmnLendClTableware")=="" ) { %>  
                           <input class="form-check-input" type="checkbox" id="rentDish" name="eqpmnLendClTableware" value="식기">
+                          <% } else if( request.getAttribute("eqpmnLendClTableware").equals("식기") ){ %>
+                          <input class="form-check-input" type="checkbox" id="rentDish" name="eqpmnLendClTableware" value="식기" checked>
+                          <% } %>                                                      	
                           <label class="form-check-label" for="rentDish">식기</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("eqpmnLendClSbag")==null||request.getAttribute("eqpmnLendClSbag")=="" ) { %>    
                           <input class="form-check-input" type="checkbox" id="rentBed" name="eqpmnLendClSbag" value="침낭">
+                          <% } else if( request.getAttribute("eqpmnLendClSbag").equals("침낭") ){ %>
+                          <input class="form-check-input" type="checkbox" id="rentBed" name="eqpmnLendClSbag" value="침낭" checked>
+                          <% } %>                                                      				
                           <label class="form-check-label" for="rentBed">침낭</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="form-check">
+                          <%if( request.getAttribute("eqpmnLendClRwire")==null||request.getAttribute("eqpmnLendClRwire")=="" ) { %>     
                           <input class="form-check-input" type="checkbox" id="rentWire" name="eqpmnLendClRwire" value="릴선">
+                          <% } else if( request.getAttribute("eqpmnLendClRwire").equals("릴선") ){ %>
+                          <input class="form-check-input" type="checkbox" id="rentWire" name="eqpmnLendClRwire" value="릴선" checked>
+                          <% } %>                   
                           <label class="form-check-label" for="rentWire">릴선</label>
                         </div>
                       </li>
@@ -460,33 +582,45 @@
               </div>
               <hr>
               <div class="mb-4"> 
-                  <label class="form-label" style="font-family: 'GmarketSansBold';'"><font size=+0.5>기타 정보</font></label>
-                  <ul class="list-unstyled mb-0">
-                    <li>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="etcTrailer" name="trlerAcmpnyAt" value="Y">
-                        <label class="form-check-label" for="etcTrailer">개인 트레일러 입장 가능</label>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="etcCaraban" name="caravAcmpnyAt" value="Y">
-                        <label class="form-check-label" for="etcCaraban">개인 카라반 입장 가능</label>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="etcPet" name="animalCmgCl" value="불가능">
-                        <label class="form-check-label" for="etcPet">반려견 동반 가능</label>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-				<hr>
-                <div class="mt-4">
+				<label class="form-label" style="font-family: 'GmarketSansBold';'"><font size=+0.5>기타 정보</font></label>
+                <ul class="list-unstyled mb-0">
+                      <li>
+                        <div class="form-check">
+                          <%if( request.getAttribute("trlerAcmpnyAt")==null||request.getAttribute("trlerAcmpnyAt")=="" ) { %>   
+                          <input class="form-check-input" type="checkbox" id="etcTrailer" name="trlerAcmpnyAt" value="Y">
+                          <% } else if( request.getAttribute("trlerAcmpnyAt").equals("Y") ){ %>
+                          <input class="form-check-input" type="checkbox" id="etcTrailer" name="trlerAcmpnyAt" value="Y" checked>
+                          <% } %>                                                      						           
+                          <label class="form-check-label" for="etcTrailer">개인 트레일러 입장 가능</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-check">
+                          <%if( request.getAttribute("caravAcmpnyAt")==null||request.getAttribute("caravAcmpnyAt")=="" ) { %>    
+                          <input class="form-check-input" type="checkbox" id="etcCaraban" name="caravAcmpnyAt" value="Y">
+                          <% } else if( request.getAttribute("caravAcmpnyAt").equals("Y") ){ %>
+                          <input class="form-check-input" type="checkbox" id="etcCaraban" name="caravAcmpnyAt" value="Y" checked>
+                          <% } %>                                                     
+                          <label class="form-check-label" for="etcCaraban">개인 카라반 입장 가능</label>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-check">
+                          <%if( request.getAttribute("animalCmgCl")==null||request.getAttribute("animalCmgCl")=="" ) { %>     
+                          <input class="form-check-input" type="checkbox" id="etcPet" name="animalCmgCl" value="불가능">
+                          <% } else if( request.getAttribute("animalCmgCl").equals("불가능") ){ %>
+                          <input class="form-check-input" type="checkbox" id="etcPet" name="animalCmgCl" value="불가능" checked>
+                          <% } %>                                                   						                                                      
+                          <label class="form-check-label" for="etcPet">반려견 동반 가능</label>
+                        </div>
+                      </li>
+                </ul>
+              </div>
+			  <hr>
+              <div class="mt-4">
 					<button type="button" class="btn btn-dark" id="allNonChk">&emsp;초기화&emsp;</button>
 					<button type="submit" class="btn btn-primary text-white" style="float:right" id="detailSearch">&emsp;검색하기&emsp;</button>
-				</div>
+		  	  </div>
 			  </form>
 			</div>
         </div>
@@ -498,38 +632,6 @@
           </div>
           <div class="row">
             <%=sbHtml.toString() %>
-            <!--  
-            <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e322f3375db4d89128">
-              <div class="card h-100 border-0 shadow">
-                <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="./resources/bootstrap-5/html/img/photo/photo-1426122402199-be02db90eb90.jpg" alt="Cute Quirky Garden apt, NYC adjacent"/><a class="tile-link" href="./campview.do"></a>
-                </div>
-                <div class="card-body d-flex align-items-center">
-                  <div class="w-100">
-                    <h5 class="card-title"><a class="text-decoration-none text-dark" href="./campview.do">캠핑장 이름</a></h5>
-                    <div class="d-flex card-subtitle mb-3">
-                      <p class="flex-grow-1 mb-0 text-muted text-sm">캠핑장 full address</p>
-                    </div>
-                    <p class="card-text text-muted">업종(일반 야영장)</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-           
-            <div class="col-sm-6 col-xl-4 mb-5 hover-animate" data-marker-id="59c0c8e33b1527bfe2abaf92">
-              <div class="card h-100 border-0 shadow">
-                <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="./resources/bootstrap-5/html/img/noimage.jpg" alt="Modern, Well-Appointed Room"/><a class="tile-link" href="./campview.do"></a>               
-                </div>
-                <div class="card-body d-flex align-items-center">
-                  <div class="w-100">
-                    <h5 class="card-title"><a class="text-decoration-none text-dark" href="./campview.do">캠핑장 대표사진없을때</a></h5>
-                    <div class="d-flex card-subtitle mb-3">
-                      <p class="flex-grow-1 mb-0 text-muted text-sm">캠핑장 full address</p>
-                    </div>
-                    <p class="card-text text-muted">업종(일반 야영장)</p>
-                  </div>
-                </div>
-              </div>
-            </div>-->
           </div>
           
           <!-- Pagination -->

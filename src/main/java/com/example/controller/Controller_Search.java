@@ -36,7 +36,6 @@ public class Controller_Search {
 		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
 			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
 		}
-		System.out.println("@@ : " + request.getParameter( "keysearch" ));
 		SearchkeyTO kto = new SearchkeyTO();
 		
 		if(  request.getParameter( "keysearch" ) == null ) {
@@ -44,7 +43,6 @@ public class Controller_Search {
 		} else {
 			kto.setKeysearch( request.getParameter( "keysearch" ) );
 		}
-		//System.out.println( "키워드 : " + kto.getKeysearch());	
 				
 		SearchListTO listTO = new SearchListTO();
 		listTO.setCpage( cpage );
@@ -75,25 +73,21 @@ public class Controller_Search {
 		String doNmS = "";
 		String doNmI = "";
 		String doNmG = "";
-		//System.out.println( "공백확인 : "+ doNmS);
 		if( (request.getParameter( "doNmS" )!=null&&request.getParameter("doNmS")!="") ) {
 			addurl +="doNmS=" + request.getParameter("doNmS") +"&";
 			doNmS = request.getParameter( "doNmS" );
-			//System.out.println( "값들어갔는지S: " + doNmS );
 		} else {
 			doNmS = request.getParameter( "doNmS" );
 		}
 		if( (request.getParameter( "doNmI" )!=null&&request.getParameter("doNmI")!="") ) {
 			addurl +="doNmI=" + request.getParameter("doNmI") +"&";
 			doNmI = request.getParameter( "doNmI" );
-			//System.out.println( "값들어갔는지I: " + doNmI );
 		} else {
 			doNmI = request.getParameter( "doNmI" );
 		}
 		if( (request.getParameter( "doNmG" )!=null&&request.getParameter("doNmG")!="") ) {
 			addurl +="doNmG=" + request.getParameter("doNmG") +"&";
 			doNmG = request.getParameter( "doNmG" );
-			//System.out.println( "값들어갔는지G: " + doNmG );
 		} else {
 			doNmG = request.getParameter( "doNmG" );
 		}
@@ -453,6 +447,58 @@ public class Controller_Search {
 		modelAndView.addObject( "listTO", listTO );
 		modelAndView.addObject( "cpage", cpage );
 		modelAndView.addObject( "addurl", addurl );
+		
+		// 지역3개
+		modelAndView.addObject( "doNmS", doNmS );
+		modelAndView.addObject( "doNmI", doNmI );
+		modelAndView.addObject( "doNmG", doNmG );
+		
+		// 캠핑 유형 4개
+		modelAndView.addObject( "indutyNor", indutyNor );
+		modelAndView.addObject( "indutyCar", indutyCar );
+		modelAndView.addObject( "indutyGl", indutyGl );
+		modelAndView.addObject( "indutyVan", indutyVan );
+		
+		// 입지 8개
+		modelAndView.addObject( "lctClMount", lctClMount );
+		modelAndView.addObject( "lctClForest", lctClForest );
+		modelAndView.addObject( "lctClValley", lctClValley );
+		modelAndView.addObject( "lctClCity", lctClCity );
+		modelAndView.addObject( "lctClRiver", lctClRiver );
+		modelAndView.addObject( "lctClLake", lctClLake );
+		modelAndView.addObject( "lctClBeach", lctClBeach );
+		modelAndView.addObject( "lctClIsland", lctClIsland );
+				
+		// 바닥형태 5개
+		modelAndView.addObject( "siteBottomCl1", siteBottomCl1 );
+		modelAndView.addObject( "siteBottomCl2", siteBottomCl2 );
+		modelAndView.addObject( "siteBottomCl3", siteBottomCl3 );
+		modelAndView.addObject( "siteBottomCl4", siteBottomCl4 );
+		modelAndView.addObject( "siteBottomCl5", siteBottomCl5 );
+		
+		// 부대시설 9개
+		modelAndView.addObject( "sbrsClElectro", sbrsClElectro );
+		modelAndView.addObject( "sbrsClHwater", sbrsClHwater );
+		modelAndView.addObject( "sbrsClGym", sbrsClGym );
+		modelAndView.addObject( "sbrsClWifi", sbrsClWifi );
+		modelAndView.addObject( "sbrsClFirewood", sbrsClFirewood );
+		modelAndView.addObject( "sbrsClPool", sbrsClPool );
+		modelAndView.addObject( "sbrsClMart", sbrsClMart );
+		modelAndView.addObject( "sbrsClCstore", sbrsClCstore );
+		modelAndView.addObject( "sbrsClWalk", sbrsClWalk );
+		
+		// 캠핑장비대여 6개
+		modelAndView.addObject( "eqpmnLendClTent", eqpmnLendClTent );
+		modelAndView.addObject( "eqpmnLendClBrazier", eqpmnLendClBrazier );
+		modelAndView.addObject( "eqpmnLendClHeater", eqpmnLendClHeater );
+		modelAndView.addObject( "eqpmnLendClTableware", eqpmnLendClTableware );
+		modelAndView.addObject( "eqpmnLendClSbag", eqpmnLendClSbag );
+		modelAndView.addObject( "eqpmnLendClRwire", eqpmnLendClRwire );
+		
+		// 기타정보 3개
+		modelAndView.addObject( "trlerAcmpnyAt", trlerAcmpnyAt );
+		modelAndView.addObject( "caravAcmpnyAt", caravAcmpnyAt );
+		modelAndView.addObject( "animalCmgCl", animalCmgCl );
 		
 		return modelAndView;
 	}
