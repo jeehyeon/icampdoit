@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.exam.admin.AdminStatDAO;
-import com.exam.admin.VisitTO;
 import com.exam.home.HomeDAO;
 import com.exam.search.InsertGocamping;
 import com.exam.search.SearchkeyTO;
@@ -31,10 +30,9 @@ public class Controller {
 	
 	@RequestMapping( value="/home.do" )
 	public ModelAndView home(HttpServletRequest request, HttpSession session) {
-		System.out.println( "list() 호출" );
+		
 		if(session != null) {
-			System.out.println("세션값 ucode : " + session.getAttribute("ucode"));
-			System.out.println("세션값 id : " + session.getAttribute("id"));
+			
 		} else {
 			request.getSession(true);
 		}		
@@ -43,7 +41,6 @@ public class Controller {
 
 		ArrayList<WeatherTO> wlists = dao.weatherInfo();
 		if( session.isNew() ) {
-			//vto.setVdate( (Long.toString( session.getCreationTime() ) ) );
 			sdao.increaseVisitor();
 		}
 		
@@ -57,9 +54,7 @@ public class Controller {
 	
 	@RequestMapping( value="/about.do" )
 	public ModelAndView about(HttpServletRequest request, HttpSession session) {
-		System.out.println( "about() 호출" );
 		
-
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "about" );
 		
@@ -68,7 +63,6 @@ public class Controller {
 	
 	@RequestMapping( value="/insertgocamping.do" )
 	public ModelAndView insertgocamping(HttpServletRequest request, HttpSession session) {
-		System.out.println( "insertgocamping() 호출" );
 		
 		ArrayList<SearchkeyTO> lists = gocamp.gocampingparse( "인천시" );
 		int flag = gocamp.insertapi(lists);
@@ -80,26 +74,14 @@ public class Controller {
 		return modelAndView;
 	}
 	
-
 	@RequestMapping( value="/insertCampImage.do" )
 	public void insertimage(HttpServletRequest request, HttpSession session) {
-		System.out.println( "insertgocamping() 호출" );
 		
 		ArrayList<SearchkeyTO> lists = gocamp.contentIdList();
 		
 		for(SearchkeyTO kto : lists) {
-			System.out.println(kto.getContentId());
 			gocamp.insertImage(kto);
 		}
-
-		System.out.println("이미지 Insert완료");
-		
-		
 	}
 	
-	
-	
-	
-	
-
 }

@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.exam.nboard.NBoardDAO" %>
 <%@ page import="com.exam.nboard.NBoardTO" %>
-
 <%
 	//session 값 가져오기
 	int ucode = -1;
@@ -188,7 +187,6 @@
           <!-- 
           <div class="col-xl-10 mx-auto"><img class="img-fluid mb-5" src="./resources/bootstrap-5/html/img/photo/photo-1471189641895-16c58a695bcb.jpg" alt=""></div>	
           -->
-          
         </div> 
         <div id=wrap2>
         <hr>

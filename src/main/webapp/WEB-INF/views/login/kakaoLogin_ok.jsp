@@ -1,16 +1,11 @@
-<%@page import="com.exam.login.SignUpTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@page import="com.exam.login.SignUpTO"%>
 <%
 	int ucode = (Integer)request.getAttribute("ucode");
 	SignUpTO sto =(SignUpTO)request.getAttribute("sto"); 
 	String prevPage =(String)request.getAttribute("prevPage");
 %>
-
-
-
-
 <!DOCTYPE html>
   <head>
     <meta charset="utf-8"/>

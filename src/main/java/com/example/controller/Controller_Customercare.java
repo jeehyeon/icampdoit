@@ -1,12 +1,9 @@
 package com.example.controller;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.exam.nboard.NBoardDAO;
 import com.exam.nboard.NBoardTO;
 import com.exam.nboard.NListTO;
+
 
 @RestController
 public class Controller_Customercare {
@@ -23,9 +21,6 @@ public class Controller_Customercare {
 	
 	@RequestMapping( value="/notice.do" )
 	public ModelAndView notice(HttpServletRequest request, HttpSession session) {
-		System.out.println( "notice()호출" );
-		
-		//ArrayList<NBoardTO> lists = dao.nboardList();
 		
 		int cpage=1;
 		if(request.getParameter("cpage")!=null && !request.getParameter("cpage").equals("")) {
@@ -65,8 +60,6 @@ public class Controller_Customercare {
 		
 		to = dao.nboardView(to);
 		
-		NListTO nto = new NListTO();
-		//int cpage = nto.getCpage();
 		int cpage = (Integer.parseInt(request.getParameter( "cpage" )));
 
 		ModelAndView modelAndView = new ModelAndView();

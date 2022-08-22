@@ -3,16 +3,14 @@ package com.exam.login;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.exam.login.SignUpTO;
 import com.exam.mboard.BoardListTO;
 import com.exam.mboard.BoardTO;
-import com.exam.mboard.FileTO;
 import com.exam.search.SearchkeyTO;
+
 
 @Repository
 public class MypageDAO {
@@ -60,15 +58,13 @@ public class MypageDAO {
 	public BoardListTO boardList(BoardListTO listTO, BoardTO bto) {
 		
 		int cpage = listTO.getCpage();
-		int recordPerPage = listTO.getRecordPerPage();// 한페이지에 글 개수 5*2=10개
-		int blockPerPage = listTO.getBlockPerPage();// 한 화면에 보이는 페이지수 5개
+		int recordPerPage = listTO.getRecordPerPage();
+		int blockPerPage = listTO.getBlockPerPage();
 		
 		String sql = "select seq, subject, title, writer, content, date_format(wdate, '%Y-%m-%d') wdate, hit, ucode, cmt from m_board where ucode=? order by seq desc";
 
 		ArrayList<BoardTO> boardLists = (ArrayList<BoardTO>)jdbcTemplate.query(
 				sql, new BeanPropertyRowMapper<BoardTO>(BoardTO.class), bto.getUcode() );
-		
-		System.out.println("ucode : " + bto.getUcode() );
 		
 		// 총 게시글 수 얻기
 		listTO.setTotalRecord( boardLists.size() );
@@ -114,6 +110,5 @@ public class MypageDAO {
 				
 		return lists;
 	}
-	
 
 }

@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
 <%
 	String referer = (String)request.getAttribute( "referer" );
 %>
-
 <!DOCTYPE html>
   <head>
     <meta charset="utf-8">
@@ -84,7 +82,7 @@
               
             </form>
             <div class="d-grid gap-2" name="kakao_frm">
-            <button type="button" class="btn btn-lg btn-social btn-warning" onClick="location.href='javascript:loginWithKakao()'" style="color:#2e322e"><i class="fa fa-solid fa-comment btn-social-icon fa-2x"></i>LOGIN <span class="d-none d-sm-inline">WITH KAKAKO</span></button>
+            		<button type="button" class="btn btn-lg btn-social btn-warning" onClick="location.href='javascript:loginWithKakao()'" style="color:#2e322e"><i class="fa fa-solid fa-comment btn-social-icon fa-2x"></i>LOGIN <span class="d-none d-sm-inline">WITH KAKAKO</span></button>
             		<!--          
             		<button type="button" class="btn btn btn-outline-muted btn-lg btn-social btn-warning"><a id="custom-login-btn" href="javascript:loginWithKakao()" style="color:#2e322e"><i class="fa fa-solid fa-comment btn-social-icon fa-2x"></i>LOGIN <span class="d-none d-sm-inline">WITH KAKAKO</a></span></button>
             		   		
@@ -93,8 +91,6 @@
 				    	width="300"
 				    	alt="카카오 로그인 버튼" />
 				  	</a>				  	
-				  	<button class="api-btn" onclick="kakaoLogout()">로그아웃</button>
-				  	<button class="api-btn" onclick="kakaoUnlink()">카카오탈퇴</button>  
 				  	-->
 				  	
               </div>
@@ -147,29 +143,7 @@
 		    </div>
 		  </div>
 		</div>
-		
-		<!-- 아이디 알려주는 모달 -->
-	    <div class="modal fade" id="FindID2" role="dialog">
-		  <div class="modal-dialog modal-dialog-centered" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" style="font-family: 'Recipekorea';">아이디 찾기</h5>
-		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		      </div>
-		      <div class="modal-body">
-		        <form>  
-		          <div class="form-group">
-		            <p>회원님의 아이디는 <b>soye**</b> 입니다.</p>
-		          </div>
-		        </form>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
-        
+		        
         <!-- 비밀번호 찾기 모달 -->
 	    <div class="modal fade" id="FindPwd" role="dialog">
 		  <div class="modal-dialog modal-dialog-centered" role="document">
@@ -192,14 +166,8 @@
 		            <label for="email" class="col-form-label"><b>이메일</b></label>
 		            <input type="text" class="form-control" id="pemail">
 		          </div>
-		          <!--  
 		          <div class="form-group">
-		            <label for="birth" class="col-form-label"><b>생년월일(YYYYMMDD)</b></label>
-		            <input type="text" class="form-control" id="birth" placeholder="ex) 19961116">
-		          </div>
-		          -->
-		          <div class="form-group">
-		            <label class="form-label" for="pwdhint"> *비밀번호 확인 질문</label>
+		            <label for="email" class="col-form-label"><b>비밀번호 확인 질문</b></label>
 	                <div class="mb-3">
 	                <select class="form-select" name="phint" id="phint">
 	                  <option value="1">자신의 보물 1호는?</option>
@@ -222,41 +190,7 @@
 		    </div>
 		  </div>
 		</div>
-		
-		<!-- 비밀번호 재설정 모달 -->
-	    <div class="modal fade" id="NewPwd" role="dialog">
-		  <div class="modal-dialog modal-dialog-centered" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" style="font-family: 'Recipekorea';">비밀번호 재설정</h5>
-		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		      </div>
-		      <div class="modal-body">
-		        <form>  
-		          <div class="form-group">
-		            <label for="newpwd" class="col-form-label"><b>새로운 비밀번호</b></label>
-		            <input type="text" class="form-control" id="pwd">
-		          </div>
-		          <div class="form-group">
-		            <label for="newpwd" class="col-form-label"><b>비밀번호 확인</b></label>
-		            <input type="text" class="form-control" id="pwd" placeholder="비밀번호를 한번 더 입력하세요.">
-		          </div>
-		          <!--  
-		          <div class="form-group">
-		            <label for="birth" class="col-form-label"><b>생년월일(YYYYMMDD)</b></label>
-		            <input type="text" class="form-control" id="birth" placeholder="ex) 19961116">
-		          </div>
-		          -->
-		        </form>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">취소</button>
-		        <button type="button" class="btn btn-primary">확인</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
-        
+		        
         <div class="col-md-4 col-lg-6 col-xl-7 d-none d-md-block">
           <!-- Image-->
           <div class="bg-cover h-100 me-n3" style="background-image: url(./resources/bootstrap-5/html/img/photo/캠핑.jpg);"></div>
@@ -354,18 +288,17 @@
 	        $('#idname').focus();
 	    } 				
 	});
+    
 	//비밀번호 찾기 부분
 	$("#pbtn").click(function(){
     	var name = $('#pname').val();
      	var id = $('#pid').val();
      	var email = $('#pemail').val();
      	var hint = $("#phint option:selected").val();
-     	console.log(hint);
      	var answer = $('#panswer').val();
      	var postData = {'name' : name , 'id' : id , 'email' : email, 'hint' : hint, 'answer' : answer};
-    	
-    	
-	     if(($('#pname').val() != '')&&($('#pid').val() != '')&&($('#pemail').val() != '')&&($('#panswer').val() != '')){	        
+     	
+	    if(($('#pname').val() != '')&&($('#pid').val() != '')&&($('#pemail').val() != '')&&($('#panswer').val() != '')){	        
 	        $.ajax({ 	   					
 	            type: 'POST',
 	            url: './pwdcheck.do',
@@ -398,18 +331,12 @@
 			})
 	        $('#pname').focus();
 	    } 				
-	});
-	
-	
-	
-	
-	
+	});	
     </script>
- 	 <script type="text/javascript">
+ 	<script type="text/javascript">
       
     	//카카오 초기화
     	Kakao.init('2dde53cc9d654a3a8d8b78783aa5cbfc');
-    	console.log( Kakao.isInitialized() ); //초기화 판단 여부. console 에 true 나오면 됨.
     	
     	//데모버전으로 들어가서 카카오로그인 코드확인
 		function loginWithKakao() {
@@ -426,33 +353,13 @@
 		    				var nickname = res.kakao_account.profile.nickname;
 		    				var email = res.kakao_account.email;
 		    				var kid = res.id;
-		    				//var uri = $('#kuri').val();
 		    				
-		    				console.log(res);
-		    				//alert(kid);
-		    				//alert(JSON.stringify(res));
-		    				//alert(JSON.stringify(authObj));
-		    				//console.log( authObj.acces_token);
-		    				
-		    				console.log( email );
-		    				//console.log( res.kakao_account.profile.nickname );
 		    				$( '#kakaonickname' ).val( nickname );
 		    				$( '#kakaoemail' ).val( email );
 		    				$( '#kakaokid' ).val( kid );
 		    				
-		    				//$('#kakaoemail').val(res.kakao_account.profile.email);
-		    				//$('#kakaonickname').val(res.kakao_account.profile.nickname);
-		    				
-		    				console.log( $('#kakaoemail').val() );
-		    				console.log( $('#kakaonickname').val() );
-		    				
-		    				//document.kakao_frm.action
-		    				//document.getElementById( 'kakao_frm' ).submit();
-		    				
 		    				$('#kakao_frm').submit();
 		    				
-		    				//ajax
-		    				//카카오로그인 DB 만들어야 함. 비번은 랜덤으로..
 		    			},
 		    			fail: function(error){
 		    				alert('카카오 로그인에 실패했습니다. 관리자에게 문의하세요.' + JSON.stringify(error) );
@@ -464,36 +371,6 @@
 		      },
 		    });
 		}
-    	
-    	
-    	//로그아웃 기능 - 카카오 서버에 접속하는 엑세스 토큰 만료. 사용자 어플리케이션의 로그아웃은 따로 해야 함.
-    	function kakaoLogout(){
-    		if( !Kakao.Auth.getAccessToken() ){ //토큰이 있는지 확인. 없으면
-    			alert( 'Not logged in' );
-    			return;
-    		}
-    		Kakao.Auth.logout(function(){ //카카오 로그아웃
-    			alert( 'logout ok\naccess token -> ' + Kakao.Auth.getAccessToken() );
-    			
-    		});
-    	}
-    	
-    	
-    	//연결 끊기 기능 - 탈퇴처리리는 직접 구현해야 함. 	
-    	function kakaoUnlink(){
-    		Kakao.API.request({
-        		url: '/v1/user/unlink',
-        		success: function(response) {
-        			console.log( response );
-        			callbackFunction();
-        		},
-        		fail: function(error){
-        			alert('탈퇴처리가 미완료되었습니다. \n관리자에게 문의하시기 바랍니다.' );
-        			console.log( error );
-        		}
-        	});
-    	}
-    	
     	
 	</script>
     <!-- jQuery-->
