@@ -278,6 +278,47 @@ public class BoardDAO {
 		return to;
 	}
 	
+	public int mboardModifyOk1(BoardTO to) {
+		int flag = 1;
+		String	sql = "update m_board set subject=?, title=?, writer=?, content=? where seq=? and ucode=?";
+		int result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(),
+				to.getSeq(), to.getUcode() );
+		if(result == 1) {
+			flag=0;
+		}
+		return flag;
+	}
+	public int mboardModifyOk2(BoardTO to, FileTO fto) {
+		int flag = 0;
+		int result = 1;
+		if(to.getContent().indexOf(fto.getFilename()) != -1) {
+			String sql ="delete from m_file where pseq=? and filename=?";
+			result = jdbcTemplate.update(sql, to.getSeq(), fto.getFilename());	
+		}
+		if(result == 1) {
+			flag=0;
+		}else {
+			flag=1;
+		}
+		return flag;
+	}
+	
+	public int mboardModifyOk3(BoardTO to, FileTO fto) {
+		int flag = 0;
+		int result = 1;
+		if(to.getContent().indexOf(fto.getFilename()) != -1) {
+			String sql ="insert into m_file values ( 0, ?, ?, ? )";
+			result = jdbcTemplate.update(sql, to.getSeq(), fto.getFilename(), fto.getFilesize());
+		}
+		if(result == 1) {
+			flag=0;
+		}else {
+			flag=1;
+		}
+		return flag;
+	}
+	
+	
 	// modify_ok
 	public int mboardModifyOk(BoardTO to, FileTO fto) {	
 		
@@ -293,7 +334,7 @@ public class BoardDAO {
 			String	sql = "update m_board set subject=?, title=?, writer=?, content=? where seq=? and ucode=?";
 			result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(),
 					to.getSeq(), to.getUcode() );
-			result = 1;
+			
 			System.out.println( "result1 :"+result);
 			// 기존 텍스트 -> 새파일 첨부시 : m_file insert
 			if( to.getContent().indexOf( fto.getNewFilename())!=-1 && fto.getFilesize()==0 ) {
@@ -428,6 +469,8 @@ public class BoardDAO {
 				System.out.println("파일이 존재 하지 않습니다.");
 			}
 		
+		}else {
+			System.out.println("변경된 파일이 없습니다.");
 		}
 	}
 	//글작성하다가 취소 눌렀을 경우 파일 삭제
@@ -511,19 +554,20 @@ public class BoardDAO {
 	}
 	
 	// 게시글 파일찾기
-	public FileTO findNFile(BoardTO to) {
+	public ArrayList<FileTO> findNFile(BoardTO to) {
 		
 		FileTO fto = new FileTO();
 		
+		ArrayList<FileTO> fileArr = new ArrayList<FileTO>();
 		String sql = "select * from m_file where pseq=?";
 		try {
-			fto = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<FileTO>(FileTO.class), to.getSeq() );
+			fileArr = (ArrayList<FileTO>)jdbcTemplate.query(sql, new BeanPropertyRowMapper<FileTO>(FileTO.class), to.getSeq() );
 		} catch (DataAccessException e) {
 			// TODO Auto-generated catch block
-			//fto.setFilename("null");
-			System.out.println("게시글에 파일없음 ");
+			fto.setFilename("null");
+			fileArr.add(fto);
 		}
-		return fto;
+		return fileArr;
 	}
 		
 }

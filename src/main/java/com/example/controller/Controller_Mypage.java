@@ -30,7 +30,6 @@ public class Controller_Mypage {
 	
 	@RequestMapping( value="/mypage.do" )
 	public ModelAndView mypage(HttpServletRequest request, HttpSession session) {
-		System.out.println( "mypage() 호출" );
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
@@ -52,7 +51,6 @@ public class Controller_Mypage {
 	
 	@RequestMapping( value="/mypagemodify_ok.do" )
 	public ModelAndView mypageModifyOk(HttpServletRequest request, HttpSession session) {
-		System.out.println( "mypageModifyOk() 호출" );
 		
 		SignUpTO sto = new SignUpTO();
 		sto.setUcode(request.getParameter( "ucode" ));
@@ -77,7 +75,6 @@ public class Controller_Mypage {
 	
 	@RequestMapping( value="/mypagemylist.do" )
 	public ModelAndView mypagemylist(HttpServletRequest request, HttpSession session) {
-		System.out.println( "mypagemylist() 호출" );
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
@@ -108,7 +105,6 @@ public class Controller_Mypage {
 	
 	@RequestMapping( value="/mypagesub.do" )
 	public ModelAndView mypagesub(HttpServletRequest request, HttpSession session) {
-		System.out.println( "mysublist() 호출" );
 
 		ModelAndView modelAndView = new ModelAndView();
 		
@@ -119,9 +115,7 @@ public class Controller_Mypage {
 		
 		SignUpTO to = new SignUpTO();
 		to.setUcode( String.valueOf( session.getAttribute("ucode") ) );
-		
-		int ucode = (Integer)session.getAttribute("ucode");
-				
+						
 		ArrayList<SearchkeyTO> lists = dao.subList(to);
 		
 		modelAndView.setViewName( "/mypage/mypage_sub" );
@@ -130,10 +124,9 @@ public class Controller_Mypage {
 		return modelAndView;
 	}	
 	
-	@RequestMapping(value="/delsub.do")
+	@RequestMapping( value="/delsub.do" )
 	public ModelAndView campsubscribe(HttpServletRequest request, HttpSession session) {
 		int flag =1;
-		System.out.println("campsubscribe 찜취소");
 		
 		ModelAndView modelAndView = new ModelAndView();
 		

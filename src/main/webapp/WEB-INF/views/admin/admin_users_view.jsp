@@ -107,17 +107,14 @@
       <div class="card my-2">
             <div class="card-header p-0 position-relative mt-4 mx-3 z-index-2">
               <div class="bg-gradient-secondary shadow-primary border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3">회원 목록</h6>
-                
-	                
-			
-              </div>
-              
-            </div>
+                <h6 class="text-white text-capitalize ps-3">회원 목록</h6>  
+              </div>            
+            </div>            
+            <!-- 회원수정 시작 -->
+            <form class="form-validate" method="post" name="adminuser">        
             <div class="card-body px-0 pb-2">
               <div class="table-responsive p-1">
-                <table class="table align-items-center mb-1">
-                  
+                <table class="table align-items-center mb-1">                 
                   <tbody>
                     <tr>
                       <td>
@@ -125,7 +122,7 @@
                           <div class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm">아이디 :</h6> 
                           </div>
-                          <div class="input-group input-group-static my-2 px-3 w-xxl-30">
+                            <div class="input-group input-group-static my-2 px-3 w-xxl-30">
 						      <label class="form-label"><%=id %></label>
 						      <input type="text" class="form-control" disabled/>
 						    </div>
@@ -138,8 +135,7 @@
                           <div class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm">이름  :</h6> 
                           </div>
-                          <div class="input-group input-group-static my-2 px-3 w-xxl-30">
-						      <!-- <label class="form-label"><%=name %></label> -->
+                            <div class="input-group input-group-static my-2 px-3 w-xxl-30">
 						      <input type="text" class="form-control" name="name" id="name" value="<%=name%>">
 						    </div>
                         </div>
@@ -151,8 +147,7 @@
                           <div class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm">이메일 :</h6> 
                           </div>
-                          <div class="input-group input-group-static my-2 px-3 w-xxl-30">
-						      <!--<label class="form-label"><%=email %></label>  -->
+                            <div class="input-group input-group-static my-2 px-3 w-xxl-30">
 						      <input type="text" class="form-control" name="email" id="email" value="<%=email%>">
 						    </div>
                         </div>
@@ -164,8 +159,7 @@
                           <div class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm">생년월일 :</h6> 
                           </div>
-                          <div class="input-group input-group-static my-2 px-3 w-xxl-30">
-						      <!--<label class="form-label"><%=birth %></label>  -->
+                            <div class="input-group input-group-static my-2 px-3 w-xxl-30">
 						       <input type="text" class="form-control" name="birth" id="birth" value="<%=birth%>">
 						    </div>
                         </div>
@@ -213,14 +207,11 @@
                     
                   </tbody>
                 </table>
-                <div id="dialog" style="display:none;" title="회원정보 삭제">
-                	<h4>회원 정보를 삭제하시겠습니까? 삭제 후 복구가 불가능합니다.</h4>
-                </div>
               </div>
             </div>
- 
-          </div>
-   	</div>
+          </form>
+        </div>
+   	  </div>
   </div>
   
   <!--   Core JS Files   -->
@@ -231,8 +222,7 @@
   <script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
   <script>
-  
-  
+
   const Toast = Swal.mixin({
 	    toast: true,
 	    position: 'center-center',
@@ -243,8 +233,8 @@
 	        toast.addEventListener('mouseenter', Swal.stopTimer)
 	        toast.addEventListener('mouseleave', Swal.resumeTimer)
 	    }
-	})    	
-  
+	})    			
+    	  
   document.getElementById( 'dbtn' ).onclick = function() {
 	  Swal.fire({
 			title: '회원 정보를 삭제하시겠습니까? ',  
@@ -307,15 +297,133 @@
   };
   
   document.getElementById( 'mbtn' ).onclick = function() {
+	  
+	  if( document.adminuser.name.value.trim() == '' ) {
+			Toast.fire({
+				    icon: 'warning',
+				    title: '이름을 입력해 주세요.'
+				})
+			return false;				
+		} else {
+			if(isName(document.adminuser.name.value)) {
+				$("#name").css('border-color', '#ced4da');
+			} else {
+				$("#name").css('border-color', 'red');
+				Toast.fire({
+				    icon: 'warning',
+ 				    title: '올바른 이름이 아닙니다. &emsp;&emsp;&emsp;이름은 2글자 이상, 한글만 입력해주세요.'
+				})
+				return false;
+			}
+		}
+		
+		if( document.adminuser.birth.value.trim() == '' ) {
+			Toast.fire({
+				    icon: 'warning',
+				    title: '생년월일을 입력해 주세요.'
+				})
+			return false;				
+		} else {
+			if(isBirthday(document.adminuser.birth.value)) {
+				//유효성 맞음
+				$("#birth").css('border-color', '#ced4da');
+			} else {
+				//유효성 안맞음
+				$("#birth").css('border-color', 'red');
+				Toast.fire({
+				    icon: 'warning',
+				    title: '올바른 생년월일이 아닙니다.'
+				})
+				return false;
+			}
+		}
+		if( document.adminuser.email.value.trim() == '' ) {
+			Toast.fire({
+				    icon: 'warning',
+				    title: '이메일을 입력해 주세요.'
+				})
+			return false;				
+		} else {
+			if(isEmail(document.adminuser.email.value)){
+				
+				$("#email").css('border-color', '#ced4da');
+			} else {
+				//유효성 안맞음
+				$("#email").css('border-color', 'red');
+				Toast.fire({
+				    icon: 'warning',
+				    title: '올바른 이메일 형식이 아닙니다.'
+				})
+				return false;
+			}
+			
+		}			
+    	
+   	function isBirthday(dateStr) {
+   		var reg_Birthday = /^[0-9]{8,8}$/;
+   		if(reg_Birthday.test(dateStr)){
+    		var year = Number(dateStr.substr(0,4)); 
+    		var month = Number(dateStr.substr(4,2)); 
+    		var day = Number(dateStr.substr(6,2));
+    		var today = new Date(); 
+    		var yearNow = today.getFullYear(); 
+
+    		if (dateStr.length <=8) {
+    		
+    			if (1900 > year || year > yearNow){
+    				return false;
+    			} else if (month < 1 || month > 12) {
+    				return false;
+    			} else if (day < 1 || day > 31) {
+    				return false;
+    			} else if ((month==4 || month==6 || month==9 || month==11) && day==31) {
+    				return false;
+    			} else if (month == 2) {
+
+    				var isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+    				if (day>29 || (day==29 && !isleap)) {
+    					return false;
+    				} else {
+    					return true;
+    				} 
+    			} else {
+    				return true;
+    			}
+    		}
+    		else {
+    			
+    			return false;
+    		}
+   		}else{
+   			return false;
+   		}
+   	}
+   	
+   	function isEmail(emailStr) {                                                 
+   	     var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+   	     if(!reg_email.test(emailStr)) {                            
+   	          return false;         
+   	     }                            
+   	     else {                       
+   	          return true;         
+   	     }                            
+   	}                            
+   	
+   	function isName(name) {            
+   		      
+   		var reg_Name = /^[가-힣]{2,}$/;    
+   		if (!reg_Name.test(name)) {                                 
+   			 return false;        
+   			}        
+   		return true; 
+   	}
+	  
 	  	var name = $('#name').val();
 		var email = $('#email').val();
 		var birth = $('#birth').val();
 		var gen = $('.form-select option:selected').val();
-		 //alert( "gen option: " + gen );
 		var ucode = $('#ucode').val();
-		 
-		//console.log( name );
-		 		 
+		 		 		 
 	    var data = {'name': name, 'email' : email , 'birth' : birth, 'gen' : gen, 'ucode' : ucode };	    	
 
 	    if(($('#name').val() != '')&&($('#email').val() != '')&&($('#birth').val() != '')&&($('#gen').val() != '')){	        
@@ -367,8 +475,8 @@
 	    	 Toast.fire({
 				    icon: 'error',
 				    title: '회원정보 수정 오류'
-				})
-		        $('#title').focus();
+			})
+		    $('#name').focus();
 		 } 
   }
   

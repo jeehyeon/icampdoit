@@ -71,8 +71,7 @@ public class AdminStatDAO {
 					+ "group by age) s "
 					+ "where s.age >=0 and s.age<=100";
 		
-		ArrayList<SignUpTO> ageList = (ArrayList<SignUpTO>)jdbcTemplate.query(sql, new BeanPropertyRowMapper<SignUpTO>(SignUpTO.class) );
-		
+		ArrayList<SignUpTO> ageList = (ArrayList<SignUpTO>)jdbcTemplate.query(sql, new BeanPropertyRowMapper<SignUpTO>(SignUpTO.class) );		
 		
 		return ageList;
 	}

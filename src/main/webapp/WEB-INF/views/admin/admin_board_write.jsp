@@ -94,9 +94,10 @@
 		   			
 	<!-- Write Section-->
 	<div class="main-content px-5">		
-		  <!-- <form action="./aboardwrite_ok.do" method="post" id="afrm" name="afrm" enctype="multipart/form-data"> -->
-		  <input type="hidden" name="writeOk" id="writeOk" value="default"/>
-		  <input type="hidden" name="filesize" id="filesize" value="0000"/>
+		  <form method="post" id="afrm" name="afrm" enctype="multipart/form-data">
+		  <div id="filebody" name="filebody">
+		  </div>
+		  
 		  <input type="hidden" name="vcode" id="vcode" value="default"/>
 	
 			<div class="card my-2 px-5 justify-content-center">
@@ -121,6 +122,9 @@
 						<textarea id="summernote" name="content"></textarea>
 					</div>
 				</div>
+				<!-- Write Section-->
+				
+				<!-- 목록 시작 -->
 				<div class="row">
 				  <div class="col-lg-8">
 			        <input type="button" value="목록" class="btn btn-success" style="cursor: pointer;" onclick="location.href='admin_board.do'" />
@@ -131,7 +135,7 @@
 			      </div>
 				</div>
 			</div>
-		  <!-- </form> -->
+		  </form>
 		</div>
 
 	
@@ -206,13 +210,14 @@
 		 var vcode = $('#vcode').val();
 		 var filename = $('#writeOk').val();
 		 var filesize = $('#filesize').val();
+		 var formdata = $('#afrm').serialize();
 		 		 
 	     var data = {'subject' : subject , 'title' : title , 'content' : content, 'vcode' : vcode, 'filename' : filename, 'filesize' : filesize};	    	
 
 	     if(($('#subject').val() != '')&&($('#title').val() != '')&&($('#summernote').val() != '')){	        
 					
 			$.ajax({
-				data : data,				
+				data : formdata,				
 				type : "POST",
 				url : './aboardwrite_ok.do',
 				dataType : 'text',
@@ -334,12 +339,15 @@
 					imgUrl = mImgUrl + str[0];
 				}
 				
+				console.log("imgUrl : " +imgUrl);
+				
 				$('#summernote').summernote( 'insertImage', imgUrl );
 				
 				if(str[0] != null){
-            				               
-					$('#writeOk').val(str[0]);
-					$('#filesize').val(str[1]);
+            		
+					$('#filebody').append("<input type=\"hidden\" name=\"filename\" value=\""+str[0]+"\"/>");
+            		$('#filebody').append("<input type=\"hidden\" name=\"filesize\" value=\""+str[1]+"\"/>"); 
+
 	                
             	}else{
             		alert("error11");

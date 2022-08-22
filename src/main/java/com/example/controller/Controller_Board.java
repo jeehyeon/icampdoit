@@ -269,7 +269,7 @@ public class Controller_Board {
 		to.setContent(request.getParameter("content"));
 		to.setUcode((Integer) session.getAttribute("ucode"));
 		to.setVcode(request.getParameter("vcode"));
-		System.out.println("subject : " + request.getParameter("subject"));
+		System.out.println("filename : " + request.getParameter("filename"));
 
 		//String file = request.getParameter("writeOk");
 		//System.out.println("파일이름 : " + file);
@@ -279,20 +279,20 @@ public class Controller_Board {
 		
 		int flag = dao.mboardWriteOk(to);
 		
-		if(request.getParameter("filesize")!=null || request.getParameter("filesize")!="") {
+		if(request.getParameter("filename")!="" && request.getParameter("filename")!=null) {
 		String[] filenames = request.getParameterValues("filename");
 		String[] filesizes = request.getParameterValues("filesize");
 		
-		for (int i = 0; i < filenames.length; i++) {            
-			System.out.println(filenames[i]);  
-			FileTO fto = new FileTO();
-			fto.setFilename(filenames[i]);
-			fto.setFilesize(Long.parseLong(filesizes[i]) );
-			flag = dao.mboardWriteFileOk(to, fto);
-			dao.filecnd(to, fto);
-		};
+			for (int i = 0; i < filenames.length; i++) {            
+				System.out.println(filenames[i]);  
+				FileTO fto = new FileTO();
+				fto.setFilename(filenames[i]);
+				fto.setFilesize(Long.parseLong(filesizes[i]) );
+				flag = dao.mboardWriteFileOk(to, fto);
+				dao.filecnd(to, fto);
+			};
 		
-		}
+		};
 		/*
 		 * File file = request.getFile("upload"); if (file != null) {
 		 * fto.setFilesize(file.length()); }
@@ -329,13 +329,13 @@ public class Controller_Board {
 		
 		BoardTO to = new BoardTO();
 		FileTO fto = new FileTO();
-		
+		ArrayList<FileTO> fileArr = new ArrayList<FileTO>();
 		if(subjectValue.equals( "1") || subjectValue.equals( "2") || subjectValue.equals( "3")) {
 			to.setUcode((Integer) session.getAttribute("ucode"));
 			to.setSeq(request.getParameter( "seq" ));
 			to = dao.mboardModify(to);
 			
-			fto = dao.findNFile(to);
+			fileArr = dao.findNFile(to);
 		}
 		
 		ModelAndView modelAndView = new ModelAndView();
@@ -346,7 +346,7 @@ public class Controller_Board {
 		}
 		modelAndView.setViewName( "/board/mboard_modify" );
 		modelAndView.addObject("to", to);
-		modelAndView.addObject("fto", fto);
+		modelAndView.addObject("fileArr", fileArr);
 		modelAndView.addObject("cpage", cpage);
 		modelAndView.addObject("subjectValue", subjectValue);
 		
@@ -381,7 +381,7 @@ public class Controller_Board {
 		if (  modifyUcode.equals(Integer.toString(ucode)) ) {
 				System.out.println( "작성자ucode2: "+modifyUcode);
 				System.out.println( "수정자ucode2: "+ucode);
-				
+				System.out.println("new file name : " + request.getParameter("newfilename") );
 				FileTO fto = new FileTO();
 				
 				to.setSeq(request.getParameter( "seq" ));
@@ -391,9 +391,55 @@ public class Controller_Board {
 				to.setContent(request.getParameter("content"));
 				to.setUcode((Integer) session.getAttribute("ucode"));
 				to.setVcode(request.getParameter("vcode"));
-				System.out.println("수정title1: "+ to.getTitle());
-				System.out.println("request.getfilename : " + request.getParameter("filename"));
-				// 게시글에 기존 파일이 있으면
+				//게시판 수정부분(file빼고)
+				flag = dao.mboardModifyOk1(to);
+				System.out.println("1 ");
+				// 게시글에 기존 파일 체크(내용에 없으면 삭제 있으면 유지)
+				if(request.getParameter("filename")!="" && request.getParameter("filename")!=null) {
+					String[] filenames = request.getParameterValues("filename");
+					String[] filesizes = request.getParameterValues("filesize");
+					
+					for (int i = 0; i < filenames.length; i++) {            
+						System.out.println(filenames[i]);  
+						FileTO fito = new FileTO();
+						fito.setFilename(filenames[i]);
+						fito.setFilesize(Long.parseLong(filesizes[i]) );
+						flag = dao.mboardModifyOk2(to, fito);
+						System.out.println("2 ");
+						dao.filecnd(to, fito);
+						System.out.println("3 ");
+					};
+					if(flag==0) {
+						System.out.println("기존파일 체크 완료");
+					}else {
+						System.out.println("mboardModifyOk2() 오류!");
+					}
+				};
+				//게시글에 새로운 파일 추가했을경우
+				if(request.getParameter("newfilename")!=null && request.getParameter("newfilename")!="") {
+					String[] newfilenames = request.getParameterValues("newfilename");
+					String[] newfilesizes = request.getParameterValues("newfilesize");
+					
+					for (int i = 0; i < newfilenames.length; i++) {            
+						System.out.println(newfilenames[i]);  
+						FileTO fito = new FileTO();
+						fito.setFilename(newfilenames[i]);
+						fito.setFilesize(Long.parseLong(newfilesizes[i]) );
+						flag = dao.mboardModifyOk3(to, fito);
+						System.out.println("4 ");
+						dao.filecnd(to, fito);
+						
+						System.out.println("5 ");
+					};
+					if(flag==0) {
+						System.out.println("새로운 파일 체크 완료");
+					}else {
+						System.out.println("mboardModifyOk3() 오류!");
+					}
+					
+				};
+				
+				/*
 				if(request.getParameter("filesize") != "0"&&request.getParameter("filename")!="default") {
 					fto.setFilename(request.getParameter("filename"));
 					fto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
@@ -410,10 +456,10 @@ public class Controller_Board {
 				}
 				flag = dao.mboardModifyOk(to, fto);
 				
-				dao.filecnd(to, fto);
+				dao.filecnd(to, fto);*/
 			
 		}
-		System.out.println("수정title2: "+ to.getTitle());
+		
 		System.out.println("최종flag : " + flag);
 		
 		return Integer.toString(flag);

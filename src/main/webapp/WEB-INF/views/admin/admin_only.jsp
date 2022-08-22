@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- <%
-	out.println( "<script type='text/javascript'>" );
-	out.println( "alert( '관리자만 접속할 수 있습니다.' );" );
-	out.println( "history.back();" );
-	out.println( "</script>" );
-%> --%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +11,7 @@
 <link rel="shortcut icon" href="./resources/bootstrap-5/html/img/logo2.svg">
 </head>
 <body>
- 	<!-- Sweet Alert -->
+	<!-- Sweet Alert -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 	<script type='text/javascript'>
 				   
@@ -45,7 +40,6 @@
 		  				history.back();
 		  		 } 
 	  		})
-	 				
 				 	
 </script>
 </body>
