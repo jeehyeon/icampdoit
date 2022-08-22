@@ -461,7 +461,7 @@ public class Controller_Board {
 	}
 	
 	@RequestMapping( value="/cmt_insert.do" )
-	public JSONObject cmtInsert(HttpServletRequest request, HttpSession session) throws IOException {
+	public int cmtInsert(HttpServletRequest request, HttpSession session) throws IOException {
 		System.out.println( "mboarddeleteOk() 호출" );
 		//System.out.println(request.getParameter("ucode"));
 		//System.out.println(request.getParameter("id"));
@@ -475,6 +475,7 @@ public class Controller_Board {
 		cto.setContent(request.getParameter("comment"));
 		
 		int flag = dao.mboardWriteComment(cto);
+		/*
 		JSONArray cmtList = new JSONArray();
 		if(flag == 0 ) {
 			ArrayList<CmtTO> lists = dao.mboardViewComment(cto);
@@ -494,11 +495,12 @@ public class Controller_Board {
 		
 		JSONObject data = new JSONObject();
 		data.put("cmtList", cmtList);
+		*/
 	//System.out.println("제이슨 어레이 : "+ cmtList);
 		
 		
 		
-		return data;
+		return flag;
 	}
 	
 	@RequestMapping( value="/cmtdelete.do" )

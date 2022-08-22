@@ -413,11 +413,12 @@
     			
     		});
     		
+    		/*나중에 빼기
     		var latlngArr = new Array();
 	    	$( '#mapval' ).each( function( index, item ) {
 	    		latlngArr.push($(item).text());
 	    	});
-	    	
+	    	*/
     	});
     	
     	
@@ -560,7 +561,7 @@
 						//console.log(marker)
 						//console.log("1");
 						overlays[i].setMap(map);
-						$('div .card-body:eq('+i+')').css('background-color', '#99CC99');
+						//$('div .card-body:eq('+i+')').css('background-color', '#99CC99');
 					});
 				}
 			

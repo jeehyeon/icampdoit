@@ -484,9 +484,11 @@ public class Controller_Search {
 		
 		//campview 사진데이터
 		ArrayList<SearchkeyTO> lists = kdao.gocampimgparse(kto);
-		for(SearchkeyTO iito : lists) {
+		
+		/*for(SearchkeyTO iito : lists) {
 			System.out.println(iito.getImgurl());
 		}
+		*/
 		
 		//댓글
 		ArrayList<CampviewCmtTO> clists= kdao.campViewCmt(cto);
