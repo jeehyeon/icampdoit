@@ -249,8 +249,11 @@ public class Controller_Board {
 	public ModelAndView mboardwriteOk(MultipartFile image, HttpServletRequest request, HttpServletResponse response, HttpSession session)
 			throws IOException {
 		System.out.println("mboardwriteOk() 호출");
-		System.out.println(request.getParameter("writeOk"));
-		System.out.println(request.getParameter("filesize"));
+		//System.out.println(request.getParameter("filename"));
+		//System.out.println(request.getParameter("filename").length());
+		//System.out.println("test  :  "+request.getParameter("filesize"));
+		
+		
 		//String uploadPath = request.getSession().getServletContext().getRealPath("/upload");
 
 		//MultipartRequest multi = new MultipartRequest(request, uploadPath, maxFileSize, encoding,
@@ -274,19 +277,30 @@ public class Controller_Board {
 		//String filename = file.substring( 0, file.lastIndexOf(",") );
 		//long filesize = Long.parseLong( file.substring(file.lastIndexOf(",")+2) );
 		
-		FileTO fto = new FileTO();
-		if(request.getParameter("filesize")!="0") {
-		fto.setFilename(request.getParameter("writeOk"));
-		fto.setFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
+		int flag = dao.mboardWriteOk(to);
+		
+		if(request.getParameter("filesize")!=null || request.getParameter("filesize")!="") {
+		String[] filenames = request.getParameterValues("filename");
+		String[] filesizes = request.getParameterValues("filesize");
+		
+		for (int i = 0; i < filenames.length; i++) {            
+			System.out.println(filenames[i]);  
+			FileTO fto = new FileTO();
+			fto.setFilename(filenames[i]);
+			fto.setFilesize(Long.parseLong(filesizes[i]) );
+			flag = dao.mboardWriteFileOk(to, fto);
+			dao.filecnd(to, fto);
+		};
+		
 		}
 		/*
 		 * File file = request.getFile("upload"); if (file != null) {
 		 * fto.setFilesize(file.length()); }
 		 */
 		
-		int flag = dao.mboardWriteOk(to, fto);
+		
 
-		dao.filecnd(to, fto);
+		
 		ModelAndView modelAndView = new ModelAndView();
 		
 		if (session.getAttribute("ucode") == null) {
@@ -412,17 +426,27 @@ public class Controller_Board {
 		//게시글 삭제 전 이미지 파일 확인
 		BoardTO to = new BoardTO();
 		to.setSeq(request.getParameter("viewseq"));
-		FileTO fto = new FileTO();
+		
+		ArrayList<FileTO> fileArr = new ArrayList<FileTO>();
 		//DB에 파일 데이터가 있는지 조회
-		fto=dao.mboardDelFileCheck(to);
+		fileArr=dao.mboardDelFileCheck(to);
 		int flag = 2;
-		if(fto.getFilename() !="null") {
+		if(fileArr != null) {
 			//파일이 존재 => 삭제
 			System.out.println("파일이 존재");
 			//디렉터리 폴더에 파일 삭제
-			dao.filedel(fto.getFilename());
+			for(FileTO fto : fileArr) {
+				dao.filedel(fto.getFilename());
+			}
+			
+			
 			//DB table에서 항목 삭제
-			flag= dao.fileDBDel(to);
+			 int result= dao.fileDBDel(to);
+			 if(result == 1) {
+				 flag=0;
+			 }else {
+				 flag=1;
+			 }
 		}
 		
 		if(flag != 1) {
