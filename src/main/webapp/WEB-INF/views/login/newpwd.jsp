@@ -65,7 +65,6 @@ System.out.println(ucode);
                 <button id="sbtn" name="sbtn" class="btn btn-lg btn-primary">비밀번호 재설정</button>
               </div>
             </form>
-            
             <a class="close-absolute me-md-5 me-xl-6 pt-5" href="./home.do"> 
               <svg class="svg-icon w-3rem h-3rem">
                 <use xlink:href="#close-1"> </use>

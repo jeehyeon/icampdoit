@@ -1,7 +1,7 @@
+<%@page import="com.exam.login.SignUpTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@page import="com.exam.login.SignUpTO"%>
 <%
 	
 	SignUpTO sto =(SignUpTO)request.getAttribute("sto");
@@ -130,13 +130,13 @@
 	                  <div class="container mb-2">
 						  <form>
 						    <div class="form-group">
-						      <textarea class="form-control" rows="7" id="" style="background-color: white" readonly>제1조. 목적&#13;&#10; 본 약관은 I Camp Do It(이하 "아이캠두잇")이 제공하는 모든 서비스의 이용조건 및 절차, 이용자와 아이캠두잇의 권리, 의무, 책임사항과 기타 필요한 사항을 규정합니다.&#13;&#10;&#13;&#10;제2조. 개인정보 수집목적 및 이용목적&#13;&#10;[회원 관리]&#13;&#10;1. 회원제 서비스 이용에 따른 본인확인, 개인 식별, 불량회원의 부정 이용 방지와 비인가 사용 방지, 가입 의사 확인, 연령확인, 불만처리 등 민원처리, 고지사항 전달&#13;&#10;2. 수집하는 개인정보 항목 : 이름, 생년월일, 성별, 로그인ID, 비밀번호, 이메일, 14세미만 가입자의 경우 법정대리인의 정보&#13;&#10;3. 개인정보의 보유기간 및 이용기간&#13;&#10;원칙적으로, 개인정보 수집 및 이용목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다. 단, 다음의 정보에 대해서는 아래의 이유로 명시한 기간 동안 보존합니다.&#13;&#10;o 소비자 불만 또는 분쟁처리에 관한 기록&#13;&#10;-보존이유 : 소비자보호에관한법률&#13;&#10;-보존기간 : 3년&#13;&#10;o 로그 기록&#13;&#10;-보존이유: 통신비밀보호법&#13;&#10;-보존기간 : 3개월&#13;&#10;※ 동의를 거부할 수 있으나 거부시 회원 가입이 불가능합니다.</textarea>
+						      <textarea class="form-control" rows="7" id="" style="background-color: white" readonly>제1장 총칙&#13;&#10;제1조. 목적&#13;&#10; 본 약관은 I Camp Do It(이하 "아이캠두잇")이 제공하는 모든 서비스의 이용조건 및 절차, 이용자와 아이캠두잇의 권리, 의무, 책임사항과 기타 필요한 사항을 규정합니다.&#13;&#10;제2조. 용어의 정의&#13;&#10;본 약관에서 사용하는 용어의 정의는 다음과 같습니다.&#13;&#10;...</textarea>
 						    </div>
 						  </form>
 	                  </div>    			  
       			<div class="form-check">
                   <input class="form-check-input" id="info" type="checkbox" name="info">
-                  <label class="form-check-label text-muted"> <span class="text-sm">[필수] 이용약관 및 개인정보수집/이용에 모두 동의합니다.</span></label>
+                  <label class="form-check-label text-muted"> <span class="text-sm">[필수] 이용약관에 동의합니다.</span></label>
                 </div>
               </div>
               <div class="d-grid gap-2">
@@ -229,7 +229,10 @@
 				        toast.addEventListener('mouseleave', Swal.resumeTimer)
 				    }
 				})
-								
+				
+				
+				
+				
 	    		document.getElementById( 'sbtn' ).onclick = function() {
 	    			// 데이터 전송
 	    			if( document.sfrm.info.checked == false ) {

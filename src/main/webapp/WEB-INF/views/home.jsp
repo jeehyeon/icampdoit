@@ -1,8 +1,8 @@
+<%@page import="com.exam.weather.WeatherTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="com.exam.search.SearchkeyTO"%>
 <%@ page import="java.util.ArrayList" %>
-<%@page import="com.exam.weather.WeatherTO"%>
 <%
 	//session 값 가져오기
 	int ucode = -1;
@@ -38,6 +38,7 @@
 		sbHtml.append( "</div>" );
 	}
 	
+	
 	//날씨 
 	ArrayList<WeatherTO> wlists = (ArrayList)request.getAttribute( "wlists" );
 	
@@ -64,6 +65,8 @@
 	wHtml.append("</div>");
 		
 	}
+	
+	
 	
 %>
 <!DOCTYPE html>
@@ -518,8 +521,7 @@
         <div class="swiper-container guides-slider mx-n2 pt-3">
           <!-- Additional required wrapper-->
           <div class="swiper-wrapper pb-5">
-            <!-- Slides -->
-            <!-- 
+            <!-- Slides
             <div class="swiper-slide h-auto px-2">
               <div class="card card-poster gradient-overlay hover-animate mb-4 mb-lg-0"><a class="tile-link" href="./campview.do"></a><img class="bg-image" src="./resources/bootstrap-5/html/img/photo/top1예시.jpg" alt="Card image">
                 <div class="card-body overlay-content">
@@ -528,7 +530,38 @@
                 </div>
               </div>
             </div>
-            -->
+            <div class="swiper-slide h-auto px-2">
+              <div class="card card-poster gradient-overlay hover-animate mb-4 mb-lg-0"><a class="tile-link" href="./campview.do"></a><img class="bg-image" src="./resources/bootstrap-5/html/img/photo/top2예시.jpg" alt="Card image">
+                <div class="card-body overlay-content">
+                  <h5 class="card-title text-shadow text-uppercase" style="font-family: 'Recipekorea';">도마치 캠핑장</h5>
+                  <p class="card-text text-sm" style="font-family: 'BMJUA';">경기도 포천시</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide h-auto px-2">
+              <div class="card card-poster gradient-overlay hover-animate mb-4 mb-lg-0"><a class="tile-link" href="./campview.do"></a><img class="bg-image" src="./resources/bootstrap-5/html/img/photo/top3예시.jpg" alt="Card image">
+                <div class="card-body overlay-content">
+                  <h5 class="card-title text-shadow text-uppercase" style="font-family: 'Recipekorea';">대장금 테마파크</h5>
+                  <p class="card-text text-sm" style="font-family: 'BMJUA';">경기도 용인시</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide h-auto px-2">
+              <div class="card card-poster gradient-overlay hover-animate mb-4 mb-lg-0"><a class="tile-link" href="./campview.do"></a><img class="bg-image" src="./resources/bootstrap-5/html/img/photo/top4예시.jpg" alt="Card image">
+                <div class="card-body overlay-content">
+                  <h5 class="card-title text-shadow text-uppercase" style="font-family: 'Recipekorea';">용인 자연휴양림</h5>
+                  <p class="card-text text-sm" style="font-family: 'BMJUA';">경기도 용인시</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide h-auto px-2">
+              <div class="card card-poster gradient-overlay hover-animate mb-4 mb-lg-0"><a class="tile-link" href="./campview.do"></a><img class="bg-image" src="./resources/bootstrap-5/html/img/photo/top5예시.jpg" alt="Card image">
+                <div class="card-body overlay-content">
+                  <h5 class="card-title text-shadow text-uppercase" style="font-family: 'Recipekorea';">마장호수 휴 캠핑장</h5>
+                  <p class="card-text text-sm" style="font-family: 'BMJUA';">경기도 파주시</p>
+                </div>
+              </div>
+            </div>-->
             <%=sbHtml.toString() %>
           </div>
           <div class="swiper-pagination d-md-none"> </div>
@@ -658,6 +691,7 @@
             <p class="subtitle text-primary">Survey</p>
             <h2 class="mb-md-0" style="font-family: 'Recipekorea';">설문조사 결과를 참고하세요!</h2>
           </div>
+         
         </div>
         <div class="row">
           <div class="mb-3 mb-lg-0 col-sm-6 col-lg-3">
@@ -702,7 +736,53 @@
 			   	25°C/32°C<br/>
 			    강수 : 10%
 		   	</div>
- 			-->
+            <div class="swiper-slide h-auto d-flex align-items-center justify-content-center">
+	           <div class="tit_weather"> <strong>7.27</strong><br/>수</div>
+			   	<img class="weatherimage" src="./resources/bootstrap-5/html/img/weathericon/NB01.png"/>
+			   	23°C/33°C<br/>
+			   	강수 : 30%
+            </div>
+            
+            
+            <div class="swiper-slide h-auto d-flex align-items-center justify-content-center">
+	            <div class="tit_weather"><strong>7.28</strong><br/>목 </div>
+			   	<img class="weatherimage" src="./resources/bootstrap-5/html/img/weathericon/NB03.png"/>
+			   	25°C/34°C<br/>
+			   	강수 : 0%
+            </div>
+            
+            
+            <div class="swiper-slide h-auto d-flex align-items-center justify-content-center">
+	            <div class="tit_weather"><strong>7.29</strong><br/>금 </div>
+			   	<img class="weatherimage" src="./resources/bootstrap-5/html/img/weathericon/NB03.png"/>
+			   	22°C/30°C<br/>
+			   	강수 : 50%
+            </div>
+            
+           
+            <div class="swiper-slide h-auto d-flex align-items-center justify-content-center">
+	            <div class="tit_weather"><strong>7.30</strong> <br/>토</div>
+			   	<img class="weatherimage" src="./resources/bootstrap-5/html/img/weathericon/NB03.png"/>
+			   	25°C/32°C<br/>
+			   	강수 : 50%
+            </div>
+            
+            
+            <div class="swiper-slide h-auto d-flex align-items-center justify-content-center">
+	            <div class="tit_weather"><strong>7.31</strong><br/>일 </div>
+			   	<img class="weatherimage" src="./resources/bootstrap-5/html/img/weathericon/NB01.png"/>
+			   	23°C/33°C<br/>
+			   	강수 : 0%
+            </div>
+            
+           
+            <div class="swiper-slide h-auto d-flex align-items-center justify-content-center">
+	            <div class="tit_weather"><strong>8.01</strong> <br/>월</div>
+			   	<img class="weatherimage" src="./resources/bootstrap-5/html/img/weathericon/NB01.png"/>
+			   	25°C/34°C<br/>
+			   	강수 : 10%
+            </div>            
+ -->
           </div>
         </div>
       </div>

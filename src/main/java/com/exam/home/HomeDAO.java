@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.exam.mboard.BoardTO;
 import com.exam.search.SearchkeyTO;
 import com.exam.weather.WeatherTO;
 
@@ -34,6 +35,9 @@ public class HomeDAO {
 		ArrayList<WeatherTO> lists = (ArrayList<WeatherTO>)jdbcTemplate.query(
 				sql, new BeanPropertyRowMapper<WeatherTO>(WeatherTO.class) );
 		
+		//for(WeatherTO to : lists) {
+			//System.out.println("dao 날짜"+to.getDate());
+		//}
 		return lists;
 	}
 

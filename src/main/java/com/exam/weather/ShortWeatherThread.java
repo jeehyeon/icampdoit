@@ -1,5 +1,6 @@
 package com.exam.weather;
 
+
 import java.util.HashMap;
 
 import org.w3c.dom.Element;
@@ -35,25 +36,35 @@ public class ShortWeatherThread extends Thread {
 	public void run() {
 		// TODO Auto-generated method stub
 		for(int i = startidx; i < endidx; i++){		
+			//System.out.println(nList.item(i).getAttributes().getNamedItem("facltNm").getNodeValue());
 			Node node = nList.item(i);
 			
 			if(node.getNodeType() == Node.ELEMENT_NODE) {
 				Element element = (Element) node;
 				
-				// 최저기온
-				if(wg.weatherGet("category", element).indexOf("TMN") != -1) {
-					minList.put(wg.weatherGet("fcstDate", element), wg.weatherGet("fcstValue", element));
+				if( (wg.weatherGet( "category", element ).indexOf("TMN") != -1 )&&(wg.weatherGet("fcstDate", element).indexOf("20220810") != -1)){
+					System.out.println("10일 데이터 최저기온");
 				}
-				// 최고기온
+				if( (wg.weatherGet( "category", element ).indexOf("POP") != -1 )&&(wg.weatherGet("fcstDate", element).indexOf("20220810") != -1)&&(wg.weatherGet("fcstTime", element).indexOf("1200") != -1)){
+					System.out.println("10일 데이터 강수량");
+				}
+				
+				if(wg.weatherGet("category", element).indexOf("TMN") != -1) {
+					//System.out.println("최저기온 : "+wg.weatherGet("fcstValue", element));
+					minList.put(wg.weatherGet("fcstDate", element), wg.weatherGet("fcstValue", element));
+					
+				}
 				if(wg.weatherGet("category", element).indexOf("TMX") != -1) {
+					//System.out.println("최저기온 : "+wg.weatherGet("fcstValue", element));
 					maxList.put(wg.weatherGet("fcstDate", element), wg.weatherGet("fcstValue", element));
 				}
-				// 강수량
 				if((wg.weatherGet("category", element).indexOf("POP") != -1)&&(wg.weatherGet("fcstTime", element).indexOf("1200") != -1)) {
+					//System.out.println("최저기온 : "+wg.weatherGet("fcstValue", element));
+	
 					popList.put(wg.weatherGet("fcstDate", element), wg.weatherGet("fcstValue", element));
 				}
-				// 하늘 흐림정도
 				if((wg.weatherGet("category", element).indexOf("SKY") != -1)&&(wg.weatherGet("fcstTime", element).indexOf("1200") != -1)) {
+					//System.out.println("최저기온 : "+wg.weatherGet("fcstValue", element));
 					skyList.put(wg.weatherGet("fcstDate", element), wg.weatherGet("fcstValue", element));
 				}
 			}

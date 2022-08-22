@@ -48,6 +48,8 @@ public class WeatherTO {
 	private String sky6;
 	private String sky7;
 	
+	
+	
 	private String resultDate;
 	private String resultTaMin;
 	private String resultTaMax;
@@ -59,6 +61,12 @@ public class WeatherTO {
 	private String taMax;
 	private String pop;
 	private String sky;
+
+	
+	
+	
+	
+	
 	
 	public WeatherTO() {
 		// TODO Auto-generated constructor stub
@@ -102,7 +110,10 @@ public class WeatherTO {
 		    	this.date7= strdate;
 		    	break;
 		   
+		    	
+		    
 		    }
+		    
 		}
 	}
 	

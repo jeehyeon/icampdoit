@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	//session 값 가져오기
-	int ucode = -1;
-	String id ="";
-	if(session.getAttribute("id") != null){
-		ucode = (int)session.getAttribute("ucode");
-		id = (String)session.getAttribute("id");
-	}
+//session 값 가져오기
+int ucode = -1;
+String id ="";
+if(session.getAttribute("id") != null){
+	ucode = (int)session.getAttribute("ucode");
+	id = (String)session.getAttribute("id");
+}
 %>
 <!DOCTYPE html>
   <head>
