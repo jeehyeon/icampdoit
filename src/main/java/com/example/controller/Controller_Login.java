@@ -166,7 +166,7 @@ public class Controller_Login {
 		sto.setName(request.getParameter("kakaonickname"));
 		sto.setEmail(request.getParameter("kakaoemail"));
 		sto.setKid(request.getParameter("kakaokid"));
-		
+		String kuri = request.getParameter("kuri");
 		LoginTO lto = new LoginTO();
 		lto.setUri(request.getParameter( "uri") );
 		
@@ -190,7 +190,7 @@ public class Controller_Login {
 		modelAndView.addObject("ucode", ucode);
 		modelAndView.addObject("id", id);
 		modelAndView.addObject("sto", sto);
-		modelAndView.addObject("prevPage", lto.getUri());
+		modelAndView.addObject("prevPage", kuri);
 		
 		return modelAndView;
 	}
