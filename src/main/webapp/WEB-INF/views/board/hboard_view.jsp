@@ -52,9 +52,6 @@
     <link rel="stylesheet" href="./resources/bootstrap-5/html/css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="./resources/bootstrap-5/html/img/logo2.svg">
-    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <style type="text/css">
@@ -178,8 +175,8 @@
              <!-- 관리자페이지 바로가기 -->
              	
               	<ul class="list-inline mb-0 mt-2 mt-md-0 text-center text-md-end">
-                <li class="list-inline-item"><a class="text-muted text-sm" href="./admin.do" >
-              	관리자 페이지</a></li>
+                <li class="list-inline-item">
+                <a class="text-muted text-sm" href="./admin.do" >관리자 페이지</a></li>
               </ul>
             </div>
           </div>
@@ -234,14 +231,5 @@
     <!-- Available tile layers-->
     <script src="./resources/bootstrap-5/html/js/map-layers.js"> </script>
     <script src="./resources/bootstrap-5/html/js/map-detail.js"></script>
-    <script>
-      createDetailMap({
-          mapId: 'detailMap',
-          mapCenter: [40.732346, -74.0014247],
-          markerShow: true,
-          markerPosition: [40.732346, -74.0014247],
-          markerPath: 'img/marker.svg',
-      })
-    </script>
   </body>
 </html>

@@ -23,13 +23,9 @@ public class Controller_HBoard {
 	
 	@Autowired
 	private HBoardDAO dao;
-		 
-	String url = System.getProperty("user.dir");
-	private String hUploadPath = url +"/src/main/webapp/h_upload/";
 		
 	@RequestMapping( value="/hboardlist.do" )
 	public ModelAndView hboardlist(HttpServletRequest request, HttpSession session) {
-		System.out.println( "hboardlist()호출" );
 		
 		int cpage = 1;
 		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
@@ -57,7 +53,6 @@ public class Controller_HBoard {
 	
 	@RequestMapping( value="/hboardview.do" )
 	public ModelAndView hboardview(HttpServletRequest request, HttpSession session) {
-		System.out.println( "hboardview() 호출" );
 		
 		int cpage = 1;
 		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
@@ -77,7 +72,5 @@ public class Controller_HBoard {
 		
 		return modelAndView;
 	}
-	
-	
-	
+
 }

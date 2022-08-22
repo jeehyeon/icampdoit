@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.exam.mboard.CmtTO;
 import com.exam.search.CampviewCmtTO;
 import com.exam.search.SearchListTO;
 import com.exam.search.SearchkeyDAO;
@@ -30,7 +28,6 @@ public class Controller_Search {
 	
 	@RequestMapping( value="/searchkey.do" )
 	public ModelAndView searchkey(HttpServletRequest request) {
-		System.out.println( "searchkey()호출" );
 		
 		int cpage = 1;
 		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
@@ -60,7 +57,6 @@ public class Controller_Search {
 	
 	@RequestMapping( value="/searchdetail.do" )
 	public ModelAndView searchdetail(HttpServletRequest request) {
-		System.out.println( "searchdetail()호출" );
 		
 		int cpage = 1;
 		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
@@ -91,7 +87,6 @@ public class Controller_Search {
 		} else {
 			doNmG = request.getParameter( "doNmG" );
 		}
-		System.out.println( "addurl:"+ addurl);
 		if( (request.getParameter( "doNmS" )==null||request.getParameter("doNmS")=="") &&
 			(request.getParameter( "doNmI" )==null||request.getParameter("doNmI")=="") &&
 			(request.getParameter( "doNmG" )==null||request.getParameter("doNmG")=="") ) {
@@ -223,7 +218,6 @@ public class Controller_Search {
 		if( request.getParameter( "siteBottomCl1" )!=null&& request.getParameter( "siteBottomCl1" )!="" ) {
 			addurl +="siteBottomCl1=" + request.getParameter("siteBottomCl1") +"&";
 			siteBottomCl1 = request.getParameter( "siteBottomCl1" );
-			System.out.println( "siteBottomCl1값나오는지 : " + siteBottomCl1 );
 		} else {
 			siteBottomCl1 = request.getParameter( "siteBottomCl1" );
 		}
@@ -505,16 +499,16 @@ public class Controller_Search {
 	
 	@RequestMapping( value="/campview.do" )
 	public ModelAndView campview(HttpServletRequest request, HttpSession session) {
-		System.out.println( "campview() 호출" );
-		//System.out.println("컨트롤러 request.getParameter(contentID) : " + request.getParameter("contentId"));
+		
 		SearchkeyTO kto = new SearchkeyTO();
 		CampviewCmtTO cto = new CampviewCmtTO();
 		kto.setContentId(request.getParameter("contentId"));
 		cto.setContentId(request.getParameter("contentId"));
+		
 		//campview 테이블에 해당 캠핑장 데이터가 있는지 검사
 		kto= kdao.campViewTableExist(kto);
-			//System.out.println("컨트롤러 kdao.viewTableExist : " + kto.getSeq()+ " / " + kto.getContentId());
-		int flag=1;
+		
+		int flag = 1;
 		//있다면 조회수 +1 / 없다면 Insert 후 조회수 +1
 		if(kto.getSeq() != "-1") {
 			//campview table 존재
@@ -522,19 +516,13 @@ public class Controller_Search {
 		}else {
 			//campview 테이블이 없을떄
 			flag=kdao.campViewTableInsert(kto);
-		}
-		
+		}		
 		
 		//campview page 정보 불러오기
 		kto = kdao.campView(kto);
 		
 		//campview 사진데이터
 		ArrayList<SearchkeyTO> lists = kdao.gocampimgparse(kto);
-		
-		/*for(SearchkeyTO iito : lists) {
-			System.out.println(iito.getImgurl());
-		}
-		*/
 		
 		//댓글
 		ArrayList<CampviewCmtTO> clists= kdao.campViewCmt(cto);
@@ -547,10 +535,8 @@ public class Controller_Search {
 			int ucode = (Integer)session.getAttribute("ucode");
 			
 			sub =kdao.campSubscribeCheck(Integer.toString(ucode), kto.getContentId());
-			System.out.println("sub : " + sub);
 		}
-		
-		
+				
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "/search/campview" );
 		modelAndView.addObject("kto", kto);
@@ -559,11 +545,11 @@ public class Controller_Search {
 		modelAndView.addObject("sub", sub);
 		return modelAndView;
 	}
+	
 	@RequestMapping(value="/campviewCmt.do")
 	public String campviewCmt(HttpServletRequest request, HttpSession session) {
+		
 		int flag =1;
-		System.out.println("댓글 달기 평점: "+request.getParameter("rating"));
-		System.out.println("댓글 달기 내용: "+request.getParameter("review"));
 		if(session.getAttribute("ucode") == null) {
 			flag=2;
 			return Integer.toString(flag);
@@ -577,14 +563,14 @@ public class Controller_Search {
 		cto.setUcode(Integer.toString(ucode));
 		
 		flag=kdao.campViewCmtInsert(cto);
-		System.out.println("댓글 달기 결과: "+flag);
+		
 		return Integer.toString(flag);
 	}
+	
 	@RequestMapping(value="/subscribe.do")
 	public String campsubscribe(HttpServletRequest request, HttpSession session) {
+		
 		int flag =1;
-		System.out.println("댓글 달기 컨텐트ID: "+request.getParameter("contentId"));
-		//System.out.println("댓글 달기 내용: "+request.getParameter("review"));
 		if(session.getAttribute("ucode") == null) {
 			flag=2;
 			return Integer.toString(flag);
@@ -598,29 +584,20 @@ public class Controller_Search {
 			//찜DB에 없음 => 찜추가
 			flag= kdao.campSubscribe(Integer.toString(ucode), request.getParameter("contentId"));
 		}
-		
-		
-		
+
 		return Integer.toString(flag);
 	}
 	
 	
 	@RequestMapping( value="/campviewcmtdelete.do" )
 	public String cmtList(HttpServletRequest request, HttpSession session) throws IOException, ParseException {
-		System.out.println( "mboarddeleteOk() 호출" );
+		
 		int flag = 1;
-		//System.out.println(request.getParameter("ucode"));
-		//System.out.println(request.getParameter("id"));
-		//System.out.println(request.getParameter("seq"));
-		//System.out.println(request.getParameter("comment"));
+
 		String body = (String)request.getParameter("replyseq");
-		System.out.println("cmtdelete 데이터 : " + body);
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(body);
 		JSONObject data = (JSONObject)obj;
-		System.out.println("댓글삭제 데이터 seq : "+ data.get("seq"));
-		System.out.println("댓글삭제 데이터 ucode : "+ data.get("ucode") );
-		System.out.println("댓글삭제 데이터 session ucode : "+ session.getAttribute("ucode"));
 		if(session.getAttribute("ucode") == null) {
 			flag=3;
 			return Integer.toString(flag);
@@ -638,6 +615,5 @@ public class Controller_Search {
 		
 		return Integer.toString(flag);
 	}
-	
-	
+
 }

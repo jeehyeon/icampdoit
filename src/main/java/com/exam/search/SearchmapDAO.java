@@ -12,14 +12,6 @@ public class SearchmapDAO {
 	
 	@Autowired JdbcTemplate jdbcTemplate;
 	
-	public ArrayList<SearchkeyTO> listdoNm(){
-		
-		String sql = "select distinct doNm from go_api";
-		ArrayList<SearchkeyTO> lists = (ArrayList<SearchkeyTO>)jdbcTemplate.query(sql, new BeanPropertyRowMapper<SearchkeyTO>(SearchkeyTO.class));
-		
-		return lists;
-	}
-	
 	public ArrayList<SearchkeyTO> listsigunguNm( String doValue ){
 		
 		String sql = "select distinct sigunguNm from go_api where doNm=?";
@@ -28,18 +20,7 @@ public class SearchmapDAO {
 		return lists;
 	}
 	
-	public ArrayList<SearchkeyTO> listsearchmap(SearchkeyTO sto){
-		String sql = "select facltNm, addr1, addr2, induty, firstImageUrl, contentId, mapX, mapY from go_api where doNm=? and sigunguNm=?";
-		ArrayList<SearchkeyTO> lists = (ArrayList<SearchkeyTO>)jdbcTemplate.query(sql, new BeanPropertyRowMapper<SearchkeyTO>(SearchkeyTO.class), sto.getDoNm(), sto.getSigunguNm() );
-		
-		return lists;
-	}
-	
 	public SearchListMapTO searchmapList(SearchListMapTO listTO, SearchkeyTO sto){
-		
-		System.out.println( "searchmapList DAO 호출()" );
-		System.out.println( "sto.getDoNm 갑 보자: " + sto.getDoNm() );
-		System.out.println( "sto.getgugunNm 갑 보자: " + sto.getSigunguNm() );
 		
 		String sql = "select facltNm, doNm, sigunguNm, addr1, addr2, induty, firstImageUrl, contentId, mapX, mapY from go_api where doNm like ? and sigunguNm like ?";
 		ArrayList<SearchkeyTO> searchLists = (ArrayList<SearchkeyTO>)jdbcTemplate.query(sql, new BeanPropertyRowMapper<SearchkeyTO>(SearchkeyTO.class), "%"+sto.getDoNm()+"%", "%"+sto.getSigunguNm()+"%" );
@@ -48,19 +29,13 @@ public class SearchmapDAO {
 		int recordPerPage = listTO.getRecordPerPage();
 		int blockPerPage = listTO.getBlockPerPage();
 		
-		//System.out.println( "cpage 뽑아봐봐 : " + listTO.getCpage() );
-		
-		//System.out.println( "recordPerPage 뽑아봐봐 : " + listTO.getRecordPerPage() );
-		//System.out.println( "2번째 인덱스 값 : " + searchLists.get(0).getContentId() ); //인덱스 1하면 자료 1개 있는거 에러남~
-		
 		//총 게시글 수
 		listTO.setTotalRecord( searchLists.size() );
 		
 		//총페이지 수
 		listTO.setTotalPage( ( (listTO.getTotalRecord() -1 ) / recordPerPage ) + 1 );		
 		int skip = ( cpage - 1 ) * recordPerPage;
-		//cpage 1일땐 skip=0.. cpage2 일땐 skip=6
-		
+		//cpage 1일땐 skip=0.. cpage2 일땐 skip=6		
 		
 		ArrayList<SearchkeyTO> lists = new ArrayList<SearchkeyTO>();
 		
@@ -90,9 +65,6 @@ public class SearchmapDAO {
 		if(listTO.getEndBlock() >= listTO.getTotalPage()) {
 			listTO.setEndBlock(listTO.getTotalPage());
 		}		
-		
-		//System.out.println( "DoNm 뽑아봐봐 : " + sto.getDoNm() );
-		//System.out.println( "facltNm 뽑아봐봐 : " + sto.getFacltNm() );
 		
 		return listTO;
 	}
