@@ -19,12 +19,16 @@ public class Controller_Login {
 	private LoginDAO dao;
 	
 	@RequestMapping( value="/login.do" )
-	public ModelAndView login(HttpServletRequest request) {
+	public ModelAndView login(HttpServletRequest request, HttpSession session) {
 		System.out.println( "login() 호출" );
+		
+		String referer = request.getHeader("Referer");
+		//request.getSession().setAttribute("prevPage", referer);
 
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "login/login" );
 		
+		modelAndView.addObject("referer", referer);
 		return modelAndView;
 	}
 
@@ -35,18 +39,24 @@ public class Controller_Login {
 		LoginTO lto = new LoginTO();
 		lto.setId(request.getParameter("id"));
 		lto.setPwd(request.getParameter("pwd"));
+		lto.setUri(request.getParameter("uri"));
 	
 		int ucode = dao.loginOK(lto);
 		
 		if(ucode != -1) {
 			session.setAttribute("ucode",ucode);
+			session.setAttribute("prevPage",lto.getUri());
 			session.setAttribute("id", lto.getId());
 			session.setMaxInactiveInterval(60*60);
+			//session.getAttribute("prevPage");
 		}
+		
+		System.out.println( "uri: " + lto.getUri() );
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "login/login_ok" );
 		modelAndView.addObject("ucode", ucode);
+		modelAndView.addObject("prevPage", lto.getUri());
 
 		return modelAndView;
 	}
@@ -150,13 +160,19 @@ public class Controller_Login {
 	@RequestMapping( value="/kakaologin_form.do" )
 	public ModelAndView kakaologin_form(HttpServletRequest request, HttpSession session) {
 		System.out.println("kakaologin_form() 실행");
+		
 		SignUpTO sto = new SignUpTO();
 		
 		sto.setName(request.getParameter("kakaonickname"));
 		sto.setEmail(request.getParameter("kakaoemail"));
 		sto.setKid(request.getParameter("kakaokid"));
 		
-		System.out.println("kakaologin_form : " + sto.getKid());
+		LoginTO lto = new LoginTO();
+		lto.setUri(request.getParameter( "uri") );
+		
+		System.out.println("kakaouri1 : " + lto.getUri());
+		
+		//System.out.println("kakaologin_form : " + sto.getKid());
 		
 		int ucode = dao.kakaoCheck(sto.getName(), sto.getEmail(), sto.getKid());
 		String id="";
@@ -174,6 +190,7 @@ public class Controller_Login {
 		modelAndView.addObject("ucode", ucode);
 		modelAndView.addObject("id", id);
 		modelAndView.addObject("sto", sto);
+		modelAndView.addObject("prevPage", lto.getUri());
 		
 		return modelAndView;
 	}
@@ -225,8 +242,12 @@ public class Controller_Login {
 	@RequestMapping( value="/logout.do" )
 	public ModelAndView logout(HttpServletRequest request, HttpSession session) {
 		session.invalidate();
+		
+		String referer = request.getHeader("Referer");
+		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "login/logout_ok" );
+		modelAndView.addObject("prevPage", referer);
 		
 		return modelAndView;
 	}

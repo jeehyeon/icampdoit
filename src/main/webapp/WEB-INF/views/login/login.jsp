@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%
+	String referer = (String)request.getAttribute( "referer" );
+%>
 
 <!DOCTYPE html>
   <head>
@@ -68,6 +72,8 @@
                 <input class="form-control" name="pwd" id="pwd" placeholder="Password" type="password" required data-msg="Please enter your password">
               </div>
               
+              <input type="hidden" name="uri" id="uri" value="<%=referer%>"/>
+              
               <!-- Submit-->
               <div class="d-grid">
                 <button class="lbtn btn btn-lg btn-primary">LOGIN</button>
@@ -90,6 +96,7 @@
 				  	<button class="api-btn" onclick="kakaoLogout()">로그아웃</button>
 				  	<button class="api-btn" onclick="kakaoUnlink()">카카오탈퇴</button>  
 				  	-->
+				  	
               </div>
               <hr class="my-4">
               <p class="text-center"><small class="text-muted text-center">Don't have an account yet? <a href="signup.do">Sign Up</a></small></p>
@@ -98,6 +105,8 @@
 				  	<input type="hidden" name="kakaoemail" id="kakaoemail" />
 				  	<input type="hidden" name="kakaonickname" id="kakaonickname" />
 				  	<input type="hidden" name="kakaokid" id="kakaokid" />
+				  	<input type="hidden" name="kuri" id="kuri" value="<%=referer%>"/>
+				  	
 				  	</form>
               </div>
             <a class="close-absolute me-md-5 me-xl-6 pt-5" href="./home.do"> 
@@ -417,6 +426,7 @@
 		    				var nickname = res.kakao_account.profile.nickname;
 		    				var email = res.kakao_account.email;
 		    				var kid = res.id;
+		    				//var uri = $('#kuri').val();
 		    				
 		    				console.log(res);
 		    				//alert(kid);

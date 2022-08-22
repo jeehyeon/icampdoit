@@ -13,6 +13,10 @@
 	}
 	out.println( "</script>" );
 %> --%>
+<%
+	String prevPage = (String)request.getAttribute("prevPage");
+	System.out.println( "prevPage: " + prevPage );
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,6 +32,7 @@
 	<script type='text/javascript'>
 		
 		   var ucode = <%=(Integer)request.getAttribute("ucode")%>;
+		   
 		   
 		   const Toast = Swal.mixin({
 			    toast: true,
@@ -52,7 +57,7 @@
 			}).then((result) => {
 				
 	  			 if (result.isConfirmed) {
-	  				 location.href='/home.do';
+	  				 location.href= '<%=prevPage%>';
 	  			 } 
 	  		})
 	 				

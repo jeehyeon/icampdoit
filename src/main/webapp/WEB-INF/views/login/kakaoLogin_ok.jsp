@@ -5,6 +5,7 @@
 <%
 	int ucode = (Integer)request.getAttribute("ucode");
 	SignUpTO sto =(SignUpTO)request.getAttribute("sto"); 
+	
 %>
 
 

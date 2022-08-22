@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%
+	String prevPage = (String)request.getAttribute("prevPage");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +39,7 @@
 		}).then((result) => {
 			
   			 if (result.isConfirmed) {
-  				 location.href='/home.do';
+  				location.href= '<%=prevPage%>';
   			 } 
   		})
  				
