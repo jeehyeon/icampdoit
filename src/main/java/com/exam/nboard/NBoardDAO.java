@@ -99,7 +99,7 @@ public class NBoardDAO {
 	}
 	
 	// write_ok
-	public int nboardWriteOk(NBoardTO to, NFileTO fto) {	
+	public int nboardWriteOk(NBoardTO to) {	
 				
 		int flag = 1;
 		
@@ -118,9 +118,14 @@ public class NBoardDAO {
 		}
 		String pseq;
 		System.out.println("vcode : " + to.getVcode());
+		return flag;
+	};
 		
-		//파일이 있으면 진행 없으면 진행 X
-		
+	//파일이 있으면 진행 없으면 진행 X
+	public int nboardWriteFileOk(NBoardTO to, NFileTO fto) {	
+		int flag = 1;
+		String sql= "";
+		String pseq="";
 		if(to.getContent().indexOf(fto.getFilename()) != -1) {
 			try {
 				sql = "select seq from n_board where vcode=?";
@@ -133,7 +138,7 @@ public class NBoardDAO {
 			}
 						
 			sql = "insert into n_file values ( 0, ?, ?, ? )";
-			result = jdbcTemplate.update(sql, pseq, fto.getFilename(), fto.getFilesize());
+			int result = jdbcTemplate.update(sql, pseq, fto.getFilename(), fto.getFilesize());
 	
 			if( result != 1 ) {
 				System.out.println("fileinsert 오류");
@@ -191,19 +196,21 @@ public class NBoardDAO {
 	}
 	
 	//게시글 파일체크
-	public NFileTO nboardDelFileCheck(NBoardTO to) {
+	public ArrayList<NFileTO> nboardDelFileCheck(NBoardTO to) {
 		//삭제했을 경우 임시 파일 삭제
 		//System.out.println("파일삭제 메서드 : " + filename);
 		NFileTO fto = new NFileTO();
+		ArrayList<NFileTO> nfileArr = new ArrayList<NFileTO>();
 		String sql = "select filename from n_file where nseq=?";
 		try {
-			fto = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<NFileTO>(NFileTO.class), to.getSeq() );
+			nfileArr = (ArrayList<NFileTO>)jdbcTemplate.query(sql, new BeanPropertyRowMapper<NFileTO>(NFileTO.class), to.getSeq() );
 		} catch (DataAccessException e) {
 			// TODO Auto-generated catch block
 			fto.setFilename("null");
+			nfileArr.add(fto);
 		}
 		
-		return fto;	
+		return nfileArr;	
 	}
 	
 	//게시글 삭제메서드
