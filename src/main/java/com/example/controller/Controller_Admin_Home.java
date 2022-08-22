@@ -36,18 +36,6 @@ import com.exam.nboard.NFileTO;
 
 @RestController
 public class Controller_Admin_Home {
-
-	@Autowired
-	private BoardDAO dao;
-
-	@Autowired
-	private HBoardDAO hdao;
-
-	@Autowired
-	private NBoardDAO ndao;
-	
-	@Autowired
-	private AdminDAO adao;
 	
 	@Autowired
 	private AdminStatDAO sdao;
@@ -55,17 +43,9 @@ public class Controller_Admin_Home {
 	@Autowired
 	private AdminUsersDAO udao;
 
-	String url = System.getProperty("user.dir");
-	private String mUploadPath = url + "/src/main/webapp/upload/";
-
-	private String hUploadPath = url + "/src/main/webapp/h_upload/";
-
-	private String nUploadPath = url + "/src/main/webapp/n_upload/";
-
 	// 관리자페이지
 	@RequestMapping(value = "/admin.do")
-	public ModelAndView admin(HttpServletRequest request, HttpSession session) {
-		System.out.println("admin() 호출");
+	public ModelAndView admin(HttpServletRequest request, HttpSession session) {		
 		
 		String countBoardResult = sdao.countBoard();  //총 게시글 수
 		String countFemale = sdao.countFemale(); //여성회원수
@@ -79,8 +59,6 @@ public class Controller_Admin_Home {
 		SignUpTO sto = new SignUpTO();
 		ArrayList<SignUpTO> lists = sdao.countbyAge(sto);
 		
-		System.out.println( "countBoardResult : " + countBoardResult );
-
 		ModelAndView modelAndView = new ModelAndView();
 
 		if (session.getAttribute("ucode") == null) {
@@ -109,13 +87,11 @@ public class Controller_Admin_Home {
 	
 	@RequestMapping(value = "/admin_users.do")
 	public ModelAndView adminUsers(HttpServletRequest request, HttpSession session) {
-		System.out.println("admin_users");
-
+		
 		int cpage = 1;
 		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
 			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
 		}
-		System.out.println("test cpage" + cpage);
 		
 		UsersListTO ulistTO = new UsersListTO();
 		ulistTO.setCpage(cpage);
@@ -138,7 +114,6 @@ public class Controller_Admin_Home {
 	
 	@RequestMapping(value = "/admin_users_view.do")
 	public ModelAndView adminUsersView(HttpServletRequest request, HttpSession session) {
-		System.out.println("admin_users_view 호출");
 		
 		SignUpTO sto = new SignUpTO();
 		sto.setUcode( request.getParameter( "ucode" ) );
@@ -146,7 +121,6 @@ public class Controller_Admin_Home {
 		
 		sto = udao.userView(sto);
 		
-		UsersListTO ulistTO = new UsersListTO();
 		int cpage = Integer.parseInt( request.getParameter( "cpage" ) );
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -164,7 +138,6 @@ public class Controller_Admin_Home {
 	
 	@RequestMapping(value = "/admin_users_modifyOk.do")
 	public String adminUsersModifyOk(HttpServletRequest request, HttpSession session) {
-		System.out.println("admin_users_modifyOk 호출");
 		
 		int cpage = 1;
 		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
@@ -191,8 +164,6 @@ public class Controller_Admin_Home {
 	
 	@RequestMapping(value = "/admin_users_deleteOk.do")
 	public int adminUsersDeleteOk(HttpServletRequest request, HttpSession session) {
-		System.out.println("admin_users_deleteOk 호출");
-		//System.out.println("ucode 파라메터: " + request.getParameter( "ucode" ) );
 		
 		int flag = 1;
 		
@@ -200,16 +171,10 @@ public class Controller_Admin_Home {
 		
 		if ( session.getAttribute("id").equals("admin") ) {
 			sto.setUcode( request.getParameter( "ucode" ) );
-			//System.out.println( "ucode deleteOk에서 : " + sto.getUcode() );	
 
 			flag = udao.usersDeleteOK(sto);
-			//System.out.println( "flag 값: " + flag);
 		}
 		
-		//ModelAndView modelAndView = new ModelAndView();
-
-		//modelAndView.setViewName( "/admin/admin_users_delete_ok" );
-		//modelAndView.addObject("flag", flag);
 		return flag;
 	}
 	

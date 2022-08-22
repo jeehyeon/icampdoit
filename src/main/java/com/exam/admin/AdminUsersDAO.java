@@ -45,7 +45,6 @@ public class AdminUsersDAO {
 				
 			} else { break; }
 		}
-		System.out.println("dao 리스트 : " + lists);
 		ulistTO.setUsersLists( lists );
 		ulistTO.setStartBlock( ( ( cpage-1 ) / blockPerPage ) * blockPerPage + 1);
 		ulistTO.setEndBlock( ( (cpage-1) / blockPerPage) * blockPerPage + blockPerPage);
@@ -66,18 +65,12 @@ public class AdminUsersDAO {
 	
 	//회원정보 modifyOk
 	public int usersModifyOK(SignUpTO sto) {
+		
 		int flag = 2;
-		System.out.println( "birth: " + sto.getBirth() );
-		System.out.println("Name: " + sto.getName() );
-		System.out.println( "Gen: " +sto.getGen() );
-		System.out.println( "Email: " +sto.getEmail() );
-		System.out.println( "Ucode: " +sto.getUcode() );
 		
 		String sql = "update users set name=?, gen=?, email=?, birth=? where ucode=?";
 		int result = jdbcTemplate.update(sql, sto.getName(), sto.getGen(), sto.getEmail(), sto.getBirth(), sto.getUcode() );
-		
-		System.out.println( result );
-		
+				
 		if( result == 0 ) {
 			flag = 1;
 		} else if( result == 1 ) {
@@ -88,23 +81,19 @@ public class AdminUsersDAO {
 	}
 	
 	//회원정보 deleteOk
-		public int usersDeleteOK(SignUpTO sto) {
-			int flag = 2;
-			
-			System.out.println( "Ucode deleteDAO 에서: " +sto.getUcode() );
-			
-			String sql = "update users set pwd=?, name=?, email=?, birth=?, gen=?, hint=?, answer=?, kid=? where ucode=?";
-			int result = jdbcTemplate.update(sql, " ", " ", " ", " ", " ", " ", " ", " ", sto.getUcode() );
-			
-			System.out.println( result );
-			
-			if( result == 0 ) {
-				System.out.println("삭제가 되지 않았습니다.");
-				flag = 1;
-			} else if( result == 1 ) {
-				flag = 0;
-			}
-			
-			return flag;
+	public int usersDeleteOK(SignUpTO sto) {
+		int flag = 2;
+				
+		String sql = "update users set pwd=?, name=?, email=?, birth=?, gen=?, hint=?, answer=?, kid=? where ucode=?";
+		int result = jdbcTemplate.update(sql, " ", " ", " ", " ", " ", " ", " ", " ", sto.getUcode() );
+				
+		if( result == 0 ) {
+			System.out.println("삭제가 되지 않았습니다.");
+			flag = 1;
+		} else if( result == 1 ) {
+			flag = 0;
 		}
+		
+		return flag;
+	}
 }

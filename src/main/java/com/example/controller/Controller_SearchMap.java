@@ -30,8 +30,6 @@ public class Controller_SearchMap {
 		
 	@RequestMapping( value="/searchmap.do" )
 	public ModelAndView searchmap(HttpServletRequest request) {
-		System.out.println( "searchmap() 호출" );
-
 
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "/search/search_map" );
@@ -41,13 +39,10 @@ public class Controller_SearchMap {
 
 	@RequestMapping( value="/searchmapsido.do" )
 	public JSONObject searchmapsido(HttpServletRequest request) {
-		System.out.println( "searchmapsido() 호출" );
 		
 		SearchkeyTO sto = new SearchkeyTO();
 		String sido = "";
-		
-		System.out.println( "시도 넘어왔나:" + request.getParameter( "sidoVal" ) );
-		
+				
 		if( request.getParameter( "sidoVal" ).equals("서울시" )) {
 			sto.setDoNm( "서울시" );
 			sido = "서울시";
@@ -59,9 +54,7 @@ public class Controller_SearchMap {
 			sto.setDoNm( "경기도" );
 			sido = "경기도";
 		}
-		
-		//System.out.println( "doNm TO 에 잘 넣어진거 가져왔나: " + sto.getDoNm() );
-		
+				
 		ArrayList<SearchkeyTO> list = (ArrayList<SearchkeyTO>)mdao.listsigunguNm( sto.getDoNm() );
 		
 		JSONObject result = new JSONObject();	
@@ -83,13 +76,10 @@ public class Controller_SearchMap {
 		
 		return result;
 	}
-	
-	
+		
 	@RequestMapping( value="/searchmapgugun.do" )
 	public ModelAndView searchmapgugun(HttpServletRequest request) {
-		
-		System.out.println( "searchmapgugun() 호출" );
-		
+				
 		int cpage = 1;
 		if(request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
 			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
@@ -99,19 +89,10 @@ public class Controller_SearchMap {
 		sto.setDoNm( request.getParameter( "sido" ) );
 		sto.setSigunguNm( request.getParameter( "gugun" ) );
 		
-		//System.out.println( "시도 파라메터 잘 받아왔니 :" + request.getParameter( "sido" ) );
-		//System.out.println( "구군 파라메터 잘 받아왔니 :" + request.getParameter( "gugun" ) );
-		
-		//System.out.println( "sto에 DoNm 잘 들어갔나 :" + sto.getDoNm() );
-		//System.out.println( "sto에 SigunguNm 잘 들어갔나 :" + sto.getSigunguNm() );
-		
 		SearchListMapTO slistTO = new SearchListMapTO();
 		slistTO.setCpage(cpage);
-		//System.out.println( "slistTO cpage 나오나보자 : " + slistTO.getCpage() );
 
 		slistTO = mdao.searchmapList(slistTO, sto );
-		//System.out.println( "총페이지. 누가 이가나 보자: " + slistTO.getTotalPage() );
-		//System.out.println( "총게시글수. 누가 이가나 보자: " + slistTO.getTotalRecord() );
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "/search/search_map_result" );

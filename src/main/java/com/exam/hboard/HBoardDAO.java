@@ -35,7 +35,6 @@ public class HBoardDAO {
 		String sql = "insert into h_board values  ( 0, ?, ?, ?, ?, now(), 0, ?, ?, ?, ?)";
 		int result = jdbcTemplate.update(sql, hto.getSubject(), hto.getTitle(), hto.getWriter(), hto.getContent(), 
 				hto.getUcode(), hto.getFilename(), hto.getFilesize(), hto.getVcode() );
-					System.out.println("dao result "+ result);
 					
 		if( result != 1 ) {
 			System.out.println("h_board insert 오류");
@@ -43,8 +42,6 @@ public class HBoardDAO {
 		}else {
 			flag=0;
 		}
-		String pseq;
-		System.out.println("vcode : " + hto.getVcode());
 		
 		return flag;		
 	}
@@ -54,6 +51,7 @@ public class HBoardDAO {
 		//삭제했을 경우 임시 파일 삭제
 		if(hto.getContent().indexOf(hto.getFilename()) == -1) {
 			String delurl = hUploadPath + hto.getFilename();
+			
 			File delFile = new File(delurl);
 			if(delFile.exists()) {//파일이 존재하는지 확인
 				delFile.delete();
@@ -68,9 +66,9 @@ public class HBoardDAO {
 	//글작성하다가 취소 눌렀을 경우 파일 삭제
 	public void filedel(String filename) {
 		//삭제했을 경우 임시 파일 삭제
-		System.out.println("파일삭제 메서드 : " + filename);
 		if(filename != "default") {
 			String delurl = hUploadPath + filename;
+			
 			File delFile = new File(delurl);
 			if(delFile.exists()) {//파일이 존재하는지 확인
 				delFile.delete();
@@ -149,19 +147,16 @@ public class HBoardDAO {
 
 		String sql = "select ucode from h_board where seq=?";
 		to = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<HBoardTO>(HBoardTO.class), to.getSeq() );
-		System.out.println("findViewUcode 성공");	
 		return to;	
 	}
 	
 	// 파일체크
 	public HBoardTO hboardDelFileCheck(HBoardTO to) {
 		//삭제했을 경우 임시 파일 삭제
-		//System.out.println("파일삭제 메서드 : " + filename);
 		String sql = "select filename from h_board where seq=?";
 		try {
 			to = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<HBoardTO>(HBoardTO.class), to.getSeq() );
 		} catch (DataAccessException e) {
-			// TODO Auto-generated catch block
 			to.setFilename("null");
 		}
 		
@@ -171,13 +166,11 @@ public class HBoardDAO {
 	//게시글 삭제메서드
 	public int fileDBDel(HBoardTO to) {
 		//삭제했을 경우 임시 파일 삭제
-		//System.out.println("파일삭제 메서드 : " + filename);
 		int flag = 1;
 		
 		String sql = "delete from h_board where seq=?";
 		int result = jdbcTemplate.update(sql, to.getSeq());
-		System.out.println("fileDBDel seq : " + to.getSeq());
-		System.out.println("fileDBDel flag : " + flag);
+		
 		if( result != 1 ) {
 			System.out.println("filedbDel() 오류");
 		}else {
@@ -186,24 +179,6 @@ public class HBoardDAO {
 		
 		return flag;
 	}
-	
-	
-	// delete_ok
-	public int hboardDeleteOk(HBoardTO to) {
-		
-		int flag = 2;
-		
-		String sql = "delete from h_board where seq=?";
-		int result = jdbcTemplate.update(sql, to.getSeq() );
-	
-		if(result == 0) {
-			System.out.println("hboardDeleteOk 오류");
-			flag=1;
-		}else {
-			flag=0;
-		}
-	
-		return flag;
-	}
+
 	
 }

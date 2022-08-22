@@ -60,7 +60,6 @@
 
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -202,168 +201,6 @@
                         </a>
                       </td>
                     </tr>
-                    
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">  
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">홍길동</h6> 
-                          </div>
-                        </div>
-                      </td>
-                      <td>                 
-                        <p class="text-xs font-weight-bold mb-0">TestID</p>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">TestMail@TEST.COM</p>                 
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span>1996-04-02</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">남</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="./admin_users_view.do" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
-                    </tr>
-                    
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">  
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">홍길동</h6> 
-                          </div>
-                        </div>
-                      </td>
-                      <td>                 
-                        <p class="text-xs font-weight-bold mb-0">TestID</p>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">TestMail@TEST.COM</p>                 
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span>1996-04-02</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">남</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="./admin_users_view.do" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
-                    </tr>
-                    
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">  
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">홍길동</h6> 
-                          </div>
-                        </div>
-                      </td>
-                      <td>                 
-                        <p class="text-xs font-weight-bold mb-0">TestID</p>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">TestMail@TEST.COM</p>                 
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span>1996-04-02</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">남</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="./admin_users_view.do" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
-                    </tr>
-                    
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">  
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">홍길동</h6> 
-                          </div>
-                        </div>
-                      </td>
-                      <td>                 
-                        <p class="text-xs font-weight-bold mb-0">TestID</p>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">TestMail@TEST.COM</p>                 
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span>1996-04-02</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">남</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="./admin_users_view.do" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
-                    </tr>
-                    
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">  
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">홍길동</h6> 
-                          </div>
-                        </div>
-                      </td>
-                      <td>                 
-                        <p class="text-xs font-weight-bold mb-0">TestID</p>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">TestMail@TEST.COM</p>                 
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span>1996-04-02</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">남</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="./admin_users_view.do" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
-                    </tr>
-                    
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">  
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">홍길동</h6> 
-                          </div>
-                        </div>
-                      </td>
-                      <td>                 
-                        <p class="text-xs font-weight-bold mb-0">TestID</p>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">TestMail@TEST.COM</p>                 
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span>1996-04-02</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">남</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="./admin_users_view.do" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
-                    </tr>
                     -->
                     <%=sbHtml.toString() %>
                   </tbody>
@@ -419,13 +256,9 @@
 %>	
 		   
           </ul>
-         </div> 
-          
+         </div>           
         </div>
-      </div>
-      
-                          
-      
+      </div>   
   </main>
   
   <!--   Core JS Files   -->
