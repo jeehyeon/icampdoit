@@ -201,7 +201,7 @@
 			<div id="searchkey" class="tabcontent">
 			  <form action="searchkey.do" method="post"> 
 			    <div class="mb-3 mt-3">
-			      <input class="form-control" type="text" name="keysearch" id="keysearch" placeholder=<%=keysearch %>>
+			      <input class="form-control" type="text" name="keysearch" id="keysearch" placeholder=<%=keyword %>>
 			    </div>
 			    <div class="d-grid mb-7">
                   <button class="btn btn-primary text-white" type="submit">검색하기 </button>
