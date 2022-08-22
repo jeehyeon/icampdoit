@@ -41,11 +41,7 @@
   			 if (result.isConfirmed) {
   				location.href= '<%=prevPage%>';
   			 } 
-  		})
- 				
-			
-		
-	
+  		})	
 </script>
 </body>
 </html>

@@ -1,8 +1,8 @@
-<%@page import="com.exam.search.CampviewCmtTO"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.exam.search.SearchkeyTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="com.exam.search.CampviewCmtTO"%>
+<%@page import="com.exam.search.SearchkeyTO"%>
+<%@page import="java.util.ArrayList"%>
 <%
 	//session 값 가져오기
 	int ucode = -1;
@@ -204,8 +204,6 @@
 		cmthtml.append("</div>");
 		cmthtml.append("</div>");
 		cmthtml.append("<hr/>");
-		
-		
 	}
 
 %>
@@ -349,28 +347,12 @@
 	           <div class="row"> 
               	 <div class="col-md-6">
 		           <ul class="list-unstyled text-muted">
-		          <!-- 
-		             <li class="mb-2"> <i class="fa fa-wifi text-secondary w-1rem me-3 text-center"></i><span class="text-sm">와이파이</span></li>
-		             <li class="mb-2"><i class="fa fa-solid fa-bolt text-secondary w-1rem me-3 text-center"></i><span class="text-sm">전기</span></li>
-		             <li class="mb-2"><i class="fa fa-solid fa-shower text-secondary w-1rem me-3 text-center"></i><span class="text-sm">온수</span></li>
-		             <li class="mb-2"><i class="fa fa-regular fa-water text-secondary w-1rem me-3 text-center"></i><span class="text-sm">물놀이장</span></li>
-		              -->
 		              <%=campInfo1.toString()%>
-		             
 		           </ul>
                  </div>
                  <div class="col-md-6">
 		           <ul class="list-unstyled text-muted">
 		           		<%=campInfo2.toString()%>
-		           <!--  
-		             <li class="mb-2"><i class="fa fa-regular fa-fire text-secondary w-1rem me-3 text-center"></i><span class="text-sm">장작판매</span></li>
-		             <li class="mb-2"><i class="fa fa-solid fa-shoe-prints text-secondary w-1rem me-3 text-center"></i><span class="text-sm">산책로</span></li>
-		             <li class="mb-2"><i class="fa fa-solid fa-dumbbell text-secondary w-1rem me-3 text-center"></i><span class="text-sm">운동시설</span></li>
-		             <li class="mb-2"><i class="fa fa-regular fa-store text-secondary w-1rem me-3 text-center"></i><span class="text-sm">마트,편의점</span></li>
-		             
-		           
-		             <li class="mb-2"> <i class="fa fa-bed me-1 text-secondary w-1rem me-3 text-center"></i><span class="text-sm">bed</span></li>
-		             -->
 		           </ul>
               	 </div>
                </div>

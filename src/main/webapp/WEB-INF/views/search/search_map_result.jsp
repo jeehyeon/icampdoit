@@ -1,13 +1,13 @@
-<%@page import="org.json.simple.JSONArray"%>
-<%@page import="org.json.simple.JSONObject"%>
-<%@page import="java.util.Map"%>
-<%@page import="java.util.List"%>
-<%@page import="java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="com.exam.search.SearchkeyTO"%>
 <%@page import="com.exam.search.SearchListMapTO"%>
 <%@page import="com.exam.search.SearchmapDAO"%>
+<%@page import="org.json.simple.JSONArray"%>
+<%@page import="org.json.simple.JSONObject"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
 <%
 	//session 값 가져오기

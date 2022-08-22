@@ -1,18 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-<%-- <%
-	int ucode = (Integer)request.getAttribute("ucode");
-	out.println( "<script type='text/javascript'>" );
-	if( ucode != -1 ) {
-		//세션 등록
-		out.println( "location.href='home.do';" );
-	} else {
-		out.println( "alert( '로그인 실패: 아이디나 비밀번호를 확인해주세요.' );" );
-		out.println( "history.back();" );
-	}
-	out.println( "</script>" );
-%> --%>
 <%
 	String prevPage = (String)request.getAttribute("prevPage");
 	System.out.println( "prevPage: " + prevPage );
@@ -32,7 +19,6 @@
 	<script type='text/javascript'>
 		
 		   var ucode = <%=(Integer)request.getAttribute("ucode")%>;
-		   
 		   
 		   const Toast = Swal.mixin({
 			    toast: true,
@@ -66,8 +52,8 @@
 					title: '로그인 실패',     
 					text:	'아이디나 비밀번호를 확인해주세요.', 
 					icon:	'error',
-					confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
-					confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+					confirmButtonColor: '#1cb36e', 
+					confirmButtonText: '확인',
 					
 			}).then((result) => {
 				

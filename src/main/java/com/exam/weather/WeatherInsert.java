@@ -8,7 +8,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 
-
 @Component
 public class WeatherInsert {
 
@@ -23,11 +22,7 @@ public class WeatherInsert {
 		
 		String sql = "delete from weather";
 		int deleteresult = jdbcTemplate.update(sql);
-		System.out.println(deleteresult);
 		
-		
-		//long now = System.currentTimeMillis() / 1000;
-        //System.out.println("schedule tasks using cron jobs - {}"+ now);
 		WeatherTO wto = new WeatherTO();
 		wto = wdao.weathearDAO();
 		WeatherTO wto2 = new WeatherTO();
@@ -37,7 +32,7 @@ public class WeatherInsert {
 		
 		
 		ArrayList<WeatherTO> lists = new ArrayList<WeatherTO>();
-		//1일 데이터
+		// 1일 데이터
 		WeatherTO result = new WeatherTO();
 		result.setResultDate(wto.getDate1().substring(4,6)+"."+wto.getDate1().substring(6,8));
 		result.setResultTaMin(wto.getTaMin1());
@@ -45,7 +40,8 @@ public class WeatherInsert {
 		result.setResultPop(wto.getPop1());
 		result.setResultSky(wto.getSky1());
 		lists.add(result);
-		//2일 데이터
+		
+		// 2일 데이터
 		WeatherTO result2 = new WeatherTO();
 		result2.setResultDate(wto.getDate2().substring(4,6)+"."+wto.getDate2().substring(6,8));
 		result2.setResultTaMin(wto.getTaMin2());
@@ -54,7 +50,7 @@ public class WeatherInsert {
 		result2.setResultSky(wto.getSky2());
 		lists.add(result2);
 		
-		//3일
+		// 3일 데이터
 		WeatherTO result3 = new WeatherTO();
 		result3.setResultDate(wto.getDate3().substring(4,6)+"."+wto.getDate3().substring(6,8));
 		result3.setResultTaMin(wto.getTaMin3());
@@ -63,7 +59,7 @@ public class WeatherInsert {
 		result3.setResultSky(wto.getSky3());
 		lists.add(result3);
 		
-		//4일
+		// 4일 데이터
 		WeatherTO result4 = new WeatherTO();
 		result4.setResultDate(wto.getDate4().substring(4,6)+"."+wto.getDate4().substring(6,8));
 		result4.setResultTaMin(wto2.getTaMin4()+".0");
@@ -71,7 +67,8 @@ public class WeatherInsert {
 		result4.setResultPop(wto3.getPop4());
 		result4.setResultSky(wto3.getSky4());
 		lists.add(result4);
-		//5일
+		
+		// 5일 데이터
 		WeatherTO result5 = new WeatherTO();
 		result5.setResultDate(wto.getDate5().substring(4,6)+"."+wto.getDate5().substring(6,8));
 		result5.setResultTaMin(wto2.getTaMin5()+".0");
@@ -79,16 +76,17 @@ public class WeatherInsert {
 		result5.setResultPop(wto3.getPop5());
 		result5.setResultSky(wto3.getSky5());
 		lists.add(result5);
-		//6일
+		
+		// 6일 데이터
 		WeatherTO result6 = new WeatherTO();
 		result6.setResultDate(wto.getDate6().substring(4,6)+"."+wto.getDate6().substring(6,8));
 		result6.setResultTaMin(wto2.getTaMin6()+".0");
 		result6.setResultTaMax(wto2.getTaMax6()+".0");
 		result6.setResultPop(wto3.getPop6());
-		//System.out.println("6일하늘 인서트 전 : "+wto3.getPop6());
 		result6.setResultSky(wto3.getSky6());
 		lists.add(result6);
-		//7일
+		
+		// 7일 데이터
 		WeatherTO result7 = new WeatherTO();
 		result7.setResultDate(wto.getDate7().substring(4,6)+"."+wto.getDate7().substring(6,8));
 		result7.setResultTaMin(wto2.getTaMin7()+".0");
@@ -102,8 +100,5 @@ public class WeatherInsert {
 			int result1 = jdbcTemplate.update(insertsql, to.getResultDate(), to.getResultTaMin(), to.getResultTaMax(), to.getResultPop(), to.getResultSky());
 			System.out.println(result1);
 		}
-		
-		
-		
 	}
 }

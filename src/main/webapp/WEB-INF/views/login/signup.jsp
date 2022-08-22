@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
   <head>
     <meta charset="utf-8">
@@ -33,8 +32,7 @@
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<!-- Sweet Alert -->
   	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
-	  
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>	  
   </head>
   <body>
     <div class="container-fluid px-3">
@@ -61,7 +59,7 @@
                 <br>
                 <button type="button" id="btnCheck" class="btn btn btn-dark btn-sm" style="float: right; height: 30px; display: flex; align-items:center;">아이디 중복확인</button>
                 </div>
-                <span id="result"></span>
+                <span id="result" style="color:red"></span>
                 <input type="hidden" id="idcheck" value="idUncheck"/>
               </div>
               
@@ -121,13 +119,13 @@
 	                  <div class="container mb-2">
 						  <form>
 						    <div class="form-group">
-						      <textarea class="form-control" rows="7" id="" style="background-color: white" readonly>제1장 총칙&#13;&#10;제1조. 목적&#13;&#10; 본 약관은 I Camp Do It(이하 "아이캠두잇")이 제공하는 모든 서비스의 이용조건 및 절차, 이용자와 아이캠두잇의 권리, 의무, 책임사항과 기타 필요한 사항을 규정합니다.&#13;&#10;제2조. 용어의 정의&#13;&#10;본 약관에서 사용하는 용어의 정의는 다음과 같습니다.&#13;&#10;...</textarea>
+						      <textarea class="form-control" rows="7" id="" style="background-color: white" readonly>제1조. 목적&#13;&#10; 본 약관은 I Camp Do It(이하 "아이캠두잇")이 제공하는 모든 서비스의 이용조건 및 절차, 이용자와 아이캠두잇의 권리, 의무, 책임사항과 기타 필요한 사항을 규정합니다.&#13;&#10;&#13;&#10;제2조. 개인정보 수집목적 및 이용목적&#13;&#10;[회원 관리]&#13;&#10;1. 회원제 서비스 이용에 따른 본인확인, 개인 식별, 불량회원의 부정 이용 방지와 비인가 사용 방지, 가입 의사 확인, 연령확인, 불만처리 등 민원처리, 고지사항 전달&#13;&#10;2. 수집하는 개인정보 항목 : 이름, 생년월일, 성별, 로그인ID, 비밀번호, 이메일, 14세미만 가입자의 경우 법정대리인의 정보&#13;&#10;3. 개인정보의 보유기간 및 이용기간&#13;&#10;원칙적으로, 개인정보 수집 및 이용목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다. 단, 다음의 정보에 대해서는 아래의 이유로 명시한 기간 동안 보존합니다.&#13;&#10;o 소비자 불만 또는 분쟁처리에 관한 기록&#13;&#10;-보존이유 : 소비자보호에관한법률&#13;&#10;-보존기간 : 3년&#13;&#10;o 로그 기록&#13;&#10;-보존이유: 통신비밀보호법&#13;&#10;-보존기간 : 3개월&#13;&#10;※ 동의를 거부할 수 있으나 거부시 회원 가입이 불가능합니다.</textarea>
 						    </div>
 						  </form>
 	                  </div>    			  
       			<div class="form-check">
-                  <input class="form-check-input" id="" type="checkbox" name="info">
-                  <label class="form-check-label text-muted"> <span class="text-sm">[필수] 이용약관에 동의합니다.</span></label>
+                  <input class="form-check-input" id="info" type="checkbox" name="info">
+                  <label class="form-check-label text-muted"> <span class="text-sm">[필수] 이용약관 및 개인정보수집/이용에 모두 동의합니다.</span></label>
                 </div>
               </div>
               
@@ -202,17 +200,10 @@
   		        toast.addEventListener('mouseenter', Swal.stopTimer)
   		        toast.addEventListener('mouseleave', Swal.resumeTimer)
   		    }
-  		})
+  		  })
   		
     		document.getElementById( 'sbtn' ).onclick = function() {
     			// 데이터 전송
-    			if( document.signup.info.checked == false ) {
-    				Toast.fire({
-     				    icon: 'warning',
-     				    title: '동의하셔야 합니다.'
-     				})
-					return false;
-				}
 				if( document.signup.name.value.trim() == '' ) {
 					Toast.fire({
 	 				    icon: 'warning',
@@ -308,6 +299,13 @@
 	 				})
 					return false;				
 				}			
+				if( document.signup.info.checked == false ) {
+    				Toast.fire({
+     				    icon: 'warning',
+     				    title: '동의하셔야 합니다.'
+     				})
+					return false;
+				}
     			document.signup.submit();
     			
     		};
@@ -384,7 +382,19 @@
     	}
     	
     	
-    	$('#btnCheck').click(function () {		
+    	$('#btnCheck').click(function () {	
+    		const Toast = Swal.mixin({
+      		    toast: true,
+      		    position: 'center-center',
+      		    showConfirmButton: false,
+      		    timer: 3000,
+      		    timerProgressBar: false,
+      		    didOpen: (toast) => {
+      		        toast.addEventListener('mouseenter', Swal.stopTimer)
+      		        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      		    }
+      		  })
+    		
     	    if ($('#id').val() != '') {
     	    	
     	    	if(isId(document.signup.id.value)){
@@ -418,7 +428,10 @@
     	        
     	   				
     	    } else {
-    	        alert('아이디를 입력하세요.');
+    	    	Toast.fire({
+ 				    icon: 'warning',
+ 				    title: '아이디를 입력해 주세요.'
+ 				})
     	        $('#id').focus();
     	    }
     	   			
@@ -451,31 +464,11 @@
 		    				var email = res.kakao_account.email;
 		    				var kid = res.id;
 		    				
-		    				console.log(res);
-		    				//alert(kid);
-		    				//alert(JSON.stringify(res));
-		    				//alert(JSON.stringify(authObj));
-		    				//console.log( authObj.acces_token);
-		    				
-		    				console.log( email );
-		    				//console.log( res.kakao_account.profile.nickname );
 		    				$( '#kakaonickname' ).val( nickname );
 		    				$( '#kakaoemail' ).val( email );
-		    				$( '#kakaokid' ).val( kid );
-		    				
-		    				//$('#kakaoemail').val(res.kakao_account.profile.email);
-		    				//$('#kakaonickname').val(res.kakao_account.profile.nickname);
-		    				
-		    				console.log( $('#kakaoemail').val() );
-		    				console.log( $('#kakaonickname').val() );
-		    				
-		    				//document.kakao_frm.action
-		    				//document.getElementById( 'kakao_frm' ).submit();
+		    				$( '#kakaokid' ).val( kid );		    				
 		    				
 		    				$('#kakao_frm').submit();
-		    				
-		    				//ajax
-		    				//카카오로그인 DB 만들어야 함. 비번은 랜덤으로..
 		    			},
 		    			fail: function(error){
 		    				alert('카카오 로그인에 실패했습니다. 관리자에게 문의하세요.' + JSON.stringify(error) );
@@ -488,35 +481,6 @@
 		    });
 		}
     	
-    	<!--
-    	//로그아웃 기능 - 카카오 서버에 접속하는 엑세스 토큰 만료. 사용자 어플리케이션의 로그아웃은 따로 해야 함.
-    	function kakaoLogout(){
-    		if( !Kakao.Auth.getAccessToken() ){ //토큰이 있는지 확인. 없으면
-    			alert( 'Not logged in' );
-    			return;
-    		}
-    		Kakao.Auth.logout(function(){ //카카오 로그아웃
-    			alert( 'logout ok\naccess token -> ' + Kakao.Auth.getAccessToken() );
-    			
-    		});
-    	}
-    	
-    	
-    	//연결 끊기 기능 - 탈퇴처리리는 직접 구현해야 함. 	
-    	function kakaoUnlink(){
-    		Kakao.API.request({
-        		url: '/v1/user/unlink',
-        		success: function(response) {
-        			console.log( response );
-        			callbackFunction();
-        		},
-        		fail: function(error){
-        			alert('탈퇴처리가 미완료되었습니다. \n관리자에게 문의하시기 바랍니다.' );
-        			console.log( error );
-        		}
-        	});
-    	}
-    	-->
     </script>
     <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
     <script src="./resources/bootstrap-5/html/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

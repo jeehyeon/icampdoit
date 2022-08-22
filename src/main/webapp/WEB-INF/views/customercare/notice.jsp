@@ -2,11 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.exam.nboard.NBoardTO" %>
 <%@ page import="com.exam.nboard.NListTO" %>
-
 <%@ page import="java.util.ArrayList" %>
-
 <%
-//session 값 가져오기
+	//session 값 가져오기
 	int ucode = -1;
 	String id ="";
 	if(session.getAttribute("id") != null){
