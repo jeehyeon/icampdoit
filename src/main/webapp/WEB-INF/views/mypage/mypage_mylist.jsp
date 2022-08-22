@@ -85,9 +85,6 @@
     <link rel="stylesheet" href="./resources/bootstrap-5/html/css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="./resources/bootstrap-5/html/img/logo2.svg">
-    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <style type="text/css">
@@ -212,16 +209,7 @@
           	       
         <!-- Pagination -->
         <nav aria-label="Page navigation example">  
-          <ul class="pagination pagination-template d-flex justify-content-center pt-2">
-           <!--
-            <li class="page-item"><a class="page-link" href="#"> <i class="fa fa-angle-left"></i></a></li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#"> <i class="fa fa-angle-right"></i></a></li>
-            -->
-        
-        
+          <ul class="pagination pagination-template d-flex justify-content-center pt-2">       
 <%			
 	//페이지 하단의 << 버튼
 	if ( startBlock == 1 ) {

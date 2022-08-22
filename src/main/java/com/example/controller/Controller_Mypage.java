@@ -56,15 +56,12 @@ public class Controller_Mypage {
 		
 		SignUpTO sto = new SignUpTO();
 		sto.setUcode(request.getParameter( "ucode" ));
-		System.out.println( "수정 : " + request.getParameter( "ucode" ) );
 		sto.setName(request.getParameter( "name" ));
-		System.out.println( "이름수정 : " + request.getParameter( "name" ) );
 		sto.setGen(request.getParameter( "gen" ));
 		sto.setEmail(request.getParameter( "email" ));
 		sto.setBirth(request.getParameter( "birth" ));
 		
 		int flag = dao.mypageModifyOk(sto);
-		System.out.println( "flag : " + flag);
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
@@ -126,7 +123,6 @@ public class Controller_Mypage {
 		int ucode = (Integer)session.getAttribute("ucode");
 				
 		ArrayList<SearchkeyTO> lists = dao.subList(to);
-		System.out.println( "mysublist() 호출" );		
 		
 		modelAndView.setViewName( "/mypage/mypage_sub" );
 		modelAndView.addObject( "lists", lists );

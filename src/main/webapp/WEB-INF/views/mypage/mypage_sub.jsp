@@ -24,7 +24,6 @@
 		if( mainImg.equals("default") ) {
 			mainImg = "./resources/bootstrap-5/html/img/흑백.png";
 		}
-		//String addr1 = to.getAddr1();
 		String addr1 = to.getAddr1();
 	      if( addr1.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*") == false ){
 	         addr1 = to.getDoNm() + " " + to.getSigunguNm() + " " + to.getAddr1();
@@ -48,8 +47,6 @@
 		sbHtml.append( "</div>" );
 		sbHtml.append( "</div>" );
 	}
-	
-	
 	
 %>
 <!DOCTYPE html>
@@ -78,9 +75,6 @@
     <link rel="stylesheet" href="./resources/bootstrap-5/html/css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="./resources/bootstrap-5/html/img/logo2.svg">
-    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <style type="text/css">
@@ -182,37 +176,6 @@
                 </div>
               </div>
               
-               <div class="d-flex d-block d-sm-flex review">
-                <div class="text-md-center flex-shrink-0 me-4 me-xl-5"><img class="d-block avatar avatar-xl p-2 mb-2" src="./resources/bootstrap-5/html/img/photo/한탄강캠핑장.jpg" alt="Luke Skywalker"></div>
-                <div class="col-sm-10">
-				<div align="right">
-					<button type="button" class="btn btn-outline-danger">
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-							<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path>
-						</svg>
-						찜취소
-					</button>
-				</div>
-                  <h4 class="mt-2 mb-1"><a href="./campview.do">한탄강 오토캠핑장</a></h4>
-                  <h6 class="mt-3 mb-1">경기 연천군 전곡읍 선사로 76</h6>
-                </div>
-              </div>
-              
-              <div class="d-flex d-block d-sm-flex review">
-                <div class="text-md-center flex-shrink-0 me-4 me-xl-5"><img class="d-block avatar avatar-xl p-2 mb-2" src="./resources/bootstrap-5/html/img/photo/광릉숲이야기캠핑장.jpg" alt="Princess Leia"></div>
-                <div class="col-sm-10">
-				<div align="right">
-					<button type="button" class="btn btn-outline-danger">
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-							<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path>
-						</svg>
-						찜취소
-					</button>
-				</div>
-                  <h4 class="mt-2 mb-1"><a href="./campview.do">광릉숲이야기 캠핑장</a></h4>
-                  <h6 class="mt-3 mb-1">경기 포천시 소흘읍 직동리 76-8</h6>
-                </div>
-              </div>
               <div class="d-flex d-block d-sm-flex review">
                 <div class="text-md-center flex-shrink-0 me-4 me-xl-5"><img class="d-block avatar avatar-xl p-2 mb-2" src="./resources/bootstrap-5/html/img/photo/자라섬캠핑장.jpg" alt="Jabba Hut"></div>
                 <div class="col-sm-10">

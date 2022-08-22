@@ -23,7 +23,6 @@ public class MypageDAO {
 	// myfageView
 	public SignUpTO mypageView(SignUpTO sto) {	
 
-		//String sql = "select ucode, id, pwd, name, gen, email, rdate, date_format(birth, '%Y-%m-%d') birth, hint, answer, kid from users where ucode=?";
 		String sql = "select ucode, id, pwd, name, gen, email, rdate, birth, hint, answer, kid from users where ucode=?";
 		sto = jdbcTemplate.queryForObject(
 				sql, new BeanPropertyRowMapper<SignUpTO>(SignUpTO.class), sto.getUcode() );
@@ -66,7 +65,6 @@ public class MypageDAO {
 		
 		String sql = "select seq, subject, title, writer, content, date_format(wdate, '%Y-%m-%d') wdate, hit, ucode, cmt from m_board where ucode=? order by seq desc";
 
-		//BoardTO to = new BoardTO();
 		ArrayList<BoardTO> boardLists = (ArrayList<BoardTO>)jdbcTemplate.query(
 				sql, new BeanPropertyRowMapper<BoardTO>(BoardTO.class), bto.getUcode() );
 		

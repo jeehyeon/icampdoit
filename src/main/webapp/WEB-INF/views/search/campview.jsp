@@ -4,208 +4,209 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-//session 값 가져오기
-int ucode = -1;
-String id ="";
-if(session.getAttribute("id") != null){
-	ucode = (int)session.getAttribute("ucode");
-	id = (String)session.getAttribute("id");
-}
-
-
-//사진데이터
-StringBuilder imghtml = new StringBuilder();
-ArrayList<SearchkeyTO> lists = (ArrayList<SearchkeyTO>)request.getAttribute("lists");
-for(SearchkeyTO ito : lists){
-	System.out.println("사진 url : " + ito.getImgurl());
-	if(ito.getImgurl() == null || ito.getImgurl().equals("default")){
-		imghtml.append("<div class=\"col-lg-4 col-6 px-1 mb-2\"><a href=\"./resources/bootstrap-5/html/img/noimage.svg\" data-fancybox=\"gallery\"><img class=\"img-fluid\" src=\"./resources/bootstrap-5/html/img/noimage.svg\" alt=\"...\"></a></div>");
-	}else{
-		imghtml.append("<div class=\"col-lg-4 col-6 px-1 mb-2\"><a href=\""+ito.getImgurl() +"\" data-fancybox=\"gallery\"><img class=\"img-fluid\" src=\""+ito.getImgurl() +"\" alt=\"...\"></a></div>");
+	//session 값 가져오기
+	int ucode = -1;
+	String id ="";
+	if(session.getAttribute("id") != null){
+		ucode = (int)session.getAttribute("ucode");
+		id = (String)session.getAttribute("id");
+	}	
+	
+	//사진데이터
+	StringBuilder imghtml = new StringBuilder();
+	ArrayList<SearchkeyTO> lists = (ArrayList<SearchkeyTO>)request.getAttribute("lists");
+	for(SearchkeyTO ito : lists){
+		System.out.println("사진 url : " + ito.getImgurl());
+		if(ito.getImgurl() == null || ito.getImgurl().equals("default")){
+			imghtml.append("<div class=\"col-lg-4 col-6 px-1 mb-2\"><a href=\"./resources/bootstrap-5/html/img/noimage.svg\" data-fancybox=\"gallery\"><img class=\"img-fluid\" src=\"./resources/bootstrap-5/html/img/noimage.svg\" alt=\"...\"></a></div>");
+		}else{
+			imghtml.append("<div class=\"col-lg-4 col-6 px-1 mb-2\"><a href=\""+ito.getImgurl() +"\" data-fancybox=\"gallery\"><img class=\"img-fluid\" src=\""+ito.getImgurl() +"\" alt=\"...\"></a></div>");
+		}
 	}
-}
-
-//찜하기
-int sub= (Integer)request.getAttribute("sub");
-
-SearchkeyTO kto = (SearchkeyTO)request.getAttribute("kto");
-
-String address="";
-String titleaddr="";
-
-//대표사진
-String firstImageUrl= "";
-if(kto.getFirstImageUrl().equals("default")){
-	firstImageUrl= "./resources/bootstrap-5/html/img/noimage.svg";
-}else{
-	firstImageUrl=kto.getFirstImageUrl();
-}
-
-
-if( kto.getAddr1().matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*") == false ){
-	address = kto.getDoNm() + " " + kto.getSigunguNm() + " " + kto.getAddr1();
-}
-
-if(kto.getDoNm().equals("default") && !kto.getSigunguNm().equals("default")){
-	titleaddr= kto.getSigunguNm();
-}else if(!kto.getDoNm().equals("default") && kto.getSigunguNm().equals("default")){
-	titleaddr= kto.getDoNm();
-}else if(!kto.getDoNm().equals("default") && !kto.getSigunguNm().equals("default")){
-	titleaddr= kto.getDoNm() + " " +kto.getSigunguNm();
-}
-
-String intro="";
-if(kto.getIntro().equals("default")){
-	intro = " ";
-}else{
-	intro = kto.getIntro();
-};
-
-//홈페이지
-String homepage="";
-if(kto.getHomepage().equals("default")){
-	homepage = " ";
-}else if(kto.getHomepage().indexOf("http") != -1){
-	homepage = kto.getHomepage();
-}else{
-	homepage = " ";
-}
-//주요 시설
-
-String induty="";
-if(kto.getInduty().equals("default")){
-	induty = "정보 없음";
-}else{
-	induty = kto.getInduty();
-}
-
-//입지
-String lctCl="";
-if(kto.getLctCl().equals("default")){
-	lctCl = "정보 없음";
-}else{
-	lctCl = kto.getLctCl();
-}
-
-//바닥형태
-String siteBottom=" ";
-
-if(!kto.getSiteBottomCl1().equals("0")){
-	siteBottom += "잔디/";
-}
-if(!kto.getSiteBottomCl2().equals("0")){
-	siteBottom += "파쇄석/";
-}
-if(!kto.getSiteBottomCl3().equals("0")){
-	siteBottom += "테크/";
-}
-if(!kto.getSiteBottomCl4().equals("0")){
-	siteBottom += "자갈/";
-}
-if(!kto.getSiteBottomCl5().equals("0")){
-	siteBottom += "맨흙/";
-}
-siteBottom = siteBottom.substring(0, siteBottom.length()-1);
-
-//캠핑장비 대여
-String eqpmnLendCl="";
-if(kto.getEqpmnLendCl().equals("default")){
-	eqpmnLendCl = "정보 없음";
-}else{
-	eqpmnLendCl = kto.getEqpmnLendCl();
-}
-
-//애완동물/개인트레일러/개인카라반
-String petCaravan=" ";
-if(kto.getAnimalCmgCl().equals("default")){
-	petCaravan += "반려동물 : 정보 없음 / ";
-}else{
-	petCaravan += "반려동물 : "+kto.getAnimalCmgCl()+" / ";
-}
-
-if(kto.getTrlerAcmpnyAt().equals("Y")){
-	petCaravan += "개인 트레일러 가능 / ";
-}else{
-	petCaravan += "개인 트레일러 불가능 / ";
-}
-
-if(kto.getCaravAcmpnyAt().equals("Y")){
-	petCaravan += "개인 카라반 가능 / ";
-}else{
-	petCaravan += "개인 카라반 불가능 / ";
-}
-petCaravan = petCaravan.substring(0, petCaravan.length()-1);
-
-
-
-
-//캠핑장 시설정보
-StringBuilder campInfo1 = new StringBuilder();
-StringBuilder campInfo2 = new StringBuilder();
- 
-kto.getSbrsCl();
-if(kto.getSbrsCl().indexOf("전기") != -1){
-	//System.out.println("전기있음");
-	campInfo1.append( "<li class=\"mb-2\"> <i class=\"fa fa-bolt text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">전기</span></li>");
-}
-
-if(kto.getSbrsCl().indexOf("와이파이") != -1){
-	//System.out.println("와이파이");
-	campInfo1.append( "<li class=\"mb-2\"> <i class=\"fa fa-wifi text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">와이파이</span></li>");
-};
-
-if(kto.getSbrsCl().indexOf("온수") != -1){
-	//System.out.println("온수");
-	campInfo1.append( "<li class=\"mb-2\"> <i class=\"fa fa-solid fa-shower text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">온수</span></li>");
-};
-
-if(kto.getSbrsCl().indexOf("물놀이장") != -1){
-	//System.out.println("물놀이장");
-	campInfo1.append( "<li class=\"mb-2\"> <i class=\"fa fa-regular fa-water text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">물놀이장</span></li>");
-};
-
-
-if(kto.getSbrsCl().indexOf("장작판매") != -1){
-	campInfo2.append( "<li class=\"mb-2\"> <i class=\"fa fa-regular fa-fire text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">장작판매</span></li>");
-};
-if(kto.getSbrsCl().indexOf("산책로") != -1){
-	campInfo2.append( "<li class=\"mb-2\"> <i class=\"fa fa-solid fa-shoe-prints text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">산책로</span></li>");
-};
-if(kto.getSbrsCl().indexOf("운동시설") != -1){
-	campInfo2.append( "<li class=\"mb-2\"> <i class=\"fa fa-solid fa-dumbbell text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">운동시설</span></li>");
-};
-if(kto.getSbrsCl().indexOf("마트") != -1 || kto.getSbrsCl().indexOf("편의점") != -1){
-	campInfo2.append( "<li class=\"mb-2\"> <i class=\"fa fa-regular fa-store text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">마트,편의점</span></li>");
-};
-
-
-
-//댓글 부분
-ArrayList<CampviewCmtTO> clists= (ArrayList<CampviewCmtTO>)request.getAttribute("clists");
-StringBuilder cmthtml = new StringBuilder();
-for(CampviewCmtTO cto : clists){
 	
-	String deldata = "{\"seq\":\"" +cto.getSeq() + "\",\"ucode\":\""+ cto.getUcode()+"\"}";
+	//찜하기
+	int sub= (Integer)request.getAttribute("sub");
 	
-	cmthtml.append("<div>");
-	cmthtml.append("<div>");
+	SearchkeyTO kto = (SearchkeyTO)request.getAttribute("kto");
 	
-	cmthtml.append(" <div class=\"mt-2 mb-1 right-left\">"+cto.getWriter()+"</div>");
-	cmthtml.append("<div class=\"cvcmt btn right-float btn-outline-primary\" value=\"삭제\" deldata="+deldata+">삭제</div>");
+	String address="";
+	String titleaddr="";
 	
-	cmthtml.append(" <div>");
-	for(int i=0; i<Integer.parseInt(cto.getMark()); i++){
-		cmthtml.append("<i class=\"fa fa-xs fa-star text-primary\"></i>");
+	//대표사진
+	String firstImageUrl= "";
+	if(kto.getFirstImageUrl().equals("default")){
+		firstImageUrl= "./resources/bootstrap-5/html/img/noimage.svg";
+	}else{
+		firstImageUrl=kto.getFirstImageUrl();
+	}
+	
+	
+	if( kto.getAddr1().matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*") == false ){
+		address = kto.getDoNm() + " " + kto.getSigunguNm() + " " + kto.getAddr1();
+	}
+	
+	if(kto.getDoNm().equals("default") && !kto.getSigunguNm().equals("default")){
+		titleaddr= kto.getSigunguNm();
+	}else if(!kto.getDoNm().equals("default") && kto.getSigunguNm().equals("default")){
+		titleaddr= kto.getDoNm();
+	}else if(!kto.getDoNm().equals("default") && !kto.getSigunguNm().equals("default")){
+		titleaddr= kto.getDoNm() + " " +kto.getSigunguNm();
+	}
+	
+	String intro="";
+	if(kto.getIntro().equals("default")){
+		intro = " ";
+	}else{
+		intro = kto.getIntro();
 	};
-	cmthtml.append("</div>");
 	
-	cmthtml.append("<p  class=\"text-muted text-sm\">"+cto.getContent() +"</p>");
-	cmthtml.append("</div>");
-	cmthtml.append("</div>");
-	cmthtml.append("<hr/>");
+	//홈페이지
+	String homepage="";
+	if(kto.getHomepage().equals("default")){
+		homepage = " ";
+	}else if(kto.getHomepage().indexOf("http") != -1){
+		homepage = kto.getHomepage();
+	}else{
+		homepage = " ";
+	}
+	//주요 시설
+	
+	String induty="";
+	if(kto.getInduty().equals("default")){
+		induty = "정보 없음";
+	}else{
+		induty = kto.getInduty();
+	}
+	
+	//입지
+	String lctCl="";
+	if(kto.getLctCl().equals("default")){
+		lctCl = "정보 없음";
+	}else{
+		lctCl = kto.getLctCl();
+	}
+	
+	//바닥형태
+	String siteBottom=" ";
+	
+	if(!kto.getSiteBottomCl1().equals("0")){
+		siteBottom += "잔디 / ";
+	}
+	if(!kto.getSiteBottomCl2().equals("0")){
+		siteBottom += "파쇄석 / ";
+	}
+	if(!kto.getSiteBottomCl3().equals("0")){
+		siteBottom += "테크 / ";
+	}
+	if(!kto.getSiteBottomCl4().equals("0")){
+		siteBottom += "자갈 / ";
+	}
+	if(!kto.getSiteBottomCl5().equals("0")){
+		siteBottom += "맨흙 / ";
+	}
+	
+	if( siteBottom != " " ) {
+		siteBottom = siteBottom.substring( 0, siteBottom.length() -2 );
+	} else if( siteBottom == null || siteBottom == " " ) {
+		siteBottom = "정보 없음";
+	}
+	
+	//캠핑장비 대여
+	String eqpmnLendCl="";
+	if(kto.getEqpmnLendCl().equals("default")){
+		eqpmnLendCl = "정보 없음";
+	}else{
+		eqpmnLendCl = kto.getEqpmnLendCl();
+	}
+	
+	//애완동물 / 개인트레일러 / 개인카라반
+	String petCaravan=" ";
+	if(kto.getAnimalCmgCl().equals("default")){
+		petCaravan += "반려동물 동반 : 정보 없음 / ";
+	}else{
+		petCaravan += "반려동물 동반 : "+kto.getAnimalCmgCl()+" / ";
+	}
+	
+	if(kto.getTrlerAcmpnyAt().equals("Y")){
+		petCaravan += "개인 트레일러 : 가능 / ";
+	}else{
+		petCaravan += "개인 트레일러 : 불가능 / ";
+	}
+	
+	if(kto.getCaravAcmpnyAt().equals("Y")){
+		petCaravan += "개인 카라반 : 가능 / ";
+	}else{
+		petCaravan += "개인 카라반 : 불가능 / ";
+	}
+	petCaravan = petCaravan.substring(0, petCaravan.length()-2);	
 	
 	
-}
+	//캠핑장 시설정보
+	StringBuilder campInfo1 = new StringBuilder();
+	StringBuilder campInfo2 = new StringBuilder();
+	 
+	kto.getSbrsCl();
+	if(kto.getSbrsCl().indexOf("전기") != -1){
+		//System.out.println("전기있음");
+		campInfo1.append( "<li class=\"mb-2\"> <i class=\"fa fa-bolt text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">전기</span></li>");
+	}
+	
+	if(kto.getSbrsCl().indexOf("와이파이") != -1){
+		//System.out.println("와이파이");
+		campInfo1.append( "<li class=\"mb-2\"> <i class=\"fa fa-wifi text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">와이파이</span></li>");
+	};
+	
+	if(kto.getSbrsCl().indexOf("온수") != -1){
+		//System.out.println("온수");
+		campInfo1.append( "<li class=\"mb-2\"> <i class=\"fa fa-solid fa-shower text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">온수</span></li>");
+	};
+	
+	if(kto.getSbrsCl().indexOf("물놀이장") != -1){
+		//System.out.println("물놀이장");
+		campInfo1.append( "<li class=\"mb-2\"> <i class=\"fa fa-regular fa-water text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">물놀이장</span></li>");
+	};
+	
+	
+	if(kto.getSbrsCl().indexOf("장작판매") != -1){
+		campInfo2.append( "<li class=\"mb-2\"> <i class=\"fa fa-regular fa-fire text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">장작판매</span></li>");
+	};
+	if(kto.getSbrsCl().indexOf("산책로") != -1){
+		campInfo2.append( "<li class=\"mb-2\"> <i class=\"fa fa-solid fa-shoe-prints text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">산책로</span></li>");
+	};
+	if(kto.getSbrsCl().indexOf("운동시설") != -1){
+		campInfo2.append( "<li class=\"mb-2\"> <i class=\"fa fa-solid fa-dumbbell text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">운동시설</span></li>");
+	};
+	if(kto.getSbrsCl().indexOf("마트") != -1 || kto.getSbrsCl().indexOf("편의점") != -1){
+		campInfo2.append( "<li class=\"mb-2\"> <i class=\"fa fa-regular fa-store text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">마트,편의점</span></li>");
+	};
+	
+		
+	//댓글 부분
+	ArrayList<CampviewCmtTO> clists= (ArrayList<CampviewCmtTO>)request.getAttribute("clists");
+	StringBuilder cmthtml = new StringBuilder();
+	for(CampviewCmtTO cto : clists){
+		
+		String deldata = "{\"seq\":\"" +cto.getSeq() + "\",\"ucode\":\""+ cto.getUcode()+"\"}";
+		
+		cmthtml.append("<div>");
+		cmthtml.append("<div>");
+		
+		cmthtml.append(" <div class=\"mt-2 mb-1 right-left\">"+cto.getWriter()+"</div>");
+		cmthtml.append("<div class=\"cvcmt btn right-float btn-outline-primary\" value=\"삭제\" deldata="+deldata+">삭제</div>");
+		
+		cmthtml.append(" <div>");
+		for(int i=0; i<Integer.parseInt(cto.getMark()); i++){
+			cmthtml.append("<i class=\"fa fa-xs fa-star text-primary\"></i>");
+		};
+		cmthtml.append("</div>");
+		
+		cmthtml.append("<p  class=\"text-muted text-sm\">"+cto.getContent() +"</p>");
+		cmthtml.append("</div>");
+		cmthtml.append("</div>");
+		cmthtml.append("<hr/>");
+		
+		
+	}
 
 %>
 
@@ -236,9 +237,6 @@ for(CampviewCmtTO cto : clists){
     <link rel="stylesheet" href="./resources/bootstrap-5/html/css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="./resources/bootstrap-5/html/img/logo2.svg">
-    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
      <!-- Sweet Alert -->
@@ -587,11 +585,7 @@ for(CampviewCmtTO cto : clists){
       //   see more here 
       //   https://css-tricks.com/ajaxing-svg-sprite/
       // ------------------------------------------------------ //
-     
-      
-      
-      
-      
+   
       function injectSvgSprite(path) {
       
           var ajax = new XMLHttpRequest();
@@ -611,9 +605,7 @@ for(CampviewCmtTO cto : clists){
       injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg'); 
       
     
-		
-      
-      
+      // 찜하기 버튼 클릭시
       $("#subscribebtn").on("click",function(){
   		var data ={"contentId" : $("#contentId").val()};
   		$.ajax({
@@ -655,12 +647,11 @@ for(CampviewCmtTO cto : clists){
 	});   
    
    
-   
+   // 댓글 삭제버튼 클릭시
    $(".cvcmt").on("click", function(){
 	   
 	 	var replyseq = $(this).attr("deldata");
 			var sendData = {"replyseq": replyseq}
-
 		
 			cmtDelete(sendData);
 	 });
@@ -745,12 +736,9 @@ for(CampviewCmtTO cto : clists){
 		})
   	}
  
-   
-   
-   
+
     </script>
-    <!-- jQuery-->
-    
+    <!-- jQuery-->    
     <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
     <script src="./resources/bootstrap-5/html/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Magnific Popup - Lightbox for the gallery-->
@@ -771,20 +759,6 @@ for(CampviewCmtTO cto : clists){
     <!-- Available tile layers-->
     <script src="./resources/bootstrap-5/html/js/map-layers.js"> </script>
     <script src="./resources/bootstrap-5/html/js/map-detail.js"></script>
-    <script>
-      createDetailMap({
-          mapId: 'detailMap',
-          mapZoom: 14,
-          mapCenter: [40.732346, -74.0014247],
-          circleShow: true,
-          circlePosition: [40.732346, -74.0014247]
-      })
-      
-       
-      
-      
-      
-    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"> </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-date-range-picker/0.19.0/jquery.daterangepicker.min.js"> </script>
     <script src="js/datepicker-detail.js">   </script>

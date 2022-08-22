@@ -51,9 +51,6 @@
     <link rel="stylesheet" href="./resources/bootstrap-5/html/css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="./resources/bootstrap-5/html/img/logo2.svg">
-    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   	<!-- Sweet Alert -->
@@ -92,7 +89,19 @@
  				    title: '이름을 입력해 주세요.'
  				})
  				return false;
- 			}
+ 			} else {
+				if( isName(document.myfrm.name.value) ) {
+					$("#name").css('border-color', '#ced4da');
+				} else {
+					$("#name").css('border-color', 'red');
+					Toast.fire({
+	 				    icon: 'warning',
+	 				    title: '올바른 이름이 아닙니다. &emsp;&emsp;&emsp;이름은 2글자 이상, 한글만 입력해주세요.'
+	 				})
+					return false;
+				}
+			}
+ 			
  			if ( document.myfrm.gen.value.trim() == '' ) {
  				Toast.fire({
  				    icon: 'warning',
@@ -106,17 +115,104 @@
  				    title: '생년월일을 입력해 주세요.'
  				})
  				return false;
- 			}
+ 			} else {
+				if( isBirthday(document.myfrm.birth.value) ) {
+					//유효성 맞음
+					$("#birth").css('border-color', '#ced4da');
+				} else {
+					//유효성 안맞음
+					$("#birth").css('border-color', 'red');
+					Toast.fire({
+	 				    icon: 'warning',
+	 				    title: '올바른 생년월일이 아닙니다.'
+	 				})
+					return false;
+				}
+			}
  			if ( document.myfrm.email.value.trim() == '' ) {
  				Toast.fire({
  				    icon: 'warning',
  				    title: '이메일을 입력해 주세요.'
  				})
  				return false;
- 			}
+ 			} else {
+				if( isEmail(document.myfrm.email.value) ) {
+					
+					$("#email").css('border-color', '#ced4da');
+				} else {
+					//유효성 안맞음
+					$("#email").css('border-color', 'red');
+					Toast.fire({
+	 				    icon: 'warning',
+	 				    title: '올바른 이메일 형식이 아닙니다.'
+	 				})
+					return false;
+				}
+				
+			}
  			document.myfrm.submit();
  		}
  	}
+ 	
+ 	function isBirthday(dateStr) {
+		var reg_Birthday = /^[0-9]{8,8}$/;
+		if(reg_Birthday.test(dateStr)){
+    		var year = Number(dateStr.substr(0,4)); 
+    		var month = Number(dateStr.substr(4,2)); 
+    		var day = Number(dateStr.substr(6,2));
+    		var today = new Date(); 
+    		var yearNow = today.getFullYear(); 
+
+    		if (dateStr.length <=8) {
+    		
+    			if (1900 > year || year > yearNow){
+    				return false;
+    			} else if (month < 1 || month > 12) {
+    				return false;
+    			} else if (day < 1 || day > 31) {
+    				return false;
+    			} else if ((month==4 || month==6 || month==9 || month==11) && day==31) {
+    				return false;
+    			} else if (month == 2) {
+
+    				var isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+    				if (day>29 || (day==29 && !isleap)) {
+    					return false;
+    				} else {
+    					return true;
+    				} 
+    			} else {
+    				return true;
+    			}
+    		}
+    		else {
+    			
+    			return false;
+    		}
+		}else{
+			return false;
+		}
+	}
+	
+	function isEmail(emailStr) {                                                 
+	     var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+	     if(!reg_email.test(emailStr)) {                            
+	          return false;         
+	     }                            
+	     else {                       
+	          return true;         
+	     }                            
+	}                            	
+	
+	function isName(name) {            
+		      
+		var reg_Name = /^[가-힣]{2,}$/;    
+		if (!reg_Name.test(name)) {                                 
+			 return false;        
+			}        
+		return true; 
+	}
+	
   </script>
   </head>
   <body style="padding-top: 72px;">

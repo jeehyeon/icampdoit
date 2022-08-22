@@ -16,8 +16,7 @@
 	if(session.getAttribute("id") != null){
 		ucode = (int)session.getAttribute("ucode");
 		id = (String)session.getAttribute("id");
-	}
-	
+	}	
 	
 	//여기서부터 지도검색
 	SearchListMapTO slistTO = (SearchListMapTO)request.getAttribute( "slistTO" );
@@ -28,25 +27,18 @@
 	int blockPerPage = slistTO.getBlockPerPage();
 	int startBlock = slistTO.getStartBlock();
 	int endBlock = slistTO.getEndBlock();
-	int totalRecord = slistTO.getTotalRecord();
-	
-	
+	int totalRecord = slistTO.getTotalRecord();	
 	
 	SearchkeyTO sto = (SearchkeyTO)request.getAttribute( "sto" );
 	
 	String sido = sto.getDoNm();
-	String gugun = sto.getSigunguNm();
-	
-
+	String gugun = sto.getSigunguNm();	
 	
 	ArrayList<SearchkeyTO> datas = slistTO.getSearchLists();
 	
 	StringBuilder sbHtml = new StringBuilder();
-	
-	
-	
-	for( SearchkeyTO kto : datas ){
-		
+
+	for( SearchkeyTO kto : datas ){		
 
 		String contentId = kto.getContentId();
 		System.out.println( "contentId :" + contentId );
@@ -63,8 +55,7 @@
 		}
 		String mapX = kto.getMapX();
 		String mapY = kto.getMapY();
-		String latlngadd = mapY + ", " + mapX;
-		
+		String latlngadd = mapY + ", " + mapX;		
 		
 		sbHtml.append( "<div class='lists col-sm-6 mb-5 hover-animate' data-marker-id='59c0c8e33b1527bfe2abaf92'>");
 		sbHtml.append( "	<div class='card h-100 border-0 shadow'>");
@@ -81,10 +72,7 @@
 		sbHtml.append( "			</div>");
 		sbHtml.append( "		</div>");
 		sbHtml.append( "	</div>");
-		sbHtml.append( "</div>");
-		
-		//System.out.println( "x좌표 뽑아보자 : " + mapX );
-		
+		sbHtml.append( "</div>");				
 	}
 	
 	//JSONObject result = new JSONObject();
@@ -125,13 +113,6 @@
 	
 	String resultk = kmap.toString();
 	resultk = resultk.substring(0, resultk.length()-1);
-	
-	
-	//String arrdata = jsonArray.toString();
-	//result.put( "jsonArray", jsonArray );
-	
-	//System.out.println(  arrdata );
-	
 						
 %>
 
@@ -264,7 +245,7 @@
           <form action="./searchmapgugun.do" id="searchform" autocomplete="off">
             <div class="row">
               <div class="col-md-4">
-                <label class="form-label" for="sido">전체/시,도 :</label>
+                <label class="form-label" for="sido">전체 / 시,도 :</label>
                 <select class="selectpicker col-md-8" name="sido" id="sido" data-style="btn-selectpicker" title="시도 선택&nbsp;&nbsp;">
                   <option value="서울시">서울시    </option>
                   <option value="인천시">인천시    </option>
@@ -272,9 +253,9 @@
                 </select>
               </div>
               <div class="col-md-4">
-                <label class="form-label" for="gugun">전체/시,구 :</label>
+                <label class="form-label" for="gugun">전체 / 시,구 :</label>
                 <select class="selectpicker col-md-8" name="gugun" id="gugun" title="시구 선택">
-                  <option value="시구">시/구 선택   </option>
+                  <!-- <option value="시구">시/구 선택   </option> -->
                 </select>
               </div>
                
@@ -382,7 +363,7 @@
     				},
     				dataType : "json",
     				success: function(json){
-    					$('#gugun').html( '<option value="시구">시/구 선택   </option>' );
+    					$('#gugun').html( '<option value="">전체 선택   </option>' );
     					
     					$.each( json.jsonArray, function( index, jsonArray ){
     						
@@ -412,18 +393,9 @@
     			
     			
     		});
-    		
-    		/*나중에 빼기
-    		var latlngArr = new Array();
-	    	$( '#mapval' ).each( function( index, item ) {
-	    		latlngArr.push($(item).text());
-	    	});
-	    	*/
+
     	});
-    	
-    	
-    	
-    
+
     </script>
     <script>
 				var mapContainer = document.getElementById('map'), //지도 표시할 div id
@@ -433,38 +405,22 @@
 					};
 		
 				var map = new kakao.maps.Map(mapContainer, mapOptions); //지도를 표시할 div와 지도 옵션으로 지도를 생성함
-
 				
-				// 마커가 표시될 위치입니다 
-				//var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
-				
-				// 마커를 생성합니다
-				//var marker = new kakao.maps.Marker({
-				//    position: markerPosition
-				//});
-
-				// 마커가 지도 위에 표시되도록 설정합니다
-				//marker.setMap(map);
-				
-				//마커 여러개 생성
-				
+				//마커 여러개 생성				
 				var markers = []; // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
 				var contents = [];
 				var overlays = [];
-				
-				
-				
-				
+							
 				var positions =[
 					<%=resultk%>
 				];
 
-				
-				
+			
 				for ( var i=0; i<positions.length; i++ ){
 					
+					// 마커를 생성합니다
 					var marker = new kakao.maps.Marker({
-						position: positions[i].latlng,
+						position: positions[i].latlng, // 마커가 표시될 위치입니다
 						title: positions[i].title,
 						map: map
 					});
@@ -536,17 +492,12 @@
 						//content: wrap
 					});
 					
-					
-					
+										
 					overlay.setContent(wrap);
 
-					overlays.push(overlay);
-					
-					
+					overlays.push(overlay);					
 					
 					kakao.maps.event.addListener( markers[i], 'mouseover', function() {
-						//console.log(marker)
-						//console.log("1");
 						
 						$('div .card-body:eq('+i+')').css('background-color', '#99CC99');
 					});
@@ -558,15 +509,13 @@
 					
 					
 					kakao.maps.event.addListener( markers[i], 'click', function() {
-						//console.log(marker)
-						//console.log("1");
-						overlays[i].setMap(map);
+
+						overlays[i].setMap(map); 
 						//$('div .card-body:eq('+i+')').css('background-color', '#99CC99');
 					});
 				}
 			
 				$(".lists").hover(function(){
-					//console.log("인덱스  : "+$(this).index());
 					overlays[$(this).index()].setMap(map);
 					$('div .card-body:eq('+$(this).index()+')').css('background-color', '#99CC99');
 				},function(){
