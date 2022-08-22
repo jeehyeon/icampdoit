@@ -524,11 +524,25 @@ public class Controller_Board {
 	@RequestMapping( value="/writecancel.do" )
 	public void writecancel(HttpServletRequest request, HttpSession session) {
 		System.out.println( "writecancel() 호출" );
-		
-		dao.filedel((String)request.getParameter("filename"));
-		
-		
-	}
+		if(request.getParameter("filename")!="" && request.getParameter("filename")!=null) {
+			String[] filenames = request.getParameterValues("filename");
+			for (int i = 0; i < filenames.length; i++) {            
+				dao.filedel(filenames[i]);
+			};
+			
+		};
+	};
+	@RequestMapping( value="/modifycancel.do" )
+	public void modifycancel(HttpServletRequest request, HttpSession session) {
+		System.out.println( "writecancel() 호출" );
+		if(request.getParameter("newfilename")!="" && request.getParameter("newfilename")!=null) {
+			String[] filenames = request.getParameterValues("newfilename");
+			for (int i = 0; i < filenames.length; i++) {            
+				dao.filedel(filenames[i]);
+			};
+			
+		};
+	};
 	
 	@RequestMapping( value="/cmt_insert.do" )
 	public int cmtInsert(HttpServletRequest request, HttpSession session) throws IOException {

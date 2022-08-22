@@ -386,18 +386,14 @@ if (subjectValue.equals("1") || subjectValue.equals("2") || subjectValue.equals(
 		})    	
 	
 	document.getElementById( 'cbtn' ).onclick = function() { 		
- 		var subject = $('#subject').val();
- 		var filename = $('#modifyOk').val();
+ 		
  		var cpage = $( '#cpage').val();
  		var subjectValue = $('#subjectValue').val();
- 		alert(cpage);
- 		
-	    var data = {'filename' : filename, 'subject' : subject, 'cpage' : cpage, 'subjectValue' : subjectValue};	    	
- 		
+	    var formdata = $("#mfrm").serialize() ; 
 		$.ajax({
-			data : data,
-			type : "GET",
-			url : '/writecancel.do',
+			data : formdata,
+			type : "post",
+			url : '/modifycancel.do',
 			success : function() {
 				location.href='/mboardlist.do?subjectValue='+subjectValue+'&cpage='+cpage;
 			},

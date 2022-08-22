@@ -307,6 +307,7 @@
 					options);
 		} */
 		document.getElementById( 'cbtn' ).onclick = function() {
+			var formdata = $("#wfrm").serialize() ;
 			const Toast = Swal.mixin({
 			    toast: true,
 			    position: 'center-center',
@@ -320,7 +321,7 @@
 			})
 			
 			$.ajax({
-				data : {filename: $('#writeOk').val()},
+				data : formdata,
 				type : "GET",
 				url : '/writecancel.do',
 				success : function() {
