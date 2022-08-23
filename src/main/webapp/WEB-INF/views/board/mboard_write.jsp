@@ -168,7 +168,7 @@
 	<!-- Write Section-->
 	<section class="py-5 pb-7">
 	<form action="./mboardwrite_ok.do" method="post" id="wfrm" name="wfrm" enctype="multipart/form-data">
-	<div id="filebody" name="filebody">>
+	<div id="filebody" name="filebody">
 	</div>
 	
 	<input type="hidden" name="vcode" id="vcode" value="default"/>
