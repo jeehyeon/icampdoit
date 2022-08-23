@@ -73,8 +73,6 @@
 			var subject = wfrm.subject.value;
 	     	var title = wfrm.title.value;
 	     	var content = wfrm.content.value;
-	     	console.log(subject);
-	     	console.log(title);
 	     	     	
 			if(subject.trim() == '') {
 				Toast.fire({
@@ -388,7 +386,6 @@
 				enctype : 'multipart/form-data',
 				processData : false,
 				success : function(result) {
-					console.log(result);
 					let str= result.split('@');
 					
 					imgUrl = imgUrl + str[0];

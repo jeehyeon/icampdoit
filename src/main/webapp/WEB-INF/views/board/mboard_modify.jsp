@@ -17,14 +17,12 @@
 	BoardTO to = (BoardTO) request.getAttribute("to");
 	
 	String subjectValue = (String) request.getAttribute("subjectValue");
-	System.out.println("수정.jsp 말머리 : " + subjectValue);
 	String seq = "";
 	String subject = "";
 	String writer = "";
 	String title = "";
 	String content = "";
 	String filename = "";
-	System.out.println("[filename]" + filename);
 	long filesize = 0;
 	int modifyUcode = to.getUcode();
 	StringBuilder fileHtml = new StringBuilder();
@@ -426,7 +424,6 @@
 	$(document).ready(function() {
 		let date = new Date().getTime().toString(36);
 		$('#vcode').val(date);
-		console.log("date : " +date);
 		
 		var fontList = ['맑은 고딕','굴림','돋움','바탕','궁서','NotoSansKR','Arial','Courier New','Verdana','Tahoma'];
 		$('#summernote').summernote({
@@ -477,7 +474,6 @@
 			enctype : 'multipart/form-data',
 			processData : false,
 			success : function(result) {
-				console.log("imagupload result : "+result);
 				
 				let str= result.split('@');
 				var subject = $('#subject').val();
@@ -485,7 +481,6 @@
 					mImgUrl = mImgUrl + str[0];
 	
 				$('#summernote').summernote( 'insertImage', mImgUrl );
-				console.log("imgUrl : "+ mImgUrl);
 				
 				if(str[0] != null){
             				               

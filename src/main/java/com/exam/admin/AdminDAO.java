@@ -339,7 +339,6 @@ public class AdminDAO {
 			// 새로운 파일 삭제
 			if( nfto.getNewFilename() != "default" ) {
 				String delurl = nUploadPath + nfto.getNewFilename();
-				System.out.println("delurl : " + delurl);
 				File file  = new File(delurl);
 				file.delete(); 
 			}

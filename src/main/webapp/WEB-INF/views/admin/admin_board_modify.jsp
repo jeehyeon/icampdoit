@@ -262,7 +262,6 @@
 	}
 	 
        document.getElementById( 'mbtn' ).onclick = function() {	
-    	  //alert( $('#subject').val() );
     	 var formdata = $("#afrm").serialize();
     	 var subjectValue = $('#subject').val();
     	 var cpage = $( '#cpage').val();

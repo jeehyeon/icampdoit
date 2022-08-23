@@ -91,7 +91,6 @@ public class NBoardDAO {
 		
 		String sql = "insert into n_board values  ( 0, ?, ?, ?, ?, now(), 0, ?, ?)";
 		int result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(), to.getUcode(), to.getVcode());
-		System.out.println("dao result "+ result);
 					
 		//위에 들어가 부분에 seq값을 다시 들고 나와야 함
 		if( result != 1 ) {
@@ -100,15 +99,12 @@ public class NBoardDAO {
 		}else {
 			flag=0;
 		}
-		
-		System.out.println("vcode : " + to.getVcode());
+
 		return flag;
 	};
 		
 	//파일이 있으면 진행 없으면 진행 X
 	public int nboardWriteFileOk(NBoardTO to, NFileTO fto) {	
-		System.out.println("내용"+to.getContent());
-		System.out.println("파일명"+fto.getFilename());
 		int flag = 1;
 		String sql= "";
 		String pseq="";
@@ -146,7 +142,6 @@ public class NBoardDAO {
 			File delFile = new File(delurl);
 			if(delFile.exists()) {//파일이 존재하는지 확인
 				delFile.delete();
-				System.out.println("임시파일 삭제 성공");
 				
 			}else {
 				System.out.println("파일이 존재 하지 않습니다.");
@@ -157,13 +152,11 @@ public class NBoardDAO {
 	//글작성하다가 취소 눌렀을 경우 파일 삭제
 	public void filedel(String filename) {
 		//삭제했을 경우 임시 파일 삭제
-		System.out.println("파일삭제 메서드 : " + filename);
 		if(filename != "default") {
 			String delurl = nUploadPath + filename;
 			File delFile = new File(delurl);
 			if(delFile.exists()) {//파일이 존재하는지 확인
 				delFile.delete();
-				System.out.println("임시파일 삭제 성공");
 				
 			}else {
 				System.out.println("파일이 존재 하지 않습니다.");
@@ -183,7 +176,6 @@ public class NBoardDAO {
 	//게시글 파일체크
 	public ArrayList<NFileTO> nboardDelFileCheck(NBoardTO to) {
 		//삭제했을 경우 임시 파일 삭제
-		//System.out.println("파일삭제 메서드 : " + filename);
 		NFileTO fto = new NFileTO();
 		ArrayList<NFileTO> nfileArr = new ArrayList<NFileTO>();
 		String sql = "select filename from n_file where nseq=?";

@@ -211,7 +211,6 @@ public class Controller_Admin {
 				
 				for (int i = 0; i < filenames.length; i++) {
 					FileTO fto = new FileTO();
-					System.out.println(filenames[i]);  
 					fto.setFilename(filenames[i]);
 					fto.setFilesize(Long.parseLong(filesizes[i]) );
 					flag = dao.mboardWriteFileOk(to, fto);
@@ -261,7 +260,6 @@ public class Controller_Admin {
 				
 				for (int i = 0; i < filenames.length; i++) { 
 					FileTO fto = new FileTO();
-					System.out.println(filenames[i]);  
 					fto.setFilename(filenames[i]);
 					fto.setFilesize(Long.parseLong(filesizes[i]) );
 					flag = dao.mboardWriteFileOk(to, fto);
@@ -306,7 +304,6 @@ public class Controller_Admin {
 				
 				for (int i = 0; i < filenames.length; i++) {
 					NFileTO nfto = new NFileTO();
-					System.out.println( "test : "+filenames[i]);  
 					nfto.setFilename(filenames[i]);
 					nfto.setFilesize(Long.parseLong(filesizes[i]) );
 					flag = ndao.nboardWriteFileOk(nto, nfto);
@@ -335,7 +332,6 @@ public class Controller_Admin {
 		
 		String tempName = null;
 		File file = new File(hUploadPath + fileName);
-		System.out.println("file : " + file);
 		int lastIdx = fileName.lastIndexOf(".");
 		int i = 1;
 		while(true) {
@@ -476,7 +472,6 @@ public class Controller_Admin {
 					
 					to.setOldFilename(request.getParameter("filename"));
 					to.setOldFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
-					System.out.println("컨트롤러 modify filename : " + request.getParameter("filename"));
 				}
 				if( request.getParameter("newfilesize") != null ) { //새로운 사진이 있으면
 					to.setFilename(request.getParameter("newfilename"));
@@ -523,7 +518,6 @@ public class Controller_Admin {
 						ndao.filecnd(nto, fito);
 					};
 					if(flag==0) {
-						System.out.println("기존파일 체크 완료");
 					}else {
 						System.out.println("mboardModifyOk2() 오류!");
 					}
@@ -549,7 +543,6 @@ public class Controller_Admin {
 	
 	@RequestMapping( value="/aboarddelete_ok.do" )
 	public ModelAndView mboarddeleteOk(HttpServletRequest request, HttpSession session) throws IOException {
-		System.out.println( "aboarddeleteOk() 호출" );
 		
 		String subjectValue = "";
 		if(request.getParameter( "subjectValue" ) != null && !request.getParameter( "subjectValue" ).equals( "" ) ) {

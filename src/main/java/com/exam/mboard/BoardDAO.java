@@ -398,7 +398,6 @@ public class BoardDAO {
 			File delFile = new File(delurl);
 			if(delFile.exists()) {//파일이 존재하는지 확인
 				delFile.delete();
-				System.out.println("임시파일 삭제 성공");
 				
 			}else {
 				System.out.println("파일이 존재 하지 않습니다.");
@@ -417,7 +416,6 @@ public class BoardDAO {
 			File delFile = new File(delurl);
 			if(delFile.exists()) {//파일이 존재하는지 확인
 				delFile.delete();
-				System.out.println("임시파일 삭제 성공");
 				
 			}else {
 				System.out.println("파일이 존재 하지 않습니다.");
@@ -467,7 +465,6 @@ public class BoardDAO {
 		
 		String sql = "delete from m_cmt where pseq=?";
 		int result = jdbcTemplate.update(sql, to.getSeq());
-		System.out.println("mboardDeleteCmtAll  : " + result);
 		if( result == 0 ) {
 			System.out.println("댓글이 없음");
 			flag=0;

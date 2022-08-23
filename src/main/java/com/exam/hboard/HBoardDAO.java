@@ -50,7 +50,6 @@ public class HBoardDAO {
 			File delFile = new File(delurl);
 			if(delFile.exists()) {//파일이 존재하는지 확인
 				delFile.delete();
-				System.out.println("임시파일 삭제 성공");
 				
 			}else {
 				System.out.println("파일이 존재 하지 않습니다.");
@@ -69,7 +68,6 @@ public class HBoardDAO {
 			File delFile = new File(delurl);
 			if(delFile.exists()) {//파일이 존재하는지 확인
 				delFile.delete();
-				System.out.println("임시파일 삭제 성공");
 				
 			}else {
 				System.out.println("파일이 존재 하지 않습니다.");
@@ -88,7 +86,6 @@ public class HBoardDAO {
 			File delFile = new File(delurl);
 			if(delFile.exists()) {//파일이 존재하는지 확인
 				delFile.delete();
-				System.out.println("임시파일 삭제 성공");
 				
 			}else {
 				System.out.println("파일이 존재 하지 않습니다.");

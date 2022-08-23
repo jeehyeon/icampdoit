@@ -347,15 +347,10 @@
             		$('#filebody').append("<input type=\"hidden\" name=\"filesize\" value=\""+str[1]+"\"/>"); 
 	                
             	}else{
-            		alert("error11");
+            		alert("파일첨부에러");
             	};
 			},
 			error: function() {
-				/*
-				Toast.fire({
-				    icon: 'warning',
-				    title: '말머리를 선택해주세요.'
-				})*/
 				alert( "말머리선택하세요");
 	        }
 		});
