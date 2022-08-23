@@ -39,7 +39,7 @@
 			}).then((result) => {
 				
 	  			 if (result.isConfirmed) {
-	  				 location.href='/login.do';
+	  				 location.href='/home.do';
 	  			 } 
 	  		})
 	 				

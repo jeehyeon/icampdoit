@@ -20,7 +20,7 @@
    <script type='text/javascript'>
     const ucode = <%=ucode%>;
     if(ucode != -1){
-    	location.href='<%=prevPage%>';
+    	location.href='./home.do';
     }else{
     	document.signupdata.submit()
     };
