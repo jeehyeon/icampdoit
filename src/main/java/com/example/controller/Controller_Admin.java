@@ -383,9 +383,9 @@ public class Controller_Admin {
 		System.out.println("awritecancel() 호출");
 		
 		if( request.getParameter("subject").equals("4")  ) {
-			hdao.filedel((String) request.getParameter("filename"));
+			hdao.filedel((String) request.getParameter("newfilename"));
 		} else if( request.getParameter("subject").equals("5")  ) {
-			ndao.filedel((String) request.getParameter("filename"));
+			ndao.filedel((String) request.getParameter("newfilename"));
 		} else {
 			dao.filedel((String) request.getParameter("filename"));
 		}

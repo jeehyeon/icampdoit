@@ -244,15 +244,15 @@
 	
  	document.getElementById( 'cbtn' ).onclick = function() { 		
  		var subject = $('#subject').val();
- 		var filename = $('#modifyOk').val();
+ 		var filename = $('#newfilename').val();
  		var cpage = $( '#cpage').val();
  		var subjectValue = $('#subject').val();
  		
 	    var data = {'filename' : filename, 'subject' : subject, 'cpage' : cpage, 'subjectValue' : subjectValue };	    	
- 		
+	    var formdata = $("#afrm").serialize();
 		$.ajax({
-			data : data,
-			type : "GET",
+			data : formdata,
+			type : "post",
 			url : '/awritecancel.do',
 			success : function() {
 				location.href='/admin_board.do?subjectValue='+subjectValue+'&cpage='+cpage;
