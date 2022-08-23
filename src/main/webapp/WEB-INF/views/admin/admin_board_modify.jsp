@@ -313,6 +313,8 @@
 							title: '게시글 수정 실패',     
 							text:	' ', 
 							icon:	'warning',
+							confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
+							confirmButtonText: '확인', // confirm 버튼 텍스트 지정
 						})
 						history.back();
 					}
