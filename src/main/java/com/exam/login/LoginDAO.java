@@ -89,8 +89,7 @@ public class LoginDAO {
 			// TODO Auto-generated catch block
 			result = "-1";
 		}
-		
-		System.out.println("pwdcheck : " + result);
+
 		return result;
 	}
 	

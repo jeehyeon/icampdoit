@@ -91,7 +91,6 @@ public class Controller_Login {
 	public int idcheck(HttpServletRequest request) {
 		
 		String id = request.getParameter("id");
-		System.out.println(id);
 		int flag= dao.idCheck(id);
 		
 		return flag;
