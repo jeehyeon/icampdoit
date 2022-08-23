@@ -339,19 +339,14 @@
     		  	
     		  	if (  $( "#subjectInput" ).val() == 1 ) {
     		  		$("#form_sort").val("1");
-    		  		//alert( "1로 변경");
     		  	} else if ( $( "#subjectInput" ).val() == 2 ) {
     		  		$("#form_sort").val("2");
-    		  		//alert( "2로 변경");
     		  	} else if ( $( "#subjectInput" ).val() == 3 ) {
     		  		$("#form_sort").val("3");
-    		  		//alert( "3로 변경");
     		  	} else if ( $( "#subjectInput" ).val() == 4 ) {
     		  		$("#form_sort").val("4");
-    		  		//alert( "4로 변경");
     		  	} else if ( $( "#subjectInput" ).val() == 5 ) {
     		  		$("#form_sort").val("5");
-    		  		//alert( "5로 변경");
     		  	}	  	
 
     </script>

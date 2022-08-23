@@ -256,9 +256,7 @@
 					url : './admin_users_deleteOk.do',
 					dataType : 'text',
 					success : function(flag) {					
-						//alert( "flag값 ajax:" + flag );
 						if( flag == "0" ) {
-							//alert('회원정보 삭제 성공');
 							Swal.fire({
 								title: '회원 정보 삭제 성공',  
 								text:	'',
