@@ -149,7 +149,9 @@ public class NBoardDAO {
 				flag=0;
 			}
 		
-		};
+		}else {
+			flag=0;
+		}
 		
 		return flag;		
 	}

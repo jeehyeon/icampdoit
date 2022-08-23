@@ -359,7 +359,7 @@ public class Controller_Admin {
 				
 				for (int i = 0; i < filenames.length; i++) {
 					NFileTO nfto = new NFileTO();
-					System.out.println(filenames[i]);  
+					System.out.println( "test : "+filenames[i]);  
 					nfto.setFilename(filenames[i]);
 					nfto.setFilesize(Long.parseLong(filesizes[i]) );
 					flag = ndao.nboardWriteFileOk(nto, nfto);
