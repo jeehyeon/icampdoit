@@ -291,7 +291,7 @@ public class BoardDAO {
 	public int mboardModifyOk2(BoardTO to, FileTO fto) {
 		int flag = 0;
 		int result = 1;
-		if(to.getContent().indexOf(fto.getFilename()) != -1) {
+		if(to.getContent().indexOf(fto.getFilename()) == -1) {
 			String sql ="delete from m_file where pseq=? and filename=?";
 			result = jdbcTemplate.update(sql, to.getSeq(), fto.getFilename());	
 		}
