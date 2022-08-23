@@ -227,10 +227,11 @@ public class NBoardDAO {
 		int result = jdbcTemplate.update(sql, to.getSeq());
 					System.out.println(result);
 		System.out.println("fileDBDel flag : " + flag);
-		if( result != 1 ) {
-			System.out.println("filedbDel() 오류");
-		}else {
+		if( result != 0 ) {
 			flag = 0;
+			
+		}else {
+			System.out.println("filedbDel() 오류");
 		}
 		
 		return flag;
