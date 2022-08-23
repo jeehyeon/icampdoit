@@ -325,13 +325,13 @@ public class AdminDAO {
 	}
 	public int nboardModifyOk2(NBoardTO to, NFileTO fto) {
 		int flag = 0;
-		int result = 1;
+		int result = 0;
 		System.out.println( "seq값:" + to.getSeq() );
 		if(to.getContent().indexOf(fto.getFilename()) == -1) {
 			String sql ="delete from n_file where nseq=? and filename=?";
 			result = jdbcTemplate.update(sql, to.getSeq(), fto.getFilename());	
 		}
-		if(result == 1) {
+		if(result == 0) {
 			flag=0;
 		}else {
 			flag=1;
