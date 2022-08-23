@@ -349,9 +349,9 @@
 	
 	document.getElementById( 'cbtn' ).onclick = function() { 		
  		
- 		var cpage = $( '#cpage').val();
+ 		var cpage = $('#cpage').val();
  		var subjectValue = $('#subjectValue').val();
-	    var formdata = $("#mfrm").serialize() ; 
+	    var formdata = $("#mfrm").serialize(); 
 		$.ajax({
 			data : formdata,
 			type : "post",
@@ -371,7 +371,9 @@
     document.getElementById( 'mbtn' ).onclick = function() {	
     	   
     	 var formdata = $("#mfrm").serialize() ; 
-    	
+    	 var seq = $('#seq').val();
+  		var cpage = $('#cpage').val();
+  		var subjectValue = $('#subjectValue').val();
 	     if(($('#title').val() != '')&&($('#summernote').val() != '')){	        
 					
 			$.ajax({
