@@ -321,7 +321,7 @@ public class AdminDAO {
 		int flag = 0;
 		int result = 1;
 		System.out.println( "seq값:" + to.getSeq() );
-		if(to.getContent().indexOf(fto.getFilename()) != -1) {
+		if(to.getContent().indexOf(fto.getFilename()) == -1) {
 			String sql ="delete from n_file where nseq=? and filename=?";
 			result = jdbcTemplate.update(sql, to.getSeq(), fto.getFilename());	
 		}
