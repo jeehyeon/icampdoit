@@ -14,4 +14,7 @@
 ## 🥇💌🕊
 #### 얘들아~ 우리팀이 짱이야!! 힘내자~!!👍💖
 
+## Language
+<p><img src="https://img.shields.io/badge/json-000000?style=for-the-badge&logo=json&logoColor=white"></p>
+
 KIC 학원 project
