@@ -209,8 +209,8 @@
 		 var formdata = $('#afrm').serialize();
 		 		 
 	     var data = {'subject' : subject , 'title' : title , 'content' : content, 'vcode' : vcode, 'filename' : filename, 'filesize' : filesize};	    	
-
-	     if(($('#subject').val() != '')&&($('#title').val() != '')&&($('#summernote').val() != '')){	        
+		
+	     if(($('#subject').val() != "default")&&($('#title').val() != '')&&($('#summernote').val() != '')){	        
 					
 			$.ajax({
 				data : formdata,				
@@ -292,8 +292,15 @@
 
 			callbacks: { //이미지를 첨부하는 부분
 				onImageUpload : function(files, editor, welEditable) {
-					for (var i = 0; i < files.length; i++) {
-						sendFile(files[i], editor, welEditable);
+						if($('#subject').val() == "default"){
+							Toast.fire({
+							    icon: 'warning',
+							    title: '말머리를 선택하고, 빈칸을 모두 입력해주세요.'
+							})
+						}else{
+						for (var i = 0; i < files.length; i++) {
+							sendFile(files[i], editor, welEditable);
+						}
 					}										            
 				}					 
 			}
