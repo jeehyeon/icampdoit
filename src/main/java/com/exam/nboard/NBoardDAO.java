@@ -1,26 +1,14 @@
 package com.exam.nboard;
 
 import java.io.File;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.core.ResultSetExtractor;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.exam.login.SignUpTO;
-import com.exam.mboard.BoardTO;
-import com.exam.mboard.FileTO;
 
 @Repository
 public class NBoardDAO {
@@ -89,8 +77,6 @@ public class NBoardDAO {
 		
 		String sql = "update n_board set hit=hit+1 where seq=?";
 		
-		int result = jdbcTemplate.update(sql, to.getSeq() );
-		
 		sql = "select seq, subject, title, writer, content, date_format(wdate, '%Y-%m-%d') wdate, hit from n_board where seq=?";		
 		to = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<NBoardTO>(NBoardTO.class), to.getSeq() );
 		
@@ -103,8 +89,6 @@ public class NBoardDAO {
 				
 		int flag = 1;
 		
-		SignUpTO sto = new SignUpTO();
-		
 		String sql = "insert into n_board values  ( 0, ?, ?, ?, ?, now(), 0, ?, ?)";
 		int result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(), to.getUcode(), to.getVcode());
 		System.out.println("dao result "+ result);
@@ -116,7 +100,7 @@ public class NBoardDAO {
 		}else {
 			flag=0;
 		}
-		String pseq;
+		
 		System.out.println("vcode : " + to.getVcode());
 		return flag;
 	};
@@ -132,10 +116,8 @@ public class NBoardDAO {
 			try {
 				sql = "select seq from n_board where vcode=?";
 				pseq = jdbcTemplate.queryForObject(sql, String.class, to.getVcode());
-				System.out.println("pseq 결과값 : " + pseq);
 			} catch (DataAccessException e) {
 				// TODO Auto-generated catch block
-				System.out.println("seq값 찾기 오류");
 				return flag;
 			}
 						
@@ -186,7 +168,6 @@ public class NBoardDAO {
 			}else {
 				System.out.println("파일이 존재 하지 않습니다.");
 			}
-		
 		}
 	}
 	
@@ -195,7 +176,7 @@ public class NBoardDAO {
 
 		String sql = "select ucode from n_board where seq=?";
 			to = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<NBoardTO>(NBoardTO.class), to.getSeq() );
-			System.out.println("findViewUcode 성공");	
+
 		return to;	
 	}
 	
@@ -220,17 +201,15 @@ public class NBoardDAO {
 	//게시글 삭제메서드
 	public Integer fileDBDel(NBoardTO to) {
 		//삭제했을 경우 임시 파일 삭제
-		//System.out.println("파일삭제 메서드 : " + filename);
 		int flag = 1;
 		
 		String sql = "delete from n_file where nseq=?";
 		int result = jdbcTemplate.update(sql, to.getSeq());
-					System.out.println(result);
-		System.out.println("fileDBDel flag : " + flag);
+
 		if( result != 0 ) {
 			flag = 0;
 			
-		}else {
+		} else {
 			System.out.println("filedbDel() 오류");
 		}
 		

@@ -193,7 +193,7 @@
                 <div class="subjectdrop">
                	 <div class="me-2 ms-1" style="float:left">
 					<select class="customSelect1" name="sort" id="form_sort" data-style="btn-selectpicker" onchange="changeSubject()">
-						<option value="0">말머리 선택 &nbsp;&nbsp;</option>
+						<option value="0" disabled>말머리 선택 &nbsp;&nbsp;</option>
 						<option value="1">자유</option>
 						<option value="2">후기</option>
 						<option value="3">중고</option>
@@ -257,7 +257,7 @@
                     -->
                <input type="hidden" id="viewUcode" name="viewUcode" value="<%=viewUcode%>"/>
                <input type="hidden" id="viewSeq" name="viewSeq" value="<%=seq%>"/>      
- <%=sbHtml.toString() %>                   
+ 			   <%=sbHtml.toString() %>                   
                                       
                   </tbody>
                 </table>
@@ -270,41 +270,6 @@
           <!-- 페이징 버튼 -->
           <div class="pagenu">
           <ul class="pagination pagination-info">
-          <!--
-		    <li class="page-item">
-		      <a class="page-link" href="#link" aria-label="Previous">
-		        <span aria-hidden="true">
-		           <span class="material-icons">
-		            keyboard_arrow_left
-		          </span>
-		        </span>
-		      </a>
-		    </li>
-		    <li class="page-item">
-		      <a class="page-link" href="#link">1</a>
-		    </li>
-		    <li class="page-item active">
-		      <a class="page-link" href="#link">2</a>
-		    </li>
-		    <li class="page-item">
-		      <a class="page-link" href="#link">3</a>
-		    </li>
-		    <li class="page-item">
-		      <a class="page-link" href="#link">4</a>
-		    </li>
-		    <li class="page-item">
-		      <a class="page-link" href="#link">5</a>
-		    </li>
-		    <li class="page-item">
-		      <a class="page-link" href="#link" aria-label="Next">
-		        <span aria-hidden="true">
-		          <span class="material-icons">
-		            keyboard_arrow_right
-		          </span>
-		          
-		        </span>
-		      </a>
-		    </li> -->
 		    
 <%			
 	//페이지 하단의 << 버튼
@@ -313,14 +278,12 @@
 	} else {
 		out.println(" <li class='page-item'><a class='page-link' href='admin_board.do?cpage="+ (startBlock - blockPerPage) +"&subjectValue="+ subjectValue +"'><i class='fa fa-thin fa-angles-left'></i></a></li>");
 	}
-	//out.println(" &nbsp; ");
 	//페이지 하단의 < 버튼 => (cpage-1) 한페이지 앞으로 이동
 	if ( cpage == 1 ) {
 		out.println(" <li class='page-item'><a class='page-link' href='#'> <i class='fa fa-angle-left'></i></a></li> ");
 	} else {
 		out.println(" <li class='page-item'><a class='page-link' href='admin_board.do?cpage="+ (cpage-1) +"&subjectValue="+ subjectValue + "'><i class='fa fa-angle-left'></i></a></li> ");
 	}
-	//out.println(" &nbsp;&nbsp; ");
 	//현재 페이지
 	for ( int i=startBlock; i<=endBlock; i++ ) {
 		if ( cpage == i ) { 
@@ -329,22 +292,18 @@
 			out.println(" <li class='page-item'><a class='page-link' href='admin_board.do?subjectValue=" + subjectValue + "&cpage=" + i + "'>" + i + "</a></li> ");
 		}
 	}
-	//out.println(" &nbsp;&nbsp; ");
 	//페이지 하단의 > 버튼
 	if ( cpage == totalPage ) {
 		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-angle-right'></i></a></li> ");
 	} else {
 		out.println(" <li class='page-item'><a class='page-link' href='admin_board.do?cpage="+ (cpage+1) +"&subjectValue="+ subjectValue + "'><i class='fa fa-angle-right'></i></a></li> ");
 	}
-	//out.println(" &nbsp; ");
 	//페이지 하단의 >> 버튼
 	if ( endBlock == totalPage ) {
 		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
 	} else {
 		out.println(" <li class='page-item'><a class='page-link' href='admin_board.do?cpage="+ (startBlock + blockPerPage) +"&subjectValue="+ subjectValue + "'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
 	}
-	//out.println(" &nbsp; ");
-
 %>		    
           </ul>
          </div> 
@@ -374,7 +333,6 @@
         	
     	function changeSubject(){
     		var subjectValue = $( "#form_sort option:selected" ).val();
-    		//alert( subjectValue );
     		
     		location.href='./admin_board.do?subjectValue=' + subjectValue; 
     	};
