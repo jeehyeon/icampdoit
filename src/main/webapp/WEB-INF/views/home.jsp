@@ -661,22 +661,22 @@
         </div>
         <div class="row">
           <div class="mb-3 mb-lg-0 col-sm-6 col-lg-3">
-            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative" href="#"><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/여가.jpg" style="border-radius: 8px;" alt="여가"/>
+            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative" ><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/여가.jpg" style="border-radius: 8px;" alt="여가"/>
                 <div class="team-circle bg-primary-light"></div></a>
             </div>
           </div>
           <div class="mb-3 mb-lg-0 col-sm-6 col-lg-3">
-            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative" href="#"><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/혼캠장점.jpg" style="border-radius: 8px;" alt="장점"/>
+            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative" ><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/혼캠장점.jpg" style="border-radius: 8px;" alt="장점"/>
                 <div class="team-circle bg-primary-light"></div></a>
             </div>
           </div>
           <div class="mb-3 mb-lg-0 col-sm-6 col-lg-3">
-            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative" href="#"><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/준비물.jpg" style="border-radius: 8px;" alt="준비물"/>
+            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative" ><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/준비물.jpg" style="border-radius: 8px;" alt="준비물"/>
                 <div class="team-circle bg-primary-light"></div></a>
             </div>
           </div>
           <div class="mb-3 mb-lg-0 col-sm-6 col-lg-3">
-            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative" href="#"><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/캠핑종류.jpg" style="border-radius: 8px;" alt="캠핑종류"/>
+            <div class="card border-0 hover-animate bg-transparent"><a class="position-relative" ><img class="card-img-top team-img" src="./resources/bootstrap-5/html/img/avatar/캠핑종류.jpg" style="border-radius: 8px;" alt="캠핑종류"/>
                 <div class="team-circle bg-primary-light"></div></a>
             </div>
           </div>
