@@ -1,20 +1,16 @@
 package com.example.controller;
 
 import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.exam.login.SignUpTO;
 import com.exam.login.MypageDAO;
 import com.exam.mboard.BoardListTO;
 import com.exam.mboard.BoardTO;
-import com.exam.mboard.FileTO;
 import com.exam.search.SearchkeyDAO;
 import com.exam.search.SearchkeyTO;
 

@@ -4,46 +4,46 @@
 <%@page import="com.exam.mboard.FileTO"%>
 <%@page import="com.exam.mboard.BoardTO"%>
 <%
-//session 값 가져오기
-int ucode = -1;
-String id = "";
-if (session.getAttribute("id") != null) {
-	ucode = (int) session.getAttribute("ucode");
-	id = (String) session.getAttribute("id");
-}
-
-int cpage = (Integer) request.getAttribute("cpage");
-
-BoardTO to = (BoardTO) request.getAttribute("to");
-
-String subjectValue = (String) request.getAttribute("subjectValue");
-System.out.println("수정.jsp 말머리 : " + subjectValue);
-String seq = "";
-String subject = "";
-String writer = "";
-String title = "";
-String content = "";
-String filename = "";
-System.out.println("[filename]" + filename);
-long filesize = 0;
-int modifyUcode = to.getUcode();
-StringBuilder fileHtml = new StringBuilder();
-if (subjectValue.equals("1") || subjectValue.equals("2") || subjectValue.equals("3")) {
-
-	seq = to.getSeq();
-	subject = to.getSubject();
-	writer = to.getWriter();
-	title = to.getTitle();
-	content = to.getContent();
-
-	ArrayList<FileTO> fileArr = (ArrayList<FileTO>) request.getAttribute("fileArr");
-	for (FileTO fto : fileArr) {
-		filename = fto.getFilename();
-		filesize = fto.getFilesize();
-		fileHtml.append("<input type=\"hidden\" name=\"filename\" value=\"" + filename + "\"/>");
-		fileHtml.append("<input type=\"hidden\" name=\"filesize\" value=\"" + filesize + "\"/>");
+	//session 값 가져오기
+	int ucode = -1;
+	String id = "";
+	if (session.getAttribute("id") != null) {
+		ucode = (int) session.getAttribute("ucode");
+		id = (String) session.getAttribute("id");
 	}
-}
+	
+	int cpage = (Integer) request.getAttribute("cpage");
+	
+	BoardTO to = (BoardTO) request.getAttribute("to");
+	
+	String subjectValue = (String) request.getAttribute("subjectValue");
+	System.out.println("수정.jsp 말머리 : " + subjectValue);
+	String seq = "";
+	String subject = "";
+	String writer = "";
+	String title = "";
+	String content = "";
+	String filename = "";
+	System.out.println("[filename]" + filename);
+	long filesize = 0;
+	int modifyUcode = to.getUcode();
+	StringBuilder fileHtml = new StringBuilder();
+	if (subjectValue.equals("1") || subjectValue.equals("2") || subjectValue.equals("3")) {
+	
+		seq = to.getSeq();
+		subject = to.getSubject();
+		writer = to.getWriter();
+		title = to.getTitle();
+		content = to.getContent();
+	
+		ArrayList<FileTO> fileArr = (ArrayList<FileTO>) request.getAttribute("fileArr");
+		for (FileTO fto : fileArr) {
+			filename = fto.getFilename();
+			filesize = fto.getFilesize();
+			fileHtml.append("<input type=\"hidden\" name=\"filename\" value=\"" + filename + "\"/>");
+			fileHtml.append("<input type=\"hidden\" name=\"filesize\" value=\"" + filesize + "\"/>");
+		}
+	}
 %>
 <!DOCTYPE html>
 <head>
@@ -53,66 +53,39 @@ if (subjectValue.equals("1") || subjectValue.equals("2") || subjectValue.equals(
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="all,follow">
-<link rel="stylesheet" href="./resources/bootstrap-5/html/css/font.css"
-	type="text/css">
+<link rel="stylesheet" href="./resources/bootstrap-5/html/css/font.css" type="text/css">
 <!-- Price Slider Stylesheets -->
-<link rel="stylesheet"
-	href="./resources/bootstrap-5/html/vendor/nouislider/nouislider.css">
+<link rel="stylesheet" href="./resources/bootstrap-5/html/vendor/nouislider/nouislider.css">
 <!-- Google fonts - Playfair Display-->
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700">
 <!-- Google fonts - Poppins-->
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700">
 <!-- swiper-->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css">
 <!-- Magnigic Popup-->
-<link rel="stylesheet"
-	href="./resources/bootstrap-5/html/vendor/magnific-popup/magnific-popup.css">
+<link rel="stylesheet" href="./resources/bootstrap-5/html/vendor/magnific-popup/magnific-popup.css">
 <!-- theme stylesheet-->
-<link rel="stylesheet"
-	href="./resources/bootstrap-5/html/css/style.green.css"
-	id="theme-stylesheet">
+<link rel="stylesheet" href="./resources/bootstrap-5/html/css/style.green.css" id="theme-stylesheet">
 <!-- Custom stylesheet - for your changes-->
-<link rel="stylesheet"
-	href="./resources/bootstrap-5/html/css/custom.css">
+<link rel="stylesheet" href="./resources/bootstrap-5/html/css/custom.css">
 <!-- Favicon-->
-<link rel="shortcut icon"
-	href="./resources/bootstrap-5/html/img/logo2.svg">
-<!-- Tweaks for older IEs-->
-<!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+<link rel="shortcut icon" href="./resources/bootstrap-5/html/img/logo2.svg">
 <!-- Font Awesome CSS-->
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-	integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-	crossorigin="anonymous">
-
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<!--     Fonts and icons     -->
-<link rel="stylesheet" type="text/css"
-	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Fonts and icons     -->
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
 <!-- Font Awesome Icons -->
-<script src="https://kit.fontawesome.com/42d5adcbca.js"
-	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 <!-- Font Awesome 이거 추가함 -->
-<script src="https://kit.fontawesome.com/5251502df3.js"
-	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/5251502df3.js" crossorigin="anonymous"></script>
 <!-- Material Icons -->
-<link
-	href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 <!-- CSS Files -->
-<link rel="stylesheet"
-	href="./resources/bootstrap-5/html/summernote/summernote-lite.css" />
+<link rel="stylesheet" href="./resources/bootstrap-5/html/summernote/summernote-lite.css" />
 <!-- Sweet Alert -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
-<script
-	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 </head>
 
 <body style="padding-top: 72px;">
@@ -336,41 +309,30 @@ if (subjectValue.equals("1") || subjectValue.equals("2") || subjectValue.equals(
 	<!-- jQuery-->
 	<script src="./resources/bootstrap-5/html/vendor/jquery/jquery.min.js"></script>
 	<!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
-	<script
-		src="./resources/bootstrap-5/html/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="./resources/bootstrap-5/html/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<!-- Magnific Popup - Lightbox for the gallery-->
-	<script
-		src="./resources/bootstrap-5/html/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+	<script src="./resources/bootstrap-5/html/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 	<!-- Smooth scroll-->
-	<script
-		src="./resources/bootstrap-5/html/vendor/smooth-scroll/smooth-scroll.polyfills.min.js"></script>
+	<script src="./resources/bootstrap-5/html/vendor/smooth-scroll/smooth-scroll.polyfills.min.js"></script>
 	<!-- Bootstrap Select-->
-	<script
-		src="./resources/bootstrap-5/html/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+	<script src="./resources/bootstrap-5/html/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
 	<!-- Object Fit Images - Fallback for browsers that don't support object-fit-->
-	<script
-		src="./resources/bootstrap-5/html/vendor/object-fit-images/ofi.min.js"></script>
+	<script src="./resources/bootstrap-5/html/vendor/object-fit-images/ofi.min.js"></script>
 	<!-- Swiper Carousel                       -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
 	<script> var basePath = '' </script>
 	<!-- Main Theme JS file    -->
 	<script src="./resources/bootstrap-5/html/js/theme.js"></script>
 	<!-- Map-->
-	<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
-		integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
-		crossorigin=""></script>
+	<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
 	<!-- Available tile layers-->
 	<script src="./resources/bootstrap-5/html/js/map-layers.js"></script>
 	<script src="./resources/bootstrap-5/html/js/map-detail.js"></script>
 	<!-- jquery -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<!-- summernote -->
-	<script
-		src="./resources/bootstrap-5/html/summernote/summernote-lite.js"></script>
-	<script
-		src="./resources/bootstrap-5/html/summernote/lang/summernote-ko-KR.js"></script>
+	<script src="./resources/bootstrap-5/html/summernote/summernote-lite.js"></script>
+	<script src="./resources/bootstrap-5/html/summernote/lang/summernote-ko-KR.js"></script>
 
 	<script>
 	const Toast = Swal.mixin({
@@ -407,26 +369,9 @@ if (subjectValue.equals("1") || subjectValue.equals("2") || subjectValue.equals(
 	}
 	 
     document.getElementById( 'mbtn' ).onclick = function() {	
-    	   //alert( $('#filename').val() );
-    	  //alert( $('#newfilename').val() );
+    	   
     	 var formdata = $("#mfrm").serialize() ; 
-    	  
-    	  <!--
-    	 var subject = $('#subject').val();
-		 var title = $('#title').val();
-		 var content = $('#summernote').val();
-		 var vcode = $('#vcode').val();
-		 var filename = $('#filename').val(); 
-		 var newFilename = $('#modifyOk').val();
-		 var filesize = $('#filesize').val();
-		 var newFilesize = $('#newFilesize').val();
-		 var seq = $('#seq').val();
-		 var cpage = $( '#cpage').val();
-	 	 var subjectValue = $('#subjectValue').val();
-	 	 var modifyUcode = $('#modifyUcode').val();
-		 		 
-	     var data = {'subject': subject, 'title' : title , 'content' : content, 'vcode' : vcode, 'filename' : filename, 'newFilename' : newFilename, 'filesize' : filesize, 'newFilesize' : newFilesize, 'seq' : seq, 'cpage' : cpage, 'subjectValue' : subjectValue, 'modifyUcode' : modifyUcode};	    	
-	     -->
+    	
 	     if(($('#title').val() != '')&&($('#summernote').val() != '')){	        
 					
 			$.ajax({
@@ -535,9 +480,7 @@ if (subjectValue.equals("1") || subjectValue.equals("2") || subjectValue.equals(
 				let str= result.split('@');
 				var subject = $('#subject').val();
 				
-				//if($('#subject').val() == 1||$('#subject').val() == 2||$('#subject').val() == 3){
 					mImgUrl = mImgUrl + str[0];
-				//}
 	
 				$('#summernote').summernote( 'insertImage', mImgUrl );
 				console.log("imgUrl : "+ mImgUrl);
@@ -553,7 +496,6 @@ if (subjectValue.equals("1") || subjectValue.equals("2") || subjectValue.equals(
      				    title: '이미지파일 업로드 오류'
      				})
             	};
-            	
             		
 			},
 			error: function() {
@@ -590,9 +532,6 @@ if (subjectValue.equals("1") || subjectValue.equals("2") || subjectValue.equals(
 		//- injectSvgSprite('${path}icons/orion-svg-sprite.svg'); 
 		injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg');
 	</script>
-
-
-
 
 </body>
 </html>

@@ -24,11 +24,6 @@
 	
 	int subjectValue = (Integer)request.getAttribute( "subjectValue" );
 	
-
-	//게시판
-	//int totalRecord = (Integer)request.getAttribute( "totalRecord" );
-	//String result = (String)request.getAttribute( "result" );
-	
 	ArrayList<BoardTO> lists = listTO.getBoardLists();
 	
 	StringBuilder sbHtml = new StringBuilder();
@@ -50,10 +45,9 @@
         sbHtml.append( "<td class=\"text-center\">" + wdate + "</td>" );
         sbHtml.append( "<td class=\"text-center\">" + hit + "</td>" );
         sbHtml.append( "</tr>" );
-	}
-	
-
+	}	
 %>
+
 <!DOCTYPE html>
   <head>
     <meta charset="utf-8">
@@ -82,9 +76,6 @@
     <link rel="stylesheet" href="./resources/bootstrap-5/html/css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="./resources/bootstrap-5/html/img/logo2.svg">
-    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   </head>
@@ -209,56 +200,7 @@
                     <td class="text-end">soyeon</td>
                     <td class="text-end">2022-01-01</td>
                     <td class="text-end">0</td>
-                  </tr>
-                  <tr onmouseover="this.style.background='#f1f6ea'" onmouseout="this.style.background='white'" style="cursor: pointer;" onclick="location.href='mboardview.do'">
-                    <td class="text-center">2</td>
-                    <td class="fw-bold text-center">[후기게시판] 자라섬 캠핑장 솔직후기</td>
-                    <td></td>
-                    <td class="text-end">rina</td>
-                    <td class="text-end">2022-01-01</td>
-                    <td class="text-end">0</td>
-                  </tr>
-                  <tr onmouseover="this.style.background='#f1f6ea'" onmouseout="this.style.background='white'" style="cursor: pointer;" onclick="location.href='mboardview.do'">
-                    <td class="text-center">3</td>
-                    <td class="fw-bold text-center">[후기게시판] 자라섬 캠핑장 솔직후기</td>
-                    <td></td>
-                    <td class="text-end">jeehyeon</td>
-                    <td class="text-end">2022-01-01</td>
-                    <td class="text-end">0</td>
-                  </tr>
-                  <tr onmouseover="this.style.background='#f1f6ea'" onmouseout="this.style.background='white'" style="cursor: pointer;" onclick="location.href='mboardview.do'">
-                    <td class="text-center">4</td>
-                    <td class="fw-bold text-center">[후기게시판] 자라섬 캠핑장 솔직후기</td>
-                    <td></td>
-                    <td class="text-end">byeongchan</td>
-                    <td class="text-end">2022-01-01</td>
-                    <td class="text-end">0</td>
-                  </tr>
-                  <tr onmouseover="this.style.background='#f1f6ea'" onmouseout="this.style.background='white'" style="cursor: pointer;" onclick="location.href='mboardview.do'">
-                    <td class="text-center">5</td>
-                    <td class="fw-bold text-center">[후기게시판] 자라섬 캠핑장 솔직후기</td>
-                    <td></td>
-                    <td class="text-end">soyeon</td>
-                    <td class="text-end">2022-01-01</td>
-                    <td class="text-end">0</td>
-                  </tr>
-                  <tr onmouseover="this.style.background='#f1f6ea'" onmouseout="this.style.background='white'" style="cursor: pointer;" onclick="location.href='mboardview.do'">
-                    <td class="text-center">6</td>
-                    <td class="fw-bold text-center">[후기게시판] 자라섬 캠핑장 솔직후기</td>
-                    <td></td>
-                    <td class="text-end">soyeon</td>
-                    <td class="text-end">2022-01-01</td>
-                    <td class="text-end">0</td>
-                  </tr>
-                  <tr onmouseover="this.style.background='#f1f6ea'" onmouseout="this.style.background='white'" style="cursor: pointer;" onclick="location.href='mboardview.do'">
-                    <td class="text-center">7</td>
-                    <td class="fw-bold text-center">[후기게시판] 자라섬 캠핑장 솔직후기</td>
-                    <td></td>
-                    <td class="text-end">soyeon</td>
-                    <td class="text-end">2022-01-01</td>
-                    <td class="text-end">0</td>
-                  </tr>
-                  
+                  </tr>                  
                    -->
                    <%=sbHtml.toString() %>
                 </tbody>
@@ -272,13 +214,6 @@
           <div class="card-footer p-5 px-print-0 border-0 text-end text-sm" style="background-color: white">
             <nav aria-label="Page navigation example">
               <ul class="pagination pagination-template d-flex justify-content-center">
-              <!--  
-                <li class="page-item"><a class="page-link" href="#"> <i class="fa fa-angle-left"></i></a></li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#"> <i class="fa fa-angle-right"></i></a></li>
-                -->
                 
 <%			
 	//페이지 하단의 << 버튼
@@ -287,14 +222,12 @@
 	} else {
 		out.println(" <li class='page-item'><a class='page-link' href='mboardlist.do?cpage="+ (startBlock - blockPerPage) +"&subjectValue="+ subjectValue +"'><i class='fa fa-thin fa-angles-left'></i></a></li>");
 	}
-	//out.println(" &nbsp; ");
 	//페이지 하단의 < 버튼 => (cpage-1) 한페이지 앞으로 이동
 	if ( cpage == 1 ) {
 		out.println(" <li class='page-item'><a class='page-link' href='#'> <i class='fa fa-angle-left'></i></a></li> ");
 	} else {
 		out.println(" <li class='page-item'><a class='page-link' href='mboardlist.do?cpage="+ (cpage-1) +"&subjectValue="+ subjectValue + "'><i class='fa fa-angle-left'></i></a></li> ");
 	}
-	//out.println(" &nbsp;&nbsp; ");
 	//현재 페이지
 	for ( int i=startBlock; i<=endBlock; i++ ) {
 		if ( cpage == i ) { 
@@ -303,37 +236,26 @@
 			out.println(" <li class='page-item'><a class='page-link' href='mboardlist.do?subjectValue=" + subjectValue + "&cpage=" + i + "'>" + i + "</a></li> ");
 		}
 	}
-	//out.println(" &nbsp;&nbsp; ");
 	//페이지 하단의 > 버튼
 	if ( cpage == totalPage ) {
 		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-angle-right'></i></a></li> ");
 	} else {
 		out.println(" <li class='page-item'><a class='page-link' href='mboardlist.do?cpage="+ (cpage+1) +"&subjectValue="+ subjectValue + "'><i class='fa fa-angle-right'></i></a></li> ");
 	}
-	//out.println(" &nbsp; ");
 	//페이지 하단의 >> 버튼
 	if ( endBlock == totalPage ) {
 		out.println(" <li class='page-item'><a class='page-link' href='#'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
 	} else {
 		out.println(" <li class='page-item'><a class='page-link' href='mboardlist.do?cpage="+ (startBlock + blockPerPage) +"&subjectValue="+ subjectValue + "'><i class='fa fa-thin fa-angles-right'></i></a></li> ");
 	}
-	//out.println(" &nbsp; ");
 
 %>
               </ul>
             </nav>  
-            <!-- 
-            <p class="mb-0">Thank you for you business. Directory, Inc.</p>
-            -->
           </div>
         </div>
       </div>
     </section>
-    <!-- 
-	<section class="py-6">
-	
-	</section>
-	-->
     <!-- Footer - 관리자 페이지 이동 부분 넣을 곳 -->
     <footer class="position-relative z-index-10 d-print-none">
            
@@ -374,46 +296,14 @@
 	    	
 	    }
     </script>
+    
     <script>
-    	function changePage(){
-    		
-    	}
-    	
     	function changeSubject(){
     		subjectValue = $( "#form_sort option:selected" ).val();
     		console.log( subjectValue );
     		
     		location.href='./mboardlist.do?subjectValue=' + subjectValue; 
-    		/*
-    		$.ajax({
-    			url: './mboardlist.do',
-    			type: 'post',
-    			data: {
-    				subjectValue : $( "#form_sort option:selected" ).val()
-    			},
-    			success : {
-    				
-    			}
-    			
-    			//dataType: "text",
-    			//contentType :   "application/x-www-form-urlencoded; charset=UTF-8",
-    			
-    			success: function(result){
-    				
-    				
-    				$("#tbody").html( result );
-    				
-    				
-    				let totalRecord = $("tr").length -1;
-    				
-    				$("#totalRecord").text("전체 : " + totalRecord + " 건");
-    				
-    				
     		
-    			}
-    			
-    		});
-    		*/
     	};
     </script>
 
@@ -441,9 +331,7 @@
       //- injectSvgSprite('${path}icons/orion-svg-sprite.svg'); 
       injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg'); 
       
-    </script>
-    <!-- jQuery-->
-   
+    </script>   
     <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
     <script src="./resources/bootstrap-5/html/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Magnific Popup - Lightbox for the gallery-->

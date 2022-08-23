@@ -2,19 +2,13 @@ package com.exam.hboard;
 
 import java.io.File;
 import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 import com.exam.login.SignUpTO;
-import com.exam.mboard.BoardTO;
-import com.exam.mboard.FileTO;
-import com.exam.nboard.NBoardTO;
-import com.exam.nboard.NFileTO;
+
 
 @Repository
 public class HBoardDAO {
@@ -48,6 +42,7 @@ public class HBoardDAO {
 	
 	//파일 검사 및 이동
 	public void filecnd(HBoardTO hto) {
+		
 		//삭제했을 경우 임시 파일 삭제
 		if(hto.getContent().indexOf(hto.getOldFilename()) == -1) {
 			String delurl = hUploadPath + hto.getOldFilename();
@@ -66,6 +61,7 @@ public class HBoardDAO {
 	
 	//파일 검사 및 이동
 	public void newfilecnd(HBoardTO hto) {
+		
 		//삭제했을 경우 임시 파일 삭제
 		if(hto.getContent().indexOf(hto.getNewFilename()) == -1) {
 			String delurl = hUploadPath + hto.getNewFilename();
@@ -84,6 +80,7 @@ public class HBoardDAO {
 	
 	//글작성하다가 취소 눌렀을 경우 파일 삭제
 	public void filedel(String filename) {
+		
 		//삭제했을 경우 임시 파일 삭제
 		if(filename != "default") {
 			String delurl = hUploadPath + filename;

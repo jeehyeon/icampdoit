@@ -11,7 +11,6 @@
 		id = (String)session.getAttribute("id");
 	}
 	int cpage = (Integer)request.getAttribute("cpage");
-
 	
 %>
 <!DOCTYPE html>
@@ -39,12 +38,8 @@
     <link rel="stylesheet" href="./resources/bootstrap-5/html/css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="./resources/bootstrap-5/html/img/logo2.svg">
-    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">	
 	<!--     Fonts and icons     -->
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -57,7 +52,7 @@
 	<!-- Sweet Alert -->
   	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
-	
+		
 	<script type="text/javascript">
   
 	window.onload = function() {
@@ -211,7 +206,6 @@
         </div>
      <!-- Write Section-->
 
-
 		<!-- 목록 시작 -->
 		<div class="row">
 		  <div class="col-lg-8">
@@ -298,14 +292,7 @@
 	<script src="./resources/bootstrap-5/html/summernote/lang/summernote-ko-KR.js"></script>
 
 	<script>
-		/* var win = navigator.platform.indexOf('Win') > -1;
-		if (win && document.querySelector('#sidenav-scrollbar')) {
-			var options = {
-				damping : '0.5'
-			}
-			Scrollbar.init(document.querySelector('#sidenav-scrollbar'),
-					options);
-		} */
+
 		document.getElementById( 'cbtn' ).onclick = function() {
 			var formdata = $("#wfrm").serialize() ;
 			const Toast = Swal.mixin({
@@ -428,9 +415,7 @@
 		        }
 			});
 		}
-		
-		
-		
+	
 	</script>
   </body>
 </html>

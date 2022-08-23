@@ -79,9 +79,6 @@
     <link rel="stylesheet" href="./resources/bootstrap-5/html/css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="./resources/bootstrap-5/html/img/logo2.svg">
-    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <!-- Sweet Alert -->
@@ -188,12 +185,8 @@
             <div class="text-block">
               <p class="text-muted"> <%=content %> </p>
               <p></p>
-              <!-- <p class="text-muted"> 내용2 </p>  -->
             </div>
-            
-            
-            <!-- <div class="text-block">
-              <h5 class="text-uppercase text-muted mb-0" style="font-family: 'BMJUA';">댓글</h5><hr> -->
+
              <!-- comments-->
              <div id="cmtbody" class="mt-5">             
               
@@ -223,10 +216,8 @@
                   <div class="mb-4">
                      <label class="form-label" for="comment"> <span class="required"></span></label>
                      <textarea class="form-control" name="comment" id="comment" rows="3" placeholder="내용을 입력해주세요." required data-msg="Please enter your comment"></textarea>
-                     </div>
-                     
-                    <div class="btn btn-outline-primary" onclick="cmtInsert()" style="float: right;"><i class="far fa-comment"></i>등록하기</div>
-                    
+                     </div>                    
+                    <div class="btn btn-outline-primary" onclick="cmtInsert()" style="float: right;"><i class="far fa-comment"></i>등록하기</div>                   
                 </form>
               </div>
             </div>
@@ -241,10 +232,7 @@
 				<input type="button" value="수정" id="view-mbtn" class="btn btn-primary" style="cursor: pointer;" />
 				<input type="button" value="삭제" id="view-dbtn" name="view-dbtn" class="btn btn-primary" style="cursor: pointer;" />				
 			  </div>
-            </div>
-            
-          <!-- <li><p><a class="btn btn-link text-primary" href="#"><i class="fa fa-solid fa-angles-up"></i> top</a></p></li> -->
-            
+            </div>                       
           </div>
         </div>
       </div>
@@ -353,11 +341,7 @@
   			})
   			
 	  })
-	   
-	   
-	   
-	   
-	   
+	      
 	   //댓글삭제버튼
 	  $(".dbtn").on("click", function(){
 		 	var replyseq = $(this).attr("deldata");
@@ -462,23 +446,6 @@
 				  			 } 
 				  		 })
         				
-        				/*$("#cmtbody").empty();
-        				$("#comment").val("");
-        				$.each(data.cmtList, function(index, cmtList){
-        					let deldata = '{"seq" :"'+cmtList.seq+'", "ucode" : "'+cmtList.ucode +'"  }'
-        					$("#cmtbody").prepend('<div class="row">'
-        										+'<div class="col-9"><strong>'+cmtList.writer +'</strong></div>'
-        										+'<input type="button" class="dbtn btn btn-outline-primary col-1 ms-auto" align="right" value="삭제" deldata="'+deldata+'">'
-        										+'<div>'
-        										+'<p class="text-uppercase text-sm text-muted"><i class="far fa-clock"></i>'+cmtList.wdate +'</p>'
-        										+'<p class="text-muted" style="font-family: \'BMJUA\';">'+ cmtList.comment+'</p>'
-        										+'</div>'
-        										+'</div>'
-        										+'<hr/>');
-
-        				});*/
-			
-        				
         			}, 
         			fail: function(error){
         				Swal.fire({
@@ -539,16 +506,5 @@
     <!-- Available tile layers-->
     <script src="./resources/bootstrap-5/html/js/map-layers.js"> </script>
     <script src="./resources/bootstrap-5/html/js/map-detail.js"></script>
-    <!--  
-    <script>
-      createDetailMap({
-          mapId: 'detailMap',
-          mapCenter: [40.732346, -74.0014247],
-          markerShow: true,
-          markerPosition: [40.732346, -74.0014247],
-          markerPath: 'img/marker.svg',
-      })
-    </script>
-    -->
   </body>
 </html>

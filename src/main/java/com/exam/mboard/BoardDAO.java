@@ -1,21 +1,13 @@
 package com.exam.mboard;
 
 import java.io.File;
-import java.nio.file.spi.FileSystemProvider;
 import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
-import com.exam.hboard.HBoardTO;
 import com.exam.login.SignUpTO;
-import com.exam.mboard.BoardListTO;
-import com.exam.mboard.BoardTO;
-import com.exam.nboard.NBoardTO;
-import com.exam.nboard.NFileTO;
 
 @Repository
 public class BoardDAO {
@@ -26,10 +18,6 @@ public class BoardDAO {
 	String url = System.getProperty("user.dir");
 	private String mUploadPath = url +"/src/main/webapp/upload/";	
 		
-	// write
-	public void mboardWrite() {		
-	}
-		
 	// write_ok
 	public int mboardWriteOk(BoardTO to) {	
 				
@@ -39,7 +27,6 @@ public class BoardDAO {
 		
 		String sql = "insert into m_board values  ( 0, ?, ?, ?, ?, now(), 0, ?, 0, ?)";
 		int result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(), to.getUcode(), to.getVcode());
-					System.out.println(result);
 					
 		//위에 들어가 부분에 seq값을 다시 들고 나와야 함
 		if( result != 1 ) {
@@ -49,21 +36,21 @@ public class BoardDAO {
 			flag=0;
 		}
 		String pseq;
-		System.out.println("vcode : " + to.getVcode());
+		
 		return flag;
 	};
 		//파일이 있으면 진행 없으면 진행 X
 	public int mboardWriteFileOk(BoardTO to, FileTO fto) {	
+		
 		int flag = 1;
 		String sql="";
 		String pseq="";
+		
 		if(to.getContent().indexOf(fto.getFilename()) != -1) {
 			try {
 				sql = "select seq from m_board where vcode=?";
 				pseq = jdbcTemplate.queryForObject(sql, String.class, to.getVcode());
-				System.out.println("pseq 결과값 : " + pseq);
 			} catch (DataAccessException e) {
-				// TODO Auto-generated catch block
 				System.out.println("seq값 찾기 오류");
 				return flag;
 			}
@@ -82,46 +69,6 @@ public class BoardDAO {
 		
 		return flag;		
 	}
-	
-	// list
-	public ArrayList<BoardTO> mboardList() {
-				
-		String sql = "select seq, subject, writer, title, date_format(wdate, '%Y.%m.%d') wdate, hit, ucode from m_board order by seq desc";
-		ArrayList<BoardTO> lists = (ArrayList<BoardTO>)jdbcTemplate.query(
-				sql, new BeanPropertyRowMapper<BoardTO>(BoardTO.class) );
-		
-		return lists;		
-	}
-	
-	
-	public ArrayList<BoardTO> mboardListFree(BoardTO to) {
-		
-		String sql = "select seq, subject, writer, title, date_format(wdate, '%Y.%m.%d') wdate, hit, ucode from m_board where subject=? order by seq desc";
-		ArrayList<BoardTO> lists = (ArrayList<BoardTO>)jdbcTemplate.query(
-				sql, new BeanPropertyRowMapper<BoardTO>(BoardTO.class), to.getSubject() );
-		
-		return lists;		
-	}
-	
-	/*
-	public ArrayList<BoardTO> mboardListReview() {
-		
-		String sql = "select seq, subject, writer, title, date_format(wdate, '%Y.%m.%d') wdate, hit from m_board where subject='1' order by seq desc";
-		ArrayList<BoardTO> lists = (ArrayList<BoardTO>)jdbcTemplate.query(
-				sql, new BeanPropertyRowMapper<BoardTO>(BoardTO.class) );
-		
-		return lists;		
-	}
-	
-	public ArrayList<BoardTO> mboardListTrade() {
-		
-		String sql = "select seq, subject, writer, title, date_format(wdate, '%Y.%m.%d') wdate, hit from m_board where subject='3' order by seq desc";
-		ArrayList<BoardTO> lists = (ArrayList<BoardTO>)jdbcTemplate.query(
-				sql, new BeanPropertyRowMapper<BoardTO>(BoardTO.class) );
-		
-		return lists;		
-	}
-	*/
 	
 	// listTO
 	public BoardListTO mboardList(BoardListTO listTO, int subjectValue ) {
@@ -168,6 +115,7 @@ public class BoardDAO {
 	}
 	
 	public BoardListTO mboardSubjectChange(BoardListTO blistTO, BoardTO to ) {
+		
 		int cpage = blistTO.getCpage();
 		int recordPerPage = blistTO.getRecordPerPage();// 한페이지에 글 개수 5*2=10개
 		int blockPerPage = blistTO.getBlockPerPage();// 한 화면에 보이는 페이지수 5개
@@ -224,7 +172,7 @@ public class BoardDAO {
 	
 	//view Comment
 	public ArrayList<CmtTO> mboardViewComment( CmtTO cto ){
-		System.out.println("mboardViewComment() seq값 체크 :" + cto.getPseq());
+		
 		String sql = "select seq, pseq, writer, content, date_format(wdate, '%Y.%m.%d %H:%i') wdate, ucode from m_cmt where pseq=? order by seq asc";
 		ArrayList<CmtTO> lists = (ArrayList<CmtTO>)jdbcTemplate.query(
 				sql, new BeanPropertyRowMapper<CmtTO>(CmtTO.class), cto.getPseq());
@@ -240,7 +188,6 @@ public class BoardDAO {
 		
 		String sql = "insert into m_cmt values ( 0, ?, ?, ?, now(), ?)";
 		int result = jdbcTemplate.update(sql, cto.getPseq(), cto.getWriter(), cto.getContent(), cto.getUcode() );
-					System.out.println(result);
 
 		if( result != 1 ) {
 			System.out.println("m_cmt insert 오류");
@@ -257,7 +204,6 @@ public class BoardDAO {
 		
 		String sql = "delete from m_cmt where seq=?";
 		int result = jdbcTemplate.update(sql, cto.getSeq());
-					System.out.println(result);
 
 		if( result != 1 ) {
 			System.out.println("m_cmt Delete 오류");
@@ -279,6 +225,7 @@ public class BoardDAO {
 	}
 	
 	public int mboardModifyOk1(BoardTO to) {
+		
 		int flag = 1;
 		String	sql = "update m_board set subject=?, title=?, writer=?, content=? where seq=? and ucode=?";
 		int result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(),
@@ -288,13 +235,15 @@ public class BoardDAO {
 		}
 		return flag;
 	}
+	
 	public int mboardModifyOk2(BoardTO to, FileTO fto) {
+		
 		int flag = 0;
 		int result = 0;
 		if(to.getContent().indexOf(fto.getFilename()) == -1) {
 			String sql ="delete from m_file where pseq=? and filename=?";
 			result = jdbcTemplate.update(sql, to.getSeq(), fto.getFilename());
-			System.out.println("mboardModifyOk2 result 값 : "+ result);
+			
 		}
 		if(result == 0) {
 			flag=0;
@@ -305,6 +254,7 @@ public class BoardDAO {
 	}
 	
 	public int mboardModifyOk3(BoardTO to, FileTO fto) {
+		
 		int flag = 0;
 		int result = 1;
 		if(to.getContent().indexOf(fto.getFilename()) != -1) {
@@ -318,15 +268,12 @@ public class BoardDAO {
 		}
 		return flag;
 	}
-	
-	
+		
 	// modify_ok
 	public int mboardModifyOk(BoardTO to, FileTO fto) {	
 		
 		int flag = 1;
 		String oldFilename =fto.getFilename();
-		System.out.println("oldFilename : " + fto.getFilename());
-		System.out.println("새파일이름 : " + fto.getNewFilename());
 		
 		int result = 0;
 		
@@ -336,34 +283,29 @@ public class BoardDAO {
 			result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(),
 					to.getSeq(), to.getUcode() );
 			
-			System.out.println( "result1 :"+result);
 			// 기존 텍스트 -> 새파일 첨부시 : m_file insert
 			if( to.getContent().indexOf( fto.getNewFilename())!=-1 && fto.getFilesize()==0 ) {
 				sql = "insert into m_file values ( 0, ?, ?, ? )";
 				result = jdbcTemplate.update(sql, to.getSeq(), fto.getNewFilename(), fto.getNewFilesize());
 				result = 3;
-				System.out.println( "result2 :"+result);
+				
 			// 새파일 첨부하고 저장까지 한 경우
 			} else if ( to.getContent().indexOf( fto.getNewFilename())!=-1 && oldFilename!=null ) {
-				System.out.println("22뉴파일 : "+fto.getNewFilename());
-				System.out.println("22nseq : "+to.getSeq());
+				
 				sql = "update m_file set filename=?, filesize=? where pseq=?";
 				result = jdbcTemplate.update(sql, fto.getNewFilename(), fto.getNewFilesize(), to.getSeq());
 				result = 1;
-				System.out.println( "result3 :"+result);
+				
 			// 새파일 첨부 후 저장 전 삭제
 			} else if ( !fto.getNewFilename().equals("default") && to.getContent().indexOf(fto.getNewFilename())==-1) {
 				sql = "update m_board set subject=?, title=?, writer=?, content=? where seq=? and ucode=?";
 				result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(),
 						 to.getSeq(), to.getUcode() );
 				result = 4;
-				System.out.println( "result4 :"+result);
 			} 	
 			
 			if( result != 1 ) {
-				System.out.println( "newfilename insert: "+fto.getNewFilename());
-				System.out.println( "newfilesize insert: "+fto.getNewFilesize());
-				System.out.println("fileinsert");
+			
 				flag = 1;
 			} else {
 				flag = 0;
@@ -376,21 +318,21 @@ public class BoardDAO {
 			result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(),
 					 to.getSeq(), to.getUcode() );
 			result = 2;
-			System.out.println( "result5:"+result);
+			
 		// 기존 파일이름 null, 새파일이름이 default,, to.getcontent의 내용에 새파일이름이 없을때
 		} else if( to.getContent().indexOf(fto.getFilename()) == -1) {
 			String	sql = "update m_board set subject=?, title=?, writer=?, content=? where seq=? and ucode=?";
 			result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(),
 					 to.getSeq(), to.getUcode() );
 			result = 3;
-			System.out.println( "result6 :"+result);
+			
 			if( oldFilename != null ) {
 				try {
 					sql = "delete from m_file where pseq=?";
 					result = jdbcTemplate.update(sql, to.getSeq());	
 					result = 1;
 				} catch (DataAccessException e) {
-					//return result;
+					
 				}
 			}
 		} 
@@ -400,7 +342,6 @@ public class BoardDAO {
 			// 새로운 파일 삭제
 			if( fto.getNewFilename() != "default" ) {
 				String delurl = mUploadPath + fto.getNewFilename();
-				System.out.println("delurl : " + delurl);
 				File file  = new File(delurl);
 				file.delete(); 
 				System.out.println("새 파일 삭제완료 : ");
@@ -429,13 +370,6 @@ public class BoardDAO {
 			System.out.println("임시파일 삭제 ");
 		}
 		return flag;
-	}
-	
-	// delete
-	public BoardTO mboardDelete(BoardTO to) {
-		
-		
-		return to;
 	}
 	
 	// delete_ok
@@ -476,8 +410,8 @@ public class BoardDAO {
 	}
 	//글작성하다가 취소 눌렀을 경우 파일 삭제
 	public void filedel(String filename) {
+		
 		//삭제했을 경우 임시 파일 삭제
-		System.out.println("파일삭제 메서드 : " + filename);
 		if(filename != "default") {
 			String delurl = mUploadPath + filename;
 			File delFile = new File(delurl);
@@ -491,32 +425,31 @@ public class BoardDAO {
 		
 		}
 	}
+	
 	//게시글 삭제메서드
 	public ArrayList<FileTO> mboardDelFileCheck(BoardTO to) {
+		
 		//삭제했을 경우 임시 파일 삭제
-		//System.out.println("파일삭제 메서드 : " + filename);
 		FileTO fto = new FileTO();
 		ArrayList<FileTO> fileArr = new ArrayList<FileTO>();
 		String sql = "select filename from m_file where pseq=?";
 		try {
 			fileArr = (ArrayList<FileTO>)jdbcTemplate.query(sql, new BeanPropertyRowMapper<FileTO>(FileTO.class), to.getSeq() );
 		} catch (DataAccessException e) {
-			// TODO Auto-generated catch block
 			fto.setFilename("null");
 			fileArr.add(fto);
-		}
-		
+		}		
 		return fileArr;	
 	}
+	
 	//게시글 삭제메서드
 	public Integer fileDBDel(BoardTO to) {
+		
 		//삭제했을 경우 임시 파일 삭제
-		System.out.println("파일삭제 메서드 : " + to.getSeq());
 		int flag = 1;
 		
 		String sql = "delete from m_file where pseq=?";
 		int result = jdbcTemplate.update(sql, to.getSeq());
-					System.out.println(result);
 
 		if( result != 1 ) {
 			System.out.println("filedbDel() 오류");
@@ -540,8 +473,7 @@ public class BoardDAO {
 		}else if(result != 0) {
 			System.out.println("댓글이 있음 삭제 완료");
 			flag=0;
-		}
-		
+		}		
 		return flag;
 	}
 	
@@ -550,7 +482,6 @@ public class BoardDAO {
 
 		String sql = "select ucode from m_board where seq=?";
 			to = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<BoardTO>(BoardTO.class), to.getSeq() );
-			System.out.println("findViewUcode 성공");	
 		return to;	
 	}
 	
@@ -564,7 +495,6 @@ public class BoardDAO {
 		try {
 			fileArr = (ArrayList<FileTO>)jdbcTemplate.query(sql, new BeanPropertyRowMapper<FileTO>(FileTO.class), to.getSeq() );
 		} catch (DataAccessException e) {
-			// TODO Auto-generated catch block
 			fto.setFilename("null");
 			fileArr.add(fto);
 		}

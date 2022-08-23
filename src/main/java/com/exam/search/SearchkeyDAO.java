@@ -1,30 +1,12 @@
 package com.exam.search;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
-import com.exam.login.SignUpTO;
-import com.exam.mboard.BoardTO;
-import com.exam.mboard.CmtTO;
-import com.exam.mboard.FileTO;
 
 @Repository
 public class SearchkeyDAO {
