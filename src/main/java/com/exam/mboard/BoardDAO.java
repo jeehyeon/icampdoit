@@ -290,12 +290,13 @@ public class BoardDAO {
 	}
 	public int mboardModifyOk2(BoardTO to, FileTO fto) {
 		int flag = 0;
-		int result = 1;
+		int result = 0;
 		if(to.getContent().indexOf(fto.getFilename()) == -1) {
 			String sql ="delete from m_file where pseq=? and filename=?";
-			result = jdbcTemplate.update(sql, to.getSeq(), fto.getFilename());	
+			result = jdbcTemplate.update(sql, to.getSeq(), fto.getFilename());
+			System.out.println("mboardModifyOk2 result 값 : "+ result);
 		}
-		if(result == 1) {
+		if(result == 0) {
 			flag=0;
 		}else {
 			flag=1;
