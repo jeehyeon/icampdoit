@@ -661,7 +661,8 @@ public class Controller_Admin {
 				//게시글 삭제 전 이미지 파일 확인
 				//DB에 파일 데이터가 있는지 조회
 				nfileArr = ndao.nboardDelFileCheck(to);
-				if( nfileArr != null ) {
+				System.out.println("test2 : " + nfileArr);
+				if( nfileArr != null && nfileArr.size()!=0 ) {
 					//파일이 존재 => 삭제
 					System.out.println("파일이 존재");
 					//디렉터리 폴더에 파일 삭제
@@ -670,7 +671,8 @@ public class Controller_Admin {
 					}
 					//DB table에서 항목 삭제
 					int result= ndao.fileDBDel(to);
-					 if(result == 1) {
+					System.out.println("test1 :" + result);
+					 if(result == 0) {
 						 flag=0;
 					 }else {
 						 flag=1;
