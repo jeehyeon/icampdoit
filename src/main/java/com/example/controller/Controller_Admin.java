@@ -310,12 +310,14 @@ public class Controller_Admin {
 			//dao.filecnd(to, fto);
 			
 		} else if( request.getParameter("subject").equals("4")  ) {
+			System.out.println("혼캠 작성 메서드1");
 			String subject = request.getParameter("subject");
 			hto.setSubject(subject);
 			hto.setTitle(request.getParameter("title"));
 			hto.setWriter((String) session.getAttribute("id"));
 			hto.setContent(request.getParameter("content"));
 			hto.setUcode((Integer) session.getAttribute("ucode"));
+			hto.setVcode(request.getParameter("vcode"));
 			//System.out.println("4ucode : " + hto.getUcode());			
 			if(request.getParameter("filesize") != null ) {
 				hto.setFilename(request.getParameter("filename"));
@@ -324,17 +326,19 @@ public class Controller_Admin {
 				hto.setOldFilename(request.getParameter("filename"));
 				hto.setOldFilesize(Long.parseLong(request.getParameter("filesize").trim()) );
 				System.out.println("컨트롤러write 혼캠 oldfilename :" + hto.getOldFilename() );
+				
+				hdao.filecnd(hto);
 			}
-			hto.setVcode(request.getParameter("vcode"));
+			flag = hdao.aboardWriteOk(hto);
 			//System.out.println("4vcode : " + hto.getVcode());
 			
-			flag = hdao.aboardWriteOk(hto);
+			
 			//System.out.println("content : " + hto.getContent());			
 			//System.out.println("4flag : " + flag);
 			
-			System.out.println( "컨트롤로 혼캠 writeok 파일:" + hto.getOldFilename() );
+			//System.out.println( "컨트롤로 혼캠 writeok 파일:" + hto.getOldFilename() );
 			
-			hdao.filecnd(hto);
+			
 			
 		} else if( request.getParameter("subject").equals("5")  ) {
 			String subject = request.getParameter("subject");
