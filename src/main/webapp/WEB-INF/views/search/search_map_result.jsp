@@ -260,6 +260,7 @@
               </div>
                
               <div class="col-md-4">
+              <label class="" for="gugun">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label>
                 <button class="btn btn-primary col-md-8" type="submit" id="searchlist"> <i class="fas fa-search me-1"></i>Search</button>
               </div>
             </div>  
