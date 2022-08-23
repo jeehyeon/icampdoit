@@ -3,7 +3,6 @@ package com.exam.admin;
 import java.util.ArrayList;
 
 import com.exam.login.SignUpTO;
-import com.exam.mboard.BoardTO;
 
 import lombok.Getter;
 import lombok.Setter;

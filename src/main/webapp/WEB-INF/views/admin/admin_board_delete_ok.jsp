@@ -48,8 +48,8 @@
 					title: '게시글 삭제에 실패하였습니다.',     
 					text:	'', 
 					icon:	'error',
-					confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
-					confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+					confirmButtonColor: '#1cb36e', 
+					confirmButtonText: '확인', 
 					
 			}).then((result) => {
 				

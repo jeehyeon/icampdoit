@@ -8,9 +8,8 @@
 		ucode = (int)session.getAttribute("ucode");
 		id = (String)session.getAttribute("id");
 	}
-	int cpage = (Integer)request.getAttribute("cpage");
-
 	
+	int cpage = (Integer)request.getAttribute("cpage");
 %>
 
 <!DOCTYPE html>
@@ -138,7 +137,6 @@
 		  </form>
 		</div>
 
-	
 	<!--   Core JS Files   -->
 	<script src="./resources/bootstrap-5/html/admin/js/core/popper.min.js"></script>
 	<script src="./resources/bootstrap-5/html/admin/js/core/bootstrap.min.js"></script>
@@ -200,8 +198,6 @@
 	        }
 		});
 	}
- 	
- 	
 	 
        document.getElementById( 'wbtn' ).onclick = function() {	
 		 var subject = $('#subject').val();
@@ -243,8 +239,8 @@
 							title: '글쓰기 실패',     
 							text:	'', 
 							icon:	'error',
-							confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
-							confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+							confirmButtonColor: '#1cb36e', 
+							confirmButtonText: '확인', 
 							
 					}).then((result) => {
 						
@@ -272,7 +268,6 @@
 	$(document).ready(function() {
 		let date = new Date().getTime().toString(36);
 		$('#vcode').val(date);
-		console.log("date : " +date);
 
 		var fontList = ['맑은 고딕','굴림','돋움','바탕','궁서','NotoSansKR','Arial','Courier New','Verdana','Tahoma'];
 		$('#summernote').summernote({
@@ -326,8 +321,6 @@
 			processData : false,
 			success : function(result) {
 				
-				console.log("result : " +result);
-				
 				let str= result.split('@');
 				var subject = $('#subject').val();
 				
@@ -339,25 +332,24 @@
 					imgUrl = mImgUrl + str[0];
 				}
 				
-				console.log("imgUrl : " +imgUrl);
-				
 				$('#summernote').summernote( 'insertImage', imgUrl );
 				
 				if(str[0] != null){
             		
 					$('#filebody').append("<input type=\"hidden\" name=\"filename\" value=\""+str[0]+"\"/>");
             		$('#filebody').append("<input type=\"hidden\" name=\"filesize\" value=\""+str[1]+"\"/>"); 
-
 	                
             	}else{
             		alert("error11");
             	};
 			},
 			error: function() {
+				/*
 				Toast.fire({
 				    icon: 'warning',
 				    title: '말머리를 선택해주세요.'
-				})
+				})*/
+				alert( "말머리선택하세요");
 	        }
 		});
 	}

@@ -1,6 +1,6 @@
-<%@page import="ch.qos.logback.core.recovery.ResilientSyslogOutputStream"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="ch.qos.logback.core.recovery.ResilientSyslogOutputStream"%>
 <%@ page import="com.exam.hboard.HBoardTO" %>
 <%@ page import="com.exam.nboard.NBoardTO" %>
 <%@ page import="com.exam.nboard.NFileTO" %>
@@ -15,10 +15,10 @@
 		ucode = (int)session.getAttribute("ucode");
 		id = (String)session.getAttribute("id");
 	}
+	
 	int cpage = (Integer)request.getAttribute("cpage");
 	
 	String subjectValue = (String)request.getAttribute( "subjectValue" );
-	//System.out.println("수정.jsp 말머리 : " + subjectValue);
 	String seq = "";
 	String subject = "";
 	String writer = "";
@@ -27,7 +27,7 @@
 	String wdate = "";
 	String hit = "";	
 	String filename = "";
-	System.out.println("[filename]" + filename);
+	
 	long filesize = 0;	
 	StringBuilder fileHtml = new StringBuilder();
 	
@@ -43,8 +43,6 @@
 		hit = hto.getHit();	
 		filename = hto.getFilename();
 		filesize = hto.getFilesize();
-		System.out.println("[jsp 혼캠filename]" + filename);
-		//System.out.println("[content]" + content);
 
 		fileHtml.append("<input type=\"hidden\" name=\"filename\" value=\"" + filename + "\"/>");
 		fileHtml.append("<input type=\"hidden\" name=\"filesize\" value=\"" + filesize + "\"/>");
@@ -63,7 +61,6 @@
 		hit = nto.getHit();	
 		filename = nfto.getFilename();
 		filesize = nfto.getFilesize();
-		System.out.println("[jsp 공지filename]" + filename);
 		
 		ArrayList<NFileTO> fileArr = (ArrayList<NFileTO>) request.getAttribute("fileArr");
 		for (NFileTO fto : fileArr) {
@@ -74,8 +71,6 @@
 		}
 		
 	}
-	
-	//System.out.println("수정.jsp 말머리2 : " + to.getSubject());
 %>
 
 <!DOCTYPE html>
@@ -273,20 +268,7 @@
     	 var cpage = $( '#cpage').val();
     	 var seq = $('#seq').val();
     	 var filename = $('input[name=filename]').val();
-    	 alert("파일이름:" + filename );
-    	  <!--
-    	 var subject = $('#subject').val();
-		 var title = $('#title').val();
-		 var content = $('#summernote').val();
-		 var vcode = $('#vcode').val();
-		 var filename = $('#filename').val(); 
-		 var newFilename = $('#modifyOk').val();
-		 var filesize = $('#filesize').val();
-		 var newFilesize = $('#newFilesize').val();
-		 var seq = $('#seq').val();
-		 		 
-	     var data = {'subject': subject, 'title' : title , 'content' : content, 'vcode' : vcode, 'filename' : filename, 'newFilename' : newFilename, 'filesize' : filesize, 'newFilesize' : newFilesize, 'seq' : seq};	    	
-	     -->
+    	 
 	     if(($('#title').val() != '')&&($('#summernote').val() != '')){	        
 					
 			$.ajax({
@@ -305,7 +287,7 @@
 							confirmButtonText: '확인', // confirm 버튼 텍스트 지정
 						}).then((result) => {
 							if (result.isConfirmed) {
-								location.href='/admin_board.do?subjectValue='+subjectValue+'&cpage='+cpage+'&seq=' + seq;
+								location.href='/admin_board.do?subjectValue='+subjectValue+'&cpage='+cpage+'&seq='+ seq;
 				  			 } 
 				  		 })
 					} else {
@@ -313,8 +295,8 @@
 							title: '게시글 수정 실패',     
 							text:	' ', 
 							icon:	'warning',
-							confirmButtonColor: '#1cb36e', // confrim 버튼 색깔 지정
-							confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+							confirmButtonColor: '#1cb36e',
+							confirmButtonText: '확인',
 						})
 						history.back();
 					}
@@ -336,7 +318,6 @@
 	$(document).ready(function() {
 		let date = new Date().getTime().toString(36);
 		$('#vcode').val(date);
-		console.log("date : " +date);
 
 		var fontList = ['맑은 고딕','굴림','돋움','바탕','궁서','NotoSansKR','Arial','Courier New','Verdana','Tahoma'];
 		$('#summernote').summernote({
@@ -369,13 +350,10 @@
 			} 
         });
 	});
-	
-	
 
 	// 이미지 파일 업로드
 	function sendFile(file, editor, welEditable) {
 		var imgUrl = '';
-		var mImgUrl = './upload/';
 		var hImgUrl = './h_upload/';
 		var nImgUrl = './n_upload/';
 		var data = new FormData();
@@ -390,7 +368,6 @@
 			enctype : 'multipart/form-data',
 			processData : false,
 			success : function(result) {
-				console.log("result : "+result);
 				
 				let str= result.split('@');
 				var subject = $('#subject').val();
@@ -399,8 +376,7 @@
 					imgUrl = hImgUrl + str[0];
 				} else if( $('#subject').val() == 5 ) {
 					imgUrl = nImgUrl + str[0];
-				}				
-				console.log("imgUrl : "+imgUrl);				
+				}							
 				
 				$('#summernote').summernote( 'insertImage', imgUrl );
 				
