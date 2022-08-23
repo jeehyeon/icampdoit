@@ -76,6 +76,7 @@ public class NBoardDAO {
 	public NBoardTO nboardView(NBoardTO to) {
 		
 		String sql = "update n_board set hit=hit+1 where seq=?";
+		int result = jdbcTemplate.update(sql, to.getSeq() );
 		
 		sql = "select seq, subject, title, writer, content, date_format(wdate, '%Y-%m-%d') wdate, hit from n_board where seq=?";		
 		to = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<NBoardTO>(NBoardTO.class), to.getSeq() );

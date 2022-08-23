@@ -364,7 +364,6 @@ public class BoardDAO {
 		} else if( result == 4 ) { 
 			flag = 0;			
 			String delurl = mUploadPath + fto.getNewFilename();
-			System.out.println("delurl : " + delurl);
 			File file  = new File(delurl);
 			file.delete(); 			
 			System.out.println("임시파일 삭제 ");

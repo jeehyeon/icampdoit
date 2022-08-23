@@ -96,7 +96,6 @@ public class Controller_Admin_Home {
 		
 		SignUpTO sto = new SignUpTO();
 		sto.setUcode( request.getParameter( "ucode" ) );
-		System.out.println(  "ucode값:" + sto.getUcode() );
 		
 		sto = udao.userView(sto);
 		
@@ -128,7 +127,6 @@ public class Controller_Admin_Home {
 		
 		SignUpTO sto = new SignUpTO();
 		sto.setUcode( request.getParameter( "ucode" ) );
-		System.out.println( "ucode : " + sto.getUcode() );
 		sto.setName( request.getParameter( "name" ) );
 		sto.setEmail( request.getParameter( "email" ) );
 		sto.setGen( request.getParameter( "gen" ) );

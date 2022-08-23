@@ -41,9 +41,7 @@ public class Controller_Customercare {
 	}
 	
 	@RequestMapping( value="/faq.do" )
-	public ModelAndView faq(HttpServletRequest request) {
-		System.out.println( "faq() 호출" );
-		
+	public ModelAndView faq(HttpServletRequest request) {		
 
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "/customercare/faq" );
@@ -53,7 +51,6 @@ public class Controller_Customercare {
 	
 	@RequestMapping( value="/noticeview.do" )
 	public ModelAndView noticeview(HttpServletRequest request) {
-		System.out.println( "noticeview() 호출" );
 		
 		NBoardTO to = new NBoardTO();
 		to.setSeq( request.getParameter( "seq" ) );
