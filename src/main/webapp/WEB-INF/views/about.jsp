@@ -152,7 +152,7 @@
                 <div class="team-circle bg-info-light"></div></a>
               <div class="card-body team-body text-center">
                 <h6 class="card-title">Rina</h6>
-                <p class="card-subtitle text-muted text-xs text-uppercase">Backend    </p>
+                <p class="card-subtitle text-muted text-xs text-uppercase">Backend & Frontend    </p>
               </div>
             </div>
           </div>
@@ -161,7 +161,7 @@
                 <div class="team-circle bg-info-light"></div></a>
               <div class="card-body team-body text-center">
                 <h6 class="card-title">Byeong Chan</h6>
-                <p class="card-subtitle text-muted text-xs text-uppercase">Backend    </p>
+                <p class="card-subtitle text-muted text-xs text-uppercase">Backend & Frontend    </p>
               </div>
             </div>
           </div>
@@ -170,7 +170,7 @@
                 <div class="team-circle bg-info-light"></div></a>
               <div class="card-body team-body text-center">
                 <h6 class="card-title">So Yeon</h6>
-                <p class="card-subtitle text-muted text-xs text-uppercase">Frontend    </p>
+                <p class="card-subtitle text-muted text-xs text-uppercase">Backend & Frontend    </p>
               </div>
             </div>
           </div>
@@ -179,7 +179,7 @@
                 <div class="team-circle bg-info-light"></div></a>
               <div class="card-body team-body text-center">
                 <h6 class="card-title">Jee Hyeon</h6>
-                <p class="card-subtitle text-muted text-xs text-uppercase">Frontend    </p>
+                <p class="card-subtitle text-muted text-xs text-uppercase">Backend & Frontend    </p>
               </div>
             </div>
           </div>
