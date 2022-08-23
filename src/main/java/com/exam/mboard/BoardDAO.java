@@ -451,10 +451,11 @@ public class BoardDAO {
 		String sql = "delete from m_file where pseq=?";
 		int result = jdbcTemplate.update(sql, to.getSeq());
 
-		if( result != 1 ) {
-			System.out.println("filedbDel() 오류");
-		}else {
+		if( result != 0 ) {
 			flag=0;
+			
+		}else {
+			System.out.println("filedbDel() 오류");
 		}
 		
 		return flag;

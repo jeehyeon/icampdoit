@@ -399,7 +399,7 @@ public class Controller_Board {
 			
 			//DB table에서 항목 삭제
 			 int result= dao.fileDBDel(to);
-			 if(result == 1) {
+			 if(result == 0) {
 				 flag=0;
 			 }else {
 				 flag=1;
