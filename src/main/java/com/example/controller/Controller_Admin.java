@@ -212,8 +212,8 @@ public class Controller_Admin {
 		BoardTO to = new BoardTO();
 		HBoardTO hto = new HBoardTO();
 		NBoardTO nto = new NBoardTO();	
-		FileTO fto = new FileTO();
-		NFileTO nfto = new NFileTO();
+		
+		
 
 		int flag = 1;
 		
@@ -237,7 +237,8 @@ public class Controller_Admin {
 				String[] filesizes = request.getParameterValues("filesize");
 				//System.out.println( "컨트롤러에서filenames: " + filenames.toString() );
 				
-				for (int i = 0; i < filenames.length; i++) {            
+				for (int i = 0; i < filenames.length; i++) {
+					FileTO fto = new FileTO();
 					System.out.println(filenames[i]);  
 					fto.setFilename(filenames[i]);
 					fto.setFilesize(Long.parseLong(filesizes[i]) );
@@ -266,7 +267,8 @@ public class Controller_Admin {
 				String[] filenames = request.getParameterValues("filename");
 				String[] filesizes = request.getParameterValues("filesize");
 				
-				for (int i = 0; i < filenames.length; i++) {            
+				for (int i = 0; i < filenames.length; i++) {  
+					FileTO fto = new FileTO();
 					System.out.println(filenames[i]);  
 					fto.setFilename(filenames[i]);
 					fto.setFilesize(Long.parseLong(filesizes[i]) );
@@ -295,7 +297,8 @@ public class Controller_Admin {
 				String[] filenames = request.getParameterValues("filename");
 				String[] filesizes = request.getParameterValues("filesize");
 				
-				for (int i = 0; i < filenames.length; i++) {            
+				for (int i = 0; i < filenames.length; i++) { 
+					FileTO fto = new FileTO();
 					System.out.println(filenames[i]);  
 					fto.setFilename(filenames[i]);
 					fto.setFilesize(Long.parseLong(filesizes[i]) );
@@ -346,14 +349,15 @@ public class Controller_Admin {
 			
 			flag = ndao.nboardWriteOk(nto);
 
-			if(request.getParameter("filesize")!=null || request.getParameter("filesize")!="") {
+			if(request.getParameter("filename")!=null && request.getParameter("filename")!="") {
 				String[] filenames = request.getParameterValues("filename");
 				String[] filesizes = request.getParameterValues("filesize");
 				
-				for (int i = 0; i < filenames.length; i++) {            
+				for (int i = 0; i < filenames.length; i++) {
+					NFileTO nfto = new NFileTO();
 					System.out.println(filenames[i]);  
-					fto.setFilename(filenames[i]);
-					fto.setFilesize(Long.parseLong(filesizes[i]) );
+					nfto.setFilename(filenames[i]);
+					nfto.setFilesize(Long.parseLong(filesizes[i]) );
 					flag = ndao.nboardWriteFileOk(nto, nfto);
 					ndao.filecnd(nto, nfto);
 				};
@@ -364,7 +368,7 @@ public class Controller_Admin {
 			//System.out.println("content : " + nto.getContent());	
 			//System.out.println("5flag : " + flag);
 			
-			ndao.filecnd(nto, nfto);
+			//ndao.filecnd(nto, nfto);
 		}
 
 		return Integer.toString(flag);

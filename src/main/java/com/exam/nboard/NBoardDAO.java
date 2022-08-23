@@ -123,6 +123,8 @@ public class NBoardDAO {
 		
 	//파일이 있으면 진행 없으면 진행 X
 	public int nboardWriteFileOk(NBoardTO to, NFileTO fto) {	
+		System.out.println("내용"+to.getContent());
+		System.out.println("파일명"+fto.getFilename());
 		int flag = 1;
 		String sql= "";
 		String pseq="";
