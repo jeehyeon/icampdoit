@@ -481,8 +481,7 @@ public class Controller_Admin {
 			hto.setUcode( (Integer) session.getAttribute("ucode") );
 			hto.setSeq( request.getParameter( "seq" ) );
 			hto = adao.hboardModify(hto);
-			System.out.println( "컨트롤러 modify 파일이름:" + hto.getOldFilename() );  //이게 null 나옴
-			System.out.println( "컨트롤러 modify 파일이름2:" + hto.getFilename() ); //이건 잘 나옴
+			
 			
 		} else if( subjectValue.equals( "5" ) ) {
 			nto.setUcode( (Integer) session.getAttribute("ucode") );
@@ -556,9 +555,11 @@ public class Controller_Admin {
 				}
 				if( request.getParameter("newfilesize") != null ) { //새로운 사진이 있으면
 					//if( !request.getParameter("newFilename").equals("default") ) {
+					to.setFilename(request.getParameter("newfilename"));
+					to.setFilesize(Long.parseLong(request.getParameter("newfilesize").trim()) );
+					
 					to.setNewFilename(request.getParameter("newfilename"));
 					to.setNewFilesize(Long.parseLong(request.getParameter("newfilesize").trim()) );
-					System.out.println("11newFilename : " + to.getNewFilename());
 				}
 				to.setVcode(request.getParameter("vcode"));			
 				

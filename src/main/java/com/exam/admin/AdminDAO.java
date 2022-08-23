@@ -190,14 +190,20 @@ public class AdminDAO {
 	
 		String oldFilename = to.getFilename();
 		System.out.println("oldFilename : " +oldFilename);
+		if(to.getFilename() !=null) {
+			if(to.getContent().indexOf(to.getFilename()) == -1) {
+				to.setFilename(null);
+				to.setFilesize(0);
+			}
+		}
 		
 		
 		int result = 0;		
 		
 		//새파일 첨부시
 		String	sql = "update h_board set subject=?, title=?, writer=?, content=?, filename=?, filesize=? where seq=? and ucode=?";
-		result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(), to.getNewFilename(),
-				to.getNewFilesize(), to.getSeq(), to.getUcode() );
+		result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(), to.getFilename(),
+				to.getFilesize(), to.getSeq(), to.getUcode() );
 		
 		if(result == 1) {
 			flag = 0;
