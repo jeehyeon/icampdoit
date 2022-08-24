@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%
 String ucode = request.getParameter("resultpwd");
-System.out.println(ucode);
 %>
 <!DOCTYPE html>
   <head>

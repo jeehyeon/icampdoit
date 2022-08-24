@@ -44,7 +44,6 @@ public class InsertGocamping {
 			Document document = dBuilder.parse( new URL("https://api.visitkorea.or.kr/openapi/service/rest/GoCamping/basedList?ServiceKey=74rd5r1MwtY%2F3dFG0s9I1UDtFBJBj1zjmm0VdZBNsJoslwPnviVh2PeV1vCg%2BtaHuMvN8G1f1PWIwKh3I%2BI0oQ%3D%3D&numOfRows=3107&pageNo=1&MobileOS=ETC&MobileApp=TestApp").openStream());
 			
 			Element root = document.getDocumentElement();
-	        System.out.println( root.toString() );
 	         
 	        NodeList nList = document.getElementsByTagName("item"); 
 						

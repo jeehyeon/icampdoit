@@ -21,9 +21,7 @@
 	int startBlock = listTO.getStartBlock();
 	int endBlock = listTO.getEndBlock();
 	int totalRecord = listTO.getTotalRecord();
-	
-	System.out.println("관리자페이지 말머리 리스트 : " + request.getAttribute( "subjectValue" ));
-	
+
 	String subjectValue = (String)request.getAttribute( "subjectValue" );
 		
 	ArrayList<AdminTO> lists = listTO.getBoardLists();

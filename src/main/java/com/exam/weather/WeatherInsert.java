@@ -98,7 +98,6 @@ public class WeatherInsert {
 		for(WeatherTO to : lists) {
 			String insertsql = "insert into weather values(?, ?, ?, ?, ?)";
 			int result1 = jdbcTemplate.update(insertsql, to.getResultDate(), to.getResultTaMin(), to.getResultTaMax(), to.getResultPop(), to.getResultSky());
-			System.out.println(result1);
 		}
 	}
 }

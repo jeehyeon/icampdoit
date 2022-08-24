@@ -446,13 +446,11 @@
       
     	//카카오 초기화
     	Kakao.init('2dde53cc9d654a3a8d8b78783aa5cbfc');
-    	console.log( Kakao.isInitialized() ); //초기화 판단 여부. console 에 true 나오면 됨.
     	
     	//데모버전으로 들어가서 카카오로그인 코드확인
 		function loginWithKakao() {
 			window.Kakao.Auth.login({
-		      	success: function(authObj) {
-		    	  	console.log( authObj ); //access 토큰값 출력		    	  	
+		      	success: function(authObj) {	    	  	
 		    	  	Kakao.Auth.setAccessToken(authObj.access_token ); //access 토큰값 저장
 		    	  	
 		    	  	//로그인 성공시, API 호출

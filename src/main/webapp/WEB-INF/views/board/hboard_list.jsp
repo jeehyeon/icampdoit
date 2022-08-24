@@ -40,7 +40,6 @@
 		} else {
 			filename = "./resources/bootstrap-5/html/img/noimage.svg";
 		}
-	System.out.println( "filename : " + filename );
 	String wdate = to.getWdate();
 	String hit = to.getHit();
 	
@@ -126,7 +125,7 @@
 	              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="communicationDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                   Communication</a>
 	                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="communicationDropdownMenuLink">
-	                  <a class="dropdown-item" href="./mboardlist.do">게시판</a><a class="dropdown-item" href="./hboardview.do">혼캠 자료실</a>
+	                  <a class="dropdown-item" href="./mboardlist.do">게시판</a><a class="dropdown-item" href="./hboardlist.do">혼캠 자료실</a>
 	                </div>
 	              </li>
 	              

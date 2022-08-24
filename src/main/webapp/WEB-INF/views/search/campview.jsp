@@ -16,7 +16,6 @@
 	StringBuilder imghtml = new StringBuilder();
 	ArrayList<SearchkeyTO> lists = (ArrayList<SearchkeyTO>)request.getAttribute("lists");
 	for(SearchkeyTO ito : lists){
-		System.out.println("사진 url : " + ito.getImgurl());
 		if(ito.getImgurl() == null || ito.getImgurl().equals("default")){
 			imghtml.append("<div class=\"col-lg-4 col-6 px-1 mb-2\"><a href=\"./resources/bootstrap-5/html/img/noimage.svg\" data-fancybox=\"gallery\"><img class=\"img-fluid\" src=\"./resources/bootstrap-5/html/img/noimage.svg\" alt=\"...\"></a></div>");
 		}else{
@@ -147,22 +146,18 @@
 	 
 	kto.getSbrsCl();
 	if(kto.getSbrsCl().indexOf("전기") != -1){
-		//System.out.println("전기있음");
 		campInfo1.append( "<li class=\"mb-2\"> <i class=\"fa fa-bolt text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">전기</span></li>");
 	}
 	
 	if(kto.getSbrsCl().indexOf("와이파이") != -1){
-		//System.out.println("와이파이");
 		campInfo1.append( "<li class=\"mb-2\"> <i class=\"fa fa-wifi text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">와이파이</span></li>");
 	};
 	
 	if(kto.getSbrsCl().indexOf("온수") != -1){
-		//System.out.println("온수");
 		campInfo1.append( "<li class=\"mb-2\"> <i class=\"fa fa-solid fa-shower text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">온수</span></li>");
 	};
 	
 	if(kto.getSbrsCl().indexOf("물놀이장") != -1){
-		//System.out.println("물놀이장");
 		campInfo1.append( "<li class=\"mb-2\"> <i class=\"fa fa-regular fa-water text-secondary w-1rem me-3 text-center\"></i><span class=\"text-sm\">물놀이장</span></li>");
 	};
 	

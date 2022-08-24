@@ -28,16 +28,12 @@
 	
 	int cpage = (Integer)request.getAttribute("cpage");
 	int subjectValue = (Integer)request.getAttribute( "subjectValue" );
-	System.out.println("view페이지 subjectValue: "+subjectValue);
-	System.out.println("view페이지 session id : "+id);
-	System.out.println("view페이지 seq : "+seq);
 		
 	//cmt
 	ArrayList<CmtTO> cmtArr = (ArrayList<CmtTO>)request.getAttribute("cmtArr");
 	StringBuilder cmtHtml= new StringBuilder();
 	for(CmtTO cto : cmtArr){
 		String deldata = "{\"seq\":\"" +cto.getSeq() + "\",\"ucode\":\""+ cto.getUcode()+"\"}";
-		System.out.println("deldata : "+ deldata);
 		cmtHtml.append("<div class=\"row\">");
 		cmtHtml.append("<div class=\"col-9\"><strong>"+cto.getWriter() +"</strong></div>");
 		cmtHtml.append("<input type=\"button\" class=\"dbtn btn btn-outline-primary col-1 ms-auto\" align=\"right\" value=\"삭제\" deldata="+deldata+">");

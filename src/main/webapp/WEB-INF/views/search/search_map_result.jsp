@@ -41,7 +41,6 @@
 	for( SearchkeyTO kto : datas ){		
 
 		String contentId = kto.getContentId();
-		System.out.println( "contentId :" + contentId );
 		String facltNm = kto.getFacltNm();
 		String induty = kto.getInduty();
 		String addr1 = kto.getAddr1();
@@ -385,7 +384,6 @@
     		$('#searchlist').on('click', function() {
     			let sidoVal = $( '#sido option:selected' ).text().trim();
     			let gugunVal = $( '#gugun option:selected' ).val();
-    			console.log(gugunVal);
 
     			$("searchform").submit();
     			
@@ -485,7 +483,6 @@
 					link.appendChild(detail);
 					footerDiv.appendChild(link);
 					
-					console.log(wrap);
 					
 					var overlay = new kakao.maps.CustomOverlay({
 						//map: map,

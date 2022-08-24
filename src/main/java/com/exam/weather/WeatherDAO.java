@@ -231,7 +231,6 @@ public class WeatherDAO {
 			
 			doc.getDocumentElement().normalize();
 			NodeList nList = doc.getElementsByTagName("item");
-			System.out.println("파싱할 리스트 수 : "+ nList.getLength());
 						
 			Node node = nList.item(0);
 				

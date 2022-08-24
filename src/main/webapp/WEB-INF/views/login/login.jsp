@@ -341,8 +341,7 @@
     	//데모버전으로 들어가서 카카오로그인 코드확인
 		function loginWithKakao() {
 			window.Kakao.Auth.login({
-		      	success: function(authObj) {
-		    	  	console.log( authObj ); //access 토큰값 출력		    	  	
+		      	success: function(authObj) {	    	  	
 		    	  	Kakao.Auth.setAccessToken(authObj.access_token, false); //access 토큰값 저장
 		    	  	
 		    	  	//로그인 성공시, API 호출

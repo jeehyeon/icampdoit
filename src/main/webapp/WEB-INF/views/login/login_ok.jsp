@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%
 	String prevPage = (String)request.getAttribute("prevPage");
-	System.out.println( "prevPage: " + prevPage );
 %>
 <!DOCTYPE html>
 <html>

@@ -23,10 +23,8 @@
 	int startBlock = listTO.getStartBlock();
 	int endBlock = listTO.getEndBlock();
 	int totalRecord = listTO.getTotalRecord();
-	System.out.println( "토탈detail: " + totalRecord );
 	
 	String addurl = (String)request.getAttribute( "addurl" );
-	System.out.println( "addurljsp: " + addurl );
 	
 	ArrayList<SearchkeyTO> datas = listTO.getSearchLists();
 		
