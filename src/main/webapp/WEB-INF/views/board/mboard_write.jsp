@@ -329,7 +329,7 @@
 
 			var fontList = ['맑은 고딕','굴림','돋움','바탕','궁서','NotoSansKR','Arial','Courier New','Verdana','Tahoma'];
 			$('#summernote').summernote({
-				placeholder : '내용을 입력해주세요. (이미지는 1장만 업로드 가능합니다.)',
+				placeholder : '내용을 입력해주세요.',
 				minHeight : null,
 				maxHeight : null,
 				tabsize : 2,
