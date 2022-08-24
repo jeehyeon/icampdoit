@@ -35,12 +35,11 @@
 	String title = to.getTitle();
 	String writer = to.getWriter();
 	String content = to.getContent();
-		if( to.getFilename() != null ){
+		if( to.getFilename() != null ) {
 			filename = "./h_upload/" + to.getFilename();
 		} else {
 			filename = "./resources/bootstrap-5/html/img/noimage.svg";
 		}
-	//String filename = to.getFilename().equals(null) ? "./resources/bootstrap-5/html/img/noimage.svg" : "./h_upload/" + to.getFilename();
 	System.out.println( "filename : " + filename );
 	String wdate = to.getWdate();
 	String hit = to.getHit();
