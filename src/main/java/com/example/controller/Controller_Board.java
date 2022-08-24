@@ -389,12 +389,18 @@ public class Controller_Board {
 		fileArr=dao.mboardDelFileCheck(to);
 		int flag = 2;
 		
-		if(fileArr != null) {
+		//System.out.println( "파일배열:" + fileArr.toString() );
+		if( fileArr.size() != 0 ) {
 			//파일이 존재 => 삭제
 			System.out.println("파일이 존재");
 			//디렉터리 폴더에 파일 삭제
 			for(FileTO fto : fileArr) {
-				dao.filedel(fto.getFilename());
+				
+				if( !fto.getFilename().equals( "null" ) ) {
+					System.out.println( "파일:" + fto.getFilename() );
+					dao.filedel(fto.getFilename());
+					
+				}			
 			}			
 			
 			//DB table에서 항목 삭제

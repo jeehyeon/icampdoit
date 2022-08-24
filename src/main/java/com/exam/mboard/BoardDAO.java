@@ -492,8 +492,9 @@ public class BoardDAO {
 		try {
 			fileArr = (ArrayList<FileTO>)jdbcTemplate.query(sql, new BeanPropertyRowMapper<FileTO>(FileTO.class), to.getSeq() );
 		} catch (DataAccessException e) {
-			fto.setFilename("null");
-			fileArr.add(fto);
+			//fto.setFilename("null");
+			//fileArr.add(fto);
+			System.out.println( "파일 없음" );
 		}
 		return fileArr;
 	}
