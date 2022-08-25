@@ -23,7 +23,7 @@ public class BoardDAO {
 				
 		int flag = 1;
 		
-		SignUpTO sto = new SignUpTO();
+		//SignUpTO sto = new SignUpTO();
 		
 		String sql = "insert into m_board values  ( 0, ?, ?, ?, ?, now(), 0, ?, 0, ?)";
 		int result = jdbcTemplate.update(sql, to.getSubject(), to.getTitle(), to.getWriter(), to.getContent(), to.getUcode(), to.getVcode());
@@ -35,7 +35,7 @@ public class BoardDAO {
 		}else {
 			flag=0;
 		}
-		String pseq;
+		//String pseq;
 		
 		return flag;
 	};
@@ -65,7 +65,9 @@ public class BoardDAO {
 				flag=0;
 			}
 		
-		};
+		}else {
+			flag=0;
+		}
 		
 		return flag;		
 	}
@@ -465,7 +467,6 @@ public class BoardDAO {
 		String sql = "delete from m_cmt where pseq=?";
 		int result = jdbcTemplate.update(sql, to.getSeq());
 		if( result == 0 ) {
-			System.out.println("댓글이 없음");
 			flag=0;
 		}else if(result != 0) {
 			System.out.println("댓글이 있음 삭제 완료");

@@ -205,7 +205,7 @@ public class Controller_Admin {
 			
 			flag = dao.mboardWriteOk(to);
 						
-			if(request.getParameter("filesize")!=null || request.getParameter("filesize")!="") {
+			if(request.getParameter("filename")!=null && request.getParameter("filename")!="") {
 				String[] filenames = request.getParameterValues("filename");
 				String[] filesizes = request.getParameterValues("filesize");
 				
@@ -229,7 +229,7 @@ public class Controller_Admin {
 			
 			flag = dao.mboardWriteOk(to);
 			
-			if(request.getParameter("filesize")!=null || request.getParameter("filesize")!="") {
+			if(request.getParameter("filename")!=null && request.getParameter("filename")!="") {
 				String[] filenames = request.getParameterValues("filename");
 				String[] filesizes = request.getParameterValues("filesize");
 				
@@ -254,7 +254,7 @@ public class Controller_Admin {
 			
 			flag = dao.mboardWriteOk(to);
 			
-			if(request.getParameter("filesize")!=null || request.getParameter("filesize")!="") {
+			if(request.getParameter("filename")!=null && request.getParameter("filename")!="") {
 				String[] filenames = request.getParameterValues("filename");
 				String[] filesizes = request.getParameterValues("filesize");
 				
