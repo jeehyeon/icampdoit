@@ -351,7 +351,7 @@
         <div class="container">
           <div class="row align-items-center">
             <div class="col-md-6 text-center text-md-start">
-              <p class="text-sm mb-md-0">&copy; 2022, Your company.  All rights reserved.</p>
+              <p class="text-sm mb-md-0">&copy; 2022, I Camp Do It.  All rights reserved.</p>
             </div>
             <div class="col-md-6">
              <!-- 관리자페이지 바로가기 -->
