@@ -58,6 +58,11 @@ public class Controller_HBoard {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
+		if(session.getAttribute("ucode") == null) {
+			modelAndView.setViewName( "/login/nousers" );
+			return modelAndView;
+		}
+		
 		modelAndView.setViewName( "/board/hboard_view" );
 		modelAndView.addObject( "to", to );
 		modelAndView.addObject( "cpage", cpage );
