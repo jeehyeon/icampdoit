@@ -28,7 +28,7 @@ public class Controller {
 	@Autowired
 	private HomeDAO dao;
 	
-	@RequestMapping( value="/home.do" )
+	@RequestMapping( value= {"/home.do", "/"} )
 	public ModelAndView home(HttpServletRequest request, HttpSession session) {
 		
 		if(session != null) {
